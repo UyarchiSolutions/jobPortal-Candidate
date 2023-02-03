@@ -6,12 +6,16 @@ import { AppComponent } from './app.component';
 import { CanHomeComponent } from './can-home/can-home.component';
 import { CandidateModule } from './candidate/candidate.module';
 import { RegisterComponent } from './register/register.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CanHomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
