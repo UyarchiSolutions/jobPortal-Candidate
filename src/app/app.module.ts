@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CanHomeComponent } from './can-home/can-home.component';
+import { CandidateModule } from './candidate/candidate.module';
 import { RegisterComponent } from './register/register.component';
 
 @NgModule({
@@ -14,7 +15,8 @@ import { RegisterComponent } from './register/register.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CandidateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
