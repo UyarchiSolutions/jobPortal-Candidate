@@ -1,0 +1,410 @@
+body{
+    font-family: 'Poppins', sans-serif;
+}
+h3{
+    font-family: 'Raleway', sans-serif;
+
+}
+.hero-image {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.login{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.register {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.register-content-row {
+    padding-top: 10px;
+}
+.height-register-content{
+    height: 878px;
+
+}
+.register-content {
+    background-color: #E7E9ED;
+    /* padding: 10px; */
+    margin: 0 10px 10px 10px;
+    border-radius: 5px;
+}
+
+.register-content h3 {
+    font-weight: 700;
+    color: #FD841F;
+    text-align: center;
+    font-size: 32px;
+}
+
+.register-content .row {
+    margin-top: 20px;
+}
+
+.register-content a {
+    color: #000;
+    text-decoration: none;
+}
+
+
+.ad-image img {
+    width: 100%;
+}
+
+
+.register-form {
+    max-width: 600px;
+    margin: auto;
+}
+.single-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+.content-box{
+    width: 60%;
+}
+.single-row button{
+    color: #fff;
+}
+
+.btn-grey{
+    background-color:  #878787;
+}
+
+
+
+.btn-brand-blue{
+    background-color: #0A2647 !important;
+    color: #fff !important;
+}
+.btn-brand-orange{
+    background-color: #FD841F;
+
+}
+
+.btn-brand-trans{
+    background-color:rgba(255, 255, 255, 0.2);
+}
+
+.btn-shadow{
+    box-shadow:  0px 2px 8px rgba(0, 0, 0, 0.25);
+ }
+.single-row label{
+    font-weight: 500;
+    color:#0A2647;
+}
+
+.select-type{
+    color: #B4B4B4 !important;
+    appearance: auto;
+}
+
+.single-row input::placeholder{
+    color: #B4B4B4;
+}
+.single-row textarea::placeholder{
+    color: #B4B4B4;
+}
+
+.content-box{
+    display: flex;
+}
+
+
+
+.btn-custom{
+    width: 45%;
+}
+
+
+
+.btn-brand-grey{
+    background-color: #FFFFFF;
+    color: #0A2647 !important;
+}
+.douple-btn{
+    display: flex;
+    width: 80%;
+    margin:30px auto 0 auto;
+}
+
+.douple-btn button{
+    width: 80%;
+    font-weight: 500;
+}
+.douple-btn .content-box{
+    justify-content: space-evenly;
+}
+.douple-input-first{
+    margin-right: 5px;
+}
+.douple-input-second{
+    margin-left: 5px;
+}
+
+.or-line-wrap{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.or-line-wrap h3{
+    margin:0;
+}
+.or-line{
+    position: relative;
+}
+.or-line::after{
+
+        content: "";
+        display: block;
+        width: 40%;
+        height: 1px;
+        background:  #0A2647;
+top: 20px;
+right: 0px;
+        position: absolute;
+      
+}
+.or-line::before{
+
+    content: "";
+    display: block;
+    width: 40%;
+    height: 1px;
+    background:   #0A2647;
+top: 20px;
+
+
+    position: absolute;
+  
+}
+
+
+
+
+.sigin-button{
+    background-color: #fff;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    
+}
+.sigin-button img{
+    width: 30px;
+    height: 30px;
+ }
+
+ 
+ .final-btn-wrap{
+    margin-top: 20px;
+}
+
+.final-btn-wrap button{
+    width: 50%;
+}
+
+.ad-image li{
+    list-style: none;
+}
+
+
+.icon-custom{
+    display: inline-block;
+    width: 50px;
+    text-align: center;
+}
+
+.font12{
+    font-size: 12px;
+}
+
+.m-l-1{
+    margin-left: 10px;
+}
+
+
+/*   sidebar*/
+
+
+
+.myprofile{
+    height: 100%;
+}
+.sidebarmenu li{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.sidebarmenu ul{
+    padding: 0px 0px;
+   
+
+
+}
+
+
+
+.icon-custom-recent{
+    width: 40px;
+
+}
+
+.icon-text{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.sidebarmenu-heading{
+    background-color: #FD841F;
+    padding: 10px 0px;
+    border: none !important;
+}
+
+.recent-search .sidebarmenu-heading i{
+    color: #000;
+}
+
+
+.job-listing-bottom{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 5%;
+}
+
+
+.recent-search ul li{
+    border-bottom:  1px solid rgba(10, 38, 71, 0.5);
+}
+.recent-search ul li{
+   padding-bottom: 10px;
+}
+
+
+
+.recent-search ul li div{
+
+    margin-top: 5px;
+}
+
+.recent-search i{
+    color: #79879A;
+}
+
+.saved-job-icon{
+    color: #0A2647 !important;
+}
+
+.company-logo{
+    width: 100px;
+}
+
+.about-company span{
+display: block;
+}
+
+.about-company-content{
+align-items: normal;
+}
+.content-box{
+    font-weight: 500;
+}
+
+.no-margin{
+    margin-top: 0 !important;
+}
+
+.search-boxs{
+    display: flex;
+    justify-content: center;
+    margin: 40px 0px 10px 0px;
+}
+
+.search-box{
+    margin: 0 10px;
+}
+.first-search-box{
+    width: 35%;
+}
+
+.second-search-box{
+    width: 15%;
+}
+
+.search-box-wrap{
+    padding: 10px 0;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background: linear-gradient(91.68deg, #FD841F 0.87%, #FD841F 0.88%, #FA831F 0.89%, #0D2747 99.92%, #0A2647 99.93%, #0A2647 99.93%);
+}
+
+.search-icon{
+    width: 25px;
+    height: 25px;
+}
+
+.advanced-search{
+    text-align: right;
+    margin-right: 10.9%;
+    margin-bottom:20px ;
+    font-size: 14px;
+   
+
+
+}
+
+.advanced-search a{
+   color: #fff;
+    font-size: 14px;
+
+}
+
+.sidebarmenu{
+    border-radius: 5px;
+    background-color: #E7E9ED;
+   
+
+}
+
+
+/* sidebar and advanced search completed */
+
+
+.no-padding{
+    padding: 0;
+}
+
+.no-margin-all{
+    margin: 0;
+
+}
+
+
+.padding10{
+    padding:10px
+}
+
+.resend-otp{
+    margin-top: 5px;
+    text-align: right;
+    font-size: 10px;
+    color: #0A2647;
+}
+
+
+
+/* heading-side-btn */
+
+.add-pan-btn{
+    display: flex;
+    justify-content: space-around
+}
+
+
+/* heading-side-btn *//* You can add global styles to this file, and also import other style files */
