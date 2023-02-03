@@ -8,6 +8,7 @@ import { CandidateModule } from './candidate/candidate.module';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmployerModule } from './employer/employer.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     CandidateModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    EmployerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

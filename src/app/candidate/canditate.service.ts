@@ -6,9 +6,17 @@ import { Env } from '../environment.dev';
   providedIn: 'root'
 })
 export class CanditateService {
-  baseUrl=Env.baseAPi
-  constructor(private http:HttpClient) { }
-  loginForm(data:any){
-    return this.http.post(this.baseUrl+ '/v1/candidateRegistration/login',data)
+  baseUrl = Env.baseAPi
+  constructor(private http: HttpClient) { }
+  loginForm(data: any) {
+    return this.http.post(this.baseUrl + '/v1/candidateRegistration/login', data)
+  }
+  // submit candidate Details
+  submitcandicate(data: any) {
+    return this.http.post(this.baseUrl + '/v1/candidateRegistration/register', data)
+  }
+  // mobile verification setd otp
+  verifyMobile(data:any){
+    return this.http.post(this.baseUrl+'/v1/candidateRegistration/mobile_verify',data)
   }
 }
