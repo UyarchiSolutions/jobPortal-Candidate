@@ -1,0 +1,37 @@
+
+ 
+.login-content a{
+    color: #000;
+    text-decoration: none;
+}
+
+
+.button{
+    margin-top: 10px;
+    width: 180px;
+}
+
+.btn-bg-brand-blue{
+    background-color: #0A2647;
+    color: #fff;
+}
+
+.forgot-pass{
+    text-align: right;
+    font-size: 10px;
+    color: #0A2647;
+}
+
+.ad-image img{
+    width: 100%;
+}
+
+
+.btn-brand-blue{
+    min-width: 150px;
+}
+
+.login-main .col-2 img{
+    width: 100%;
+
+}
