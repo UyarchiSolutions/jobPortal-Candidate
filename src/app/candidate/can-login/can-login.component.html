@@ -22,16 +22,20 @@
           <div class="row">
             <div class="col"></div>
             <div class="col">
-              <a href="#"><div class="sigin-button">
-                <img src="../../assets/image/g.png" alt="">
-                <div>Sign In With Google</div>
-              </div></a>
+              <a href="#">
+                <div class="sigin-button">
+                  <img src="../../assets/image/g.png" alt="">
+                  <div>Sign In With Google</div>
+                </div>
+              </a>
             </div>
             <div class="col">
-              <a href="#"><div class="sigin-button">
-                <img src="../../assets/image/fb.png" alt="">
-                <div> Sign In With Facebook</div>
-              </div></a>
+              <a href="#">
+                <div class="sigin-button">
+                  <img src="../../assets/image/fb.png" alt="">
+                  <div> Sign In With Facebook</div>
+                </div>
+              </a>
             </div>
             <div class="col"></div>
           </div>
@@ -47,39 +51,39 @@
 
           <div class="row">
             <div class="register-form">
+              <form [formGroup]="login" (submit)="login_now()">
 
 
-
-              <div class="single-row">
+                <div class="single-row">
                   <label for="">Email ID :</label>
                   <div class="content-box">
-                      <input type="email" class="form-control" placeholder="Enter Your Email ID">
+                    <input type="email" class="form-control" placeholder="Enter Your Email ID" formControlName="email">
                   </div>
 
-              </div>
+                </div>
 
-              <div class="single-row">
+                <div class="single-row">
                   <label for="">Password :</label>
                   <div class="content-box">
-                      <input type="password" class="form-control" placeholder="Enter  Password">
+                    <input type="password" class="form-control" placeholder="Enter  Password" formControlName="password">
                   </div>
-              </div>
+                </div>
 
-              <div class="forgot-pass">
-                <a href="#">Forgot Password!</a>
-              </div>
+                <div class="forgot-pass">
+                  <a href="#">Forgot Password!</a>
+                </div>
 
 
-              <div class="single-row">
+                <div class="single-row">
                   <label for=""> </label>
 
                   <div class="content-box">
-                      <button type="submit" class="btn btn-brand-blue mb-2">Log In</button>
+                    <button type="submit" class="btn btn-brand-blue mb-2">Log In</button>
                   </div>
-              </div>
+                </div>
+              </form>
 
-
-          </div>
+            </div>
           </div>
 
 
