@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { CanditateService } from '../canditate.service';
 
 @Component({
   selector: 'app-can-login',
@@ -6,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./can-login.component.css']
 })
 export class CanLoginComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+  login: any = this.fb.group({
+    email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+    password: new FormControl('', Validators.required)
+  })
+  constructor(private fb: FormBuilder, private con_Service: CanditateService) { }
+  ngOnInit() {
   }
-
+  // login api
+  login_now() {
+    console.log(this.login.value)
+    this.con_Service.loginForm(this.login.value).subscribe((res:any)=>{
+    }, error =>{
+      error.message
+    }
+    )
+  }
 }
