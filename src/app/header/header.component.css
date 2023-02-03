@@ -1,0 +1,55 @@
+
+
+.top-header-menu{
+    display: flex;
+}
+.top-header-menu p{
+    padding-left: 10px;
+    margin: 0;
+}
+.top-header-contact p{
+    margin: 0;
+}
+
+
+.navbar{
+    display: flex;
+    justify-content: space-around;
+}
+
+.container{
+    max-width: 1600px !important;
+}
+.top-header{
+    max-width: 1513px !important;
+
+}
+
+.bg-brand-blue{
+    background-color: #0A2647;;
+}
+
+.brand-logo{
+    width: 216px;
+    height: 80px;
+}
+a{
+    text-decoration: none;
+    color: #fff;
+}
+.nav-menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 240px;
+}
+.nav-menu a i{
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+.call-img{
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+}
