@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CanditateService } from '../canditate.service';
 
 @Component({
@@ -12,7 +13,7 @@ export class CanLoginComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
     password: new FormControl('', Validators.required)
   })
-  constructor(private fb: FormBuilder, private con_Service: CanditateService) { }
+  constructor(private fb: FormBuilder, private con_Service: CanditateService,private router:Router) { }
   ngOnInit() {
   }
   // login api
@@ -23,5 +24,6 @@ export class CanLoginComponent implements OnInit {
       error.message
     }
     )
+    this.router.navigate(['/updateProfile'])
   }
 }

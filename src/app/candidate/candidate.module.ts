@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CanRegisterComponent } from './can-register/can-register.component';
 import { CheckmailtamplateComponent } from './checkmailtamplate/checkmailtamplate.component';
 import { CanMobileverifyComponent } from './can-mobileverify/can-mobileverify.component';
+import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
 
 
 
@@ -14,7 +15,8 @@ import { CanMobileverifyComponent } from './can-mobileverify/can-mobileverify.co
     CanLoginComponent,
     CanRegisterComponent,
     CheckmailtamplateComponent,
-    CanMobileverifyComponent
+    CanMobileverifyComponent,
+    UpdateprofileComponent
   ],
   imports: [
     CommonModule,

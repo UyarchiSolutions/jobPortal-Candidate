@@ -8,7 +8,7 @@ import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 export class RegisterComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder) {
-   
+
    }
    RegisterForm = this.formBuilder.group({
     logo: new FormControl(''),
@@ -29,6 +29,19 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
   reg_submit(){
-   
+
+  }
+  addresume(file: any) {
+    console.log("sbdhsbdhj")
+    // this.candidateFile = null;
+    const res = file.target.files[0] as File;
+    if (res != null) {
+      if (
+        res.type == 'application/pdf' ||
+        res.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      ) {
+        // this.candidateFile = res;
+      }
+    }
   }
 }

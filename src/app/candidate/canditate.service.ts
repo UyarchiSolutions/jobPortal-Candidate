@@ -19,4 +19,8 @@ export class CanditateService {
   verifyMobile(data:any){
     return this.http.post(this.baseUrl+'/v1/candidateRegistration/mobile_verify',data)
   }
+  // verify
+  verify_otp(data:any){
+    return this.http.post(this.baseUrl+ '/v1/candidateRegistration/mobile_verify_Otp',data)
+  }
 }

@@ -29,6 +29,7 @@ export class CanRegisterComponent implements OnInit {
   }
   // File upload
   addresume(file: any) {
+    console.log("sbdhsbdhj")
     this.candidateFile = null;
     const res = file.target.files[0] as File;
     if (res != null) {
