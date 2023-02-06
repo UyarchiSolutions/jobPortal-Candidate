@@ -34,7 +34,8 @@
                             <div class="single-row">
                                 <label for="">Company Name :</label>
                                 <div class="content-box">
-                                    <input type="text" class="form-control" placeholder="Enter Your Company Name" formControlName="company_name">
+                                    <input type="text" class="form-control" min="1" step="1"
+                                    ng-pattern="/^[a-zA-Z\s]*$/" placeholder="Enter Your Company Name" formControlName="company_name">
                                 </div>
 
                             </div>
@@ -42,7 +43,7 @@
                             <div class="single-row">
                                 <label for="">Company Email :</label>
                                 <div class="content-box">
-                                    <input type="email" class="form-control" placeholder="Enter Your Company Email" formControlName="company_mail">
+                                    <input type="email" class="form-control" placeholder="Enter Your Company Email" formControlName="email">
                                 </div>
 
                             </div>
@@ -63,21 +64,21 @@
                             <div class="single-row">
                                 <label for="">Mobile Number :</label>
                                 <div class="content-box">
-                                    <input type="password" class="form-control" placeholder="Enter Your Mobile Number" formControlName="mobile">
+                                    <input type="text" class="form-control" placeholder="Enter Your Mobile Number" formControlName="mobileNumber">
                                 </div>
                             </div>
 
                             <div class="single-row">
                                 <label for="">Contact Name :</label>
                                 <div class="content-box">
-                                    <input type="password" class="form-control" placeholder="Enter Contact Persion Name" formControlName="contact_name">
+                                    <input type="text" class="form-control" placeholder="Enter Contact Persion Name" formControlName="contactName">
                                 </div>
                             </div>
 
                             <div class="single-row">
                                 <label for="">Company Type :</label>
                                 <div class="content-box">
-                                    <select class="form-control select-type" formControlName="company_type">
+                                    <select class="form-control select-type" formControlName="companyType">
                                         <option value="option1" disabled selected >Select Type</option>
                                         <option value="option2">Option 2</option>
                                         <option value="option3">Option 3</option>
@@ -106,12 +107,13 @@
                                     <div class="location-content">
                                         <label for="select-logo" class="form-control choose-file">Choose File</label>
                                         <div>  <input type="file" id="select-logo" class="form-control choose-file"
-                                            placeholder="+Add Logo" style="display: none;" formControlName="file">
+                                            placeholder="+Add Logo" style="display: none;" formControlName="choosefile">
                                         <span class="ppt-data">[PPT, PDF]</span></div>
 
                                     </div>
                                 </div>
                             </div>
+
 
 
                             <div class="single-row">
