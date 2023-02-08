@@ -23,7 +23,7 @@ import { EmployerModule } from './employer/employer.module';
     CandidateModule,
     ReactiveFormsModule,
     FormsModule,
-    EmployerModule
+    EmployerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

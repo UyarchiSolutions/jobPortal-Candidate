@@ -8,6 +8,8 @@ import { CanRegisterComponent } from './candidate/can-register/can-register.comp
 import { CheckmailtamplateComponent } from './candidate/checkmailtamplate/checkmailtamplate.component';
 import { CanMobileverifyComponent } from './candidate/can-mobileverify/can-mobileverify.component';
 import { UpdateprofileComponent } from './candidate/updateprofile/updateprofile.component';
+import { CanGetComponent } from './candidate/can-get/can-get.component';
+import { EmpJobdetailsComponent } from './candidate/emp-jobdetails/emp-jobdetails.component';
 
 const routes: Routes = [
    {path:"",component:CanHomeComponent},
@@ -18,7 +20,9 @@ const routes: Routes = [
     {path:"can-register",component:CanRegisterComponent},
     {path:"checkmailCan",component:CheckmailtamplateComponent},
     {path:"VeriftOPT",component:CanMobileverifyComponent},
-    {path:"updateProfile",component:UpdateprofileComponent}
+    {path:"updateProfile",component:UpdateprofileComponent},
+    {path:"canJobs",component:CanGetComponent},
+    {path:"can-employ",component:EmpJobdetailsComponent}
 ];
 
 @NgModule({

@@ -102,7 +102,7 @@
 }
 
 .filter-bar div{
-  
+
     padding: 10px;
 }
 
@@ -186,7 +186,7 @@ padding: 8px 0px;
 }
 .content-card-footer{
     color:#fff;
-    padding: 35px;
+    padding: 8px;
 }
 .pageination-logo{
     position: relative;
@@ -221,6 +221,9 @@ padding: 8px 0px;
 .main-content{
     font-size: 14px;
 }
+.title{
+  font-size: 13px;
 
+}
 
 

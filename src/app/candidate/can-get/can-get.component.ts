@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { CanditService } from '../candit.service';
+import { Router } from '@angular/router';
+import { CanditateService } from '../canditate.service';
 
 @Component({
-  selector: 'app-can-home',
-  templateUrl: './can-home.component.html',
-  styleUrls: ['./can-home.component.css']
+  selector: 'app-can-get',
+  templateUrl: './can-get.component.html',
+  styleUrls: ['./can-get.component.css']
 })
-export class CanHomeComponent implements OnInit {
-  jobs: any = [];
+export class CanGetComponent implements OnInit {
   searchForm = this.fb.group({
     search: new FormControl(null),
     experience: new FormControl(null),
@@ -27,11 +27,17 @@ export class CanHomeComponent implements OnInit {
     postedby: new FormControl(null),
 
   })
-  constructor(private canditSarvice: CanditService, private fb: FormBuilder) { }
+  jobs:any=[];
+  constructor(private canditSarvice: CanditateService, private fb: FormBuilder,private router:Router) { }
 
-  ngOnInit() {
-    this.getjobS();
 
+  ngOnInit(){
+    this.get_allJobs();
+  }
+  get_allJobs(){
+    this.canditSarvice.getAlldetails(this.searchForm.value).subscribe((res:any) =>{
+    this.jobs=res;
+    })
   }
   postedTime(time:any){
     let date_1 = new Date(time);
@@ -44,9 +50,7 @@ export class CanHomeComponent implements OnInit {
     console.log(days(date_1, date_2) + " days to world cup");
     return days(date_1, date_2)
   }
-  getjobS() {
-    this.canditSarvice.jobs(this.searchForm.value).subscribe((res: any) => {
-      this.jobs = res.user;
-    })
+  apply(id:any){
+   this.router.navigate(['/can-employ'],{queryParams:{id:id}})
   }
 }

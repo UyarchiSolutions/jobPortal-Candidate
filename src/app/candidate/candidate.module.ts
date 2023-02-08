@@ -7,6 +7,8 @@ import { CanRegisterComponent } from './can-register/can-register.component';
 import { CheckmailtamplateComponent } from './checkmailtamplate/checkmailtamplate.component';
 import { CanMobileverifyComponent } from './can-mobileverify/can-mobileverify.component';
 import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
+import { CanGetComponent } from './can-get/can-get.component';
+import { EmpJobdetailsComponent } from './emp-jobdetails/emp-jobdetails.component';
 
 
 
@@ -16,13 +18,15 @@ import { UpdateprofileComponent } from './updateprofile/updateprofile.component'
     CanRegisterComponent,
     CheckmailtamplateComponent,
     CanMobileverifyComponent,
-    UpdateprofileComponent
+    UpdateprofileComponent,
+    CanGetComponent,
+    EmpJobdetailsComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ]
 })
 export class CandidateModule { }
