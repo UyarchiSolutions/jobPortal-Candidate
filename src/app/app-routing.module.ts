@@ -7,11 +7,22 @@ import { CanLoginComponent } from './candidate/can-login/can-login.component';
 import { CanRegisterComponent } from './candidate/can-register/can-register.component';
 import { CheckmailtamplateComponent } from './candidate/checkmailtamplate/checkmailtamplate.component';
 import { CanMobileverifyComponent } from './candidate/can-mobileverify/can-mobileverify.component';
+import { CheckEmailComponent } from './employer/check-email/check-email.component';
+import { VerifyOtpComponent } from './employer/verify-otp/verify-otp.component';
 
 const routes: Routes = [
    {path:"",component:CanHomeComponent},
    {path:"register",component:RegisterComponent},
    {path:"login",component:LoginComponent},
+   {path:"empcheck-mail",component:CheckEmailComponent},
+   {path:"empverify-otp",component:VerifyOtpComponent},
+   {path: 'empupdate-profile',loadChildren: () => import('./employer/emp-update-profile/emp-update-profile.module').then(m => m.EmpUpdateProfileModule) },
+   {path: 'emp-home',loadChildren: () => import('./employer/emp-home/emp-home.module').then(m => m.EmpHomeModule) },
+   {path: 'emp-postjob',loadChildren: () => import('./employer/emp-jobpost/emp-jobpost.module').then(m => m.EmpJobpostModule) },
+   {path: 'emp-account',loadChildren: () => import('./employer/emp-myaccount/emp-myaccount.module').then(m => m.EmpMyaccountModule) },
+
+
+
 
     {path:"canlogin",component:CanLoginComponent},
     {path:"can-register",component:CanRegisterComponent},

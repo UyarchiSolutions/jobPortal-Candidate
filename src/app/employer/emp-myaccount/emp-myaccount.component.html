@@ -1,0 +1,370 @@
+<p>emp-myaccount works!</p>
+<div class="container-fluid register">
+    <div class="row">
+        <div class="col-2 ad-image">
+
+            <img src="../../assets/image/myaccountimg1.png" alt="">
+
+
+           
+        </div>
+        <div class="col-8  login-main">
+            <div class="row ">
+                <div class="col search-box-wrap">
+
+                    <div class="advanced-search-warap">
+
+                  
+
+                    <div class="search-boxs">
+
+                        <div class="search-box first-search-box">
+                            <input type="text" class="form-control" placeholder="Enter Designation / Key skills">
+                        </div>
+
+
+
+                        <div class="search-box second-search-box">
+                            <input type="text" class="form-control location" placeholder="Enter Location">
+                        </div>
+
+                        <div class="search-box">
+                            <select class="form-control select-type">
+                                <option value="option1" disabled selected>Select Type</option>
+                                <option value="option2">Option 2</option>
+                                <option value="option3">Option 3</option>
+                            </select>
+                        </div>
+
+                        <div class="search-box">
+                            <button type="submit" class="btn btn-brand-orange"><img src="../../assets/image/search.png"
+                                    alt="" class="search-icon"></button>
+                        </div>
+
+                    </div>
+
+                    <div class="advanced-search">
+                        <button type="submit" class="btn btn-brand-trans"><a href="#">Advanced Search</a></button>
+
+                    </div>
+                </div>
+
+                </div>
+            </div>
+          
+        </div>
+        <div class="col-2 ad-image">
+            <img src="../../assets/image/myaccountimg2.png" alt="">
+
+        </div>
+
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-2">
+
+            <div class="row">
+                <div class="col">
+                    <div class="sidebarmenu myprofile">
+                        <ul>
+                            <li class="sidebarmenu-heading"> <span class="icon-custom"><i class='far fa-user'></i></span> <span class="icon-text">My Profile</span></li>
+                            <li>
+                               <span class="icon-custom"><i class='far fa-address-card'></i></span>
+                                <span class="icon-text">Basic Details</span>
+                            </li>
+                            <li>
+                                <span class="icon-custom"><i class='far fa-file-alt'></i></span>
+                                <span class="icon-text">Job Post</span>
+                            </li>
+                            <li>
+                                <span class="icon-custom"><i class="fa fa-star-o">                        </i></span>
+        
+                                <span  class="icon-text">Saved Candidates</span>
+                            </li>
+                            <li>
+                                <span class="icon-custom"><i class="fa fa-download"></i></span>
+                                <span class="icon-text">Saved Folder</span>
+                            </li>
+                            <li>
+                                <span class="icon-custom"><i class="fa fa-download"></i></span>
+                                <span class="icon-text">Upcoming Live</span>
+                            </li>
+                            <li>
+                                <span class="icon-custom"><i class="fa fa-download"></i></span>
+                                <span class="icon-text">Change Password</span>
+                            </li>
+                            <li>
+                                <span class="icon-custom"><i class="fa fa-download"></i></span>
+                                <span class="icon-text">Logout</span>
+                            </li>
+                            <li>
+                                <span class="icon-custom"><i class="fa fa-download"></i></span>
+                                <span class="icon-text">Deactivate My Profile</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-8">
+            <div class="row register-content-row height-register-content">
+                <div class="col register-content">
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <h3>My Account</h3>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+
+                    <div class="register-form">
+                        <div class="single-row">
+                            <label for="">Company Logo :</label>
+                            <div class="content-box">
+                                <div>
+                                    <img src="../../assets/image/g.png" alt="" class="company-logo">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="single-row">
+                            <label for="">Company Name :</label>
+                            <div class="content-box">
+                                {{data.name}}
+                            </div>
+
+                        </div>
+
+                        <div class="single-row">
+                            <label for="">Company Email :</label>
+                            <div class="content-box">
+                               {{data.email}}
+                            </div>
+
+                        </div>
+
+                        <div class="single-row">
+                            <label for="">Contact Person :</label>
+                            <div class="content-box">
+                                {{data.contactName}}
+                            </div>
+                        </div>
+
+                        <div class="single-row">
+                            <label for="">Mobile Number :</label>
+                            <div class="content-box">
+                               {{data.mobileNumber}}
+                            </div>
+                        </div>
+
+                        <div class="single-row">
+                            <label for="">Company Type :</label>
+                            <div class="content-box">
+                               {{data.companyType}}
+                            </div>
+                        </div>
+
+                        <div class="single-row">
+                            <label for="">Pin Code :</label>
+                            <div class="content-box">
+                               {{data.pincode}}
+                            </div>
+                        </div>
+
+                        <div class="single-row about-company-content">
+                            <label for="">About Company :</label>
+                            <div class="content-box about-company">
+                                <div>
+                                    <span>{{data.aboutCompany}}</span>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="single-row about-company-content">
+                            <label for="">Location :</label>
+                            <div class="content-box about-company">
+                                <div style="color: #000;">
+                                    <span><a class="btn btn-link" data-bs-toggle="modal" data-bs-target="#singleimageview" style="margin-right: 141px" (click)="viewproduct_details(data.choosefile, data.name)">
+                                         View File
+                                    </a></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal mt-5 fade" id="singleimageview">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h4 class="modal-title">{{ this.name }}</h4>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <div style="text-align: center;margin: 0;padding: 0;">
+                                    <iframe [src]="baseurl + '/' + viewproduct| safemode : 'resourceUrl'" style="width: 100%; height: 400px" alt="" *ngIf="viewproduct != '' && viewproduct != null"></iframe>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                    Close
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                        </div> -->
+                        <div class="single-row about-company-content">
+                            <label for="">Location :</label>
+                            <div class="content-box about-company">
+                                <div>
+                                <span>{{data.location}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+      
+
+
+                
+
+
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-2">
+            <div class="row">
+                <div class="col">
+                    <div class="right-sidebar">
+                        <div class="sidebarmenu recent-search">
+                            <ul>
+                                <li class="sidebarmenu-heading"> <span class="icon-custom"><i class='far fa-user'></i></span> <span class="icon-text">Recent Search</span></li>
+                                <li>
+                                   <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                    <span class="icon-text">UI/UX Designer</span></div>
+            
+                                    <div class="job-listing-bottom"> <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                        <span class="icon-text">Chennai</span></div>
+                                        <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                            <span class="icon-text">1 Years</span></div></div>
+                                   
+                                </li>
+            
+                                <li>
+                                    <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                     <span class="icon-text">UI/UX Designer</span></div>
+             
+                                     <div class="job-listing-bottom"> <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                         <span class="icon-text">Chennai</span></div>
+                                         <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                             <span class="icon-text">1 Years</span></div></div>
+                                    
+                                 </li>
+            
+                                 <li>
+                                    <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                     <span class="icon-text">UI/UX Designer</span></div>
+             
+                                     <div class="job-listing-bottom"> <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                         <span class="icon-text">Chennai</span></div>
+                                         <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                             <span class="icon-text">1 Years</span></div></div>
+                                    
+                                 </li>
+                
+                            </ul>
+                        </div>
+            
+                        <div class="sidebarmenu recent-search">
+                            <ul>
+                                <li class="sidebarmenu-heading"> <span class="icon-custom"><i class='far fa-user'></i></span> <span class="icon-text">Saved Search</span></li>
+                              
+                                <li>
+                                    <div class="job-listing-bottom">
+                                        <div class="div"><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                            <span class="icon-text">UI/UX Designer</span></div>
+            
+                                            <div><i class='fas fa-bookmark saved-job-icon'></i>
+                                            </div>
+                                        
+                                    
+                                    </div>
+             
+                                     <div class="job-listing-bottom"> <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                         <span class="icon-text">Chennai</span></div>
+                                         <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                             <span class="icon-text">1 Years</span></div></div>
+                                    
+                                 </li>
+                                 <li>
+                                    <div class="job-listing-bottom">
+                                        <div class="div"><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                            <span class="icon-text">UI/UX Designer</span></div>
+            
+                                            <div><i class='fas fa-bookmark saved-job-icon'></i>
+                                            </div>
+                                        
+                                    
+                                    </div>
+             
+                                     <div class="job-listing-bottom"> <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                         <span class="icon-text">Chennai</span></div>
+                                         <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                             <span class="icon-text">1 Years</span></div></div>
+                                    
+                                 </li>
+                                 <li>
+                                    <div class="job-listing-bottom">
+                                        <div class="div"><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                            <span class="icon-text">UI/UX Designer</span></div>
+            
+                                            <div><i class='fas fa-bookmark saved-job-icon'></i>
+                                            </div>
+                                        
+                                    
+                                    </div>
+             
+                                     <div class="job-listing-bottom"> <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                         <span class="icon-text">Chennai</span></div>
+                                         <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                             <span class="icon-text">1 Years</span></div></div>
+                                    
+                                 </li>
+                                 <li>
+                                    <div class="job-listing-bottom">
+                                        <div class="div"><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                            <span class="icon-text">UI/UX Designer</span></div>
+            
+                                            <div><i class='fas fa-bookmark saved-job-icon'></i>
+                                            </div>
+                                        
+                                    
+                                    </div>
+             
+                                     <div class="job-listing-bottom"> <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                         <span class="icon-text">Chennai</span></div>
+                                         <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                                             <span class="icon-text">1 Years</span></div></div>
+                                    
+                                 </li>
+            
+                                 
+             
+                            </ul>
+                        </div>
+            
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

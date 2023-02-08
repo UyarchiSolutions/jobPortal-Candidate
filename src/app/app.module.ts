@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CanHomeComponent } from './can-home/can-home.component';
@@ -9,6 +9,9 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployerModule } from './employer/employer.module';
+
+
+
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { EmployerModule } from './employer/employer.module';
     CandidateModule,
     ReactiveFormsModule,
     FormsModule,
-    EmployerModule
+    EmployerModule,
+    GooglePlaceModule,
+   
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

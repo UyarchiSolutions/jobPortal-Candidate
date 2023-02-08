@@ -1,0 +1,153 @@
+.register-content-row{
+    background-color:#E7E9ED ;
+    border-radius: 5px;
+}
+.register-content{
+    background-color: #fff;
+}
+.search-boxs{
+    display: flex;
+    justify-content: center;
+    margin: 40px 0px 10px 0px;
+}
+
+.search-box{
+    margin: 0 10px;
+}
+.first-search-box{
+    width: 35%;
+}
+
+.second-search-box{
+    width: 15%;
+}
+
+.search-box-wrap{
+    padding: 10px 0;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background: linear-gradient(91.68deg, #FD841F 0.87%, #FD841F 0.88%, #FA831F 0.89%, #0D2747 99.92%, #0A2647 99.93%, #0A2647 99.93%);
+}
+
+.search-icon{
+    width: 25px;
+    height: 25px;
+}
+
+.advanced-search{
+    text-align: right;
+    margin-right: 13.7%;
+    margin-bottom:20px ;
+    font-size: 14px;
+   
+
+
+}
+
+.advanced-search a{
+   color: #fff;
+    font-size: 14px;
+
+}
+
+.sidebarmenu{
+    border-radius: 5px;
+    margin-top: 20px;
+    background-color: #E7E9ED;
+   
+
+}
+
+.myprofile{
+    height: 100%;
+}
+.sidebarmenu li{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin: 10px 0px;
+}
+.sidebarmenu ul{
+    padding: 0px 0px;
+   
+
+
+}
+
+
+
+.icon-custom-recent{
+    width: 40px;
+
+}
+
+.icon-text{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.sidebarmenu-heading{
+    background-color: #FD841F;
+    padding: 10px 0px;
+    border: none !important;
+}
+
+.recent-search .sidebarmenu-heading i{
+    color: #000;
+}
+
+
+.job-listing-bottom{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 5%;
+}
+
+
+.recent-search ul li{
+    border-bottom:  1px solid rgba(10, 38, 71, 0.5);
+}
+.recent-search ul li{
+   padding-bottom: 10px;
+}
+
+
+.right-sidebar{
+    background-color: #E7E9ED;
+    height: 100%;
+}
+
+.recent-search ul li div{
+
+    margin-top: 5px;
+}
+
+.recent-search i{
+    color: #79879A;
+}
+
+.saved-job-icon{
+    color: #0A2647 !important;
+}
+
+.company-logo{
+    width: 100px;
+}
+
+.about-company span{
+display: block;
+}
+
+.about-company-content{
+align-items: normal;
+}
+.content-box{
+    font-weight: 500;
+}
+
+.right-sidebar{
+    background-color: #E7E9ED;
+    height: 100%;
+}
+.sidebarmenu ul{
+    list-style: none;
+}
