@@ -19,23 +19,25 @@
             <div class="col"></div>
           </div>
           <div class="row">
-            <div class="register-form">
-              <div class="single-row">
+            <form [formGroup]="verify" (submit)="verify_now()">
+              <div class="register-form">
+                <div class="single-row">
                   <label for="">OTP :</label>
                   <div class="content-box">
-                      <input type="number" class="form-control" placeholder="Enter OTP">
+                    <input type="number" class="form-control" formControlName="otp" placeholder="Enter OTP">
                   </div>
-              </div>
-              <div class="resend-otp">
-                <a href="#">Resend OTP</a>
-              </div>
-              <div class="single-row">
+                </div>
+                <div class="resend-otp">
+                  <a href="#">Resend OTP</a>
+                </div>
+                <div class="single-row">
                   <label for=""> </label>
                   <div class="content-box final-btn-wrap">
-                      <button type="submit" class="btn btn-brand-blue mb-2 ">Verify OTP</button>
+                    <button type="submit" class="btn btn-brand-blue mb-2 ">Verify OTP</button>
                   </div>
+                </div>
               </div>
-          </div>
+            </form>
           </div>
         </div>
       </div>

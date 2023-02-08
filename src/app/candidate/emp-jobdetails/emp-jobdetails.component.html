@@ -1,0 +1,172 @@
+<div class="container-fluid login">
+  <div class="row">
+    <div class="col-2 ad-image">
+      <img src="../../assets/image/ad.png" alt="">
+    </div>
+
+    <div class="col-8 m-auto">
+      <img src="../../assets/image/hero.png" class="col-12 hero">
+      <div class="bg col-12 m-auto rounded">
+
+        <div class="apply-now">
+          <nav>
+        <div class="back">
+          <button (click)="homePage()"><i><svg width="20" height="30" viewBox="0 0 20 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7.27179 15L20 26.6672L16.3641 30L0 15L16.3641 0L20 3.33281L7.27179 15Z" fill="#0A2647" />
+                </svg>
+              </i></button>
+            </div>
+
+            <div class="toggle">
+              <div class="prev">
+                <i><svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 15L20 5V25L10 15Z" fill="#0A2647" />
+                    <rect x="1" y="1" width="28" height="28" rx="14" stroke="#0A2647" stroke-width="2" />
+                  </svg>
+                </i>
+              </div>
+              <div class="next">
+                <i><svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 15L10 25L10 5L20 15Z" fill="#0A2647" />
+                    <rect x="29" y="29" width="28" height="28" rx="14" transform="rotate(-180 29 29)" stroke="#0A2647"
+                      stroke-width="2" />
+                  </svg>
+                </i>
+              </div>
+            </div>
+          </nav>
+
+          <div class="main-content d-flex" *ngFor="let job of jobDetals">
+            <div class="col-8  ms-3">
+              <!-- <h3>UI UX Designer</h3> -->
+              <h3>{{job.jobTittle}}</h3>
+              <p>mogan</p>
+              <div class="d-flex"> <label><i><svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M15.1988 3.67969H0.798828V7.51969H6.7265C6.62054 7.31914 6.56055 7.09055 6.56055 6.84795V6.75195H9.44055V6.84795C9.44055 7.09055 9.38056 7.31914 9.2746 7.51969H15.1988V3.67969Z"
+                        fill="#8493A3" />
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M12.3216 0.799805H3.68164V5.5998H6.20532C5.9757 5.25664 5.8418 4.84402 5.8418 4.40012V2.72012H10.1618V4.40012C10.1618 4.84402 10.0279 5.25664 9.79827 5.5998H12.3216V0.799805Z"
+                        fill="#8493A3" />
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M6.64244 8.47998H0.798828V15.2H15.1988V8.47998H9.35866C9.16101 9.03934 8.62758 9.44012 8.00055 9.44012C7.37351 9.44012 6.84008 9.03934 6.64244 8.47998Z"
+                        fill="#8493A3" />
+                    </svg>
+                  </i>{{job.jobTittle}}</label>
+                <p>₹{{job.salaryRangeFrom}} To {{job.salaryRangeTo}}</p>
+              </div>
+
+              <div class="d-flex"><label><i><svg width="16" height="19" viewBox="0 0 16 19" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M7.99883 18.5996C7.99883 18.5996 15.1988 11.7761 15.1988 7.79961C15.1988 3.82316 11.9753 0.599609 7.99883 0.599609C4.02238 0.599609 0.798828 3.82316 0.798828 7.79961C0.798828 11.7761 7.99883 18.5996 7.99883 18.5996ZM7.99922 9.59951C8.99333 9.59951 9.79922 8.79362 9.79922 7.79951C9.79922 6.8054 8.99333 5.99951 7.99922 5.99951C7.00511 5.99951 6.19922 6.8054 6.19922 7.79951C6.19922 8.79362 7.00511 9.59951 7.99922 9.59951Z"
+                        fill="#8493A3" />
+                    </svg>
+                  </i>{{job.jobLocation}}</label>
+                <p>{{job.experienceFrom}}year {{job.experienceTo}}month</p>
+              </div>
+              <div class="d-flex"> <label><i><svg width="16" height="18" viewBox="0 0 16 18" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M9.51688 7.90078C10.9728 7.30275 11.998 5.87071 11.998 4.19922C11.998 1.99008 10.2072 0.199219 7.99805 0.199219C5.78891 0.199219 3.99805 1.99008 3.99805 4.19922C3.99805 5.87086 5.02347 7.30301 6.47961 7.90094C3.23273 8.3519 0.798828 10.3198 0.798828 14.0984C0.798828 17.6279 2.92237 17.5028 5.84845 17.3305C6.52752 17.2905 7.24982 17.2479 7.99883 17.2479C8.74784 17.2479 9.47013 17.2905 10.1492 17.3305C13.0753 17.5028 15.1988 17.6279 15.1988 14.0984C15.1988 10.3194 12.7643 8.35143 9.51688 7.90078Z"
+                        fill="#8493A3" />
+                    </svg>
+                  </i>Hiring {{job.openings}} candidate</label>
+                <p>{{postedTime(job.expiredDate)}}</p>
+              </div>
+            </div>
+            <div class="col-4 d-flex flex-column justify-content-between position-relative">
+              <img src="../../assets/image/Google-Icon.jpg" width="100px">
+              <button class="btn">Apply Now</button>
+
+              <i class="share"><svg width="30" height="30" viewBox="0 0 30 31" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M17.5588 22.537L10.9286 19.102C10.063 19.9811 8.93901 20.5925 7.70279 20.8568C6.46658 21.1211 5.17525 21.0261 3.99664 20.5841C2.81804 20.142 1.80664 19.3734 1.09389 18.3782C0.38114 17.3829 0 16.207 0 15.0033C0 13.7995 0.38114 12.6236 1.09389 11.6283C1.80664 10.6331 2.81804 9.86448 3.99664 9.42244C5.17525 8.98041 6.46658 8.88537 7.70279 9.14967C8.93901 9.41398 10.063 10.0254 10.9286 10.9045L17.5604 7.4695C17.1839 6.05361 17.3639 4.55588 18.0666 3.25706C18.7694 1.95823 19.9467 0.947474 21.3779 0.414255C22.809 -0.118965 24.3957 -0.13804 25.8406 0.360604C27.2855 0.859248 28.4893 1.84138 29.2265 3.12289C29.9636 4.40441 30.1835 5.89733 29.8448 7.32182C29.5061 8.74631 28.6322 10.0046 27.3868 10.8607C26.1415 11.7169 24.6101 12.1122 23.0799 11.9725C21.5497 11.8328 20.1256 11.1678 19.0746 10.102L12.4428 13.537C12.6974 14.499 12.6974 15.506 12.4428 16.468L19.073 19.903C20.124 18.8372 21.5481 18.1722 23.0783 18.0325C24.6086 17.8928 26.1399 18.2881 27.3853 19.1443C28.6306 20.0004 29.5046 21.2587 29.8432 22.6832C30.1819 24.1077 29.9621 25.6006 29.2249 26.8821C28.4878 28.1636 27.2839 29.1458 25.839 29.6444C24.3941 30.143 22.8074 30.124 21.3763 29.5908C19.9451 29.0575 18.7678 28.0468 18.0651 26.7479C17.3623 25.4491 17.1823 23.9514 17.5588 22.5355V22.537ZM6.31632 18.0025C7.15387 18.0025 7.95712 17.6864 8.54936 17.1238C9.1416 16.5612 9.47431 15.7982 9.47431 15.0025C9.47431 14.2069 9.1416 13.4438 8.54936 12.8812C7.95712 12.3186 7.15387 12.0025 6.31632 12.0025C5.47877 12.0025 4.67552 12.3186 4.08328 12.8812C3.49104 13.4438 3.15832 14.2069 3.15832 15.0025C3.15832 15.7982 3.49104 16.5612 4.08328 17.1238C4.67552 17.6864 5.47877 18.0025 6.31632 18.0025ZM23.6853 9.0025C24.5229 9.0025 25.3261 8.68643 25.9183 8.12382C26.5106 7.56121 26.8433 6.79815 26.8433 6.0025C26.8433 5.20685 26.5106 4.44379 25.9183 3.88118C25.3261 3.31857 24.5229 3.0025 23.6853 3.0025C22.8477 3.0025 22.0445 3.31857 21.4523 3.88118C20.86 4.44379 20.5273 5.20685 20.5273 6.0025C20.5273 6.79815 20.86 7.56121 21.4523 8.12382C22.0445 8.68643 22.8477 9.0025 23.6853 9.0025ZM23.6853 27.0025C24.5229 27.0025 25.3261 26.6864 25.9183 26.1238C26.5106 25.5612 26.8433 24.7982 26.8433 24.0025C26.8433 23.2069 26.5106 22.4438 25.9183 21.8812C25.3261 21.3186 24.5229 21.0025 23.6853 21.0025C22.8477 21.0025 22.0445 21.3186 21.4523 21.8812C20.86 22.4438 20.5273 23.2069 20.5273 24.0025C20.5273 24.7982 20.86 25.5612 21.4523 26.1238C22.0445 26.6864 22.8477 27.0025 23.6853 27.0025Z"
+                    fill="#8493A3" />
+                </svg>
+              </i>
+              <i class="fav"><svg width="30" height="30" viewBox="0 0 30 30" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M15 24.5439L5.73031 30L7.80032 19.0437L0 11.4594L10.5498 10.1437L15 0L19.4502 10.1437L30 11.4594L22.1997 19.0437L24.2697 30L15 24.5439ZM15 21.3765L20.5818 24.6614L19.3345 18.0652L24.0305 13.4978L17.6785 12.7059L15 6.59895L12.3215 12.7073L5.96951 13.4978L10.6655 18.0652L9.41821 24.6614L15 21.3765Z"
+                    fill="#8493A3" />
+                </svg>
+              </i>
+            </div>
+          </div>
+
+          <div class="sub-content" *ngFor="let job of jobDetals">
+            <div>
+              <label>Key Skills : </label>
+              <p *ngFor="let skill of job.keySkill">{{skill}}</p>
+            </div>
+
+            <div> <label>Qualification :</label>
+              <p>B.E</p>
+            </div>
+            <div> <label>Employment Type :</label>
+              <p>{{job.employmentType}}</p>
+            </div>
+
+            <div> <label>Work Place Type :</label>
+              <ul>
+               <li>{{job.workplaceType}}</li>
+                <!-- <li>Required Skill set</li>
+                <li>Proficient in Node.js or Java</li>
+                <li>Hands on Angular2+/React.js</li>
+                <li>Expertise in AWS/Azure/Google Cloud</li>
+                <li>Expertise in Docker and Kubernetes</li>
+                <li>Prior experience in at least one Relational database technologies</li>
+                <li>Experience with Agile software development practices</li>
+                <li>Experience with Continuous Integration and Delivery</li>
+                <li>Experience with unit test frameworks and peer code review</li>
+                <li>Proficient in current development tools (Visual Studio, JIRA)</li> -->
+              </ul>
+            </div>
+
+            <div>
+              <label>Industry :</label>
+              <p>{{job.industry}}</p>
+            </div>
+            <div><label>Preferred Industry :</label>
+              <p>{{job.preferedIndustry}}</p>
+            </div>
+            <div><label>Job Description : </label>
+              <ul>
+                <li>{{job.jobDescription}}</li>
+                <!-- <li>Required Skill set</li>
+                <li>Proficient in Node.js or Java</li>
+                <li>Hands on Angular2+/React.js</li>
+                <li>Expertise in AWS/Azure/Google Cloud</li>
+                <li>Expertise in Docker and Kubernetes</li>
+                <li>Prior experience in at least one Relational database technologies</li>
+                <li>Experience with Agile software development practices</li>
+                <li>Experience with Continuous Integration and Delivery</li>
+                <li>Experience with unit test frameworks and peer code review</li>
+                <li>Proficient in current development tools (Visual Studio, JIRA)</li> -->
+              </ul>
+            </div>
+
+            <div><label>Recruiter Name : </label>
+              <p>{{job.recruiterName}}</p>
+            </div>
+            <div><label>Mobile Number : </label>
+              <p>{{job.contactNumber}}</p>
+            </div>
+
+
+
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+    <div class="col-2 ad-image">
+      <img src="../../assets/image/ad.png" alt="">
+    </div>
+  </div>
+</div>

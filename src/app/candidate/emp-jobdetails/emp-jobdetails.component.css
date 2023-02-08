@@ -1,0 +1,119 @@
+.bg{
+  background-color: #E7E9ED;
+  padding: 10px 0;
+}
+.apply-now{
+  background-color: white;
+width: 98%;
+padding: 10px 0;
+border-radius: 10px;
+margin: auto;
+}
+nav{
+  display: flex;
+  padding: 0 10px;
+
+  justify-content: space-between;
+}
+.toggle{
+  display: flex;
+  justify-content: space-between;
+}
+.toggle i{
+  margin: 0 10px;
+}
+.main-content{
+  width: 100%;
+  margin: auto;
+  margin-top: 30px;
+padding: 10px 0;
+  border-radius: 10px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+}
+label{
+  width: 200px;
+}
+label i{
+  margin-right: 10px;
+}
+.btn{
+background-color: #0A2647;
+color: white;
+width: fit-content;
+padding: 7px 60px;
+}
+.share{
+  position: absolute;
+  top: 15px;
+  right: 50px;
+}
+.fav{
+  position: absolute;
+  top: 15px;
+  right: 100px;
+}
+.sub-content{
+  margin-top: 30px;
+  padding: 10px;
+  font-size: 0.8rem;
+}
+.sub-content label{
+font-weight: 500;
+}
+.sub-content > div{
+  display: flex;
+}
+.sub-content ul{
+  padding-left: 15px;
+}
+
+
+
+
+
+
+.hero{
+  height: 100px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.login-content a{
+  color: #000;
+  text-decoration: none;
+}
+
+
+.button{
+  margin-top: 10px;
+  width: 180px;
+}
+
+.btn-bg-brand-blue{
+  background-color: #0A2647;
+  color: #fff;
+}
+
+.forgot-pass{
+  text-align: right;
+  font-size: 10px;
+  color: #0A2647;
+}
+
+.ad-image img{
+  width: 100%;
+}
+
+
+.btn-brand-blue{
+  min-width: 150px;
+}
+
+.login-main .col-2 img{
+  width: 100%;
+
+}
+button{
+  border: none;
+  background-color: white;
+}

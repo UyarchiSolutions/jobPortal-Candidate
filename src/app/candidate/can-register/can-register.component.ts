@@ -29,6 +29,7 @@ export class CanRegisterComponent implements OnInit {
   }
   // File upload
   addresume(file: any) {
+    console.log("sbdhsbdhj")
     this.candidateFile = null;
     const res = file.target.files[0] as File;
     if (res != null) {
@@ -54,12 +55,14 @@ export class CanRegisterComponent implements OnInit {
     jobForm.append('long', this.Candidateform.get('long')?.value);
     jobForm.append('resume', this.candidateFile);
      this.canditateService.submitcandicate(jobForm).subscribe( (res: any) => {
-        },
+      this.router.navigate(['/checkmailCan'])
+    },
         error => {
           error.error.message;
           console.log(error.error.message, 'ppppp');
         }
+
       );
-      this.router.navigate(['/checkmailCan'])
+
   }
 }

@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
   latitude: any;
   longtitude: any;
   constructor(private formBuilder: FormBuilder, private router: Router,private empservice: EmpServiceService) {
-   
+
    }
    RegisterForm:any = this.formBuilder.group({
     logo: new FormControl(''),
