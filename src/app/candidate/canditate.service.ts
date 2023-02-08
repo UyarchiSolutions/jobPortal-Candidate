@@ -47,4 +47,8 @@ export class CanditateService {
   getJobs(id:any){
     return this.http.get(this.baseUrl+`/v1/candidateDetail/getByIdEmployerDetailsShownCandidate/${id}`,{headers:{auth:Cookie.get('tokens')}})
   }
+  // apply job
+  applyJobs(data:any){
+    return this.http.post(this.baseUrl+`/v1/candidateDetail/createCandidatePostjob`,data,{headers:{auth:Cookie.get('tokens')}})
+  }
 }

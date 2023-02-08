@@ -10,11 +10,12 @@
 
         <div class="apply-now">
           <nav>
-        <div class="back">
-          <button (click)="homePage()"><i><svg width="20" height="30" viewBox="0 0 20 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7.27179 15L20 26.6672L16.3641 30L0 15L16.3641 0L20 3.33281L7.27179 15Z" fill="#0A2647" />
-                </svg>
-              </i></button>
+            <div class="back">
+              <button (click)="homePage()"><i><svg width="20" height="30" viewBox="0 0 20 30" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.27179 15L20 26.6672L16.3641 30L0 15L16.3641 0L20 3.33281L7.27179 15Z" fill="#0A2647" />
+                  </svg>
+                </i></button>
             </div>
 
             <div class="toggle">
@@ -78,8 +79,9 @@
             </div>
             <div class="col-4 d-flex flex-column justify-content-between position-relative">
               <img src="../../assets/image/Google-Icon.jpg" width="100px">
-              <button class="btn">Apply Now</button>
-
+              <button class="btn" [disabled]="job.candidatesubmitButton == true"
+                ngClass="{{job.candidatesubmitButton == true ?'applied':''}}"
+                (click)="apply(job._id)">{{job.candidatesubmitButton == true ?'Applied' :'Apply Now'}}</button>
               <i class="share"><svg width="30" height="30" viewBox="0 0 30 31" fill="none"
                   xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -87,13 +89,13 @@
                     fill="#8493A3" />
                 </svg>
               </i>
-              <i class="fav"><svg width="30" height="30" viewBox="0 0 30 30" fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M15 24.5439L5.73031 30L7.80032 19.0437L0 11.4594L10.5498 10.1437L15 0L19.4502 10.1437L30 11.4594L22.1997 19.0437L24.2697 30L15 24.5439ZM15 21.3765L20.5818 24.6614L19.3345 18.0652L24.0305 13.4978L17.6785 12.7059L15 6.59895L12.3215 12.7073L5.96951 13.4978L10.6655 18.0652L9.41821 24.6614L15 21.3765Z"
-                    fill="#8493A3" />
-                </svg>
-              </i>
+              <button><i class="fav"><svg width="30" height="30" viewBox="0 0 30 30" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M15 24.5439L5.73031 30L7.80032 19.0437L0 11.4594L10.5498 10.1437L15 0L19.4502 10.1437L30 11.4594L22.1997 19.0437L24.2697 30L15 24.5439ZM15 21.3765L20.5818 24.6614L19.3345 18.0652L24.0305 13.4978L17.6785 12.7059L15 6.59895L12.3215 12.7073L5.96951 13.4978L10.6655 18.0652L9.41821 24.6614L15 21.3765Z"
+                      fill="#8493A3" />
+                  </svg>
+                </i></button>
             </div>
           </div>
 
@@ -112,7 +114,7 @@
 
             <div> <label>Work Place Type :</label>
               <ul>
-               <li>{{job.workplaceType}}</li>
+                <li>{{job.workplaceType}}</li>
                 <!-- <li>Required Skill set</li>
                 <li>Proficient in Node.js or Java</li>
                 <li>Hands on Angular2+/React.js</li>
