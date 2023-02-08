@@ -10,6 +10,7 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { EmpJobpostComponent } from './emp-jobpost/emp-jobpost.component';
 import { EmpMyaccountComponent } from './emp-myaccount/emp-myaccount.component';
 import { EmpCansearchComponent } from './emp-cansearch/emp-cansearch.component';
+import { EmpAppliesListComponent } from './emp-applies-list/emp-applies-list.component';
 
 
 
@@ -21,6 +22,7 @@ import { EmpCansearchComponent } from './emp-cansearch/emp-cansearch.component';
     CheckEmailComponent,
     VerifyOtpComponent,
     EmpCansearchComponent,
+    
   
     
     
