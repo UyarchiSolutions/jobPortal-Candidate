@@ -1,0 +1,225 @@
+<div class="container-fluid register">
+    <div class="row">
+        <div class="col-2 ad-image">
+            <img src="../../assets/image/ad.png" alt="">
+        </div>
+        <div class="col-8  login-main">
+            <div class="row ">
+                <div class="col">
+                    <img src="../../assets/image/hero.png" alt="" class="hero-image">
+                </div>
+            </div>
+            <div class="row register-content-row height-register-content">
+                <div class="col register-content">
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <h3>Post A Job</h3>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+
+                  <div class="row">
+                    <div class="col">
+
+
+                    <form [formGroup]="jobpostForm" (submit)="job_post()">
+                        <div class="register-form">
+                            <div class="single-row">
+                                <label for="">Job Title :</label>
+                                <div class="content-box">
+                                    <input type="text" class="form-control" placeholder="Enter Job Title" formControlName="jobTittle">
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Job Description :</label>
+                                <div class="content-box">
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Job Description" formControlName="jobDescription"></textarea>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Candidate Description :</label>
+                                <div class="content-box">
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Candidate Description" formControlName="candidateDescription"></textarea>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Salary Description :</label>
+                                <div class="content-box">
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Salary Description" formControlName="salaryDescription"></textarea>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Job Location :</label>
+                                <div class="content-box">
+                                    <input type="text" class="form-control" placeholder="Enter Job location" formControlName="jobLocation">
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Key Skills :</label>
+                                <div class="content-box">
+                                    <input type="text" class="form-control" placeholder="Enter Key Skills" formControlName="keySkill">
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Qualification :</label>
+                                <div class="content-box">
+                                    <input type="text" class="form-control" placeholder="Enter Qualification" formControlName="educationalQualification">
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Salary Range :</label>
+                                <div class="content-box">
+                                    <input type="number" class="form-control douple-input-first" placeholder="From" formControlName="salaryRangeFrom">
+                                    <input type="number" class="form-control douple-input-second" placeholder="To" formControlName="salaryRangeTo">
+                                </div>
+                            </div>
+
+                            <div class="single-row">
+                                <label for="">Expreience :</label>
+                                <div class="content-box">
+                                    <select class="form-control select-type douple-input-first" formControlName="experienceFrom">
+                                        <option value="option1" disabled selected >Year</option>
+                                        <option value="fresher">Fresher</option>
+                                        <option value="1">1 Year</option>
+                                        <option value="2">2 Year</option>
+                                        <option value="3">3 Year</option>
+                                        <option value="4">4 Year</option>
+                                        <option value="5">5 Year</option>
+                                        <option value="6">6 Year</option>
+                                        <option value="7">7 Year</option>
+                                        <option value="8">8 Year</option>
+                                        <option value="9">9 Year</option>
+                                        <option value="10">10 Year</option>
+                                        <option value="11">11 Year</option>
+                                    </select>
+
+
+                                    <select class="form-control select-type douple-input-second" formControlName="experienceTo">
+                                        <option value="option1" disabled selected >Month</option>
+                                        <option value="0">0 Month</option>
+                                        <option value="1">1 Month</option>
+                                        <option value="2">2 Month</option>
+                                        <option value="3">3 Month</option>
+                                        <option value="4">4 Month</option>
+                                        <option value="5">5 Month</option>
+                                        <option value="6">6 Month</option>
+                                        <option value="7">7 Month</option>
+                                        <option value="8">8 Month</option>
+                                        <option value="9">9 Month</option>
+                                        <option value="10">10 Month</option>
+                                        <option value="11">11 Month</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Industry :</label>
+                                <div class="content-box">
+                                    <select class="form-control select-type" formControlName="industry">
+                                        <option value="option1" disabled selected >Select Type</option>
+                                        <option value="analytics/kpo/research">Analytics/KPO/Research</option>
+                                        <option value="bpo/call center">BPO/Call Center</option>
+                                        <option value="it services/consultancy">It Services/Consultancy</option>
+                                        <option value="hardWare">HardWare</option>
+                                        <option value="netWorking">NetWorking</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Preferred Industry :</label>
+                                <div class="content-box">
+                                    <select class="form-control select-type" formControlName="preferedIndustry">
+                                        <option value="option1" disabled selected >Select Type</option>
+                                        <option value="analytics/kpo/research">Analytics/KPO/Research</option>
+                                        <option value="bpo/call center">BPO/Call Center</option>
+                                        <option value="it services/consultancy">It Services/Consultancy</option>
+                                        <option value="hardWare">HardWare</option>
+                                        <option value="netWorking">NetWorking</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Interview Type :</label>
+                                <div class="content-box">
+                                    <select class="form-control select-type" formControlName="interviewType">
+                                        <option value="option1" disabled selected >Select Type</option>
+                                        <option value="walk in">Walk In</option>
+                                        <option value="online">Online</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Employment Type :</label>
+                                <div class="content-box">
+                                    <select class="form-control select-type" formControlName="employmentType">
+                                        <option value="option1" disabled selected >Select Type</option>
+                                        <option value="fulltime">Full Time</option>
+                                        <option value="parttime">Part Time</option>
+                                        <option value="contract">Contract</option>
+                                        <option value="temporary">Temporary</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">No. Of. Openings :</label>
+                                <div class="content-box">
+                                    <input type="number" class="form-control" placeholder="Enter No. Of. Openings" formControlName="openings">
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Work Mode :</label>
+                                <div class="content-box">
+                                    <select class="form-control select-type" formControlName="workplaceType">
+                                        <option value="option1" disabled selected >Select Type</option>
+                                        <option value="onsite">Onsite</option>
+                                        <option value="hybrid">Hybrid</option>
+                                        <option value="work from home">Work From Home</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">URL to Apply :</label>
+                                <div class="content-box">
+                                    <input type="url" class="form-control" placeholder="Enter URL" formControlName="urltoApply">
+                                </div>
+                            </div>
+
+                            <div class="single-row">
+                                <label for="">Recruiter Name :</label>
+                                <div class="content-box">
+                                    <input type="text" class="form-control" placeholder="Enter Recruiter Name" formControlName="recruiterName">
+                                </div>
+
+                            </div>
+
+                            <div class="single-row">
+                                <label for="">Mobile Number :</label>
+                                <div class="content-box">
+                                    <input type="number" class="form-control" placeholder="Enter Mobile Number" formControlName="contactNumber">
+                                </div>
+                            </div>
+                            <div class="single-row douple-btn">
+                                <div class="content-box">
+                                    <button type="submit" class="btn btn-brand-grey mb-2 btn-custom">Preview</button>
+                                </div>
+                                <div class="content-box">
+                                    <button type="submit" class="btn btn-brand-blue mb-2 btn-custom">Post</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>  
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-2 ad-image">
+            <img src="../../assets/image/ad.png" alt="">
+        </div>
+    </div>
+</div>

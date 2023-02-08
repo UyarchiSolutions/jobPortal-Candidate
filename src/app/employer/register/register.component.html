@@ -18,7 +18,7 @@
                         </div>
                         <div class="col"></div>
                     </div>
-                    <form [formGroup]="RegisterForm" (ngSubmit)="reg_submit()">
+                    <form [formGroup]="RegisterForm" (submit)="reg_submit()">
                         <div class="register-form">
                             <div class="single-row">
                                 <label for="">Company Logo :</label>
@@ -35,7 +35,7 @@
                                 <label for="">Company Name :</label>
                                 <div class="content-box">
                                     <input type="text" class="form-control" min="1" step="1"
-                                    ng-pattern="/^[a-zA-Z\s]*$/" placeholder="Enter Your Company Name" formControlName="company_name">
+                                    ng-pattern="/^[a-zA-Z\s]*$/" placeholder="Enter Your Company Name" formControlName="name">
                                 </div>
 
                             </div>
@@ -80,8 +80,8 @@
                                 <div class="content-box">
                                     <select class="form-control select-type" formControlName="companyType">
                                         <option value="option1" disabled selected >Select Type</option>
-                                        <option value="option2">Option 2</option>
-                                        <option value="option3">Option 3</option>
+                                        <option value="foreign-mnc">Foreign MNC</option>
+                                        <option value="corporate">Corporate</option>
                                       </select>
                                 </div>
                             </div>
@@ -96,7 +96,7 @@
                             <div class="single-row">
                                 <label for="">About Company :</label>
                                 <div class="content-box">
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="about"></textarea>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1"  rows="3" formControlName="aboutCompany"></textarea>
                                 </div>
                             </div>
 
@@ -105,11 +105,12 @@
                                 <label for="">About Company :</label>
                                 <div class="content-box">
                                     <div class="location-content">
-                                        <label for="select-logo" class="form-control choose-file">Choose File</label>
-                                        <div>  <input type="file" id="select-logo" class="form-control choose-file"
-                                            placeholder="+Add Logo" style="display: none;" formControlName="choosefile">
+                                        <label for="select-logo-file" class="form-control choose-file">Choose File</label>
+                                        <div>  <input type="file" id="select-logo-file" (change)="addresume($event)" accept=".ppt,.pptx,.pdf"  class="form-control choose-file"
+                                            placeholder="+Add Logo"  style="display: none;" >
                                         <span class="ppt-data">[PPT, PDF]</span></div>
 
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -117,9 +118,10 @@
 
 
                             <div class="single-row">
-                                <label for="">Location :</label>
+                                <label for="select-logo">Location :</label>
                                 <div class="content-box">
-                                    <input type="text" class="form-control" placeholder="Enter Your Location" formControlName="location">
+                                    <input class="form-control" ngx-google-places-autocomplete [options]="options"
+                                    (onAddressChange)="handleAddressChange($event)" placeholder="Enter Your Location">
                                 </div>
                             </div>
                             <div class="single-row single-row-final-btn">
