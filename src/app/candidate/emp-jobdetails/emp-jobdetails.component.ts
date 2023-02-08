@@ -40,6 +40,15 @@ export class EmpJobdetailsComponent implements OnInit {
     this.get_jobDetails(jopId)
    })
   }
+  // save job
+  saveJob(id:any){
+    const save={
+      jobid:id
+    }
+    this.candidateService.saveJob(save).subscribe((res:any) => {
+      this.get_jobDetails(id)
+    })
+  }
   get_jobDetails(id: any) {
     this.candidateService.getJobs(id).subscribe((res: any) => {
       this.jobDetals = res;

@@ -6,10 +6,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CheckEmailComponent } from './check-email/check-email.component';
 import { VerifyOtpComponent } from './verify-otp/verify-otp.component';
-import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { EmpJobpostComponent } from './emp-jobpost/emp-jobpost.component';
 import { EmpMyaccountComponent } from './emp-myaccount/emp-myaccount.component';
 import { EmpCansearchComponent } from './emp-cansearch/emp-cansearch.component';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
 
 
@@ -21,20 +21,20 @@ import { EmpCansearchComponent } from './emp-cansearch/emp-cansearch.component';
     CheckEmailComponent,
     VerifyOtpComponent,
     EmpCansearchComponent,
-  
-    
-    
-   
-    
+
+
+
+
+
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    GooglePlaceModule,
-    
-  
+    GooglePlaceModule
+
+
   ]
 })
 export class EmployerModule { }
