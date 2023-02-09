@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams} from '@angular/common/http';
 import { Env } from '../environment.dev';
+import { Cookie } from 'ng2-cookies';
 
 @Injectable({
   providedIn: 'root'
@@ -22,15 +23,10 @@ export class EmpServiceService {
   }
   viewBasicDetailsEmployee(){
     let local: any = localStorage.getItem('tokenloginEmplooyeee');
-    return this.http.get(this.baseurl+'/v1/employerRegistration/userDetails',{
-      headers: { auth: local}
-    })
+    return this.http.get(this.baseurl+'/v1/employerRegistration/userDetails',{headers:{auth:Cookie.get('emptokens')}})
   }
   submitPostAJob(data:any){
-    let local: any = localStorage.getItem('tokenloginEmplooyeee');
-    return this.http.post(this.baseurl+'/v1/employerdetail/createEmpDetails',data,{
-      headers: { auth: local },
-    })
+    return this.http.post(this.baseurl+'/v1/employerdetail/createEmpDetails',data,{headers:{auth:Cookie.get('emptokens')}})
   }
   getdataAdvanceEmployeeDetails(){
     let local: any = localStorage.getItem('tokenloginEmplooyeee');
@@ -44,4 +40,15 @@ export class EmpServiceService {
       headers : { auth: local}
     })
   }
+  view_post(id: any){
+    console.log(id)
+    return this.http.get(this.baseurl + "/v1/employerdetail/getAllApplied_postjobs_Candidates/" + id);
+  }
+ view_can(data:any){
+  console.log(data)
+  return this.http.post(this.baseurl + "/v1/employerCandidateSearch/outSearch_employer",data,{headers:{auth:Cookie.get('emptokens')}});
+ }
+ getSkill(value:any){
+  return this.http.get(this.baseurl+`/v1/employerdetail/keySkillData/${value}`)
+}
 }

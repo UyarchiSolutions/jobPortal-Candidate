@@ -1,4 +1,4 @@
-<div class="container-fluid register">
+<div class="container-fluid register" [formGroup]="searchForm">
     <div class="row">
         <div class="col-2 ad-image">
 
@@ -21,13 +21,21 @@
                         <div class="search-boxs">
 
                             <div class="search-box first-search-box">
-                                <input type="text" class="form-control" placeholder="Enter Designation / Key skills">
+                                <input type="text" class="form-control" placeholder="Enter Designation / Key skills" formControlName="keyskills" (keyup)="search_skills($event)">
                             </div>
-    
+                            <div class="single-row" *ngIf="isDisplay" style="margin-top:0px;">
+                                <label></label>
+                                <div class="content-box" style="background: white;">
+                                  <ul style="padding-left: 0px;">
+                                    <li *ngFor="let skill of keySkill"><input style="width: 30%" type="checkbox" value="{{skill}}" (change)="checkSkill($event)"/>
+                                      <span>{{skill}}</span></li>
+                                  </ul>
+                                </div>
+                              </div>
     
     
                             <div class="search-box second-search-box">
-                                <input type="text" class="form-control location" placeholder="Enter Location">
+                                <input type="text" class="form-control location" placeholder="Enter Location" formControlName="location">
                             </div>
     
                             <div class="search-box">
@@ -38,7 +46,7 @@
                                 </select>
                             </div>
     
-                            <div class="search-box">
+                            <div class="search-box" (click)="can_list()">
                                 <button type="submit" class="btn btn-brand-orange"><img src="../../assets/image/search.png"
                                         alt="" class="search-icon"></button>
                             </div>
@@ -134,7 +142,7 @@
                                     <div class="search-box">
                                         <label for="">Key Words</label>
                                         <div class="sidebar-search-box">
-                                            <input type="text" class="form-control location">
+                                            <input type="text" class="form-control location" formControlName="anykeywords">
                                             <button type="submit" class="btn btn-brand-orange"><img
                                                     src="../../assets/image/search.png" alt=""
                                                     class="search-icon"></button>
@@ -144,7 +152,7 @@
                             </li>
                             <li class="refine-content">
                                 <div class="search-box">
-                                    <select class="form-control select-type">
+                                    <select class="form-control select-type" formControlName="qualification">
                                         <option value="option1" selected>Qualification</option>
                                         <option value="option2">Option 2</option>
                                         <option value="option3">Option 3</option>
@@ -200,15 +208,15 @@
                             <i class='fas fa-sort-amount-down'></i>
                         </div>
 
-                        <div class="all-candidates col">
+                        <div class="all-candidates col" (click)="can_list()">
 
                             <i class='fas fa-user-alt'></i>
                             All Candidates
                         </div>
 
-                        <div class="job-post col" [routerLink]="['/emp-postjob']">
+                        <div class="job-post col" (click)="current_link()">
                             <i class='fas fa-sort-amount-down'></i>
-                           Job Post
+                             Job Post
                         </div>
 
                         <div class="saved-candidates col">
@@ -221,119 +229,284 @@
                         </div>
                         <!-- </div> -->
                     </div>
+                    <div *ngIf="is_viewpost">
+                        <div class="row no-margin bg-grey">
+                            <div class="col">
 
-                    <div class="row no-margin bg-grey">
-                        <div class="col">
+                                <div class="filter-label">
 
-                            <div class="filter-label">
+                                    <span class="badge bg-light text-dark">
+                                        <span>BA-English</span>
 
-                                <span class="badge bg-light text-dark">
-                                    <span>BA-English</span>
+                                        <span class="close-mark">x</span>
+                                    </span>
 
-                                    <span class="close-mark">x</span>
-                                </span>
+                                    <span class="badge bg-light text-dark">
+                                        <span>Chennai</span>
 
-                                <span class="badge bg-light text-dark">
-                                    <span>Chennai</span>
-
-                                    <span class="close-mark">x</span>
-                                </span>
-
-
-                                <span class="badge bg-light text-dark">
-                                    <span>0 to 2 Years</span>
-
-                                    <span class="close-mark">x</span>
-                                </span>
+                                        <span class="close-mark">x</span>
+                                    </span>
 
 
+                                    <span class="badge bg-light text-dark">
+                                        <span>0 to 2 Years</span>
+
+                                        <span class="close-mark">x</span>
+                                    </span>
 
 
 
+
+
+
+                                </div>
 
                             </div>
+                        </div>
 
+                        <div class="row content-card-heading no-margin padding10"  style="font-size:13px" >
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Posted Date
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Job Title
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-clock-o'></i>
+                                Experience
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Salary
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Applies
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Location
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Action
+                            </div>
+                        </div>
+                        <div class="row content-card no-margin padding10" *ngFor="let list of data">
+                        
+                            <div class="col">
+                                {{list.createdAt |  date: 'yyyy-MM-dd'}}
+                            </div>
+                            <div class="col" (click)="view_post_details()">
+                                {{list.jobTittle}}
+                            </div>
+                            <div class="col" (click)="current_applies(list._id)">
+                                {{list.experienceFrom}} to {{list.experienceTo}}
+                            </div>
+                            <div class="col" (click)="current_applies(list._id)">
+                                {{list.salaryRangeFrom}} to {{list.salaryRangeTo}} lacs
+                            </div>
+                            <div class="col">
+                                <button class="applie-des" (click)="current_applies(list._id)">{{list.appliedcount}}</button>
+                            </div>
+                            <div class="col" (click)="current_applies(list._id)">
+                                {{list.jobLocation}}
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-pencil-alt'></i>
+                            </div>
+    
+
+                            <!-- <div class="col-1">
+                                <i class='fas fa-sort-amount-down text-white-color'></i>
+
+                            </div> -->
                         </div>
                     </div>
+                    <div *ngIf="is_viewapplies">
+                        <div class="row no-margin bg-grey">
+                            <div class="col">
 
-                    <div class="row content-card-heading no-margin padding10"  style="font-size:13px" >
-                        <div class="col">
-                            <i class='fas fa-sort-amount-down'></i>
-                            Posted Date
-                        </div>
-                        <div class="col">
-                            <i class='fas fa-sort-amount-down'></i>
-                            Job Title
-                        </div>
-                        <div class="col">
-                            <i class='fas fa-sort-amount-down'></i>
-                            Experience
-                        </div>
-                        <div class="col">
-                            <i class='fas fa-sort-amount-down'></i>
-                            Salary
-                        </div>
-                        <div class="col">
-                            <i class='fas fa-sort-amount-down'></i>
-                           Applies
-                        </div>
-                        <div class="col">
-                            <i class='fas fa-sort-amount-down'></i>
-                            Status
-                        </div>
-                        <div class="col">
-                            <i class='fas fa-sort-amount-down'></i>
-                            Action
-                        </div>
+                                <div class="filter-label">
+
+                                    <span class="badge bg-light text-dark">
+                                        <span>BA-English</span>
+
+                                        <span class="close-mark">x</span>
+                                    </span>
+
+                                    <span class="badge bg-light text-dark">
+                                        <span>Chennai</span>
+
+                                        <span class="close-mark">x</span>
+                                    </span>
+
+
+                                    <span class="badge bg-light text-dark">
+                                        <span>0 to 2 Years</span>
+
+                                        <span class="close-mark">x</span>
+                                    </span>
 
 
 
-                       
-                    </div>
 
 
-                    <div class="row content-card no-margin padding10" *ngFor="let list of data">
-                      
-                        <div class="col">
-                            {{list.createdAt |  date: 'yyyy-MM-dd'}}
+
+                                </div>
+
+                            </div>
                         </div>
-                        <div class="col">
-                           {{list.jobTittle}}
-                        </div>
-                        <div class="col">
-                            {{list.experienceFrom}}
-                        </div>
-                        <div class="col">
-                            {{list.salaryRangeFrom}}
-                        </div>
-                        <div class="col">
-                            <a [routerLink]="['']" [queryParams]="{id:list._id}">{{list.openings}}</a>
+
+                        <div class="row content-card-heading no-margin padding10"  style="font-size:13px" >
+                            <div class="col-1">
+                                <div class="form-check">
+                                     <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                 </div>
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Name
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Location
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                               Qualification
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Salary
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                 Experience
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Status
+                            </div>
                             
                         </div>
-                        <div class="col">
-                            {{list.openings}}
-                         </div>
-                         <div class="col">
-                            {{list.openings}}
-                         </div>
-  
+                        <div class="row content-card no-margin padding10" *ngFor="let list of applied_data">
+                            <div class="col-1">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                </div>
+                            </div>
+                            <div class="col">
+                                {{list.candidateData.name}}
+                            </div>
+                            <div class="col">
+                            {{list.candidateData.locationCurrent}}
+                            </div>
+                            <div class="col">
+                                {{list.experienceFrom}}
+                            </div>
+                            <div class="col">
+                                {{list.salaryRangeFrom}}
+                            </div>
+                            <div class="col">
+                                {{list.candidateData.experienceYear}}Year - {{list.candidateData.experienceMonth}}Months
+                            </div>
+                            <div class="col">
+                                {{list.status}}
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="is_viewcan">
+                        <div class="row no-margin bg-grey">
+                            <div class="col">
 
-                        <!-- <div class="col-1">
-                            <i class='fas fa-sort-amount-down text-white-color'></i>
+                                <div class="filter-label">
 
+                                    <span class="badge bg-light text-dark">
+                                        <span>BA-English</span>
+
+                                        <span class="close-mark">x</span>
+                                    </span>
+
+                                    <span class="badge bg-light text-dark">
+                                        <span>Chennai</span>
+
+                                        <span class="close-mark">x</span>
+                                    </span>
+
+
+                                    <span class="badge bg-light text-dark">
+                                        <span>0 to 2 Years</span>
+
+                                        <span class="close-mark">x</span>
+                                    </span>
+
+
+
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row content-card-heading no-margin padding10"  style="font-size:13px" >
+                            <div class="col-1">
+                                <div class="form-check">
+                                     <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                 </div>
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Name
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Location
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                               Qualification
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Salary
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                 Experience
+                            </div>
+                            
+                        </div>
+                        <!-- <div class="row content-card no-margin padding10" *ngFor="let list of applied_data">
+                            <div class="col-1">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                </div>
+                            </div>
+                            <div class="col">
+                                {{list.candidateData.name}}
+                            </div>
+                            <div class="col">
+                            {{list.candidateData.locationCurrent}}
+                            </div>
+                            <div class="col">
+                                {{list.experienceFrom}}
+                            </div>
+                            <div class="col">
+                                {{list.salaryRangeFrom}}
+                            </div>
+                            <div class="col">
+                                {{list.candidateData.experienceYear}}Year - {{list.candidateData.experienceMonth}}Months
+                            </div>
+                            <div class="col">
+                                {{list.status}}
+                            </div>
                         </div> -->
                     </div>
-
-                    
-
-
-
-
-
-
-
-
-
                 </div>
             </div>
 

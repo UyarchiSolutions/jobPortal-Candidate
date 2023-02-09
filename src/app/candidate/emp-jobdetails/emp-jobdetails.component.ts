@@ -9,7 +9,7 @@ import { CanditateService } from '../canditate.service';
 })
 export class EmpJobdetailsComponent implements OnInit {
   jobDetals: any = [];
-  constructor(private candidateService: CanditateService, private activate: ActivatedRoute,private router:Router) { }
+  constructor(private candidateService: CanditateService, private activate: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.activate.queryParams.subscribe((res: Params) => {
@@ -17,8 +17,8 @@ export class EmpJobdetailsComponent implements OnInit {
     })
   }
   postedTime(time: any) {
-    let date_1 = new Date(time);
-    let date_2 = new Date();
+    let date_1 = new Date();
+    let date_2 = new Date(time);
     const days = (date_1: any, date_2: any) => {
       let difference = date_1.getTime() - date_2.getTime();
       let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
@@ -28,8 +28,26 @@ export class EmpJobdetailsComponent implements OnInit {
     return days(date_1, date_2)
   }
   // redirect to hompage
-  homePage(){
-   this.router.navigate(['/canJobs'])
+  homePage() {
+    this.router.navigate(['/canJobs'])
+  }
+  // apply jops
+  apply(jopId: any) {
+    const job={
+      jobId:jopId
+    }
+   this.candidateService.applyJobs(job).subscribe((res:any) =>{
+    this.get_jobDetails(jopId)
+   })
+  }
+  // save job
+  saveJob(id:any){
+    const save={
+      jobid:id
+    }
+    this.candidateService.saveJob(save).subscribe((res:any) => {
+      this.get_jobDetails(id)
+    })
   }
   get_jobDetails(id: any) {
     this.candidateService.getJobs(id).subscribe((res: any) => {

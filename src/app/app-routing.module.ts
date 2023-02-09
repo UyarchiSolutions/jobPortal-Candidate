@@ -23,7 +23,6 @@ const routes: Routes = [
    {path: 'emp-home',loadChildren: () => import('./employer/emp-home/emp-home.module').then(m => m.EmpHomeModule) },
    {path: 'emp-postjob',loadChildren: () => import('./employer/emp-jobpost/emp-jobpost.module').then(m => m.EmpJobpostModule) },
    {path: 'emp-account',loadChildren: () => import('./employer/emp-myaccount/emp-myaccount.module').then(m => m.EmpMyaccountModule) },
-   {path: 'emp-applies-list',loadChildren: () => import('./employer/emp-applies-list/emp-applies-list.module').then(m => m.EmpAppliesListModule) },
 
 
 

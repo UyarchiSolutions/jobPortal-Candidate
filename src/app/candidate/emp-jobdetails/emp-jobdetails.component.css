@@ -117,3 +117,8 @@ button{
   border: none;
   background-color: white;
 }
+.applied{
+  background-color: white;
+  color: green;
+  /* border: 1px solid #0A2647; */
+}
