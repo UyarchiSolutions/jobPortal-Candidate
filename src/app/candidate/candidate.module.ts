@@ -18,7 +18,7 @@ import { EmpJobdetailsComponent } from './emp-jobdetails/emp-jobdetails.componen
     CanRegisterComponent,
     CheckmailtamplateComponent,
     CanMobileverifyComponent,
-    UpdateprofileComponent,
+
     CanGetComponent,
     EmpJobdetailsComponent
   ],

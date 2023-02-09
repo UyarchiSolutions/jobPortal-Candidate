@@ -55,4 +55,16 @@ export class CanditateService {
   saveJob(data:any){
     return this.http.post(this.baseUrl+`/v1/candidateDetail/createCandidateSavejob`,data,{headers:{auth:Cookie.get('tokens')}})
   }
+  // get applied jobd
+  getAppliedJobs(){
+    return this.http.get(this.baseUrl+`/v1/candidateDetail/getByIdAppliedJobs`,{headers:{auth:Cookie.get('tokens')}})
+  }
+  // get saved
+  getSavedJob(){
+    return this.http.get(this.baseUrl+`/v1/candidateDetail/getByIdSavedJobs`,{headers:{auth:Cookie.get('tokens')}})
+  }
+  // get no
+  getRecentsearch(){
+    return this.http.get(this.baseUrl+`/v1/candidateDetail/recentSearch`)
+  }
 }

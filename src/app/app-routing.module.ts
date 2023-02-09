@@ -32,7 +32,7 @@ const routes: Routes = [
     {path:"can-register",component:CanRegisterComponent},
     {path:"checkmailCan",component:CheckmailtamplateComponent},
     {path:"VeriftOPT",component:CanMobileverifyComponent},
-    {path:"updateProfile",component:UpdateprofileComponent},
+    {path:"updateProfile",loadChildren:() => import('./candidate/updateprofile/updateprofile.module').then(m => m.UpdateprofileModule)},
     {path:"canJobs",component:CanGetComponent},
     {path:"can-employ",component:EmpJobdetailsComponent}
 ];
