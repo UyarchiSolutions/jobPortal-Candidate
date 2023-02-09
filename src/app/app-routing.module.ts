@@ -27,6 +27,7 @@ const routes: Routes = [
 
 
 
+
     {path:"canlogin",component:CanLoginComponent},
     {path:"can-register",component:CanRegisterComponent},
     {path:"checkmailCan",component:CheckmailtamplateComponent},

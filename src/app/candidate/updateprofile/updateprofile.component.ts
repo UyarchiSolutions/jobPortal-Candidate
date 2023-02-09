@@ -115,7 +115,8 @@ export class UpdateprofileComponent implements OnInit {
     if (data.target.value) {
       this.isDisplay = true;
       console.log(data.target.value, "valuesmdkjfjdhj")
-    } else {
+    } 
+    else {
       this.isDisplay = false
       console.log(data.target.value, "not  valuesmdkjfjdhj")
     }
