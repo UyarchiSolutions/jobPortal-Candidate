@@ -1,4 +1,4 @@
-<div class="container-fluid register">
+<div class="container-fluid register" [formGroup]="searchForm">
   <div class="row">
     <div class="col-2 ad-image">
 
@@ -21,34 +21,58 @@
             <div class="search-boxs">
 
               <div class="search-box first-search-box">
-                <input type="text" class="form-control" placeholder="Enter Designation / Key skills">
+                <input type="text" class="form-control" placeholder="Enter Designation / Key skills"
+                  (keyup)="dispalye($event)">
+
+                <div class="" *ngIf="isDisplay" style="margin-top:0px;">
+                  <label></label>
+                  <div class="content-box" style="background: white;">
+                    <ul style="padding-left: 0px;">
+                      <li *ngFor="let skill of keySkill"><input style="width: 30%" type="checkbox" value="{{skill}}"
+                          (change)="checkSkill($event)" />
+                        <span>{{skill}}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
 
 
 
               <div class="search-box second-search-box">
-                <input type="text" class="form-control location" placeholder="Enter Location">
+                <input type="text" class="form-control location" placeholder="Enter Location"
+                  formControlName="location">
               </div>
 
               <div class="search-box">
-                <select class="form-control select-type">
-                  <option value="option1" disabled selected>Select Type</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
+                <select class="form-control select-type douple-input-first" formControlName="experienceAnotherfrom">
+                  <option value="option1" disabled selected>Year</option>
+                  <option value="Freshers">Freshers</option>
+                  <option value="1">1 Year</option>
+                  <option value="2">2 Year</option>
+                  <option value="3">3 Year</option>
+                  <option value="4">4 Year</option>
+                  <option value="5">5 Year</option>
+                  <option value="6">6 Year</option>
+                  <option value="7">7 Year</option>
+                  <option value="8">8 Year</option>
+                  <option value="9">9 Year</option>
+                  <option value="10">10 Year</option>
+                  <option value="11">11 Year</option>
                 </select>
               </div>
 
               <div class="search-box">
                 <button type="submit" class="btn btn-brand-orange"><img src="../../assets/image/search.png" alt=""
-                    class="search-icon"></button>
+                    class="search-icon" (click)="search()"></button>
               </div>
 
             </div>
 
             <div class="advanced-search">
               <button type="submit" class="btn btn-brand-trans"><a href="#">Advanced Search</a></button>
-
             </div>
+
           </div>
 
 
@@ -191,7 +215,7 @@
     <div class="col-8">
 
       <div class="row register-content-row no-padding">
-        <div class="col register-content no-margin-all">
+        <div ngClass="{{tab==4?'alerJob':'register-content'}}" class="col register-content no-margin-all">
           <div class="row no-margin filter-bar">
 
             <!-- <div class="filter-bar"> -->
@@ -199,8 +223,9 @@
               <i class='fas fa-sort-amount-down'></i>
             </div>
 
-            <div class="jobs col-2">
-              <i><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div class="col" (click)="onClickJop()" ngClass="{{tab == 0?'jobs':''}}">
+              <i>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <mask id="path-1-inside-1_2073_878" fill="white">
                     <rect y="4" width="19.2308" height="6.00024" rx="1" />
                   </mask>
@@ -220,7 +245,7 @@
               Jobs
             </div>
 
-            <div class="applied-jobs col-2">
+            <div class="applied-jobs col" (click)="onClickApplied()" ngClass="{{tab == 2?'jobs':''}}">
               <i><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M7.66667 11.8333L10.1667 14.3333L14.3333 8.5M21 11C21 12.3132 20.7413 13.6136 20.2388 14.8268C19.7362 16.0401 18.9997 17.1425 18.0711 18.0711C17.1425 18.9997 16.0401 19.7362 14.8268 20.2388C13.6136 20.7413 12.3132 21 11 21C9.68678 21 8.38642 20.7413 7.17317 20.2388C5.95991 19.7362 4.85752 18.9997 3.92893 18.0711C3.00035 17.1425 2.26375 16.0401 1.7612 14.8268C1.25866 13.6136 1 12.3132 1 11C1 8.34784 2.05357 5.8043 3.92893 3.92893C5.8043 2.05357 8.34783 1 11 1C13.6522 1 16.1957 2.05357 18.0711 3.92893C19.9464 5.8043 21 8.34784 21 11Z"
@@ -230,7 +255,7 @@
               Applied Jobs
             </div>
 
-            <div class="saved-jobs col-2">
+            <div class="saved-jobs col" (click)="savedJobs()" ngClass="{{tab == 3?'jobs':''}}">
               <i><svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M10.4312 1.839C10.4774 1.72632 10.5561 1.62992 10.6572 1.56208C10.7584 1.49423 10.8774 1.45801 10.9992 1.45801C11.121 1.45801 11.24 1.49423 11.3411 1.56208C11.4423 1.62992 11.5209 1.72632 11.5671 1.839L13.8881 7.42133C13.9316 7.52578 14.003 7.61623 14.0945 7.68271C14.186 7.74919 14.2941 7.78914 14.4069 7.79814L20.4338 8.2809C20.9788 8.32459 21.1994 9.00504 20.7844 9.36002L16.1927 13.2942C16.1069 13.3676 16.043 13.4632 16.0079 13.5705C15.9728 13.6778 15.968 13.7927 15.9939 13.9026L17.3974 19.7841C17.4256 19.9021 17.4182 20.0259 17.3762 20.1397C17.3341 20.2535 17.2593 20.3523 17.1611 20.4235C17.0629 20.4948 16.9458 20.5354 16.8246 20.5402C16.7034 20.545 16.5834 20.5137 16.4799 20.4504L11.3192 17.2994C11.2228 17.2406 11.1121 17.2095 10.9992 17.2095C10.8863 17.2095 10.7756 17.2406 10.6792 17.2994L5.51844 20.4515C5.41496 20.5148 5.29503 20.5461 5.1738 20.5413C5.05256 20.5365 4.93547 20.4959 4.83729 20.4246C4.73912 20.3533 4.66428 20.2546 4.62222 20.1408C4.58016 20.027 4.57277 19.9032 4.60097 19.7852L6.00447 13.9026C6.0305 13.7927 6.02572 13.6777 5.99065 13.5704C5.95558 13.4631 5.89158 13.3675 5.80569 13.2942L1.214 9.36002C1.12205 9.28095 1.05553 9.17646 1.02281 9.05969C0.990088 8.94292 0.992621 8.81909 1.03009 8.70375C1.06756 8.58842 1.1383 8.48674 1.23341 8.4115C1.32852 8.33626 1.44375 8.29083 1.56461 8.2809L7.59147 7.79814C7.70424 7.78914 7.81234 7.74919 7.90387 7.68271C7.99541 7.61623 8.06682 7.52578 8.11027 7.42133L10.4312 1.839Z"
@@ -241,7 +266,7 @@
               Saved Jobs
             </div>
 
-            <div class="job-alert col-2">
+            <div class="job-alert col" (click)="jobAlert()" ngClass="{{tab == 4?'jobs':''}}">
               <i><svg width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M12.0003 8.0466V11.9498M2.31718 15.4638C1.4158 17.025 2.54305 18.9756 4.34477 18.9756H19.6558C21.4565 18.9756 22.5837 17.025 21.6834 15.4638L14.0289 2.19489C13.1275 0.633604 10.873 0.633604 9.97165 2.19489L2.31718 15.4638ZM12.0003 15.0724H12.0076V15.0807H12.0003V15.0724Z"
@@ -252,7 +277,7 @@
               Job Alert
             </div>
 
-            <div class="job-notification col-2">
+            <div class="job-notification col-1" (click)="notification()" ngClass="{{tab == 5?'jobs':''}}">
               <i><svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M21.6 17.8571H24V20.2381H0V17.8571H2.4V9.52381C2.4 6.99794 3.41143 4.57552 5.21178 2.78946C7.01212 1.0034 9.45392 0 12 0C14.5461 0 16.9879 1.0034 18.7882 2.78946C20.5886 4.57552 21.6 6.99794 21.6 9.52381V17.8571ZM19.2 17.8571V9.52381C19.2 7.62941 18.4414 5.81259 17.0912 4.47305C15.7409 3.1335 13.9096 2.38095 12 2.38095C10.0904 2.38095 8.25909 3.1335 6.90883 4.47305C5.55857 5.81259 4.8 7.62941 4.8 9.52381V17.8571H19.2ZM8.4 22.619H15.6V25H8.4V22.619Z"
@@ -262,425 +287,305 @@
               </i>
 
             </div>
-
-
-
-
-
-            <!-- </div> -->
-
-
-
-
-
-
-
           </div>
-
-          <div class="row no-margin bg-grey ">
+          <div class="row no-margin bg-grey " *ngIf="tab != 4">
             <div class="col">
-
               <div class="filter-label">
-
                 <span class="badge bg-light text-dark">
                   <span>BA-English</span>
-
                   <span class="close-mark">x</span>
                 </span>
-
                 <span class="badge bg-light text-dark">
                   <span>Chennai</span>
-
                   <span class="close-mark">x</span>
                 </span>
-
-
                 <span class="badge bg-light text-dark">
                   <span>0 to 2 Years</span>
-
                   <span class="close-mark">x</span>
                 </span>
+              </div>
+            </div>
+          </div>
+          <!-- get all jobs -->
+          <div *ngIf="tab == 0">
+            <div class="row content-card-heading no-margin padding10">
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Company
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Designation
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                City
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Experience
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Salary
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Posted
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Status
+              </div>
+            </div>
+            <div class="row content-card no-margin padding10 main-content" *ngFor="let job of jobs">
+              <div class="col">
+                {{job.employerregistrations.name}}
+              </div>
+              <div class="col">
+                {{job.jobTittle}}
+              </div>
+              <div class="col">
+                {{job.jobLocation}}
+              </div>
+              <div class="col">
+                {{job.experienceFrom}} To {{job.experienceTo}}
+              </div>
+              <div class="col">
+                {{job.salaryRangeFrom}} To {{job.salaryRangeTo}}
+              </div>
+              <div class="col">
+                {{postedTime(job.date)}}
+              </div>
+              <div class="col">
+                <a (click)="apply(job._id)">Apply Now </a>
+              </div>
+            </div>
+          </div>
+          <!-- Applied jobs -->
+          <div *ngIf="tab == 2">
+            <div class="row content-card-heading no-margin padding10" *ngFor="let apply of appliedJobs">
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Company
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Designation
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                City
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Experience
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Salary
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Applied
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Sortby<i class="ms-1"><svg width="10" height="5" viewBox="0 0 10 5" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M4.9106 3.4494L1.2895 0.343127C0.994494 0.0900649 0.516198 0.0900649 0.221195 0.343127C-0.0738086 0.596188 -0.0738086 1.00648 0.221195 1.25954L4.35454 4.80523C4.47775 4.91093 4.63293 4.97247 4.79337 4.98988C5.02833 5.02584 5.27931 4.96595 5.46087 4.8102L9.77875 1.10621C10.0738 0.853151 10.0738 0.442857 9.77875 0.189795C9.48374 -0.0632663 9.00545 -0.0632658 8.71045 0.189795L4.9106 3.4494Z"
+                      fill="white" />
+                  </svg>
+                </i>
+              </div>
+            </div>
+            <div class="row content-card no-margin padding10 main-content" *ngFor="let apply of appliedJobs">
+              <div class="col">
+                {{apply.companyName}}
+              </div>
+              <div class="col">
+                {{apply.designation}}
+              </div>
+              <div class="col">
+                {{apply.jobLocation}}
+              </div>
+              <div class="col">
+                {{apply.experienceFrom}} to {{apply.experienceTo}}
+              </div>
+              <div class="col">
+                {{apply.salaryRangeFrom}} to {{apply.salaryRangeTo}}
 
+              </div>
+              <div class="col">
+                {{apply.appliedDate | date:'dd-MM-yyyy'}}
+              </div>
+              <div class="col applied">
+                <i><svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M6 12.5C2.6862 12.5 0 9.8138 0 6.5C0 3.1862 2.6862 0.5 6 0.5C9.3138 0.5 12 3.1862 12 6.5C12 9.8138 9.3138 12.5 6 12.5ZM6 11.3C7.27304 11.3 8.49394 10.7943 9.39411 9.89411C10.2943 8.99394 10.8 7.77304 10.8 6.5C10.8 5.22696 10.2943 4.00606 9.39411 3.10589C8.49394 2.20571 7.27304 1.7 6 1.7C4.72696 1.7 3.50606 2.20571 2.60589 3.10589C1.70571 4.00606 1.2 5.22696 1.2 6.5C1.2 7.77304 1.70571 8.99394 2.60589 9.89411C3.50606 10.7943 4.72696 11.3 6 11.3ZM5.4018 8.9L2.856 6.3542L3.7044 5.5058L5.4018 7.2032L8.7954 3.809L9.6444 4.6574L5.4018 8.9Z"
+                      fill="white" />
+                  </svg>
+                </i> {{apply.approvedStatus}}
+              </div>
+            </div>
+          </div>
+          <!-- saved jobs -->
+          <div *ngIf="tab == 3">
+            <div class="row content-card-heading no-margin padding10">
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Company
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Designation
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                City
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Experience
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Salary
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Posted
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Status
+              </div>
+            </div>
+            <div class="row content-card no-margin padding10 main-content" *ngFor="let save of saveJobs">
+              <div class="col">
+                {{save.companyName}}
+              </div>
+              <div class="col">
+                {{save.jobTittle}}
+              </div>
+              <div class="col">
+                {{save.jobLocation}}
+              </div>
+              <div class="col">
+                {{save.experienceFrom}} To {{save.experienceTo}}
+              </div>
+              <div class="col">
+                {{save.salaryRangeFrom}} To {{save.salaryRangeTo}}
 
+              </div>
+              <div class="col">
+                {{postedTime(save.date)}}
+              </div>
+              <div class="col applied">
+                <i><svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M6 12.5C2.6862 12.5 0 9.8138 0 6.5C0 3.1862 2.6862 0.5 6 0.5C9.3138 0.5 12 3.1862 12 6.5C12 9.8138 9.3138 12.5 6 12.5ZM6 11.3C7.27304 11.3 8.49394 10.7943 9.39411 9.89411C10.2943 8.99394 10.8 7.77304 10.8 6.5C10.8 5.22696 10.2943 4.00606 9.39411 3.10589C8.49394 2.20571 7.27304 1.7 6 1.7C4.72696 1.7 3.50606 2.20571 2.60589 3.10589C1.70571 4.00606 1.2 5.22696 1.2 6.5C1.2 7.77304 1.70571 8.99394 2.60589 9.89411C3.50606 10.7943 4.72696 11.3 6 11.3ZM5.4018 8.9L2.856 6.3542L3.7044 5.5058L5.4018 7.2032L8.7954 3.809L9.6444 4.6574L5.4018 8.9Z"
+                      fill="white" />
+                  </svg>
+                </i> {{save.approvedStatus}}
+              </div>
+            </div>
+          </div>
+          <!-- Job alert -->
+          <div *ngIf="tab == 4">
+            <div class="jobalert col-8">
+              <h1>Create Job Alert</h1>
 
+              <div class="form col-9">
+                <div class="designation">
+                  <label>Designation :</label>
+                  <input class="alertField" type="text" name="designation" placeholder="Enter Your Designation">
+                </div>
 
+                <div class="keyskill">
+                  <label>Key Skill :</label>
+                  <input class="alertField" type="text" name="keyskill" placeholder="Enter Key Skill">
+                </div>
 
+                <div class="experience">
+                  <label>Experience :</label>
+
+                  <input class="alertField" type="text" name="year" placeholder="Year" id="year">
+                  <input class="alertField" type="text" name="month" placeholder="Month" id="month">
+
+                </div>
+
+                <div class="job-location">
+                  <label>Job Location :</label>
+                  <input class="alertField" type="text" name="location" placeholder="Enter Job location">
+                </div>
 
               </div>
 
+
+              <button class="btn alert">Set Alert</button>
+
+
             </div>
           </div>
-
-          <div class="row content-card-heading no-margin padding10">
-            <div class="col">
-              <!-- <i class='fas fa-sort-amount-down'></i> -->
-
-              Company
-
+          <!-- notification -->
+          <div *ngIf="tab == 5">
+            <div class="row content-card-heading no-margin padding10">
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Company
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Designation
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                City
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Experience
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Salary
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Recived
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Status
+              </div>
             </div>
-
-            <div class="col">
-
-              <!-- <i class='fas fa-sort-amount-down'></i> -->
-              Designation
-
-            </div>
-
-            <div class="col">
-              <!-- <i class='fas fa-sort-amount-down'></i> -->
-              City
-
-            </div>
-
-            <div class="col">
-              <!-- <i class='fas fa-sort-amount-down'></i> -->
-              Experience
-
-            </div>
-
-            <div class="col">
-              <!-- <i class='fas fa-sort-amount-down'></i> -->
-              Salary
-            </div>
-
-            <div class="col">
-              <!-- <i class='fas fa-sort-amount-down'></i> -->
-              Posted
-            </div>
-
-            <div class="col">
-              <!-- <i class='fas fa-sort-amount-down'></i> -->
-              Status
-            </div>
-          </div>
-
-
-          <div class="row content-card no-margin padding10 main-content" *ngFor="let job of jobs">
-            <div class="col">
-              {{job.employerregistrations.name}}
-            </div>
-            <div class="col">
-              {{job.jobTittle}}
-            </div>
-            <div class="col">
-              {{job.jobLocation}}
-            </div>
-            <div class="col">
-              {{job.experienceFrom}} To {{job.experienceTo}}
-            </div>
-            <div class="col">
-              {{job.salaryRangeFrom}} To {{job.salaryRangeTo}}
-            </div>
-            <div class="col">
-              {{postedTime(job.expiredDate)}}
-            </div>
-            <div class="col">
-              <a (click)="apply(job._id)">Apply Now </a>
+            <div class="row content-card no-margin padding10 main-content" *ngFor="let job of jobs">
+              <div class="col">
+                {{job.employerregistrations.name}}
+              </div>
+              <div class="col">
+                {{job.jobTittle}}
+              </div>
+              <div class="col">
+                {{job.jobLocation}}
+              </div>
+              <div class="col">
+                {{job.experienceFrom}} To {{job.experienceTo}}
+              </div>
+              <div class="col">
+                {{job.salaryRangeFrom}} To {{job.salaryRangeTo}}
+              </div>
+              <div class="col">
+                {{postedTime(job.date)}}
+              </div>
+              <div class="col">
+                <a (click)="apply(job._id)">Apply Now </a>
+              </div>
             </div>
           </div>
-
-          <!-- <div class="row content-card no-margin padding10 main-content">
-                      <div class="col">
-                          Cactus
-
-
-                      </div>
-
-                      <div class="col">
-
-                          UI UX Designer
-
-                      </div>
-
-                      <div class="col">
-                          Across India
-
-                      </div>
-
-                      <div class="col">
-                          1 to 2 Years
-
-                      </div>
-
-                      <div class="col">
-                          0 to 2 lacs
-
-                      </div>
-
-                      <div class="col">
-                          2 Day ago
-
-                      </div>
-
-
-                      <div class="col">
-                          Apply Now
-
-
-                      </div>
-                  </div>
-
-                  <div class="row content-card no-margin padding10 main-content">
-                      <div class="col">
-                          JP Morgan
-
-
-                      </div>
-
-                      <div class="col">
-
-                          Software Engineer
-
-                      </div>
-
-                      <div class="col">
-                          Bangalore
-
-                      </div>
-
-                      <div class="col">
-                          0 to 2 Years
-
-                      </div>
-
-                      <div class="col">
-                          0 to 2 lacs
-
-                      </div>
-
-                      <div class="col">
-                          2 Day ago
-
-                      </div>
-
-
-                      <div class="col">
-                          Apply Now
-
-
-                      </div>
-                  </div>
-
-                  <div class="row content-card no-margin padding10 main-content">
-                      <div class="col">
-                          Honeywell
-
-
-                      </div>
-
-                      <div class="col">
-
-                          UI UX Designer
-
-                      </div>
-
-                      <div class="col">
-                          Hyderabad
-
-                      </div>
-
-                      <div class="col">
-                          2 to 5 Years
-
-                      </div>
-
-                      <div class="col">
-                          0 to 2 lacs
-
-                      </div>
-
-                      <div class="col">
-                          2 Day ago
-
-                      </div>
-
-
-                      <div class="col">
-                          Apply Now
-
-
-                      </div>
-                  </div>
-
-                  <div class="row content-card no-margin padding10 main-content">
-                      <div class="col">
-                          Honeywell
-
-
-                      </div>
-
-                      <div class="col">
-
-                          UI UX Designer
-
-                      </div>
-
-                      <div class="col">
-                          Hyderabad
-
-                      </div>
-
-                      <div class="col">
-                          2 to 5 Years
-
-                      </div>
-
-                      <div class="col">
-                          0 to 2 lacs
-
-                      </div>
-
-                      <div class="col">
-                          2 Day ago
-
-                      </div>
-
-
-                      <div class="col">
-                          Apply Now
-
-
-                      </div>
-                  </div>
-                  <div class="row content-card no-margin padding10 main-content">
-                      <div class="col">
-                          IBM
-                      </div>
-                      <div class="col">
-                          Software Developer
-                      </div>
-                      <div class="col">
-                          Pune
-                      </div>
-                      <div class="col">
-                          0 to 1  years
-                      </div>
-                      <div class="col">
-                          0 to 2 lacs
-                      </div>
-                      <div class="col">
-                          2 Day ago
-                      </div>
-                      <div class="col">
-                          Apply Now
-                      </div>
-                  </div>
-                  <div class="row content-card no-margin padding10 main-content">
-                      <div class="col">
-                          Barclays
-                      </div>
-                      <div class="col">
-                          Salesforce Developer
-                      </div>
-                      <div class="col">
-                          Chennai
-                      </div>
-                      <div class="col">
-                          0 to 2 Years
-                      </div>
-                      <div class="col">
-                          0 to 2 lacs
-                      </div>
-                      <div class="col">
-                          2 Day ago
-                      </div>
-                      <div class="col">
-                          Apply Now
-                      </div>
-                  </div>
-                  <div class="row content-card no-margin padding10 main-content">
-                      <div class="col">
-                          Wipro
-                      </div>
-                      <div class="col">
-                          System Engineer
-                      </div>
-                      <div class="col">
-                          Mumbai
-                      </div>
-                      <div class="col">
-                          2 to 3 Years
-                      </div>
-                      <div class="col">
-                          0 to 2 lacs
-                      </div>
-                      <div class="col">
-                          2 Day ago
-                      </div>
-                      <div class="col">
-                          Apply Now
-                      </div>
-                  </div>
-                  <div class="row content-card no-margin padding10 main-content">
-                      <div class="col">
-                          ThinkPalm
-                      </div>
-                      <div class="col">
-                          Junior System
-                      </div>
-                      <div class="col">
-                          Chennai
-                      </div>
-                      <div class="col">
-                          1 to 2 Years
-                      </div>
-                      <div class="col">
-                          0 to 2 lacs
-                      </div>
-                      <div class="col">
-                          2 Day ago
-                      </div>
-                      <div class="col">
-                          Apply Now
-                      </div>
-                  </div>
-                  <div class="row content-card no-margin padding10 main-content">
-                      <div class="col">
-                          Wipro
-                      </div>
-                      <div class="col">
-                          System Engineer
-                      </div>
-                      <div class="col">
-                          Mumbai
-                      </div>
-                      <div class="col">
-                          2 to 3 Years
-                      </div>
-                      <div class="col">
-                          0 to 2 lacs
-                      </div>
-                      <div class="col">
-                          2 Day ago
-                      </div>
-                      <div class="col">
-                          Apply Now
-                      </div>
-                  </div>
-                  <div class="row content-card no-margin padding10 main-content">
-                      <div class="col">
-                          ThinkPalm
-                      </div>
-                      <div class="col">
-                          Junior System
-                      </div>
-                      <div class="col">
-                          Chennai
-                      </div>
-                      <div class="col">
-                          1 to 2 Years
-                      </div>
-                      <div class="col">
-                          0 to 2 lacs
-                      </div>
-                      <div class="col">
-                          2 Day ago
-                      </div>
-                      <div class="col">
-                          Apply Now
-                      </div>
-                  </div> -->
-          <div class="row content-card-footer no-margin padding10">
+          <div class="row content-card-footer no-margin padding10" *ngIf="tab != 4">
             <div class="col">
 
               <div class="footer-menu">

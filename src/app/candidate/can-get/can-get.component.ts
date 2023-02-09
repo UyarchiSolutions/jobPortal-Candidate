@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CanditateService } from '../canditate.service';
 
@@ -9,9 +9,13 @@ import { CanditateService } from '../canditate.service';
   styleUrls: ['./can-get.component.css']
 })
 export class CanGetComponent implements OnInit {
+  tab=0;
+  appliedJobs:any=[];
+  saveJobs:any=[];
+  keySkill:any;
   searchForm = this.fb.group({
-    search: new FormControl(null),
     experience: new FormControl(null),
+    search:this.fb.array([],[Validators.required]),
     experienceAnotherfrom: new FormControl(null),
     experienceAnotherto: new FormControl(null),
     location: new FormControl(null),
@@ -27,6 +31,7 @@ export class CanGetComponent implements OnInit {
     postedby: new FormControl(null),
 
   })
+
   jobs:any=[];
   constructor(private canditSarvice: CanditateService, private fb: FormBuilder,private router:Router) { }
 
@@ -40,6 +45,7 @@ export class CanGetComponent implements OnInit {
     })
   }
   postedTime(time:any){
+    console.log(time,"timevnjn")
     let date_1 = new Date(time);
     let date_2 = new Date();
     const days = (date_1:any, date_2:any) => {
@@ -50,7 +56,76 @@ export class CanGetComponent implements OnInit {
     console.log(days(date_1, date_2) + " days to world cup");
     return days(date_1, date_2)
   }
+  // redirect to employer details
   apply(id:any){
    this.router.navigate(['/can-employ'],{queryParams:{id:id}})
+  }
+  // get all jobs
+  onClickJop(){
+  this.tab=0
+  this.get_allJobs();
+  }
+  // get all applied
+  onClickApplied(){
+    console.log("bfhdfhdfb")
+    this.tab=2
+    this.canditSarvice.getAppliedJobs().subscribe((res:any)=>{
+     this.appliedJobs=res;
+    })
+  }
+  savedJobs(){
+    this.tab=3
+    this.canditSarvice.getSavedJob().subscribe((res:any) => {
+      this.saveJobs=res;
+    })
+  }
+  // creatr alte
+  jobAlert(){
+    this.tab=4
+  }
+  // notification
+  notification(){
+    this.tab=5
+  }
+  // search
+  search(){
+    if(this.searchForm.get('search')?.valid && this.searchForm.get('location')?.valid&& this.searchForm.get('experienceAnotherfrom')?.valid){
+      this.get_allJobs();
+    }
+
+  }
+  // get skills
+  isDisplay=false;
+  dispalye(data: any) {
+
+    if (data.target.value) {
+      this.isDisplay = true;
+      console.log(data.target.value, "valuesmdkjfjdhj")
+    } else {
+      this.isDisplay = false
+      console.log(data.target.value, "not  valuesmdkjfjdhj")
+    }
+  this.getKeyskills(data.target.value)
+  }
+  getKeyskills(value: any) {
+    this.canditSarvice.getSkill(value).subscribe((res: any) => {
+      this.keySkill = res;
+    })
+  }
+  checkSkill(event:any){
+    const data: FormArray = this.searchForm.get('search') as FormArray;
+    if (event.target.checked) {
+      data.push(new FormControl(event.target.value));
+      console.log(data)
+    } else {
+      let i: number = 0;
+      data.controls.forEach((item: any) => {
+        if (item == event.target.value) {
+          data.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
   }
 }

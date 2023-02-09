@@ -43,7 +43,7 @@ export class EmpJobdetailsComponent implements OnInit {
   // save job
   saveJob(id:any){
     const save={
-      jobid:id
+      savejobId:id
     }
     this.candidateService.saveJob(save).subscribe((res:any) => {
       this.get_jobDetails(id)

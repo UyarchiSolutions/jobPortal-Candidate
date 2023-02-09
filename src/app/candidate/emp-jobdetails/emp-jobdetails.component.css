@@ -122,3 +122,6 @@ button{
   color: green;
   /* border: 1px solid #0A2647; */
 }
+.saved{
+  background-color: goldenrod;
+}
