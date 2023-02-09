@@ -351,3 +351,15 @@ label {
 .alerJob{
 background-color: #E7E9ED;
 }
+.keyskill{
+  position: relative;
+}
+.keylist{
+  margin-top: 0px;
+  position: relative;
+  bottom: 24px;
+}
+ul{
+  list-style-type: none;
+
+}

@@ -65,6 +65,6 @@ export class CanditateService {
   }
   // get no
   getRecentsearch(){
-    return this.http.get(this.baseUrl+`/v1/candidateDetail/recentSearch`)
+    return this.http.get(this.baseUrl+`/v1/candidateDetail/recentSearch`,{headers:{auth:Cookie.get('tokens')}})
   }
 }

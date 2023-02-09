@@ -33,11 +33,13 @@ export class CanGetComponent implements OnInit {
   })
 
   jobs:any=[];
+  recentData:any=[];
   constructor(private canditSarvice: CanditateService, private fb: FormBuilder,private router:Router) { }
 
 
   ngOnInit(){
     this.get_allJobs();
+    this.recentSearch();
   }
   get_allJobs(){
     this.canditSarvice.getAlldetails(this.searchForm.value).subscribe((res:any) =>{
@@ -45,7 +47,6 @@ export class CanGetComponent implements OnInit {
     })
   }
   postedTime(time:any){
-    console.log(time,"timevnjn")
     let date_1 = new Date(time);
     let date_2 = new Date();
     const days = (date_1:any, date_2:any) => {
@@ -53,7 +54,6 @@ export class CanGetComponent implements OnInit {
       let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
       return TotalDays;
     }
-    console.log(days(date_1, date_2) + " days to world cup");
     return days(date_1, date_2)
   }
   // redirect to employer details
@@ -113,6 +113,7 @@ export class CanGetComponent implements OnInit {
     })
   }
   checkSkill(event:any){
+    console.log(event.target.value,"workinjf")
     const data: FormArray = this.searchForm.get('search') as FormArray;
     if (event.target.checked) {
       data.push(new FormControl(event.target.value));
@@ -127,5 +128,11 @@ export class CanGetComponent implements OnInit {
         i++;
       });
     }
+  }
+  // recent Search
+  recentSearch(){
+    this.canditSarvice.getRecentsearch().subscribe((res:any) => {
+    this.recentData=res;
+    })
   }
 }

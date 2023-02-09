@@ -21,15 +21,14 @@
             <div class="search-boxs">
 
               <div class="search-box first-search-box">
-                <input type="text" class="form-control" placeholder="Enter Designation / Key skills"
+                <input type="text" class="form-control keyskill" placeholder="Enter Designation / Key skills"
                   (keyup)="dispalye($event)">
 
                 <div class="" *ngIf="isDisplay" style="margin-top:0px;">
                   <label></label>
-                  <div class="content-box" style="background: white;">
+                  <div class="content-box keylist" style="background: white;">
                     <ul style="padding-left: 0px;">
-                      <li *ngFor="let skill of keySkill"><input style="width: 30%" type="checkbox" value="{{skill}}"
-                          (change)="checkSkill($event)" />
+                      <li *ngFor="let skill of keySkill"  (click)="checkSkill($event)"  value="{{skill}}">
                         <span>{{skill}}</span>
                       </li>
                     </ul>
