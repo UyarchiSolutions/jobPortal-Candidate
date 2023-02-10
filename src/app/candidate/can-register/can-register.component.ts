@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { CanditateService } from '../canditate.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class CanRegisterComponent implements OnInit {
     mobileNumber: new FormControl('', Validators.required),
     lat: new FormControl('', Validators.required),
     long: new FormControl('', Validators.required),
-    addressLoaction : new FormControl('')
+    addressLoaction : new FormControl(''),
+    location: new FormControl('', Validators.required),
   });
   candidateFile:any;
   constructor(private fb:FormBuilder,private canditateService:CanditateService,private router:Router) { }
@@ -53,6 +55,7 @@ export class CanRegisterComponent implements OnInit {
     jobForm.append('mobileNumber', this.Candidateform.get('mobileNumber')?.value);
     jobForm.append('lat', this.Candidateform.get('lat')?.value);
     jobForm.append('long', this.Candidateform.get('long')?.value);
+    jobForm.append('location', this.Candidateform.get('location')?.value)
     jobForm.append('resume', this.candidateFile);
      this.canditateService.submitcandicate(jobForm).subscribe( (res: any) => {
       this.router.navigate(['/checkmailCan'])
@@ -64,5 +67,26 @@ export class CanRegisterComponent implements OnInit {
 
       );
 
+  }
+  options: any = {
+    componentRestrictions: { country: 'IN' },
+  };
+
+  latitude:any;
+  longtitude:any;
+  handleAddressChange(address: Address) {
+    console.log(address);
+    console.log(address.geometry.location.lat());
+    console.log(address.geometry.location.lng());
+    this.latitude = address.geometry.location.lat();
+    this.latitude = String(this.latitude)
+    this.longtitude = address.geometry.location.lng();
+    this.longtitude = String(this.longtitude)
+
+    this.Candidateform.patchValue({
+      lat:  this.latitude,
+      long: this.longtitude,
+      location:address.formatted_address
+    })
   }
 }

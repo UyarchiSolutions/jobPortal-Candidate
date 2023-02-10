@@ -67,4 +67,34 @@ export class CanditateService {
   getRecentsearch(){
     return this.http.get(this.baseUrl+`/v1/candidateDetail/recentSearch`,{headers:{auth:Cookie.get('tokens')}})
   }
+  updateEduction(data:any){
+    return this.http.post(this.baseUrl+'/v1/candidateDetail/updateKeyskill',data,{headers:{auth:Cookie.get('tokens')}})
+  }
+  // current industry
+  currentIndustry(){
+    return this.http.get(this.baseUrl+'/v1/educationDetails/get_Industry')
+  }
+  // current department
+  currentDepartment(){
+    return this.http.get(this.baseUrl+'/v1/educationDetails/get_Department')
+  }
+  // get Category
+  getCategory(id:any){
+    return this.http.get(this.baseUrl+`/v1/educationDetails/get_Rolecategory/${id}`)
+  }
+  // getRole
+  getRole(id:any){
+    return this.http.get(this.baseUrl+`/v1/educationDetails/get_Role/${id}`)
+  }
+  getReacent_data(id:any){
+    return this.http.get(this.baseUrl+`/v1/candidateDetail/recentSearch_byId/${id}`)
+  }
+  // save search
+  saveSearch(data:any){
+    return this.http.post(this.baseUrl+'/v1/candidateDetail/createdSearchhistory',data,{headers:{auth:Cookie.get('tokens')}})
+  }
+  // getSavedSearch
+  getSave(){
+    return this.http.get(this.baseUrl+'/v1/candidateDetail/createdSearchhistory')
+  }
 }

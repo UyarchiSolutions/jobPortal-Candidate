@@ -115,7 +115,7 @@ export class UpdateprofileComponent implements OnInit {
     if (data.target.value) {
       this.isDisplay = true;
       console.log(data.target.value, "valuesmdkjfjdhj")
-    } 
+    }
     else {
       this.isDisplay = false
       console.log(data.target.value, "not  valuesmdkjfjdhj")
@@ -146,7 +146,7 @@ export class UpdateprofileComponent implements OnInit {
       this.candidateService.imageUpload(res.user._id, formData).subscribe((res: any) => {
 
       })
-      this.router.navigate(['/canJobs'])
+      this.router.navigate(['/can-edu'])
     })
   }
 }

@@ -18,7 +18,8 @@ import { EmployerModule } from './employer/employer.module';
     AppComponent,
     CanHomeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -28,8 +29,6 @@ import { EmployerModule } from './employer/employer.module';
     FormsModule,
     EmployerModule,
     GooglePlaceModule,
-   
-    
   ],
   providers: [],
   bootstrap: [AppComponent]

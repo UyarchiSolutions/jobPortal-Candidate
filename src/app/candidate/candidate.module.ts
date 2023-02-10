@@ -9,6 +9,9 @@ import { CanMobileverifyComponent } from './can-mobileverify/can-mobileverify.co
 import { UpdateprofileComponent } from './updateprofile/updateprofile.component';
 import { CanGetComponent } from './can-get/can-get.component';
 import { EmpJobdetailsComponent } from './emp-jobdetails/emp-jobdetails.component';
+import { EducationdetailsComponent } from './educationdetails/educationdetails.component';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { ProffesinoalComponent } from './proffesinoal/proffesinoal.component';
 
 
 
@@ -18,15 +21,18 @@ import { EmpJobdetailsComponent } from './emp-jobdetails/emp-jobdetails.componen
     CanRegisterComponent,
     CheckmailtamplateComponent,
     CanMobileverifyComponent,
-
     CanGetComponent,
-    EmpJobdetailsComponent
+    EmpJobdetailsComponent,
+    EducationdetailsComponent,
+    ProffesinoalComponent,
+
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    GooglePlaceModule
   ]
 })
 export class CandidateModule { }

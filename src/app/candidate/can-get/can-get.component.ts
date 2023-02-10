@@ -9,16 +9,16 @@ import { CanditateService } from '../canditate.service';
   styleUrls: ['./can-get.component.css']
 })
 export class CanGetComponent implements OnInit {
-  tab=0;
-  appliedJobs:any=[];
-  saveJobs:any=[];
-  keySkill:any;
+  tab = 0;
+  appliedJobs: any = [];
+  saveJobs: any = [];
+  keySkill: any;
   searchForm = this.fb.group({
-    experience: new FormControl(null),
-    search:this.fb.array([],[Validators.required]),
+    experience: new FormControl(null, [Validators.required]),
+    search: this.fb.array([], [Validators.required]),
     experienceAnotherfrom: new FormControl(null),
     experienceAnotherto: new FormControl(null),
-    location: new FormControl(null),
+    location: new FormControl(null, [Validators.required]),
     preferredindustry: new FormControl(null),
     salary: new FormControl(null),
     workmode: new FormControl(null),
@@ -32,70 +32,77 @@ export class CanGetComponent implements OnInit {
 
   })
 
-  jobs:any=[];
-  recentData:any=[];
-  constructor(private canditSarvice: CanditateService, private fb: FormBuilder,private router:Router) { }
+  jobs: any = [];
+  recentData: any = [];
+  constructor(private canditSarvice: CanditateService, private fb: FormBuilder, private router: Router) { }
 
 
-  ngOnInit(){
+  ngOnInit() {
     this.get_allJobs();
     this.recentSearch();
+    this.getSaveData()
   }
-  get_allJobs(){
-    this.canditSarvice.getAlldetails(this.searchForm.value).subscribe((res:any) =>{
-    this.jobs=res;
+  get_allJobs() {
+    this.canditSarvice.getAlldetails(this.searchForm.value).subscribe((res: any) => {
+      this.jobs = res;
+      this.recentSearch();
     })
   }
-  postedTime(time:any){
+  postedTime(time: any) {
     let date_1 = new Date(time);
     let date_2 = new Date();
-    const days = (date_1:any, date_2:any) => {
-      let difference = date_1.getTime() - date_2.getTime();
+    const days = (date_1: any, date_2: any) => {
+      let difference = date_2.getTime() - date_1.getTime();
       let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
       return TotalDays;
     }
     return days(date_1, date_2)
   }
   // redirect to employer details
-  apply(id:any){
-   this.router.navigate(['/can-employ'],{queryParams:{id:id}})
+  apply(id: any) {
+    this.router.navigate(['/can-employ'], { queryParams: { id: id } })
   }
   // get all jobs
-  onClickJop(){
-  this.tab=0
-  this.get_allJobs();
+  onClickJop() {
+    this.tab = 0
+    this.get_allJobs();
   }
   // get all applied
-  onClickApplied(){
+  onClickApplied() {
     console.log("bfhdfhdfb")
-    this.tab=2
-    this.canditSarvice.getAppliedJobs().subscribe((res:any)=>{
-     this.appliedJobs=res;
+    this.tab = 2
+    this.canditSarvice.getAppliedJobs().subscribe((res: any) => {
+      this.appliedJobs = res;
     })
   }
-  savedJobs(){
-    this.tab=3
-    this.canditSarvice.getSavedJob().subscribe((res:any) => {
-      this.saveJobs=res;
+  savedJobs() {
+    this.tab = 3
+    this.canditSarvice.getSavedJob().subscribe((res: any) => {
+      this.saveJobs = res;
     })
   }
   // creatr alte
-  jobAlert(){
-    this.tab=4
+  jobAlert() {
+    this.tab = 4
   }
   // notification
-  notification(){
-    this.tab=5
+  notification() {
+    this.tab = 5
   }
   // search
-  search(){
-    if(this.searchForm.get('search')?.valid && this.searchForm.get('location')?.valid&& this.searchForm.get('experienceAnotherfrom')?.valid){
-      this.get_allJobs();
-    }
+  search() {
+    console.log(this.searchForm.get('search')?.valid)
+    console.log(this.searchForm.get('location')?.valid)
+    console.log(this.searchForm.get('experience')?.value)
 
+    if (this.searchForm.get('search')?.valid && this.searchForm.get('location')?.valid && this.searchForm.get('experience')?.valid) {
+      this.get_allJobs();
+
+
+    }
   }
   // get skills
-  isDisplay=false;
+  isDisplay = false;
   dispalye(data: any) {
 
     if (data.target.value) {
@@ -105,15 +112,15 @@ export class CanGetComponent implements OnInit {
       this.isDisplay = false
       console.log(data.target.value, "not  valuesmdkjfjdhj")
     }
-  this.getKeyskills(data.target.value)
+    this.getKeyskills(data.target.value)
   }
   getKeyskills(value: any) {
     this.canditSarvice.getSkill(value).subscribe((res: any) => {
       this.keySkill = res;
     })
   }
-  checkSkill(event:any){
-    console.log(event.target.value,"workinjf")
+  checkSkill(event: any) {
+
     const data: FormArray = this.searchForm.get('search') as FormArray;
     if (event.target.checked) {
       data.push(new FormControl(event.target.value));
@@ -130,9 +137,35 @@ export class CanGetComponent implements OnInit {
     }
   }
   // recent Search
-  recentSearch(){
-    this.canditSarvice.getRecentsearch().subscribe((res:any) => {
-    this.recentData=res;
+  recentSearch() {
+    this.canditSarvice.getRecentsearch().subscribe((res: any) => {
+      this.recentData = res;
+
+    })
+  }
+  searchdata(value: any) {
+    console.log(value, "values")
+    // this.searchForm.get('search')?.valid && this.searchForm.get('location')?.valid&& this.searchForm.get('experience')?.valid
+    this.canditSarvice.getReacent_data(value).subscribe((res: any) => {
+      this.searchForm.patchValue({
+        location: res.location,
+        experience: res.experience
+      })
+
+    })
+  }
+  savesearch() {
+    if (this.searchForm.get('search')?.valid && this.searchForm.get('location')?.valid && this.searchForm.get('experience')?.valid) {
+      this.canditSarvice.saveSearch(this.searchForm.value).subscribe((res: any) => {
+
+      })
+    }
+  }
+  // get
+  save:any=[]
+  getSaveData(){
+    this.canditSarvice.getSave().subscribe((res: any) => {
+    this.save=res
     })
   }
 }

@@ -103,6 +103,7 @@
 
   padding: 10px;
 }
+
 .jobs {
   background-color: #fff;
   color: #0A2647;
@@ -111,6 +112,7 @@
 .filter-bar {
   color: #fff;
 }
+
 /* filter bar */
 .filter-label {
   width: 95%;
@@ -304,9 +306,7 @@ h1 {
   color: #FD841F;
 }
 
-.form {
-
-}
+.form {}
 
 .form>div {
   display: flex;
@@ -348,18 +348,47 @@ label {
   margin-bottom: 61px;
 
 }
-.alerJob{
-background-color: #E7E9ED;
+
+.alerJob {
+  background-color: #E7E9ED;
 }
-.keyskill{
+
+.keyskill {
   position: relative;
 }
-.keylist{
+
+.keylist {
   margin-top: 0px;
   position: relative;
   bottom: 24px;
-}
-ul{
-  list-style-type: none;
+  width: 100%;
+  border-radius: 5px;
 
+}
+
+ul {
+  list-style-type: none;
+}
+
+.ulkeylist {
+
+
+  margin: 17px;
+}
+
+.ilkeylist{
+  display: flex;
+  padding: 2px 16px 0px 13px;
+
+}
+.nodata{
+  padding: 10px 10px 2px;
+
+}
+a{
+  width: 100%;
+
+}
+.display{
+  display: flex;
 }

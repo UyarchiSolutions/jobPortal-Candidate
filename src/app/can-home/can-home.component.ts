@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { CanditService } from '../candit.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { CanditService } from '../candit.service';
 export class CanHomeComponent implements OnInit {
   jobs: any = [];
   searchForm = this.fb.group({
-    search: new FormControl(null),
+    search: this.fb.array([],[Validators.required]),
     experience: new FormControl(null),
     experienceAnotherfrom: new FormControl(null),
     experienceAnotherto: new FormControl(null),
