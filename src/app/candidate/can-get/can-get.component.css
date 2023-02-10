@@ -376,19 +376,42 @@ ul {
   margin: 17px;
 }
 
-.ilkeylist{
+.ilkeylist {
   display: flex;
   padding: 2px 16px 0px 13px;
 
 }
-.nodata{
+
+.nodata {
   padding: 10px 10px 2px;
 
 }
-a{
+
+a {
   width: 100%;
 
 }
-.display{
+
+.display {
   display: flex;
+}
+
+.time {
+  display: flex;
+  justify-content: end;
+}
+
+.alertskill {
+  margin-top: 0px;
+  position: relative;
+  bottom: 8px;
+  width: 71%;
+  border-radius: 5px;
+}
+.alertkeylist{
+  margin-top: 0px;
+  position: relative;
+  bottom: 8px;
+  width: 71%;
+  border-radius: 5px;
 }

@@ -70,6 +70,10 @@ export class CanditateService {
   updateEduction(data:any){
     return this.http.post(this.baseUrl+'/v1/candidateDetail/updateKeyskill',data,{headers:{auth:Cookie.get('tokens')}})
   }
+  // education details
+  educationDetail(data:any){
+    return this.http.post(this.baseUrl+`/v1/candidateDetail/updateEducation`,data,{headers:{auth:Cookie.get('tokens')}})
+  }
   // current industry
   currentIndustry(){
     return this.http.get(this.baseUrl+'/v1/educationDetails/get_Industry')
@@ -95,6 +99,54 @@ export class CanditateService {
   }
   // getSavedSearch
   getSave(){
-    return this.http.get(this.baseUrl+'/v1/candidateDetail/createdSearchhistory')
+    return this.http.get(this.baseUrl+'/v1/candidateDetail/createdSearchhistoryData',{headers:{auth:Cookie.get('tokens')}})
+  }
+  // get all qualification
+  getQualification(){
+    return this.http.get(this.baseUrl+`/v1/educationDetails`)
+  }
+  // docterate
+  getdoctorate(id:any){
+    return this.http.get(this.baseUrl+`/v1/educationDetails/get_drcourse/${id}`)
+  }
+  // doctorate spe
+  getDrSped(){
+    return this.http.get(this.baseUrl+`/v1/educationDetails/get_drspecialization/dr1`)
+  }
+  // pgcourse
+  getPgcourses(id:any){
+    return this.http.get(this.baseUrl+`/v1/educationDetails/get_pg_course/${id}`)
+  }
+  // pg Sepciat
+  getPgSpecial(){
+    return this.http.get(this.baseUrl+`/v1/educationDetails/get_pgspecialization/PG3`)
+  }
+  // getug course
+  grtUgcou(id:any){
+    return this.http.get(this.baseUrl+`/v1/educationDetails/get_ug_course/${id}`)
+  }
+  // ugSep
+  ugSepcial(){
+    return this.http.get(this.baseUrl+`/v1/educationDetails/get_specialization/ug5`)
+  }
+  // hsc course
+  hsccourse(id:any){
+    return this.http.get(this.baseUrl+`/v1/educationDetails/get_hsc_course/${id}`)
+  }
+  // sslc course
+  sslcSpecial(id:any){
+    return this.http.get(this.baseUrl+`/v1/educationDetails/get_sslc_course/${id}`)
+  }
+  // language
+  getLanguages(){
+    return this.http.get(this.baseUrl+`/v1/educationDetails/get_medium`)
+  }
+  // getSaveData
+  saveddata(id:any){
+    return this.http.get(this.baseUrl+`/v1/candidateDetail/createdSearchhistoryData_byId/${id}`,{headers:{auth:Cookie.get('tokens')}})
+  }
+  // serAlert
+  alertSet(data:any){
+    return this.http.post(this.baseUrl+`/v1/candidateDetail/updateKeyskill`,data,{headers:{auth:Cookie.get('tokens')}})
   }
 }

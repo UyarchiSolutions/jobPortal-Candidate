@@ -26,56 +26,19 @@ export class UpdateprofileComponent implements OnInit {
     gender: new FormControl('', Validators.required),
     maritalStatus: new FormControl('', Validators.required),
     relocate: new FormControl('', Validators.required),
-
-    // doctorate
-    // drQualification: new FormControl('', [Validators.required]),
-    // drSpecialization: new FormControl('', [Validators.required]),
-    // drCourseType: new FormControl('', [Validators.required]),
-    // drCourse: new FormControl('', [Validators.required]),
-    // drCourseDurationFrom: new FormControl('', [Validators.required]),
-    // drCourseDurationTo: new FormControl('', [Validators.required]),
-    // drGradingSystem: new FormControl('', [Validators.required]),
-    // drMarks: new FormControl('', [Validators.required]),
-    // Master
-    // pgQualification: new FormControl('', [Validators.required]),
-    // pgCourse: new FormControl('', [Validators.required]),
-    // pgSpecialization: new FormControl('', [Validators.required]),
-    // pgCourseType: new FormControl('', [Validators.required]),
-    // pgCourseDurationFrom: new FormControl('', [Validators.required]),
-    // pgCourseDurationTo: new FormControl('', [Validators.required]),
-    // pgGradingSystem: new FormControl('', [Validators.required]),
-    // pgMarks: new FormControl('', [Validators.required]),
-    // UG Course
-    // ugQualification: new FormControl('', [Validators.required]),
-    // ugCourse: new FormControl('', [Validators.required]),
-    // ugSpecialization: new FormControl('', [Validators.required]),
-    // ugCourseType: new FormControl('', [Validators.required]),
-    // ugCourseDurationFrom: new FormControl('', [Validators.required]),
-    // ugCourseDurationTo: new FormControl('', [Validators.required]),
-    // ugGradingSystem: new FormControl('', [Validators.required]),
-    // ugMarks: new FormControl('', [Validators.required]),
-    // HSC
-    // hsBoard: new FormControl('', [Validators.required]),
-    // hsQualification: new FormControl('', [Validators.required]),
-    // hsPassedYear: new FormControl('', [Validators.required]),
-    // hsMedium: new FormControl('', [Validators.required]),
-    // hstotalmarks: new FormControl('', [Validators.required]),
-    // ssLc
-    // sslcQualification: new FormControl('', [Validators.required]),
-    // sslcBoard: new FormControl('', [Validators.required]),
-    // sslcPassedYear: new FormControl('', [Validators.required]),
-    // sslcMedium: new FormControl('', [Validators.required]),
-    // sslctotalmarks: new FormControl('', [Validators.required]),
-    //  dummy
-    // qualify: this.fb.array([this.fb.control(null)])
+    // languages:
   })
   keySkill: any;
+  lang:any=[]
   constructor(private fb: FormBuilder, private candidateService: CanditateService, private router: Router) { }
 
   ngOnInit() {
     console.log(this.profileForm.get('education')?.value, "education");
     this.candidateService.getKeyskill().subscribe((res: any) => {
 
+    })
+    this.candidateService.getLanguages().subscribe((res:any) =>{
+    this.lang=res;
     })
   }
   getKeyskills(value: any) {
@@ -93,21 +56,6 @@ export class UpdateprofileComponent implements OnInit {
   }
   addQualification() {
     (this.profileForm.get('qualify') as FormArray).push(this.fb.control(null));
-  }
-  qualifiacation(val: any) {
-    console.log(val.target.value, "valjsdj")
-    this.qualification = val.target.value;
-    if (this.qualification == 'SSLC') {
-      this.profileForm.get('sslcQualification').setValue(this.qualification)
-    } else if (this.qualification == 'HSC') {
-      this.profileForm.get('hsQualification').setValue(this.qualification)
-    } else if (this.qualification == 'Graduation/Diploma') {
-      this.profileForm.get('ugQualification').setValue(this.qualification)
-    } else if (this.qualification == 'Masters/Post-Graduation') {
-      this.profileForm.get('pgQualification').setValue(this.qualification)
-    } else if (this.qualification == 'Doctoate/PhD') {
-      this.profileForm.get('drQualification').setValue(this.qualification)
-    }
   }
   isDisplay = false;
   dispalye(data: any) {
@@ -139,6 +87,9 @@ export class UpdateprofileComponent implements OnInit {
       });
     }
   }
+  insLang(val:any){
+
+  }
   updateprofile() {
     const formData = new FormData();
     formData.append('image', this.selectImg1);
@@ -146,7 +97,7 @@ export class UpdateprofileComponent implements OnInit {
       this.candidateService.imageUpload(res.user._id, formData).subscribe((res: any) => {
 
       })
-      this.router.navigate(['/can-edu'])
+      this.router.navigate(['/can-edu'],{queryParams:{id:res.user._id}})
     })
   }
 }

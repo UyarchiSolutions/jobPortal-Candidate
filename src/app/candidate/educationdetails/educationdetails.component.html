@@ -27,25 +27,27 @@
             </div>
           </div>
           <div class="row" [formGroup]="educationForm">
-            <div formGroupName="phaseExecutions">
+            <div>
               <div class="register-form" formArrayName="educationArray">
                 <div *ngFor="let phase of Qualification.controls; let i = index;" [formGroupName]="i">
                   <div class="single-row">
                     <label for="">Qualification :</label>
                     <div class="content-box">
-                      <select id="select" class="form-control" (change)="qualifiacation($event,i)">
+                      <select id="select" class="form-control" (change)="qualifiacation($event,i,phase)">
                         <option value="null" disabled selected>Select</option>
-                        <option value="Doctoate/PhD">Doctorate/Phd</option>
+                        <option value="{{quli.qualification}}" *ngFor="let quli of qualification">{{quli.qualification}}
+                        </option>
+                        <!-- <option value="Doctoate/PhD">Doctorate/Phd</option>
                         <option value="Masters/Post-Graduation">Masters/Post Graduation</option>
                         <option value="Graduation/Diploma">Graduation/Diploma</option>
                         <option value="HSC">HSC</option>
-                        <option value="SSLC">SSLC</option>
+                        <option value="SSLC">SSLC</option> -->
                       </select>
                     </div>
 
                   </div>
                   <!-- doctorate/Phd -->
-                  <div class="phd-master-graduation" >
+                  <div class="phd-master-graduation" *ngIf="phase.get('Education')?.value=='Doctorate/phD'">
                     <div class="single-row" *ngIf="hasPhaseValue1At(i)">
                       <label for="">Course :</label>
                       <div class="content-box">
@@ -118,19 +120,26 @@
                     </div>
                   </div>
                   <!-- master/post graduate -->
-                  <div class="phd-master-graduation" *ngIf="qualification =='Masters/Post-Graduation'">
+                  <div class="phd-master-graduation" *ngIf="phase.get('Education')?.value=='Masters/Post-Graduation'">
                     <div class="single-row">
                       <label for="">Course :</label>
-                      <div class="content-box">
-                        <input type="text" class="form-control" placeholder="Enter Course" formControlName="pgCourse">
-                      </div>
+                        <!-- <input type="text" class="form-control" placeholder="Enter Course" formControlName="pgCourse"> -->
+                        <div class="content-box">
+                          <select class="form-control select-type" formControlName="pgCourse">
+                            <option [ngValue]="null" disabled selected>Select</option>
+                            <option value="{{course.QualificationId}}" *ngFor="let course of pgCourse">{{course.Course}}</option>
+                          </select>
+                        </div>
                     </div>
                     <div class="single-row">
                       <label for="">Specialization :</label>
                       <div class="content-box">
-                        <input type="text" class="form-control" placeholder="Enter Specialization"
-                          formControlName="pgSpecialization">
+                        <select class="form-control select-type" formControlName="pgSpecialization">
+                          <option [ngValue]="null" disabled selected>Select</option>
+                          <option value="{{course._id}}" *ngFor="let course of pgSpe">{{course.Specialization}}</option>
+                        </select>
                       </div>
+
                     </div>
                     <div class="single-row">
                       <label for="">Course Type :</label>
@@ -191,12 +200,11 @@
                     </div>
                   </div>
                   <!-- ug/Diplomo -->
-                  <div class="phd-master-graduation" *ngIf="qualification =='Graduation/Diploma'">
+                  <div class="phd-master-graduation" *ngIf="phase.get('Education')?.value=='Graduation/Diploma'">
                     <div class="single-row">
                       <label for="">Course :</label>
                       <div class="content-box">
-                        <input type="text" class="form-control" placeholder="Enter Course"
-                          formControlName="ugQualification">
+                        <input type="text" class="form-control" placeholder="Enter Course" formControlName="ugCourse">
                       </div>
                     </div>
                     <div class="single-row">
@@ -267,7 +275,7 @@
 
 
                   <!-- HSC -->
-                  <div class="hsc-sslsc" *ngIf="qualification == 'HSC'">
+                  <div class="hsc-sslsc" *ngIf="phase.get('Education')?.value=='HSC'">
                     <div class="single-row">
                       <label for="">Board :</label>
                       <div class="content-box">
@@ -306,7 +314,7 @@
 
                   </div>
                   <!-- sslc -->
-                  <div class="hsc-sslsc" *ngIf="qualification == 'SSLC'">
+                  <div class="hsc-sslsc" *ngIf="phase.get('Education')?.value=='SSLC'">
                     <div class="single-row">
                       <label for="">Board :</label>
                       <div class="content-box">
@@ -348,7 +356,7 @@
                   <label for=""> </label>
 
                   <div class="content-box">
-                    <button type="submit" class="btn btn-brand-blue mb-2">submit</button>
+                    <button type="submit" class="btn btn-brand-blue mb-2" (click)="submit()">submit</button>
                   </div>
                 </div>
               </div>

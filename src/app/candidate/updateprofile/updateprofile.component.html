@@ -53,8 +53,10 @@
                     <label></label>
                     <div class="content-box" style="background: white;">
                       <ul style="padding-left: 0px;">
-                        <li *ngFor="let skill of keySkill"><input style="width: 30%" type="checkbox" value="{{skill}}" (change)="checkSkill($event)"/>
-                          <span>{{skill}}</span></li>
+                        <li *ngFor="let skill of keySkill"><input style="width: 30%" type="checkbox" value="{{skill}}"
+                            (change)="checkSkill($event)" />
+                          <span>{{skill}}</span>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -180,6 +182,22 @@
                     </div>
                   </div>
 
+                  <div class="dropdown single-row">
+                    <label for="">Language :</label>
+                    <div class="content-box">
+                      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Language <span></span>
+                      </a>
+                      <ul class="dropdown-menu" style="width: 60%;padding: 3%;" aria-labelledby="dropdownMenuLink">
+                        <li *ngFor="let lan of lang">
+                          <input type="checkbox" value="{{lan._id}}"
+                            (change)="insLang($event)"/><span style="margin: 9px;">{{lan.School_Medium}}</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -195,310 +213,7 @@
             <div class="row no-margin">
               <div class="col">
                 <div class="register-form education-wrap">
-                  <!-- <div class="single-row" *ngFor="let quali of getQualified(); let i = index">
-                    <label for="">Qualification </label>
-                    <div class="content-box">
-                      <select class="form-control select-type" (change)="qualifiacation($event)">
-                        <option value="null" disabled selected>Select</option>
-                        <option value="Doctoate/PhD">Doctorate/PhD</option>
-                        <option value="Masters/Post-Graduation">Masters/Post-Graduation</option>
-                        <option value="Graduation/Diploma">Graduation/Diploma</option>
-                        <option value="HSC">HSC</option>
-                        <option value="SSLC">SSLC</option>
-                      </select>
-                    </div>
-                  </div> -->
-                  <!-- doctorate/Phd -->
-                  <!-- <div class="phd-master-graduation" *ngIf="qualification =='Doctoate/PhD'">
-                    <div class="single-row">
-                      <label for="">Course :</label>
-                      <div class="content-box">
-                        <input type="text" class="form-control" placeholder="Enter Course" formControlName="drCourse">
-                      </div>
-                    </div>
-                    <div class="single-row">
-                      <label for="">Specialization :</label>
-                      <div class="content-box">
-                        <input type="text" class="form-control" placeholder="Enter Specialization"
-                          formControlName="drSpecialization">
-                      </div>
-                    </div>
-                    <div class="single-row">
-                      <label for="">Course Type :</label>
-                      <div class="content-box">
-                        <select class="form-control select-type" formControlName="drCourseType">
-                          <option value="option1" disabled selected>Select</option>
-                          <option value="Full Time">Full Time</option>
-                          <option value="Part Time">Part Time</option>
-                          <option value="Distance">Distance</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="single-row">
-                      <label for="">Course Duration :</label>
-                      <div class="content-box">
-                        <select class="form-control select-type douple-input-first" formControlName="drCourseDurationFrom">
-                          <option value="option1" disabled selected>From</option>
-                          <option value="2016">2016</option>
-                          <option value="2017">2017</option>
-                          <option value="2018">2018</option>
-                          <option value="2019">2019</option>
-                          <option value="2020">2020</option>
-                          <option value="2021">2021</option>
-                          <option value="2022">2022</option>
-                          <option value="2023">2023</option>
-                        </select>
-                        <select class="form-control select-type douple-input-second" formControlName="drCourseDurationTo">
-                          <option value="option1" disabled selected>To</option>
-                          <option value="2016">2016</option>
-                          <option value="2017">2017</option>
-                          <option value="2018">2018</option>
-                          <option value="2019">2019</option>
-                          <option value="2020">2020</option>
-                          <option value="2021">2021</option>
-                          <option value="2022">2022</option>
-                          <option value="2023">2023</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="single-row">
-                      <label for="">Grading System :</label>
-                      <div class="content-box">
-                        <select class="form-control select-type" formControlName="drGradingSystem">
-                          <option value="option1" disabled selected>Select</option>
-                          <option value="CGPA">CGPA</option>
-                          <option value="Percentage">Percentage</option>
-                        </select>
-                      </div>
 
-                    </div>
-                    <div class="single-row">
-                      <label for="">Marks :</label>
-                      <div class="content-box">
-                        <input type="text" class="form-control" formControlName="drMarks" placeholder="Enter Marks">
-                      </div>
-                    </div>
-                  </div> -->
-                  <!-- master/post graduate -->
-                  <!-- <div class="phd-master-graduation"
-                    *ngIf="qualification =='Masters/Post-Graduation'">
-                    <div class="single-row">
-                      <label for="">Course :</label>
-                      <div class="content-box">
-                        <input type="text" class="form-control" placeholder="Enter Course" formControlName="pgCourse">
-                      </div>
-                    </div>
-                    <div class="single-row">
-                      <label for="">Specialization :</label>
-                      <div class="content-box">
-                        <input type="text" class="form-control" placeholder="Enter Specialization"
-                          formControlName="pgSpecialization">
-                      </div>
-                    </div>
-                    <div class="single-row">
-                      <label for="">Course Type :</label>
-                      <div class="content-box">
-                        <select class="form-control select-type" formControlName="pgCourseType">
-                          <option value="option1" disabled selected>Select</option>
-                          <option value="Full Time">Full Time</option>
-                          <option value="Part Time">Part Time</option>
-                          <option value="Distance">Distance</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="single-row">
-                      <label for="">Course Duration :</label>
-                      <div class="content-box">
-                        <select class="form-control select-type douple-input-first" formControlName="pgCourseDurationFrom">
-                          <option value="option1" disabled selected>From</option>
-                          <option value="2016">2016</option>
-                          <option value="2017">2017</option>
-                          <option value="2018">2018</option>
-                          <option value="2019">2019</option>
-                          <option value="2020">2020</option>
-                          <option value="2021">2021</option>
-                          <option value="2022">2022</option>
-                          <option value="2023">2023</option>
-                        </select>
-                        <select class="form-control select-type douple-input-second" formControlName="pgCourseDurationTo">
-                          <option value="option1" disabled selected>To</option>
-                          <option value="2016">2016</option>
-                          <option value="2017">2017</option>
-                          <option value="2018">2018</option>
-                          <option value="2019">2019</option>
-                          <option value="2020">2020</option>
-                          <option value="2021">2021</option>
-                          <option value="2022">2022</option>
-                          <option value="2023">2023</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="single-row">
-                      <label for="">Grading System :</label>
-                      <div class="content-box">
-                        <select class="form-control select-type" formControlName="pgGradingSystem">
-                          <option value="option1" disabled selected>Select</option>
-                          <option value="CGPA">CGPA</option>
-                          <option value="Percentage">Percentage</option>
-                        </select>
-                      </div>
-
-                    </div>
-                    <div class="single-row">
-                      <label for="">Marks :</label>
-                      <div class="content-box">
-                        <input type="text" class="form-control" formControlName="pgMarks" placeholder="Enter Marks">
-                      </div>
-                    </div>
-                  </div> -->
-                  <!-- ug/Diplomo -->
-                  <!-- <div class="phd-master-graduation" *ngIf="qualification =='Graduation/Diploma'">
-                    <div class="single-row">
-                      <label for="">Course :</label>
-                      <div class="content-box">
-                        <input type="text" class="form-control" placeholder="Enter Course" formControlName="ugQualification">
-                      </div>
-                    </div>
-                    <div class="single-row">
-                      <label for="">Specialization :</label>
-                      <div class="content-box">
-                        <input type="text" class="form-control" placeholder="Enter Specialization"
-                          formControlName="ugSpecialization">
-                      </div>
-                    </div>
-                    <div class="single-row">
-                      <label for="">Course Type :</label>
-                      <div class="content-box">
-                        <select class="form-control select-type" formControlName="ugCourse">
-                          <option value="option1" disabled selected>Select</option>
-                          <option value="Full Time">Full Time</option>
-                          <option value="Part Time">Part Time</option>
-                          <option value="Distance">Distance</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="single-row">
-                      <label for="">Course Duration :</label>
-                      <div class="content-box">
-                        <select class="form-control select-type douple-input-first" formControlName="ugCourseDurationFrom">
-                          <option value="option1" disabled selected> From</option>
-                          <option value="2016">2016</option>
-                          <option value="2017">2017</option>
-                          <option value="2018">2018</option>
-                          <option value="2019">2019</option>
-                          <option value="2020">2020</option>
-                          <option value="2021">2021</option>
-                          <option value="2022">2022</option>
-                          <option value="2023">2023</option>
-                        </select>
-                        <select class="form-control select-type douple-input-second" formControlName="ugCourseDurationTo">
-                          <option value="option1" disabled selected>To</option>
-                          <option value="2016">2016</option>
-                          <option value="2017">2017</option>
-                          <option value="2018">2018</option>
-                          <option value="2019">2019</option>
-                          <option value="2020">2020</option>
-                          <option value="2021">2021</option>
-                          <option value="2022">2022</option>
-                          <option value="2023">2023</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="single-row">
-                      <label for="">Grading System :</label>
-                      <div class="content-box">
-                        <select class="form-control select-type" formControlName="ugGradingSystem">
-                          <option value="option1" disabled selected>Select</option>
-                          <option value="CGPA">CGPA</option>
-                          <option value="Percentage">Percentage</option>
-                        </select>
-                      </div>
-
-                    </div>
-                    <div class="single-row">
-                      <label for="">Marks:</label>
-                      <div class="content-box">
-                        <input type="text" class="form-control" formControlName="ugMarks" placeholder="Enter Marks">
-                      </div>
-                    </div>
-                  </div> -->
-
-
-                  <!-- HSC -->
-                  <!-- <div class="hsc-sslsc" *ngIf="qualification == 'HSC'">
-                    <div class="single-row">
-                      <label for="">Board :</label>
-                      <div class="content-box">
-                        <input type="text" class="form-control" placeholder="Enter Board" formControlName="hsBoard">
-                      </div>
-                    </div>
-                    <div class="single-row">
-                      <label for="">Passed Out Year :</label>
-                      <div class="content-box">
-                        <select class="form-control select-type" formControlName="hsPassedYear">
-                          <option value="option1" disabled selected>Select</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </select>
-                      </div>
-
-                    </div>
-                    <div class="single-row">
-                      <label for="">School Medium:</label>
-                      <div class="content-box">
-                        <select class="form-control select-type" formControlName="hsMedium">
-                          <option value="option1" disabled selected>Select</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="single-row">
-                      <label for="">Marks :</label>
-                      <div class="content-box">
-                        <input type="text" class="form-control" placeholder="Enter Marks" formControlName="hstotalmarks">
-                      </div>
-                    </div>
-
-                  </div> -->
-                  <!-- sslc -->
-                  <!-- <div class="hsc-sslsc" *ngIf="qualification == 'SSLC'">
-                    <div class="single-row">
-                      <label for="">Board :</label>
-                      <div class="content-box">
-                        <input type="text" class="form-control" placeholder="Enter Board" formControlName="sslcBoard">
-                      </div>
-                    </div>
-                    <div class="single-row">
-                      <label for="">Passed Out Year :</label>
-                      <div class="content-box">
-                        <select class="form-control select-type" formControlName="sslcPassedYear">
-                          <option value="option1" disabled selected>Select</option>
-                          <option value="2016">2016</option>
-                          <option value="2017">2017</option>
-                        </select>
-                      </div>
-
-                    </div>
-                    <div class="single-row">
-                      <label for="">School Medium:</label>
-                      <div class="content-box">
-                        <select class="form-control select-type" formControlName="sslcMedium">
-                          <option value="option1" disabled selected>Select</option>
-                          <option value="Tamil">Tamil</option>
-                          <option value="English">English</option>
-                        </select>
-                      </div>
-                    </div>
-                    <div class="single-row">
-                      <label for="">Marks :</label>
-                      <div class="content-box">
-                        <input type="text" class="form-control" placeholder="Enter Marks" formControlName="sslctotalmarks">
-                      </div>
-                    </div>
-
-                  </div> -->
                   <div class="single-row single-row-final-btn">
                     <label for=""> </label>
 

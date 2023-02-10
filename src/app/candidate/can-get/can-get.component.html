@@ -22,7 +22,7 @@
 
               <div class="search-box first-search-box">
                 <input type="text" class="form-control keyskill" placeholder="Enter Designation / Key skills"
-                  (keyup)="dispalye($event)">
+                  value="{{datavalues}}" (keyup)="dispalye($event)">
 
                 <div class="" *ngIf="isDisplay" style="margin-top:0px;">
                   <label></label>
@@ -497,39 +497,46 @@
           </div>
           <!-- Job alert -->
           <div *ngIf="tab == 4">
-            <div class="jobalert col-8">
+            <div class="jobalert col-8" [formGroup]="setAlertForm" >
               <h1>Create Job Alert</h1>
 
               <div class="form col-9">
                 <div class="designation">
                   <label>Designation :</label>
-                  <input class="alertField" type="text" name="designation" placeholder="Enter Your Designation">
+                  <input class="alertField" type="text" name="designation" placeholder="Enter Your Designation"
+                    formControlName="designationSet">
                 </div>
 
                 <div class="keyskill">
                   <label>Key Skill :</label>
-                  <input class="alertField" type="text" name="keyskill" placeholder="Enter Key Skill">
+                  <input class="alertField" type="text" name="keyskill" placeholder="Enter Key Skill"
+                    (keyup)="dispalye($event)">
                 </div>
-
+                <div class="" *ngIf="isDisplay" style="margin-top:0px;">
+                  <label></label>
+                  <div class="content-box alertkeylist" style="background: white;">
+                    <ul class="alertskill" style="padding-left: 0px;" class="">
+                      <li class="ilkeylist" *ngFor="let skill of keySkill"><input type="checkbox" value="{{skill}}"
+                          (change)="alretcheckSkill($event)" />
+                        <span>{{skill}}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
                 <div class="experience">
                   <label>Experience :</label>
-
-                  <input class="alertField" type="text" name="year" placeholder="Year" id="year">
-                  <input class="alertField" type="text" name="month" placeholder="Month" id="month">
-
+                  <input class="alertField" type="text" name="year" placeholder="Year" id="year"
+                    formControlName="experienceYearSet">
+                  <input class="alertField" type="text" name="month" placeholder="Month" id="month"
+                    formControlName="experienceMonthSet">
                 </div>
-
                 <div class="job-location">
                   <label>Job Location :</label>
-                  <input class="alertField" type="text" name="location" placeholder="Enter Job location">
+                  <input class="alertField" type="text" name="location" placeholder="Enter Job location"
+                    formControlName="locationSet">
                 </div>
-
               </div>
-
-
-              <button class="btn alert">Set Alert</button>
-
-
+              <button class="btn alert" (click)="setalert()">Set Alert</button>
             </div>
           </div>
           <!-- notification -->
@@ -625,7 +632,8 @@
             </i> Recent Search
           </header>
           <div class="tabs">
-            <div class="tab d-flex flex-wrap bg-grey" style="cursor: pointer;" *ngFor="let recent of recentData">
+            <div class="tab d-flex flex-wrap bg-grey" style="cursor: pointer;"
+              *ngFor="let recent of recentData;let i=index">
 
               <a (click)="searchdata(recent._id)">
                 <div class="course col-12 d-flex">
@@ -658,45 +666,13 @@
                     <p>{{recent.experience}} Year</p>
                   </div>
                 </div>
+                <div class="time">
+                  <p>{{recent.time}}</p>
+                </div>
               </a>
-              <!-- </div> -->
-              <!-- <ul style="padding-left: 0px;">
-                <li >
-                  <div class="course col-12 d-flex"><span class="icon-custom icon-custom-recent"> <i><svg width="12"
-                          height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M12 2.3999H0V5.5999H4.9384C4.85003 5.43273 4.8 5.24216 4.8 5.03991V4.95991H7.2V5.03991C7.2 5.24216 7.14996 5.43273 7.06159 5.5999H12V2.3999Z"
-                            fill="#79879A" />
-                          <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M9.60039 0H2.40039V4H4.5035C4.31204 3.71398 4.20039 3.37003 4.20039 3V1.6H7.80039V3C7.80039 3.37003 7.68874 3.71398 7.49728 4H9.60039V0Z"
-                            fill="#79879A" />
-                          <path fill-rule="evenodd" clip-rule="evenodd"
-                            d="M4.86828 6.3999H0V11.9999H12V6.3999H7.13172C6.96698 6.86598 6.52249 7.1999 6 7.1999C5.47751 7.1999 5.03302 6.86598 4.86828 6.3999Z"
-                            fill="#79879A" />
-                        </svg>
-                      </i></span>
-                    <span class="icon-text">{{recent.search}}</span>
-                  </div>
-
-                  <div class="location col-8 d-flex">
-                    <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                      <span class="icon-text">{{recent.search}}</span>
-                    </div>
-                    <div class="years"><span class="icon-custom icon-custom-recent"><i
-                          class='far fa-address-card'></i></span>
-                      <span class="icon-text">{{recent.experience}} Year</span>
-                    </div>
-                  </div>
-
-                </li>
-              </ul> -->
             </div>
             <div class="nodata" *ngIf="recentData.length==0">
               <p style="margin-bottom: 0px;">No recent search</p>
-            </div>
-
-            <div class="tab space d-flex flex-wrap bg-grey">
-
             </div>
           </div>
         </div>
@@ -724,117 +700,53 @@
             </i> Saved Search
           </header>
           <div class="tabs" *ngFor="let sav of save">
+
             <div class="tab d-flex flex-wrap bg-grey">
-              <div class="course col-12 d-flex align-items-center">
-                <i><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M12 2.3999H0V5.5999H4.9384C4.85003 5.43273 4.8 5.24216 4.8 5.03991V4.95991H7.2V5.03991C7.2 5.24216 7.14996 5.43273 7.06159 5.5999H12V2.3999Z"
-                      fill="#79879A" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M9.60039 0H2.40039V4H4.5035C4.31204 3.71398 4.20039 3.37003 4.20039 3V1.6H7.80039V3C7.80039 3.37003 7.68874 3.71398 7.49728 4H9.60039V0Z"
-                      fill="#79879A" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M4.86828 6.3999H0V11.9999H12V6.3999H7.13172C6.96698 6.86598 6.52249 7.1999 6 7.1999C5.47751 7.1999 5.03302 6.86598 4.86828 6.3999Z"
-                      fill="#79879A" />
-                  </svg>
-                </i>
-                <p>{{sav}}</p>
-              </div>
-              <div class="location col-8 d-flex">
-                <i><svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M9.99986 4.80022C9.99986 7.45131 5.00042 12.0006 5.00042 12.0006C5.00042 12.0006 0.000976562 7.45131 0.000976562 4.80022C0.000976562 2.14913 2.2393 0 5.00042 0C7.76153 0 9.99986 2.14913 9.99986 4.80022Z"
-                      fill="#79879A" />
-                    <ellipse cx="4.99986" cy="4.80064" rx="1.24986" ry="1.20006" fill="white" />
-                  </svg>
-                </i>
-                <p>{{sav}}</p>
-              </div>
-              <div class="years">
-                <p>{{sav}} Year</p>
-              </div>
-              <div class="save-icon"><i><svg width="10" height="12" viewBox="0 0 10 12" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M0.625 0H9.375C9.54076 0 9.69973 0.0612432 9.81694 0.170257C9.93415 0.27927 10 0.427125 10 0.581293V11.709C10.0001 11.761 9.98516 11.812 9.95681 11.8568C9.92847 11.9016 9.88773 11.9385 9.83884 11.9636C9.78995 11.9888 9.7347 12.0013 9.67884 11.9999C9.62299 11.9984 9.56856 11.9831 9.52125 11.9555L5 9.31813L0.47875 11.9549C0.43148 11.9825 0.377117 11.9978 0.321314 11.9993C0.26551 12.0008 0.210304 11.9883 0.161434 11.9632C0.112565 11.9381 0.0718168 11.9013 0.0434268 11.8566C0.0150367 11.8119 4.15443e-05 11.7609 0 11.709V0.581293C0 0.427125 0.0658481 0.27927 0.183058 0.170257C0.300269 0.0612432 0.45924 0 0.625 0Z"
-                      fill="#0A2647" />
-                  </svg>
-                </i></div>
+              <a (click)="savedSearchData(sav._id)">
+                <div class="course col-12 d-flex align-items-center">
+                  <i><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M12 2.3999H0V5.5999H4.9384C4.85003 5.43273 4.8 5.24216 4.8 5.03991V4.95991H7.2V5.03991C7.2 5.24216 7.14996 5.43273 7.06159 5.5999H12V2.3999Z"
+                        fill="#79879A" />
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M9.60039 0H2.40039V4H4.5035C4.31204 3.71398 4.20039 3.37003 4.20039 3V1.6H7.80039V3C7.80039 3.37003 7.68874 3.71398 7.49728 4H9.60039V0Z"
+                        fill="#79879A" />
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M4.86828 6.3999H0V11.9999H12V6.3999H7.13172C6.96698 6.86598 6.52249 7.1999 6 7.1999C5.47751 7.1999 5.03302 6.86598 4.86828 6.3999Z"
+                        fill="#79879A" />
+                    </svg>
+                  </i>
+                  <p>{{sav.search}}</p>
+                </div>
+                <div class="display">
+                  <div class="location col-8 d-flex">
+                    <i><svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.99986 4.80022C9.99986 7.45131 5.00042 12.0006 5.00042 12.0006C5.00042 12.0006 0.000976562 7.45131 0.000976562 4.80022C0.000976562 2.14913 2.2393 0 5.00042 0C7.76153 0 9.99986 2.14913 9.99986 4.80022Z"
+                          fill="#79879A" />
+                        <ellipse cx="4.99986" cy="4.80064" rx="1.24986" ry="1.20006" fill="white" />
+                      </svg>
+                    </i>
+                    <p>{{sav.location}}</p>
+                  </div>
+                  <div class="years">
+                    <p>{{sav.experience}} Year</p>
+                  </div>
+                </div>
+                <div class="time">
+                  <p>{{sav.time}}</p>
+                </div>
+                <div class="save-icon"><i><svg width="10" height="12" viewBox="0 0 10 12" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M0.625 0H9.375C9.54076 0 9.69973 0.0612432 9.81694 0.170257C9.93415 0.27927 10 0.427125 10 0.581293V11.709C10.0001 11.761 9.98516 11.812 9.95681 11.8568C9.92847 11.9016 9.88773 11.9385 9.83884 11.9636C9.78995 11.9888 9.7347 12.0013 9.67884 11.9999C9.62299 11.9984 9.56856 11.9831 9.52125 11.9555L5 9.31813L0.47875 11.9549C0.43148 11.9825 0.377117 11.9978 0.321314 11.9993C0.26551 12.0008 0.210304 11.9883 0.161434 11.9632C0.112565 11.9381 0.0718168 11.9013 0.0434268 11.8566C0.0150367 11.8119 4.15443e-05 11.7609 0 11.709V0.581293C0 0.427125 0.0658481 0.27927 0.183058 0.170257C0.300269 0.0612432 0.45924 0 0.625 0Z"
+                        fill="#0A2647" />
+                    </svg>
+                  </i></div>
+              </a>
             </div>
-            <div class="tab d-flex flex-wrap bg-grey">
-              <div class="course col-12 d-flex">
-                <i><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M12 2.3999H0V5.5999H4.9384C4.85003 5.43273 4.8 5.24216 4.8 5.03991V4.95991H7.2V5.03991C7.2 5.24216 7.14996 5.43273 7.06159 5.5999H12V2.3999Z"
-                      fill="#79879A" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M9.60039 0H2.40039V4H4.5035C4.31204 3.71398 4.20039 3.37003 4.20039 3V1.6H7.80039V3C7.80039 3.37003 7.68874 3.71398 7.49728 4H9.60039V0Z"
-                      fill="#79879A" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M4.86828 6.3999H0V11.9999H12V6.3999H7.13172C6.96698 6.86598 6.52249 7.1999 6 7.1999C5.47751 7.1999 5.03302 6.86598 4.86828 6.3999Z"
-                      fill="#79879A" />
-                  </svg>
-                </i>
-                <p>UI UX Designer</p>
-              </div>
-              <div class="location col-8 d-flex">
-                <i><svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M9.99986 4.80022C9.99986 7.45131 5.00042 12.0006 5.00042 12.0006C5.00042 12.0006 0.000976562 7.45131 0.000976562 4.80022C0.000976562 2.14913 2.2393 0 5.00042 0C7.76153 0 9.99986 2.14913 9.99986 4.80022Z"
-                      fill="#79879A" />
-                    <ellipse cx="4.99986" cy="4.80064" rx="1.24986" ry="1.20006" fill="white" />
-                  </svg>
-                </i>
-                <p>Chennai</p>
-              </div>
-              <div class="years">
-                <p>1 Year</p>
-              </div>
-              <div class="save-icon"><i><svg width="10" height="12" viewBox="0 0 10 12" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M0.625 0H9.375C9.54076 0 9.69973 0.0612432 9.81694 0.170257C9.93415 0.27927 10 0.427125 10 0.581293V11.709C10.0001 11.761 9.98516 11.812 9.95681 11.8568C9.92847 11.9016 9.88773 11.9385 9.83884 11.9636C9.78995 11.9888 9.7347 12.0013 9.67884 11.9999C9.62299 11.9984 9.56856 11.9831 9.52125 11.9555L5 9.31813L0.47875 11.9549C0.43148 11.9825 0.377117 11.9978 0.321314 11.9993C0.26551 12.0008 0.210304 11.9883 0.161434 11.9632C0.112565 11.9381 0.0718168 11.9013 0.0434268 11.8566C0.0150367 11.8119 4.15443e-05 11.7609 0 11.709V0.581293C0 0.427125 0.0658481 0.27927 0.183058 0.170257C0.300269 0.0612432 0.45924 0 0.625 0Z"
-                      fill="#0A2647" />
-                  </svg>
-                </i></div>
-            </div>
-            <div class="tab d-flex flex-wrap bg-grey">
-              <div class="course col-12 d-flex  align-items-center">
-                <i><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M12 2.3999H0V5.5999H4.9384C4.85003 5.43273 4.8 5.24216 4.8 5.03991V4.95991H7.2V5.03991C7.2 5.24216 7.14996 5.43273 7.06159 5.5999H12V2.3999Z"
-                      fill="#79879A" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M9.60039 0H2.40039V4H4.5035C4.31204 3.71398 4.20039 3.37003 4.20039 3V1.6H7.80039V3C7.80039 3.37003 7.68874 3.71398 7.49728 4H9.60039V0Z"
-                      fill="#79879A" />
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M4.86828 6.3999H0V11.9999H12V6.3999H7.13172C6.96698 6.86598 6.52249 7.1999 6 7.1999C5.47751 7.1999 5.03302 6.86598 4.86828 6.3999Z"
-                      fill="#79879A" />
-                  </svg>
-                </i>
-                <p>UI UX Designer</p>
-              </div>
-              <div class="location col-8 d-flex">
-                <i><svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M9.99986 4.80022C9.99986 7.45131 5.00042 12.0006 5.00042 12.0006C5.00042 12.0006 0.000976562 7.45131 0.000976562 4.80022C0.000976562 2.14913 2.2393 0 5.00042 0C7.76153 0 9.99986 2.14913 9.99986 4.80022Z"
-                      fill="#79879A" />
-                    <ellipse cx="4.99986" cy="4.80064" rx="1.24986" ry="1.20006" fill="white" />
-                  </svg>
-                </i>
-                <p>Chennai</p>
-              </div>
-              <div class="years">
-                <p>1 Year</p>
-              </div>
-              <div class="save-icon"><i><svg width="10" height="12" viewBox="0 0 10 12" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M0.625 0H9.375C9.54076 0 9.69973 0.0612432 9.81694 0.170257C9.93415 0.27927 10 0.427125 10 0.581293V11.709C10.0001 11.761 9.98516 11.812 9.95681 11.8568C9.92847 11.9016 9.88773 11.9385 9.83884 11.9636C9.78995 11.9888 9.7347 12.0013 9.67884 11.9999C9.62299 11.9984 9.56856 11.9831 9.52125 11.9555L5 9.31813L0.47875 11.9549C0.43148 11.9825 0.377117 11.9978 0.321314 11.9993C0.26551 12.0008 0.210304 11.9883 0.161434 11.9632C0.112565 11.9381 0.0718168 11.9013 0.0434268 11.8566C0.0150367 11.8119 4.15443e-05 11.7609 0 11.709V0.581293C0 0.427125 0.0658481 0.27927 0.183058 0.170257C0.300269 0.0612432 0.45924 0 0.625 0Z"
-                      fill="#0A2647" />
-                  </svg>
-                </i></div>
-            </div>
+
+
           </div>
         </div>
 
