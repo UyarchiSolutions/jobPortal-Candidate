@@ -44,27 +44,45 @@
                                 </div>
                             </div>
                             <div class="single-row">
-                                <label for="">Salary Description :</label>
+                                <label for="">Perks & Benefits :</label>
                                 <div class="content-box">
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Salary Description" formControlName="salaryDescription"></textarea>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Perks & Benefits" formControlName="salaryDescription"></textarea>
                                 </div>
                             </div>
                             <div class="single-row">
                                 <label for="">Job Location :</label>
                                 <div class="content-box">
-                                    <input type="text" class="form-control" placeholder="Enter Job location" formControlName="jobLocation">
+                                    <input type="text" class="form-control" ngx-google-places-autocomplete [options]="options"
+                                    (onAddressChange)="handleAddressChange($event)" placeholder="Enter Job location">
                                 </div>
                             </div>
                             <div class="single-row">
                                 <label for="">Key Skills :</label>
                                 <div class="content-box">
-                                    <input type="text" class="form-control" placeholder="Enter Key Skills" formControlName="keySkill">
+                                    <input type="text" class="form-control" placeholder="Enter Key Skills" formControlName="keySkill" (keyup)="search_skills($event)">
+                                   
+                                </div>
+                            </div>
+                            <div class="single-row" *ngIf="isDisplay" style="margin-top:0px;">
+                                <label></label>
+                                <div class="content-box" style="background: white;padding: 12px;">
+                                  <ul style="padding-left: 0px;list-style: none;">
+                                    <li *ngFor="let skill of keySkill" class="d-flex"><input type="checkbox" value="{{skill}}" (change)="checkSkill($event)"/>
+                                      <span style="padding-left: 10px;">{{skill}}</span></li>
+                                  </ul>
                                 </div>
                             </div>
                             <div class="single-row">
                                 <label for="">Qualification :</label>
                                 <div class="content-box">
-                                    <input type="text" class="form-control" placeholder="Enter Qualification" formControlName="educationalQualification">
+                                    <select class="form-control select-type" formControlName="industry">
+                                        <option value="option1" disabled selected >Select</option>
+                                        <option value="Doctorate/PhD">Doctorate/PhD</option>
+                                        <option value="Masters/Post-Graduation">Masters/Post-Graduation</option>
+                                        <option value="Graduation/Diplomo">Graduation/Diplomo</option>
+                                        <option value="HSC">HSC</option>
+                                        <option value="SSLC">SSLC</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="single-row">
@@ -76,11 +94,11 @@
                             </div>
 
                             <div class="single-row">
-                                <label for="">Expreience :</label>
+                                <label for="">Experience :</label>
                                 <div class="content-box">
                                     <select class="form-control select-type douple-input-first" formControlName="experienceFrom">
                                         <option value="option1" disabled selected >Year</option>
-                                        <option value="fresher">Fresher</option>
+                                        <option value="0">0 Year</option>
                                         <option value="1">1 Year</option>
                                         <option value="2">2 Year</option>
                                         <option value="3">3 Year</option>
@@ -96,32 +114,29 @@
 
 
                                     <select class="form-control select-type douple-input-second" formControlName="experienceTo">
-                                        <option value="option1" disabled selected >Month</option>
-                                        <option value="0">0 Month</option>
-                                        <option value="1">1 Month</option>
-                                        <option value="2">2 Month</option>
-                                        <option value="3">3 Month</option>
-                                        <option value="4">4 Month</option>
-                                        <option value="5">5 Month</option>
-                                        <option value="6">6 Month</option>
-                                        <option value="7">7 Month</option>
-                                        <option value="8">8 Month</option>
-                                        <option value="9">9 Month</option>
-                                        <option value="10">10 Month</option>
-                                        <option value="11">11 Month</option>
+                                        <option value="option1" disabled selected >Year</option>
+                                        <option value="0">0 Year</option>
+                                        <option value="1">1 Year</option>
+                                        <option value="2">2 Year</option>
+                                        <option value="3">3 Year</option>
+                                        <option value="4">4 Year</option>
+                                        <option value="5">5 Year</option>
+                                        <option value="6">6 Year</option>
+                                        <option value="7">7 Year</option>
+                                        <option value="8">8 Year</option>
+                                        <option value="9">9 Year</option>
+                                        <option value="10">10 Year</option>
+                                        <option value="11">11 Year</option>
                                     </select>
                                 </div>
                             </div>
+                           
                             <div class="single-row">
                                 <label for="">Industry :</label>
                                 <div class="content-box">
                                     <select class="form-control select-type" formControlName="industry">
-                                        <option value="option1" disabled selected >Select Type</option>
-                                        <option value="analytics/kpo/research">Analytics/KPO/Research</option>
-                                        <option value="bpo/call center">BPO/Call Center</option>
-                                        <option value="it services/consultancy">It Services/Consultancy</option>
-                                        <option value="hardWare">HardWare</option>
-                                        <option value="netWorking">NetWorking</option>
+                                        <option disabled [ngValue]="null" selected value="select">Select</option>
+                                        <option value="{{industry.Industry}}" *ngFor="let industry of indus_data">{{industry.Industry}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -129,12 +144,51 @@
                                 <label for="">Preferred Industry :</label>
                                 <div class="content-box">
                                     <select class="form-control select-type" formControlName="preferedIndustry">
-                                        <option value="option1" disabled selected >Select Type</option>
-                                        <option value="analytics/kpo/research">Analytics/KPO/Research</option>
-                                        <option value="bpo/call center">BPO/Call Center</option>
-                                        <option value="it services/consultancy">It Services/Consultancy</option>
-                                        <option value="hardWare">HardWare</option>
-                                        <option value="netWorking">NetWorking</option>
+                                        <option disabled [ngValue]="null" selected value="select">Select</option>
+                                        <option value="{{industry.Industry}}" *ngFor="let industry of indus_data">{{industry.Industry}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- <div>
+                                <div>
+                                    <button class="drop-toggle btn flat">
+                                        <span>Select</span>
+                                        <span>{{checkedList.join(', ')}}</span>
+                                        <i class="fa fa-angle-down"></i>
+                                    </button>
+                                    <div class="drop-show" *ngIf="showDropDown">
+                                        <label *ngFor="let a of list">
+                                            <input type="checkbox" [(ngModel)]="a.checked" 
+                                                (change)="getSelectedValue(a.checked,a.name)" />
+                                            <span>{{a.name}}</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="single-row">
+                                <label for="">Department :</label>
+                                <div class="content-box">
+                                    <select class="form-control select-type" formControlName="department" (change)="depart($event)">
+                                        <option value="option1" [ngValue]="null" disabled selected >Select</option>
+                                        <option value="{{depart_list._id}}" *ngFor="let depart_list of depart_data">{{depart_list.Department}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="single-row" *ngIf="jobpostForm.get('department')?.value">
+                                <label for="">Role Category :</label>
+                                <div class="content-box">
+                                    <select class="form-control select-type" formControlName="roleCategory" (change)="cat($event)">
+                                        <option value="option1" [ngValue]="null" disabled selected >Select</option>
+                                        <option value="{{cat_list._id}}" *ngFor="let cat_list of cat_data">{{cat_list.Role_Category}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="single-row" *ngIf="jobpostForm.get('roleCategory')?.value">
+                                <label for="">Role :</label>
+                                <div class="content-box">
+                                    <select class="form-control select-type" formControlName="role">
+                                        <option value="option1" [ngValue]="null" disabled selected >Select</option>
+                                        <option value="{{role_list._id}}" *ngFor="let role_list of role_data">{{role_list.Job_role}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -142,9 +196,69 @@
                                 <label for="">Interview Type :</label>
                                 <div class="content-box">
                                     <select class="form-control select-type" formControlName="interviewType">
-                                        <option value="option1" disabled selected >Select Type</option>
+                                        <option value="option1" [ngValue]="null" disabled selected >Select</option>
                                         <option value="walk in">Walk In</option>
                                         <option value="online">Online</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="single-row" *ngIf="jobpostForm.get('interviewType')?.value == 'walk in'">
+                                <label for="">Date :</label>
+                                <div class="content-box">
+                                    <input type="date" class="form-control douple-input-first" placeholder="From" formControlName="interviewstartDate">
+                                    <input type="date" class="form-control douple-input-second" placeholder="To" formControlName="interviewendDate">
+                                </div>
+                            </div>
+                            <div class="single-row" *ngIf="jobpostForm.get('interviewType')?.value == 'walk in'">
+                                <label for="">Time :</label>
+                                <div class="content-box">
+                                    <select class="form-control select-type" formControlName="startTime">
+                                        <option value="option1" [ngValue]="null" disabled selected >From</option>
+                                        <option value="">08.00 Am</option>
+                                        <option value="">08.30 Am</option>
+                                        <option value="">09.00 Am</option>
+                                        <option value="">09.30 Am</option>
+                                        <option value="">10.00 Am</option>
+                                        <option value="">10.30 Am</option>
+                                        <option value="">11.00 Am</option>
+                                        <option value="">11.30 Am</option>
+                                        <option value="">12.00 Pm</option>
+                                        <option value="">12.30 Pm</option>
+                                        <option value="">01.00 Pm</option>
+                                        <option value="">01.30 Pm</option>
+                                        <option value="">02.00 Pm</option>
+                                        <option value="">02.30 Pm</option>
+                                        <option value="">03.00 Pm</option>
+                                        <option value="">03.30 Pm</option>
+                                        <option value="">04.00 Pm</option>
+                                        <option value="">04.30 Pm</option>
+                                        <option value="">05.00 Pm</option>
+                                        <option value="">05.30 Pm</option>
+                                        <option value="">06.00 Pm</option>
+                                    </select>
+                                    <select class="form-control select-type" formControlName="endTime">
+                                        <option value="option1" [ngValue]="null" disabled selected >To</option>
+                                        <option value="">08.00 Am</option>
+                                        <option value="">08.30 Am</option>
+                                        <option value="">09.00 Am</option>
+                                        <option value="">09.30 Am</option>
+                                        <option value="">10.00 Am</option>
+                                        <option value="">10.30 Am</option>
+                                        <option value="">11.00 Am</option>
+                                        <option value="">11.30 Am</option>
+                                        <option value="">12.00 Pm</option>
+                                        <option value="">12.30 Pm</option>
+                                        <option value="">01.00 Pm</option>
+                                        <option value="">01.30 Pm</option>
+                                        <option value="">02.00 Pm</option>
+                                        <option value="">02.30 Pm</option>
+                                        <option value="">03.00 Pm</option>
+                                        <option value="">03.30 Pm</option>
+                                        <option value="">04.00 Pm</option>
+                                        <option value="">04.30 Pm</option>
+                                        <option value="">05.00 Pm</option>
+                                        <option value="">05.30 Pm</option>
+                                        <option value="">06.00 Pm</option>
                                     </select>
                                 </div>
                             </div>
@@ -152,7 +266,7 @@
                                 <label for="">Employment Type :</label>
                                 <div class="content-box">
                                     <select class="form-control select-type" formControlName="employmentType">
-                                        <option value="option1" disabled selected >Select Type</option>
+                                        <option value="option1" [ngValue]="null" disabled selected >Select</option>
                                         <option value="fulltime">Full Time</option>
                                         <option value="parttime">Part Time</option>
                                         <option value="contract">Contract</option>
@@ -170,7 +284,7 @@
                                 <label for="">Work Mode :</label>
                                 <div class="content-box">
                                     <select class="form-control select-type" formControlName="workplaceType">
-                                        <option value="option1" disabled selected >Select Type</option>
+                                        <option value="option1" [ngValue]="null" disabled selected >Select</option>
                                         <option value="onsite">Onsite</option>
                                         <option value="hybrid">Hybrid</option>
                                         <option value="work from home">Work From Home</option>

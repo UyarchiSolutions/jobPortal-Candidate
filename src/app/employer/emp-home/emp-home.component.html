@@ -21,17 +21,20 @@
                         <div class="search-boxs">
 
                             <div class="search-box first-search-box">
-                                <input type="text" class="form-control" placeholder="Enter Designation / Key skills" formControlName="keyskills" (keyup)="search_skills($event)">
+                                <input type="text" class="form-control" placeholder="Enter Designation / Key skills" (keyup)="search_skills($event)">
+                                <div class="single-row" *ngIf="isDisplay" style="margin-top:0px;">
+                                    <label></label>
+                                    <div class="content-box w-100" style="background: white;">
+                                      <ul style="padding-left: 0px; list-style: none;margin: 13px;">
+                                        <li *ngFor="let skill of keySkill" class="d-flex">
+                                            <input style="width: 30%" type="checkbox" value="{{skill}}" (change)="checkSkill($event)"/>
+                                             <span>{{skill}}</span>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
                             </div>
-                            <div class="single-row" *ngIf="isDisplay" style="margin-top:0px;">
-                                <label></label>
-                                <div class="content-box" style="background: white;">
-                                  <ul style="padding-left: 0px;">
-                                    <li *ngFor="let skill of keySkill"><input style="width: 30%" type="checkbox" value="{{skill}}" (change)="checkSkill($event)"/>
-                                      <span>{{skill}}</span></li>
-                                  </ul>
-                                </div>
-                              </div>
+                         
     
     
                             <div class="search-box second-search-box">
@@ -39,28 +42,42 @@
                             </div>
     
                             <div class="search-box">
-                                <select class="form-control select-type">
-                                    <option value="option1" disabled selected>Select Type</option>
-                                    <option value="option2">Option 2</option>
-                                    <option value="option3">Option 3</option>
+                                <select class="form-control select-type" formControlName="experience">
+                                    <option value="option1" disabled selected >Experience</option>
+                                    <option value="0">Fresher</option>
+                                    <option value="1">1 Year</option>
+                                    <option value="2">2 Year</option>
+                                    <option value="3">3 Year</option>
+                                    <option value="4">4 Year</option>
+                                    <option value="5">5 Year</option>
+                                    <option value="6">6 Year</option>
+                                    <option value="7">7 Year</option>
+                                    <option value="8">8 Year</option>
+                                    <option value="9">9 Year</option>
+                                    <option value="10">10 Year</option>
+                                    <option value="11">11 Year</option>
                                 </select>
                             </div>
-    
-                            <div class="search-box" (click)="can_list()">
+                            <div class="search-box" (click)="can_list()" *ngIf="is_search_icon">
                                 <button type="submit" class="btn btn-brand-orange"><img src="../../assets/image/search.png"
                                         alt="" class="search-icon"></button>
                             </div>
-    
+                            <div class="search-box" *ngIf="is_icon" (click)="save_search()">
+                                <button type="submit" class="btn btn-brand-orange"><img src="../../assets/image/Vector.png"
+                                        alt="" class="search-icon"></button>
+                            </div>
+                            <div class="search-box" *ngIf="is_icon1">
+                                <button type="submit" class="btn btn-brand-orange"><img src="../../assets/image/icon.png"
+                                        alt="" class="search-icon"></button>
+                            </div>
+                          
                         </div>
     
                         <div class="advanced-search">
-                            <button type="submit" class="btn btn-brand-trans"><a href="#">Advanced Search</a></button>
+                            <button type="submit" class="btn btn-brand-trans" data-bs-toggle="modal" data-bs-target="#exampleModal">Advance Search</button>
     
                         </div>
                     </div>
-
-                 
-
                 </div>
             </div>
         
@@ -186,10 +203,6 @@
                         <div class="refine-result">
                             <button type="submit" class="btn btn-brand-blue register-btn">Refine Result</button>
                         </div>
-
-
-
-
                     </div>
                 </div>
             </div>
@@ -220,7 +233,12 @@
                         </div>
 
                         <div class="saved-candidates col">
-                            <i class='fas fa-sort-amount-down'></i>
+                            <i><svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M10.4312 1.839C10.4774 1.72632 10.5561 1.62992 10.6572 1.56208C10.7584 1.49423 10.8774 1.45801 10.9992 1.45801C11.121 1.45801 11.24 1.49423 11.3411 1.56208C11.4423 1.62992 11.5209 1.72632 11.5671 1.839L13.8881 7.42133C13.9316 7.52578 14.003 7.61623 14.0945 7.68271C14.186 7.74919 14.2941 7.78914 14.4069 7.79814L20.4338 8.2809C20.9788 8.32459 21.1994 9.00504 20.7844 9.36002L16.1927 13.2942C16.1069 13.3676 16.043 13.4632 16.0079 13.5705C15.9728 13.6778 15.968 13.7927 15.9939 13.9026L17.3974 19.7841C17.4256 19.9021 17.4182 20.0259 17.3762 20.1397C17.3341 20.2535 17.2593 20.3523 17.1611 20.4235C17.0629 20.4948 16.9458 20.5354 16.8246 20.5402C16.7034 20.545 16.5834 20.5137 16.4799 20.4504L11.3192 17.2994C11.2228 17.2406 11.1121 17.2095 10.9992 17.2095C10.8863 17.2095 10.7756 17.2406 10.6792 17.2994L5.51844 20.4515C5.41496 20.5148 5.29503 20.5461 5.1738 20.5413C5.05256 20.5365 4.93547 20.4959 4.83729 20.4246C4.73912 20.3533 4.66428 20.2546 4.62222 20.1408C4.58016 20.027 4.57277 19.9032 4.60097 19.7852L6.00447 13.9026C6.0305 13.7927 6.02572 13.6777 5.99065 13.5704C5.95558 13.4631 5.89158 13.3675 5.80569 13.2942L1.214 9.36002C1.12205 9.28095 1.05553 9.17646 1.02281 9.05969C0.990088 8.94292 0.992621 8.81909 1.03009 8.70375C1.06756 8.58842 1.1383 8.48674 1.23341 8.4115C1.32852 8.33626 1.44375 8.29083 1.56461 8.2809L7.59147 7.79814C7.70424 7.78914 7.81234 7.74919 7.90387 7.68271C7.99541 7.61623 8.06682 7.52578 8.11027 7.42133L10.4312 1.839Z"
+                                  stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                              </svg>
+                            </i>
                             Saved Candidates
                         </div>
 
@@ -253,24 +271,15 @@
 
                                         <span class="close-mark">x</span>
                                     </span>
-
-
-
-
-
-
                                 </div>
-
                             </div>
                         </div>
 
                         <div class="row content-card-heading no-margin padding10"  style="font-size:13px" >
                             <div class="col">
-                                <i class='fas fa-sort-amount-down'></i>
                                 Posted Date
                             </div>
                             <div class="col">
-                                <i class='fas fa-sort-amount-down'></i>
                                 Job Title
                             </div>
                             <div class="col">
@@ -278,23 +287,19 @@
                                 Experience
                             </div>
                             <div class="col">
-                                <i class='fas fa-sort-amount-down'></i>
                                 Salary
                             </div>
                             <div class="col">
-                                <i class='fas fa-sort-amount-down'></i>
                                 Applies
                             </div>
                             <div class="col">
-                                <i class='fas fa-sort-amount-down'></i>
                                 Location
                             </div>
                             <div class="col">
-                                <i class='fas fa-sort-amount-down'></i>
                                 Action
                             </div>
                         </div>
-                        <div class="row content-card no-margin padding10" *ngFor="let list of data">
+                        <div class="row content-card no-margin padding10" *ngFor="let list of data" style="cursor:pointer" [formGroup]="activeform">
                         
                             <div class="col">
                                 {{list.createdAt |  date: 'yyyy-MM-dd'}}
@@ -314,8 +319,12 @@
                             <div class="col" (click)="current_applies(list._id)">
                                 {{list.jobLocation}}
                             </div>
-                            <div class="col">
+                            <div class="col d-flex">
                                 <i class='fas fa-pencil-alt'></i>
+                                <div class="form-check form-switch" style="padding-left: 4.5em !important">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" formControlName="active" (change)="change_status(list._id,$event)" [checked]="list.active" />
+                                </div>
+                               
                             </div>
     
 
@@ -367,51 +376,45 @@
                                  </div>
                             </div>
                             <div class="col">
-                                <i class='fas fa-sort-amount-down'></i>
                                 Name
                             </div>
                             <div class="col">
-                                <i class='fas fa-sort-amount-down'></i>
                                 Location
                             </div>
                             <div class="col">
-                                <i class='fas fa-sort-amount-down'></i>
                                Qualification
                             </div>
                             <div class="col">
-                                <i class='fas fa-sort-amount-down'></i>
                                 Salary
                             </div>
                             <div class="col">
-                                <i class='fas fa-sort-amount-down'></i>
                                  Experience
                             </div>
                             <div class="col">
-                                <i class='fas fa-sort-amount-down'></i>
                                 Status
                             </div>
                             
                         </div>
-                        <div class="row content-card no-margin padding10" *ngFor="let list of applied_data">
+                        <div class="row content-card no-margin padding10" *ngFor="let list of applied_data" style="cursor:pointer">
                             <div class="col-1">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
                                 </div>
                             </div>
                             <div class="col">
-                                {{list.candidateData.name}}
+                                <a [routerLink]="['/emp-action']">{{list.candidateData.name}}</a>
                             </div>
                             <div class="col">
-                            {{list.candidateData.locationCurrent}}
+                                <a [routerLink]="['/emp-action']">{{list.candidateData.locationCurrent}}</a>
                             </div>
                             <div class="col">
-                                {{list.experienceFrom}}
+                                <a [routerLink]="['/emp-action']">{{list.experienceFrom}}</a>
                             </div>
                             <div class="col">
-                                {{list.salaryRangeFrom}}
+                                <a [routerLink]="['/emp-action']">{{list.candidateData.expectedctc}}</a>
                             </div>
                             <div class="col">
-                                {{list.candidateData.experienceYear}}Year - {{list.candidateData.experienceMonth}}Months
+                                <a [routerLink]="['/emp-action']">{{list.candidateData.experienceYear}}Year - {{list.candidateData.experienceMonth}}Months </a>
                             </div>
                             <div class="col">
                                 {{list.status}}
@@ -452,7 +455,6 @@
 
                             </div>
                         </div>
-
                         <div class="row content-card-heading no-margin padding10"  style="font-size:13px" >
                             <div class="col-1">
                                 <div class="form-check">
@@ -460,52 +462,46 @@
                                  </div>
                             </div>
                             <div class="col">
-                                <i class='fas fa-sort-amount-down'></i>
+                                <!-- <i class='fas fa-sort-amount-down'></i> -->
                                 Name
                             </div>
                             <div class="col">
-                                <i class='fas fa-sort-amount-down'></i>
                                 Location
                             </div>
                             <div class="col">
-                                <i class='fas fa-sort-amount-down'></i>
                                Qualification
                             </div>
                             <div class="col">
-                                <i class='fas fa-sort-amount-down'></i>
                                 Salary
                             </div>
                             <div class="col">
-                                <i class='fas fa-sort-amount-down'></i>
                                  Experience
                             </div>
                             
                         </div>
-                        <!-- <div class="row content-card no-margin padding10" *ngFor="let list of applied_data">
+                        <div class="row content-card no-margin padding10" *ngFor="let list of can_data" style="cursor:pointer">
                             <div class="col-1">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" [value]="list.candidateregistrations._id" (change)="canId($event)" value="" aria-label="...">
                                 </div>
                             </div>
                             <div class="col">
-                                {{list.candidateData.name}}
+                                <a [routerLink]="['/can-details']" [queryParams]="{id:list.candidateregistrations._id}">{{list.candidateregistrations.name}}</a>
                             </div>
                             <div class="col">
-                            {{list.candidateData.locationCurrent}}
+                                <a [routerLink]="['/can-details']" [queryParams]="{id:list.candidateregistrations._id}">{{list.locationCurrent}}</a>
                             </div>
                             <div class="col">
-                                {{list.experienceFrom}}
+                                <a [routerLink]="['/can-details']" [queryParams]="{id:list.candidateregistrations._id}">B.E CSE</a>
                             </div>
                             <div class="col">
-                                {{list.salaryRangeFrom}}
+                                <a [routerLink]="['/can-details']" [queryParams]="{id:list.candidateregistrations._id}">{{list.expectedctc}}</a>
                             </div>
                             <div class="col">
-                                {{list.candidateData.experienceYear}}Year - {{list.candidateData.experienceMonth}}Months
+                                <a [routerLink]="['/can-details']" [queryParams]="{id:list.candidateregistrations._id}">{{list.experienceYear}}Year - {{list.experienceMonth}}Months</a>
                             </div>
-                            <div class="col">
-                                {{list.status}}
-                            </div>
-                        </div> -->
+                         
+                        </div>
                     </div>
                 </div>
             </div>
@@ -525,63 +521,28 @@
                                 <li class="sidebarmenu-heading"> <span class="icon-custom"><i
                                             class='far fa-user'></i></span> <span class="icon-text">Recent Search</span>
                                 </li>
-                                <li>
+                                <li *ngFor="let search_list of rcnt_data" (click)="get_recnt_search(search_list._id)">
                                     <div><span class="icon-custom icon-custom-recent"><i
                                                 class='far fa-address-card'></i></span>
-                                        <span class="icon-text">UI/UX Designer</span>
+                                        <span class="icon-text">{{search_list.keyskills[0]}}</span>
                                     </div>
 
-                                    <div class="job-listing-bottom">
+                                    <div class="job-listing-bottom" >
                                         <div><span class="icon-custom icon-custom-recent"><i
                                                     class='far fa-address-card'></i></span>
-                                            <span class="icon-text">Chennai</span>
+                                            <span class="icon-text">{{search_list.location}}</span>
                                         </div>
                                         <div><span class="icon-custom icon-custom-recent"><i
                                                     class='far fa-address-card'></i></span>
-                                            <span class="icon-text">1 Years</span>
+                                            <span class="icon-text">{{search_list.experience}} Years</span>
                                         </div>
                                     </div>
 
                                 </li>
 
-                                <li>
-                                    <div><span class="icon-custom icon-custom-recent"><i
-                                                class='far fa-address-card'></i></span>
-                                        <span class="icon-text">UI/UX Designer</span>
-                                    </div>
+                               
 
-                                    <div class="job-listing-bottom">
-                                        <div><span class="icon-custom icon-custom-recent"><i
-                                                    class='far fa-address-card'></i></span>
-                                            <span class="icon-text">Chennai</span>
-                                        </div>
-                                        <div><span class="icon-custom icon-custom-recent"><i
-                                                    class='far fa-address-card'></i></span>
-                                            <span class="icon-text">1 Years</span>
-                                        </div>
-                                    </div>
-
-                                </li>
-
-                                <li>
-                                    <div><span class="icon-custom icon-custom-recent"><i
-                                                class='far fa-address-card'></i></span>
-                                        <span class="icon-text">UI/UX Designer</span>
-                                    </div>
-
-                                    <div class="job-listing-bottom">
-                                        <div><span class="icon-custom icon-custom-recent"><i
-                                                    class='far fa-address-card'></i></span>
-                                            <span class="icon-text">Chennai</span>
-                                        </div>
-                                        <div><span class="icon-custom icon-custom-recent"><i
-                                                    class='far fa-address-card'></i></span>
-                                            <span class="icon-text">1 Years</span>
-                                        </div>
-                                    </div>
-
-                                </li>
-
+                                
                             </ul>
                         </div>
 
@@ -603,11 +564,11 @@
                                     class='far fa-user'></i></span> <span class="icon-text">Saved Search</span>
                         </li>
 
-                        <li>
+                        <li *ngFor="let list of save_search_data">
                             <div class="job-listing-bottom">
                                 <div class="div"><span class="icon-custom icon-custom-recent"><i
                                             class='far fa-address-card'></i></span>
-                                    <span class="icon-text">UI/UX Designer</span>
+                                    <span class="icon-text">{{list.keyskills[0]}}</span>
                                 </div>
 
                                 <div><i class='fas fa-bookmark saved-job-icon'></i>
@@ -619,91 +580,16 @@
                             <div class="job-listing-bottom">
                                 <div><span class="icon-custom icon-custom-recent"><i
                                             class='far fa-address-card'></i></span>
-                                    <span class="icon-text">Chennai</span>
+                                    <span class="icon-text">{{list.location}}</span>
                                 </div>
                                 <div><span class="icon-custom icon-custom-recent"><i
                                             class='far fa-address-card'></i></span>
-                                    <span class="icon-text">1 Years</span>
+                                    <span class="icon-text">{{list.experience}} Years</span>
                                 </div>
                             </div>
 
                         </li>
-                        <li>
-                            <div class="job-listing-bottom">
-                                <div class="div"><span class="icon-custom icon-custom-recent"><i
-                                            class='far fa-address-card'></i></span>
-                                    <span class="icon-text">UI/UX Designer</span>
-                                </div>
-
-                                <div><i class='fas fa-bookmark saved-job-icon'></i>
-                                </div>
-
-
-                            </div>
-
-                            <div class="job-listing-bottom">
-                                <div><span class="icon-custom icon-custom-recent"><i
-                                            class='far fa-address-card'></i></span>
-                                    <span class="icon-text">Chennai</span>
-                                </div>
-                                <div><span class="icon-custom icon-custom-recent"><i
-                                            class='far fa-address-card'></i></span>
-                                    <span class="icon-text">1 Years</span>
-                                </div>
-                            </div>
-
-                        </li>
-                        <li>
-                            <div class="job-listing-bottom">
-                                <div class="div"><span class="icon-custom icon-custom-recent"><i
-                                            class='far fa-address-card'></i></span>
-                                    <span class="icon-text">UI/UX Designer</span>
-                                </div>
-
-                                <div><i class='fas fa-bookmark saved-job-icon'></i>
-                                </div>
-
-
-                            </div>
-
-                            <div class="job-listing-bottom">
-                                <div><span class="icon-custom icon-custom-recent"><i
-                                            class='far fa-address-card'></i></span>
-                                    <span class="icon-text">Chennai</span>
-                                </div>
-                                <div><span class="icon-custom icon-custom-recent"><i
-                                            class='far fa-address-card'></i></span>
-                                    <span class="icon-text">1 Years</span>
-                                </div>
-                            </div>
-
-                        </li>
-                        <li>
-                            <div class="job-listing-bottom">
-                                <div class="div"><span class="icon-custom icon-custom-recent"><i
-                                            class='far fa-address-card'></i></span>
-                                    <span class="icon-text">UI/UX Designer</span>
-                                </div>
-
-                                <div><i class='fas fa-bookmark saved-job-icon'></i>
-                                </div>
-
-
-                            </div>
-
-                            <div class="job-listing-bottom">
-                                <div><span class="icon-custom icon-custom-recent"><i
-                                            class='far fa-address-card'></i></span>
-                                    <span class="icon-text">Chennai</span>
-                                </div>
-                                <div><span class="icon-custom icon-custom-recent"><i
-                                            class='far fa-address-card'></i></span>
-                                    <span class="icon-text">1 Years</span>
-                                </div>
-                            </div>
-
-                        </li>
-
+                        
 
 
                     </ul>
@@ -714,4 +600,132 @@
 
         </div>
     </div>
+</div>
+
+<div class="modal" id="exampleModal" tabindex="-1"
+aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content popup-parent">
+        <div class="modal-body">
+                <div class="container" style="width:800px">
+                    <div class="col register-content">
+                        <div class="row px-4">
+                          <div class="col-2"></div>
+                          <div class="col mt-3">
+                            <h3>Search Candidate</h3>
+                          </div>
+                          <div class="col-2 mt-4 d-flex justify-content-end">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="register-form">
+                            <div class="single-row">
+                                <label for="">Any Keywords :</label>
+                                <div class="content-box">
+                                    <input type="text" class="form-control" placeholder="Enter Any Keywords" formControlName="anykeywords">
+                                </div>
+                
+                            </div>
+                
+                            <div class="single-row">
+                                <label for="">Experience :</label>
+                                <div class="content-box">
+                                    <select id="select" class="form-control" formControlName="experiencefrom">
+                                        <option [ngValue]="null" disabled selected >From</option>
+                                        <option value="0">0 Year</option>
+                                        <option value="1">1 Year</option>
+                                        <option value="2">2 Year</option>
+                                        <option value="3">3 Year</option>
+                                        <option value="4">4 Year</option>
+                                        <option value="5">5 Year</option>
+                                        <option value="6">6 Year</option>
+                                        <option value="7">7 Year</option>
+                                        <option value="8">8 Year</option>
+                                        <option value="9">9 Year</option>
+                                        <option value="10">10 Year</option>
+                                        <option value="11">11 Year</option>
+                                    </select>
+                                    <select id="select" class="form-control" formControlName="experienceto">
+                                        <option value="option1" disabled selected >To</option>
+                                        <option value="0">0 Year</option>
+                                        <option value="1">1 Year</option>
+                                        <option value="2">2 Year</option>
+                                        <option value="3">3 Year</option>
+                                        <option value="4">4 Year</option>
+                                        <option value="5">5 Year</option>
+                                        <option value="6">6 Year</option>
+                                        <option value="7">7 Year</option>
+                                        <option value="8">8 Year</option>
+                                        <option value="9">9 Year</option>
+                                        <option value="10">10 Year</option>
+                                        <option value="11">11 Year</option>
+                                    </select>
+                                </div>
+                            </div>
+                
+                            <div class="single-row">
+                                <label for="">Salary Range :</label>
+                                <div class="content-box">
+                                    <select id="select" class="form-control">
+                                        <option value="salary">Select</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Job Location :</label>
+                                <div class="content-box">
+                                    <input type="text" class="form-control" placeholder="Enter  Job Location" formControlName="location">
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Gender :</label>
+                                <div class="content-box">
+                                    <select id="select" class="form-control" formControlName="gender">
+                                        <option value="gender">Select</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                
+                                </div>
+                
+                            </div>
+                          
+                            <div class="single-row">
+                                <label for="">Course :</label>
+                                <div class="content-box">
+                                    <!-- <select id="select" class="form-control">
+                                        <option value="gender">Select</option>
+                                    </select> -->
+                                    <!-- <ng-multiselect-dropdown id="cuisineInput" name='cuisines' [placeholder]="'Search cuisines'"
+                                    [settings]="dropdownSettings" [data]="cuisine_list" [(ngModel)]="selected_cuisines">
+                                </ng-multiselect-dropdown> -->
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Display Details :</label>
+                                <div class="content-box">
+                                   <div class="selection col d-flex align-items-center">
+                                    <input type="radio" value=""><p>All Candidate</p>
+                                   </div>
+                                   <div class="selection col d-flex align-items-center">
+                                    <input type="radio" value=""><p>New Registration</p>
+                                   </div>
+                                </div>
+                            </div>
+                            <div class="single-row  mt-5">
+                                <label for=""> </label>
+                
+                                <div class="content-box mb-5">
+                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5">Search</button>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
 </div>

@@ -10,6 +10,13 @@ import { EmpJobpostComponent } from './emp-jobpost/emp-jobpost.component';
 import { EmpMyaccountComponent } from './emp-myaccount/emp-myaccount.component';
 import { EmpCansearchComponent } from './emp-cansearch/emp-cansearch.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { EmpActionComponent } from './emp-action/emp-action.component';
+import { CanDetailsComponent } from './can-details/can-details.component';
+import { SendMailComponent } from './send-mail/send-mail.component';
+import { SendJobComponent } from './send-job/send-job.component';
+import { EmpMailTemplateComponent } from './emp-mail-template/emp-mail-template.component';
+import { CreateMailTemplateComponent } from './create-mail-template/create-mail-template.component';
+import { NgxEditorModule } from "ngx-editor";
 
 
 
@@ -21,20 +28,15 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
     CheckEmailComponent,
     VerifyOtpComponent,
     EmpCansearchComponent,
-
-
-
-
-
+    
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    GooglePlaceModule
-
-
+    GooglePlaceModule,
+    NgxEditorModule
   ]
 })
 export class EmployerModule { }
