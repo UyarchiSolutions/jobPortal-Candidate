@@ -26,7 +26,8 @@ export class UpdateprofileComponent implements OnInit {
     gender: new FormControl('', Validators.required),
     maritalStatus: new FormControl('', Validators.required),
     relocate: new FormControl('', Validators.required),
-    // languages:
+    languages:this.fb.array([]),
+
   })
   keySkill: any;
   lang:any=[]
@@ -39,6 +40,7 @@ export class UpdateprofileComponent implements OnInit {
     })
     this.candidateService.getLanguages().subscribe((res:any) =>{
     this.lang=res;
+    console.log(this.lang,"lang")
     })
   }
   getKeyskills(value: any) {
@@ -71,6 +73,7 @@ export class UpdateprofileComponent implements OnInit {
     this.getKeyskills(data.target.value)
   }
   // push skills
+
   checkSkill(event:any){
     const data: FormArray = this.profileForm.get('keyskill') as FormArray;
     if (event.target.checked) {
@@ -87,8 +90,35 @@ export class UpdateprofileComponent implements OnInit {
       });
     }
   }
+  languageskill:any=[];
   insLang(val:any){
-
+    const data = this.profileForm.get('languages') as FormArray;
+    if (val.target.checked) {
+      data.push(new FormControl(val.target.value));
+      // var a:any
+      // data.controls.forEach((item:any) =>{
+      //   {language:item}
+      // })
+      console.log(data.value)
+    } else {
+      let i: number = 0;
+      data.controls.forEach((item: any) => {
+        console.log(item,"shdjsdj")
+        if (item.value == val.target.value) {
+          // this.languageskill.removeAt(i)
+          console.log("dfbjhdfd")
+          data.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
+  }
+  get languages(){
+    return this.profileForm.get('languages') as FormArray;
+  }
+  kownaction(val:any,i:any){
+  console.log(i,"index")
   }
   updateprofile() {
     const formData = new FormData();
@@ -100,4 +130,7 @@ export class UpdateprofileComponent implements OnInit {
       this.router.navigate(['/can-edu'],{queryParams:{id:res.user._id}})
     })
   }
+  // addcontrol(){
+  //   return thi
+  // }
 }

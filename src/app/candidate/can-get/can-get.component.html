@@ -73,7 +73,8 @@
             </div>
 
             <div class="advanced-search">
-              <button type="submit" class="btn btn-brand-trans"><a href="#">Advanced Search</a></button>
+              <button class="btn btn-brand-trans" data-bs-toggle="modal" data-bs-target="#exampleModal"><a>Advanced
+                  Search</a></button>
             </div>
 
           </div>
@@ -226,7 +227,7 @@
               <i class='fas fa-sort-amount-down'></i>
             </div>
 
-            <div class="col" (click)="onClickJop()" ngClass="{{tab == 0?'jobs':''}}">
+            <div class="col postedjob" (click)="onClickJop()" ngClass="{{tab == 0?'jobs':''}}">
               <i>
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <mask id="path-1-inside-1_2073_878" fill="white">
@@ -367,7 +368,7 @@
           </div>
           <!-- Applied jobs -->
           <div *ngIf="tab == 2">
-            <div class="row content-card-heading no-margin padding10" *ngFor="let apply of appliedJobs">
+            <div class="row content-card-heading no-margin padding10">
               <div class="col">
                 <!-- <i class='fas fa-sort-amount-down'></i> -->
                 Company
@@ -497,7 +498,7 @@
           </div>
           <!-- Job alert -->
           <div *ngIf="tab == 4">
-            <div class="jobalert col-8" [formGroup]="setAlertForm" >
+            <div class="jobalert col-8" [formGroup]="setAlertForm">
               <h1>Create Job Alert</h1>
 
               <div class="form col-9">
@@ -597,31 +598,20 @@
           </div>
           <div class="row content-card-footer no-margin padding10" *ngIf="tab != 4">
             <div class="col">
-
               <div class="footer-menu">
                 <div class="pageination-logo">
                   <img src="../../assets/image/left-arrow.png" alt="" class="p-left">
                   <div class="pageination-number">1</div>
                   <img src="../../assets/image/right-arrow.png" alt="" class="p-right">
-
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
-
     <div class="col-2 ">
       <div class="col-11  m-auto bg-grey rounded overflow-hidden">
-        <!-- <div class="row no-margin bg-primary">
-
-
-              <div class="col ad-image">
-                <img src="../../assets/image/sidebar-ad.png" alt="">
-              </div>
-          </div> -->
         <div class="recent-search col-12">
           <header>
             <i><svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -676,20 +666,8 @@
             </div>
           </div>
         </div>
-
-
-
-
       </div>
-
       <div class="col-11  m-auto bg-grey rounded overflow-hidden">
-        <!-- <div class="row no-margin bg-primary">
-
-
-              <div class="col ad-image">
-                <img src="../../assets/image/sidebar-ad.png" alt="">
-              </div>
-          </div> -->
         <div class="saved col-12">
           <header>
             <i><svg width="16" height="22" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -745,16 +723,76 @@
                   </i></div>
               </a>
             </div>
-
-
           </div>
         </div>
-
-
-
-
       </div>
+    </div>
+  </div>
+</div>
 
+<!-- Modal -->
+<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="background-color: #EEEEEE; ">
+      <div class="modal-header" style="justify-content: center;">
+        <h3 class="modal-title">Search Jod</h3>
+      </div>
+      <div class="modal-body ">
+        <div>
+          <div class="row">
+            <div class="register-form"  [formGroup]="searchForm">
+              <div class="single-row">
+                <label for="">Designation/Keyskills:</label>
+                <div class="content-box">
+                  <input type="text" class="form-control" placeholder="Enter  Any Keywords" formControlName="search">
+                </div>
+
+              </div>
+              <div class="single-row">
+                <label for="">Salary Range:</label>
+                <div class="content-box">
+                  <input type="text" class="form-control" placeholder="Enter Salary Range">
+                </div>
+              </div>
+              <div class="single-row">
+                <label for="">Experience:</label>
+                <div class="content-box">
+                  <select id="select" class="form-control">
+                    <option value="from">From</option>
+                    <option value="from">From</option>
+                  </select>
+                  <select id="select" class="form-control">
+                    <option value="to">To</option>
+                  </select>
+                </div>
+              </div>
+
+
+              <div class="single-row">
+                <label for="">Job Location:</label>
+                <div class="content-box">
+                  <input type="text" class="form-control" placeholder="Enter  Job Location">
+                </div>
+              </div>
+              <div class="single-row">
+                <label for="">Prefered Industry :</label>
+                <div class="content-box">
+                  <select id="select" class="form-control">
+                    <option value="education">Select</option>
+                  </select>
+                </div>
+              </div>
+              <div class="single-row  mt-5">
+                <label for=""> </label>
+
+                <div class="content-box">
+                  <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5">Search</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

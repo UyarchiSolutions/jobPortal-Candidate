@@ -118,8 +118,8 @@ export class CanditateService {
     return this.http.get(this.baseUrl+`/v1/educationDetails/get_pg_course/${id}`)
   }
   // pg Sepciat
-  getPgSpecial(){
-    return this.http.get(this.baseUrl+`/v1/educationDetails/get_pgspecialization/PG3`)
+  getPgSpecial(id:any){
+    return this.http.get(this.baseUrl+`/v1/educationDetails/get_pgspecialization/${id}`)
   }
   // getug course
   grtUgcou(id:any){

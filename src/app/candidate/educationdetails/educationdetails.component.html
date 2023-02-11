@@ -125,9 +125,9 @@
                       <label for="">Course :</label>
                         <!-- <input type="text" class="form-control" placeholder="Enter Course" formControlName="pgCourse"> -->
                         <div class="content-box">
-                          <select class="form-control select-type" formControlName="pgCourse">
+                          <select class="form-control select-type" formControlName="pgCourse" (change)="specialization($event,phase)">
                             <option [ngValue]="null" disabled selected>Select</option>
-                            <option value="{{course.QualificationId}}" *ngFor="let course of pgCourse">{{course.Course}}</option>
+                            <option value="{{course._id}}" *ngFor="let course of pgCourse">{{course.Course}}</option>
                           </select>
                         </div>
                     </div>

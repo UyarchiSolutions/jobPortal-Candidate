@@ -96,3 +96,9 @@ ul{
 ul li{
   width: 323%;
 }
+.tamil,.english{
+  margin-top: 0 !important;
+}
+.tamil i,.english i{
+  margin-right: 5px;
+}

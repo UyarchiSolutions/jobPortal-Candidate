@@ -65,7 +65,7 @@
                     <div class="content-box">
                       <select class="form-control select-type douple-input-first" formControlName="experienceYear">
                         <option value="option1" disabled selected>Year</option>
-                        <option value="Freshers">Freshers</option>
+                        <option value="0">Freshers</option>
                         <option value="1">1 Year</option>
                         <option value="2">2 Year</option>
                         <option value="3">3 Year</option>
@@ -191,13 +191,35 @@
                       </a>
                       <ul class="dropdown-menu" style="width: 60%;padding: 3%;" aria-labelledby="dropdownMenuLink">
                         <li *ngFor="let lan of lang">
-                          <input type="checkbox" value="{{lan._id}}"
-                            (change)="insLang($event)"/><span style="margin: 9px;">{{lan.School_Medium}}</span>
+                          <input type="checkbox" value="{{lan.School_Medium}}" (change)="insLang($event)" /><span
+                            style="margin: 9px;">{{lan.School_Medium}}</span>
                         </li>
                       </ul>
                     </div>
                   </div>
-
+                  <div class="" formArrayName="languages">
+                    <div for="" *ngFor="let lang of languages.controls;let i=index" [formGroupName]="i">
+                      <div class="content-box row d-flex flex-wrap align-items-start">
+                        <div class=" tamil d-flex row col-12 flex-wrap align-items-start">
+                          <p>{{lang.value}}</p>
+                        </div>
+                        <div class="content-box">
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Speck" (change)="kownaction($event,i)">
+                            <label class="form-check-label" for="inlineCheckbox1">Speck</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Read" (change)="kownaction($event,i)">
+                            <label class="form-check-label" for="inlineCheckbox2">Read</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="Write" (change)="kownaction($event,i)">
+                            <label class="form-check-label" for="inlineCheckbox3">Write</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

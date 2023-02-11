@@ -13,28 +13,28 @@ export class EducationdetailsComponent implements OnInit {
   educationForm: any = this.fb.group({
     educationArray: this.fb.array([]),
   })
-  drCourse:any=[];
-  drsep:any=[];
-  pgCourse:any=[];
-  pgSpe:any=[];
-  ugcourse:any=[];
-  ugSpe:any=[];
-  hscCourse:any=[];
-  sslcspe:any=[];
-  userID:any;
+  drCourse: any = [];
+  drsep: any = [];
+  pgCourse: any = [];
+  pgSpe: any = [];
+  ugcourse: any = [];
+  ugSpe: any = [];
+  hscCourse: any = [];
+  sslcspe: any = [];
+  userID: any;
   private _fb: any;
-  constructor(private fb: FormBuilder, private candidate: CanditateService,private activate:ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private candidate: CanditateService, private activate: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.addPhase();
     this.candidate.getQualification().subscribe((res: any) => {
       this.qualification = res;
     })
-    this.activate.queryParams.subscribe((res:any) => {
-   this.userID=res.id
+    this.activate.queryParams.subscribe((res: any) => {
+      this.userID = res.id
     })
   }
-
+  q: any;
   qualifiacation(val: any, index: any, phase: any) {
     let allcontrols = ['drQualification', 'drSpecialization', 'drCourseType', 'drCourse', 'drCourseDurationFrom', 'drCourseDurationTo', 'drGradingSystem', 'drMarks', 'pgQualification', 'pgCourse', 'pgSpecialization', 'pgCourseType', 'pgCourseDurationFrom', 'pgCourseDurationTo', 'pgGradingSystem', 'pgMarks', 'ugQualification', 'ugSpecialization', 'ugCourse', 'ugCourseType', 'ugCourseDurationFrom', 'ugCourseDurationTo', 'ugGradingSystem', 'ugMarks', 'hsBoard', 'hsQualification', 'hsPassedYear', 'hsMedium', 'hstotalmarks', 'sslcQualification', 'sslcBoard', 'sslcPassedYear', 'sslcMedium', 'sslctotalmarks']
     let ss: any = {
@@ -56,51 +56,59 @@ export class EducationdetailsComponent implements OnInit {
     let q = this.qualification.find((data: any) => data.qualification == val.target.value)
     console.log(q._id, "ssss");
     // dr
-    if( val.target.value =='Doctorate/phD'){
-      phase.get('drQualification')?.setValue(q._id);
-      this.candidate.getDrSped().subscribe((res:any) =>{
-        this.drCourse=res;
+    if (val.target.value == 'Doctorate/phD') {
+      phase.get('drQualification')?.setValue(val.target.valu);
+      this.candidate.getDrSped().subscribe((res: any) => {
+        this.drCourse = res;
       })
-      this.candidate.getdoctorate(q._id).subscribe((res:any) => {
-        this.drsep=res
+      this.candidate.getdoctorate(q._id).subscribe((res: any) => {
+        this.drsep = res
       })
     }
     // pg
-    if( val.target.value =='Masters/Post-Graduation'){
-      phase.get('pgQualification')?.setValue(q._id);
-      this.candidate.getPgcourses(q._id).subscribe((res:any) =>{
-        this.pgCourse=res;
+    if (val.target.value == 'Masters/Post-Graduation') {
+      phase.get('pgQualification')?.setValue(val.target.valu);
+      this.candidate.getPgcourses(q._id).subscribe((res: any) => {
+        this.pgCourse = res;
       })
-      this.candidate.getPgSpecial().subscribe((res:any) =>{
-        this.pgSpe=res;
-      })
+      // this.candidate.getPgSpecial().subscribe((res:any) =>{
+      //   this.pgSpe=res;
+      // })
     }
     // ug
-    if( val.target.value =='Graduation/Diploma'){
-      phase.get('ugQualification')?.setValue(q._id);
-      this.candidate.grtUgcou(q._id).subscribe((res:any) => {
-        this.ugcourse=res;
+    if (val.target.value == 'Graduation/Diploma') {
+      phase.get('ugQualification')?.setValue(val.target.valu);
+      this.candidate.grtUgcou(q._id).subscribe((res: any) => {
+        this.ugcourse = res;
       })
-      this.candidate.ugSepcial().subscribe((res:any) => {
-        this.ugSpe=res
+      this.candidate.ugSepcial().subscribe((res: any) => {
+        this.ugSpe = res
       })
     }
     // hsc
-    if( val.target.value =='HSC'){
+    if (val.target.value == 'HSC') {
       phase.get('hsQualification')?.setValue(q._id)
-      this.candidate.hsccourse(q._id).subscribe((res:any) => {
-        this.hscCourse=res
+      this.candidate.hsccourse(q._id).subscribe((res: any) => {
+        this.hscCourse = res
       })
     }
     // sslc
-    if( val.target.value =='SSLC'){
+    if (val.target.value == 'SSLC') {
       phase.get('sslcQualification')?.setValue(q._id);
-      this.candidate.sslcSpecial(q._id).subscribe((res:any) =>{
-        this.sslcspe=res
+      this.candidate.sslcSpecial(q._id).subscribe((res: any) => {
+        this.sslcspe = res
       })
     }
 
 
+  }
+  specialization(val: any, qali: any) {
+    let q = this.qualification.find((data: any) => data.qualification == val.target.value)
+    if (qali == 'Masters/Post-Graduation') {
+      this.candidate.getPgSpecial(val.target.value).subscribe((res: any) => {
+        this.pgSpe = res;
+      })
+    }
   }
   hasPhaseValue1At(index: any) {
     console.log((<FormGroup>this.Qualification.at(index)).get('drCourse') ? true : false, "dhsdhsdbh")
