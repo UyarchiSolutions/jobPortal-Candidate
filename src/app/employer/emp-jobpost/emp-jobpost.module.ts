@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { EmpJobpostRoutingModule } from './emp-jobpost-routing.module';
 import { EmpJobpostComponent } from './emp-jobpost.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
 
 @NgModule({
@@ -12,7 +13,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     EmpJobpostRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    GooglePlaceModule,
+
   ]
 })
 export class EmpJobpostModule { }

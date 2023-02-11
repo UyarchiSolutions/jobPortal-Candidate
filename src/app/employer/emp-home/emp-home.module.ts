@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { EmpHomeRoutingModule } from './emp-home-routing.module';
 import { EmpHomeComponent } from './emp-home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     EmpHomeRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgMultiSelectDropDownModule.forRoot(),
   ]
 })
 export class EmpHomeModule { }

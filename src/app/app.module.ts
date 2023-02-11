@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployerModule } from './employer/employer.module';
+import { NgxEditorModule } from "ngx-editor";
 
 
 
@@ -29,6 +30,10 @@ import { EmployerModule } from './employer/employer.module';
     FormsModule,
     EmployerModule,
     GooglePlaceModule,
+    NgxEditorModule
+
+   
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

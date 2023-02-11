@@ -25,6 +25,12 @@ const routes: Routes = [
    {path: 'emp-home',loadChildren: () => import('./employer/emp-home/emp-home.module').then(m => m.EmpHomeModule) },
    {path: 'emp-postjob',loadChildren: () => import('./employer/emp-jobpost/emp-jobpost.module').then(m => m.EmpJobpostModule) },
    {path: 'emp-account',loadChildren: () => import('./employer/emp-myaccount/emp-myaccount.module').then(m => m.EmpMyaccountModule) },
+   {path: 'emp-action',loadChildren: () => import('./employer/emp-action/emp-action.module').then(m => m.EmpActionModule) },
+   {path: 'can-details',loadChildren: () => import('./employer/can-details/can-details.module').then(m => m.CanDetailsModule) },
+   {path: 'sendMail',loadChildren: () => import('./employer/send-mail/send-mail.module').then(m => m.SendMailModule) },
+   {path: 'sendJob',loadChildren: () => import('./employer/send-job/send-job.module').then(m => m.SendJobModule) },
+   {path: 'emp-email-template',loadChildren: () => import('./employer/emp-mail-template/emp-mail-template.module').then(m => m.EmpMailTemplateModule) },
+   {path: 'create-email-template',loadChildren: () => import('./employer/create-mail-template/create-mail-template.module').then(m => m.CreateMailTemplateModule) },
 
 
 

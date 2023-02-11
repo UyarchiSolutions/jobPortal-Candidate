@@ -1,0 +1,152 @@
+<div class="container-fluid register">
+    <div class="row">
+        <div class="col-2 ad-image">
+            <img src="../../assets/image/ad.png" alt="">
+        </div>
+        <div class="col-8  login-main">
+            <div class="row ">
+                <div class="col">
+                    <img src="../../assets/image/hero.png" alt="" class="hero-image">
+                </div>
+            </div>
+       
+           
+            <div class="row register-content-row height-register-content ">
+                <div class="col register-content">
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <h3>Create Mail Template</h3>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+
+                    <div class="register-form" [formGroup]="mailForm">
+                        <div class="single-row">
+                            <label for="">Template Name :</label>
+                            <div class="content-box">
+                                <input type="text" class="form-control" placeholder="Enter Template Name" formControlName="templateName">
+                            </div>
+
+                        </div>
+
+                        <div class="single-row">
+                            <label for="">Job Title :</label>
+                            <div class="content-box">
+                                <input type="text" class="form-control" placeholder="Enter Job Title" formControlName="jobTittle">
+                            </div>
+
+                        </div>
+
+                        <div class="single-row">
+                            <label for="">Expreience :</label>
+                            <div class="content-box">
+                                <select class="form-control select-type douple-input-first" formControlName="experienceFrom">
+                                    <option value="option1" disabled selected >Year</option>
+                                    <option value="0">0 Year</option>
+                                    <option value="1">1 Year</option>
+                                    <option value="2">2 Year</option>
+                                    <option value="3">3 Year</option>
+                                    <option value="4">4 Year</option>
+                                    <option value="5">5 Year</option>
+                                    <option value="6">6 Year</option>
+                                    <option value="7">7 Year</option>
+                                    <option value="8">8 Year</option>
+                                    <option value="9">9 Year</option>
+                                    <option value="10">10 Year</option>
+                                    <option value="11">11 Year</option>
+                                  </select>
+
+
+                                  <select class="form-control select-type douple-input-second" formControlName="experienceTo">
+                                    <option value="option1" disabled selected >Year</option>
+                                    <option value="0">0 Year</option>
+                                    <option value="1">1 Year</option>
+                                    <option value="2">2 Year</option>
+                                    <option value="3">3 Year</option>
+                                    <option value="4">4 Year</option>
+                                    <option value="5">5 Year</option>
+                                    <option value="6">6 Year</option>
+                                    <option value="7">7 Year</option>
+                                    <option value="8">8 Year</option>
+                                    <option value="9">9 Year</option>
+                                    <option value="10">10 Year</option>
+                                    <option value="11">11 Year</option>
+                                  </select>
+                            </div>
+                        </div>
+
+                        <div class="single-row">
+                            <label for="">Salary :</label>
+                            <div class="content-box">
+                                <input type="number" class="form-control" placeholder="From" formControlName="salaryRangeFrom">
+                                <input type="number" class="form-control" placeholder="To" formControlName="salaryRangeTo">
+
+                            </div>
+                        </div>
+
+                        <div class="single-row">
+                            <label for="">Job Location :</label>
+                            <div class="content-box">
+                                <input type="text" class="form-control" placeholder="Enter Job location" ngx-google-places-autocomplete [options]="options"
+                                (onAddressChange)="handleAddressChange($event)">
+                            </div>
+                        </div>
+                        <div class="single-row">
+                            <label for="">Job Description :</label>
+                            <div class="editor">
+                                <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+                                </ngx-editor-menu>
+                                <ngx-editor [editor]="editor" formControlName="jobDescription">
+                                </ngx-editor>
+                            </div>
+                        </div>
+                        <div class="single-row">
+                            <label for="">Key Skills :</label>
+                            <div class="content-box">
+                                <input type="text" class="form-control" placeholder="Enter Key Skills" (keyup)="search_skills($event)">
+                            </div>
+                        </div>
+                        <div class="single-row" *ngIf="isDisplay" style="margin-top:0px;">
+                            <label></label>
+                            <div class="content-box" style="background: white;padding: 12px;">
+                              <ul style="padding-left: 0px;list-style: none;">
+                                <li *ngFor="let skill of keySkill" class="d-flex"><input type="checkbox" value="{{skill}}" (change)="checkSkill($event)"/>
+                                  <span style="padding-left: 10px;">{{skill}}</span></li>
+                              </ul>
+                            </div>
+                        </div>
+                        <div class="single-row">
+                            <label for="">Signature :</label>
+                            <div class="content-box">
+                                <textarea class="form-control" id="exampleFormControlTextarea1" formControlName="signature" rows="3" placeholder="Type Here........"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="single-row douple-btn">
+                            <div class="content-box">
+                                <button type="submit" class="btn mb-2 btn-custom  btn-brand-grey">Preview</button>
+                            </div>
+                            <div class="content-box">
+                                <button type="submit" class="btn btn-brand-blue mb-2 btn-custom" (click)="submit()">Post</button>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+       
+
+        </div>
+        <div class="col-2 ad-image">
+            <img src="../../assets/image/ad.png" alt="">
+        </div>
+    </div>
+</div>

@@ -1,0 +1,402 @@
+<div class="container-fluid register">
+    <div class="row">
+        <div class="col-2 ad-image">
+            <img src="../../assets/image/ad.png" alt="">
+        </div>
+        <div class="col-8  login-main">
+            <div class="row ">
+                <div class="col  hero-col">
+                    <img src="../../assets/image/hero.png" alt="" class="hero-image">
+                </div>
+            </div>
+            <div class="row register-content-row ">
+                <div class="col register-content">
+                    <div class="row no-margin">
+                        <div class="col-2"><span class="arrow">&lt;</span> </div>
+                        <div class="col"></div>
+
+                        <div class="col-2 pre-next-page">
+                            <img src="../../assets/image/prepage.png" alt="">
+
+                            <img src="../../assets/image/nextpage.png" alt="">
+                        </div>
+                    </div>
+                    <div class="row custom-row">
+
+                        <div class="card custom-card job-card border-remove">
+                            <div class="card-body card-main-content">
+
+                                <div class="heading-main-content-small">
+                                    <img src="../../assets/image/profile.png" alt="">
+
+                                </div>
+                                <div class="heading-main-content">
+
+                                    <div class="card-action-heading">
+                                        {{candidate_data.name}}
+                                    </div>
+
+                                    <div> <span class="icon-custom width-custom"><i
+                                                class='fas fa-archive'></i></span>{{candidate_data.email}}</div>
+
+                                    <div> <span class="icon-custom width-custom"><i
+                                                class='fas fa-archive'></i></span>{{candidate_data.mobileNumber}}</div>
+
+
+                                    <div>
+                                        <div class="content-box">
+                                            <select class="form-control select-type send-drop"
+                                                (change)="send($event,popup)">
+                                                <option value="option1" disabled selected> <span class="drop-icon"><img
+                                                            src="../../assets/image/message.png" alt=""></span> Send
+                                                </option>
+                                                <option value="send mail">Send a mail</option>
+                                                <option value="send job" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal"><button>Send a job</button></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button style="display:none" type="button" class="btn btn-primary" #popup
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        Launch demo modal
+                                    </button>
+
+                                </div>
+                              
+                                <div class="heading-main-content">
+
+                                    <div> <span class="icon-custom width-custom"><i
+                                                class='fas fa-archive'></i></span>{{candidate_data.workStatus}}</div>
+
+                                    <div> <span class="icon-custom width-custom"><i
+                                                class='fas fa-archive'></i></span>View Resume</div>
+
+
+                                    <div> <span class="icon-custom width-custom"><i
+                                                class='fas fa-archive'></i></span>{{candidate_data.candidateDetails[0].locationCurrent}}
+                                    </div>
+
+                                    <div>
+                                        <div class="content-box">
+                                            <select class="form-control select-type">
+                                                <option value="fas fa-a" disabled selected
+                                                    style="background-image:url('../../assets/image/message.png');">
+                                                    <span class="drop-icon"></span> Save Folder
+                                                </option>
+                                                <option value="option2">Option 2</option>
+                                                <option value="option3">Option 3</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="heading-icons heading-main-content-small">
+
+                                    <div class="heading-icons-alignment">
+                                        <div> <span class="icon-custom width-custom"><i
+                                                    class='fas fa-archive'></i></span></div>
+
+                                        <div> <span class="icon-custom width-custom"><i
+                                                    class='fas fa-archive'></i></span></div>
+                                    </div>
+
+
+
+                                    <div class="heading-active">Active Today</div>
+
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row action-row-padding">
+                        <div class="col">
+                            <div class="register-form">
+                                <div class="single-row">
+                                    <label for="">Key Skill :</label>
+                                    <div class="content-box">
+                                        <div>
+                                            Adobe XD
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="single-row" *ngIf="candidate_data.workStatus == 'Experience'">
+                                    <label for="">Salary Range :</label>
+                                    <div class="content-box">
+                                       {{candidate_data.candidateDetails[0].currentctc}}
+                                    </div>
+                                </div>
+                                <div class="single-row" *ngIf="candidate_data.workStatus == 'Fresher'">
+                                    <label for="">Salary Range :</label>
+                                    <div class="content-box">
+                                       {{candidate_data.candidateDetails[0].expectedctc}}
+                                    </div>
+                                </div>
+
+                                <div class="single-row" >
+                                    <label for="">Experience :</label>
+                                    <div class="content-box">
+                                        <div>
+                                            {{candidate_data.candidateDetails[0].experienceYear}} Year
+                                        </div>
+                                        <div>
+                                            {{candidate_data.candidateDetails[0].experienceMonth}} Month
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="single-row">
+                                    <label for="">Native Address :</label>
+                                    <div class="content-box">
+                                        {{candidate_data.candidateDetails[0].locationNative}}
+                                    </div>
+                                </div>
+                                <div class="single-row">
+                                    <label for="">Current Address :</label>
+                                    <div class="content-box">
+                                        {{candidate_data.candidateDetails[0].locationCurrent}}
+                                    </div>
+                                </div>
+
+                                <div class="single-row">
+                                    <label for="">Notice Period :</label>
+                                    <div class="content-box">
+                                        {{candidate_data.candidateDetails[0].noticeperiod}}
+
+                                    </div>
+                                </div>
+
+                                <div class="single-row">
+                                    <label for="">Current Skill Set :</label>
+                                    <div class="content-box">
+                                        Adobe XD
+                                    </div>
+                                </div>
+
+                                <div class="single-row">
+                                    <label for="">Preferred Skill Set :</label>
+                                    <div class="content-box">
+                                        Adobe XD
+                                    </div>
+                                </div>
+
+                                <div class="single-row">
+                                    <label for="">Gender</label>
+                                    <div class="content-box">
+                                        {{candidate_data.candidateDetails[0].gender}}
+                                    </div>
+                                </div>
+
+                                <div class="single-row">
+                                    <label for="">Marital Status :</label>
+                                    <div class="content-box">
+                                        {{candidate_data.candidateDetails[0].maritalStatus}}
+                                    </div>
+                                </div>
+
+                                <div class="single-row eduction-skills">
+                                    <label for="">Educational Dertails 1 :</label>
+                                    <div class="content-box">
+                                    </div>
+                                </div>
+
+
+
+                                <div class="single-row">
+                                    <label for="">Qualification :</label>
+                                    <div class="content-box">
+                                        {{candidate_data.candidateDetails[0].drQualification}}
+                                    </div>
+                                </div>
+
+
+                                <div class="single-row">
+                                    <label for="">University :</label>
+                                    <div class="content-box">
+                                        {{candidate_data.candidateDetails[0].drUniversity}}
+                                    </div>
+                                </div>
+
+
+                                <div class="single-row">
+                                    <label for="">Specification :</label>
+                                    <div class="content-box">
+                                        {{candidate_data.candidateDetails[0].drSpecialization}}
+                                    </div>
+                                </div>
+
+
+                                <div class="single-row">
+                                    <label for="">Course :</label>
+                                    <div class="content-box">
+                                        {{candidate_data.candidateDetails[0].drCourse}}
+                                    </div>
+                                </div>
+
+
+                                <div class="single-row">
+                                    <label for="">Grading System :</label>
+                                    <div class="content-box">
+                                        {{candidate_data.candidateDetails[0].drGradingSystem}}
+                                    </div>
+                                </div>
+
+
+                                <div class="single-row">
+                                    <label for="">Marks :</label>
+                                    <div class="content-box">
+                                        99%
+                                    </div>
+                                </div>
+
+
+                                <div class="single-row">
+                                    <label for="">Course Type :</label>
+                                    <div class="content-box">
+                                        Full Time
+                                    </div>
+                                </div>
+
+
+                                <div class="single-row">
+                                    <label for="">Passed Out Year :</label>
+                                    <div class="content-box">
+                                        2020
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2 ad-image">
+            <img src="../../assets/image/ad.png" alt="">
+        </div>
+    </div>
+    <!-- Modal -->
+
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1"
+aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="popup-parent">
+                <div class="container col-8">
+                    <div class="col register-content">
+                        <div class="row">
+                          <div class="col-2"></div>
+                          <div class="col">
+                            <h3>Send a Job</h3>
+                          </div>
+                          <div class="col-2">
+                             
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="table">
+                          <div class="register-form">
+                            <div class="row content-card-heading rounded no-margin padding10">
+                                <div class="col d-flex align-items-center">
+                                    <i class="icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="10" fill="white"/>
+                                        <path d="M13 5.2H15.4C15.5591 5.2 15.7117 5.26321 15.8243 5.37574C15.9368 5.48826 16 5.64087 16 5.8V15.4C16 15.5591 15.9368 15.7117 15.8243 15.8243C15.7117 15.9368 15.5591 16 15.4 16H4.6C4.44087 16 4.28826 15.9368 4.17574 15.8243C4.06321 15.7117 4 15.5591 4 15.4V5.8C4 5.64087 4.06321 5.48826 4.17574 5.37574C4.28826 5.26321 4.44087 5.2 4.6 5.2H7V4H8.2V5.2H11.8V4H13V5.2ZM5.2 8.8V14.8H14.8V8.8H5.2ZM6.4 10H7.6V11.2H6.4V10ZM6.4 12.4H7.6V13.6H6.4V12.4ZM8.8 10H13.6V11.2H8.8V10ZM8.8 12.4H11.8V13.6H8.8V12.4Z" fill="#0A2647"/>
+                                        </svg>
+                                        </i>
+                                        <p class="text">
+                                   Posted Date</p>
+            
+                                </div>
+                                <div class="col d-flex align-items-center">
+                                    <i class="icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="20" height="20" rx="10" fill="white"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16 6.40039H4V9.60039H8.93792C8.84973 9.43334 8.7998 9.24297 8.7998 9.04094V8.96094H11.1998V9.04094C11.1998 9.24297 11.1499 9.43334 11.0617 9.60039H16V6.40039Z" fill="#0A2647"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.6004 4H6.40039V8H8.50357C8.31195 7.7139 8.2002 7.36981 8.2002 6.99961V5.59961H11.8002V6.99961C11.8002 7.36981 11.6884 7.7139 11.4968 8H13.6004V4Z" fill="#0A2647"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.86855 10.4004H4V16.0004H16V10.4004H11.1314C10.9665 10.8661 10.5222 11.1996 9.99999 11.1996C9.47779 11.1996 9.0335 10.8661 8.86855 10.4004Z" fill="#0A2647"/>
+                                        </svg>
+                                        </i>
+                                        <p class="text">
+                                           Job Title</p>
+            
+                                </div>
+            
+                                <div class="col d-flex align-items-center">
+                                    <i class="icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="10" fill="white"/>
+                                        <path d="M8 12L8 9L15.5 9C16.3284 9 17 9.67157 17 10.5V10.5C17 11.3284 16.3284 12 15.5 12L8 12Z" fill="#0A2647"/>
+                                        <path d="M11 12L8 12L8 6.5C8 5.67157 8.67157 5 9.5 5V5C10.3284 5 11 5.67157 11 6.5L11 12Z" fill="#0A2647"/>
+                                        </svg>
+                                        </i>
+                                        <p class="text">
+                                           Experience</p>
+            
+                                </div>
+            
+                                <div class="col d-flex align-items-center">
+                                    <i class="icon"><svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="12" r="10" fill="white"/>
+                                        <path d="M12.648 8.384V9.6H14.264V11.072H12.552C12.3813 12.0853 11.96 12.8213 11.288 13.28C10.6267 13.7387 9.624 13.968 8.28 13.968V14.816C8.28 15.3173 8.38133 15.712 8.584 16C8.79733 16.288 9.15467 16.432 9.656 16.432C10.136 16.432 10.4827 16.2987 10.696 16.032C10.9093 15.7547 11.016 15.3547 11.016 14.832H13.096C13.0747 15.9093 12.7707 16.736 12.184 17.312C11.5973 17.8773 10.76 18.16 9.672 18.16C8.54133 18.16 7.67733 17.856 7.08 17.248C6.48267 16.64 6.184 15.7547 6.184 14.592V12.464C7.32533 12.464 8.168 12.4373 8.712 12.384C9.256 12.32 9.66133 12.192 9.928 12C10.1947 11.808 10.3707 11.4987 10.456 11.072H5.672V9.6H10.536V8.384H5.672V6.816H14.264V8.384H12.648Z" fill="#0A2647"/>
+                                        </svg>
+                                        </i>
+                                        <p class="text">
+                                            Salary</p>
+            
+                                </div>
+            
+                               
+            
+                            </div>
+                         <div class="scroll" style="cursor:pointer">
+                            <div class="row content-card no-margin" *ngFor="let list of data">
+                              
+            
+                                <div class="col">
+            
+                                    <a routerLink="/sendJob" [queryParams]="{id:list._id}">{{list.createdAt |  date: 'yyyy-MM-dd'}}</a>
+            
+                                </div>
+            
+                                <div class="col">
+                                    <a routerLink="/sendJob" [queryParams]="{id:list._id}">{{list.jobTittle}}</a>
+            
+                                </div>
+            
+                                <div class="col">
+                                    <a routerLink="/sendJob" [queryParams]="{id:list._id}">{{list.experienceFrom}} to {{list.experienceTo}} Years</a>
+                                </div>
+            
+                                <div class="col">
+                                    <a routerLink="/sendJob" [queryParams]="{id:list._id}">{{list.salaryRangeFrom}} to {{list.salaryRangeTo}} lacs</a>
+            
+                                </div>
+            
+                               
+            
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+</div>
+</div>
