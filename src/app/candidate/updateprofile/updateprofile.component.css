@@ -77,6 +77,15 @@
 .dropdown-toggle::after {
   display: none;
 }
+.dropdown-toggle{
+  background: white;
+  color: grey;
+  width: 100%;
+  text-align: justify;
+  border: 1px solid #ced4da;
+
+}
+
 .list{
   width: 205%;
   color: grey;
@@ -86,4 +95,10 @@ ul{
 }
 ul li{
   width: 323%;
+}
+.tamil,.english{
+  margin-top: 0 !important;
+}
+.tamil i,.english i{
+  margin-right: 5px;
 }

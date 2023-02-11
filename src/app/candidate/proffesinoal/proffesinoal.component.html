@@ -1,0 +1,75 @@
+<div class="container-fluid login">
+  <div class="row">
+    <div class="col-2 ad-image">
+      <img src="../../assets/image/ad.png" alt="">
+    </div>
+    <div class="col-8  login-main">
+      <div class="row ">
+        <div class="col">
+          <img src="../../assets/image/hero.png" alt="" class="hero-image">
+        </div>
+      </div>
+      <div class="row register-content-row height-register-content">
+        <div class="col register-content">
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col">
+              <h3>Professional Details</h3>
+            </div>
+
+          </div>
+          <div class="row" [formGroup]="proffesonalForm" >
+            <div class="register-form">
+              <div class="single-row">
+                <label for="">Current Industry :</label>
+                <div class="content-box">
+                  <select id="select" class="form-control" formControlName="industry">
+                    <option [ngValue]="null" disabled selected>Select</option>
+                    <option value="{{ind._id}}" *ngFor="let ind of industry">{{ind.Industry}}</option>
+                  </select>
+                </div>
+
+              </div>
+              <div class="single-row">
+                <label for="">Current Department :</label>
+                <div class="content-box">
+                  <select id="select" class="form-control" formControlName="department" (change)="changeDeparment($event)">
+                    <option [ngValue]="null" disabled selected>Select</option>
+                    <option *ngFor="let dep of currentDepartment" value="{{dep._id}}">{{dep.Department}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="single-row">
+                <label for="">Role Category :</label>
+                <div class="content-box">
+                  <select id="select" class="form-control" (change)="getRole($event)" formControlName="roleCategory">
+                    <option  [ngValue]="null" disabled selected>Select</option>
+                    <option value="" *ngFor="let cat of currentCategory" value="{{cat._id}}">{{cat.Role_Category}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="single-row">
+                <label for="">Job Role :</label>
+                <div class="content-box">
+                  <select id="select" class="form-control" formControlName="role">
+                    <option [ngValue]="null" disabled selected>Select</option>
+                    <option *ngFor="let role of getroles" value="{{role._id}}">{{role.Job_role}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="single-row  mt-5">
+                <label for=""> </label>
+                <div class="content-box">
+                  <button type="submit" class="btn btn-brand-blue mb-2" (click)="updateProfile()">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2 ad-image">
+      <img src="../../assets/image/ad.png" alt="">
+    </div>
+  </div>
+</div>

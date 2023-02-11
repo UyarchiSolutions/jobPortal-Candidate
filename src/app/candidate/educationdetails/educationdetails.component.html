@@ -1,0 +1,372 @@
+<div class="container-fluid login">
+  <div class="row">
+    <div class="col-2 ad-image">
+      <img src="../../assets/image/ad.png" alt="">
+    </div>
+    <div class="col-8  login-main">
+      <div class="row ">
+        <div class="col">
+          <img src="../../assets/image/hero.png" alt="" class="hero-image">
+        </div>
+      </div>
+      <div class="row register-content-row height-register-content">
+        <div class="col register-content">
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col">
+              <h3>Education Details</h3>
+            </div>
+            <div class="col-2">
+              <button style="border: none;" (click)="addQualification()"><span class=" edit-icon"><i><svg width="14"
+                      height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M14 8.31765H8.4549V14H5.5451V8.31765H0V5.68235H5.5451V0H8.4549V5.68235H14V8.31765Z"
+                        fill="white" />
+                    </svg>
+
+                  </i></span></button>
+            </div>
+          </div>
+          <div class="row" [formGroup]="educationForm">
+            <div>
+              <div class="register-form" formArrayName="educationArray">
+                <div *ngFor="let phase of Qualification.controls; let i = index;" [formGroupName]="i">
+                  <div class="single-row">
+                    <label for="">Qualification :</label>
+                    <div class="content-box">
+                      <select id="select" class="form-control" (change)="qualifiacation($event,i,phase)">
+                        <option value="null" disabled selected>Select</option>
+                        <option value="{{quli.qualification}}" *ngFor="let quli of qualification">{{quli.qualification}}
+                        </option>
+                        <!-- <option value="Doctoate/PhD">Doctorate/Phd</option>
+                        <option value="Masters/Post-Graduation">Masters/Post Graduation</option>
+                        <option value="Graduation/Diploma">Graduation/Diploma</option>
+                        <option value="HSC">HSC</option>
+                        <option value="SSLC">SSLC</option> -->
+                      </select>
+                    </div>
+
+                  </div>
+                  <!-- doctorate/Phd -->
+                  <div class="phd-master-graduation" *ngIf="phase.get('Education')?.value=='Doctorate/phD'">
+                    <div class="single-row" *ngIf="hasPhaseValue1At(i)">
+                      <label for="">Course :</label>
+                      <div class="content-box">
+                        <input type="text" class="form-control" placeholder="Enter Course" formControlName="drCourse">
+                      </div>
+                    </div>
+                    <div class="single-row">
+                      <label for="">Specialization :</label>
+                      <div class="content-box">
+                        <input type="text" class="form-control" placeholder="Enter Specialization"
+                          formControlName="drSpecialization">
+                      </div>
+                    </div>
+                    <div class="single-row">
+                      <label for="">Course Type :</label>
+                      <div class="content-box">
+                        <select class="form-control select-type" formControlName="drCourseType">
+                          <option value="option1" disabled selected>Select</option>
+                          <option value="Full Time">Full Time</option>
+                          <option value="Part Time">Part Time</option>
+                          <option value="Distance">Distance</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="single-row">
+                      <label for="">Course Duration :</label>
+                      <div class="content-box">
+                        <select class="form-control select-type douple-input-first"
+                          formControlName="drCourseDurationFrom">
+                          <option value="option1" disabled selected>From</option>
+                          <option value="2016">2016</option>
+                          <option value="2017">2017</option>
+                          <option value="2018">2018</option>
+                          <option value="2019">2019</option>
+                          <option value="2020">2020</option>
+                          <option value="2021">2021</option>
+                          <option value="2022">2022</option>
+                          <option value="2023">2023</option>
+                        </select>
+                        <select class="form-control select-type douple-input-second"
+                          formControlName="drCourseDurationTo">
+                          <option value="option1" disabled selected>To</option>
+                          <option value="2016">2016</option>
+                          <option value="2017">2017</option>
+                          <option value="2018">2018</option>
+                          <option value="2019">2019</option>
+                          <option value="2020">2020</option>
+                          <option value="2021">2021</option>
+                          <option value="2022">2022</option>
+                          <option value="2023">2023</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="single-row">
+                      <label for="">Grading System :</label>
+                      <div class="content-box">
+                        <select class="form-control select-type" formControlName="drGradingSystem">
+                          <option value="option1" disabled selected>Select</option>
+                          <option value="CGPA">CGPA</option>
+                          <option value="Percentage">Percentage</option>
+                        </select>
+                      </div>
+
+                    </div>
+                    <div class="single-row">
+                      <label for="">Marks :</label>
+                      <div class="content-box">
+                        <input type="text" class="form-control" formControlName="drMarks" placeholder="Enter Marks">
+                      </div>
+                    </div>
+                  </div>
+                  <!-- master/post graduate -->
+                  <div class="phd-master-graduation" *ngIf="phase.get('Education')?.value=='Masters/Post-Graduation'">
+                    <div class="single-row">
+                      <label for="">Course :</label>
+                        <!-- <input type="text" class="form-control" placeholder="Enter Course" formControlName="pgCourse"> -->
+                        <div class="content-box">
+                          <select class="form-control select-type" formControlName="pgCourse" (change)="specialization($event,phase)">
+                            <option [ngValue]="null" disabled selected>Select</option>
+                            <option value="{{course._id}}" *ngFor="let course of pgCourse">{{course.Course}}</option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="single-row">
+                      <label for="">Specialization :</label>
+                      <div class="content-box">
+                        <select class="form-control select-type" formControlName="pgSpecialization">
+                          <option [ngValue]="null" disabled selected>Select</option>
+                          <option value="{{course._id}}" *ngFor="let course of pgSpe">{{course.Specialization}}</option>
+                        </select>
+                      </div>
+
+                    </div>
+                    <div class="single-row">
+                      <label for="">Course Type :</label>
+                      <div class="content-box">
+                        <select class="form-control select-type" formControlName="pgCourseType">
+                          <option value="option1" disabled selected>Select</option>
+                          <option value="Full Time">Full Time</option>
+                          <option value="Part Time">Part Time</option>
+                          <option value="Distance">Distance</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="single-row">
+                      <label for="">Course Duration :</label>
+                      <div class="content-box">
+                        <select class="form-control select-type douple-input-first"
+                          formControlName="pgCourseDurationFrom">
+                          <option value="option1" disabled selected>From</option>
+                          <option value="2016">2016</option>
+                          <option value="2017">2017</option>
+                          <option value="2018">2018</option>
+                          <option value="2019">2019</option>
+                          <option value="2020">2020</option>
+                          <option value="2021">2021</option>
+                          <option value="2022">2022</option>
+                          <option value="2023">2023</option>
+                        </select>
+                        <select class="form-control select-type douple-input-second"
+                          formControlName="pgCourseDurationTo">
+                          <option value="option1" disabled selected>To</option>
+                          <option value="2016">2016</option>
+                          <option value="2017">2017</option>
+                          <option value="2018">2018</option>
+                          <option value="2019">2019</option>
+                          <option value="2020">2020</option>
+                          <option value="2021">2021</option>
+                          <option value="2022">2022</option>
+                          <option value="2023">2023</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="single-row">
+                      <label for="">Grading System :</label>
+                      <div class="content-box">
+                        <select class="form-control select-type" formControlName="pgGradingSystem">
+                          <option value="option1" disabled selected>Select</option>
+                          <option value="CGPA">CGPA</option>
+                          <option value="Percentage">Percentage</option>
+                        </select>
+                      </div>
+
+                    </div>
+                    <div class="single-row">
+                      <label for="">Marks :</label>
+                      <div class="content-box">
+                        <input type="text" class="form-control" formControlName="pgMarks" placeholder="Enter Marks">
+                      </div>
+                    </div>
+                  </div>
+                  <!-- ug/Diplomo -->
+                  <div class="phd-master-graduation" *ngIf="phase.get('Education')?.value=='Graduation/Diploma'">
+                    <div class="single-row">
+                      <label for="">Course :</label>
+                      <div class="content-box">
+                        <input type="text" class="form-control" placeholder="Enter Course" formControlName="ugCourse">
+                      </div>
+                    </div>
+                    <div class="single-row">
+                      <label for="">Specialization :</label>
+                      <div class="content-box">
+                        <input type="text" class="form-control" placeholder="Enter Specialization"
+                          formControlName="ugSpecialization">
+                      </div>
+                    </div>
+                    <div class="single-row">
+                      <label for="">Course Type :</label>
+                      <div class="content-box">
+                        <select class="form-control select-type" formControlName="ugCourse">
+                          <option value="option1" disabled selected>Select</option>
+                          <option value="Full Time">Full Time</option>
+                          <option value="Part Time">Part Time</option>
+                          <option value="Distance">Distance</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="single-row">
+                      <label for="">Course Duration :</label>
+                      <div class="content-box">
+                        <select class="form-control select-type douple-input-first"
+                          formControlName="ugCourseDurationFrom">
+                          <option value="option1" disabled selected> From</option>
+                          <option value="2016">2016</option>
+                          <option value="2017">2017</option>
+                          <option value="2018">2018</option>
+                          <option value="2019">2019</option>
+                          <option value="2020">2020</option>
+                          <option value="2021">2021</option>
+                          <option value="2022">2022</option>
+                          <option value="2023">2023</option>
+                        </select>
+                        <select class="form-control select-type douple-input-second"
+                          formControlName="ugCourseDurationTo">
+                          <option value="option1" disabled selected>To</option>
+                          <option value="2016">2016</option>
+                          <option value="2017">2017</option>
+                          <option value="2018">2018</option>
+                          <option value="2019">2019</option>
+                          <option value="2020">2020</option>
+                          <option value="2021">2021</option>
+                          <option value="2022">2022</option>
+                          <option value="2023">2023</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="single-row">
+                      <label for="">Grading System :</label>
+                      <div class="content-box">
+                        <select class="form-control select-type" formControlName="ugGradingSystem">
+                          <option value="option1" disabled selected>Select</option>
+                          <option value="CGPA">CGPA</option>
+                          <option value="Percentage">Percentage</option>
+                        </select>
+                      </div>
+
+                    </div>
+                    <div class="single-row">
+                      <label for="">Marks:</label>
+                      <div class="content-box">
+                        <input type="text" class="form-control" formControlName="ugMarks" placeholder="Enter Marks">
+                      </div>
+                    </div>
+                  </div>
+
+
+                  <!-- HSC -->
+                  <div class="hsc-sslsc" *ngIf="phase.get('Education')?.value=='HSC'">
+                    <div class="single-row">
+                      <label for="">Board :</label>
+                      <div class="content-box">
+                        <input type="text" class="form-control" placeholder="Enter Board" formControlName="hsBoard">
+                      </div>
+                    </div>
+                    <div class="single-row">
+                      <label for="">Passed Out Year :</label>
+                      <div class="content-box">
+                        <select class="form-control select-type" formControlName="hsPassedYear">
+                          <option value="option1" disabled selected>Select</option>
+                          <option value="option2">Option 2</option>
+                          <option value="option3">Option 3</option>
+                        </select>
+                      </div>
+
+                    </div>
+                    <div class="single-row">
+                      <label for="">School Medium:</label>
+                      <div class="content-box">
+                        <select class="form-control select-type" formControlName="hsMedium">
+                          <option value="option1" disabled selected>Select</option>
+                          <option value="option2">Option 2</option>
+                          <option value="option3">Option 3</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="single-row">
+                      <label for="">Marks :</label>
+                      <div class="content-box">
+                        <input type="text" class="form-control" placeholder="Enter Marks"
+                          formControlName="hstotalmarks">
+                      </div>
+                    </div>
+
+                  </div>
+                  <!-- sslc -->
+                  <div class="hsc-sslsc" *ngIf="phase.get('Education')?.value=='SSLC'">
+                    <div class="single-row">
+                      <label for="">Board :</label>
+                      <div class="content-box">
+                        <input type="text" class="form-control" placeholder="Enter Board" formControlName="sslcBoard">
+                      </div>
+                    </div>
+                    <div class="single-row">
+                      <label for="">Passed Out Year :</label>
+                      <div class="content-box">
+                        <select class="form-control select-type" formControlName="sslcPassedYear">
+                          <option value="option1" disabled selected>Select</option>
+                          <option value="2016">2016</option>
+                          <option value="2017">2017</option>
+                        </select>
+                      </div>
+
+                    </div>
+                    <div class="single-row">
+                      <label for="">School Medium:</label>
+                      <div class="content-box">
+                        <select class="form-control select-type" formControlName="sslcMedium">
+                          <option value="option1" disabled selected>Select</option>
+                          <option value="Tamil">Tamil</option>
+                          <option value="English">English</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="single-row">
+                      <label for="">Marks :</label>
+                      <div class="content-box">
+                        <input type="text" class="form-control" placeholder="Enter Marks"
+                          formControlName="sslctotalmarks">
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="single-row  mt-5">
+                  <label for=""> </label>
+
+                  <div class="content-box">
+                    <button type="submit" class="btn btn-brand-blue mb-2" (click)="submit()">submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2 ad-image">
+      <img src="../../assets/image/ad.png" alt="">
+    </div>
+  </div>
+</div>

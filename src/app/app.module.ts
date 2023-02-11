@@ -19,7 +19,8 @@ import { NgxEditorModule } from "ngx-editor";
     AppComponent,
     CanHomeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+
   ],
   imports: [
     BrowserModule,

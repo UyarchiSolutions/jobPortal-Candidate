@@ -12,6 +12,8 @@ import { VerifyOtpComponent } from './employer/verify-otp/verify-otp.component';
 import { UpdateprofileComponent } from './candidate/updateprofile/updateprofile.component';
 import { CanGetComponent } from './candidate/can-get/can-get.component';
 import { EmpJobdetailsComponent } from './candidate/emp-jobdetails/emp-jobdetails.component';
+import { EducationdetailsComponent } from './candidate/educationdetails/educationdetails.component';
+import { ProffesinoalComponent } from './candidate/proffesinoal/proffesinoal.component';
 
 const routes: Routes = [
    {path:"",component:CanHomeComponent},
@@ -40,7 +42,9 @@ const routes: Routes = [
     {path:"VeriftOPT",component:CanMobileverifyComponent},
     {path:"updateProfile",loadChildren:() => import('./candidate/updateprofile/updateprofile.module').then(m => m.UpdateprofileModule)},
     {path:"canJobs",component:CanGetComponent},
-    {path:"can-employ",component:EmpJobdetailsComponent}
+    {path:"can-employ",component:EmpJobdetailsComponent},
+    {path:"can-edu",component:EducationdetailsComponent},
+    {path:"can-proffesinal",component:ProffesinoalComponent}
 ];
 
 @NgModule({

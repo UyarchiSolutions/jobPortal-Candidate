@@ -102,9 +102,9 @@
                     </div>
                   </div>
                   <div class="single-row">
-                    <label for="">Location :</label>
+                    <label for="">Current Location :</label>
                     <div class="content-box">
-                      <input type="text" class="form-control" placeholder="Enter Your Location">
+                      <input type="text" class="form-control" ngx-google-places-autocomplete [options]="options"  (onAddressChange)="handleAddressChange($event)" placeholder="Enter Your Location">
                     </div>
                   </div>
                   <div class="single-row single-row-final-btn">
