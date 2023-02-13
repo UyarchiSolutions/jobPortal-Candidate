@@ -18,11 +18,12 @@
               </h3>
             </div>
             <div class="col-2">
-              <span class="edit-icon"><i style="font-size: 11px;color: white;" class="fa fa-pencil"></i>
+              <span class="edit-icon" style="cursor: pointer;" (click)="updateProfile(details._id)"><i
+                  style="font-size: 11px;color: white;" class="fa fa-pencil"></i>
               </span>
             </div>
           </div>
-          <div class="row" *ngFor="let details of getAlldetails">
+          <div class="row">
             <div class="register-form">
               <div class="single-row">
                 <label for="">Key Skills :</label>
@@ -99,38 +100,60 @@
               <div class="single-row d-flex align-items-start">
                 <label for="">Language :</label>
                 <div class="content-box d-flex flex-wrap align-items-start">
-                  <div class="tamil d-flex row col-12 flex-wrap align-items-start">
-                    <p class="col-3">{{details.maritalStatus}}</p>
+                  <div class="tamil d-flex row col-12 flex-wrap align-items-start"
+                    *ngFor="let lan of details.languages">
+                    <p class="col-3">{{lan.lang}}</p>
 
                     <div class="select col-3 d-flex align-item-center">
-                      <i> <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                      <i *ngIf="lan.know == 'Speck'"> <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                           xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M8 16C3.5816 16 0 12.4184 0 8C0 3.5816 3.5816 0 8 0C12.4184 0 16 3.5816 16 8C16 12.4184 12.4184 16 8 16ZM8 14.4C9.69739 14.4 11.3253 13.7257 12.5255 12.5255C13.7257 11.3253 14.4 9.69739 14.4 8C14.4 6.30261 13.7257 4.67475 12.5255 3.47452C11.3253 2.27428 9.69739 1.6 8 1.6C6.30261 1.6 4.67475 2.27428 3.47452 3.47452C2.27428 4.67475 1.6 6.30261 1.6 8C1.6 9.69739 2.27428 11.3253 3.47452 12.5255C4.67475 13.7257 6.30261 14.4 8 14.4ZM7.2024 11.2L3.808 7.8056L4.9392 6.6744L7.2024 8.9376L11.7272 4.412L12.8592 5.5432L7.2024 11.2Z"
                             fill="#00FF44" />
+                        </svg>
+                      </i>
+                      <i *ngIf="lan.know == ''"> <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M8 16C3.5816 16 0 12.4184 0 8C0 3.5816 3.5816 0 8 0C12.4184 0 16 3.5816 16 8C16 12.4184 12.4184 16 8 16ZM8 14.4C9.69739 14.4 11.3253 13.7257 12.5255 12.5255C13.7257 11.3253 14.4 9.69739 14.4 8C14.4 6.30261 13.7257 4.67475 12.5255 3.47452C11.3253 2.27428 9.69739 1.6 8 1.6C6.30261 1.6 4.67475 2.27428 3.47452 3.47452C2.27428 4.67475 1.6 6.30261 1.6 8C1.6 9.69739 2.27428 11.3253 3.47452 12.5255C4.67475 13.7257 6.30261 14.4 8 14.4ZM8 6.8688L10.2624 4.6056L11.3944 5.7376L9.1312 8L11.3944 10.2624L10.2624 11.3944L8 9.1312L5.7376 11.3944L4.6056 10.2624L6.8688 8L4.6056 5.7376L5.7376 4.6056L8 6.8688Z"
+                            fill="#FF0000" />
                         </svg>
                       </i><label>Speak</label>
                     </div>
                     <div class="select col-3  d-flex align-item-center">
-                      <i> <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                      <i *ngIf="lan.know[0] == 'Read'"> <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                           xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M8 16C3.5816 16 0 12.4184 0 8C0 3.5816 3.5816 0 8 0C12.4184 0 16 3.5816 16 8C16 12.4184 12.4184 16 8 16ZM8 14.4C9.69739 14.4 11.3253 13.7257 12.5255 12.5255C13.7257 11.3253 14.4 9.69739 14.4 8C14.4 6.30261 13.7257 4.67475 12.5255 3.47452C11.3253 2.27428 9.69739 1.6 8 1.6C6.30261 1.6 4.67475 2.27428 3.47452 3.47452C2.27428 4.67475 1.6 6.30261 1.6 8C1.6 9.69739 2.27428 11.3253 3.47452 12.5255C4.67475 13.7257 6.30261 14.4 8 14.4ZM7.2024 11.2L3.808 7.8056L4.9392 6.6744L7.2024 8.9376L11.7272 4.412L12.8592 5.5432L7.2024 11.2Z"
                             fill="#00FF44" />
                         </svg>
-                      </i><label>Read</label>
+                      </i>
+                      <i *ngIf="lan.know[0] == ''"> <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M8 16C3.5816 16 0 12.4184 0 8C0 3.5816 3.5816 0 8 0C12.4184 0 16 3.5816 16 8C16 12.4184 12.4184 16 8 16ZM8 14.4C9.69739 14.4 11.3253 13.7257 12.5255 12.5255C13.7257 11.3253 14.4 9.69739 14.4 8C14.4 6.30261 13.7257 4.67475 12.5255 3.47452C11.3253 2.27428 9.69739 1.6 8 1.6C6.30261 1.6 4.67475 2.27428 3.47452 3.47452C2.27428 4.67475 1.6 6.30261 1.6 8C1.6 9.69739 2.27428 11.3253 3.47452 12.5255C4.67475 13.7257 6.30261 14.4 8 14.4ZM8 6.8688L10.2624 4.6056L11.3944 5.7376L9.1312 8L11.3944 10.2624L10.2624 11.3944L8 9.1312L5.7376 11.3944L4.6056 10.2624L6.8688 8L4.6056 5.7376L5.7376 4.6056L8 6.8688Z"
+                            fill="#FF0000" />
+                        </svg>
+                      </i><label>Read {{lan.know[2]}}</label>
                     </div>
                     <div class="select col-3  d-flex align-item-center">
-                      <i> <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                      <i *ngIf="lan.know[2] == 'Speck'"> <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                           xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M8 16C3.5816 16 0 12.4184 0 8C0 3.5816 3.5816 0 8 0C12.4184 0 16 3.5816 16 8C16 12.4184 12.4184 16 8 16ZM8 14.4C9.69739 14.4 11.3253 13.7257 12.5255 12.5255C13.7257 11.3253 14.4 9.69739 14.4 8C14.4 6.30261 13.7257 4.67475 12.5255 3.47452C11.3253 2.27428 9.69739 1.6 8 1.6C6.30261 1.6 4.67475 2.27428 3.47452 3.47452C2.27428 4.67475 1.6 6.30261 1.6 8C1.6 9.69739 2.27428 11.3253 3.47452 12.5255C4.67475 13.7257 6.30261 14.4 8 14.4ZM7.2024 11.2L3.808 7.8056L4.9392 6.6744L7.2024 8.9376L11.7272 4.412L12.8592 5.5432L7.2024 11.2Z"
                             fill="#00FF44" />
+                        </svg>
+                      </i>
+                      <i *ngIf="lan.know[2] == ''"> <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M8 16C3.5816 16 0 12.4184 0 8C0 3.5816 3.5816 0 8 0C12.4184 0 16 3.5816 16 8C16 12.4184 12.4184 16 8 16ZM8 14.4C9.69739 14.4 11.3253 13.7257 12.5255 12.5255C13.7257 11.3253 14.4 9.69739 14.4 8C14.4 6.30261 13.7257 4.67475 12.5255 3.47452C11.3253 2.27428 9.69739 1.6 8 1.6C6.30261 1.6 4.67475 2.27428 3.47452 3.47452C2.27428 4.67475 1.6 6.30261 1.6 8C1.6 9.69739 2.27428 11.3253 3.47452 12.5255C4.67475 13.7257 6.30261 14.4 8 14.4ZM8 6.8688L10.2624 4.6056L11.3944 5.7376L9.1312 8L11.3944 10.2624L10.2624 11.3944L8 9.1312L5.7376 11.3944L4.6056 10.2624L6.8688 8L4.6056 5.7376L5.7376 4.6056L8 6.8688Z"
+                            fill="#FF0000" />
                         </svg>
                       </i><label>Write</label>
                     </div>
                   </div>
-                  <div class="english  d-flex row col-12 flex-wrap align-items-start">
+                  <!-- <div class="english  d-flex row col-12 flex-wrap align-items-start">
                     <p class="col-3">English</p>
 
                     <div class="select col-3 d-flex align-item-center">
@@ -151,15 +174,9 @@
                       </i><label>Read</label>
                     </div>
                     <div class="select col-3  d-flex align-item-center">
-                      <i> <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                          xmlns="http://www.w3.org/2000/svg">
-                          <path
-                            d="M8 16C3.5816 16 0 12.4184 0 8C0 3.5816 3.5816 0 8 0C12.4184 0 16 3.5816 16 8C16 12.4184 12.4184 16 8 16ZM8 14.4C9.69739 14.4 11.3253 13.7257 12.5255 12.5255C13.7257 11.3253 14.4 9.69739 14.4 8C14.4 6.30261 13.7257 4.67475 12.5255 3.47452C11.3253 2.27428 9.69739 1.6 8 1.6C6.30261 1.6 4.67475 2.27428 3.47452 3.47452C2.27428 4.67475 1.6 6.30261 1.6 8C1.6 9.69739 2.27428 11.3253 3.47452 12.5255C4.67475 13.7257 6.30261 14.4 8 14.4ZM8 6.8688L10.2624 4.6056L11.3944 5.7376L9.1312 8L11.3944 10.2624L10.2624 11.3944L8 9.1312L5.7376 11.3944L4.6056 10.2624L6.8688 8L4.6056 5.7376L5.7376 4.6056L8 6.8688Z"
-                            fill="#FF0000" />
-                        </svg>
-                      </i><label>Write</label>
+                      <label>Write</label>
                     </div>
-                  </div>
+                  </div> -->
 
                 </div>
 
@@ -397,86 +414,46 @@
                   <h3>Professional Details</h3>
                 </div>
                 <div class="col-2">
-                  <span class=" edit-icon"><i><svg width="14" height="14" viewBox="0 0 14 14" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14 8.31765H8.4549V14H5.5451V8.31765H0V5.68235H5.5451V0H8.4549V5.68235H14V8.31765Z"
-                          fill="white" />
-                      </svg>
-
-                    </i></span>
+                  <span class="edit-icon"><i style="font-size: 11px;color: white;" class="fa fa-pencil" (click)="gotoProffistional(details._id)"></i></span>
                 </div>
               </div>
-
-
-
-
-
               <div class="row">
                 <div class="register-form">
-
-
-
                   <div class="single-row">
                     <label for="">Current Industry :</label>
                     <div class="content-box">
-                      <p>IT Service/Consulting
+                      <p>{{details.industry}}
                     </div>
-
                   </div>
-
-
                   <div class="single-row">
                     <label for="">Current Department :</label>
                     <div class="content-box">
-                      <p>UI UX Design & Architecture</p>
+                      <p>{{details.department}}</p>
                     </div>
-
                   </div>
-
                   <div class="single-row">
                     <label for="">Role Category :</label>
                     <div class="content-box">
-                      <p>UI/UX</p>
+                      <p>{{details.roleCategory
+                      }}</p>
                     </div>
-
                   </div>
-
                   <div class="single-row">
                     <label for="">Job Role :</label>
                     <div class="content-box">
-                      <p>UI/UX Designer</p>
+                      <p>{{details.role}}</p>
                     </div>
-
                   </div>
-
-
-
-
-
-
-
                 </div>
               </div>
-
-
-
-
-
               <div class="single-row  mt-5 mb-5">
                 <label for=""> </label>
-
                 <div class="content-box">
                   <button type="submit" class="btn btn-brand-blue mb-2">Log In</button>
                 </div>
               </div>
-
-
-
-
-
             </div>
           </div>
-
         </div>
       </div>
     </div>

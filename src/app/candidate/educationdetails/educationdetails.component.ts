@@ -49,6 +49,7 @@ export class EducationdetailsComponent implements OnInit {
     allcontrols.forEach((a: any) => {
       <FormArray>phase.removeControl(a)
     })
+    console.log(value,"values")
     ss[value].forEach((a: any) => {
       <FormArray>phase.addControl(a, new FormControl())
     })
@@ -57,14 +58,14 @@ export class EducationdetailsComponent implements OnInit {
     console.log(q._id, "ssss");
     // dr
     if (val.target.value == 'Doctorate/phD') {
-      phase.get('drQualification')?.setValue(val.target.valu);
+      phase.get('drQualification')?.setValue(q._id);
       this.candidate.getdoctorate(q._id).subscribe((res: any) => {
         this.drCourse = res
       })
     }
     // pg
     if (val.target.value == 'Masters/Post-Graduation') {
-      phase.get('pgQualification')?.setValue(val.target.valu);
+      phase.get('pgQualification')?.setValue(q._id);
       this.candidate.getPgcourses(q._id).subscribe((res: any) => {
         this.pgCourse = res;
       })
@@ -72,7 +73,7 @@ export class EducationdetailsComponent implements OnInit {
     }
     // ug
     if (val.target.value == 'Graduation/Diploma') {
-      phase.get('ugQualification')?.setValue(val.target.valu);
+      phase.get('ugQualification')?.setValue(q._id);
       this.candidate.grtUgcou(q._id).subscribe((res: any) => {
         this.ugcourse = res;
       })

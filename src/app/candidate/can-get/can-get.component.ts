@@ -14,10 +14,10 @@ export class CanGetComponent implements OnInit {
   saveJobs: any = [];
   keySkill: any;
   afterSearch: any;
-  getAllalerts:any=[];
+  getAllalerts: any = [];
   searchForm = this.fb.group({
     experience: new FormControl(null, [Validators.required]),
-    search: this.fb.array([], [Validators.required]),
+    search: new FormControl(null, [Validators.required]),
     experienceAnotherfrom: new FormControl(null),
     experienceAnotherto: new FormControl(null),
     location: new FormControl(null, [Validators.required]),
@@ -31,7 +31,7 @@ export class CanGetComponent implements OnInit {
     locationfilter: new FormControl(null),
     companytype: new FormControl(null),
     postedby: new FormControl(null),
-
+    searchbox: new FormControl(null),
   })
   setAlertForm = this.fb.group({
     designationSet: new FormControl(null, [Validators.required]),
@@ -93,8 +93,8 @@ export class CanGetComponent implements OnInit {
   // creatr alte
   jobAlert() {
     this.tab = 4;
-    this.canditSarvice.getAlerts().subscribe((res:any) => {
-     this.getAllalerts=res;
+    this.canditSarvice.getAlerts().subscribe((res: any) => {
+      this.getAllalerts = res;
     })
   }
   // notification
@@ -106,54 +106,48 @@ export class CanGetComponent implements OnInit {
     console.log(this.searchForm.get('search')?.valid)
     console.log(this.searchForm.get('location')?.valid)
     console.log(this.searchForm.get('experience')?.value)
-
     // if (this.searchForm.get('search')?.valid && this.searchForm.get('location')?.valid && this.searchForm.get('experience')?.valid) {
     this.get_allJobs();
-
-
     // }
   }
   // get skills
   isDisplay = false;
   dispalye(data: any) {
-    console
+    let value = data.target.value.split(",");
+
     if (data.target.value) {
       this.isDisplay = true;
-      console.log(data.target.value, "valuesmdkjfjdhj")
     } else {
       this.isDisplay = false
-      console.log(data.target.value, "not  valuesmdkjfjdhj")
     }
-    this.getKeyskills(data.target.value)
+    if (value.length != 0) {
+      if (value[value.length - 1] != null && value[value.length - 1] != '') {
+        this.getKeyskills(value[value.length - 1])
+      }
+    }
+    this.searchForm.get('search')?.setValue(value)
+    console.log(this.searchForm?.value)
+
   }
   getKeyskills(value: any) {
     this.canditSarvice.getSkill(value).subscribe((res: any) => {
       this.keySkill = res;
     })
   }
-  checkSkill(event: any) {
-
-    const data: FormArray = this.searchForm.get('search') as FormArray;
-    if (event.target.checked) {
-      data.push(new FormControl(event.target.value));
-      console.log(data.value, "val")
-      this.datavalues = data.value;
-    } else {
-      let i: number = 0;
-      data.controls.forEach((item: any) => {
-        if (item == event.target.value) {
-          data.removeAt(i);
-          return;
-        }
-        i++;
-      });
+  checkSkill(event: any, skill: any) {
+    let index: any = this.searchForm.get('search')?.value;
+    if (index.length != 0) {
+      let value = index.splice([index.length - 1], 1);
+      index.push(skill)
+      this.searchForm.get('search')?.setValue(index)
+      let search: any = index.toString() + ","
+      this.searchForm.get('searchbox')?.setValue(search);
     }
   }
   // recent Search
   recentSearch() {
     this.canditSarvice.getRecentsearch().subscribe((res: any) => {
       this.recentData = res;
-
     })
   }
   searchdata(value: any) {
@@ -170,7 +164,6 @@ export class CanGetComponent implements OnInit {
   savesearch() {
     if (this.searchForm.get('search')?.valid && this.searchForm.get('location')?.valid && this.searchForm.get('experience')?.valid) {
       this.canditSarvice.saveSearch(this.searchForm.value).subscribe((res: any) => {
-
       })
     }
   }
@@ -220,21 +213,21 @@ export class CanGetComponent implements OnInit {
     this.get_allJobs();
   }
   searchfilter(val: any) {
-    const data: FormArray = this.searchForm.get('search') as FormArray;
-    if (val == 'search') {
-      (this.searchForm.controls['search']).clear();
-      this.datavalues = [];
+    // const data: FormArray = this.searchForm.get('search') as FormArray;
+    // if (val == 'search') {
+    //   (this.searchForm.controls['search']).clear();
+    //   this.datavalues = [];
 
-    }
-    if (val == 'location') {
-      this.searchForm.get('location')?.setValue(null)
-    }
-    if (val == 'experience') {
-      this.searchForm.get('experience')?.setValue(null)
-    }
+    // }
+    // if (val == 'location') {
+    //   this.searchForm.get('location')?.setValue(null)
+    // }
+    // if (val == 'experience') {
+    //   this.searchForm.get('experience')?.setValue(null)
+    // }
   }
-  applynotification(id:any){
-  this.router.navigate(['/'])
+  applynotification(id: any) {
+    this.router.navigate(['/'])
   }
 }
 

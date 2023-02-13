@@ -22,14 +22,14 @@
 
               <div class="search-box first-search-box">
                 <input type="text" class="form-control keyskill" placeholder="Enter Designation / Key skills"
-                  value="{{datavalues}}" (keyup)="dispalye($event)">
+                  value="{{datavalues}}" (keyup)="dispalye($event)" formControlName="searchbox">
 
                 <div class="" *ngIf="isDisplay" style="margin-top:0px;">
                   <label></label>
                   <div class="content-box keylist" style="background: white;">
                     <ul class="ulkeylist" style="padding-left: 0px;" class="">
-                      <li class="ilkeylist" *ngFor="let skill of keySkill"><input type="checkbox" value="{{skill}}"
-                          (change)="checkSkill($event)" />
+                      <li class="ilkeylist" style="cursor:pointer" *ngFor="let skill of keySkill"
+                        (click)="checkSkill($event,skill)">
                         <span>{{skill}}</span>
                       </li>
                     </ul>
@@ -297,11 +297,11 @@
                 </span>
                 <span class="badge searchlabel bg-light text-dark" *ngIf="searchForm.get('location')?.valid">
                   <span>{{searchForm.get('location')?.value}}</span>
-                  <span class="close-mark"  (click)="searchfilter('location')">x</span>
+                  <span class="close-mark" (click)="searchfilter('location')">x</span>
                 </span>
                 <span class="badge searchlabel bg-light text-dark" *ngIf="searchForm.get('experience')?.valid">
                   <span>{{searchForm.get('experience')?.value}}</span>
-                  <span class="close-mark"  (click)="searchfilter('experience')">x</span>
+                  <span class="close-mark" (click)="searchfilter('experience')">x</span>
                 </span>
               </div>
             </div>
@@ -861,8 +861,8 @@
               <div class="single-row  mt-5">
                 <label for=""> </label>
                 <div class="content-box">
-                  <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5"
-                    (click)="advanceSearch()" data-bs-dismiss="modal" >Search</button>
+                  <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" (click)="advanceSearch()"
+                    data-bs-dismiss="modal">Search</button>
                 </div>
               </div>
             </div>

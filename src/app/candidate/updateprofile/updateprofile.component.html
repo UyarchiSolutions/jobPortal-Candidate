@@ -45,16 +45,15 @@
                   <div class="single-row">
                     <label for="">Key Skills :</label>
                     <div class="content-box">
-                      <input type="text" class="form-control" formControlName="keyskill" (keyup)="dispalye($event)"
-                        placeholder="Enter Key Skills">
+                      <input type="text" class="form-control" (keyup)="dispalye($event)"
+                        placeholder="Enter Key Skills" formControlName="searchbox">
                     </div>
                   </div>
                   <div class="single-row" *ngIf="isDisplay" style="margin-top:0px;">
                     <label></label>
                     <div class="content-box" style="background: white;">
                       <ul style="padding-left: 0px;">
-                        <li *ngFor="let skill of keySkill"><input style="width: 30%" type="checkbox" value="{{skill}}"
-                            (change)="checkSkill($event)" />
+                        <li *ngFor="let skill of keySkill" style="cursor:pointer" (click)="checkSkill($event,skill)">
                           <span>{{skill}}</span>
                         </li>
                       </ul>
@@ -223,15 +222,7 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="row no-margin education-row">
-              <div class="col"></div>
-              <div class="col">
-                <h3 class="education-h3">Educational Details</h3>
-              </div>
-              <div class="col-4 add-pan-btn">
-                <button type="submit" class="btn btn-brand-blue mb-2" (click)="addQualification()">+</button>
-              </div>
-            </div> -->
+
             <div class="row no-margin">
               <div class="col">
                 <div class="register-form education-wrap">

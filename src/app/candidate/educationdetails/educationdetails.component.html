@@ -64,11 +64,10 @@
                       <div class="content-box">
                         <select class="form-control select-type" formControlName="drSpecialization">
                           <option [ngValue]="null" disabled selected>Select</option>
-                          <option value="{{course.Specialization}}" *ngFor="let course of drsep">
+                          <option value="{{course._id}}" *ngFor="let course of drsep">
                             {{course.Specialization}}</option>
                         </select>
                       </div>
-
                     </div>
                     <div class="single-row">
                       <label for="">Course Type :</label>
@@ -153,7 +152,7 @@
                       <div class="content-box">
                         <select class="form-control select-type" formControlName="pgSpecialization">
                           <option [ngValue]="null" disabled selected>Select</option>
-                          <option value="{{course.Specialization}}" *ngFor="let course of pgSpe">
+                          <option value="{{course._id}}" *ngFor="let course of pgSpe">
                             {{course.Specialization}}</option>
                         </select>
                       </div>
@@ -241,7 +240,7 @@
                       <div class="content-box">
                         <select class="form-control select-type" formControlName="ugSpecialization">
                           <option [ngValue]="null" disabled selected>Select</option>
-                          <option value="{{course.Specialization}}" *ngFor="let course of pgSpe">
+                          <option value="{{course._id}}" *ngFor="let course of pgSpe">
                             {{course.Specialization}}</option>
                         </select>
                       </div>
