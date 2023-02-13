@@ -12,7 +12,7 @@ export class UpdateprofileComponent implements OnInit {
   qualification: any;
   profileForm: any = this.fb.group({
     image: new FormControl('', [Validators.required]),
-    keyskill: this.fb.array([],[Validators.required]),
+    keyskill: this.fb.array([], [Validators.required]),
     dob: new FormControl('', Validators.required),
     experienceYear: new FormControl('', Validators.required),
     experienceMonth: new FormControl('', Validators.required),
@@ -26,11 +26,11 @@ export class UpdateprofileComponent implements OnInit {
     gender: new FormControl('', Validators.required),
     maritalStatus: new FormControl('', Validators.required),
     relocate: new FormControl('', Validators.required),
-    languages:this.fb.array([]),
+    languages: this.fb.array([]),
 
   })
   keySkill: any;
-  lang:any=[]
+  lang: any = []
   constructor(private fb: FormBuilder, private candidateService: CanditateService, private router: Router) { }
 
   ngOnInit() {
@@ -38,9 +38,9 @@ export class UpdateprofileComponent implements OnInit {
     this.candidateService.getKeyskill().subscribe((res: any) => {
 
     })
-    this.candidateService.getLanguages().subscribe((res:any) =>{
-    this.lang=res;
-    console.log(this.lang,"lang")
+    this.candidateService.getLanguages().subscribe((res: any) => {
+      this.lang = res;
+      console.log(this.lang, "lang")
     })
   }
   getKeyskills(value: any) {
@@ -74,7 +74,7 @@ export class UpdateprofileComponent implements OnInit {
   }
   // push skills
 
-  checkSkill(event:any){
+  checkSkill(event: any) {
     const data: FormArray = this.profileForm.get('keyskill') as FormArray;
     if (event.target.checked) {
       data.push(new FormControl(event.target.value));
@@ -90,47 +90,46 @@ export class UpdateprofileComponent implements OnInit {
       });
     }
   }
-  languageskill:any=[];
-  insLang(val:any){
-    const data = this.profileForm.get('languages') as FormArray;
-    if (val.target.checked) {
-      data.push(new FormControl(val.target.value));
-      // var a:any
-      // data.controls.forEach((item:any) =>{
-      //   {language:item}
-      // })
-      console.log(data.value)
-    } else {
-      let i: number = 0;
-      data.controls.forEach((item: any) => {
-        console.log(item,"shdjsdj")
-        if (item.value == val.target.value) {
-          // this.languageskill.removeAt(i)
-          console.log("dfbjhdfd")
-          data.removeAt(i);
-          return;
-        }
-        i++;
-      });
-    }
+  languageskill: any = [];
+  insLang(val: any) {
+     if(val.target.checked){
+      const data = this.profileForm.get('languages').push(this.fb.group({
+        lang: new FormControl(val.target.value),
+        know: this.fb.array([])
+      }));
+     }else{
+      let index=this.languages.value.findIndex((i:any) => i.lang == val.target.value);
+      if(index !=-1){
+        this.languages?.removeAt(index)
+      }
+     console.log(this.languages.value)
+     }
   }
-  get languages(){
+  get languages() {
     return this.profileForm.get('languages') as FormArray;
   }
-  kownaction(val:any,i:any){
-  console.log(i,"index")
+  kownaction(val: any, i: any, language: any) {
+    console.log(i, "index");
+    let Known = language.get('know')?.value;
+    let value = val.target.value;
+    let index = Known.findIndex((item: any) => item == value)
+    if (val.target.checked) {
+      Known.push(value)
+    } else {
+    Known.splice(index, 1);
+    }
+    language.get('kown')?.setValue(Known)
   }
   updateprofile() {
     const formData = new FormData();
     formData.append('image', this.selectImg1);
     this.candidateService.updateProfile(this.profileForm.value).subscribe((res: any) => {
       this.candidateService.imageUpload(res.user._id, formData).subscribe((res: any) => {
-
       })
-      this.router.navigate(['/can-edu'],{queryParams:{id:res.user._id}})
+      this.router.navigate(['/can-edu'], { queryParams: { id: res.user._id } })
     })
   }
-  // addcontrol(){
-  //   return thi
-  // }
+  addcontrol() {
+    return
+  }
 }

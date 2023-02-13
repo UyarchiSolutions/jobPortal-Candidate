@@ -13,7 +13,8 @@ export class CanGetComponent implements OnInit {
   appliedJobs: any = [];
   saveJobs: any = [];
   keySkill: any;
-  afterSearch:any;
+  afterSearch: any;
+  getAllalerts:any=[];
   searchForm = this.fb.group({
     experience: new FormControl(null, [Validators.required]),
     search: this.fb.array([], [Validators.required]),
@@ -32,14 +33,14 @@ export class CanGetComponent implements OnInit {
     postedby: new FormControl(null),
 
   })
-  setAlertForm=this.fb.group({
+  setAlertForm = this.fb.group({
     designationSet: new FormControl(null, [Validators.required]),
     keyskillSet: this.fb.array([], [Validators.required]),
     experienceYearSet: new FormControl(null, [Validators.required]),
     experienceMonthSet: new FormControl(null, [Validators.required]),
     locationSet: new FormControl(null, [Validators.required]),
   })
-  datavalues:any;
+  datavalues: any;
   jobs: any = [];
   recentData: any = [];
   constructor(private canditSarvice: CanditateService, private fb: FormBuilder, private router: Router) { }
@@ -91,7 +92,10 @@ export class CanGetComponent implements OnInit {
   }
   // creatr alte
   jobAlert() {
-    this.tab = 4
+    this.tab = 4;
+    this.canditSarvice.getAlerts().subscribe((res:any) => {
+     this.getAllalerts=res;
+    })
   }
   // notification
   notification() {
@@ -104,7 +108,7 @@ export class CanGetComponent implements OnInit {
     console.log(this.searchForm.get('experience')?.value)
 
     // if (this.searchForm.get('search')?.valid && this.searchForm.get('location')?.valid && this.searchForm.get('experience')?.valid) {
-      this.get_allJobs();
+    this.get_allJobs();
 
 
     // }
@@ -112,7 +116,7 @@ export class CanGetComponent implements OnInit {
   // get skills
   isDisplay = false;
   dispalye(data: any) {
-     console
+    console
     if (data.target.value) {
       this.isDisplay = true;
       console.log(data.target.value, "valuesmdkjfjdhj")
@@ -132,8 +136,8 @@ export class CanGetComponent implements OnInit {
     const data: FormArray = this.searchForm.get('search') as FormArray;
     if (event.target.checked) {
       data.push(new FormControl(event.target.value));
-      console.log(data.value,"val")
-      this.datavalues=data.value;
+      console.log(data.value, "val")
+      this.datavalues = data.value;
     } else {
       let i: number = 0;
       data.controls.forEach((item: any) => {
@@ -160,7 +164,7 @@ export class CanGetComponent implements OnInit {
         location: res.location,
         experience: res.experience
       })
-      this.datavalues=res.search
+      this.datavalues = res.search
     })
   }
   savesearch() {
@@ -171,30 +175,30 @@ export class CanGetComponent implements OnInit {
     }
   }
   // get
-  save:any=[]
-  getSaveData(){
+  save: any = []
+  getSaveData() {
     this.canditSarvice.getSave().subscribe((res: any) => {
-      console.log(res,"working fine")
-    this.save=res
+      console.log(res, "working fine")
+      this.save = res
     })
   }
   // saved search data
-  savedSearchData(id:any){
-   this.canditSarvice.saveddata(id).subscribe((res:any) => {
-    this.searchForm.patchValue({
-      location: res.location,
-      experience: res.experience
-    })
-    this.datavalues=res.search
+  savedSearchData(id: any) {
+    this.canditSarvice.saveddata(id).subscribe((res: any) => {
+      this.searchForm.patchValue({
+        location: res.location,
+        experience: res.experience
+      })
+      this.datavalues = res.search
 
-   })
+    })
   }
-  alretcheckSkill(event:any){
+  alretcheckSkill(event: any) {
     const data: FormArray = this.setAlertForm.get('keyskillSet') as FormArray;
     if (event.target.checked) {
       data.push(new FormControl(event.target.value));
-      console.log(data.value,"val")
-      this.datavalues=data.value;
+      console.log(data.value, "val")
+      this.datavalues = data.value;
     } else {
       let i: number = 0;
       data.controls.forEach((item: any) => {
@@ -206,9 +210,31 @@ export class CanGetComponent implements OnInit {
       });
     }
   }
-  setalert(){
-     this.canditSarvice.educationDetail(this.setAlertForm.value).subscribe((res:any) => {
+  setalert() {
+    this.canditSarvice.educationDetail(this.setAlertForm.value).subscribe((res: any) => {
 
-     })
+    })
+  }
+  // advance search
+  advanceSearch() {
+    this.get_allJobs();
+  }
+  searchfilter(val: any) {
+    const data: FormArray = this.searchForm.get('search') as FormArray;
+    if (val == 'search') {
+      (this.searchForm.controls['search']).clear();
+      this.datavalues = [];
+
+    }
+    if (val == 'location') {
+      this.searchForm.get('location')?.setValue(null)
+    }
+    if (val == 'experience') {
+      this.searchForm.get('experience')?.setValue(null)
+    }
+  }
+  applynotification(id:any){
+  this.router.navigate(['/'])
   }
 }
+

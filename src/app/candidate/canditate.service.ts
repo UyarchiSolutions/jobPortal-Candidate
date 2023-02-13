@@ -110,8 +110,8 @@ export class CanditateService {
     return this.http.get(this.baseUrl+`/v1/educationDetails/get_drcourse/${id}`)
   }
   // doctorate spe
-  getDrSped(){
-    return this.http.get(this.baseUrl+`/v1/educationDetails/get_drspecialization/dr1`)
+  getDrSped(id:any){
+    return this.http.get(this.baseUrl+`/v1/educationDetails/get_drspecialization/${id}`)
   }
   // pgcourse
   getPgcourses(id:any){
@@ -126,8 +126,8 @@ export class CanditateService {
     return this.http.get(this.baseUrl+`/v1/educationDetails/get_ug_course/${id}`)
   }
   // ugSep
-  ugSepcial(){
-    return this.http.get(this.baseUrl+`/v1/educationDetails/get_specialization/ug5`)
+  ugSepcial(id:any){
+    return this.http.get(this.baseUrl+`/v1/educationDetails/get_specialization/${id}`)
   }
   // hsc course
   hsccourse(id:any){
@@ -148,5 +148,17 @@ export class CanditateService {
   // serAlert
   alertSet(data:any){
     return this.http.post(this.baseUrl+`/v1/candidateDetail/updateKeyskill`,data,{headers:{auth:Cookie.get('tokens')}})
+  }
+  // get all aterts
+  getAlerts(){
+    return this.http.get(this.baseUrl+`/v1/candidatedetail/SearchByIdcandidataSearchEmployerSet`,{headers:{auth:Cookie.get('tokens')}})
+  }
+  // notification
+  getallNotification(id:any){
+    this.http.get(this.baseUrl+``)
+  }
+  // view all details
+  viewDetails(){
+   return this.http.get(this.baseUrl+`/v1/candidateDetail/getKeyskill`,{headers:{auth:Cookie.get('tokens')}})
   }
 }

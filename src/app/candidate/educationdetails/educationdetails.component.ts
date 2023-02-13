@@ -36,11 +36,11 @@ export class EducationdetailsComponent implements OnInit {
   }
   q: any;
   qualifiacation(val: any, index: any, phase: any) {
-    let allcontrols = ['drQualification', 'drSpecialization', 'drCourseType', 'drCourse', 'drCourseDurationFrom', 'drCourseDurationTo', 'drGradingSystem', 'drMarks', 'pgQualification', 'pgCourse', 'pgSpecialization', 'pgCourseType', 'pgCourseDurationFrom', 'pgCourseDurationTo', 'pgGradingSystem', 'pgMarks', 'ugQualification', 'ugSpecialization', 'ugCourse', 'ugCourseType', 'ugCourseDurationFrom', 'ugCourseDurationTo', 'ugGradingSystem', 'ugMarks', 'hsBoard', 'hsQualification', 'hsPassedYear', 'hsMedium', 'hstotalmarks', 'sslcQualification', 'sslcBoard', 'sslcPassedYear', 'sslcMedium', 'sslctotalmarks']
+    let allcontrols = ['drQualification', 'drSpecialization', 'drCourseType', 'drCourse', 'drCourseDurationFrom', 'drCourseDurationTo', 'drGradingSystem', 'drMarks', 'drUniversity', 'pgQualification', 'pgCourse', 'pgSpecialization', 'pgCourseType', 'pgCourseDurationFrom', 'pgCourseDurationTo', 'pgGradingSystem', 'pgMarks', 'pgUniversity', 'ugQualification', 'ugSpecialization', 'ugCourse', 'ugCourseType', 'ugCourseDurationFrom', 'ugCourseDurationTo', 'ugGradingSystem', 'ugUniversity', 'ugMarks', 'hsBoard', 'hsQualification', 'hsPassedYear', 'hsMedium', 'hstotalmarks', 'sslcQualification', 'sslcBoard', 'sslcPassedYear', 'sslcMedium', 'sslctotalmarks']
     let ss: any = {
-      'Doctorate/phD': ['drQualification', 'drSpecialization', 'drCourseType', 'drCourse', 'drCourseDurationFrom', 'drCourseDurationTo', 'drGradingSystem', 'drMarks'],
-      'Masters/Post-Graduation': ['pgQualification', 'pgCourse', 'pgSpecialization', 'pgCourseType', 'pgCourseDurationFrom', 'pgCourseDurationTo', 'pgGradingSystem', 'pgMarks'],
-      'Graduation/Diploma': ['ugCourse', 'ugQualification', 'ugSpecialization', 'ugCourseType', 'ugCourseDurationFrom', 'ugCourseDurationTo', 'ugGradingSystem', 'ugMarks'],
+      'Doctorate/phD': ['drQualification', 'drSpecialization', 'drCourseType', 'drCourse', 'drCourseDurationFrom', 'drCourseDurationTo', 'drGradingSystem', 'drMarks', 'drUniversity'],
+      'Masters/Post-Graduation': ['pgQualification', 'pgCourse', 'pgSpecialization', 'pgCourseType', 'pgCourseDurationFrom', 'pgCourseDurationTo', 'pgGradingSystem', 'pgMarks', 'pgUniversity'],
+      'Graduation/Diploma': ['ugCourse', 'ugQualification', 'ugSpecialization', 'ugCourseType', 'ugCourseDurationFrom', 'ugCourseDurationTo', 'ugGradingSystem', 'ugMarks', 'ugUniversity'],
       HSC: ['hsBoard', 'hsQualification', 'hsPassedYear', 'hsMedium', 'hstotalmarks'],
       SSLC: ['sslcQualification', 'sslcBoard', 'sslcPassedYear', 'sslcMedium', 'sslctotalmarks']
     }
@@ -58,11 +58,8 @@ export class EducationdetailsComponent implements OnInit {
     // dr
     if (val.target.value == 'Doctorate/phD') {
       phase.get('drQualification')?.setValue(val.target.valu);
-      this.candidate.getDrSped().subscribe((res: any) => {
-        this.drCourse = res;
-      })
       this.candidate.getdoctorate(q._id).subscribe((res: any) => {
-        this.drsep = res
+        this.drCourse = res
       })
     }
     // pg
@@ -71,9 +68,7 @@ export class EducationdetailsComponent implements OnInit {
       this.candidate.getPgcourses(q._id).subscribe((res: any) => {
         this.pgCourse = res;
       })
-      // this.candidate.getPgSpecial().subscribe((res:any) =>{
-      //   this.pgSpe=res;
-      // })
+
     }
     // ug
     if (val.target.value == 'Graduation/Diploma') {
@@ -81,9 +76,7 @@ export class EducationdetailsComponent implements OnInit {
       this.candidate.grtUgcou(q._id).subscribe((res: any) => {
         this.ugcourse = res;
       })
-      this.candidate.ugSepcial().subscribe((res: any) => {
-        this.ugSpe = res
-      })
+
     }
     // hsc
     if (val.target.value == 'HSC') {
@@ -103,10 +96,25 @@ export class EducationdetailsComponent implements OnInit {
 
   }
   specialization(val: any, qali: any) {
-    let q = this.qualification.find((data: any) => data.qualification == val.target.value)
-    if (qali == 'Masters/Post-Graduation') {
+    console.log(qali.value)
+    if (qali.get('Education')?.value == 'Masters/Post-Graduation') {
       this.candidate.getPgSpecial(val.target.value).subscribe((res: any) => {
         this.pgSpe = res;
+        qali.get('pgCourse')?.setValue(val.target.value);
+      })
+    }
+    if (qali.get('Education')?.value == 'Graduation/Diploma') {
+      this.candidate.ugSepcial(val.target.value).subscribe((res: any) => {
+        this.ugSpe = res;
+        qali.get('ugCourse')?.setValue(val.target.value);
+      })
+    }
+
+    if (qali.get('Education')?.value == 'Doctorate/phD') {
+      console.log('wokin')
+      this.candidate.getDrSped(val.target.value).subscribe((res: any) => {
+        this.drsep = res
+        qali.get('drCourse')?.setValue(val.target.value);
       })
     }
   }

@@ -205,10 +205,6 @@
               </li>
 
             </ul>
-
-
-
-
           </div>
         </div>
       </div>
@@ -292,20 +288,20 @@
 
             </div>
           </div>
-          <div class="row no-margin bg-grey " *ngIf="tab != 4">
+          <div class="row no-margin bg-grey " *ngIf="tab ==0">
             <div class="col">
               <div class="filter-label">
-                <span class="badge bg-light text-dark">
-                  <span>BA-English</span>
-                  <span class="close-mark">x</span>
+                <span class="badge searchlabel bg-light text-dark" *ngIf="searchForm.get('search')?.valid">
+                  <span>{{searchForm.get('search')?.value}}</span>
+                  <span class="close-mark" (click)="searchfilter('search')">x</span>
                 </span>
-                <span class="badge bg-light text-dark">
-                  <span>Chennai</span>
-                  <span class="close-mark">x</span>
+                <span class="badge searchlabel bg-light text-dark" *ngIf="searchForm.get('location')?.valid">
+                  <span>{{searchForm.get('location')?.value}}</span>
+                  <span class="close-mark"  (click)="searchfilter('location')">x</span>
                 </span>
-                <span class="badge bg-light text-dark">
-                  <span>0 to 2 Years</span>
-                  <span class="close-mark">x</span>
+                <span class="badge searchlabel bg-light text-dark" *ngIf="searchForm.get('experience')?.valid">
+                  <span>{{searchForm.get('experience')?.value}}</span>
+                  <span class="close-mark"  (click)="searchfilter('experience')">x</span>
                 </span>
               </div>
             </div>
@@ -502,17 +498,28 @@
               <h1>Create Job Alert</h1>
 
               <div class="form col-9">
+                <div class="keyskill">
+                  <label>Key Skill :</label>
+                  <input class="alertField" type="text" name="keyskill" placeholder="Enter Key Skill"
+                    (keyup)="dispalye($event)">
+                </div>
+                <div class="designation">
+                  <label>Designation :</label>
+                  <input class="alertField" type="text" name="designation" placeholder="Enter Your Designation"
+                    formControlName="designationSet">
+                </div>
+                <div class="designation">
+                  <label>Designation :</label>
+                  <input class="alertField" type="text" name="designation" placeholder="Enter Your Designation"
+                    formControlName="designationSet">
+                </div>
                 <div class="designation">
                   <label>Designation :</label>
                   <input class="alertField" type="text" name="designation" placeholder="Enter Your Designation"
                     formControlName="designationSet">
                 </div>
 
-                <div class="keyskill">
-                  <label>Key Skill :</label>
-                  <input class="alertField" type="text" name="keyskill" placeholder="Enter Key Skill"
-                    (keyup)="dispalye($event)">
-                </div>
+
                 <div class="" *ngIf="isDisplay" style="margin-top:0px;">
                   <label></label>
                   <div class="content-box alertkeylist" style="background: white;">
@@ -539,9 +546,6 @@
               </div>
               <button class="btn alert" (click)="setalert()">Set Alert</button>
             </div>
-          </div>
-          <!-- notification -->
-          <div *ngIf="tab == 5">
             <div class="row content-card-heading no-margin padding10">
               <div class="col">
                 <!-- <i class='fas fa-sort-amount-down'></i> -->
@@ -565,10 +569,59 @@
               </div>
               <div class="col">
                 <!-- <i class='fas fa-sort-amount-down'></i> -->
-                Recived
+                Posted
               </div>
               <div class="col">
                 <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Status
+              </div>
+            </div>
+            <!-- <div class="row content-card no-margin padding10 main-content" *ngFor="let job of getAllalerts">
+              <div class="col">
+                {{job.employerregistrations.name}}
+              </div>
+              <div class="col">
+                {{job.jobTittle}}
+              </div>
+              <div class="col">
+                {{job.jobLocation}}
+              </div>
+              <div class="col">
+                {{job.experienceFrom}} To {{job.experienceTo}}
+              </div>
+              <div class="col">
+                {{job.salaryRangeFrom}} To {{job.salaryRangeTo}}
+              </div>
+              <div class="col">
+                {{postedTime(job.date)}}
+              </div>
+              <div class="col">
+                <a (click)="apply(job._id)">Apply Now </a>
+              </div>
+            </div> -->
+          </div>
+          <!-- notification -->
+          <div *ngIf="tab == 5">
+            <div class="row content-card-heading no-margin padding10">
+              <div class="col">
+                Company
+              </div>
+              <div class="col">
+                Designation
+              </div>
+              <div class="col">
+                City
+              </div>
+              <div class="col">
+                Experience
+              </div>
+              <div class="col">
+                Salary
+              </div>
+              <div class="col">
+                Recived
+              </div>
+              <div class="col">
                 Status
               </div>
             </div>
@@ -592,7 +645,7 @@
                 {{postedTime(job.date)}}
               </div>
               <div class="col">
-                <a (click)="apply(job._id)">Apply Now </a>
+                <a (click)="applynotification(job._id)">Apply Now </a>
               </div>
             </div>
           </div>
@@ -740,29 +793,52 @@
       <div class="modal-body ">
         <div>
           <div class="row">
-            <div class="register-form"  [formGroup]="searchForm">
+            <div class="register-form" [formGroup]="searchForm">
               <div class="single-row">
                 <label for="">Designation/Keyskills:</label>
                 <div class="content-box">
-                  <input type="text" class="form-control" placeholder="Enter  Any Keywords" formControlName="search">
+                  <input type="text" class="form-control" placeholder="Enter  Any Keywords">
                 </div>
 
               </div>
               <div class="single-row">
                 <label for="">Salary Range:</label>
                 <div class="content-box">
-                  <input type="text" class="form-control" placeholder="Enter Salary Range"  formControlName="search">
+                  <input type="text" class="form-control" placeholder="Enter Salary Range" formControlName="salary">
                 </div>
               </div>
               <div class="single-row">
                 <label for="">Experience:</label>
                 <div class="content-box">
-                  <select id="select" class="form-control">
-                    <option value="from">From</option>
-                    <option value="from">From</option>
+                  <select id="select" class="form-control" formControlName="experienceAnotherfrom">
+                    <option [ngValue]="null">From</option>
+                    <option value="0">Freshers</option>
+                    <option value="1">1 Year</option>
+                    <option value="2">2 Year</option>
+                    <option value="3">3 Year</option>
+                    <option value="4">4 Year</option>
+                    <option value="5">5 Year</option>
+                    <option value="6">6 Year</option>
+                    <option value="7">7 Year</option>
+                    <option value="8">8 Year</option>
+                    <option value="9">9 Year</option>
+                    <option value="10">10 Year</option>
+                    <option value="11">11 Year</option>
                   </select>
-                  <select id="select" class="form-control">
-                    <option value="to">To</option>
+                  <select id="select" class="form-control" formControlName="experienceAnotherto">
+                    <option [ngValue]="null">To</option>
+                    <option value="0">Freshers</option>
+                    <option value="1">1 Year</option>
+                    <option value="2">2 Year</option>
+                    <option value="3">3 Year</option>
+                    <option value="4">4 Year</option>
+                    <option value="5">5 Year</option>
+                    <option value="6">6 Year</option>
+                    <option value="7">7 Year</option>
+                    <option value="8">8 Year</option>
+                    <option value="9">9 Year</option>
+                    <option value="10">10 Year</option>
+                    <option value="11">11 Year</option>
                   </select>
                 </div>
               </div>
@@ -771,22 +847,22 @@
               <div class="single-row">
                 <label for="">Job Location:</label>
                 <div class="content-box">
-                  <input type="text" class="form-control" placeholder="Enter  Job Location">
+                  <input type="text" class="form-control" placeholder="Enter  Job Location" formControlName="location">
                 </div>
               </div>
               <div class="single-row">
                 <label for="">Prefered Industry :</label>
                 <div class="content-box">
-                  <select id="select" class="form-control">
-                    <option value="education">Select</option>
+                  <select id="select" class="form-control" formControlName="preferredindustry">
+                    <option [ngValue]="null">Select</option>
                   </select>
                 </div>
               </div>
               <div class="single-row  mt-5">
                 <label for=""> </label>
-
                 <div class="content-box">
-                  <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5">Search</button>
+                  <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5"
+                    (click)="advanceSearch()" data-bs-dismiss="modal" >Search</button>
                 </div>
               </div>
             </div>
