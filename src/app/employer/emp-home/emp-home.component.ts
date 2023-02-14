@@ -59,6 +59,9 @@ export class EmpHomeComponent implements OnInit {
   folder_list: any;
   canfolderList: any;
   folder_name: any;
+  data_list: any;
+  createdAt: any;
+  splitdata: any;
   constructor(private empservice: EmpServiceService,private fb:FormBuilder, private router: Router,) { }
   is_viewpost : boolean = false;
   is_viewapplies : boolean = false;
@@ -276,14 +279,21 @@ get_folder_details(id:any,folderName:any){
     console.log(res);
     this.canfolderList = res
     this.folder_name = this.canfolderList[0].folderName
+    this.createdAt = this.canfolderList[0].createdAt
+    
+    this.splitdata = this.createdAt.split("T")
+    console.log(this.splitdata[0])
+
     this.is_canfolderlist = true
     this.is_viewcan = false
+    this.is_viewapplies = false
+    this.is_viewpost = false
   })
 }
 get_qualification(list:any){
-   console.log(list)
-   if(list.drQualification == 'Doctorate/PhD'){
-    return list.drCourse + ' ' + list.drSpecialization
+  console.log(list)
+   if(list.drQualification == 'Doctorate/phD'){
+    return list.drcourses + ' ' + list.drSpecialization
   }
   else if(list.pgQualification == 'Masters/Post-Graduation'){
     return list.pgCourse + ' ' + list.pgSpecialization
@@ -301,7 +311,55 @@ get_qualification(list:any){
 }
 get_appliedcan_qualification(list:any){
   console.log(list)
+  this.data_list = list.candidateData
+  if(this.data_list.drQualification == 'Doctorate/phD'){
+    return this.data_list.drcourses + ' ' + this.data_list.drSpecialization
+  }
+  else if(this.data_list.pgQualification == 'Masters/Post-Graduation'){
+    return this.data_list.pgCourse + ' ' + this.data_list.pgSpecialization
+  }
+  else if(this.data_list.ugQualification == 'Graduation/Diploma'){
+    return this.data_list.ugCourse + ' ' + this.data_list.ugSpecialization
+  }
+  else if(this.data_list.hsQualification == 'HSC'){
+    return this.data_list.hsQualification
+  }
+  else{
+    return this.data_list.sslcQualification
+  }
   
 }
-
+get_qua_list(list:any){
+  console.log()
+  this.data_list = list.candidateDetails
+  if(this.data_list.drQualification == 'Doctorate/phD'){
+    return this.data_list.drcourses + ' ' + this.data_list.drSpecialization
+  }
+  else if(this.data_list.pgQualification == 'Masters/Post-Graduation'){
+    return this.data_list.pgCourse + ' ' + this.data_list.pgSpecialization
+  }
+  else if(this.data_list.ugQualification == 'Graduation/Diploma'){
+    return this.data_list.ugCourse + ' ' + this.data_list.ugSpecialization
+  }
+  else if(this.data_list.hsQualification == 'HSC'){
+    return this.data_list.hsQualification
+  }
+  else{
+    return this.data_list.sslcQualification
+  }
+}
+sendmail(){
+  var data: any ={
+    candidates:this.listArray
+  }
+  var queryString = new URLSearchParams(data).toString();
+  this.router.navigateByUrl('/sendMail?'+queryString);
+}
+sendjob(){
+  var data: any ={
+    candidates:this.listArray
+  }
+  var queryString = new URLSearchParams(data).toString();
+  this.router.navigateByUrl('/sendJob?'+queryString);
+}
 }

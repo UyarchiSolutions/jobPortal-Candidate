@@ -437,7 +437,7 @@ padding: 8px 0px;
     font-size: 14px;
 }
 .recent-search,.saved{
-    border-radius: 50px ;
+    border-radius: 0px ;
 }
 .recent-search header p,.saved header p{
    margin: 0 !important;
@@ -461,7 +461,12 @@ padding: 8px 0px;
     align-items: center;
     padding: 10px 5px;
 }
-
+.recent-search ul li div{
+    margin-top: 2px !important;
+}
+.recent-search ul li{
+    padding-bottom: 5px !important;
+}
 .tab{
     
     padding: 5px;
@@ -529,5 +534,15 @@ label{
 .education{
     display: flex;
     flex-direction: column;
+}
+.view-jobs{
+    font-size: 12px;
+    font-weight: 600;
+    text-align: end;
+    text-decoration: underline;
+}
+.text-12{
+    font-size: 12px;
+    font-weight: 500;
 }
 

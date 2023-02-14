@@ -47,7 +47,11 @@ export class CanDetailsComponent implements OnInit {
     console.log(e.target.value)
      this.send_value = e.target.value;
      if(this.send_value == 'send mail'){
-      this.router.navigateByUrl('sendMail');
+      var data: any ={
+        candidates:Array(this.id)
+      }
+      var queryString = new URLSearchParams(data).toString();
+      this.router.navigateByUrl('/sendMail?'+queryString);
      }
      if(this.send_value == 'send job'){
        var data: any ={

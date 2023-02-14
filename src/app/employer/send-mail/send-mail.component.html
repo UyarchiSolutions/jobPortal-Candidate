@@ -1,173 +1,108 @@
-<div class="container-fluid register">
+<div class="container-fluid login">
     <div class="row">
-        <div class="col-2 ad-image">
-            <img src="../../assets/image/ad.png" alt="">
+      <div class="col-2 ad-image">
+        <img src="../../assets/image/ad.png" alt="">
+      </div>
+      <div class="col-8  login-main">
+        <div class="row ">
+          <div class="col">
+            <img src="../../assets/image/hero.png" alt="" class="hero-image">
+          </div>
         </div>
-        <div class="col-8  login-main">
-            <div class="row ">
-                <div class="col">
-                    <img src="../../assets/image/hero.png" alt="" class="hero-image">
-                </div>
-            </div>
-            <div class="row register-content-row height-register-content">
-                <div class="col register-content">
-                    <div class="row">
-                        <div class="col"></div>
-                        <div class="col">
-                            <h3>Send a Mail</h3>
-                        </div>
-                        <div class="col"></div>
-                    </div>
-<div class="col">
-
-                    <div class="row">
-
-              
-
-                    <div class="register-form">
-                        <div class="single-row">
-                            <label for="">From Email ID :</label>
-                            <div class="content-box">
-                                <input type="email" class="form-control" placeholder="example@gmail.com">
-                            </div>
-
-                        </div>
-
-                        <div class="single-row">
-                            <label for="">Template:</label>
-                            <div class="content-box">
-                                <select class="form-control select-type">
-                                    <option value="option1" disabled selected >Use Existing Email Template</option>
-                                    <option value="option2">Option 2</option>
-                                    <option value="option3">Option 3</option>
-                                  </select>                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-                </div>
-
-
-                <div class="row">
-                    <div class="col"></div>
-                    <div class="col">
-                      <h3 class="or-line">Or</h3>
-                    </div>
-                    <div class="col"></div>
-                  </div>
-        
-               
+        <div class="row register-content-row height-register-content">
+          <div class="col register-content">
+            <div class="row">
+              <div class="col-2"></div>
+              <div class="col">
+                <h3>Send a Mail</h3>
+              </div>
+              <div class="col-2">
                 
-                <div class="col">
-
-                    <div class="row">
-
-              
-
-                    <div class="register-form">
-                        <div class="single-row">
-                            <label for="">Template Name :</label>
-                            <div class="content-box">
-                                <input type="text" class="form-control" placeholder="Enter Template Name">
-                            </div>
-
-                        </div>
-
-
-                        <div class="single-row">
-                            <label for="">Job Title :</label>
-                            <div class="content-box">
-                                <input type="text" class="form-control" placeholder="Enter Job Title">
-                            </div>
-
-                        </div>
-
-
-                        <div class="single-row">
-                            <label for="">Expreience :</label>
-                            <div class="content-box">
-                                <select class="form-control select-type douple-input-first">
-                                    <option value="option1" disabled selected >Year</option>
-                                    <option value="option2">Option 2</option>
-                                    <option value="option3">Option 3</option>
-                                  </select>
-
-
-                                  <select class="form-control select-type douple-input-second">
-                                    <option value="option1" disabled selected >Month</option>
-                                    <option value="option2">Option 2</option>
-                                    <option value="option3">Option 3</option>
-                                  </select>
-                            </div>
-                        </div>
-                        <div class="single-row">
-                            <label for="">Subject :</label>
-                            <div class="content-box">
-                                <input type="text" class="form-control" placeholder="Enter Subject">
-                            </div>
-                        </div>
-
-                        <div class="single-row">
-                            <label for="">CTC :</label>
-                            <div class="content-box">
-                                <input type="number" class="form-control" placeholder="Enter CTC">
-                            </div>
-                        </div>
-
-                        <div class="single-row">
-                            <label for="">Job Location :</label>
-                            <div class="content-box">
-                                <input type="text" class="form-control" placeholder="Enter Job location">
-                            </div>
-                        </div>
-
-                        <div class="single-row">
-                            <label for="">Key Skills :</label>
-                            <div class="content-box">
-                                <input type="text" class="form-control" placeholder="Enter Key Skills">
-                            </div>
-                        </div>
-
-
-
-
-                        <div class="single-row">
-                            <label for="">Job Description :</label>
-                            <div class="content-box">
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Enter Job Description"></textarea>
-                            </div>
-                        </div>
-                        <div class="single-row">
-                            <label for="">Signature :</label>
-                            <div class="content-box">
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type Here........"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="single-row douple-btn">
-                            <div class="content-box">
-                                <button type="submit" class="btn mb-2 btn-custom  btn-brand-grey">Preview</button>
-                            </div>
-                            <div class="content-box">
-                                <button type="submit" class="btn btn-brand-blue mb-2 btn-custom">Post</button>
-                            </div>
-                        </div>
-
-
-
+              </div>
+            </div>
+  
+         
+  
+  
+            
+            <div class="row">
+              <div class="register-form" [formGroup]="mailForm">
+  
+  
+  
+                <div class="single-row">
+                    <label for="">Form Email ID :</label>
+                    <div class="content-box">
+                 
+                       
+                            <input type="text" class="form-control" placeholder="Enter Email" formControlName="email">
+                       
                     </div>
-
+  
                 </div>
+                <div class="single-row">
+                    <label for="">Subject:</label>
+                    <div class="content-box">
+                 
+                       
+                            <input type="text" class="form-control" value="UI UX Designer" formControlName="subject">
+                       
+                    </div>
+  
                 </div>
-
-
+                <div class="single-row  align-items-start ">
+                    <label for="" class="mt-3">Message :</label>
+                    <div class="form-control content-box flex-column message ">
+                 
+                       
+                         <textarea placeholder="Type Here..." class="form-control" formControlName="message">
+                         </textarea>
+                         <div class="font-style px-3"><svg width="10" height="14" viewBox="0 0 10 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.66667 6.16732H5.41667C5.9692 6.16732 6.4991 5.94782 6.88981 5.55712C7.28051 5.16642 7.5 4.63652 7.5 4.08398C7.5 3.53145 7.28051 3.00155 6.88981 2.61085C6.4991 2.22014 5.9692 2.00065 5.41667 2.00065H1.66667V6.16732ZM10 9.91732C10 10.4098 9.903 10.8974 9.71455 11.3524C9.52609 11.8074 9.24987 12.2207 8.90165 12.569C8.55343 12.9172 8.14003 13.1934 7.68506 13.3819C7.23009 13.5703 6.74246 13.6673 6.25 13.6673H0V0.333984H5.41667C6.1508 0.334015 6.86877 0.549528 7.48156 0.9538C8.09435 1.35807 8.575 1.93332 8.86391 2.60821C9.15282 3.2831 9.23728 4.02795 9.10682 4.7504C8.97636 5.47284 8.63671 6.1411 8.13 6.67232C8.69887 7.00173 9.17111 7.47496 9.49934 8.04452C9.82756 8.61409 10.0002 9.25995 10 9.91732ZM1.66667 7.83398V12.0007H6.25C6.80253 12.0007 7.33244 11.7812 7.72314 11.3905C8.11384 10.9998 8.33333 10.4699 8.33333 9.91732C8.33333 9.36478 8.11384 8.83488 7.72314 8.44418C7.33244 8.05348 6.80253 7.83398 6.25 7.83398H1.66667Z" fill="black"/>
+                            </svg>
+                            <svg width="10" height="14" viewBox="0 0 10 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.4987 13.6673H0.832031V12.0007H3.2712L5.03453 2.00065H2.4987V0.333984H9.16536V2.00065H6.7262L4.96286 12.0007H7.4987V13.6673Z" fill="black"/>
+                                </svg>
+                                <svg width="14" height="17" viewBox="0 0 14 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.66536 0.5V8C3.66536 8.88406 4.01655 9.7319 4.64167 10.357C5.2668 10.9821 6.11464 11.3333 6.9987 11.3333C7.88275 11.3333 8.7306 10.9821 9.35572 10.357C9.98084 9.7319 10.332 8.88406 10.332 8V0.5H11.9987V8C11.9987 9.32608 11.4719 10.5979 10.5342 11.5355C9.59655 12.4732 8.32478 13 6.9987 13C5.67262 13 4.40085 12.4732 3.46316 11.5355C2.52548 10.5979 1.9987 9.32608 1.9987 8V0.5H3.66536ZM0.332031 14.6667H13.6654V16.3333H0.332031V14.6667Z" fill="black"/>
+                                    </svg>
+                                    <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4.66667 1.33268H15.5V2.99935H4.66667V1.33268ZM1.75 3.41602C1.41848 3.41602 1.10054 3.28432 0.866117 3.0499C0.631696 2.81548 0.5 2.49754 0.5 2.16602C0.5 1.8345 0.631696 1.51655 0.866117 1.28213C1.10054 1.04771 1.41848 0.916016 1.75 0.916016C2.08152 0.916016 2.39946 1.04771 2.63388 1.28213C2.8683 1.51655 3 1.8345 3 2.16602C3 2.49754 2.8683 2.81548 2.63388 3.0499C2.39946 3.28432 2.08152 3.41602 1.75 3.41602ZM1.75 9.24935C1.41848 9.24935 1.10054 9.11765 0.866117 8.88323C0.631696 8.64881 0.5 8.33087 0.5 7.99935C0.5 7.66783 0.631696 7.34989 0.866117 7.11547C1.10054 6.88104 1.41848 6.74935 1.75 6.74935C2.08152 6.74935 2.39946 6.88104 2.63388 7.11547C2.8683 7.34989 3 7.66783 3 7.99935C3 8.33087 2.8683 8.64881 2.63388 8.88323C2.39946 9.11765 2.08152 9.24935 1.75 9.24935ZM1.75 14.9993C1.41848 14.9993 1.10054 14.8677 0.866117 14.6332C0.631696 14.3988 0.5 14.0809 0.5 13.7493C0.5 13.4178 0.631696 13.0999 0.866117 12.8655C1.10054 12.631 1.41848 12.4993 1.75 12.4993C2.08152 12.4993 2.39946 12.631 2.63388 12.8655C2.8683 13.0999 3 13.4178 3 13.7493C3 14.0809 2.8683 14.3988 2.63388 14.6332C2.39946 14.8677 2.08152 14.9993 1.75 14.9993ZM4.66667 7.16602H15.5V8.83268H4.66667V7.16602ZM4.66667 12.9993H15.5V14.666H4.66667V12.9993Z" fill="black"/>
+                                        </svg>
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M4.66667 1.33333H15.5V3H4.66667V1.33333ZM2.16667 0.5V3H3V3.83333H0.5V3H1.33333V1.33333H0.5V0.5H2.16667ZM0.5 9.66667V7.58333H2.16667V7.16667H0.5V6.33333H3V8.41667H1.33333V8.83333H3V9.66667H0.5ZM2.16667 14.25H0.5V13.4167H2.16667V13H0.5V12.1667H3V15.5H0.5V14.6667H2.16667V14.25ZM4.66667 7.16667H15.5V8.83333H4.66667V7.16667ZM4.66667 13H15.5V14.6667H4.66667V13Z" fill="black"/>
+                                            </svg>
+                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M11.0184 7.16859C11.5738 7.43376 12.0575 7.82836 12.4287 8.31922C12.8 8.81008 13.0481 9.38287 13.1521 9.98948C13.2561 10.5961 13.213 11.2188 13.0264 11.8053C12.8399 12.3918 12.5153 12.925 12.0799 13.36L8.23379 17.2062C7.51249 17.9275 6.5342 18.3327 5.51414 18.3327C4.49407 18.3327 3.51578 17.9275 2.79449 17.2062C2.07319 16.4849 1.66797 15.5066 1.66797 14.4865C1.66797 13.4664 2.07319 12.4882 2.79449 11.7669L4.29619 10.2652M15.7064 9.73354L17.2081 8.23183C17.9294 7.51054 18.3346 6.53225 18.3346 5.51218C18.3346 4.49212 17.9294 3.51383 17.2081 2.79253C16.4868 2.07124 15.5085 1.66602 14.4885 1.66602C13.4684 1.66602 12.4901 2.07124 11.7688 2.79253L7.92268 6.63867C7.48732 7.07372 7.16273 7.60689 6.97617 8.19339C6.7896 8.77989 6.74651 9.40261 6.85052 10.0092C6.95452 10.6158 7.20258 11.1886 7.57387 11.6795C7.94515 12.1703 8.42881 12.5649 8.98421 12.8301" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                                                                                                                                                        
+                                
+                            </div>
+                      
+                    </div>
+  
+                </div>
+                <div class="single-row  align-items-start">
+                    <label for="" class="mt-3">Signature :</label>
+                    <div class="content-box">
+                         <textarea placeholder="Type Here..." class="form-control" formControlName="signature"></textarea>
+                    </div>
+  
+                </div>
+                <div class="single-row mt-5"> 
+  
+                    <div class="content-box col-8 m-auto ">
+                        <button type="submit" class="btn mb-2 me-3 btn-custom btn-brand-grey">Preview</button>
+                        <button type="submit" class="btn btn-brand-blue mb-2 ms-3" (click)="sendamail()">Send</button>
+                    </div>
                 </div>
             </div>
+            </div>
+          </div>
         </div>
-        <div class="col-2 ad-image">
-            <img src="../../assets/image/ad.png" alt="">
-        </div>
+      </div>
+      <div class="col-2 ad-image">
+        <img src="../../assets/image/ad.png" alt="">
+      </div>
     </div>
-</div>
+  </div>

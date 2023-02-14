@@ -18,6 +18,8 @@ import { EmpMailTemplateComponent } from './emp-mail-template/emp-mail-template.
 import { CreateMailTemplateComponent } from './create-mail-template/create-mail-template.component';
 import { NgxEditorModule } from "ngx-editor";
 import { JobPreviewComponent } from './job-preview/job-preview.component';
+import { SavedFolderComponent } from './saved-folder/saved-folder.component';
+import { SavedSearchComponent } from './saved-search/saved-search.component';
 
 
 
@@ -29,6 +31,7 @@ import { JobPreviewComponent } from './job-preview/job-preview.component';
     CheckEmailComponent,
     VerifyOtpComponent,
     EmpCansearchComponent,
+    
     
   ],
   imports: [

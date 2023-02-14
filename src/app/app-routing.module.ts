@@ -34,6 +34,8 @@ const routes: Routes = [
    {path: 'emp-email-template',loadChildren: () => import('./employer/emp-mail-template/emp-mail-template.module').then(m => m.EmpMailTemplateModule) },
    {path: 'create-email-template',loadChildren: () => import('./employer/create-mail-template/create-mail-template.module').then(m => m.CreateMailTemplateModule) },
    {path: 'job-preview',loadChildren: () => import('./employer/job-preview/job-preview.module').then(m => m.JobPreviewModule) },
+   {path: 'saved-folder',loadChildren: () => import('./employer/saved-folder/saved-folder.module').then(m => m.SavedFolderModule) },
+   {path: 'saved-search',loadChildren: () => import('./employer/saved-search/saved-search.module').then(m => m.SavedSearchModule) },
 
 
 
