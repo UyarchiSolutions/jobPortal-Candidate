@@ -45,8 +45,8 @@
                   <div class="single-row">
                     <label for="">Key Skills :</label>
                     <div class="content-box">
-                      <input type="text" class="form-control" (keyup)="dispalye($event)"
-                        placeholder="Enter Key Skills" formControlName="searchbox">
+                      <input type="text" class="form-control" (keyup)="dispalye($event)" placeholder="Enter Key Skills"
+                        formControlName="searchbox">
                     </div>
                   </div>
                   <div class="single-row" *ngIf="isDisplay" style="margin-top:0px;">
@@ -97,14 +97,58 @@
                   <div class="single-row">
                     <label for="">Expected CTC :</label>
                     <div class="content-box">
-                      <input type="text" class="form-control" placeholder="Enter CTC" formControlName="expectedctc">
+                      <!-- <input type="text" class="form-control" placeholder="Enter CTC" formControlName="expectedctc"> -->
+                      <select class="form-control select-type douple-input-first" formControlName="expectedctc">
+                        <option value="option1" disabled selected>Year</option>
+                        <option value="1 ">1 lac</option>
+                        <option value="2 ">2 lac</option>
+                        <option value="3 ">3 lac</option>
+                        <option value="4 ">4 lac</option>
+                        <option value="5 ">5 lac</option>
+                        <option value="6 ">6 lac</option>
+                        <option value="7 ">7 lac</option>
+                        <option value="8 ">8 lac</option>
+                        <option value="9 ">9 lac</option>
+                        <option value="10 ">10 lac</option>
+                        <option value="11 ">11 lac</option>
+                      </select>
+
                     </div>
 
                   </div>
-                  <div class="single-row" *ngIf="profileForm.get('experienceYear')?.value != ''">
+                  <div class="single-row" *ngIf="profileForm.get('experienceYear')?.value != '0'">
                     <label for="">Current CTC :</label>
                     <div class="content-box">
-                      <input type="text" class="form-control" placeholder="Enter CTC" formControlName="currentctc">
+                      <select class="form-control select-type douple-input-first" formControlName="currentctc">
+                        <option value="option1" disabled selected>Year</option>
+                        <option value="1 lac">1 lac</option>
+                        <option value="2 lac">2 lac</option>
+                        <option value="3 lac">3 lac</option>
+                        <option value="4 lac">4 lac</option>
+                        <option value="5 lac">5 lac</option>
+                        <option value="6 lac">6 lac</option>
+                        <option value="7 lac">7 lac</option>
+                        <option value="8 lac">8 lac</option>
+                        <option value="9 lac">9 lac</option>
+                        <option value="10 lac">10 lac</option>
+                        <option value="11 lac">11 lac</option>
+                      </select>
+                      <select class="form-control select-type douple-input-second">
+                        <option value="option1" disabled selected>Month</option>
+                        <option value="5000">5000</option>
+                        <option value="10000">10000</option>
+                        <option value="15000">15000</option>
+                        <option value="20000">20000</option>
+                        <option value="25000">25000</option>
+                        <option value="30000">30000</option>
+                        <option value="35000">35000</option>
+                        <option value="40000">40000</option>
+                        <option value="45000">45000</option>
+                        <option value="50000">50000</option>
+                        <option value="55000">55000</option>
+                        <option value="60000">60000</option>
+                      </select>
+                      <!-- <input type="text" class="form-control" placeholder="Enter CTC" formControlName="currentctc"> -->
                     </div>
 
                   </div>
@@ -204,15 +248,18 @@
                         </div>
                         <div class="content-box">
                           <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Speck" (change)="kownaction($event,i,lang)">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Speck"
+                              (change)="kownaction($event,i,lang)">
                             <label class="form-check-label" for="inlineCheckbox1">Speck</label>
                           </div>
                           <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Read" (change)="kownaction($event,i,lang)">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Read"
+                              (change)="kownaction($event,i,lang)">
                             <label class="form-check-label" for="inlineCheckbox2">Read</label>
                           </div>
                           <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="Write" (change)="kownaction($event,i,lang)">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="Write"
+                              (change)="kownaction($event,i,lang)">
                             <label class="form-check-label" for="inlineCheckbox3">Write</label>
                           </div>
                         </div>

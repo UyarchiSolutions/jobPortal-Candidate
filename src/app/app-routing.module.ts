@@ -16,6 +16,7 @@ import { EducationdetailsComponent } from './candidate/educationdetails/educatio
 import { ProffesinoalComponent } from './candidate/proffesinoal/proffesinoal.component';
 import { ApplymailjobsComponent } from './candidate/applymailjobs/applymailjobs.component';
 import { ViewFulldetailsComponent } from './candidate/view-fulldetails/view-fulldetails.component';
+import { JobpreviewPopupComponent } from './candidate/jobpreview-popup/jobpreview-popup.component';
 
 const routes: Routes = [
    {path:"",component:CanHomeComponent},
@@ -51,7 +52,8 @@ const routes: Routes = [
     {path:"can-edu",component:EducationdetailsComponent},
     {path:"can-proffesinal",component:ProffesinoalComponent},
     {path:"can-mailApply",component:ApplymailjobsComponent},
-    {path:"viewprofile",component:ViewFulldetailsComponent}
+    {path:"viewprofile",component:ViewFulldetailsComponent},
+    {path:'mail-details',component:JobpreviewPopupComponent}
 ];
 
 @NgModule({

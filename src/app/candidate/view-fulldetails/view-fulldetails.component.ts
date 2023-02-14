@@ -16,7 +16,7 @@ export class ViewFulldetailsComponent implements OnInit {
   }
   getallDetails(){
     this.canditateService.viewDetails().subscribe((res:any) => {
-     this.getAlldetails=res.user[0].candidateDetails;
+     this.getAlldetails=res.user;
      console.log(this.getAlldetails,"details")
     })
   }
@@ -27,5 +27,9 @@ export class ViewFulldetailsComponent implements OnInit {
   // got to proffesnal
   gotoProffistional(id:any){
     this.router.navigate(['/can-proffesinal'],{queryParams:{id:id}})
+  }
+  //
+  gotoEdu(id:any){
+    this.router.navigate(['/can-edu'],{queryParams:{id:id}})
   }
 }

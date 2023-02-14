@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-applymailjobs',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApplymailjobsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private activeRouter:ActivatedRoute ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.activeRouter.queryParams.subscribe((res:any) => {
+
+    })
   }
 
 }

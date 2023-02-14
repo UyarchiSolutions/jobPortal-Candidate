@@ -190,7 +190,7 @@
               <h3>Education Details</h3>
             </div>
             <div class="col-2">
-              <span class=" edit-icon"><i style="font-size: 11px;color: white;" class="fa fa-pencil"></i></span>
+              <span class=" edit-icon" (click)="gotoEdu(details._id)"><i style="font-size: 11px;color: white;" class="fa fa-pencil"></i></span>
             </div>
           </div>
           <div class="row">
@@ -217,13 +217,13 @@
               <div class="single-row">
                 <label for="">Course :</label>
                 <div class="content-box">
-                  <p>{{details.drCourse}}</p>
+                  <p>{{details.drcourses}}</p>
                 </div>
               </div>
               <div class="single-row">
                 <label for="">Grading System :</label>
                 <div class="content-box">
-                  <p>{{details.drCourse}}</p>
+                  <p>{{details.drGradingSystem}}</p>
                 </div>
               </div>
               <div class="single-row">
@@ -244,6 +244,7 @@
                   <p>{{details.drCourseDurationFrom}}-{{details.drCourseDurationTo}}</p>
                 </div>
               </div>
+              <button>remove</button>
               <h5 class="m-auto mb-4 mt-4">Education Details 2 :</h5>
               <div class="single-row">
                 <label for="">Qualification :</label>
@@ -293,6 +294,7 @@
                   <p>{{details.pgCourseDurationFrom}}-{{details.pgCourseDurationTo}}</p>
                 </div>
               </div>
+              <button>remove</button>
               <h5 class="m-auto mb-4 mt-4">Education Details 3 :</h5>
               <div class="single-row">
                 <label for="">Qualification :</label>
@@ -342,6 +344,7 @@
                   <p>{{details.ugCourseDurationFrom}}-{{details.ugCourseDurationTo}}</p>
                 </div>
               </div>
+              <button>remove</button>
               <h5 class="m-auto mb-4 mt-4">Education Details 4 :</h5>
               <div class="single-row">
                 <label for="">Qualification :</label>
@@ -375,6 +378,7 @@
                   <p>{{details.hsPassedYear}}</p>
                 </div>
               </div>
+              <button >remove</button>
               <h5 class="m-auto mb-4 mt-4">Education Details 4 :</h5>
               <div class="single-row">
                 <label for="">Qualification :</label>
@@ -406,7 +410,7 @@
                   <p>{{details.sslcPassedYear}}</p>
                 </div>
               </div>
-
+              <button>remove</button>
               <!-- professional details -->
               <div class="row">
                 <div class="col-2"></div>
@@ -446,12 +450,12 @@
                   </div>
                 </div>
               </div>
-              <div class="single-row  mt-5 mb-5">
+              <!-- <div class="single-row  mt-5 mb-5">
                 <label for=""> </label>
                 <div class="content-box">
                   <button type="submit" class="btn btn-brand-blue mb-2">Log In</button>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { CanditateService } from '../canditate.service';
 
 @Component({
@@ -9,15 +10,17 @@ import { CanditateService } from '../canditate.service';
   styleUrls: ['./can-get.component.css']
 })
 export class CanGetComponent implements OnInit {
+  [x: string]: any;
   tab = 0;
   appliedJobs: any = [];
   saveJobs: any = [];
   keySkill: any;
   afterSearch: any;
   getAllalerts: any = [];
+  getAllNotification: any = [];
   searchForm = this.fb.group({
     experience: new FormControl(null, [Validators.required]),
-    search: new FormControl(null, [Validators.required]),
+    search: new FormControl([], [Validators.required]),
     experienceAnotherfrom: new FormControl(null),
     experienceAnotherto: new FormControl(null),
     location: new FormControl(null, [Validators.required]),
@@ -33,23 +36,37 @@ export class CanGetComponent implements OnInit {
     postedby: new FormControl(null),
     searchbox: new FormControl(null),
   })
-  setAlertForm = this.fb.group({
+  setAlertForm: any = this.fb.group({
+    currentIndustry: new FormControl(null, [Validators.required]),
+    currentDepartment: new FormControl(null, [Validators.required]),
+    role_Category: new FormControl(null, [Validators.required]),
     designationSet: new FormControl(null, [Validators.required]),
-    keyskillSet: this.fb.array([], [Validators.required]),
+    keyskillSet: new FormControl(null, [Validators.required]),
     experienceYearSet: new FormControl(null, [Validators.required]),
     experienceMonthSet: new FormControl(null, [Validators.required]),
+    salaryFrom: new FormControl(null, [Validators.required]),
+    SalaryTo: new FormControl(null, [Validators.required]),
     locationSet: new FormControl(null, [Validators.required]),
+    searchalert: new FormControl(null),
   })
   datavalues: any;
   jobs: any = [];
   recentData: any = [];
+  industry: any = [];
+  currentDepartment: any = []
   constructor(private canditSarvice: CanditateService, private fb: FormBuilder, private router: Router) { }
 
 
   ngOnInit() {
     this.get_allJobs();
     this.recentSearch();
-    this.getSaveData()
+    this.getSaveData();
+    this.canditSarvice.currentIndustry().subscribe((res: any) => {
+      this.industry = res;
+    })
+    this.canditSarvice.currentDepartment().subscribe((res: any) => {
+      this.currentDepartment = res;
+    })
   }
   get_allJobs() {
     this.canditSarvice.getAlldetails(this.searchForm.value).subscribe((res: any) => {
@@ -91,15 +108,27 @@ export class CanGetComponent implements OnInit {
     })
   }
   // creatr alte
+  alert = false;
+
   jobAlert() {
     this.tab = 4;
     this.canditSarvice.getAlerts().subscribe((res: any) => {
       this.getAllalerts = res;
+    }, error => {
+      if (error.error.message == 'job alert data not found') {
+        this.alert = true;
+      } else {
+        this.alert = false;
+      }
     })
   }
   // notification
   notification() {
     this.tab = 5
+    this.canditSarvice.getAllNotification().subscribe((res: any) => {
+      this.getAllNotification = res;
+      console.log(this.getAllNotification)
+    })
   }
   // search
   search() {
@@ -113,6 +142,7 @@ export class CanGetComponent implements OnInit {
   // get skills
   isDisplay = false;
   dispalye(data: any) {
+    console.log("lusu")
     let value = data.target.value.split(",");
 
     if (data.target.value) {
@@ -126,7 +156,6 @@ export class CanGetComponent implements OnInit {
       }
     }
     this.searchForm.get('search')?.setValue(value)
-    console.log(this.searchForm?.value)
 
   }
   getKeyskills(value: any) {
@@ -156,9 +185,10 @@ export class CanGetComponent implements OnInit {
     this.canditSarvice.getReacent_data(value).subscribe((res: any) => {
       this.searchForm.patchValue({
         location: res.location,
-        experience: res.experience
+        experience: res.experience,
+        searchbox:res.search
       })
-      this.datavalues = res.search
+      // this.datavalues = res.search
     })
   }
   savesearch() {
@@ -186,26 +216,38 @@ export class CanGetComponent implements OnInit {
 
     })
   }
-  alretcheckSkill(event: any) {
-    const data: FormArray = this.setAlertForm.get('keyskillSet') as FormArray;
-    if (event.target.checked) {
-      data.push(new FormControl(event.target.value));
-      console.log(data.value, "val")
-      this.datavalues = data.value;
+  isshow:any=false
+  dispalyedData(data: any) {
+    console.log("mental")
+    let value = data.target.value.split(",");
+    if (data.target.value) {
+      this.isshow = true;
     } else {
-      let i: number = 0;
-      data.controls.forEach((item: any) => {
-        if (item == event.target.value) {
-          data.removeAt(i);
-          return;
-        }
-        i++;
-      });
+      this.isshow = false
+    }
+    if (value.length != 0) {
+      if (value[value.length - 1] != null && value[value.length - 1] != '') {
+        this.getKeyskills(value[value.length - 1])
+      }
+    }
+    this.setAlertForm.get('keyskillSet')?.setValue(value)
+  }
+  alretcheckSkill(event: any, skill: any) {
+    let index: any = this.setAlertForm.get('keyskillSet')?.value;
+
+    console.log(skill, "skill")
+    if (index.length != 0) {
+      console.log(index, "index")
+      let value = index.splice([index.length - 1], 1);
+      index.push(skill)
+      this.setAlertForm.get('keyskillSet')?.setValue(index)
+      let search: any = index.toString() + ","
+      this.setAlertForm.get('searchalert')?.setValue(search);
     }
   }
   setalert() {
     this.canditSarvice.educationDetail(this.setAlertForm.value).subscribe((res: any) => {
-
+     this.alert=false;
     })
   }
   // advance search
@@ -227,7 +269,62 @@ export class CanGetComponent implements OnInit {
     // }
   }
   applynotification(id: any) {
-    this.router.navigate(['/'])
+    this.router.navigate(['/can-employ'], { queryParams: { id: id,mail:true } })
+  }
+
+  currentCategory: any = []
+  deparmentId: any;
+  getroles: any = [];
+  changeDeparment(id: any) {
+    this.deparmentId = id.target.value
+    this.canditSarvice.getCategory(this.deparmentId).subscribe((res: any) => {
+      this.currentCategory = res;
+    })
+  }
+  getRole(id: any) {
+    this.canditSarvice.getRole(id.target.value).subscribe((res: any) => {
+      this.getroles = res
+    })
+  }
+  // reFine the search
+  refine = false
+  exp() {
+    this.refine = true;
+  }
+  options: any = {
+    componentRestrictions: { country: 'IN' },
+  };
+
+  latitude: any;
+  longtitude: any;
+  handleAddressChange(address: Address) {
+    this.setAlertForm.patchValue({
+      locationSet: address.formatted_address
+    })
+  }
+  edit() {
+    this.alert = true;
+    this.canditSarvice.viewDetails().subscribe((res: any) => {
+      this.canditSarvice.getCategory(res.user[0].currentDepartment).subscribe((res: any) => {
+        this.currentCategory = res;
+      })
+      this.canditSarvice.getRole(res.user[0].role_Category).subscribe((res: any) => {
+        this.getroles = res
+      })
+      this.setAlertForm.patchValue({
+        searchalert:res.user[0].keyskillSet,
+        keyskillSet:res.user[0].keyskillSet,
+        currentIndustry:res.user[0].currentIndustry,
+        currentDepartment:res.user[0].currentDepartment,
+        designationSet:res.user[0].designationSet,
+        role_Category:res.user[0].role_Category,
+        experienceYearSet:res.user[0].experienceYearSet,
+        salaryFrom:res.user[0].salaryFrom,
+        locationSet:res.user[0].locationSet
+      })
+      console.log(this.setAlertForm.get('designationSet').value,"values");
+
+    })
   }
 }
 
