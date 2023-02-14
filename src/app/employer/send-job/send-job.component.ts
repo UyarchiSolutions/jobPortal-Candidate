@@ -11,34 +11,61 @@ import { EmpServiceService } from '../emp-service.service';
 export class SendJobComponent implements OnInit {
   id: any;
   postForm:any = this.formBuilder.group({
-    jobTittle : new FormControl('', Validators.required),
-    salaryRangeFrom : new FormControl('', Validators.required),
-    salaryRangeTo : new FormControl('', Validators.required),
-    experienceFrom : new FormControl('', Validators.required),
-    experienceTo : new FormControl('', Validators.required),
-    jobLocation : new FormControl('', Validators.required),
-    keySkill : this.formBuilder.array([], Validators.required),
-    jobDescription : new FormControl('', Validators.required),
-
+    jobTittle : new FormControl(null, Validators.required),
+    email : new FormControl('', Validators.required),
+    subject : new FormControl('', Validators.required),
+    signature : new FormControl('', Validators.required),
   })
+  jobId: any;
+  job_list: any;
+  jobdetails: any;
+  skills: any;
+  title: any;
+  candidates: any;
+  is_attached:boolean = false;
   constructor(private empservice: EmpServiceService,private route: ActivatedRoute, private router: Router,private formBuilder:FormBuilder,) { }
 
   ngOnInit(): void {
     this.route.queryParams
     .subscribe(params => {
-      console.log(params['id']); 
-      this.id=params['id'];
-      this.job_detail(this.id)
+      console.log(params); 
+      this.candidates=params['candidates'];
     }
   );
+  this.get_job_list()
   }
-  job_detail(id: any) {
-    this.empservice.get_job_detail(id).subscribe((res:any)=>{
-      this.job_detail = res.user[0]
+ 
+  get_job_list(){
+    this.empservice.myjobPost().subscribe((res:any)=>{
+      this.job_list = res.user
+      console.log(this.job_list)
+    })
+  }
+  job_details(e:any) {
+    this.jobId = e.target.value;
+    this.empservice.get_job_detail(this.jobId).subscribe((res:any)=>{
+      console.log(res)
+      this.jobdetails = res.user[0]
       this.postForm.patchValue({
-
+        subject:this.jobdetails.jobTittle
       })
     })
   }
+  sendajob(){
+    var data={
+       candidates:Array(this.candidates),
+       mailId: this.jobId,
+       subject:this.postForm.get('subject')?.value,
+       signature:this.postForm.get('subject')?.value,
+       email:this.postForm.get('subject')?.value
 
+    }
+    this.empservice.sendajob(data).subscribe((res:any)=>{
+        console.log(res)
+        this.postForm.reset()
+    })
+  }
+  preview(){
+    
+  }
 }

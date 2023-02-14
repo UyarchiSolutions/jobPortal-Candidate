@@ -58,7 +58,7 @@
                                     <option value="11">11 Year</option>
                                 </select>
                             </div>
-                            <div class="search-box" (click)="can_list()" *ngIf="is_search_icon">
+                            <div class="search-box" (click)="can_list()">
                                 <button type="submit" class="btn btn-brand-orange"><img src="../../assets/image/search.png"
                                         alt="" class="search-icon"></button>
                             </div>
@@ -75,7 +75,6 @@
     
                         <div class="advanced-search">
                             <button type="submit" class="btn btn-brand-trans" data-bs-toggle="modal" data-bs-target="#exampleModal">Advance Search</button>
-    
                         </div>
                     </div>
                 </div>
@@ -94,44 +93,15 @@
                         <ul>
                             <li class="sidebarmenu-heading no-margin"><span class="icon-text m-l-1">Saved Folder</span>
                             </li>
-                            <li>
-
-
+                            <li *ngFor="let data of folder_list" (click)="get_folder_details(data.userId,data.folderName)">
                                 <div class="job-listing-bottom">
                                     <div>
-                                        <span class="icon-text m-l-1">Chennai</span>
+                                        <span class="icon-text m-l-1">{{data.folderName}}</span>
                                     </div>
-                                    <div><span class="font12">12</span>
-                                    </div>
-                                </div>
-
-                            </li>
-
-                            <li>
-
-
-                                <div class="job-listing-bottom">
-                                    <div>
-                                        <span class="icon-text m-l-1">Chennai</span>
-                                    </div>
-                                    <div><span class="font12">12</span>
+                                    <div><span class="font12">{{data.count}}</span>
                                     </div>
                                 </div>
-
                             </li>
-
-                            <li>
-
-                                <div class="job-listing-bottom">
-                                    <div>
-                                        <span class="icon-text m-l-1">Chennai</span>
-                                    </div>
-                                    <div><span class="font12">12</span>
-                                    </div>
-                                </div>
-
-                            </li>
-
                         </ul>
                     </div>
 
@@ -274,7 +244,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row content-card-heading no-margin padding10"  style="font-size:13px" >
                             <div class="col">
                                 Posted Date
@@ -332,6 +301,27 @@
                                 <i class='fas fa-sort-amount-down text-white-color'></i>
 
                             </div> -->
+                        </div>
+                        <div class="row no-margin padding10" style="color:#fff;background-color: #82C3EC">
+                            <div class="col">
+                              
+                            </div>
+                            <div class="col">
+                               
+                            </div>
+                            <div class="col">
+                                <div class="pageination-logo">
+                                    <img src="../../assets/image/left-arrow.png" alt="" class="p-left">
+                                    <div class="pageination-number">1</div>
+                                    <img src="../../assets/image/right-arrow.png" alt="" class="p-right">
+                                </div>
+                            </div>
+                            <div class="col">
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Range
+                            </div>
                         </div>
                     </div>
                     <div *ngIf="is_viewapplies">
@@ -408,7 +398,7 @@
                                 <a [routerLink]="['/emp-action']">{{list.candidateData.locationCurrent}}</a>
                             </div>
                             <div class="col">
-                                <a [routerLink]="['/emp-action']">{{list.experienceFrom}}</a>
+                                <a [routerLink]="['/emp-action']">{{get_appliedcan_qualification(list)}}</a>
                             </div>
                             <div class="col">
                                 <a [routerLink]="['/emp-action']">{{list.candidateData.expectedctc}}</a>
@@ -492,15 +482,126 @@
                                 <a [routerLink]="['/can-details']" [queryParams]="{id:list.candidateregistrations._id}">{{list.locationCurrent}}</a>
                             </div>
                             <div class="col">
-                                <a [routerLink]="['/can-details']" [queryParams]="{id:list.candidateregistrations._id}">B.E CSE</a>
+                                <a [routerLink]="['/can-details']" [queryParams]="{id:list.candidateregistrations._id}">{{get_qualification(list)}}</a>
                             </div>
-                            <div class="col">
+                            <div class="col" *ngIf="list.candidateregistrations.workStatus == 'Experience'">
+                                <a [routerLink]="['/can-details']" [queryParams]="{id:list.candidateregistrations._id}">{{list.currentctc}}</a>
+                            </div>
+                            <div class="col" *ngIf="list.candidateregistrations.workStatus == 'Fresher'">
                                 <a [routerLink]="['/can-details']" [queryParams]="{id:list.candidateregistrations._id}">{{list.expectedctc}}</a>
                             </div>
                             <div class="col">
                                 <a [routerLink]="['/can-details']" [queryParams]="{id:list.candidateregistrations._id}">{{list.experienceYear}}Year - {{list.experienceMonth}}Months</a>
                             </div>
                          
+                        </div>
+                        <div class="row no-margin padding10" style="color:#fff;background-color: #82C3EC">
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Send
+                            </div>
+                            <div class="col" data-bs-toggle="modal" data-bs-target="#savefolder" style="cursor:pointer">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Save
+                            </div>
+                            <div class="col">
+                                <div class="pageination-logo">
+                                    <img src="../../assets/image/left-arrow.png" alt="" class="p-left">
+                                    <div class="pageination-number">1</div>
+                                    <img src="../../assets/image/right-arrow.png" alt="" class="p-right">
+                                </div>
+                            </div>
+                            <div class="col">
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Range
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="is_canfolderlist">
+                        <div class="row no-margin bg-grey">
+                            <div class="col">
+                                <div class="filter-label" style="font-size: 16px;">
+                                    <span class="badge bg-light text-dark">
+                                        <span class="">{{folder_name}}</span>
+                                        <span class="close-mark">x</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row content-card-heading no-margin padding10"  style="font-size:13px" >
+                            <div class="col-1">
+                                <div class="form-check">
+                                     <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                 </div>
+                            </div>
+                            <div class="col">
+                                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                                Name
+                            </div>
+                            <div class="col">
+                                Location
+                            </div>
+                            <div class="col">
+                               Qualification
+                            </div>
+                            <div class="col">
+                                Salary
+                            </div>
+                            <div class="col">
+                                 Experience
+                            </div>
+                            
+                        </div>
+                        <div class="row content-card no-margin padding10" *ngFor="let list of canfolderList" style="cursor:pointer">
+                            <div class="col-1">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" [value]="" (change)="canId($event)" value="" aria-label="...">
+                                </div>
+                            </div>
+                            <div class="col">
+                               {{list.name}}
+                            </div>
+                            <div class="col">
+                               {{list.candidateDetails.locationCurrent}}
+                            </div>
+                            <div class="col">
+                                B.E CSE
+                            </div>
+                            <div class="col" *ngIf="list.workStatus == 'Experience'">
+                                {{list.candidateDetails.currentctc}}
+                            </div>
+                            <div class="col" *ngIf="list.workStatus == 'Fresher'">
+                                {{list.candidateDetails.expectedctc}}
+                            </div>
+                            <div class="col">
+                                {{list.candidateDetails.experienceYear}}Year - {{list.candidateDetails.experienceMonth}}Months
+                            </div>
+                         
+                        </div>
+                        <div class="row no-margin padding10" style="color:#fff;background-color: #82C3EC">
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Send
+                            </div>
+                            <div class="col" data-bs-toggle="modal" data-bs-target="#savefolder" style="cursor:pointer">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Save
+                            </div>
+                            <div class="col">
+                                <div class="pageination-logo">
+                                    <img src="../../assets/image/left-arrow.png" alt="" class="p-left">
+                                    <div class="pageination-number">1</div>
+                                    <img src="../../assets/image/right-arrow.png" alt="" class="p-right">
+                                </div>
+                            </div>
+                            <div class="col">
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Range
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -603,7 +704,7 @@
 </div>
 
 <div class="modal" id="exampleModal" tabindex="-1"
-aria-labelledby="exampleModalLabel" aria-hidden="true">
+aria-labelledby="exampleModalLabel" aria-hidden="true" [formGroup]="searchForm">
 <div class="modal-dialog">
     <div class="modal-content popup-parent">
         <div class="modal-body">
@@ -633,7 +734,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="content-box">
                                     <select id="select" class="form-control" formControlName="experiencefrom">
                                         <option [ngValue]="null" disabled selected >From</option>
-                                        <option value="0">0 Year</option>
+                                        <option value="Fresher">0 Year</option>
                                         <option value="1">1 Year</option>
                                         <option value="2">2 Year</option>
                                         <option value="3">3 Year</option>
@@ -647,8 +748,8 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <option value="11">11 Year</option>
                                     </select>
                                     <select id="select" class="form-control" formControlName="experienceto">
-                                        <option value="option1" disabled selected >To</option>
-                                        <option value="0">0 Year</option>
+                                        <option value="option1" [ngValue]="null" disabled selected >To</option>
+                                        <option value="Fresher">0 Year</option>
                                         <option value="1">1 Year</option>
                                         <option value="2">2 Year</option>
                                         <option value="3">3 Year</option>
@@ -667,8 +768,16 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="single-row">
                                 <label for="">Salary Range :</label>
                                 <div class="content-box">
-                                    <select id="select" class="form-control">
-                                        <option value="salary">Select</option>
+                                    <select id="select" class="form-control" formControlName="salaryRange">
+                                        <option value="salary" [ngValue]="null" disabled selected>Select</option>
+                                        <option value="0 to 1 lacs">0 to 1 lacs</option>
+                                        <option value="1 to 2 lacs">1 to 2 lacs</option>
+                                        <option value="2 to 4 lacs">2 to 4 lacs</option>
+                                        <option value="4 to 6 lacs">4 to 6 lacs</option>
+                                        <option value="6 to 10 lacs">6 to 10 lacs</option>
+                                        <option value="10 to 20 lacs">10 to 20 lacs</option>
+                                        <option value="20 to 30 lacs">20 to 30 lacs</option>
+                                        <option value="More Than 30 lacs">More Than 30 lacs</option>
                                     </select>
                                 </div>
                             </div>
@@ -682,7 +791,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <label for="">Gender :</label>
                                 <div class="content-box">
                                     <select id="select" class="form-control" formControlName="gender">
-                                        <option value="gender">Select</option>
+                                        <option value="gender" [ngValue]="null" selected disabled>Select</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                         <option value="Others">Others</option>
@@ -695,22 +804,19 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="single-row">
                                 <label for="">Course :</label>
                                 <div class="content-box">
-                                    <!-- <select id="select" class="form-control">
-                                        <option value="gender">Select</option>
-                                    </select> -->
-                                    <!-- <ng-multiselect-dropdown id="cuisineInput" name='cuisines' [placeholder]="'Search cuisines'"
-                                    [settings]="dropdownSettings" [data]="cuisine_list" [(ngModel)]="selected_cuisines">
-                                </ng-multiselect-dropdown> -->
+                                    <ng-multiselect-dropdown id="courseInput" class="w-100" style="background-color: white;" name='courses'
+                                    [settings]="dropdownSettings" [data]="course_list" (onSelect)="pushCourse($event)">
+                                </ng-multiselect-dropdown>
                                 </div>
                             </div>
                             <div class="single-row">
                                 <label for="">Display Details :</label>
                                 <div class="content-box">
                                    <div class="selection col d-flex align-items-center">
-                                    <input type="radio" value=""><p>All Candidate</p>
+                                    <input type="radio" value="all candidates" formControlName="displayDetails"><p>All Candidate</p>
                                    </div>
                                    <div class="selection col d-flex align-items-center">
-                                    <input type="radio" value=""><p>New Registration</p>
+                                    <input type="radio" value="new registration" formControlName="displayDetails"><p>New Registration</p>
                                    </div>
                                 </div>
                             </div>
@@ -718,12 +824,150 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <label for=""> </label>
                 
                                 <div class="content-box mb-5">
-                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5">Search</button>
+                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal" (click)="advanced_search()">Search</button>
                                 </div>
                             </div>
                         </div>
                         </div>
                     </div>
+                </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<div class="modal" id="createfolder" tabindex="-1"
+aria-labelledby="exampleModalLabel" aria-hidden="true" [formGroup]="searchForm">
+<div class="modal-dialog">
+    <div class="modal-content popup-parent">
+        <div class="modal-body">
+                <div class="container" style="width:800px">
+                    <div class="col register-content">
+                        <div class="row">
+                          <div class="col-2"></div>
+                          <div class="col">
+                            <h3>Save Folder</h3>
+                          </div>
+                          <div class="col-2">
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="register-form">
+                            <div class="single-row">
+                                <label for="">Create Folder :</label>
+                                <div class="content-box">
+                                    <input class="form-control" placeholder="Enter Folder Name">
+                                    </div>
+                            </div>
+                            <div class="single-row  col-8 m-auto mt-4">
+                    
+                                <div class="content-box back-btn">
+                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5">Back</button>
+                                </div>
+                                <div class="content-box submit-btn">
+                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5">Search</button>
+                                </div>
+                            </div>
+                           
+                            <div class="create-folder col-5 m-auto mt-4 d-flex align-items-center">
+                                <span class="me-2"><i><svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 11.2454V10.4727C1 9.85784 1.24313 9.2682 1.67591 8.83345C2.10868 8.39871 2.69565 8.15447 3.30769 8.15447H18.6923C19.3043 8.15447 19.8913 8.39871 20.3241 8.83345C20.7569 9.2682 21 9.85784 21 10.4727V11.2454M12.0872 4.61023L9.91282 2.42599C9.76998 2.28232 9.60035 2.16833 9.41363 2.09054C9.22691 2.01276 9.02676 1.9727 8.82462 1.97266H3.30769C2.69565 1.97266 2.10868 2.21689 1.67591 2.65164C1.24313 3.08638 1 3.67602 1 4.29084V16.6545C1 17.2693 1.24313 17.8589 1.67591 18.2937C2.10868 18.7284 2.69565 18.9727 3.30769 18.9727H18.6923C19.3043 18.9727 19.8913 18.7284 20.3241 18.2937C20.7569 17.8589 21 17.2693 21 16.6545V7.38175C21 6.76693 20.7569 6.17729 20.3241 5.74255C19.8913 5.3078 19.3043 5.06357 18.6923 5.06357H13.1754C12.7675 5.0632 12.3754 4.90014 12.0872 4.61023Z" stroke="#0A2647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </i></span>
+                                    <p>Use Existing Folder</p>
+                            </div>
+                        </div>
+                        </div>
+                      </div>
+                </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal" id="savefolder" tabindex="-1"
+aria-labelledby="exampleModalLabel" aria-hidden="true" [formGroup]="folderForm">
+<div class="modal-dialog">
+    <div class="modal-content popup-parent">
+        <div class="modal-body">
+                <div class="container" style="width:800px">
+                    <div class="col register-content py-2 pb-5">
+                        <div class="row px-4">
+                          <div class="col-2"></div>
+                          <div class="col">
+                            <h3>Save Folder</h3>
+                          </div>
+                          <div class="col-2 mt-2 d-flex justify-content-end">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                        </div>
+                        <div class="row" *ngIf="is_old">
+                          <div class="register-form">
+                            <div class="single-row">
+                                <label for="">Saved Folder :</label>
+                                <div class="content-box">
+                                    <select class="form-control" formControlName="folderName">
+                                        <option>Select</option>
+                                        <option *ngFor="let data of folder_list" value="{{data.folderName}}">{{data.folderName}}</option>
+                                        </select>
+                                </div>
+                
+                            </div>
+                            <div class="single-row  col-8 m-auto mt-4" *ngIf="folderForm.get('folderName')?.value">
+                      
+                                <div class="content-box back-btn">
+                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5">Back</button>
+                                </div>
+                                <div class="content-box submit-btn">
+                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal" (click)="create_new_folder()">Save</button>
+                                </div>
+                            </div>
+                            <div class="create-folder col-5 m-auto mt-4 d-flex align-items-center" (click)="save_folder()" style="cursor:pointer">
+                                <span class="me-2"><i><svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 11.2454V10.4727C1 9.85784 1.24313 9.2682 1.67591 8.83345C2.10868 8.39871 2.69565 8.15447 3.30769 8.15447H18.6923C19.3043 8.15447 19.8913 8.39871 20.3241 8.83345C20.7569 9.2682 21 9.85784 21 10.4727V11.2454M12.0872 4.61023L9.91282 2.42599C9.76998 2.28232 9.60035 2.16833 9.41363 2.09054C9.22691 2.01276 9.02676 1.9727 8.82462 1.97266H3.30769C2.69565 1.97266 2.10868 2.21689 1.67591 2.65164C1.24313 3.08638 1 3.67602 1 4.29084V16.6545C1 17.2693 1.24313 17.8589 1.67591 18.2937C2.10868 18.7284 2.69565 18.9727 3.30769 18.9727H18.6923C19.3043 18.9727 19.8913 18.7284 20.3241 18.2937C20.7569 17.8589 21 17.2693 21 16.6545V7.38175C21 6.76693 20.7569 6.17729 20.3241 5.74255C19.8913 5.3078 19.3043 5.06357 18.6923 5.06357H13.1754C12.7675 5.0632 12.3754 4.90014 12.0872 4.61023Z" stroke="#0A2647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </i></span>
+                                    <p class="mt-4">Create New Folder</p>
+                            </div>
+                
+                           
+                
+                
+                        </div>
+                        </div>
+                        <div class="row" *ngIf="is_new" [formGroup]="folderForm">
+                            <div class="register-form">
+                              <div class="single-row">
+                                  <label for="">Create Folder :</label>
+                                  <div class="content-box">
+                                      <input class="form-control" placeholder="Enter Folder Name" formControlName="folderName">
+                                      </div>
+                              </div>
+                              <div class="single-row  col-8 m-auto mt-4">
+                      
+                                  <div class="content-box back-btn">
+                                      <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5">Back</button>
+                                  </div>
+                                  <div class="content-box submit-btn">
+                                      <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal" (click)="create_new_folder()">Save</button>
+                                  </div>
+                              </div>
+                             
+                              <div class="create-folder col-5 m-auto mt-4 d-flex align-items-center" (click)="exis_fold()" style="cursor:pointer">
+                                  <span class="me-2"><i><svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <path d="M1 11.2454V10.4727C1 9.85784 1.24313 9.2682 1.67591 8.83345C2.10868 8.39871 2.69565 8.15447 3.30769 8.15447H18.6923C19.3043 8.15447 19.8913 8.39871 20.3241 8.83345C20.7569 9.2682 21 9.85784 21 10.4727V11.2454M12.0872 4.61023L9.91282 2.42599C9.76998 2.28232 9.60035 2.16833 9.41363 2.09054C9.22691 2.01276 9.02676 1.9727 8.82462 1.97266H3.30769C2.69565 1.97266 2.10868 2.21689 1.67591 2.65164C1.24313 3.08638 1 3.67602 1 4.29084V16.6545C1 17.2693 1.24313 17.8589 1.67591 18.2937C2.10868 18.7284 2.69565 18.9727 3.30769 18.9727H18.6923C19.3043 18.9727 19.8913 18.7284 20.3241 18.2937C20.7569 17.8589 21 17.2693 21 16.6545V7.38175C21 6.76693 20.7569 6.17729 20.3241 5.74255C19.8913 5.3078 19.3043 5.06357 18.6923 5.06357H13.1754C12.7675 5.0632 12.3754 4.90014 12.0872 4.61023Z" stroke="#0A2647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                      </svg>
+                                      </i></span>
+                                      <p>Use Existing Folder</p>
+                              </div>
+                          </div>
+                          </div>
+                
+                
+                
+                
+                      </div>
                 </div>
         </div>
     </div>

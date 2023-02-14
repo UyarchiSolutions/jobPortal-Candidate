@@ -17,6 +17,7 @@ import { SendJobComponent } from './send-job/send-job.component';
 import { EmpMailTemplateComponent } from './emp-mail-template/emp-mail-template.component';
 import { CreateMailTemplateComponent } from './create-mail-template/create-mail-template.component';
 import { NgxEditorModule } from "ngx-editor";
+import { JobPreviewComponent } from './job-preview/job-preview.component';
 
 
 
