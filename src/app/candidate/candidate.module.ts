@@ -12,6 +12,8 @@ import { EmpJobdetailsComponent } from './emp-jobdetails/emp-jobdetails.componen
 import { EducationdetailsComponent } from './educationdetails/educationdetails.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { ProffesinoalComponent } from './proffesinoal/proffesinoal.component';
+import { ApplymailjobsComponent } from './applymailjobs/applymailjobs.component';
+import { ViewFulldetailsComponent } from './view-fulldetails/view-fulldetails.component';
 
 
 
@@ -25,6 +27,8 @@ import { ProffesinoalComponent } from './proffesinoal/proffesinoal.component';
     EmpJobdetailsComponent,
     EducationdetailsComponent,
     ProffesinoalComponent,
+    ApplymailjobsComponent,
+    ViewFulldetailsComponent,
 
   ],
   imports: [

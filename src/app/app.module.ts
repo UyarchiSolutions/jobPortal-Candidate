@@ -32,8 +32,8 @@ import { NgxEditorModule } from "ngx-editor";
     GooglePlaceModule,
     NgxEditorModule
 
-   
-    
+
+
   ],
   providers: [],
   bootstrap: [AppComponent]
