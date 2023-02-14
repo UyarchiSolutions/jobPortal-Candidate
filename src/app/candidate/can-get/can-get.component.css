@@ -464,23 +464,45 @@ label {
   margin-bottom: 0;
   margin-left: 5px;
 }
+
 h3 {
   font-weight: 700;
   color: #FD841F;
   text-align: center;
   font-size: 32px;
 }
-.searchlabel{
+
+.searchlabel {
   cursor: pointer;
 }
 
-.albtn{
+.albtn {
   padding: 3px 15px 0px 10px;
   background: #0A2647;
   border: none;
+  color: white;
 }
-.fa-pencil{
+
+.fa-pencil {
   margin-right: 10px;
   margin-top: 10px;
   margin-bottom: 5px;
+  color: white;
+}
+
+.collapsebtn {
+  background: transparent;
+  border: none;
+  color: black;
+}
+.salarybtn{
+  background: transparent;
+  border: none;
+  color: black;
+}
+.dropdown-toggle::after {
+  display: none;
+}
+.fa-angle-down{
+  margin-left: 84px;
 }

@@ -33,7 +33,8 @@
                   <div class="single-row">
                     <label for="">Qualification :</label>
                     <div class="content-box">
-                      <select id="select" class="form-control" (change)="qualifiacation($event,i,phase)">
+                      <select id="select" class="form-control" (change)="qualifiacation($event,i,phase)"
+                        formControlName="Education">
                         <option value="null" disabled selected>Select</option>
                         <option value="{{quli.qualification}}" *ngFor="let quli of qualification">{{quli.qualification}}
                         </option>

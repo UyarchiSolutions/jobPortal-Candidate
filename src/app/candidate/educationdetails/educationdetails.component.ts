@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CanditateService } from '../canditate.service';
 
 @Component({
@@ -23,18 +23,21 @@ export class EducationdetailsComponent implements OnInit {
   sslcspe: any = [];
   userID: any;
   private _fb: any;
-  constructor(private fb: FormBuilder, private candidate: CanditateService, private activate: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private candidate: CanditateService, private activate: ActivatedRoute,private router:Router) { }
 
   ngOnInit(): void {
-    this.addPhase();
+
     this.candidate.getQualification().subscribe((res: any) => {
       this.qualification = res;
     })
     this.activate.queryParams.subscribe((res: any) => {
       this.userID = res.id
+      // if (this.userID == null) {
+        this.addPhase();
+      // }
     })
     // this.Qualification.controls.forEach((res: any) => {
-      this.getAlldata()
+    this.getAlldata()
     // })
   }
   q: any;
@@ -147,26 +150,116 @@ export class EducationdetailsComponent implements OnInit {
     delete data.Education;
     console.log(data)
     this.candidate.educationDetail(data).subscribe((res: any) => {
+      this.router.navigate(['/can-proffesinal'])
     })
   }
   addAllcontrol: any = []
   getAlldata() {
-    // this.candidate.viewDetails().subscribe((res: any) => {
-    //   console.log(res, "working")
-    //   this.addAllcontrol = this.fb.group({
-    //     Education:new FormControl(res.user.drQualification, [Validators.required]),
-    //     drQualification: new FormControl(res.user.drQualification, [Validators.required]),
-    //     drCourseDurationFrom: new FormControl(res.user.drCourseDurationFrom, [Validators.required]),
-    //     drCourseDurationTonew: new FormControl(res.user.drCourseDurationTonew, [Validators.required]),
-    //     drCourseType: new FormControl(res.user.drCourseType, [Validators.required]),
-    //     drGradingSystem: new FormControl(res.user.drGradingSystem, [Validators.required]),
-    //     drMarks: new FormControl(res.user.drMarks, [Validators.required]),
-    //     drSpecialization: new FormControl(res.user.drSpecialization, [Validators.required]),
-    //     drUniversity: new FormControl(res.user.drUniversity, [Validators.required]),
-    //    drcourses: new FormControl(res.user[0].drcourses, [Validators.required]),
-    //   })
-    // });
-    // this.Qualification.push(this.addAllcontrol)
+    this.candidate.viewDetails().subscribe((res: any) => {
+      if (res.user.length != 0) {
+        let value = res.user[0];
+
+        if (value.drQualification == 'Doctorate/phD') {
+          this.candidate.getdoctorate(value.candidateDetails.drQualification).subscribe((res: any) => {
+            this.drCourse = res
+          })
+          this.candidate.getDrSped(value.candidateDetails.drCourse).subscribe((res: any) => {
+            this.drsep = res
+          })
+          this.addAllcontrol = this.fb.group({
+            Education: new FormControl(value.drQualification, [Validators.required]),
+            drQualification: new FormControl(value.candidateDetails.drQualification, [Validators.required]),
+            drCourseDurationFrom: new FormControl(value.candidateDetails.drCourseDurationFrom, [Validators.required]),
+            drCourseDurationTo: new FormControl(value.candidateDetails.drCourseDurationTo, [Validators.required]),
+            drCourseType: new FormControl(value.candidateDetails.drCourseType, [Validators.required]),
+            drGradingSystem: new FormControl(value.candidateDetails.drGradingSystem, [Validators.required]),
+            drMarks: new FormControl(value.candidateDetails.drMarks, [Validators.required]),
+            drSpecialization: new FormControl(value.candidateDetails.drSpecialization, [Validators.required]),
+            drUniversity: new FormControl(value.candidateDetails.drUniversity, [Validators.required]),
+            drCourse: new FormControl(value.candidateDetails.drCourse, [Validators.required]),
+          })
+          this.Qualification.push(this.addAllcontrol)
+        }
+        if (value.pgQualification == 'Masters/Post-Graduation') {
+          console.log("working")
+          this.candidate.getPgcourses(value.candidateDetails.pgQualification).subscribe((res: any) => {
+            this.pgCourse = res;
+          })
+          this.candidate.getPgSpecial(value.candidateDetails.pgCourse).subscribe((res: any) => {
+            this.pgSpe = res;
+          })
+
+          this.addAllcontrol = this.fb.group({
+            Education: new FormControl(value.pgQualification, [Validators.required]),
+            pgQualification: new FormControl(value.candidateDetails.pgQualification, [Validators.required]),
+            pgCourseDurationFrom: new FormControl(value.candidateDetails.pgCourseDurationFrom, [Validators.required]),
+            pgCourseDurationTo: new FormControl(value.candidateDetails.pgCourseDurationTo, [Validators.required]),
+            pgCourseType: new FormControl(value.candidateDetails.pgCourseType, [Validators.required]),
+            pgGradingSystem: new FormControl(value.candidateDetails.pgGradingSystem, [Validators.required]),
+            pgMarks: new FormControl(value.candidateDetails.pgMarks, [Validators.required]),
+            pgSpecialization: new FormControl(value.candidateDetails.pgSpecialization, [Validators.required]),
+            pgUniversity: new FormControl(value.candidateDetails.pgUniversity, [Validators.required]),
+            pgCourse: new FormControl(value.candidateDetails.pgCourse, [Validators.required]),
+          })
+          this.Qualification.push(this.addAllcontrol)
+        }
+        if (value.ugQualification == 'Graduation/Diploma') {
+          console.log("working")
+          this.candidate.grtUgcou(value.candidateDetails.ugQualification).subscribe((res: any) => {
+            this.ugcourse = res;
+          })
+          this.candidate.ugSepcial(value.candidateDetails.ugCourse).subscribe((res: any) => {
+            this.ugSpe = res
+          })
+
+          this.addAllcontrol = this.fb.group({
+            Education: new FormControl(value.ugQualification, [Validators.required]),
+            ugQualification: new FormControl(value.candidateDetails.ugQualification, [Validators.required]),
+            ugCourseDurationFrom: new FormControl(value.candidateDetails.ugCourseDurationFrom, [Validators.required]),
+            ugCourseDurationTo: new FormControl(value.candidateDetails.ugCourseDurationTo, [Validators.required]),
+            ugCourseType: new FormControl(value.candidateDetails.ugCourseType, [Validators.required]),
+            ugGradingSystem: new FormControl(value.candidateDetails.ugGradingSystem, [Validators.required]),
+            ugMarks: new FormControl(value.candidateDetails.ugMarks, [Validators.required]),
+            ugSpecialization: new FormControl(value.candidateDetails.ugSpecialization, [Validators.required]),
+            ugUniversity: new FormControl(value.candidateDetails.ugUniversity, [Validators.required]),
+            ugCourse: new FormControl(value.candidateDetails.ugCourse, [Validators.required]),
+          })
+          this.Qualification.push(this.addAllcontrol)
+        }
+        if (value.hsQualification == 'HSC') {
+          console.log("working")
+          this.candidate.hsccourse(value.candidateDetails.hsQualification).subscribe((res: any) => {
+            this.hscCourse = res
+          })
+          this.addAllcontrol = this.fb.group({
+            Education: new FormControl(value.hsQualification, [Validators.required]),
+            hsQualification: new FormControl(value.candidateDetails.hsQualification, [Validators.required]),
+            hsBoard: new FormControl(value.candidateDetails.hsBoard, [Validators.required]),
+            hsMedium: new FormControl(value.candidateDetails.hsMedium, [Validators.required]),
+            hstotalmarks: new FormControl(value.candidateDetails.hstotalmarks, [Validators.required]),
+            hsPassedYear: new FormControl(value.candidateDetails.hsPassedYear, [Validators.required]),
+          })
+          this.Qualification.push(this.addAllcontrol)
+        }
+        if (value.sslcQualification == 'SSLC') {
+          console.log("working")
+          this.candidate.hsccourse(value.candidateDetails.sslcQualification).subscribe((res: any) => {
+            this.hscCourse = res
+          })
+          this.addAllcontrol = this.fb.group({
+            Education: new FormControl(value.sslcQualification, [Validators.required]),
+            sslcQualification: new FormControl(value.candidateDetails.sslcQualification, [Validators.required]),
+            sslcBoard: new FormControl(value.candidateDetails.sslcBoard, [Validators.required]),
+            sslcMedium: new FormControl(value.candidateDetails.sslcMedium, [Validators.required]),
+            sslctotalmarks: new FormControl(value.candidateDetails.sslctotalmarks, [Validators.required]),
+            sslcPassedYear: new FormControl(value.candidateDetails.sslcPassedYear, [Validators.required]),
+          })
+          this.Qualification.push(this.addAllcontrol)
+        }
+      }
+      console.log(res, "working")
+
+    });
   }
 
 

@@ -161,4 +161,12 @@ export class CanditateService {
   viewDetails(){
    return this.http.get(this.baseUrl+`/v1/candidateDetail/getKeyskill`,{headers:{auth:Cookie.get('tokens')}})
   }
+  // get notification
+  getAllNotification(){
+    return this.http.get(this.baseUrl+`/v1/employerdetail/getAll_Mail_notification_candidateside`,{headers:{auth:Cookie.get('tokens')}})
+  }
+  // applyJobswithmail
+  applyJob_mail(id:any){
+    return this.http.get(this.baseUrl+`/v1/employerdetail/get_job_post_candidate/${id}`)
+  }
 }

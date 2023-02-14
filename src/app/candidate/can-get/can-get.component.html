@@ -22,7 +22,7 @@
 
               <div class="search-box first-search-box">
                 <input type="text" class="form-control keyskill" placeholder="Enter Designation / Key skills"
-                  value="{{datavalues}}" (keyup)="dispalye($event)" formControlName="searchbox">
+                  (keyup)="dispalye($event)" formControlName="searchbox">
                 <div class="" *ngIf="isDisplay" style="margin-top:0px;">
                   <label></label>
                   <div class="content-box keylist" style="background: white;">
@@ -61,10 +61,10 @@
                 <button type="submit" class="btn btn-brand-orange"><img src="../../assets/image/search.png" alt=""
                     class="search-icon" (click)="search()"></button>
               </div>
-              <div class="search-box">
+              <!-- <div class="search-box">
                 <button type="submit" class="btn btn-brand-orange"><img src="../../assets/image/saved.png" alt=""
                     class="search-icon" (click)="savesearch()"></button>
-              </div>
+              </div> -->
             </div>
 
             <div class="advanced-search">
@@ -111,60 +111,74 @@
               <li class="sidebarmenu-heading"> <span class="icon-custom"><i class='far fa-user'></i></span> <span
                   class="icon-text">All Filters</span>
               </li>
-
+              <!-- 1 -->
               <li class="refine-content">
                 <div class="search-box">
                   <select class="form-control select-type">
                     <option value="option1" selected>Work Mode</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
+                    <option value="Onsite">Onsite</option>
+                    <option value="Work form home">Work form home</option>
+                    <option value="Work form home">Hybrid</option>
                   </select>
                 </div>
 
               </li>
+              <!-- 2 -->
 
+              <li class="refine-content">
+                <button class="btn collapsebtn" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#collapseExample" aria-expanded="false"
+                  aria-controls="collapseExample">Experience</button>
+                <div class="collapse" id="collapseExample">
+                  <div class="card card-body" style="padding: 0px;">
+                    <div style="display:flex">
+                      <select class="form-control select-type">
+                        <option value="option1" selected>From</option>
+                        <option value="0">Freshers</option>
+                        <option value="1">1 Year</option>
+                        <option value="2">2 Year</option>
+                        <option value="3">3 Year</option>
+                        <option value="4">4 Year</option>
+                        <option value="5">5 Year</option>
+                        <option value="6">6 Year</option>
+                        <option value="7">7 Year</option>
+                        <option value="8">8 Year</option>
+                        <option value="9">9 Year</option>
+                        <option value="10">10 Year</option>
+                        <option value="11">11 Year</option>
+                      </select>
+                      <select class="form-control select-type">
+                        <option value="option1" selected>To</option>
+                        <option value="0">Freshers</option>
+                        <option value="1">1 Year</option>
+                        <option value="2">2 Year</option>
+                        <option value="3">3 Year</option>
+                        <option value="4">4 Year</option>
+                        <option value="5">5 Year</option>
+                        <option value="6">6 Year</option>
+                        <option value="7">7 Year</option>
+                        <option value="8">8 Year</option>
+                        <option value="9">9 Year</option>
+                        <option value="10">10 Year</option>
+                        <option value="11">11 Year</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+              </li>
+              <!-- 3 -->
               <li class="refine-content">
                 <div class="search-box">
                   <select class="form-control select-type">
-                    <option value="option1" selected>Qualification</option>
+                    <option value="option1" selected>Deparment</option>
                     <option value="option2">Option 2</option>
                     <option value="option3">Option 3</option>
                   </select>
                 </div>
 
               </li>
-              <li class="refine-content">
-                <div class="search-box">
-                  <select class="form-control select-type">
-                    <option value="option1" selected>Salary</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
-                  </select>
-                </div>
-
-              </li>
-              <li class="refine-content">
-                <div class="search-box">
-                  <select class="form-control select-type">
-                    <option value="option1" selected>Role</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
-                  </select>
-                </div>
-
-              </li>
-
-              <li class="refine-content">
-                <div class="search-box">
-                  <select class="form-control select-type">
-                    <option value="option1" selected>Freshers</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
-                  </select>
-                </div>
-
-              </li>
-
+              <!-- 4 -->
               <li class="refine-content">
                 <div class="search-box">
                   <select class="form-control select-type">
@@ -175,19 +189,70 @@
                 </div>
 
               </li>
+              <!-- 5 -->
+              <li class="refine-content">
+                <div class="search-box">
+                  <div class="dropdown">
+                    <button class="btn dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      Salary<i class="fa fa-angle-down"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      <li value="0">0 to 1 lac</li>
+                      <li value="1 to 2 lac">1 to 2 lac</li>
+                      <li value="2 to 4 lac">2 to 4 lac</li>
+                      <li value="4 to 6 lac">4 to 6 lac</li>
+                      <li value="6 to 8 lac">6 to 8 lac</li>
+                      <li value="8 to 9 lac">8 to 9 lac</li>
+
+                    </ul>
+                  </div>
+                </div>
+
+              </li>
+              <!-- 6 -->
+              <li class="refine-content">
+                <div class="search-box">
+                  <div class="dropdown">
+                    <button class="btn dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      Company Type<i class="fa fa-angle-down"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                      <li value="Start up">Start up</li>
+                      <li value="1 to 2 lac">MNC</li>
+                      <li value="Corparate">Corparate</li>
+                      <li value="Foregin MNC">Foregin MNC</li>
+                    </ul>
+                  </div>
+                </div>
 
 
+              </li>
+              <!-- 7 -->
               <li class="refine-content">
                 <div class="search-box">
                   <select class="form-control select-type">
-                    <option value="option1" selected>Company Type</option>
+                    <option value="option1" selected>Role</option>
                     <option value="option2">Option 2</option>
                     <option value="option3">Option 3</option>
                   </select>
                 </div>
 
               </li>
+              <!-- 9 -->
 
+              <li class="refine-content">
+                <div class="search-box">
+                  <select class="form-control select-type">
+                    <option value="option1" selected>Education</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                  </select>
+                </div>
+
+              </li>
+              <!-- 10 -->
               <li class="refine-content">
                 <div class="search-box">
                   <select class="form-control select-type">
@@ -197,6 +262,35 @@
                   </select>
                 </div>
 
+              </li>
+              <!-- 11 -->
+              <li class="refine-content">
+                <div class="search-box">
+                  <select class="form-control select-type">
+                    <option value="option1" selected>Industry</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                  </select>
+                </div>
+
+              </li>
+              <!-- 12 -->
+              <li class="refine-content">
+
+                <div class="dropdown">
+                  <button class="btn dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    Freshness<i class="fa fa-angle-down"></i>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li value="Last 30 days">Last 30 days</li>
+                    <li value="Last 15 days">Last 15 days</li>
+                    <li value="Last 7 days">Last 7 days</li>
+                    <li value="Last 5 days">Last 5 days</li>
+                    <li value="Last 3 days">Last 3 days</li>
+                    <li value="Last 1 days">Last 1 days</li>
+                  </ul>
+                </div>
               </li>
 
             </ul>
@@ -260,7 +354,6 @@
               </i>
               Saved Jobs
             </div>
-
             <div class="job-alert col" (click)="jobAlert()" ngClass="{{tab == 4?'jobs':''}}">
               <i><svg width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -271,16 +364,13 @@
               </i>
               Job Alert
             </div>
-
             <div class="job-notification col-1" (click)="notification()" ngClass="{{tab == 5?'jobs':''}}">
               <i><svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
                     d="M21.6 17.8571H24V20.2381H0V17.8571H2.4V9.52381C2.4 6.99794 3.41143 4.57552 5.21178 2.78946C7.01212 1.0034 9.45392 0 12 0C14.5461 0 16.9879 1.0034 18.7882 2.78946C20.5886 4.57552 21.6 6.99794 21.6 9.52381V17.8571ZM19.2 17.8571V9.52381C19.2 7.62941 18.4414 5.81259 17.0912 4.47305C15.7409 3.1335 13.9096 2.38095 12 2.38095C10.0904 2.38095 8.25909 3.1335 6.90883 4.47305C5.55857 5.81259 4.8 7.62941 4.8 9.52381V17.8571H19.2ZM8.4 22.619H15.6V25H8.4V22.619Z"
                     fill="white" />
                 </svg>
-
               </i>
-
             </div>
           </div>
           <div class="row no-margin bg-grey " *ngIf="tab ==0">
@@ -335,7 +425,7 @@
             </div>
             <div class="row content-card no-margin padding10 main-content" *ngFor="let job of jobs">
               <div class="col">
-                {{job.employerregistrations.name}}
+                {{job.name}}
               </div>
               <div class="col">
                 {{job.jobTittle}}
@@ -350,11 +440,21 @@
                 {{job.salaryRangeFrom}} To {{job.salaryRangeTo}}
               </div>
               <div class="col">
-                {{postedTime(job.date)}}
+                {{job.date}}
               </div>
-              <div class="col">
+              <div class="col" *ngIf="!job.appliedStatus">
                 <a (click)="apply(job._id)">Apply Now </a>
               </div>
+
+                <div class="col applied" *ngIf="job.appliedStatus">
+                  <a (click)="apply(job._id)"><i><svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M6 12.5C2.6862 12.5 0 9.8138 0 6.5C0 3.1862 2.6862 0.5 6 0.5C9.3138 0.5 12 3.1862 12 6.5C12 9.8138 9.3138 12.5 6 12.5ZM6 11.3C7.27304 11.3 8.49394 10.7943 9.39411 9.89411C10.2943 8.99394 10.8 7.77304 10.8 6.5C10.8 5.22696 10.2943 4.00606 9.39411 3.10589C8.49394 2.20571 7.27304 1.7 6 1.7C4.72696 1.7 3.50606 2.20571 2.60589 3.10589C1.70571 4.00606 1.2 5.22696 1.2 6.5C1.2 7.77304 1.70571 8.99394 2.60589 9.89411C3.50606 10.7943 4.72696 11.3 6 11.3ZM5.4018 8.9L2.856 6.3542L3.7044 5.5058L5.4018 7.2032L8.7954 3.809L9.6444 4.6574L5.4018 8.9Z"
+                        fill="white" />
+                    </svg>
+                  </i> {{job.appliedStatus}}</a>
+                </div>
+
             </div>
           </div>
           <!-- Applied jobs -->
@@ -489,7 +589,7 @@
           </div>
           <!-- Job alert -->
           <div *ngIf="tab == 4">
-            <div class="jobalert col-8" [formGroup]="setAlertForm">
+            <div class="jobalert col-8" [formGroup]="setAlertForm" *ngIf="alert">
               <h1>Create Job Alert</h1>
               <div class="form col-9">
                 <div class="keyskill">
@@ -497,7 +597,7 @@
                   <input class="alertField" type="text" name="keyskill" placeholder="Enter Key Skill"
                     formControlName="searchalert" (keyup)="dispalyedData($event)">
                 </div>
-                <div class="" *ngIf="isDisplay" style="margin-top:0px;">
+                <div class="" *ngIf="isshow" style="margin-top:0px;">
                   <label></label>
                   <div class="content-box alertkeylist" style="background: white;">
                     <ul class="alertskill" style="padding-left: 0px;" class="">
@@ -536,21 +636,16 @@
                       <option value="0">0 to 1 lac</option>
                       <option value="1 to 2 lac">1 to 2 lac</option>
                       <option value="2 to 4 lac">2 to 4 lac</option>
-                      <option value="3">3 Year</option>
-                      <option value="4">4 Year</option>
-                      <option value="5">5 Year</option>
-                      <option value="6">6 Year</option>
-                      <option value="7">7 Year</option>
-                      <option value="8">8 Year</option>
-                      <option value="9">9 Year</option>
-                      <option value="10">10 Year</option>
-                      <option value="11">11 Year</option>
+                      <option value="4 to 6 lac">4 to 6 lac</option>
+                      <option value="6 to 8 lac">6 to 8 lac</option>
+                      <option value="8 to 9 lac">8 to 9 lac</option>
+
                     </select>
                   </div>
                 </div>
                 <div class="job-location">
                   <label>Job Location :</label>
-                  <input class="alertField" type="text" name="location" placeholder="Enter Job location"
+                  <input class="alertField" type="text" ngx-google-places-autocomplete [options]="options"  (onAddressChange)="handleAddressChange($event)" name="location" placeholder="Enter Job location"
                     formControlName="locationSet">
                 </div>
                 <div class="single-row">
@@ -577,7 +672,7 @@
                   <div class="content-box">
                     <select id="select" class="form-control" (change)="getRole($event)" formControlName="role_Category">
                       <option [ngValue]="null" disabled selected>Select</option>
-                      <option value="" *ngFor="let cat of currentCategory" value="{{cat._id}}">{{cat.Role_Category}}
+                      <option  *ngFor="let cat of currentCategory" value="{{cat._id}}">{{cat.Role_Category}}
                       </option>
                     </select>
                   </div>
@@ -597,9 +692,9 @@
               </div>
               <button class="btn alert" (click)="setalert()">Set Alert</button>
             </div>
-            <div *ngIf="!alert">
+            <div *ngIf="alert==false">
               <div style="display: flex;justify-content: end;">
-                <button class="btn btn-primary btn-sm albtn"><i class="fa fa-pencil"></i>
+                <button class="btn btn-sm albtn" (click)="edit()"><i class="fa fa-pencil"></i>
                   Edit</button>
               </div>
               <div class="row content-card-heading no-margin padding10">
@@ -649,10 +744,10 @@
                   {{alert.salaryRangeFrom}} To {{alert.salaryRangeTo}}
                 </div>
                 <div class="col">
-                  {{postedTime(alert.date)}}
+                  {{alert.date}}
                 </div>
                 <div class="col">
-                  <a (click)="applynotification(alert._id)">Apply Now </a>
+                  <a (click)="apply(alert._id)">Apply Now </a>
                 </div>
               </div>
             </div>
@@ -683,7 +778,7 @@
                 Status
               </div>
             </div>
-            <div class="row content-card no-margin padding10 main-content" *ngFor="let job of jobs">
+            <div class="row content-card no-margin padding10 main-content" *ngFor="let job of getAllNotification">
               <div class="col">
                 {{job.employerregistrations.name}}
               </div>
@@ -778,7 +873,7 @@
           </div>
         </div>
       </div>
-      <div class="col-11  m-auto bg-grey rounded overflow-hidden">
+      <!-- <div class="col-11  m-auto bg-grey rounded overflow-hidden">
         <div class="saved col-12">
           <header>
             <i><svg width="16" height="22" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -836,7 +931,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </div>
