@@ -34,22 +34,36 @@ export class CanGetComponent implements OnInit {
     searchbox: new FormControl(null),
   })
   setAlertForm = this.fb.group({
+    currentIndustry: new FormControl(null, [Validators.required]),
+    currentDepartment: new FormControl(null, [Validators.required]),
+    role_Category: new FormControl(null, [Validators.required]),
     designationSet: new FormControl(null, [Validators.required]),
-    keyskillSet: this.fb.array([], [Validators.required]),
+    keyskillSet:  new FormControl(null, [Validators.required]),
     experienceYearSet: new FormControl(null, [Validators.required]),
     experienceMonthSet: new FormControl(null, [Validators.required]),
+    salaryFrom:new FormControl(null, [Validators.required]),
+    SalaryTo:new FormControl(null, [Validators.required]),
     locationSet: new FormControl(null, [Validators.required]),
+    searchalert: new FormControl(null),
   })
   datavalues: any;
   jobs: any = [];
   recentData: any = [];
+  industry:any=[];
+  currentDepartment:any=[]
   constructor(private canditSarvice: CanditateService, private fb: FormBuilder, private router: Router) { }
 
 
   ngOnInit() {
     this.get_allJobs();
     this.recentSearch();
-    this.getSaveData()
+    this.getSaveData();
+    this.canditSarvice.currentIndustry().subscribe((res: any) => {
+      this.industry = res;
+    })
+    this.canditSarvice.currentDepartment().subscribe((res: any) => {
+      this.currentDepartment = res;
+    })
   }
   get_allJobs() {
     this.canditSarvice.getAlldetails(this.searchForm.value).subscribe((res: any) => {
@@ -91,10 +105,18 @@ export class CanGetComponent implements OnInit {
     })
   }
   // creatr alte
+  alert=false;
+
   jobAlert() {
     this.tab = 4;
     this.canditSarvice.getAlerts().subscribe((res: any) => {
       this.getAllalerts = res;
+    },error => {
+      if(error.error.message =='job alert data not found'){
+       this.alert=true;
+      }else{
+        this.alert=false;
+      }
     })
   }
   // notification
@@ -126,7 +148,6 @@ export class CanGetComponent implements OnInit {
       }
     }
     this.searchForm.get('search')?.setValue(value)
-    console.log(this.searchForm?.value)
 
   }
   getKeyskills(value: any) {
@@ -186,21 +207,31 @@ export class CanGetComponent implements OnInit {
 
     })
   }
-  alretcheckSkill(event: any) {
-    const data: FormArray = this.setAlertForm.get('keyskillSet') as FormArray;
-    if (event.target.checked) {
-      data.push(new FormControl(event.target.value));
-      console.log(data.value, "val")
-      this.datavalues = data.value;
+  dispalyedData(data:any){
+    let value = data.target.value.split(",");
+    if (data.target.value) {
+      this.isDisplay = true;
     } else {
-      let i: number = 0;
-      data.controls.forEach((item: any) => {
-        if (item == event.target.value) {
-          data.removeAt(i);
-          return;
-        }
-        i++;
-      });
+      this.isDisplay = false
+    }
+    if (value.length != 0) {
+      if (value[value.length - 1] != null && value[value.length - 1] != '') {
+        this.getKeyskills(value[value.length - 1])
+      }
+    }
+    this.setAlertForm.get('keyskillSet')?.setValue(value)
+  }
+  alretcheckSkill(event: any,skill:any) {
+    let index: any = this.setAlertForm.get('keyskillSet')?.value;
+
+    console.log(skill,"skill")
+    if (index.length != 0) {
+      console.log(index,"index")
+      let value = index.splice([index.length - 1], 1);
+      index.push(skill)
+      this.setAlertForm.get('keyskillSet')?.setValue(index)
+      let search: any = index.toString() + ","
+      this.setAlertForm.get('searchalert')?.setValue(search);
     }
   }
   setalert() {
@@ -228,6 +259,21 @@ export class CanGetComponent implements OnInit {
   }
   applynotification(id: any) {
     this.router.navigate(['/'])
+  }
+
+  currentCategory: any = []
+  deparmentId: any;
+  getroles:any=[];
+  changeDeparment(id: any) {
+    this.deparmentId = id.target.value
+    this.canditSarvice.getCategory(this.deparmentId).subscribe((res: any) => {
+      this.currentCategory = res;
+    })
+  }
+  getRole(id: any) {
+    this.canditSarvice.getRole(id.target.value).subscribe((res: any) => {
+      this.getroles = res
+    })
   }
 }
 

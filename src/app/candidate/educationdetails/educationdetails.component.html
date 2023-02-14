@@ -240,7 +240,7 @@
                       <div class="content-box">
                         <select class="form-control select-type" formControlName="ugSpecialization">
                           <option [ngValue]="null" disabled selected>Select</option>
-                          <option value="{{course._id}}" *ngFor="let course of pgSpe">
+                          <option value="{{course._id}}" *ngFor="let course of ugSpe">
                             {{course.Specialization}}</option>
                         </select>
                       </div>
@@ -248,7 +248,7 @@
                     <div class="single-row">
                       <label for="">Course Type :</label>
                       <div class="content-box">
-                        <select class="form-control select-type" formControlName="ugCourse">
+                        <select class="form-control select-type" formControlName="ugCourseType">
                           <option value="option1" disabled selected>Select</option>
                           <option value="Full Time">Full Time</option>
                           <option value="Part Time">Part Time</option>
@@ -325,8 +325,8 @@
                       <div class="content-box">
                         <select class="form-control select-type" formControlName="hsPassedYear">
                           <option value="option1" disabled selected>Select</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
+                          <option value="2016">2016</option>
+                          <option value="2017">2017</option>
                         </select>
                       </div>
 
@@ -336,8 +336,8 @@
                       <div class="content-box">
                         <select class="form-control select-type" formControlName="hsMedium">
                           <option value="option1" disabled selected>Select</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
+                          <option value="Tamil">Tamil</option>
+                          <option value="English">English</option>
                         </select>
                       </div>
                     </div>

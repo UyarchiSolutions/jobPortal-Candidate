@@ -297,8 +297,7 @@ a {
   flex-direction: column;
   align-items: center;
   background-color: #E7E9ED;
-
-
+  width: 93%;
 }
 
 h1 {
@@ -320,7 +319,7 @@ label {
 }
 
 .alertField {
-  width: 70%;
+  width: 60%;
   padding-left: 10px;
   border-radius: 5px;
   height: 40px;
@@ -330,7 +329,7 @@ label {
 
 #year,
 #month {
-  width: 33%;
+  width: 28%;
 
 }
 
@@ -473,4 +472,15 @@ h3 {
 }
 .searchlabel{
   cursor: pointer;
+}
+
+.albtn{
+  padding: 3px 15px 0px 10px;
+  background: #0A2647;
+  border: none;
+}
+.fa-pencil{
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }

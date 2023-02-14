@@ -33,6 +33,9 @@ export class EducationdetailsComponent implements OnInit {
     this.activate.queryParams.subscribe((res: any) => {
       this.userID = res.id
     })
+    // this.Qualification.controls.forEach((res: any) => {
+      this.getAlldata()
+    // })
   }
   q: any;
   qualifiacation(val: any, index: any, phase: any) {
@@ -49,7 +52,7 @@ export class EducationdetailsComponent implements OnInit {
     allcontrols.forEach((a: any) => {
       <FormArray>phase.removeControl(a)
     })
-    console.log(value,"values")
+    console.log(value, "values")
     ss[value].forEach((a: any) => {
       <FormArray>phase.addControl(a, new FormControl())
     })
@@ -105,6 +108,7 @@ export class EducationdetailsComponent implements OnInit {
       })
     }
     if (qali.get('Education')?.value == 'Graduation/Diploma') {
+      console.log('wokin')
       this.candidate.ugSepcial(val.target.value).subscribe((res: any) => {
         this.ugSpe = res;
         qali.get('ugCourse')?.setValue(val.target.value);
@@ -112,7 +116,6 @@ export class EducationdetailsComponent implements OnInit {
     }
 
     if (qali.get('Education')?.value == 'Doctorate/phD') {
-      console.log('wokin')
       this.candidate.getDrSped(val.target.value).subscribe((res: any) => {
         this.drsep = res
         qali.get('drCourse')?.setValue(val.target.value);
@@ -146,4 +149,26 @@ export class EducationdetailsComponent implements OnInit {
     this.candidate.educationDetail(data).subscribe((res: any) => {
     })
   }
+  addAllcontrol: any = []
+  getAlldata() {
+    // this.candidate.viewDetails().subscribe((res: any) => {
+    //   console.log(res, "working")
+    //   this.addAllcontrol = this.fb.group({
+    //     Education:new FormControl(res.user.drQualification, [Validators.required]),
+    //     drQualification: new FormControl(res.user.drQualification, [Validators.required]),
+    //     drCourseDurationFrom: new FormControl(res.user.drCourseDurationFrom, [Validators.required]),
+    //     drCourseDurationTonew: new FormControl(res.user.drCourseDurationTonew, [Validators.required]),
+    //     drCourseType: new FormControl(res.user.drCourseType, [Validators.required]),
+    //     drGradingSystem: new FormControl(res.user.drGradingSystem, [Validators.required]),
+    //     drMarks: new FormControl(res.user.drMarks, [Validators.required]),
+    //     drSpecialization: new FormControl(res.user.drSpecialization, [Validators.required]),
+    //     drUniversity: new FormControl(res.user.drUniversity, [Validators.required]),
+    //    drcourses: new FormControl(res.user[0].drcourses, [Validators.required]),
+    //   })
+    // });
+    // this.Qualification.push(this.addAllcontrol)
+  }
+
+
+
 }

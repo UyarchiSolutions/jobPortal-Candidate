@@ -55,7 +55,7 @@ export class UpdateprofileComponent implements OnInit {
   }
   getAlldata() {
     this.candidateService.viewDetails().subscribe((res: any) => {
-      this.viewAll = res.user[0].candidateDetails;
+      this.viewAll = res.user;
       console.log(this.viewAll[0].keyskill, "key skill")
       this.profileForm.patchValue({
         image: this.viewAll.image,
