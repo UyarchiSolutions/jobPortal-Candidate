@@ -85,4 +85,17 @@ get_course_list(){
   return this.http.get(this.baseurl+'/v1/educationDetails/get_allcourse')
 
 }
+create_folder(data:any){
+  return this.http.post(this.baseurl+'/v1/employerCandidateSearch/createSavetoFolder',data,{headers:{auth:Cookie.get('emptokens')}})
+}
+get_folder_list(){
+  return this.http.get(this.baseurl+'/v1/employerCandidateSearch/saveFolderData_view',{headers:{auth:Cookie.get('emptokens')}})
+}
+get_folder_details(data:any){
+  const queryString = new URLSearchParams(data).toString();
+  return this.http.get(this.baseurl+'/v1/employerCandidateSearch/allFolderData?'+ queryString)
+}
+sendajob(data:any){
+return this.http.post(this.baseurl+'/v1/employerdetail/send_mail_and_notification',data,{headers:{auth:Cookie.get('emptokens')}})
+}
 }

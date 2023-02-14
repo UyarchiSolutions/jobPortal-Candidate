@@ -1,118 +1,115 @@
-<div class="container-fluid register">
+<div class="container-fluid login">
     <div class="row">
-        <div class="col-2 ad-image">
-            <img src="../../assets/image/ad.png" alt="">
+      <div class="col-2 ad-image">
+        <img src="../../assets/image/ad.png" alt="">
+      </div>
+      <div class="col-8  login-main">
+        <div class="row ">
+          <div class="col">
+            <img src="../../assets/image/hero.png" alt="" class="hero-image">
+          </div>
         </div>
-        <div class="col-8  login-main">
-            <div class="row ">
-                <div class="col">
-                    <img src="../../assets/image/hero.png" alt="" class="hero-image">
+        <div class="row register-content-row height-register-content">
+          <div class="col register-content">
+            <div class="row">
+              <div class="col-2"></div>
+              <div class="col">
+                <h3>Send a Job</h3>
+              </div>
+              <div class="col-2">
+                
+              </div>
+            </div>
+            <div class="row">
+              <div class="register-form" [formGroup]="postForm">
+                <div class="single-row">
+                    <label for="">Job Title :</label>
+                    <div class="content-box">
+                        <select id="select" class="form-control" formControlName="jobTittle" (change)="job_details($event)">
+                          <option value="select" [ngValue]="null" selected disabled>Select</option>
+                          <option *ngFor="let data of job_list" value="{{data._id}}">{{data?.jobTittle}}</option>
+                        </select>
+                    </div>
+  
+                </div>
+                <div class="single-row align-items-start" *ngIf="postForm.get('jobTittle')?.value">
+                    <label for="" class="mt-3">Job Attached :</label>
+                    <div class="content-box bg-white px-3 flex-column  job-attached">
+                        <div class="d-flex col-12 align-items-center justify-content-between pt-3">
+                            <h5 class="mb-0">{{jobdetails.jobTittle}}</h5>
+                        <p class="view-job mb-0">View job</p>        
+                        </div>
+
+                        <div class="col-12 d-flex flex-wrap ">
+                            <span class="col-6 my-2">
+                                <i><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.1969 3.68164H0.796875V7.52164H6.72454C6.61859 7.32109 6.55859 7.0925 6.55859 6.84991V6.75391H9.43859V6.84991C9.43859 7.0925 9.3786 7.32109 9.27264 7.52164H15.1969V3.68164Z" fill="#8493A3"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.3197 0.800781H3.67969V5.60078H6.20363C5.97385 5.25754 5.83984 4.84477 5.83984 4.4007V2.7207H10.1598V4.4007C10.1598 4.84477 10.0258 5.25754 9.79606 5.60078H12.3197V0.800781Z" fill="#8493A3"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6.64017 8.48047H0.796875V15.2005H15.1969V8.48047H9.35701C9.15962 9.04029 8.62596 9.44148 7.99859 9.44148C7.37123 9.44148 6.83757 9.04029 6.64017 8.48047Z" fill="#8493A3"/>
+                                    </svg>
+                                    </i>
+                                   <span *ngFor="let ski of jobdetails.keySkill">{{ski}}</span>
+                            </span>
+                            <span class="col-6 my-2">
+                                
+                                ₹ {{jobdetails.salaryRangeFrom}} to  {{jobdetails.salaryRangeTo}} lacs
+                            </span>
+                            <span class="col-6 mb-3">
+                                <i><svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99687 18.5996C7.99687 18.5996 15.1969 11.7761 15.1969 7.79961C15.1969 3.82316 11.9733 0.599609 7.99687 0.599609C4.02042 0.599609 0.796875 3.82316 0.796875 7.79961C0.796875 11.7761 7.99687 18.5996 7.99687 18.5996ZM7.99531 9.6C8.98942 9.6 9.79531 8.79411 9.79531 7.8C9.79531 6.80589 8.98942 6 7.99531 6C7.0012 6 6.19531 6.80589 6.19531 7.8C6.19531 8.79411 7.0012 9.6 7.99531 9.6Z" fill="#8493A3"/>
+                                    </svg>
+                                    
+                                    </i>
+                                   {{jobdetails.jobLocation}}
+                            </span>
+                            <span class="col-6">
+                                
+                                  {{jobdetails.experienceFrom}} to {{jobdetails.experienceTo}} Years
+                            </span>
+                        </div>
+                    </div>
+  
+                </div>
+
+                <div class="single-row">
+                    <label for="">Form Email ID :</label>
+                    <div class="content-box">
+                            <input type="text" class="form-control" value="abcd@gmail.com" formControlName="email">
+                    </div>
+  
+                </div>
+
+                
+                <div class="single-row">
+                    <label for="">Subject:</label>
+                    <div class="content-box">
+                            <input type="text" class="form-control" value="UI UX Designer" formControlName="subject">
+                    </div>
+  
+                </div>
+
+                <div class="single-row  align-items-start">
+                    <label for="" class="mt-3">Signature :</label>
+                    <div class="content-box">
+                         <textarea placeholder="Type Here..." class="form-control" formControlName="signature"></textarea>
+                    </div>
+  
+                </div>
+                <div class="single-row mt-5"> 
+                    <div class="content-box col-8 m-auto ">
+                        <button type="submit" class="btn mb-2 btn-custom btn-brand-grey" routerLink="/job-preview" (click)="preview()">Preview</button>
+                        <button type="submit" class="btn btn-brand-blue mb-2 ms-3" (click)="sendajob()">Send</button>
+                    </div>
                 </div>
             </div>
-            <div class="row register-content-row height-register-content">
-                <div class="col register-content">
-                    <div class="row">
-                        <div class="col"></div>
-                        <div class="col">
-                            <h3>Send a Job</h3>
-                        </div>
-                        <div class="col"></div>
-                    </div>
-
-                    <div class="register-form">
-                        <div class="single-row">
-                            <label for="">From Email ID :</label>
-                            <div class="content-box">
-                                <input type="text" class="form-control" placeholder="Enter Email" value="abck123@gmail.com">
-                            </div>
-
-                        </div>
-
-                        <div class="single-row">
-                            <label for="">Job Title :</label>
-                            <div class="content-box">
-                                <input type="text" class="form-control" placeholder="Enter Job Title" value="UX Intern" formControlName="">
-                            </div>
-
-                        </div>
-
-                        <div class="single-row">
-                            <label for="">Expreience :</label>
-                            <div class="content-box">
-                                <select class="form-control select-type douple-input-first" formControlName="">
-                                    <option value="option1" disabled selected >Year</option>
-                                    <option value="option2">Option 2</option>
-                                    <option value="option3">Option 3</option>
-                                  </select>
-
-
-                                  <select class="form-control select-type douple-input-second" formControlName="">
-                                    <option value="option1" disabled selected >Month</option>
-                                    <option value="option2">Option 2</option>
-                                    <option value="option3">Option 3</option>
-                                  </select>
-                            </div>
-                        </div>
-
-                        <div class="single-row">
-                            <label for="">Salary :</label>
-                            <div class="content-box">
-                                <input type="text" class="form-control" placeholder="Enter Salary" value="2 PAL" formControlName="">
-                            </div>
-                        </div>
-
-                        <div class="single-row">
-                            <label for="">Job Location :</label>
-                            <div class="content-box">
-                                <input type="text" class="form-control" placeholder="Enter Job location" value="Chennai" formControlName="">
-                            </div>
-                        </div>
-
-                        <div class="single-row">
-                            <label for="">Key Skills :</label>
-                            <div class="content-box">
-                                <input type="text" class="form-control" placeholder="Enter Key Skills" formControlName="">
-                            </div>
-                        </div>
-
-
-
-
-                        <div class="single-row">
-                            <label for="">Job Description :</label>
-                            <div class="content-box">
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="" placeholder="Enter Job Description"></textarea>
-                            </div>
-                        </div>
-                        <div class="single-row">
-                            <label for="">Signature :</label>
-                            <div class="content-box">
-                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="" placeholder="Type Here........"></textarea>
-                            </div>
-                        </div>
-
-                        <div class="single-row douple-btn">
-                            <div class="content-box">
-                                <button type="submit" class="btn mb-2 btn-custom  btn-brand-grey">Preview</button>
-                            </div>
-                            <div class="content-box">
-                                <button type="submit" class="btn btn-brand-blue mb-2 btn-custom">Post</button>
-                            </div>
-                        </div>
-
-
-
-                    </div>
-
-
-
-
-
-                </div>
             </div>
+          </div>
         </div>
-        <div class="col-2 ad-image">
-            <img src="../../assets/image/ad.png" alt="">
-        </div>
+      </div>
+      <div class="col-2 ad-image">
+        <img src="../../assets/image/ad.png" alt="">
+      </div>
     </div>
 </div>
+
+

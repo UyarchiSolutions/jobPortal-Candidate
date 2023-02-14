@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmpServiceService } from '../emp-service.service';
 
@@ -13,8 +14,14 @@ export class CanDetailsComponent implements OnInit {
   send_value: any;
   is_open: boolean = false;
   data: any;
-
-  constructor(private empservice: EmpServiceService,private route: ActivatedRoute, private router: Router,) { }
+  is_new: boolean = false;
+  is_old:boolean = false;
+  folderName: any;
+  folder_list: any;
+  folderForm:any = this.fb.group({
+    folderName:new FormControl(null)
+  })
+  constructor(private empservice: EmpServiceService,private route: ActivatedRoute, private router: Router,private fb:FormBuilder) { }
 
   ngOnInit(): void {
     this.route.queryParams
@@ -25,23 +32,29 @@ export class CanDetailsComponent implements OnInit {
     }
   );
   this.getJobpostDetails()
+  this.get_folder_list()
   }
   get_candidate_details(id:any){
     this.empservice.get_candidate_details(id).subscribe((res:any)=>{
       this.candidate_data = res[0]
       console.log(res);
+      // this.folderForm.patchValue({
+      //   folderName:this.folderName
+      // })
     })
   }
-  send(e:any,popup:any){
+  send(e:any){
+    console.log(e.target.value)
      this.send_value = e.target.value;
      if(this.send_value == 'send mail'){
       this.router.navigateByUrl('sendMail');
      }
      if(this.send_value == 'send job'){
-       this.is_open = true;
-      // this.router.navigateByUrl('sendJob');
-          popup.click();
-       
+       var data: any ={
+        candidates:Array(this.id)
+      }
+      var queryString = new URLSearchParams(data).toString();
+      this.router.navigateByUrl('/sendJob?'+queryString);
      }
    
   }
@@ -50,5 +63,60 @@ export class CanDetailsComponent implements OnInit {
       this.data = res.user
       console.log(res.user);
     })
+  }
+  save_folder(){
+    this.is_new = true;
+    this.is_old = false;
+    this.folderForm.patchValue({
+      folderName:''
+    })
+ }
+ create_new_folder(){
+   var data={
+     candidateId:Array(this.id),
+     folderName:this.folderForm.get('folderName').value
+   }
+   console.log(data)
+   this.empservice.create_folder(data).subscribe((res:any)=>{
+     this.folderForm.reset();
+    this.get_folder_list();
+     console.log(res);
+   })
+ }
+ exis_fold(){
+   this.is_new = false;
+    this.is_old = true;
+ }
+ get_folder_list(){
+   this.empservice.get_folder_list().subscribe((res:any)=>{
+     console.log(res);
+    this.folder_list = res.user
+   })
+ }
+
+ open_folder(e:any,createpopup:any,savepopup:any){
+    if(e.target.value == 'add'){
+      this.is_new = true;
+      this.is_old = false;
+      createpopup.click();
+      
+    }
+    else{
+      this.is_old = true;
+      this.is_new = false;
+      savepopup.click();
+      this.folderForm.patchValue({
+        folderName:e.target.value
+      })
+    }
+  }
+  
+  redirectto_job(data:any){
+    var data: any ={
+      candidates:Array(this.id),
+      jobId:data._id,
+    }
+    var queryString = new URLSearchParams(data).toString();
+    this.router.navigateByUrl('/sendJob?'+queryString);
   }
 }

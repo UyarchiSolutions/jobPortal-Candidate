@@ -33,6 +33,7 @@ const routes: Routes = [
    {path: 'sendJob',loadChildren: () => import('./employer/send-job/send-job.module').then(m => m.SendJobModule) },
    {path: 'emp-email-template',loadChildren: () => import('./employer/emp-mail-template/emp-mail-template.module').then(m => m.EmpMailTemplateModule) },
    {path: 'create-email-template',loadChildren: () => import('./employer/create-mail-template/create-mail-template.module').then(m => m.CreateMailTemplateModule) },
+   {path: 'job-preview',loadChildren: () => import('./employer/job-preview/job-preview.module').then(m => m.JobPreviewModule) },
 
 
 

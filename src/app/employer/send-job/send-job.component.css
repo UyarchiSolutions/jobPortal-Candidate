@@ -1,0 +1,62 @@
+.login-content a{
+    color: #000;
+    text-decoration: none;
+}
+
+
+.button{
+    margin-top: 10px;
+    width: 180px;
+}
+
+.btn-bg-brand-blue{
+    background-color: #0A2647;
+    color: #fff;
+}
+
+.forgot-pass{
+    text-align: right;
+    font-size: 10px;
+    color: #0A2647;
+}
+
+.ad-image img{
+    width: 100%;
+}
+
+
+.btn-brand-blue{
+    min-width: 150px;
+}
+
+.login-main .col-2 img{
+    width: 100%;
+
+}
+select {
+    -webkit-appearance: listbox !important;
+    }
+.view-job{
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 14px;
+
+}
+.content-box h5{
+    font-size: 16px;
+    font-weight: 500;
+}
+.job-attached{
+    border-radius:0.35rem;
+    border: 1px solid #ced4da;
+}
+.job-attached .col-12 .col-6{
+    font-size: 14px;
+}
+.content-box button{
+    padding: 6px 12px !important;
+    min-width: 150px;
+}
+textarea{
+    min-height: 100px;
+}

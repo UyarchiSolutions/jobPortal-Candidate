@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { EmpServiceService } from '../emp-service.service';
 
 @Component({
@@ -14,26 +15,50 @@ export class EmpHomeComponent implements OnInit {
   isDisplay=false
   keySkill: any;
   value: any;
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: false,
+    idField: '_id',
+    textField: 'Course',
+    itemsShowLimit: 3,
+    limitSelection: 3,
+    allowSearchFilter: true,
+    enableCheckAll: false
+  };
   searchForm: any = this.fb.group({
-    keyskills: this.fb.array([],[Validators.required]),
+    keyskills: this.fb.array([]),
     location: new FormControl(null),
     anykeywords: new FormControl(null),
     experiencefrom: new FormControl(null),
     experienceto: new FormControl(null),
     experience: new FormControl(null),
-    qualification: new FormControl(null)
+    qualification: new FormControl(null),
+    course:this.fb.array([]),
+    salaryRange: new FormControl(null),
+    gender: new FormControl(null),
+    displayDetails: new FormControl(null),
+  })
+  folderForm:any = this.fb.group({
+    folderName:new FormControl(null)
+
   })
   activeform:any = this.fb.group({
     active: new FormControl(true)
-
   })
   can_data: any;
   rcnt_data: any;
   is_icon: boolean = false;
   is_search_icon: boolean = true;
+  is_canfolderlist :boolean = false;
   save_search_data: any;
   listArray:any=[];
   canid: any;
+  course_list: any;
+  is_new: boolean = false;
+  is_old:boolean = true;
+  folderName: any;
+  folder_list: any;
+  canfolderList: any;
+  folder_name: any;
   constructor(private empservice: EmpServiceService,private fb:FormBuilder, private router: Router,) { }
   is_viewpost : boolean = false;
   is_viewapplies : boolean = false;
@@ -45,6 +70,7 @@ export class EmpHomeComponent implements OnInit {
     this.recent_search()
     this.get_save_search()
     this.get_course_list()
+    this.get_folder_list()
   }
   getJobpostDetails(){
     this.empservice.myjobPost().subscribe((res:any)=>{
@@ -56,6 +82,7 @@ export class EmpHomeComponent implements OnInit {
     this.is_viewpost = true
     this.is_viewapplies = false
     this.is_viewcan = false
+    this.is_canfolderlist = false
   }
   current_applies(id :any){
     console.log('current_applies',id);
@@ -76,6 +103,8 @@ export class EmpHomeComponent implements OnInit {
     this.is_viewpost = false
     this.is_icon = true
     this.is_search_icon = false
+    this.is_icon = false
+    this.is_canfolderlist = false
     this.search();
   }
   get_can(){
@@ -86,14 +115,14 @@ export class EmpHomeComponent implements OnInit {
   }
   search(){
     console.log('search',this.searchForm.value);
-      if(this.searchForm.get('keyskills')?.valid && this.searchForm.get('location')?.valid && this.searchForm.get('experience')?.valid){
+      // if(this.searchForm.get('keyskills')?.valid && this.searchForm.get('location')?.valid && this.searchForm.get('experience')?.valid){
         this.empservice.view_can(this.searchForm.value).subscribe((res:any)=>{
           console.log(res);
          this.can_data = res.user
          this.recent_search()
         //  this.searchForm.reset();
         })
-      }
+      // }
   }
 
   search_skills(data:any){
@@ -194,8 +223,85 @@ export class EmpHomeComponent implements OnInit {
  }
  get_course_list(){
   this.empservice.get_course_list().subscribe((res:any)=>{
+    this.course_list = res
     console.log(res)
   })
  }
+advanced_search(){
+   if(this.searchForm.get('anykeywords')?.valid && this.searchForm.get('location')?.valid && this.searchForm.get('experiencefrom')?.valid && this.searchForm.get('experienceto')?.valid && this.searchForm.get('salaryRange')?.valid && this.searchForm.get('gender')?.valid && this.searchForm.get('course')?.valid && this.searchForm.get('displayDetails')?.valid){
+  this.empservice.view_can(this.searchForm.value).subscribe((res:any)=>{
+    console.log(res);
+    this.search()
+  })
+}
+}
+pushCourse(e:any){
+
+  const data: FormArray = this.searchForm.get('course') as FormArray;
+  console.log(e)
+  data.push(new FormControl(e.Course))
+}
+save_folder(){
+   this.is_new = true;
+   this.is_old = false;
+}
+create_new_folder(){
+  var data={
+    candidateId:this.listArray,
+    folderName:this.folderForm.get('folderName').value
+  }
+  console.log(data)
+  this.empservice.create_folder(data).subscribe((res:any)=>{
+    this.folderForm.reset();
+    console.log(res);
+  })
+}
+exis_fold(){
+  this.is_new = false;
+   this.is_old = true;
+}
+get_folder_list(){
+  this.empservice.get_folder_list().subscribe((res:any)=>{
+    console.log(res);
+   this.folder_list = res.user
+  })
+}
+get_folder_details(id:any,folderName:any){
+  console.log(id,folderName)
+  var data={
+    id : id,
+    folderName:folderName
+  }
+  this.empservice.get_folder_details(data).subscribe((res:any)=>{
+    console.log(res);
+    this.canfolderList = res
+    this.folder_name = this.canfolderList[0].folderName
+    this.is_canfolderlist = true
+    this.is_viewcan = false
+  })
+}
+get_qualification(list:any){
+   console.log(list)
+   if(list.drQualification == 'Doctorate/PhD'){
+    return list.drCourse + ' ' + list.drSpecialization
+  }
+  else if(list.pgQualification == 'Masters/Post-Graduation'){
+    return list.pgCourse + ' ' + list.pgSpecialization
+  }
+  else if(list.ugQualification == 'Graduation/Diploma'){
+    return list.ugCourse + ' ' + list.ugSpecialization
+  }
+  else if(list.hsQualification == 'HSC'){
+    return list.hsQualification
+  }
+  else{
+    return list.sslcQualification
+  }
+  
+}
+get_appliedcan_qualification(list:any){
+  console.log(list)
+  
+}
 
 }

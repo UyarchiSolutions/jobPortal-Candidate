@@ -12,8 +12,12 @@
             <div class="row register-content-row ">
                 <div class="col register-content">
                     <div class="row no-margin">
-                        <div class="col-2"><span class="arrow">&lt;</span> </div>
-                        <div class="col"></div>
+                        <div class="col-2" routerLink="/emp-home" style="cursor: pointer;">
+                            <span class="arrow">&lt;</span> 
+                        </div>
+                        <div class="col">
+
+                        </div>
 
                         <div class="col-2 pre-next-page">
                             <img src="../../assets/image/prepage.png" alt="">
@@ -46,13 +50,12 @@
                                     <div>
                                         <div class="content-box">
                                             <select class="form-control select-type send-drop"
-                                                (change)="send($event,popup)">
+                                                (change)="send($event)">
                                                 <option value="option1" disabled selected> <span class="drop-icon"><img
                                                             src="../../assets/image/message.png" alt=""></span> Send
                                                 </option>
                                                 <option value="send mail">Send a mail</option>
-                                                <option value="send job" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal"><button>Send a job</button></option>
+                                                <option value="send job">Send a job</option>
                                             </select>
                                         </div>
                                     </div>
@@ -78,18 +81,27 @@
 
                                     <div>
                                         <div class="content-box">
-                                            <select class="form-control select-type">
-                                                <option value="fas fa-a" disabled selected
+                                            <select class="form-control select-type" formControlName="folderName" (change)="open_folder($event,createpopup,savepopup)">
+                                                <option value="option" [ngValue]="null" disabled selected
                                                     style="background-image:url('../../assets/image/message.png');">
                                                     <span class="drop-icon"></span> Save Folder
                                                 </option>
-                                                <option value="option2">Option 2</option>
-                                                <option value="option3">Option 3</option>
+                                                <option *ngFor="let data of folder_list" data-bs-toggle="modal"
+                                                data-bs-target="#savefolder" value="{{data.folderName}}">{{data.folderName}}</option>
+                                                <option value="add" data-bs-toggle="modal"
+                                                data-bs-target="#createfolder">+Add Folder</option>
                                             </select>
                                         </div>
                                     </div>
-
-
+                                    <button style="display:none" type="button" class="btn btn-primary" #savepopup
+                                    data-bs-toggle="modal" data-bs-target="#savefolder">
+                                    Launch demo modal
+                                    </button>
+                                    <button style="display:none" type="button" class="btn btn-primary" #createpopup
+                                    data-bs-toggle="modal" data-bs-target="#createfolder">
+                                    Launch demo modal
+                                    </button>
+                                   
                                 </div>
                                 <div class="heading-icons heading-main-content-small">
 
@@ -282,30 +294,24 @@
         </div>
     </div>
     <!-- Modal -->
-
 </div>
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1"
+<div class="modal" id="exampleModal" tabindex="-1"
 aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                aria-label="Close"></button>
-        </div>
+    <div class="modal-content popup-parent">
         <div class="modal-body">
-            <div class="popup-parent">
+            <div class="">
                 <div class="container col-8">
                     <div class="col register-content">
                         <div class="row">
                           <div class="col-2"></div>
-                          <div class="col">
+                          <div class="col mt-4">
                             <h3>Send a Job</h3>
                           </div>
-                          <div class="col-2">
-                             
+                          <div class="col-2 mt-2 d-flex justify-content-end">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
                         </div>
                         <div class="row">
@@ -362,26 +368,26 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
             
                             </div>
                          <div class="scroll" style="cursor:pointer">
-                            <div class="row content-card no-margin" *ngFor="let list of data">
+                            <div class="row content-card no-margin" *ngFor="let list of data" style="cursor: pointer;" data-bs-dismiss="modal" (click)="redirectto_job(list)">
                               
             
                                 <div class="col">
             
-                                    <a routerLink="/sendJob" [queryParams]="{id:list._id}">{{list.createdAt |  date: 'yyyy-MM-dd'}}</a>
+                                   {{list.createdAt |  date: 'yyyy-MM-dd'}}
             
                                 </div>
             
                                 <div class="col">
-                                    <a routerLink="/sendJob" [queryParams]="{id:list._id}">{{list.jobTittle}}</a>
+                                    {{list.jobTittle}}
             
                                 </div>
             
                                 <div class="col">
-                                    <a routerLink="/sendJob" [queryParams]="{id:list._id}">{{list.experienceFrom}} to {{list.experienceTo}} Years</a>
+                                   {{list.experienceFrom}} to {{list.experienceTo}} Years
                                 </div>
             
                                 <div class="col">
-                                    <a routerLink="/sendJob" [queryParams]="{id:list._id}">{{list.salaryRangeFrom}} to {{list.salaryRangeTo}} lacs</a>
+                                    {{list.salaryRangeFrom}} to {{list.salaryRangeTo}} lacs
             
                                 </div>
             
@@ -391,8 +397,8 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
                         </div>
                         </div>
                         </div>
+                         </div>
                     </div>
-                      </div>
                 </div>
             </div>
         </div>
@@ -400,3 +406,176 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
     </div>
 </div>
 </div>
+
+<div class="modal" id="savefolder" tabindex="-1"
+aria-labelledby="exampleModalLabel" aria-hidden="true" [formGroup]="folderForm">
+<div class="modal-dialog">
+    <div class="modal-content popup-parent">
+        <div class="modal-body">
+                <div class="container" style="width:800px">
+                    <div class="col register-content py-2 pb-5">
+                        <div class="row px-4">
+                          <div class="col-2"></div>
+                          <div class="col">
+                            <h3>Save Folder</h3>
+                          </div>
+                          <div class="col-2 mt-2 d-flex justify-content-end">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                        </div>
+                        <div class="row" *ngIf="is_old">
+                          <div class="register-form">
+                            <div class="single-row">
+                                <label for="">Saved Folder :</label>
+                                <div class="content-box">
+                                    <select class="form-control" formControlName="folderName">
+                                        <option>Select</option>
+                                        <option *ngFor="let data of folder_list" value="{{data.folderName}}">{{data.folderName}}</option>
+                                        </select>
+                                </div>
+                
+                            </div>
+                            <div class="single-row  col-8 m-auto mt-4" *ngIf="folderForm.get('folderName')?.value">
+                      
+                                <div class="content-box back-btn">
+                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5">Back</button>
+                                </div>
+                                <div class="content-box submit-btn">
+                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal" (click)="create_new_folder()">Save</button>
+                                </div>
+                            </div>
+                            <div class="create-folder col-5 m-auto mt-4 d-flex align-items-center" (click)="save_folder()" style="cursor:pointer">
+                                <span class="me-2"><i><svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 11.2454V10.4727C1 9.85784 1.24313 9.2682 1.67591 8.83345C2.10868 8.39871 2.69565 8.15447 3.30769 8.15447H18.6923C19.3043 8.15447 19.8913 8.39871 20.3241 8.83345C20.7569 9.2682 21 9.85784 21 10.4727V11.2454M12.0872 4.61023L9.91282 2.42599C9.76998 2.28232 9.60035 2.16833 9.41363 2.09054C9.22691 2.01276 9.02676 1.9727 8.82462 1.97266H3.30769C2.69565 1.97266 2.10868 2.21689 1.67591 2.65164C1.24313 3.08638 1 3.67602 1 4.29084V16.6545C1 17.2693 1.24313 17.8589 1.67591 18.2937C2.10868 18.7284 2.69565 18.9727 3.30769 18.9727H18.6923C19.3043 18.9727 19.8913 18.7284 20.3241 18.2937C20.7569 17.8589 21 17.2693 21 16.6545V7.38175C21 6.76693 20.7569 6.17729 20.3241 5.74255C19.8913 5.3078 19.3043 5.06357 18.6923 5.06357H13.1754C12.7675 5.0632 12.3754 4.90014 12.0872 4.61023Z" stroke="#0A2647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </i></span>
+                                    <p class="mt-4">Create New Folder</p>
+                            </div>
+                
+                           
+                
+                
+                        </div>
+                        </div>
+                        <div class="row" *ngIf="is_new">
+                            <div class="register-form">
+                              <div class="single-row">
+                                  <label for="">Create Folder :</label>
+                                  <div class="content-box">
+                                      <input class="form-control" placeholder="Enter Folder Name" formControlName="folderName">
+                                      </div>
+                              </div>
+                              <div class="single-row  col-8 m-auto mt-4">
+                      
+                                  <div class="content-box back-btn">
+                                      <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5">Back</button>
+                                  </div>
+                                  <div class="content-box submit-btn">
+                                      <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal" (click)="create_new_folder()">Save</button>
+                                  </div>
+                              </div>
+                             
+                              <div class="create-folder col-5 m-auto mt-4 d-flex align-items-center" (click)="exis_fold()" style="cursor:pointer">
+                                  <span class="me-2"><i><svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <path d="M1 11.2454V10.4727C1 9.85784 1.24313 9.2682 1.67591 8.83345C2.10868 8.39871 2.69565 8.15447 3.30769 8.15447H18.6923C19.3043 8.15447 19.8913 8.39871 20.3241 8.83345C20.7569 9.2682 21 9.85784 21 10.4727V11.2454M12.0872 4.61023L9.91282 2.42599C9.76998 2.28232 9.60035 2.16833 9.41363 2.09054C9.22691 2.01276 9.02676 1.9727 8.82462 1.97266H3.30769C2.69565 1.97266 2.10868 2.21689 1.67591 2.65164C1.24313 3.08638 1 3.67602 1 4.29084V16.6545C1 17.2693 1.24313 17.8589 1.67591 18.2937C2.10868 18.7284 2.69565 18.9727 3.30769 18.9727H18.6923C19.3043 18.9727 19.8913 18.7284 20.3241 18.2937C20.7569 17.8589 21 17.2693 21 16.6545V7.38175C21 6.76693 20.7569 6.17729 20.3241 5.74255C19.8913 5.3078 19.3043 5.06357 18.6923 5.06357H13.1754C12.7675 5.0632 12.3754 4.90014 12.0872 4.61023Z" stroke="#0A2647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                      </svg>
+                                      </i></span>
+                                      <p class="mt-4">Use Existing Folder</p>
+                              </div>
+                          </div>
+                          </div>
+                
+                
+                
+                
+                      </div>
+                </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal" id="createfolder" tabindex="-1"
+aria-labelledby="exampleModalLabel" aria-hidden="true" [formGroup]="folderForm">
+<div class="modal-dialog">
+    <div class="modal-content popup-parent">
+        <div class="modal-body">
+                <div class="container" style="width:800px">
+                    <div class="col register-content py-2 pb-5">
+                        <div class="row px-4">
+                          <div class="col-2"></div>
+                          <div class="col">
+                            <h3>Save Folder</h3>
+                          </div>
+                          <div class="col-2 mt-2 d-flex justify-content-end">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                        </div>
+                        <div class="row" *ngIf="is_old">
+                          <div class="register-form">
+                            <div class="single-row">
+                                <label for="">Saved Folder :</label>
+                                <div class="content-box">
+                                    <select class="form-control" formControlName="folderName">
+                                        <option>Select</option>
+                                        <option *ngFor="let data of folder_list" value="{{data.folderName}}">{{data.folderName}}</option>
+                                        </select>
+                                </div>
+                
+                            </div>
+                            <div class="single-row  col-8 m-auto mt-4" *ngIf="folderForm.get('folderName')?.value">
+                      
+                                <div class="content-box back-btn">
+                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5">Back</button>
+                                </div>
+                                <div class="content-box submit-btn">
+                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal" (click)="create_new_folder()">Save</button>
+                                </div>
+                            </div>
+                            <div class="create-folder col-5 m-auto mt-4 d-flex align-items-center" (click)="save_folder()" style="cursor:pointer">
+                                <span class="me-2"><i><svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 11.2454V10.4727C1 9.85784 1.24313 9.2682 1.67591 8.83345C2.10868 8.39871 2.69565 8.15447 3.30769 8.15447H18.6923C19.3043 8.15447 19.8913 8.39871 20.3241 8.83345C20.7569 9.2682 21 9.85784 21 10.4727V11.2454M12.0872 4.61023L9.91282 2.42599C9.76998 2.28232 9.60035 2.16833 9.41363 2.09054C9.22691 2.01276 9.02676 1.9727 8.82462 1.97266H3.30769C2.69565 1.97266 2.10868 2.21689 1.67591 2.65164C1.24313 3.08638 1 3.67602 1 4.29084V16.6545C1 17.2693 1.24313 17.8589 1.67591 18.2937C2.10868 18.7284 2.69565 18.9727 3.30769 18.9727H18.6923C19.3043 18.9727 19.8913 18.7284 20.3241 18.2937C20.7569 17.8589 21 17.2693 21 16.6545V7.38175C21 6.76693 20.7569 6.17729 20.3241 5.74255C19.8913 5.3078 19.3043 5.06357 18.6923 5.06357H13.1754C12.7675 5.0632 12.3754 4.90014 12.0872 4.61023Z" stroke="#0A2647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </i></span>
+                                    <p class="mt-4">Create New Folder</p>
+                            </div>
+                
+                           
+                
+                
+                        </div>
+                        </div>
+                        <div class="row" *ngIf="is_new">
+                            <div class="register-form">
+                              <div class="single-row">
+                                  <label for="">Create Folder :</label>
+                                  <div class="content-box">
+                                      <input class="form-control" placeholder="Enter Folder Name" formControlName="folderName">
+                                      </div>
+                              </div>
+                              <div class="single-row  col-8 m-auto mt-4">
+                      
+                                  <div class="content-box back-btn">
+                                      <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5">Back</button>
+                                  </div>
+                                  <div class="content-box submit-btn">
+                                      <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal" (click)="create_new_folder()">Save</button>
+                                  </div>
+                              </div>
+                             
+                              <div class="create-folder col-5 m-auto mt-4 d-flex align-items-center" (click)="exis_fold()" style="cursor:pointer">
+                                  <span class="me-2"><i><svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <path d="M1 11.2454V10.4727C1 9.85784 1.24313 9.2682 1.67591 8.83345C2.10868 8.39871 2.69565 8.15447 3.30769 8.15447H18.6923C19.3043 8.15447 19.8913 8.39871 20.3241 8.83345C20.7569 9.2682 21 9.85784 21 10.4727V11.2454M12.0872 4.61023L9.91282 2.42599C9.76998 2.28232 9.60035 2.16833 9.41363 2.09054C9.22691 2.01276 9.02676 1.9727 8.82462 1.97266H3.30769C2.69565 1.97266 2.10868 2.21689 1.67591 2.65164C1.24313 3.08638 1 3.67602 1 4.29084V16.6545C1 17.2693 1.24313 17.8589 1.67591 18.2937C2.10868 18.7284 2.69565 18.9727 3.30769 18.9727H18.6923C19.3043 18.9727 19.8913 18.7284 20.3241 18.2937C20.7569 17.8589 21 17.2693 21 16.6545V7.38175C21 6.76693 20.7569 6.17729 20.3241 5.74255C19.8913 5.3078 19.3043 5.06357 18.6923 5.06357H13.1754C12.7675 5.0632 12.3754 4.90014 12.0872 4.61023Z" stroke="#0A2647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                      </svg>
+                                      </i></span>
+                                      <p class="mt-4">Use Existing Folder</p>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+        </div>
+    </div>
+</div>
+</div>
+
