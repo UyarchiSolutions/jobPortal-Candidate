@@ -1,0 +1,72 @@
+<div class="container-fluid register">
+    <div class="row">
+        <div class="col-2 ad-image">
+            <img src="../../assets/image/ad.png" alt="">
+        </div>
+        <div class="col-8  login-main">
+            <div class="row ">
+                <div class="col">
+                    <img src="../../assets/image/hero.png" alt="" class="hero-image">
+                </div>
+            </div>
+            <div class="row register-content-row height-register-content">
+                <div class="col register-content">
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <h3>Edit Recruiter</h3>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+
+                  <div class="row">
+                    <div class="col">
+
+
+
+                    <div class="register-form" [formGroup]="editform">
+                        <div class="single-row">
+                            <label for="">Recruiter Name :</label>
+                            <div class="content-box">
+                                <input type="text" class="form-control" placeholder="Enter Name" formControlName="recruiterName">
+                            </div>
+
+                        </div>
+
+                        <div class="single-row">
+                            <label for="">Recruiter Email ID :</label>
+                            <div class="content-box">
+                                <input type="text" class="form-control" placeholder="Enter Email ID" formControlName="email">
+                            </div>
+
+                        </div>
+
+                        <div class="single-row">
+                            <label for="">Recruiter Number :</label>
+                            <div class="content-box">
+                                <input type="number" class="form-control" placeholder="Enter Mobile Number" formControlName="mobileNumber">
+                            </div>
+                        </div>
+                        <div class="single-row douple-btn">
+                           
+                            <div class="content-box m-auto">
+                                <button type="submit" class="btn btn-brand-blue mb-2 btn-custom" (click)="edit()">Submit</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+            </div>  
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-2 ad-image">
+            <img src="../../assets/image/ad.png" alt="">
+        </div>
+    </div>
+</div>

@@ -44,14 +44,10 @@
                                     <rect width="30" height="30" rx="5" fill="black" fill-opacity="0.1"/>
                                     <path d="M14.0887 7C18.0017 7 21.1774 10.1757 21.1774 14.0887C21.1774 18.0017 18.0017 21.1774 14.0887 21.1774C10.1757 21.1774 7 18.0017 7 14.0887C7 10.1757 10.1757 7 14.0887 7ZM14.0887 19.6021C17.1345 19.6021 19.6021 17.1345 19.6021 14.0887C19.6021 11.0421 17.1345 8.57527 14.0887 8.57527C11.0421 8.57527 8.57527 11.0421 8.57527 14.0887C8.57527 17.1345 11.0421 19.6021 14.0887 19.6021ZM20.7718 19.6581L23 21.8855L21.8855 23L19.6581 20.7718L20.7718 19.6581Z" fill="#0A2647"/>
                                     </svg>
-                                    
-                                
-                                    <svg class="ms-3" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <svg  data-bs-toggle="modal" (click)="open(data)" data-bs-target="#deletesearch"  class="ms-3" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect width="30" height="30" rx="5" fill="black" fill-opacity="0.1"/>
                                         <path d="M8.6 11.8H21.4V22.2C21.4 22.4122 21.3157 22.6157 21.1657 22.7657C21.0157 22.9157 20.8122 23 20.6 23H9.4C9.18783 23 8.98434 22.9157 8.83431 22.7657C8.68429 22.6157 8.6 22.4122 8.6 22.2V11.8ZM10.2 13.4V21.4H19.8V13.4H10.2ZM12.6 15H14.2V19.8H12.6V15ZM15.8 15H17.4V19.8H15.8V15ZM11 9.4V7.8C11 7.58783 11.0843 7.38434 11.2343 7.23431C11.3843 7.08429 11.5878 7 11.8 7H18.2C18.4122 7 18.6157 7.08429 18.7657 7.23431C18.9157 7.38434 19 7.58783 19 7.8V9.4H23V11H7V9.4H11ZM12.6 8.6V9.4H17.4V8.6H12.6Z" fill="#0A2647"/>
                                     </svg>
-                                        
-                            
                             </div>
 
                         </div>
@@ -72,4 +68,49 @@
             <img src="../../assets/image/ad.png" alt="">
         </div>
     </div>
+</div>
+
+<div class="modal" id="deletesearch" tabindex="-1"
+aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+    <div class="modal-content popup-parent">
+        <div class="modal-body">
+                <div class="container">
+                    <div class="col register-content py-2 pb-5">
+                        <div class="row px-4">
+                          <div class="col-2"></div>
+                          <div class="col">
+                            <h3>Delete Search</h3>
+                          </div>
+                          <div class="col-2 mt-2 d-flex justify-content-end">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="register-form">
+                              <div class="text-center">
+                                  <label for="">Are you sure you want to delete this folder</label>
+                              </div>
+                              <div class="single-row  col-8 m-auto mt-4" style="justify-content: center">
+                      
+                                  <div class="content-box back-btn" style="margin-left: 54px;">
+                                      <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal">No</button>
+                                  </div>
+                                  <div class="content-box submit-btn">
+                                      <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" (click)="delete()" data-bs-dismiss="modal">Yes</button>
+                                  </div>
+                              </div>
+                             
+                             
+                          </div>
+                          </div>
+                
+                
+                
+                
+                      </div>
+                </div>
+        </div>
+    </div>
+</div>
 </div>

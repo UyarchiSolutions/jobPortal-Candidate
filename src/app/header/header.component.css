@@ -41,7 +41,7 @@ a{
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    width: 342px;
+ 
 }
 .nav-menu a i{
     font-size: 20px;
@@ -52,4 +52,20 @@ a{
     width: 15px;
     height: 15px;
     margin-right: 10px;
+}
+.dropdown-toggle{
+    color: white !important;
+    margin-left: 0px !important;
+}
+.dropdown-toggle:hover{
+    background-color: white;
+    color:black !important;
+}
+
+.dropdown-menu li a{
+    color: black;
+}
+.register{
+    background-color: #FD841F;
+    color: white;
 }

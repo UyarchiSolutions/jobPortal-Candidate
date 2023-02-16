@@ -10,6 +10,7 @@ import { EmpServiceService } from '../emp-service.service';
 })
 export class SavedSearchComponent implements OnInit {
   list: any;
+  listdata: any;
 
   constructor(private empservice: EmpServiceService,private fb:FormBuilder, private router: Router,) { }
 
@@ -21,6 +22,19 @@ export class SavedSearchComponent implements OnInit {
     this.empservice.get_all_savedsearch().subscribe((res:any)=>{
       this.list = res.user
       console.log(res);
+    })
+  }
+  open(list:any){
+    console.log(list)
+    this.listdata = list
+  }
+  delete(){
+    var data={
+      candidateId:Array(this.listdata._id)
+    }
+    this.empservice.delete_search(data).subscribe((res:any)=>{
+      console.log(res);
+      this.get_savedsearch()
     })
   }
 }

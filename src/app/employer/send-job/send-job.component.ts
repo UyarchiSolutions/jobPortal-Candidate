@@ -23,6 +23,7 @@ export class SendJobComponent implements OnInit {
   title: any;
   candidates: any;
   is_attached:boolean = false;
+  canArray = [];
   constructor(private empservice: EmpServiceService,private route: ActivatedRoute, private router: Router,private formBuilder:FormBuilder,) { }
 
   ngOnInit(): void {
@@ -30,6 +31,8 @@ export class SendJobComponent implements OnInit {
     .subscribe(params => {
       console.log(params); 
       this.candidates=params['candidates'];
+      this.canArray = this.candidates.split(",")
+      console.log(this.canArray);
     }
   );
   this.get_job_list()
@@ -53,7 +56,7 @@ export class SendJobComponent implements OnInit {
   }
   sendajob(){
     var data={
-       candidates:Array(this.candidates),
+       candidates:this.canArray,
        mailId: this.jobId,
        subject:this.postForm.get('subject')?.value,
        signature:this.postForm.get('signature')?.value,

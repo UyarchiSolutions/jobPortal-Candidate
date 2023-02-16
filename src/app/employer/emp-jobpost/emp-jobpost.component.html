@@ -56,33 +56,78 @@
                                     (onAddressChange)="handleAddressChange($event)" placeholder="Enter Job location">
                                 </div>
                             </div>
+                            <!-- <div class="single-row">
+                                <label for="">Key Skills :</label>
+                                <div class="content-box">
+                                    <input type="text" class="form-control" placeholder="Enter Key Skills" (keyup)="dispalye($event)" formControlName="searchbox">
+                                    <div class="" *ngIf="isDisplay" style="margin-top:0px;">
+                                        <label></label>
+                                        <div class="" style="background: white;">
+                                          <ul class="ulkeylist" style="padding-left: 0px;" class="">
+                                            <li class="ilkeylist" style="cursor:pointer" *ngFor="let skill of keySkill"
+                                              (click)="checkSkill($event,skill)">
+                                              <span>{{skill?.Skill_Title}}</span>
+                                            </li>
+                                          </ul>
+                                        </div>
+                                      </div>
+                                </div>
+                            </div> -->
+
                             <div class="single-row">
                                 <label for="">Key Skills :</label>
                                 <div class="content-box">
-                                    <input type="text" class="form-control" placeholder="Enter Key Skills" formControlName="keySkill" (keyup)="search_skills($event)">
-                                   
+                                  <input type="text" class="form-control" (keyup)="dispalye($event)" placeholder="Enter Key Skills"
+                                    formControlName="searchbox">
                                 </div>
-                            </div>
-                            <div class="single-row" *ngIf="isDisplay" style="margin-top:0px;">
+                              </div>
+                              <div class="single-row" *ngIf="isDisplay" style="margin-top:0px;">
                                 <label></label>
-                                <div class="content-box" style="background: white;padding: 12px;">
-                                  <ul style="padding-left: 0px;list-style: none;">
-                                    <li *ngFor="let skill of keySkill" class="d-flex"><input type="checkbox" value="{{skill}}" (change)="checkSkill($event)"/>
-                                      <span style="padding-left: 10px;">{{skill}}</span></li>
+                                <div class="content-box" style="background: white;">
+                                  <ul style="padding-left: 0px;">
+                                    <li *ngFor="let skill of keySkill" style="cursor:pointer" (click)="checkSkill($event,skill)">
+                                      <span>{{skill}}</span>
+                                    </li>
                                   </ul>
                                 </div>
-                            </div>
+                              </div>
+                            <!-- <div class="search-box first-search-box">
+                                <input type="text" class="form-control keyskill" placeholder="Enter Designation / Key skills"
+                                  (keyup)="dispalye($event)" formControlName="searchbox">
+                                <div class="" *ngIf="isDisplay" style="margin-top:0px;">
+                                  <label></label>
+                                  <div class="content-box keylist" style="background: white;">
+                                    <ul class="ulkeylist" style="padding-left: 0px;" class="">
+                                      <li class="ilkeylist" style="cursor:pointer" *ngFor="let skill of keySkill"
+                                        (click)="checkSkill($event,skill)">
+                                        <span>{{skill?.Skill_Title}}</span>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                            </div> -->
                             <div class="single-row">
                                 <label for="">Qualification :</label>
                                 <div class="content-box">
-                                    <select class="form-control select-type" formControlName="industry">
-                                        <option value="option1" disabled selected >Select</option>
-                                        <option value="Doctorate/PhD">Doctorate/PhD</option>
-                                        <option value="Masters/Post-Graduation">Masters/Post-Graduation</option>
-                                        <option value="Graduation/Diplomo">Graduation/Diplomo</option>
-                                        <option value="HSC">HSC</option>
-                                        <option value="SSLC">SSLC</option>
-                                    </select>
+                                    <ng-multiselect-dropdown id="quaInput" class="w-100" style="background-color: white;" name='qualification'
+                                    [settings]="dropdownSettings1" [data]="qua_data" (onSelect)="putcourse($event)" (onDeSelect)="DeSelect_putcourse($event)">
+                                </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Course :</label>
+                                <div class="content-box">
+                                    <ng-multiselect-dropdown id="course" class="w-100" style="background-color: white;" name='course'
+                                    [settings]="dropdownSettings2" [data]="coursedata" (onSelect)="putspecial($event)">
+                                </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Specialization :</label>
+                                <div class="content-box">
+                                    <ng-multiselect-dropdown id="spcl" class="w-100" style="background-color: white;" name=''
+                                    [settings]="dropdownSettings3" [data]="spcldata" (onSelect)="put($event)">
+                                </ng-multiselect-dropdown>
                                 </div>
                             </div>
                             <div class="single-row">
@@ -143,10 +188,13 @@
                             <div class="single-row">
                                 <label for="">Preferred Industry :</label>
                                 <div class="content-box">
-                                    <select class="form-control select-type" formControlName="preferedIndustry">
+                                    <!-- <select class="form-control select-type" formControlName="preferedIndustry">
                                         <option disabled [ngValue]="null" selected value="select">Select</option>
                                         <option value="{{industry.Industry}}" *ngFor="let industry of indus_data">{{industry.Industry}}</option>
-                                    </select>
+                                    </select> -->
+                                    <ng-multiselect-dropdown id="courseInput" class="w-100" style="background-color: white;" name='industry'
+                                    [settings]="dropdownSettings" [data]="indus_data" (onSelect)="pushCourse($event)">
+                                </ng-multiselect-dropdown>
                                 </div>
                             </div>
                             <!-- <div>
@@ -202,7 +250,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="single-row" *ngIf="jobpostForm.get('interviewType')?.value == 'walk in'">
+                            <div class="single-row" *ngIf="jobpostForm.get('interviewType')?.value == 'walk in'" >
                                 <label for="">Date :</label>
                                 <div class="content-box">
                                     <input type="date" class="form-control douple-input-first" placeholder="From" formControlName="interviewstartDate">
@@ -214,51 +262,51 @@
                                 <div class="content-box">
                                     <select class="form-control select-type" formControlName="startTime">
                                         <option value="option1" [ngValue]="null" disabled selected >From</option>
-                                        <option value="">08.00 Am</option>
-                                        <option value="">08.30 Am</option>
-                                        <option value="">09.00 Am</option>
-                                        <option value="">09.30 Am</option>
-                                        <option value="">10.00 Am</option>
-                                        <option value="">10.30 Am</option>
-                                        <option value="">11.00 Am</option>
-                                        <option value="">11.30 Am</option>
-                                        <option value="">12.00 Pm</option>
-                                        <option value="">12.30 Pm</option>
-                                        <option value="">01.00 Pm</option>
-                                        <option value="">01.30 Pm</option>
-                                        <option value="">02.00 Pm</option>
-                                        <option value="">02.30 Pm</option>
-                                        <option value="">03.00 Pm</option>
-                                        <option value="">03.30 Pm</option>
-                                        <option value="">04.00 Pm</option>
-                                        <option value="">04.30 Pm</option>
-                                        <option value="">05.00 Pm</option>
-                                        <option value="">05.30 Pm</option>
-                                        <option value="">06.00 Pm</option>
+                                        <option value="08.00 Am">08.00 Am</option>
+                                        <option value="08.30 Am">08.30 Am</option>
+                                        <option value="09.00 Am">09.00 Am</option>
+                                        <option value="09.30 Am">09.30 Am</option>
+                                        <option value="10.00 Am">10.00 Am</option>
+                                        <option value="10.30 Am">10.30 Am</option>
+                                        <option value="11.00 Am">11.00 Am</option>
+                                        <option value="1.30 Am">11.30 Am</option>
+                                        <option value="12.00 Pm">12.00 Pm</option>
+                                        <option value="12.30 Pm">12.30 Pm</option>
+                                        <option value="01.00 Pm">01.00 Pm</option>
+                                        <option value=">01.30 Pm">01.30 Pm</option>
+                                        <option value="02.00 Pm">02.00 Pm</option>
+                                        <option value="02.30 Pm">02.30 Pm</option>
+                                        <option value="03.00 Pm">03.00 Pm</option>
+                                        <option value="03.30 Pm">03.30 Pm</option>
+                                        <option value="04.00 Pm">04.00 Pm</option>
+                                        <option value="04.30 Pm">04.30 Pm</option>
+                                        <option value="05.00 Pm">05.00 Pm</option>
+                                        <option value="05.30 Pm">05.30 Pm</option>
+                                        <option value="06.00 Pm">06.00 Pm</option>
                                     </select>
                                     <select class="form-control select-type" formControlName="endTime">
                                         <option value="option1" [ngValue]="null" disabled selected >To</option>
-                                        <option value="">08.00 Am</option>
-                                        <option value="">08.30 Am</option>
-                                        <option value="">09.00 Am</option>
-                                        <option value="">09.30 Am</option>
-                                        <option value="">10.00 Am</option>
-                                        <option value="">10.30 Am</option>
-                                        <option value="">11.00 Am</option>
-                                        <option value="">11.30 Am</option>
-                                        <option value="">12.00 Pm</option>
-                                        <option value="">12.30 Pm</option>
-                                        <option value="">01.00 Pm</option>
-                                        <option value="">01.30 Pm</option>
-                                        <option value="">02.00 Pm</option>
-                                        <option value="">02.30 Pm</option>
-                                        <option value="">03.00 Pm</option>
-                                        <option value="">03.30 Pm</option>
-                                        <option value="">04.00 Pm</option>
-                                        <option value="">04.30 Pm</option>
-                                        <option value="">05.00 Pm</option>
-                                        <option value="">05.30 Pm</option>
-                                        <option value="">06.00 Pm</option>
+                                        <option value="08.00 Am">08.00 Am</option>
+                                        <option value="08.30 Am">08.30 Am</option>
+                                        <option value="09.00 Am">09.00 Am</option>
+                                        <option value="09.30 Am">09.30 Am</option>
+                                        <option value="10.00 Am">10.00 Am</option>
+                                        <option value="10.30 Am">10.30 Am</option>
+                                        <option value="11.00 Am">11.00 Am</option>
+                                        <option value="11.30 Am">11.30 Am</option>
+                                        <option value="12.00 Pm">12.00 Pm</option>
+                                        <option value="12.30 Pm">12.30 Pm</option>
+                                        <option value="01.00 Pm">01.00 Pm</option>
+                                        <option value="01.30 Pm">01.30 Pm</option>
+                                        <option value="02.00 Pm">02.00 Pm</option>
+                                        <option value="02.30 Pm">02.30 Pm</option>
+                                        <option value="03.00 Pm">03.00 Pm</option>
+                                        <option value="03.30 Pm">03.30 Pm</option>
+                                        <option value="04.00 Pm">04.00 Pm</option>
+                                        <option value="04.30 Pm">04.30 Pm</option>
+                                        <option value="05.00 Pm">05.00 Pm</option>
+                                        <option value="05.30 Pm">05.30 Pm</option>
+                                        <option value="06.00 Pm">06.00 Pm</option>
                                     </select>
                                 </div>
                             </div>
@@ -298,18 +346,57 @@
                                 </div>
                             </div>
 
-                            <div class="single-row">
-                                <label for="">Recruiter Name :</label>
-                                <div class="content-box">
-                                    <input type="text" class="form-control" placeholder="Enter Recruiter Name" formControlName="recruiterName">
-                                </div>
-
-                            </div>
 
                             <div class="single-row">
                                 <label for="">Mobile Number :</label>
                                 <div class="content-box">
                                     <input type="number" class="form-control" placeholder="Enter Mobile Number" formControlName="contactNumber">
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Recruiter Details :</label>
+                                <div class="content-box">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" value="list" (change)="recriterlist($event)" name="flexRadioDefault" id="flexRadioDefault1">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Recruiter List
+                                        </label>
+                                    </div>
+                                    <div class="form-check ms-5">
+                                        <input class="form-check-input" type="radio" value="new" (change)="recriterlist($event)" name="flexRadioDefault" id="flexRadioDefault1">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            New Recruiter
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="single-row" *ngIf="is_list">
+                                <label for="">Select Recruiter :</label>
+                                <div class="content-box">
+                                    <select class="form-control select-type">
+                                        <option value="option1" disabled selected >Option</option>
+                                       
+                                      </select>
+                                </div>
+                            </div>
+                            <div class="single-row" *ngIf="is_new">
+                                <label for="">Recruiter Name :</label>
+                                <div class="content-box">
+                                    <input type="text" class="form-control" placeholder="Enter Name" formControlName="recruiterName">
+                                </div>
+                            </div>
+    
+                            <div class="single-row" *ngIf="is_new">
+                                <label for="">Recruiter Email Id :</label>
+                                <div class="content-box">
+                                    <input type="email" class="form-control" placeholder="Enter Email ID" formControlName="recruiterEmail">
+                                </div>
+                            </div>
+    
+                            <div class="single-row" *ngIf="is_new">
+                                <label for="">Recruiter Number :</label>
+                                <div class="content-box">
+                                    <input type="number" class="form-control" placeholder="Enter Number" formControlName="recruiterNumber">
                                 </div>
                             </div>
                             <div class="single-row douple-btn">

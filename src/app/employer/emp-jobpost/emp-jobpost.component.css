@@ -1,3 +1,4 @@
 .register-content-row{
-    height: 1200px;
+    height: fit-content;
+    padding-bottom: 20px;
 }

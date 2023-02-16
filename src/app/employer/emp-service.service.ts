@@ -121,4 +121,37 @@ delete_folder(id:any,data:any){
   return this.http.delete(this.baseurl+'/v1/employerCandidateSearch/delete_folder/'+id +'/'+data)
 
 }
+delete_search(data:any){
+  console.log('delete search',data)
+  return this.http.put(this.baseurl+'/v1/employerCandidateSearch/recent_saver_search_delete',data)
+
+}
+addrecruiter(data:any){
+  return this.http.post(this.baseurl+'/v1/employerdetail/create_Recruiter',data,{headers:{auth:Cookie.get('emptokens')}})
+
+}
+get_recruiter(){
+  return this.http.get(this.baseurl+'/v1/employerdetail/get_Recruiter',{headers:{auth:Cookie.get('emptokens')}})
+}
+getdetails_recruiter(id:any){
+  return this.http.get(this.baseurl+'/v1/employerdetail/get_Recruiter_id/'+id,{headers:{auth:Cookie.get('emptokens')}})
+}
+edit_recruiter(id:any,data:any){
+  return this.http.put(this.baseurl+'/v1/employerdetail/Recruiter_edit/'+id,data,{headers:{auth:Cookie.get('emptokens')}})
+}
+delete_recruiter(id:any){
+  return this.http.delete(this.baseurl+'/v1/employerdetail/Recruiter_delete/'+id)
+}
+get_qualification(){
+  return this.http.get(this.baseurl+'/v1/educationDetails')
+
+}
+get_courses(data:any){
+  return this.http.post(this.baseurl+'/v1/educationdetails/get_Qualification',data)
+
+}
+get_specialization(data:any){
+  return this.http.post(this.baseurl+'/v1/educationdetails/get_all_specialization',data)
+
+}
 }

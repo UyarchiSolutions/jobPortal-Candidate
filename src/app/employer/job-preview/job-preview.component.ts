@@ -11,6 +11,7 @@ import { EmpServiceService } from '../emp-service.service';
 export class JobPreviewComponent implements OnInit {
   jobId: any;
   jobdetails: any;
+  postdate: any;
 
   constructor(private empservice: EmpServiceService,private route: ActivatedRoute, private router: Router,private formBuilder:FormBuilder,) { }
 
@@ -22,12 +23,28 @@ export class JobPreviewComponent implements OnInit {
     }
   );
   this.job_preview_details()
+  this.calculateDiff()
   }
   job_preview_details() {
     this.empservice.job_preview(this.jobId).subscribe((res:any)=>{
-      console.log(res)
-      this.jobdetails = res.user[0]
+      this.jobdetails = res[0]
+      this.postdate = Date.parse(this.jobdetails.date);
+      console.log(this.postdate)
+
     })
   }
- 
+  calculateDiff(){
+    // let date = new Date(this.jobdetails.date);
+    // let currentDate = new Date();
+    // console.log(date,currentDate);
+    // let days = Math.floor((currentDate.getTime() - date.getTime()) / 1000 / 60 / 60 / 24);
+    // return days;
+
+    var date1:any = new Date(this.postdate);
+    var date2:any = new Date();
+    console.log(date1,date2);
+    var diffDays:any = Math.floor((date2 - date1) / (1000 * 60 * 60 * 24));
+    return diffDays;
+  }
+
 }

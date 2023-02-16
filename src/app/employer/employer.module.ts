@@ -20,6 +20,9 @@ import { NgxEditorModule } from "ngx-editor";
 import { JobPreviewComponent } from './job-preview/job-preview.component';
 import { SavedFolderComponent } from './saved-folder/saved-folder.component';
 import { SavedSearchComponent } from './saved-search/saved-search.component';
+import { AddRecruiterComponent } from './add-recruiter/add-recruiter.component';
+import { ManageRecruiterComponent } from './manage-recruiter/manage-recruiter.component';
+import { EditRecruiterComponent } from './edit-recruiter/edit-recruiter.component';
 
 
 
@@ -31,6 +34,9 @@ import { SavedSearchComponent } from './saved-search/saved-search.component';
     CheckEmailComponent,
     VerifyOtpComponent,
     EmpCansearchComponent,
+    
+    
+    
     
     
   ],

@@ -37,7 +37,9 @@ const routes: Routes = [
    {path: 'job-preview',loadChildren: () => import('./employer/job-preview/job-preview.module').then(m => m.JobPreviewModule) },
    {path: 'saved-folder',loadChildren: () => import('./employer/saved-folder/saved-folder.module').then(m => m.SavedFolderModule) },
    {path: 'saved-search',loadChildren: () => import('./employer/saved-search/saved-search.module').then(m => m.SavedSearchModule) },
-
+   {path: 'add-recruiter',loadChildren: () => import('./employer/add-recruiter/add-recruiter.module').then(m => m.AddRecruiterModule) },
+   {path: 'manage-recruiter',loadChildren: () => import('./employer/manage-recruiter/manage-recruiter.module').then(m => m.ManageRecruiterModule) },
+   {path: 'edit-recruiter',loadChildren: () => import('./employer/edit-recruiter/edit-recruiter.module').then(m => m.EditRecruiterModule) },
 
 
 

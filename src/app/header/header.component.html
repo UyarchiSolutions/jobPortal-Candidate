@@ -1,26 +1,36 @@
 <header>
-    <nav class="navbar navbar-light">
-    <div class="container top-header">
-      <div class="top-header-menu">
-        <p>TreaTJobs</p>
-        <p>JobBuzz</p>
-      </div>
-      <div class="top-header-contact">
-        <span><span><img src="../../assets/image/call.png" alt="" class="call-img">
-        </span>1234 1234 1234</span>
-      </div>
+  <nav class="navbar navbar-light">
+  <div class="container top-header">
+    <div class="top-header-menu">
+      <p>TreaTJobs</p>
+      <p>JobBuzz</p>
     </div>
-    </nav>
-      <nav class="navbar navbar-light bg-brand-blue">
-          <div class="container">
-            <a href="#" class="navbar-brand">
-              <img src="../../assets/image/logo.png" alt="" class="brand-logo">
-            </a>
-            <div class="nav-menu">
-              <button type="button" class="btn btn-light" routerLink="/canlogin">Login</button>
-              <button type="button" class="btn btn-warning" routerLink="/can-register">Register</button>
-              <div><a href="#">For Job Seekers <i class='fas fa-angle-down'></i></a></div>
+    <div class="top-header-contact">
+      <span><span><img src="../../assets/image/call.png" alt="" class="call-img">
+      </span>1234 1234 1234</span>
+    </div>
+  </div>
+  </nav>
+    <nav class="navbar navbar-light col-12 bg-brand-blue">
+        <div class="container col-12 ">
+          <a href="#" class="navbar-brand col-5">
+            <img src="../../assets/image/logo.png" alt="" class="brand-logo">
+          </a>
+          <div class="nav-menu  col-3 ">
+            <button type="button" class="btn  ms-5 register">Register</button>
+            <div class="dropdown">
+              <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+               For Employers
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/login">Login</a></li>
+                <li><a class="dropdown-item" href="/register">Register</a></li>
+                <li><a class="dropdown-item" href="#">Buy Plan</a></li>
+              </ul>
             </div>
           </div>
-        </nav>
-  </header>
+        </div>
+      </nav>
+</header>
+
+

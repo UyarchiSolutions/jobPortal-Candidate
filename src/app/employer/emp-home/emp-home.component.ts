@@ -36,6 +36,8 @@ export class EmpHomeComponent implements OnInit {
     salaryRange: new FormControl(null),
     gender: new FormControl(null),
     displayDetails: new FormControl(null),
+    searchTittle:new FormControl(null),
+    searchbox: new FormControl(null),
   })
   folderForm:any = this.fb.group({
     folderName:new FormControl(null)
@@ -106,7 +108,7 @@ export class EmpHomeComponent implements OnInit {
     this.is_viewpost = false
     this.is_icon = true
     this.is_search_icon = false
-    this.is_icon = false
+    this.is_icon = true
     this.is_canfolderlist = false
     this.search();
   }
@@ -140,22 +142,20 @@ export class EmpHomeComponent implements OnInit {
   getKeyskills(value: any) {
     this.empservice.getSkill(value).subscribe((res: any) => {
       this.keySkill = res;
+      console.log(this.keySkill)
     })
   }
-  checkSkill(event:any){
-    const data: FormArray = this.searchForm.get('keyskills') as FormArray;
-    if (event.target.checked) {
-      data.push(new FormControl(event.target.value));
-      console.log(data)
-    } else {
-      let i: number = 0;
-      data.controls.forEach((item: any) => {
-        if (item == event.target.value) {
-          data.removeAt(i);
-          return;
-        }
-        i++;
-      });
+  checkSkill(event: any, skill: any) {
+    console.log('checkSkill',skill);
+    let index: any = this.searchForm.get('keyskills')?.value;
+    console.log(this.searchForm.get('keyskills')?.value)
+    if (index.length != 0) {
+      let value = index.splice([index.length - 1], 1);
+      index.push(skill)
+      this.searchForm.get('keyskills')?.setValue(index);
+      console.log( this.searchForm.get('keyskills')?.value)
+      let search: any = index.toString() + ","
+      this.searchForm.get('searchbox')?.setValue(search);
     }
   }
   recent_search(){
@@ -176,7 +176,6 @@ export class EmpHomeComponent implements OnInit {
     })
   }
   save_search(){
-    if(this.searchForm.get('keyskills')?.valid && this.searchForm.get('location')?.valid && this.searchForm.get('experience')?.valid){
       this.is_icon1 = true;
       this.is_icon = false;
       this.is_search_icon = false;
@@ -184,7 +183,6 @@ export class EmpHomeComponent implements OnInit {
         console.log(res)
         this.get_save_search();
       })
-    }
   }
  get_save_search(){
   this.empservice.get_save_search().subscribe((res:any)=>{
@@ -239,7 +237,6 @@ advanced_search(){
 }
 }
 pushCourse(e:any){
-
   const data: FormArray = this.searchForm.get('course') as FormArray;
   console.log(e)
   data.push(new FormControl(e.Course))
@@ -361,5 +358,22 @@ sendjob(){
   }
   var queryString = new URLSearchParams(data).toString();
   this.router.navigateByUrl('/sendJob?'+queryString);
+}
+dispalye(data: any) {
+  console.log("lusu")
+  let value = data.target.value.split(",");
+  console.log(value)
+  if (data.target.value) {
+    this.isDisplay = true;
+  } else {
+    this.isDisplay = false
+  }
+  if (value.length != 0) {
+    if (value[value.length - 1] != null && value[value.length - 1] != '') {
+      this.getKeyskills(value[value.length - 1])
+    }
+  }
+  this.searchForm.get('keyskills')?.setValue(value)
+
 }
 }

@@ -14,6 +14,7 @@ export class SavedFolderComponent implements OnInit {
     folderName:new FormControl('', Validators.required)
   })
   oldName: any;
+  listdata: any;
   constructor(private empservice: EmpServiceService,private fb:FormBuilder, private router: Router,) { }
 
   ngOnInit(): void {
@@ -44,11 +45,12 @@ export class SavedFolderComponent implements OnInit {
   
     })
   }
-  delete(list:any){
-   
-     
-    
-    this.empservice.delete_folder(list.userId,list.folderName).subscribe((res:any)=>{
+  open(list:any){
+    console.log(list);
+     this.listdata = list
+  }
+  delete(){
+    this.empservice.delete_folder(this.listdata.userId,this.listdata.folderName).subscribe((res:any)=>{
       console.log(res);
       this.get_all_saved_folder()
     })

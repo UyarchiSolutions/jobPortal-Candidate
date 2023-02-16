@@ -1,11 +1,17 @@
 .register-content-row{
     height: 878px;
 }
+.register-content {
+    background-color: #E7E9ED !important;
+    /* padding: 10px; */
+    /* margin: 0 10px 10px 10px; */
+    border-radius: 5px !important;
+}
 .singe-row>p{
     margin-bottom: 0px !important;
 }
 .single-row{
-    border-bottom: solid rgba(128, 128, 128, 0.554) 2px;
+    /* border-bottom: solid rgba(128, 128, 128, 0.554) 2px; */
     padding-top: 0px;
 }
 .course{
