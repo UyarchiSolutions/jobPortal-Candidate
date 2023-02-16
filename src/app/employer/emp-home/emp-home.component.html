@@ -43,7 +43,7 @@
     
                             <div class="search-box">
                                 <select class="form-control select-type" formControlName="experience">
-                                    <option value="option1" disabled selected >Experience</option>
+                                    <option value="option1" [ngValue]="null" disabled selected >Experience</option>
                                     <option value="0">Fresher</option>
                                     <option value="1">1 Year</option>
                                     <option value="2">2 Year</option>
@@ -89,7 +89,7 @@
 
 
                 <div class="col">
-                    <div class="sidebarmenu recent-search no-margin saved-folder">
+                    <div class="sidebarmenu recent-search no-margin" style="cursor: pointer;">
                         <ul>
                             <li class="sidebarmenu-heading no-margin"><span class="icon-text m-l-1">Saved Folder</span>
                             </li>
@@ -98,10 +98,14 @@
                                     <div>
                                         <span class="icon-text m-l-1">{{data.folderName}}</span>
                                     </div>
-                                    <div><span class="font12">{{data.count}}</span>
+                                    <div>
+                                        <span class="font12">{{data.count}}</span>
                                     </div>
                                 </div>
                             </li>
+                            <div class="view-jobs py-1" routerLink="/saved-folder">
+                                View Jobs
+                            </div>
                         </ul>
                     </div>
 
@@ -400,7 +404,10 @@
                             <div class="col">
                                 <a [routerLink]="['/emp-action']">{{get_appliedcan_qualification(list)}}</a>
                             </div>
-                            <div class="col">
+                            <div class="col" *ngIf="list.candidateData.workStatus == 'Experience'">
+                                <a [routerLink]="['/emp-action']">{{list.candidateData.currentctc}}</a>
+                            </div>
+                            <div class="col" *ngIf="list.candidateData.workStatus == 'Fresher'">
                                 <a [routerLink]="['/emp-action']">{{list.candidateData.expectedctc}}</a>
                             </div>
                             <div class="col">
@@ -472,39 +479,48 @@
                         <div class="row content-card no-margin padding10" *ngFor="let list of can_data" style="cursor:pointer">
                             <div class="col-1">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" [value]="list.candidateregistrations._id" (change)="canId($event)" value="" aria-label="...">
+                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" [value]="list.candiadteId" (change)="canId($event)" value="" aria-label="...">
                                 </div>
                             </div>
                             <div class="col">
-                                <a [routerLink]="['/can-details']" [queryParams]="{id:list.candidateregistrations._id}">{{list.candidateregistrations.name}}</a>
+                                <a [routerLink]="['/can-details']" [queryParams]="{id:list.candiadteId}">{{list.name}}</a>
                             </div>
                             <div class="col">
-                                <a [routerLink]="['/can-details']" [queryParams]="{id:list.candidateregistrations._id}">{{list.locationCurrent}}</a>
+                                <a [routerLink]="['/can-details']" [queryParams]="{id:list.candiadteId}">{{list.locationCurrent}}</a>
                             </div>
                             <div class="col">
-                                <a [routerLink]="['/can-details']" [queryParams]="{id:list.candidateregistrations._id}">{{get_qualification(list)}}</a>
+                                <a [routerLink]="['/can-details']" [queryParams]="{id:list.candiadteId}">{{get_qualification(list)}}</a>
                             </div>
-                            <div class="col" *ngIf="list.candidateregistrations.workStatus == 'Experience'">
-                                <a [routerLink]="['/can-details']" [queryParams]="{id:list.candidateregistrations._id}">{{list.currentctc}}</a>
+                            <div class="col" *ngIf="list.workStatus == 'Experience'">
+                                <a [routerLink]="['/can-details']" [queryParams]="{id:list.candiadteId}">{{list.currentctc}}</a>
                             </div>
-                            <div class="col" *ngIf="list.candidateregistrations.workStatus == 'Fresher'">
-                                <a [routerLink]="['/can-details']" [queryParams]="{id:list.candidateregistrations._id}">{{list.expectedctc}}</a>
+                            <div class="col" *ngIf="list.workStatus == 'Fresher'">
+                                <a [routerLink]="['/can-details']" [queryParams]="{id:list.candiadteId}">{{list.expectedctc}}</a>
                             </div>
                             <div class="col">
-                                <a [routerLink]="['/can-details']" [queryParams]="{id:list.candidateregistrations._id}">{{list.experienceYear}}Year - {{list.experienceMonth}}Months</a>
+                                <a [routerLink]="['/can-details']" [queryParams]="{id:list.candiadteId}">{{list.experienceYear}}Year - {{list.experienceMonth}}Months</a>
                             </div>
                          
                         </div>
-                        <div class="row no-margin padding10" style="color:#fff;background-color: #82C3EC">
+                        <div class="row no-margin padding10" style="color:#fff;background-color: #82C3EC;cursor: pointer;">
                             <div class="col">
-                                <i class='fas fa-sort-amount-down'></i>
-                                Send
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-light p-1">Send</button>
+                                    <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                      <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                      <li (click)="sendmail()"><a class="dropdown-item">Send a mail</a></li>
+                                      <li (click)="sendjob()"><a class="dropdown-item">Send a job</a></li>
+                                    </ul>
+                                  </div>
                             </div>
-                            <div class="col" data-bs-toggle="modal" data-bs-target="#savefolder" style="cursor:pointer">
+                          
+                            <div class="col mt-2" data-bs-toggle="modal" data-bs-target="#savefolder" style="cursor:pointer">
                                 <i class='fas fa-sort-amount-down'></i>
                                 Save
                             </div>
-                            <div class="col">
+                            <div class="col mt-1">
                                 <div class="pageination-logo">
                                     <img src="../../assets/image/left-arrow.png" alt="" class="p-left">
                                     <div class="pageination-number">1</div>
@@ -513,7 +529,7 @@
                             </div>
                             <div class="col">
                             </div>
-                            <div class="col">
+                            <div class="col mt-2">
                                 <i class='fas fa-sort-amount-down'></i>
                                 Range
                             </div>
@@ -526,6 +542,9 @@
                                     <span class="badge bg-light text-dark">
                                         <span class="">{{folder_name}}</span>
                                         <span class="close-mark">x</span>
+                                    </span>
+                                    <span style="font-size:13px">
+                                        {{splitdata[0]}}
                                     </span>
                                 </div>
                             </div>
@@ -547,7 +566,10 @@
                                Qualification
                             </div>
                             <div class="col">
-                                Salary
+                                Skills
+                            </div>
+                            <div class="col">
+                                Role
                             </div>
                             <div class="col">
                                  Experience
@@ -567,13 +589,13 @@
                                {{list.candidateDetails.locationCurrent}}
                             </div>
                             <div class="col">
-                                B.E CSE
+                                {{get_qua_list(list)}}
                             </div>
-                            <div class="col" *ngIf="list.workStatus == 'Experience'">
-                                {{list.candidateDetails.currentctc}}
+                            <div class="col">
+                               <span *ngFor="let qua of list.candidateDetails.currentSkill">{{qua}}</span>
                             </div>
-                            <div class="col" *ngIf="list.workStatus == 'Fresher'">
-                                {{list.candidateDetails.expectedctc}}
+                            <div class="col">
+                                {{list.candidateDetails.role}}
                             </div>
                             <div class="col">
                                 {{list.candidateDetails.experienceYear}}Year - {{list.candidateDetails.experienceMonth}}Months
@@ -659,7 +681,7 @@
                 <div class="col">
 
                 
-                <div class="sidebarmenu recent-search">
+                <div class="sidebarmenu recent-search" style="cursor:pointer">
                     <ul>
                         <li class="sidebarmenu-heading"> <span class="icon-custom"><i
                                     class='far fa-user'></i></span> <span class="icon-text">Saved Search</span>
@@ -672,27 +694,31 @@
                                     <span class="icon-text">{{list.keyskills[0]}}</span>
                                 </div>
 
-                                <div><i class='fas fa-bookmark saved-job-icon'></i>
+                                <div>
+                                    <!-- <i class='fas fa-bookmark saved-job-icon'></i>createdAt-->
+                                    <span class="text-12">{{list.createdAt | date:'dd/MM/YY'}}</span>
                                 </div>
 
 
                             </div>
 
                             <div class="job-listing-bottom">
-                                <div><span class="icon-custom icon-custom-recent"><i
-                                            class='far fa-address-card'></i></span>
-                                    <span class="icon-text">{{list.location}}</span>
+                                <div>
+                                    <!-- <span class="icon-custom icon-custom-recent">
+                                    <i class='far fa-address-card'></i>
+                                    </span> -->
+                                    <span class="icon-text" *ngFor="let val of list.keyskills">{{val}} | {{list?.location}}</span>
                                 </div>
-                                <div><span class="icon-custom icon-custom-recent"><i
+                                <!-- <div><span class="icon-custom icon-custom-recent"><i
                                             class='far fa-address-card'></i></span>
                                     <span class="icon-text">{{list.experience}} Years</span>
-                                </div>
+                                </div> -->
                             </div>
 
                         </li>
-                        
-
-
+                        <div class="view-jobs py-1" routerLink="/saved-search">
+                            View Jobs
+                        </div>
                     </ul>
                 </div>
 

@@ -56,8 +56,8 @@ export class SendJobComponent implements OnInit {
        candidates:Array(this.candidates),
        mailId: this.jobId,
        subject:this.postForm.get('subject')?.value,
-       signature:this.postForm.get('subject')?.value,
-       email:this.postForm.get('subject')?.value
+       signature:this.postForm.get('signature')?.value,
+       email:this.postForm.get('email')?.value
 
     }
     this.empservice.sendajob(data).subscribe((res:any)=>{
@@ -65,7 +65,5 @@ export class SendJobComponent implements OnInit {
         this.postForm.reset()
     })
   }
-  preview(){
-    
-  }
+  
 }

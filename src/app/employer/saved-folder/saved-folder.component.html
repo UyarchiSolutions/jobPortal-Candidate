@@ -1,0 +1,133 @@
+<div class="container-fluid register">
+    <div class="row">
+        <div class="col-2 ad-image">
+            <img src="../../assets/image/ad.png" alt="">
+        </div>
+        <div class="col-8  login-main">
+            <div class="row ">
+                <div class="col">
+                    <img src="../../assets/image/hero.png" alt="" class="hero-image">
+                </div>
+            </div>
+       
+           
+            <div class="row register-content-row height-register-content mb-5">
+                <div class="col register-content pb-3">
+                    <div class="row">
+                        <div class="col">
+                            <i class="ms-3"><svg width="15" height="25" viewBox="0 0 20 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.27179 15L20 26.6672L16.3641 30L0 15L16.3641 0L20 3.33281L7.27179 15Z" fill="#0A2647"/>
+                                </svg>
+                                </i>
+                        </div>
+                        <div class="col-7">
+                            <h3>Saved Folder</h3>
+                        </div>
+                        <div class="col d-flex align-items-center">
+                            <svg width="15" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.17 15.9985C4.3766 15.4131 4.75974 14.9062 5.2666 14.5477C5.77346 14.1891 6.37909 13.9966 7 13.9966C7.62091 13.9966 8.22654 14.1891 8.7334 14.5477C9.24026 14.9062 9.6234 15.4131 9.83 15.9985H20V17.998H9.83C9.6234 18.5834 9.24026 19.0903 8.7334 19.4489C8.22654 19.8075 7.62091 20 7 20C6.37909 20 5.77346 19.8075 5.2666 19.4489C4.75974 19.0903 4.3766 18.5834 4.17 17.998H0V15.9985H4.17ZM10.17 9.00025C10.3766 8.41486 10.7597 7.90795 11.2666 7.54939C11.7735 7.19083 12.3791 6.99828 13 6.99828C13.6209 6.99828 14.2265 7.19083 14.7334 7.54939C15.2403 7.90795 15.6234 8.41486 15.83 9.00025H20V10.9998H15.83C15.6234 11.5851 15.2403 12.0921 14.7334 12.4506C14.2265 12.8092 13.6209 13.0017 13 13.0017C12.3791 13.0017 11.7735 12.8092 11.2666 12.4506C10.7597 12.0921 10.3766 11.5851 10.17 10.9998H0V9.00025H10.17ZM4.17 2.00196C4.3766 1.41657 4.75974 0.909661 5.2666 0.551105C5.77346 0.192549 6.37909 0 7 0C7.62091 0 8.22654 0.192549 8.7334 0.551105C9.24026 0.909661 9.6234 1.41657 9.83 2.00196H20V4.00147H9.83C9.6234 4.58686 9.24026 5.09377 8.7334 5.45232C8.22654 5.81088 7.62091 6.00343 7 6.00343C6.37909 6.00343 5.77346 5.81088 5.2666 5.45232C4.75974 5.09377 4.3766 4.58686 4.17 4.00147H0V2.00196H4.17Z" fill="#0A2647"/>
+                                </svg>
+                            <p class="mb-0 ms-2">Created Date</p>                              
+                        </div>
+                    </div>
+
+                    <div class="saved-folder register-form bg-white pt-1 mt-3">
+                        <div class="single-row px-3" *ngFor="let data of list">
+                          <div class="col-5">
+                            <p class="course">{{data.folderName}}</p>
+                          <p class="date">  Created Date : 12/02/2023</p>
+                          </div>
+
+                          <div class="col-3 d-flex align-items-start">
+                            <p>{{data.count}} Candidate</p>
+                          </div>
+                          <div class="2 icons" style="cursor: pointer;">
+                            <svg width="30" (click)="edit(data)" data-bs-toggle="modal" data-bs-target="#createfolder" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="30" height="30" rx="5" fill="black" fill-opacity="0.1"/>
+                                <path d="M15.8143 10.4089L19.5911 14.1866L10.7768 23H7V19.2223L15.8143 10.408V10.4089ZM17.0732 9.14997L18.9616 7.26068C19.1286 7.09377 19.355 7 19.5911 7C19.8272 7 20.0536 7.09377 20.2206 7.26068L22.7393 9.77943C22.9062 9.94639 23 10.1728 23 10.4089C23 10.645 22.9062 10.8714 22.7393 11.0384L20.85 12.9268L17.0732 9.14997Z" fill="#0A2647"/>
+                                </svg>
+                                
+                            <svg class="ms-3" (click)="delete(data)" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="30" height="30" rx="5" fill="black" fill-opacity="0.1"/>
+                                    <path d="M8.6 11.8H21.4V22.2C21.4 22.4122 21.3157 22.6157 21.1657 22.7657C21.0157 22.9157 20.8122 23 20.6 23H9.4C9.18783 23 8.98434 22.9157 8.83431 22.7657C8.68429 22.6157 8.6 22.4122 8.6 22.2V11.8ZM10.2 13.4V21.4H19.8V13.4H10.2ZM12.6 15H14.2V19.8H12.6V15ZM15.8 15H17.4V19.8H15.8V15ZM11 9.4V7.8C11 7.58783 11.0843 7.38434 11.2343 7.23431C11.3843 7.08429 11.5878 7 11.8 7H18.2C18.4122 7 18.6157 7.08429 18.7657 7.23431C18.9157 7.38434 19 7.58783 19 7.8V9.4H23V11H7V9.4H11ZM12.6 8.6V9.4H17.4V8.6H12.6Z" fill="#0A2647"/>
+                            </svg>
+                            
+                          </div>
+
+                        </div>
+                        <div class="row content-card-footer no-margin padding10 ">
+                            <div class="col">
+    
+                                <div class="footer-menu">
+                                    <div class="pageination-logo">
+                                        <img src="../../assets/image/left-arrow.png" alt="" class="p-left">
+                                        <div class="pageination-number">1</div>
+                                        <img src="../../assets/image/right-arrow.png" alt="" class="p-right">
+        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
+
+        </div>
+        <div class="col-2 ad-image">
+            <img src="../../assets/image/ad.png" alt="">
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal" id="createfolder" tabindex="-1"
+aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+    <div class="modal-content popup-parent">
+        <div class="modal-body">
+                <div class="container">
+                    <div class="col register-content py-2 pb-5">
+                        <div class="row px-4">
+                          <div class="col-2"></div>
+                          <div class="col">
+                            <h3>Save Folder</h3>
+                          </div>
+                          <div class="col-2 mt-2 d-flex justify-content-end">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                        </div>
+                        <div class="row" [formGroup]="editForm">
+                            <div class="register-form">
+                              <div class="single-row">
+                                  <label for="">Create Folder :</label>
+                                  <div class="content-box">
+                                      <input class="form-control" placeholder="Enter Folder Name" formControlName="folderName">
+                                      </div>
+                              </div>
+                              <div class="single-row  col-8 m-auto mt-4">
+                      
+                                  <div class="content-box back-btn">
+                                      <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal">Back</button>
+                                  </div>
+                                  <div class="content-box submit-btn">
+                                      <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal" (click)="create_new_folder()">Save</button>
+                                  </div>
+                              </div>
+                             
+                             
+                          </div>
+                          </div>
+                
+                
+                
+                
+                      </div>
+                </div>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SendMailRoutingModule } from './send-mail-routing.module';
-import { SendMailComponent } from './send-mail.component';
+import { SavedFolderRoutingModule } from './saved-folder-routing.module';
+import { SavedFolderComponent } from './saved-folder.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [SendMailComponent],
+  declarations: [SavedFolderComponent],
   imports: [
     CommonModule,
-    SendMailRoutingModule,
+    SavedFolderRoutingModule,
     FormsModule,
     ReactiveFormsModule
   ]
 })
-export class SendMailModule { }
+export class SavedFolderModule { }

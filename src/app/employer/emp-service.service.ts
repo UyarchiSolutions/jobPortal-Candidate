@@ -96,6 +96,29 @@ get_folder_details(data:any){
   return this.http.get(this.baseurl+'/v1/employerCandidateSearch/allFolderData?'+ queryString)
 }
 sendajob(data:any){
-return this.http.post(this.baseurl+'/v1/employerdetail/send_mail_and_notification',data,{headers:{auth:Cookie.get('emptokens')}})
+  return this.http.post(this.baseurl+'/v1/employerdetail/send_mail_and_notification',data,{headers:{auth:Cookie.get('emptokens')}})
+}
+get_notify_job(){
+  return this.http.get(this.baseurl+'/v1/employerdetail/getAll_Mail_notification_employerside',{headers:{auth:Cookie.get('emptokens')}})
+}
+job_preview(id:any){
+  return this.http.get(this.baseurl+'/v1/employerdetail/get_job_post/'+id)
+
+}
+get_all_saved_folder(){
+  return this.http.get(this.baseurl+'/v1/employerCandidateSearch/saveFolderData_view_All_data',{headers:{auth:Cookie.get('emptokens')}})
+
+}
+get_all_savedsearch(){
+  return this.http.get(this.baseurl+'/v1/employerCandidateSearch/outSearchSaveData_all',{headers:{auth:Cookie.get('emptokens')}})
+}
+edit_folder(data:any){
+  return this.http.put(this.baseurl+'/v1/employerCandidateSearch/edit_all_folder',data,{headers:{auth:Cookie.get('emptokens')}})
+
+}
+delete_folder(id:any,data:any){
+  console.log('delete folder',data)
+  return this.http.delete(this.baseurl+'/v1/employerCandidateSearch/delete_folder/'+id +'/'+data)
+
 }
 }
