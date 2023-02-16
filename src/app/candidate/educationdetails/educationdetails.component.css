@@ -50,3 +50,6 @@ select {
 .alertexperience{
   width: 50%;
 }
+.height-register-content {
+  height: fit-content;
+}

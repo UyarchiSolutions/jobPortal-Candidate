@@ -499,10 +499,22 @@ h3 {
   background: transparent;
   border: none;
   color: black;
+  padding-left: 6px;
+  font-weight: 500;
+  font-size: 14px;
 }
 .dropdown-toggle::after {
   display: none;
 }
 .fa-angle-down{
-  margin-left: 84px;
+  font-size: 17px;
+  font-weight: 700;
+}
+.over{
+  overflow: scroll;
+  height: 50%;
+}
+.refineSearch{
+  height: 500%;
+  overflow: scroll;
 }

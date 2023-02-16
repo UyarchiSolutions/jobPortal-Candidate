@@ -1,5 +1,3 @@
-
-
 .top-header-menu{
     display: flex;
 }
@@ -10,25 +8,19 @@
 .top-header-contact p{
     margin: 0;
 }
-
-
 .navbar{
     display: flex;
     justify-content: space-around;
 }
-
 .container{
     max-width: 1600px !important;
 }
 .top-header{
     max-width: 1513px !important;
-
 }
-
 .bg-brand-blue{
     background-color: #0A2647;;
 }
-
 .brand-logo{
     width: 216px;
     height: 80px;
@@ -52,4 +44,71 @@ a{
     width: 15px;
     height: 15px;
     margin-right: 10px;
+}
+.dropdown-toggle{
+  color: white !important;
+  margin-left: 0px !important;
+  position: relative;
+  padding-left: 40px;
+  display: flex;
+  align-items: center;
+}
+.dropdown-toggle:hover{
+  background-color: white;
+  color:black !important;
+}
+
+.dropdown-menu li a{
+  color: black;
+}
+.register{
+  background-color: #FD841F;
+  color: white;
+}
+.dropdown-toggle::before{
+position: absolute;
+content:"";
+left: 10px;
+height: 20px;
+width: 20px;
+background-color: red;
+background-image: url(../../assets/image/profile.png);
+background-size: cover;
+border-radius: 100%;
+}
+.dropdown-item{
+  position: relative;
+  padding-left: 35px;
+  display: flex;
+  align-items: center;
+}
+.home::before{
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  content: "";
+  /* background-image: url(../../assets/image/home.png); */
+  background-size: cover;
+  left: 10px;
+
+}
+.myplans::before{
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  content: "";
+  /* background-image: url(../../assets/image/myplans.png); */
+  background-size: cover;
+  left: 10px;
+
+}
+.upcominglive::before{
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  content: "";
+  /* background-image: url(../../assets/image/live.png); */
+  background-size: cover;
+  left: 10px;
+
 }

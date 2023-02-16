@@ -167,6 +167,10 @@ export class CanditateService {
   }
   // applyJobswithmail
   applyJob_mail(id:any){
-    return this.http.get(this.baseUrl+`/v1/employerdetail/get_job_post_candidate/${id}`)
+    return this.http.get(this.baseUrl+`/v1/employerdetail/get_job_post_candidate/${id}`,{headers:{auth:Cookie.get('tokens')}})
   }
+  courseAll(){
+    return this.http.get(this.baseUrl+`/v1/educationDetails/get_allcourse`)
+  }
+
 }

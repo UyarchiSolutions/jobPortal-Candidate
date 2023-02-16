@@ -1,5 +1,5 @@
 <header>
-    <nav class="navbar navbar-light">
+  <nav class="navbar navbar-light">
     <div class="container top-header">
       <div class="top-header-menu">
         <p>TreaTJobs</p>
@@ -7,20 +7,39 @@
       </div>
       <div class="top-header-contact">
         <span><span><img src="../../assets/image/call.png" alt="" class="call-img">
-        </span>1234 1234 1234</span>
+          </span>1234 1234 1234</span>
       </div>
     </div>
-    </nav>
-      <nav class="navbar navbar-light bg-brand-blue">
-          <div class="container">
-            <a href="#" class="navbar-brand">
-              <img src="../../assets/image/logo.png" alt="" class="brand-logo">
-            </a>
-            <div class="nav-menu">
-              <button type="button" class="btn btn-light" routerLink="/canlogin">Login</button>
-              <button type="button" class="btn btn-warning" routerLink="/can-register">Register</button>
-              <div><a href="#">For Job Seekers <i class='fas fa-angle-down'></i></a></div>
+  </nav>
+  <nav class="navbar navbar-light bg-brand-blue">
+    <div class="container">
+      <a href="#" class="navbar-brand">
+        <img src="../../assets/image/logo.png" alt="" class="brand-logo">
+      </a>
+      <div class="nav-menu">
+        <button type="button" *ngIf="!idShow" class="btn btn-light" routerLink="/canlogin">Login</button>
+        <button type="button" *ngIf="!idShow" class="btn btn-warning" routerLink="/can-register">Register</button>
+        <div *ngIf="!idShow"><a href="#">For Job Seekers <i class='fas fa-angle-down'></i></a></div>
+        <div *ngIf="idShow">
+          <div class="nav-menu  col-3 ">
+            <button type="button" class="btn  ms-5 register invisible">Register</button>
+            <div class="dropdown" style="margin-right: 22%;">
+              <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{userNAme}}
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item home" routerLink="/getAllprofile" >My Profile</a></li>
+                <li><a class="dropdown-item myplans" >My Plan</a></li>
+                <li><a class="dropdown-item upcominglive" >UpComing live</a></li>
+                <li><a class="dropdown-item upcominglive" >Change Password</a></li>
+                <li><a class="dropdown-item upcominglive" (click)="logOut()">Log Out</a></li>
+              </ul>
             </div>
           </div>
-        </nav>
-  </header>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+</header>

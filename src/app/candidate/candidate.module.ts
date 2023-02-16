@@ -15,6 +15,7 @@ import { ProffesinoalComponent } from './proffesinoal/proffesinoal.component';
 import { ApplymailjobsComponent } from './applymailjobs/applymailjobs.component';
 import { ViewFulldetailsComponent } from './view-fulldetails/view-fulldetails.component';
 import { JobpreviewPopupComponent } from './jobpreview-popup/jobpreview-popup.component';
+import { GetallcandidateProfileComponent } from './getallcandidate-profile/getallcandidate-profile.component';
 
 
 
@@ -30,7 +31,8 @@ import { JobpreviewPopupComponent } from './jobpreview-popup/jobpreview-popup.co
     ProffesinoalComponent,
     ApplymailjobsComponent,
     ViewFulldetailsComponent,
-    JobpreviewPopupComponent
+    JobpreviewPopupComponent,
+    GetallcandidateProfileComponent
   ],
   imports: [
     CommonModule,

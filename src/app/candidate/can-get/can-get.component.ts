@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { CanditateService } from '../canditate.service';
 
@@ -53,25 +53,39 @@ export class CanGetComponent implements OnInit {
   jobs: any = [];
   recentData: any = [];
   industry: any = [];
-  currentDepartment: any = []
-  constructor(private canditSarvice: CanditateService, private fb: FormBuilder, private router: Router) { }
+  currentDepartment: any = [];
+  course:any=[];
+  constructor(private canditSarvice: CanditateService, private fb: FormBuilder, private router: Router,private activateroute:ActivatedRoute) { }
 
 
   ngOnInit() {
     this.get_allJobs();
     this.recentSearch();
     this.getSaveData();
+    this.getCourse()
     this.canditSarvice.currentIndustry().subscribe((res: any) => {
       this.industry = res;
     })
     this.canditSarvice.currentDepartment().subscribe((res: any) => {
       this.currentDepartment = res;
     })
+    this.activateroute.queryParams.subscribe((res:any) => {
+     this.searchForm.patchValue({
+      searchbox:res.search,
+      location:res.location,
+      experience:res.experience
+     })
+    })
   }
   get_allJobs() {
     this.canditSarvice.getAlldetails(this.searchForm.value).subscribe((res: any) => {
       this.jobs = res;
       this.recentSearch();
+    })
+  }
+  getCourse(){
+    this.canditSarvice.courseAll().subscribe((res:any) => {
+    this.course=res;
     })
   }
   postedTime(time: any) {
@@ -165,6 +179,7 @@ export class CanGetComponent implements OnInit {
   }
   checkSkill(event: any, skill: any) {
     let index: any = this.searchForm.get('search')?.value;
+    console.log(index,"gfg")
     if (index.length != 0) {
       let value = index.splice([index.length - 1], 1);
       index.push(skill)
@@ -269,7 +284,7 @@ export class CanGetComponent implements OnInit {
     // }
   }
   applynotification(id: any) {
-    this.router.navigate(['/can-employ'], { queryParams: { id: id,mail:true } })
+    this.router.navigate(['/mail-details'], { queryParams: { id: id } })
   }
 
   currentCategory: any = []
@@ -325,6 +340,21 @@ export class CanGetComponent implements OnInit {
       console.log(this.setAlertForm.get('designationSet').value,"values");
 
     })
+  }
+  // check company type
+  companyType(event:any){
+
+  }
+  // salaryrange
+  salaryrange(event:any){
+
+  }
+  // company type
+  postedBy(event:any){
+
+  }
+  EductionDetails(event:any){
+
   }
 }
 
