@@ -68,6 +68,7 @@ export class CanHomeComponent implements OnInit {
       })
     }
     checkSkill(event: any, skill: any) {
+      this.isDisplay=false
       let index: any = this.searchForm.get('search')?.value;
       console.log(index,"gfg")
       if (index.length != 0) {

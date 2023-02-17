@@ -1,69 +1,64 @@
 <div class="container-fluid register">
   <div class="row">
     <div class="col-2 ad-image">
-
       <img src="../../assets/image/myaccountimg1.png" alt="">
-
-
-
     </div>
     <div class="col-8  login-main">
       <div class="row ">
         <div class="col search-box-wrap">
-
           <div class="advanced-search-warap">
-
-
-
-            <div class="search-boxs">
-
+            <div class="search-boxs" [formGroup]="searchForm">
               <div class="search-box first-search-box">
-                <input type="text" class="form-control" placeholder="Enter Designation / Key skills">
+                <input type="text" class="form-control" placeholder="Enter Designation / Key skills"
+                (keyup)="dispalye($event)"  formControlName="searchbox">
+                <div class="content-box keylist" style="background: white;" *ngIf="isDisplay">
+                  <ul class="ulkeylist" style="padding-left: 0px;" class="">
+                    <li class="ilkeylist" style="cursor:pointer" *ngFor="let skill of keySkill"
+                      (click)="checkSkill($event,skill.Skill_Title)">
+                      <span>{{skill.Skill_Title}}</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
-
-
-
               <div class="search-box second-search-box">
-                <input type="text" class="form-control location" placeholder="Enter Location">
+                <input type="text" class="form-control location" placeholder="Enter Location"
+                  formControlName="location">
               </div>
-
               <div class="search-box">
-                <select class="form-control select-type">
-                  <option value="option1" disabled selected>Select Type</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
+                <select class="form-control select-type" formControlName="experience">
+                  <option value="option1" disabled selected>Year</option>
+                  <option value="0">Freshers</option>
+                  <option value="1">1 Year</option>
+                  <option value="2">2 Year</option>
+                  <option value="3">3 Year</option>
+                  <option value="4">4 Year</option>
+                  <option value="5">5 Year</option>
+                  <option value="6">6 Year</option>
+                  <option value="7">7 Year</option>
+                  <option value="8">8 Year</option>
+                  <option value="9">9 Year</option>
+                  <option value="10">10 Year</option>
+                  <option value="11">11 Year</option>
                 </select>
               </div>
-
               <div class="search-box">
-                <button type="submit" class="btn btn-brand-orange"><img src="../../assets/image/search.png" alt=""
+                <button (click)="seach()" class="btn btn-brand-orange"><img src="../../assets/image/search.png" alt=""
                     class="search-icon"></button>
               </div>
-
             </div>
-
             <div class="advanced-search">
               <button type="submit" class="btn btn-brand-trans"><a href="#">Advanced Search</a></button>
-
             </div>
           </div>
-
         </div>
       </div>
-
     </div>
     <div class="col-2 ad-image">
       <img src="../../assets/image/myaccountimg2.png" alt="">
-
     </div>
-
-
   </div>
-
-
   <div class="row">
     <div class="col-2">
-
       <div class="row">
         <div class="col">
           <div class="sidebarmenu myprofile">
@@ -125,7 +120,7 @@
                     </i></span>
                   <span class="icon-text">Professional Details</span>
                 </li>
-                <li>
+                <li (click)="uploadfile()">
                   <span class="icon-custom"><i><svg width="18" height="22" viewBox="0 0 20 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -156,11 +151,7 @@
 
               </ul>
             </div>
-
             <div class="myprofile-sidebar-border">
-
-
-
               <ul>
                 <li>
                   <span class="icon-custom"><i><svg width="18" height="18" viewBox="0 0 22 22" fill="none"
@@ -205,13 +196,9 @@
 
               </ul>
             </div>
-
             <div class="myprofile-sidebar-border">
-
-
-
               <ul>
-                <li>
+                <li (click)="changePassword()">
                   <span class="icon-custom"><i><svg width="18" height="18" viewBox="0 0 20 20" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -221,7 +208,7 @@
                     </i></span>
                   <span class="icon-text">Change Password</span>
                 </li>
-                <li>
+                <li (click)="logOut()">
                   <span class="icon-custom"><i><svg width="18" height="16" viewBox="0 0 20 18" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -602,6 +589,72 @@
         </div>
 
       </div>
+
+      <div class=" pt-5 pb-5 row register-content-row height-register-content" *ngIf="tab ==5">
+
+        <div class="col">
+        </div>
+        <div class="col">
+          <h3>Your Resume</h3>
+        </div>
+        <div class="col d-flex">
+          <span class=" edit-icon upload">
+            <i><svg width="36" height="36" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g filter="url(#filter0_d_2213_9409)">
+                  <rect x="8" y="6" width="40" height="40" rx="10" fill="#0A2647" />
+                </g>
+                <path
+                  d="M19 33H37V35H19V33ZM29 19.828V31H27V19.828L20.929 25.9L19.515 24.486L28 16L36.485 24.485L35.071 25.899L29 19.83V19.828Z"
+                  fill="white" />
+                <defs>
+                  <filter id="filter0_d_2213_9409" x="0" y="0" width="56" height="56" filterUnits="userSpaceOnUse"
+                    color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                      result="hardAlpha" />
+                    <feOffset dy="2" />
+                    <feGaussianBlur stdDeviation="4" />
+                    <feComposite in2="hardAlpha" operator="out" />
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2213_9409" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2213_9409" result="shape" />
+                  </filter>
+                </defs>
+              </svg>
+
+            </i></span>
+          <span class=" edit-icon"><i><svg width="36" height="36" viewBox="0 0 56 56" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <g filter="url(#filter0_d_2095_8531)">
+                  <rect x="8" y="6" width="40" height="40" rx="10" fill="#0A2647" />
+                </g>
+                <path
+                  d="M20 22H36V35C36 35.2652 35.8946 35.5196 35.7071 35.7071C35.5196 35.8946 35.2652 36 35 36H21C20.7348 36 20.4804 35.8946 20.2929 35.7071C20.1054 35.5196 20 35.2652 20 35V22ZM22 24V34H34V24H22ZM25 26H27V32H25V26ZM29 26H31V32H29V26ZM23 19V17C23 16.7348 23.1054 16.4804 23.2929 16.2929C23.4804 16.1054 23.7348 16 24 16H32C32.2652 16 32.5196 16.1054 32.7071 16.2929C32.8946 16.4804 33 16.7348 33 17V19H38V21H18V19H23ZM25 18V19H31V18H25Z"
+                  fill="white" />
+                <defs>
+                  <filter id="filter0_d_2095_8531" x="0" y="0" width="56" height="56" filterUnits="userSpaceOnUse"
+                    color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                      result="hardAlpha" />
+                    <feOffset dy="2" />
+                    <feGaussianBlur stdDeviation="4" />
+                    <feComposite in2="hardAlpha" operator="out" />
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2095_8531" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2095_8531" result="shape" />
+                  </filter>
+                </defs>
+              </svg>
+
+
+            </i></span>
+        </div>
+        <div *ngIf="pdfUrl !=null" class="resume content m-auto col-10 mt-2 ">
+          <iframe [src]="'https://streamingupload.s3.ap-south-1.amazonaws.com/bill-2022-12.pdf' | safe"></iframe>
+
+        </div>
+      </div>
     </div>
 
     <div class="col-2">
@@ -610,10 +663,11 @@
           <div class="right-sidebar">
             <div class="sidebarmenu recent-search">
               <div class="sidebarmenu-heading"> <span class="icon-custom "><i
-                class='far fa-user color-white'></i></span> <span class="icon-text">Recent Search</span></div>
+                    class='far fa-user color-white'></i></span> <span class="icon-text">Recent Search</span></div>
               <ul class="recent">
 
-                <li *ngFor="let recent of recentData;let i=index" style="padding-bottom: 0px;" (click)="recentdata(recent)">
+                <li *ngFor="let recent of recentData;let i=index" style="padding-bottom: 0px;"
+                  (click)="recentdata(recent)">
                   <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
                     <span class="icon-text">{{recent.search}}</span>
                   </div>

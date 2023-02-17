@@ -18,6 +18,7 @@ import { ApplymailjobsComponent } from './candidate/applymailjobs/applymailjobs.
 import { ViewFulldetailsComponent } from './candidate/view-fulldetails/view-fulldetails.component';
 import { JobpreviewPopupComponent } from './candidate/jobpreview-popup/jobpreview-popup.component';
 import { GetallcandidateProfileComponent } from './candidate/getallcandidate-profile/getallcandidate-profile.component';
+import { CandidatechangepasswordComponent } from './candidate/candidatechangepassword/candidatechangepassword.component';
 
 const routes: Routes = [
    {path:"",component:CanHomeComponent},
@@ -57,7 +58,8 @@ const routes: Routes = [
     {path:"can-mailApply",component:ApplymailjobsComponent},
     {path:"viewprofile",component:ViewFulldetailsComponent},
     {path:'mail-details',component:JobpreviewPopupComponent},
-    {path:'getAllprofile',component:GetallcandidateProfileComponent}
+    {path:'getAllprofile',component:GetallcandidateProfileComponent},
+    {path:'changePassword',component:CandidatechangepasswordComponent}
 ];
 
 @NgModule({

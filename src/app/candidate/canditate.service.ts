@@ -172,5 +172,8 @@ export class CanditateService {
   courseAll(){
     return this.http.get(this.baseUrl+`/v1/educationDetails/get_allcourse`)
   }
-
+// change password
+changePassword(data:any){
+  return this.http.post(this.baseUrl+`/v1/candidateRegistration/change_pass`,data,{headers:{auth:Cookie.get('tokens')}})
+}
 }

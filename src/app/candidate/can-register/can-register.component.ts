@@ -40,6 +40,7 @@ export class CanRegisterComponent implements OnInit {
         res.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
       ) {
         this.candidateFile = res;
+        console.log(this.candidateFile,"sdsdfsf")
       }
     }
   }

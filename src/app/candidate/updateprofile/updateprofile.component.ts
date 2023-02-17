@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -33,6 +34,7 @@ export class UpdateprofileComponent implements OnInit {
   keySkill: any;
   lang: any = [];
   userId: any;
+  now:any;
   constructor(private fb: FormBuilder, private candidateService: CanditateService, private router: Router, private activateRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -47,6 +49,11 @@ export class UpdateprofileComponent implements OnInit {
         this.getAlldata()
       }
     })
+    const datePipe = formatDate(new Date(), 'yyyy-MM-dd', 'en-IN')
+    const time = formatDate(new Date(), 'hh:mm', 'en-IN')
+    this.now = datePipe
+
+
   }
   getKeyskills(value: any) {
     this.candidateService.getSkill(value).subscribe((res: any) => {
@@ -110,6 +117,7 @@ export class UpdateprofileComponent implements OnInit {
   // push skills
 
   checkSkill(event: any, skill: any) {
+    this.isDisplay=false;
     let index: any = this.profileForm.get('keyskill')?.value;
     console.log(index.length,"wORKINGDKSDK")
     if (index.length != 0) {

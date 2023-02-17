@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployerModule } from './employer/employer.module';
 import { NgxEditorModule } from "ngx-editor";
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 
 
@@ -30,8 +31,8 @@ import { NgxEditorModule } from "ngx-editor";
     FormsModule,
     EmployerModule,
     GooglePlaceModule,
-    NgxEditorModule
-
+    NgxEditorModule,
+    NgxExtendedPdfViewerModule
 
 
   ],
