@@ -33,37 +33,57 @@
                                 <div class="heading-main-content">
 
                                     <div class="card-action-heading">
-                                        Aravinddaya
+                                        {{candidate_data?.name}}
                                     </div>
 
                                     <div> <span class="icon-custom width-custom"><i
-                                                class='fas fa-archive'></i></span>aravinddaya@gmail.com</div>
+                                                class='fas fa-archive'></i></span> {{candidate_data?.email}}</div>
 
                                     <div> <span class="icon-custom width-custom"><i
-                                                class='fas fa-archive'></i></span>9876543210</div>
-
-
-                                    <div><button type="submit"
-                                            class="btn btn-brand-trans register-btn btn-shadow btn-padding">Reject</button>
+                                                class='fas fa-archive'></i></span> {{candidate_data?.mobileNumber}}</div>
+                                    <div class="content-box" *ngIf="getstatus == 'shortlisted'">
+                                        <select class="form-control select-type send-drop"
+                                        (change)="send($event)">
+                                            <option value="option1" disabled selected> <span class="drop-icon"><img
+                                                        src="../../assets/image/message.png" alt=""></span> Send
+                                            </option>
+                                            <option value="send mail">Send a mail</option>
+                                            <option value="send job">Send a job</option>
+                                        </select>
                                     </div>
+
+                                    <div *ngIf="getstatus == ''"><button type="submit"
+                                            class="btn btn-brand-trans register-btn btn-shadow btn-padding" (click)="status('rejected')">Reject</button>
+                                    </div>
+                                    <div *ngIf="getstatus == 'rejected'">
+                                        <label
+                                        class="btn-padding text-danger" style="font-size: 16px;color: red">{{getstatus}}
+                                        </label>
+                                      </div>
 
 
                                 </div>
                                 <div class="heading-main-content">
 
                                     <div> <span class="icon-custom width-custom"><i
-                                                class='fas fa-archive'></i></span>Experienced</div>
+                                                class='fas fa-archive'></i></span>{{candidate_data.workStatus}}</div>
 
                                     <div> <span class="icon-custom width-custom"><i
                                                 class='fas fa-archive'></i></span>View Resume</div>
 
 
                                     <div> <span class="icon-custom width-custom"><i
-                                                class='fas fa-archive'></i></span>Chennai</div>
+                                                class='fas fa-archive'></i></span>{{candidate_data.locationCurrent}}</div>
 
-                                    <div><button type="submit"
-                                            class="btn btn-brand-blue register-btn btn-padding">Shortlist</button>
+                                    <div *ngIf="getstatus != 'rejected' && getstatus != 'shortlisted'"><button type="submit"
+                                            class="btn btn-brand-blue register-btn btn-padding" (click)="status('shortlisted')">Shortlist</button>
                                     </div>
+                                    <div *ngIf="getstatus == 'shortlisted'" class="mt-3">
+                                        <label
+                                        class="btn-padding" style="font-size: 16px;color: #1E90FF">{{getstatus}}
+                                        </label>
+                                      </div>
+
 
 
                                 </div>
@@ -90,7 +110,7 @@
                                     <label for="">Key Skill :</label>
                                     <div class="content-box">
                                         <div>
-                                            Adobe XD
+                                           <span *ngFor="let ski of candidate_data.keyskill">{{ski}} </span>
                                         </div>
                                     </div>
 
@@ -98,7 +118,7 @@
                                 <div class="single-row">
                                     <label for="">Salary Range :</label>
                                     <div class="content-box">
-                                        2.5 LAP
+                                        {{candidate_data.salaryFrom}}
                                     </div>
 
                                 </div>
@@ -107,10 +127,11 @@
                                     <label for="">Experience :</label>
                                     <div class="content-box">
                                         <div>
-                                            2 Year
+                                            {{candidate_data.experienceYear}} Year
                                         </div>
                                         <div>
-                                            6 Month
+                                            {{candidate_data.experienceMonth}} Months
+
                                         </div>
                                     </div>
 
@@ -119,119 +140,264 @@
                                 <div class="single-row">
                                     <label for="">Native Address :</label>
                                     <div class="content-box">
-                                        Address
+                                        {{candidate_data.locationNative}}
                                     </div>
                                 </div>
                                 <div class="single-row">
                                     <label for="">Current Address :</label>
                                     <div class="content-box">
-                                        Contact Address
+                                        {{candidate_data.locationCurrent}}
                                     </div>
                                 </div>
 
                                 <div class="single-row">
                                     <label for="">Notice Period :</label>
                                     <div class="content-box">
-                                        60 days
+                                        {{candidate_data.noticeperiod}}
                                     </div>
                                 </div>
 
                                 <div class="single-row">
                                     <label for="">Current Skill Set :</label>
                                     <div class="content-box">
-                                        Adobe XD
+                                        <span *ngFor="let current of candidate_data.currentSkill">{{current}} </span>
                                     </div>
                                 </div>
 
                                 <div class="single-row">
                                     <label for="">Preferred Skill Set :</label>
                                     <div class="content-box">
-                                        Adobe XD
+                                        <span *ngFor="let currentpre of candidate_data.preferredSkill">{{currentpre}} </span>
                                     </div>
                                 </div>
 
                                 <div class="single-row">
                                     <label for="">Gender</label>
                                     <div class="content-box">
-                                        Male
+                                        {{candidate_data.gender}}
                                     </div>
                                 </div>
 
                                 <div class="single-row">
                                     <label for="">Marital Status :</label>
                                     <div class="content-box">
-                                        Single
+                                        {{candidate_data.maritalStatus}}
                                     </div>
                                 </div>
-
-                                <div class="single-row eduction-skills">
-                                    <label for="">Educational Dertails 1 :</label>
-                                    <div class="content-box">
+                                <div *ngIf="candidate_data.drQualification">
+                                    <div class="single-row eduction-skills">
+                                        <label for="">Dr Educational Details:</label>
+                                        <div class="content-box">
+                                        </div>
+                                    </div>
+    
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Qualification :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.drQualification}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">University :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.drUniversity}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Specification :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.drSpecialization}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Course :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.drCourse}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Grading System :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.drGradingSystem}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Marks :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.drMarks}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Course Type :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.drCourseType}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Passed Out Year :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.drCourseDurationFrom}} -  {{candidate_data.drCourseDurationTo}}
+                                        </div>
                                     </div>
                                 </div>
-
-
-
-                                <div class="single-row">
-                                    <label for="">Qualification :</label>
-                                    <div class="content-box">
-                                        B.Com
+                                <div *ngIf="candidate_data.pgQualification">
+                                    <div class="single-row eduction-skills">
+                                        <label for="">PG Educational Details:</label>
+                                        <div class="content-box">
+                                        </div>
+                                    </div>
+    
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Qualification :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.pgQualification}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">University :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.pgUniversity}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Specification :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.pgSpecialization}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Course :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.pgCourse}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Grading System :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.pgGradingSystem}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Marks :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.pgMarks}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Course Type :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.pgCourseType}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Passed Out Year :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.pgCourseDurationFrom}} -  {{candidate_data.pgCourseDurationTo}}
+                                        </div>
                                     </div>
                                 </div>
-
-
-                                <div class="single-row">
-                                    <label for="">University :</label>
-                                    <div class="content-box">
-                                        University
+                                <div *ngIf="candidate_data.ugQualification">
+                                    <div class="single-row eduction-skills">
+                                        <label for="">UG Educational Details:</label>
+                                        <div class="content-box">
+                                        </div>
                                     </div>
-                                </div>
-
-
-                                <div class="single-row">
-                                    <label for="">Specification :</label>
-                                    <div class="content-box">
-                                        Specification
+    
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Qualification :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.ugQualification}}
+                                        </div>
                                     </div>
-                                </div>
-
-
-                                <div class="single-row">
-                                    <label for="">Course :</label>
-                                    <div class="content-box">
-                                        Commerce
+    
+    
+                                    <div class="single-row">
+                                        <label for="">University :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.ugUniversity}}
+                                        </div>
                                     </div>
-                                </div>
-
-
-                                <div class="single-row">
-                                    <label for="">Grading System :</label>
-                                    <div class="content-box">
-                                        Percentage
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Specification :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.ugSpecialization}}
+                                        </div>
                                     </div>
-                                </div>
-
-
-                                <div class="single-row">
-                                    <label for="">Marks :</label>
-                                    <div class="content-box">
-                                        99%
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Course :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.ugCourse}}
+                                        </div>
                                     </div>
-                                </div>
-
-
-                                <div class="single-row">
-                                    <label for="">Course Type :</label>
-                                    <div class="content-box">
-                                        Full Time
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Grading System :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.ugGradingSystem}}
+                                        </div>
                                     </div>
-                                </div>
-
-
-                                <div class="single-row">
-                                    <label for="">Passed Out Year :</label>
-                                    <div class="content-box">
-                                        2020
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Marks :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.ugMarks}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Course Type :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.ugCourseType}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Passed Out Year :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.ugCourseDurationFrom}} -  {{candidate_data.ugCourseDurationTo}}
+                                        </div>
                                     </div>
                                 </div>
 

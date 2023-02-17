@@ -31,27 +31,27 @@ export class ProffesinoalComponent implements OnInit {
     })
     this.activaterouter.queryParams.subscribe((res: any) => {
       this.userId = res.id;
-      if (this.userId) {
+      // if (this.userId) {
         this.getAlldata()
-      }
+      // }
     })
   }
   getAlldata() {
     this.candidateservice.viewDetails().subscribe((res: any) => {
       this.viewAll = res.user[0].candidateDetails;
-      console.log(this.viewAll[0].keyskill, "key skill")
+      console.log(this.viewAll.keyskill, "key skill")
       this.proffesonalForm.patchValue({
-        industry: this.viewAll[0].industry,
-        department: this.viewAll[0].department,
-        roleCategory: this.viewAll[0].roleCategory,
-        role: this.viewAll[0].role,
+        industry: this.viewAll.industry,
+        department: this.viewAll.department,
+        roleCategory: this.viewAll.roleCategory,
+        role: this.viewAll.role,
         // languages: this.fb.array([]),
       })
-      this.candidateservice.getCategory(this.viewAll[0].department).subscribe((res: any) => {
+      this.candidateservice.getCategory(this.viewAll.department).subscribe((res: any) => {
         this.currentCategory = res;
         console.log(this.currentCategory)
       })
-      this.candidateservice.getRole(this.viewAll[0].roleCategory).subscribe((res: any) => {
+      this.candidateservice.getRole(this.viewAll.roleCategory).subscribe((res: any) => {
         this.getroles = res
       })
     })

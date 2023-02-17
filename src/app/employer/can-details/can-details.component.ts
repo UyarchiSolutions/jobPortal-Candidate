@@ -21,6 +21,7 @@ export class CanDetailsComponent implements OnInit {
   folderForm:any = this.fb.group({
     folderName:new FormControl(null)
   })
+  jobid: any;
   constructor(private empservice: EmpServiceService,private route: ActivatedRoute, private router: Router,private fb:FormBuilder) { }
 
   ngOnInit(): void {
@@ -28,14 +29,15 @@ export class CanDetailsComponent implements OnInit {
     .subscribe(params => {
       console.log(params['id']); 
       this.id=params['id'];
-      this.get_candidate_details(this.id)
+      this.jobid=params['job'];
+      this.get_candidate_details(this.id,this.jobid)
     }
   );
   this.getJobpostDetails()
   this.get_folder_list()
   }
-  get_candidate_details(id:any){
-    this.empservice.get_candidate_details(id).subscribe((res:any)=>{
+  get_candidate_details(id:any,jobid:any){
+    this.empservice.get_candidate_details(id,jobid).subscribe((res:any)=>{
       this.candidate_data = res[0]
       console.log(res);
       // this.folderForm.patchValue({

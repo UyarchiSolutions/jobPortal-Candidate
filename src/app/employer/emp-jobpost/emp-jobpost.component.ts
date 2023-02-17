@@ -97,6 +97,9 @@ export class EmpJobpostComponent implements OnInit {
   pushdata:any;
   coursedata: any;
   spcldata: any;
+  courseid: any;
+  coursename: any;
+  is_open: boolean = false;
   constructor(private formBuilder:FormBuilder,private router: Router,private empservice: EmpServiceService) { }
 
   ngOnInit(): void {
@@ -136,6 +139,7 @@ export class EmpJobpostComponent implements OnInit {
       this.jobpostForm.get('keySkill')?.setValue(index)
       let search: any = index.toString() + ","
       this.jobpostForm.get('searchbox')?.setValue(search);
+      console.log(this.jobpostForm.get('searchbox')?.value)
     }
   }
   options: any = {
@@ -190,6 +194,7 @@ export class EmpJobpostComponent implements OnInit {
       }
     }
     this.jobpostForm.get('keySkill')?.setValue(value)
+    console.log(this.jobpostForm.get('keySkill')?.value)
   }
   recriterlist(e:any){
    console.log(e.target.value)
@@ -250,6 +255,19 @@ export class EmpJobpostComponent implements OnInit {
     })
   }
   put(e:any){
+
+  }
+  selectcourse(e:any){
+    console.log(e)
+   this.courseid = Array(e._id)
+   this.coursename = e.Course
+   this.empservice.get_specialization({arr:this.courseid}).subscribe((res:any) => {
+    this.spcldata = res
+    this.is_open = true
+    console.log(res)
+  })
+  }
+  selectspcl(e:any){
 
   }
 }

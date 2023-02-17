@@ -1,0 +1,184 @@
+.register-content-row {
+  background-color: #E7E9ED;
+  border-radius: 5px;
+}
+
+
+
+
+
+
+.myprofile {
+  height: 100%;
+}
+
+.sidebarmenu li {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.sidebarmenu ul {
+  padding: 0px 0px;
+
+
+
+}
+
+.sidebarmenu div ul li {
+  margin: 10px 0px;
+}
+
+.sidebarmenu-heading {
+  color: #fff;
+}
+
+.myprofile-sidebar-border {
+  border-bottom: 1px solid rgba(10, 38, 71, 0.5);
+}
+
+.icon-text {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.sidebarmenu-heading {
+  background-color: #FD841F;
+  padding: 10px 0px;
+  border: none !important;
+}
+
+
+
+.job-listing-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 5%;
+}
+
+
+.recent-search ul li {
+  border-bottom: 1px solid rgba(10, 38, 71, 0.5);
+}
+
+.recent-search ul li {
+  padding-bottom: 10px;
+}
+
+.right-sidebar {
+  background-color: #E7E9ED;
+  height: 100%;
+}
+
+.recent-search ul li div {
+  margin-top: 5px;
+}
+
+.color-white {
+  color: #fff !important;
+}
+
+.saved-job-icon {
+  color: #0A2647 !important;
+}
+
+.company-logo {
+  width: 100px;
+}
+
+.about-company span {
+  display: block;
+}
+
+.about-company-content {
+  align-items: normal;
+}
+
+.content-box {
+  font-weight: 500;
+}
+
+.right-sidebar {
+  background-color: #E7E9ED;
+  height: 100%;
+}
+
+.sidebarmenu ul {
+  list-style: none;
+}
+
+/* custom card */
+
+.custom-card {
+  display: flex;
+  margin: auto;
+  width: 70%;
+
+}
+
+.myaccount-candidate {
+  display: flex;
+}
+
+.custom-card-heading {
+  font-size: 24px;
+}
+
+.image-section {
+  min-width: 20%;
+}
+
+.text-content {
+  min-width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  color: #0A2647;
+}
+
+
+.icon-custom-card {
+  width: 25px;
+  text-align: left;
+  display: inline-block;
+}
+
+/* custom card */
+
+li {}
+
+.register-content-row {
+  /* height: fit-content; */
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+li{
+  cursor: pointer;
+}
+.recent {
+  height: 261px;
+  overflow: scroll;
+  border-radius: 5px;
+
+}

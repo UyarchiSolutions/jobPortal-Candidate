@@ -1,0 +1,650 @@
+<div class="container-fluid register">
+  <div class="row">
+    <div class="col-2 ad-image">
+
+      <img src="../../assets/image/myaccountimg1.png" alt="">
+
+
+
+    </div>
+    <div class="col-8  login-main">
+      <div class="row ">
+        <div class="col search-box-wrap">
+
+          <div class="advanced-search-warap">
+
+
+
+            <div class="search-boxs">
+
+              <div class="search-box first-search-box">
+                <input type="text" class="form-control" placeholder="Enter Designation / Key skills">
+              </div>
+
+
+
+              <div class="search-box second-search-box">
+                <input type="text" class="form-control location" placeholder="Enter Location">
+              </div>
+
+              <div class="search-box">
+                <select class="form-control select-type">
+                  <option value="option1" disabled selected>Select Type</option>
+                  <option value="option2">Option 2</option>
+                  <option value="option3">Option 3</option>
+                </select>
+              </div>
+
+              <div class="search-box">
+                <button type="submit" class="btn btn-brand-orange"><img src="../../assets/image/search.png" alt=""
+                    class="search-icon"></button>
+              </div>
+
+            </div>
+
+            <div class="advanced-search">
+              <button type="submit" class="btn btn-brand-trans"><a href="#">Advanced Search</a></button>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="col-2 ad-image">
+      <img src="../../assets/image/myaccountimg2.png" alt="">
+
+    </div>
+
+
+  </div>
+
+
+  <div class="row">
+    <div class="col-2">
+
+      <div class="row">
+        <div class="col">
+          <div class="sidebarmenu myprofile">
+            <div class="myprofile-sidebar-border">
+              <ul>
+                <li class="sidebarmenu-heading"> <span class="icon-custom"><i class='far fa-user'></i></span> <span
+                    class="icon-text">My Profile</span></li>
+                <li (click)="getBasic()">
+                  <span class="icon-custom"><i><svg width="18" height="16" viewBox="0 0 20 18" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M0 0.993C0.00183004 0.730378 0.1069 0.479017 0.292513 0.293218C0.478126 0.107418 0.72938 0.00209465 0.992 0H19.008C19.556 0 20 0.445 20 0.993V17.007C19.9982 17.2696 19.8931 17.521 19.7075 17.7068C19.5219 17.8926 19.2706 17.9979 19.008 18H0.992C0.728813 17.9997 0.476497 17.895 0.290489 17.7088C0.104482 17.5226 -1.33455e-07 17.2702 0 17.007V0.993ZM2 2V16H18V2H2ZM4 4H10V10H4V4ZM6 6V8H8V6H6ZM4 12H16V14H4V12ZM12 4H16V6H12V4ZM12 8H16V10H12V8Z"
+                          fill="black" />
+                      </svg>
+                    </i></span>
+                  <span class="icon-text">Basic Details</span>
+                </li>
+                <li (click)="getAdvance()">
+                  <span class="icon-custom"><i><svg width="18" height="16" viewBox="0 0 20 18" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M0 0.993C0.00183004 0.730378 0.1069 0.479017 0.292513 0.293218C0.478126 0.107418 0.72938 0.00209465 0.992 0H19.008C19.556 0 20 0.445 20 0.993V17.007C19.9982 17.2696 19.8931 17.521 19.7075 17.7068C19.5219 17.8926 19.2706 17.9979 19.008 18H0.992C0.728813 17.9997 0.476497 17.895 0.290489 17.7088C0.104482 17.5226 -1.33455e-07 17.2702 0 17.007V0.993ZM2 2V16H18V2H2ZM4 12H16V14H4V12ZM12 4H16V6H12V4ZM8 8H16V10H8V8Z"
+                          fill="black" />
+                      </svg>
+                    </i></span>
+                  <span class="icon-text">Advanced Details</span>
+                </li>
+                <li (click)="geteducation()">
+                  <span class="icon-custom"><i><svg width="18" height="16" viewBox="0 0 20 18" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M0 0.993C0.00183004 0.730378 0.1069 0.479017 0.292513 0.293218C0.478126 0.107418 0.72938 0.00209465 0.992 0H19.008C19.556 0 20 0.445 20 0.993V17.007C19.9982 17.2696 19.8931 17.521 19.7075 17.7068C19.5219 17.8926 19.2706 17.9979 19.008 18H0.992C0.728813 17.9997 0.476497 17.895 0.290489 17.7088C0.104482 17.5226 -1.33455e-07 17.2702 0 17.007V0.993ZM2 2V16H18V2H2Z"
+                          fill="black" />
+                        <path
+                          d="M10 5.52413C8.90107 4.54087 7.47626 3.99797 6 4.00001C5.29867 4.00001 4.62533 4.1197 4 4.34047V13.8163C4.64241 13.5903 5.31878 13.4751 6 13.4759C7.53667 13.4759 8.93867 14.0524 10 15M10 5.52413C11.0989 4.54081 12.5237 3.99791 14 4.00001C14.7013 4.00001 15.3747 4.1197 16 4.34047V13.8163C15.3576 13.5903 14.6812 13.4751 14 13.4759C12.5237 13.4738 11.0989 14.0167 10 15M10 5.52413V15"
+                          stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </i></span>
+                  <span class="icon-text">Education Details</span>
+                </li>
+                <li (click)="Professional()">
+                  <span class="icon-custom"><i><svg width="18" height="18" viewBox="0 0 20 20" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <mask id="path-1-inside-1_2089_4227" fill="white">
+                          <rect y="4" width="19.2308" height="6.00024" rx="1" />
+                        </mask>
+                        <rect y="4" width="19.2308" height="6.00024" rx="1" stroke="black" stroke-width="4"
+                          mask="url(#path-1-inside-1_2089_4227)" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M15.3851 1C15.3851 0.447715 14.9374 0 14.3851 0H4.84668C4.29439 0 3.84668 0.447715 3.84668 1V5.03782C3.84668 5.56922 4.27746 6 4.80886 6C5.59332 6 6.10772 5.04359 6.02841 4.26316C6.01608 4.14186 6.00977 4.01878 6.00977 3.89423V3.5C6.00977 2.94771 6.45748 2.5 7.00977 2.5H12.2213C12.7736 2.5 13.2213 2.94772 13.2213 3.5V3.89423C13.2213 4.01861 13.215 4.14152 13.2027 4.26266C13.1235 5.04331 13.638 6 14.4227 6C14.9542 6 15.3851 5.5691 15.3851 5.03756V1Z"
+                          fill="black" />
+                        <mask id="path-3-inside-2_2089_4227" fill="white">
+                          <rect y="7.5" width="19.2308" height="12.5" rx="1" />
+                        </mask>
+                        <rect y="7.5" width="19.2308" height="12.5" rx="1" stroke="black" stroke-width="4"
+                          mask="url(#path-3-inside-2_2089_4227)" />
+                        <rect x="7.71191" y="8" width="3.80769" height="2.75" rx="0.5" fill="black" stroke="black" />
+                      </svg>
+                    </i></span>
+                  <span class="icon-text">Professional Details</span>
+                </li>
+                <li>
+                  <span class="icon-custom"><i><svg width="18" height="22" viewBox="0 0 20 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M18.8889 23.1109H1.11111C0.816426 23.1109 0.533811 22.9938 0.325437 22.7855C0.117063 22.5771 0 22.2945 0 21.9998V1.99978C0 1.7051 0.117063 1.42248 0.325437 1.21411C0.533811 1.00573 0.816426 0.888672 1.11111 0.888672H18.8889C19.1836 0.888672 19.4662 1.00573 19.6746 1.21411C19.8829 1.42248 20 1.7051 20 1.99978V21.9998C20 22.2945 19.8829 22.5771 19.6746 22.7855C19.4662 22.9938 19.1836 23.1109 18.8889 23.1109ZM17.7778 20.8887V3.11089H2.22222V20.8887H17.7778ZM5.55556 6.44423H14.4444V8.66645H5.55556V6.44423ZM5.55556 10.8887H14.4444V13.1109H5.55556V10.8887ZM5.55556 15.3331H14.4444V17.5553H5.55556V15.3331Z"
+                          fill="black" />
+                      </svg>
+                    </i></span>
+
+                  <span class="icon-text">Resume</span>
+                </li>
+                <li>
+                  <span class="icon-custom"><i><svg width="18" height="22" viewBox="0 0 20 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10" cy="6.88867" r="2.25" stroke="black" stroke-width="1.5" />
+                        <path
+                          d="M14.25 12.8255C14.25 13.414 14.1273 13.6806 14.0246 13.8073C13.9289 13.9253 13.7628 14.0301 13.411 14.0894C13.0468 14.1507 12.5816 14.1473 11.981 14.1194C11.8429 14.113 11.6979 14.1053 11.5475 14.0973C11.0721 14.0721 10.542 14.044 10 14.044C9.45797 14.044 8.9279 14.0721 8.45253 14.0973C8.30208 14.1053 8.15711 14.113 8.01897 14.1194C7.41842 14.1473 6.95318 14.1507 6.58902 14.0894C6.23718 14.0301 6.07112 13.9253 5.97541 13.8073C5.87269 13.6806 5.75 13.414 5.75 12.8255C5.75 11.704 6.19655 10.9496 6.89958 10.4488C7.63569 9.92448 8.71481 9.63867 10 9.63867C11.2852 9.63867 12.3643 9.92448 13.1004 10.4488C13.8034 10.9496 14.25 11.704 14.25 12.8255Z"
+                          stroke="black" stroke-width="1.5" />
+                        <path
+                          d="M18.8889 23.1109H1.11111C0.816426 23.1109 0.533811 22.9938 0.325437 22.7855C0.117063 22.5771 0 22.2945 0 21.9998V1.99978C0 1.7051 0.117063 1.42248 0.325437 1.21411C0.533811 1.00573 0.816426 0.888672 1.11111 0.888672H18.8889C19.1836 0.888672 19.4662 1.00573 19.6746 1.21411C19.8829 1.42248 20 1.7051 20 1.99978V21.9998C20 22.2945 19.8829 22.5771 19.6746 22.7855C19.4662 22.9938 19.1836 23.1109 18.8889 23.1109ZM17.7778 20.8887V3.11089H2.22222V20.8887H17.7778Z"
+                          fill="black" />
+                        <rect x="4" y="15.8887" width="12" height="1.5" fill="black" />
+                        <rect x="4" y="17.8887" width="12" height="1.5" fill="black" />
+                      </svg>
+                    </i></span>
+
+                  <span class="icon-text">Full Profile</span>
+                </li>
+
+              </ul>
+            </div>
+
+            <div class="myprofile-sidebar-border">
+
+
+
+              <ul>
+                <li>
+                  <span class="icon-custom"><i><svg width="18" height="18" viewBox="0 0 22 22" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M7.66667 11.8333L10.1667 14.3333L14.3333 8.5M21 11C21 12.3132 20.7413 13.6136 20.2388 14.8268C19.7362 16.0401 18.9997 17.1425 18.0711 18.0711C17.1425 18.9997 16.0401 19.7362 14.8268 20.2388C13.6136 20.7413 12.3132 21 11 21C9.68678 21 8.38642 20.7413 7.17317 20.2388C5.95991 19.7362 4.85752 18.9997 3.92893 18.0711C3.00035 17.1425 2.26375 16.0401 1.7612 14.8268C1.25866 13.6136 1 12.3132 1 11C1 8.34784 2.05357 5.8043 3.92893 3.92893C5.8043 2.05357 8.34783 1 11 1C13.6522 1 16.1957 2.05357 18.0711 3.92893C19.9464 5.8043 21 8.34784 21 11Z"
+                          stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </i></span>
+                  <span class="icon-text">Applied Jobs</span>
+                </li>
+                <li>
+                  <span class="icon-custom"><i><svg width="18" height="17" viewBox="0 0 23 22" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M10.4312 1.839C10.4774 1.72632 10.5561 1.62992 10.6572 1.56208C10.7584 1.49423 10.8774 1.45801 10.9992 1.45801C11.121 1.45801 11.24 1.49423 11.3411 1.56208C11.4423 1.62992 11.5209 1.72632 11.5671 1.839L13.8881 7.42133C13.9316 7.52578 14.003 7.61623 14.0945 7.68271C14.186 7.74919 14.2941 7.78914 14.4069 7.79814L20.4338 8.2809C20.9788 8.32459 21.1994 9.00504 20.7844 9.36002L16.1927 13.2942C16.1069 13.3676 16.043 13.4632 16.0079 13.5705C15.9728 13.6778 15.968 13.7927 15.9939 13.9026L17.3974 19.7841C17.4256 19.9021 17.4182 20.0259 17.3762 20.1397C17.3341 20.2535 17.2593 20.3523 17.1611 20.4235C17.0629 20.4948 16.9458 20.5354 16.8246 20.5402C16.7034 20.545 16.5834 20.5137 16.4799 20.4504L11.3192 17.2994C11.2228 17.2406 11.1121 17.2095 10.9992 17.2095C10.8863 17.2095 10.7756 17.2406 10.6792 17.2994L5.51844 20.4515C5.41496 20.5148 5.29503 20.5461 5.1738 20.5413C5.05256 20.5365 4.93547 20.4959 4.83729 20.4246C4.73912 20.3533 4.66428 20.2546 4.62222 20.1408C4.58016 20.027 4.57277 19.9032 4.60097 19.7852L6.00447 13.9026C6.0305 13.7927 6.02572 13.6777 5.99065 13.5704C5.95558 13.4631 5.89158 13.3675 5.80569 13.2942L1.214 9.36002C1.12205 9.28095 1.05553 9.17646 1.02281 9.05969C0.990088 8.94292 0.992621 8.81909 1.03009 8.70375C1.06756 8.58842 1.1383 8.48674 1.23341 8.4115C1.32852 8.33626 1.44375 8.29083 1.56461 8.2809L7.59147 7.79814C7.70424 7.78914 7.81234 7.74919 7.90387 7.68271C7.99541 7.61623 8.06682 7.52578 8.11027 7.42133L10.4312 1.839Z"
+                          stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </i></span>
+                  <span class="icon-text">Saved Jobs</span>
+                </li>
+                <li>
+                  <span class="icon-custom"><i><svg width="18" height="15" viewBox="0 0 24 20" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M12.0003 8.0466V11.9498M2.31718 15.4638C1.4158 17.025 2.54305 18.9756 4.34477 18.9756H19.6558C21.4565 18.9756 22.5837 17.025 21.6834 15.4638L14.0289 2.19489C13.1275 0.633604 10.873 0.633604 9.97165 2.19489L2.31718 15.4638ZM12.0003 15.0724H12.0076V15.0807H12.0003V15.0724Z"
+                          stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                    </i></span>
+                  <span class="icon-text">Job Alert</span>
+                </li>
+                <li>
+                  <span class="icon-custom"><i><svg width="18" height="14" viewBox="0 0 22 16" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M14.8462 6.46176L19.6872 1.62074C19.7948 1.5133 19.9318 1.44014 20.0809 1.41052C20.23 1.38089 20.3846 1.39612 20.5251 1.45429C20.6655 1.51246 20.7856 1.61095 20.8701 1.73732C20.9547 1.8637 20.9999 2.01229 21 2.16433V13.8361C20.9999 13.9882 20.9547 14.1368 20.8701 14.2631C20.7856 14.3895 20.6655 14.488 20.5251 14.5462C20.3846 14.6043 20.23 14.6196 20.0809 14.5899C19.9318 14.5603 19.7948 14.4872 19.6872 14.3797L14.8462 9.53869M3.30769 14.9233H12.5385C13.1505 14.9233 13.7375 14.6802 14.1702 14.2474C14.603 13.8146 14.8462 13.2276 14.8462 12.6156V3.38484C14.8462 2.7728 14.603 2.18583 14.1702 1.75306C13.7375 1.32028 13.1505 1.07715 12.5385 1.07715H3.30769C2.69565 1.07715 2.10868 1.32028 1.67591 1.75306C1.24313 2.18583 1 2.7728 1 3.38484V12.6156C1 13.2276 1.24313 13.8146 1.67591 14.2474C2.10868 14.6802 2.69565 14.9233 3.30769 14.9233Z"
+                          stroke="black" stroke-width="2" stroke-linecap="round" />
+                      </svg>
+                    </i></span>
+                  <span class="icon-text">Upcoming Live</span>
+                </li>
+
+              </ul>
+            </div>
+
+            <div class="myprofile-sidebar-border">
+
+
+
+              <ul>
+                <li>
+                  <span class="icon-custom"><i><svg width="18" height="18" viewBox="0 0 20 20" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M8.09067 9.14231L16.8723 0L19.2181 2.44217L17.6542 4.07028L20 6.51246L16.0903 10.5839L13.7445 8.14172L10.4376 11.5845C11.0465 12.8042 11.2163 14.2104 10.9163 15.549C10.6164 16.8877 9.86641 18.0705 8.80194 18.8838C7.73747 19.6971 6.4287 20.0872 5.11209 19.9836C3.79548 19.8801 2.55786 19.2897 1.62283 18.3192C0.687332 17.3468 0.117366 16.0577 0.016219 14.6855C-0.0849281 13.3133 0.289435 11.9488 1.07147 10.8392C1.8535 9.7296 2.99147 8.94838 4.27914 8.63709C5.56682 8.32579 6.91901 8.50503 8.09067 9.14231ZM7.09639 15.8758C7.30765 15.6634 7.47617 15.4093 7.5921 15.1283C7.70802 14.8474 7.76904 14.5452 7.7716 14.2394C7.77415 13.9337 7.71818 13.6304 7.60696 13.3474C7.49574 13.0644 7.33149 12.8073 7.1238 12.5911C6.91612 12.3748 6.66914 12.2039 6.3973 12.0881C6.12545 11.9723 5.83418 11.914 5.54047 11.9167C5.24677 11.9193 4.95651 11.9828 4.68664 12.1035C4.41677 12.2242 4.17269 12.3997 3.96864 12.6196C3.56571 13.0539 3.34275 13.6356 3.34779 14.2394C3.35283 14.8432 3.58547 15.4208 3.99559 15.8478C4.4057 16.2748 4.9605 16.5169 5.54047 16.5222C6.12045 16.5274 6.6792 16.2953 7.09639 15.8758Z"
+                          fill="black" />
+                      </svg>
+                    </i></span>
+                  <span class="icon-text">Change Password</span>
+                </li>
+                <li>
+                  <span class="icon-custom"><i><svg width="18" height="16" viewBox="0 0 20 18" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.09091 18C4.07 18 0 13.9707 0 9C0 4.0293 4.07 2.53646e-06 9.09091 2.53646e-06C10.5024 -0.00104728 11.8947 0.323798 13.1572 0.94873C14.4197 1.57366 15.5176 2.48146 16.3636 3.6H13.9C12.8502 2.68359 11.5556 2.08652 10.1716 1.88046C8.7875 1.6744 7.37279 1.86809 6.09717 2.43829C4.82155 3.0085 3.73923 3.93099 2.98006 5.09507C2.2209 6.25915 1.81715 7.61538 1.81727 9.001C1.81739 10.3866 2.22136 11.7428 2.98072 12.9067C3.74008 14.0707 4.82256 14.993 6.09827 15.563C7.37399 16.133 8.78874 16.3264 10.1728 16.1202C11.5568 15.9139 12.8513 15.3166 13.9009 14.4H16.3645C15.5184 15.5187 14.4204 16.4265 13.1577 17.0515C11.8951 17.6764 10.5026 18.0012 9.09091 18ZM15.4545 12.6V9.9H8.18182V8.1H15.4545V5.4L20 9L15.4545 12.6Z"
+                          fill="black" />
+                      </svg>
+                    </i></span>
+                  <span class="icon-text">Log Out</span>
+                </li>
+                <li>
+                  <span class="icon-custom"><i><svg width="18" height="16" viewBox="0 0 20 18" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.09091 18C4.07 18 0 13.9707 0 9C0 4.0293 4.07 2.53646e-06 9.09091 2.53646e-06C10.5024 -0.00104728 11.8947 0.323798 13.1572 0.94873C14.4197 1.57366 15.5176 2.48146 16.3636 3.6H13.9C12.8502 2.68359 11.5556 2.08652 10.1716 1.88046C8.7875 1.6744 7.37279 1.86809 6.09717 2.43829C4.82155 3.0085 3.73923 3.93099 2.98006 5.09507C2.2209 6.25915 1.81715 7.61538 1.81727 9.001C1.81739 10.3866 2.22136 11.7428 2.98072 12.9067C3.74008 14.0707 4.82256 14.993 6.09827 15.563C7.37399 16.133 8.78874 16.3264 10.1728 16.1202C11.5568 15.9139 12.8513 15.3166 13.9009 14.4H16.3645C15.5184 15.5187 14.4204 16.4265 13.1577 17.0515C11.8951 17.6764 10.5026 18.0012 9.09091 18ZM15.4545 12.6V9.9H8.18182V8.1H15.4545V5.4L20 9L15.4545 12.6Z"
+                          fill="black" />
+                      </svg>
+                    </i></span>
+                  <span class="icon-text">Deactivate My Profile </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-8 ">
+      <div class="row register-content-row height-register-content" *ngIf="tab == 0">
+        <div class="col register-content">
+          <div class="row">
+            <div class="col"></div>
+            <div class="col">
+              <h3>My Account</h3>
+            </div>
+            <div class="col-4 add-pan-btn">
+              <button type="submit" class="btn btn-brand-blue mb-2 btn-custom">Edit Profile</button>
+            </div>
+          </div>
+          <div class="row" *ngFor="let details of getAlldetails">
+            <div class="col">
+              <div class="card custom-card">
+                <div class="card-body myaccount-candidate">
+
+                  <div class="image-section">
+                    <img src="../../assets/image/profile.png" alt="">
+                  </div>
+                  <div class="text-content">
+                    <div class="custom-card-heading">
+                      <div>{{details.name}}</div>
+                    </div>
+                    <div class="card-content">
+                      <div>
+                        <div class="">
+                          <div> <span class="icon-custom-card"><i class="fa fa-download"></i></span>{{details.email}}
+                          </div>
+                        </div>
+                        <div class="">
+                          <div> <span class="icon-custom-card"><i
+                                class="fa fa-download"></i></span>{{details.mobileNumber}} </div>
+                        </div>
+                      </div>
+                      <div class="">
+                        <div class="">
+                        </div>
+                        <div> <span class="icon-custom-card"><i class="fa fa-download"></i></span>{{details.workStatus}}
+                        </div>
+                        <div><span class="icon-custom-card"><i
+                              class="fa fa-download"></i></span>{{details.locationCurrent}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row register-content-row height-register-content" *ngIf="tab ==2">
+        <div class="col  register-content">
+          <div class="row">
+            <div class="col"></div>
+            <div class="col">
+              <h3>Advanced Details</h3>
+            </div>
+            <div class="col-4 add-pan-btn">
+              <button type="submit" class="btn btn-brand-blue mb-2 btn-custom" (click)="editAdvance_det()">Edit
+                Profile</button>
+            </div>
+          </div>
+          <div class="content m-auto col-8 mt-5 " *ngFor="let details of getAlldetails">
+            <div class="col-12 d-flex">
+              <label class="col-5">Key Skill : </label>
+              <p class="col-7">{{details.keyskill}}</p>
+            </div>
+
+            <div class="col-12 d-flex">
+              <label class="col-5">Salary Range : </label>
+              <p class="col-7">{{details.salaryFrom}}</p>
+            </div>
+
+            <div class="col-12 d-flex">
+              <label class="col-5">Experience : </label>
+              <p class="col-7">{{details.experienceYear}} Year {{details.experienceMonth}} Month</p>
+            </div>
+
+            <div class="col-12 d-flex">
+              <label class="col-5">Native Address : </label>
+              <p class="col-7">{{details.locationNative}}</p>
+            </div>
+
+            <div class="col-12 d-flex">
+              <label class="col-5">Notice Period : </label>
+              <p class="col-7">{{details.noticeperiod}}</p>
+            </div>
+
+            <div class="col-12 d-flex">
+              <label class="col-5">Current Skill Set : </label>
+              <p class="col-7">{{details.currentSkill}}</p>
+            </div>
+
+            <div class="col-12 d-flex">
+              <label class="col-5">Preferred Skill Set : </label>
+              <p class="col-7">{{details.preferredSkill}}</p>
+            </div>
+
+            <div class="col-12 d-flex">
+              <label class="col-5">Gender :</label>
+              <p class="col-7">{{details.gender}}</p>
+            </div>
+
+            <div class="col-12 d-flex">
+              <label class="col-5">Marital Status : </label>
+              <p class="col-7">{{details.maritalStatus}}</p>
+            </div>
+
+            <div class="col-12 d-flex">
+              <label class="col-5">Language : </label>
+              <div class="col-7">
+                <div class="col-12 d-flex flex-wrap" *ngFor="let lang of details.languages">
+                  <p class="col-3">{{lang.lang}}</p>
+                  <div class="select col-3">
+                    <input type="radio" class="mb-3"><label>Speak</label>
+                  </div>
+                  <div class="select col-3">
+                    <input type="radio" class="mb-3"><label>Read</label>
+                  </div>
+                  <div class="select col-3">
+                    <input type="radio" class="mb-3"><label>Write</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row register-content-row height-register-content" *ngIf="tab ==3" style="height: fit-content;">
+        <div class="col  register-content">
+          <div class="row">
+            <div class="col"></div>
+            <div class="col">
+              <h3>Education Details</h3>
+            </div>
+            <div class="col-4 add-pan-btn">
+              <button type="submit" class="btn btn-brand-blue mb-2 btn-custom" (click)="editedu()">Edit Profile</button>
+            </div>
+          </div>
+          <div class="content m-auto col-8 mt-5 " *ngFor="let details of getAlldetails">
+            <div class="content m-auto col-8 mt-5 ">
+              <h5 class="col-12 mb-4">Education Details :</h5>
+              <div class="col-12 d-flex">
+                <label class="col-5">Qualification : </label>
+                <p class="col-7">{{details.drQualification}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">University : </label>
+                <p class="col-7">{{details.drUniversity}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Specification : </label>
+                <p class="col-7">{{details.drSpecialization}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Course : </label>
+                <p class="col-7">{{details.drcourses}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Grading Sysytem : </label>
+                <p class="col-7">{{details.drGradingSystem}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Marks : </label>
+                <p class="col-7">{{details.drMarks}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Course Type : </label>
+                <p class="col-7">{{details.drCourseType}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Passed Out Year :</label>
+                <p class="col-7">{{details.drCourseDurationFrom}} To {{details.drCourseDurationTo}}</p>
+              </div>
+
+              <h5 class="col-12 mt-4 mb-4">Education Detail 2</h5>
+              <div class="col-12 d-flex">
+                <label class="col-5">Qualification : </label>
+                <p class="col-7">{{details.pgQualification}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">University : </label>
+                <p class="col-7">{{details.pgUniversity}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Specification : </label>
+                <p class="col-7">{{details.pgSpecialization }}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Course : </label>
+                <p class="col-7">{{details.pgCourse}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Grading Sysytem : </label>
+                <p class="col-7">{{details.pgGradingSystem}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Marks : </label>
+                <p class="col-7">{{details.pgMarks}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Course Type : </label>
+                <p class="col-7">{{details.pgCourseType}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Passed Out Year :</label>
+                <p class="col-7">{{details.pgCourseDurationFrom}} To {{details.pgCourseDurationTo}}</p>
+              </div>
+              <h5 class="col-12 mt-4 mb-4">Education Detail 3</h5>
+              <div class="col-12 d-flex">
+                <label class="col-5">Qualification : </label>
+                <p class="col-7">{{details.ugQualification}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">University : </label>
+                <p class="col-7">{{details.ugUniversity}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Specification : </label>
+                <p class="col-7">{{details.ugSpecialization}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Course : </label>
+                <p class="col-7">{{details.ugCourse}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Grading Sysytem : </label>
+                <p class="col-7">{{details.ugGradingSystem}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Marks : </label>
+                <p class="col-7">{{details.ugMarks}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Course Type : </label>
+                <p class="col-7">{{details.ugCourseType}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Passed Out Year :</label>
+                <p class="col-7">{{details.ugCourseDurationFrom}} To {{details.ugCourseDurationTo}}</p>
+              </div>
+              <h5 class="col-12 mt-4 mb-4">Education Detail 3</h5>
+              <div class="col-12 d-flex">
+                <label class="col-5">Qualification : </label>
+                <p class="col-7">{{details.hsQualification}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Board : </label>
+                <p class="col-7">{{details.hsBoard}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Medium : </label>
+                <p class="col-7">{{details.hsMedium}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Mark : </label>
+                <p class="col-7">{{details.hstotalmarks}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Passed out year: </label>
+                <p class="col-7">{{details.hsPassedYear}}</p>
+              </div>
+              <h5 class="col-12 mt-4 mb-4">Education Detail 3</h5>
+              <div class="col-12 d-flex">
+                <label class="col-5">Qualification : </label>
+                <p class="col-7">{{details.sslcQualification}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Board : </label>
+                <p class="col-7">{{details.sslcBoard}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Medium : </label>
+                <p class="col-7">{{details.sslcMedium}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Mark : </label>
+                <p class="col-7">{{details.sslctotalmarks}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Passed out year: </label>
+                <p class="col-7">{{details.sslcPassedYear}}</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row register-content-row height-register-content" *ngIf="tab ==4">
+
+        <div class="register-content-row height-register-content">
+          <div class="row">
+            <div class="col"></div>
+            <div class="col">
+              <h3 style="text-align:center;color: #FD841F;font-weight: 700;">Professional Details</h3>
+            </div>
+            <div class="col-4 add-pan-btn">
+              <button type="submit" class="btn btn-brand-blue mb-2 btn-custom" (click)="editProffi()">Edit
+                Profile</button>
+            </div>
+          </div>
+          <div class="content m-auto col-8 mt-5 " *ngFor="let details of getAlldetails">
+            <div class="col-12 d-flex">
+              <label class="col-5">Current Industry: </label>
+              <p class="col-7">{{details.industry}}</p>
+            </div>
+
+            <div class="col-12 d-flex">
+              <label class="col-5">Current Department : </label>
+              <p class="col-7">{{details.department}}</p>
+            </div>
+
+            <div class="col-12 d-flex">
+              <label class="col-5">Role Category : </label>
+              <p class="col-7">{{details.roleCategory}}</p>
+            </div>
+
+            <div class="col-12 d-flex">
+              <label class="col-5">Job Role : </label>
+              <p class="col-7">{{details.role}}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-2">
+      <div class="row">
+        <div class="col">
+          <div class="right-sidebar">
+            <div class="sidebarmenu recent-search">
+              <div class="sidebarmenu-heading"> <span class="icon-custom "><i
+                class='far fa-user color-white'></i></span> <span class="icon-text">Recent Search</span></div>
+              <ul class="recent">
+
+                <li *ngFor="let recent of recentData;let i=index" style="padding-bottom: 0px;" (click)="recentdata(recent)">
+                  <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
+                    <span class="icon-text">{{recent.search}}</span>
+                  </div>
+
+                  <div class="job-listing-bottom">
+                    <div><span class="icon-custom icon-custom-recent"> <i><svg width="10" height="12"
+                            viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                              d="M9.99986 4.80022C9.99986 7.45131 5.00042 12.0006 5.00042 12.0006C5.00042 12.0006 0.000976562 7.45131 0.000976562 4.80022C0.000976562 2.14913 2.2393 0 5.00042 0C7.76153 0 9.99986 2.14913 9.99986 4.80022Z"
+                              fill="#79879A" />
+                            <ellipse cx="4.99986" cy="4.80064" rx="1.24986" ry="1.20006" fill="white" />
+                          </svg>
+                        </i></span>
+                      <span class="icon-text">{{recent.location}}</span>
+                    </div>
+                    <div>
+                      <span class="icon-text">{{recent.experience}} Year</span>
+                    </div>
+                  </div>
+                  <div class="time" style="display: flex;justify-content: end;">
+                    <p style="margin-bottom: 0px;">{{recent.time}}</p>
+                  </div>
+                </li>
+
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -144,32 +144,110 @@
                             </li>
                             <li class="refine-content">
                                 <div class="search-box">
-                                    <select class="form-control select-type" formControlName="qualification">
-                                        <option value="option1" selected>Qualification</option>
-                                        <option value="option2">Option 2</option>
-                                        <option value="option3">Option 3</option>
-                                    </select>
+                                    <button class="btn collapsebtn" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseExample" aria-expanded="false" style="padding-left: 14px;
+                                        font-weight: 500;
+                                        font-size: 14px;"
+                                        aria-controls="collapseExample">Experience</button>
+                                    <div class="collapse" id="collapseExample">
+                                        <div class="card card-body" style="padding: 0px;">
+                                            <div style="display:flex">
+                                                <select class="form-control select-type">
+                                                <option value="option1" selected>From</option>
+                                                <option value="0">Freshers</option>
+                                                <option value="1">1 Year</option>
+                                                <option value="2">2 Year</option>
+                                                <option value="3">3 Year</option>
+                                                <option value="4">4 Year</option>
+                                                <option value="5">5 Year</option>
+                                                <option value="6">6 Year</option>
+                                                <option value="7">7 Year</option>
+                                                <option value="8">8 Year</option>
+                                                <option value="9">9 Year</option>
+                                                <option value="10">10 Year</option>
+                                                <option value="11">11 Year</option>
+                                                </select>
+                                                <select class="form-control select-type">
+                                                <option value="option1" selected>To</option>
+                                                <option value="0">Freshers</option>
+                                                <option value="1">1 Year</option>
+                                                <option value="2">2 Year</option>
+                                                <option value="3">3 Year</option>
+                                                <option value="4">4 Year</option>
+                                                <option value="5">5 Year</option>
+                                                <option value="6">6 Year</option>
+                                                <option value="7">7 Year</option>
+                                                <option value="8">8 Year</option>
+                                                <option value="9">9 Year</option>
+                                                <option value="10">10 Year</option>
+                                                <option value="11">11 Year</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                             </li>
                             <li class="refine-content">
-                                <div class="search-box">
-                                    <select class="form-control select-type">
-                                        <option value="option1" selected>Salary</option>
-                                        <option value="option2">Option 2</option>
-                                        <option value="option3">Option 3</option>
-                                    </select>
-                                </div>
+                                <div class="search-box refineup">
+                                    <div class="dropdown">
+                                      <button class="btn dropdown-toggle salarybtn refhead" type="button" id="dropdownMenuButton1"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Salary<i class="fa fa-angle-down"></i>
+                                      </button>
+                                      <ul class="dropdown-menu p-3" aria-labelledby="dropdownMenuButton1">
+                                        <li value="0"><input type="checkbox" class="checkbox">0 to 1 lac</li>
+                                        <li value="1 to 2 lac"><input type="checkbox" class="checkbox">1 to 2 lac</li>
+                                        <li value="2 to 4 lac"><input type="checkbox" class="checkbox">2 to 4 lac</li>
+                                        <li value="4 to 6 lac"><input type="checkbox" class="checkbox">4 to 6 lac</li>
+                                        <li value="6 to 8 lac"><input type="checkbox" class="checkbox">6 to 8 lac</li>
+                                        <li value="8 to 9 lac"><input type="checkbox" class="checkbox">8 to 9 lac</li>
+                                      </ul>
+                                    </div>
+                                  </div>
 
                             </li>
                             <li class="refine-content">
                                 <div class="search-box">
-                                    <select class="form-control select-type">
+                                    <select class="form-control select-type" style="background-color: white;">
                                         <option value="option1" selected>Location</option>
                                         <option value="option2">Option 2</option>
                                         <option value="option3">Option 3</option>
                                     </select>
                                 </div>
+
+                            </li>
+                            <li class="refine-content">
+                                <div class="search-box refineup">
+                                    <div class="dropdown depart">
+                                      <button class="btn dropdown-toggle salarybtn refhead" type="button" id="dropdownMenuButton1"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Department<i class="fa fa-angle-down"></i>
+                                      </button>
+                                      <ul class="dropdown-menu p-3 de-data" aria-labelledby="dropdownMenuButton1">
+                                        <li value="0" *ngFor="let data of depart_data"><input type="checkbox" class="checkbox">{{data.Department}}</li>
+                                      </ul>
+                                    </div>
+                                  </div>
+
+                            </li>
+                            <li class="refine-content">
+                                <div class="search-box refineup">
+                                    <div class="dropdown">
+                                      <button class="btn dropdown-toggle salarybtn refhead" type="button" id="dropdownMenuButton1"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Role<i class="fa fa-angle-down"></i>
+                                      </button>
+                                      <ul class="dropdown-menu p-3" aria-labelledby="dropdownMenuButton1">
+                                        <li value="0"><input type="checkbox" class="checkbox">0 to 1 lac</li>
+                                        <li value="1 to 2 lac"><input type="checkbox" class="checkbox">1 to 2 lac</li>
+                                        <li value="2 to 4 lac"><input type="checkbox" class="checkbox">2 to 4 lac</li>
+                                        <li value="4 to 6 lac"><input type="checkbox" class="checkbox">4 to 6 lac</li>
+                                        <li value="6 to 8 lac"><input type="checkbox" class="checkbox">6 to 8 lac</li>
+                                        <li value="8 to 9 lac"><input type="checkbox" class="checkbox">8 to 9 lac</li>
+                                      </ul>
+                                    </div>
+                                  </div>
 
                             </li>
 
@@ -390,24 +468,24 @@
                                 </div>
                             </div>
                             <div class="col">
-                                <a [routerLink]="['/emp-action']">{{list.candidateData.name}}</a>
+                                <a [routerLink]="['/emp-action']" [queryParams]="{id:list.candidateData._id,job:list._id}">{{list.candidateData.name}}</a>
                             </div>
                             <div class="col">
-                                <a [routerLink]="['/emp-action']">{{list.candidateData.locationCurrent}}</a>
+                                <a [routerLink]="['/emp-action']" [queryParams]="{id:list.candidateData._id,job:list._id}">{{list.candidateData.locationCurrent}}</a>
                             </div>
                             <div class="col">
-                                <a [routerLink]="['/emp-action']">{{get_appliedcan_qualification(list)}}</a>
+                                <a [routerLink]="['/emp-action']" [queryParams]="{id:list.candidateData._id,job:list._id}">{{get_appliedcan_qualification(list)}}</a>
                             </div>
                             <div class="col" *ngIf="list.candidateData.workStatus == 'Experience'">
-                                <a [routerLink]="['/emp-action']">{{list.candidateData.currentctc}}</a>
+                                <a [routerLink]="['/emp-action']" [queryParams]="{id:list.candidateData._id,job:list._id}">{{list.candidateData.currentctc}}</a>
                             </div>
                             <div class="col" *ngIf="list.candidateData.workStatus == 'Fresher'">
-                                <a [routerLink]="['/emp-action']">{{list.candidateData.expectedctc}}</a>
+                                <a [routerLink]="['/emp-action']" [queryParams]="{id:list.candidateData._id,job:list._id}">{{list.candidateData.expectedctc}}</a>
                             </div>
                             <div class="col">
-                                <a [routerLink]="['/emp-action']">{{list.candidateData.experienceYear}}Year - {{list.candidateData.experienceMonth}}Months </a>
+                                <a [routerLink]="['/emp-action']" [queryParams]="{id:list.candidateData._id,job:list._id}">{{list.candidateData.experienceYear}}Year - {{list.candidateData.experienceMonth}}Months </a>
                             </div>
-                            <div class="col">
+                            <div class="col" [ngClass]="{'statusstyle': list.status == 'rejected'}">
                                 {{list.status}}
                             </div>
                         </div>

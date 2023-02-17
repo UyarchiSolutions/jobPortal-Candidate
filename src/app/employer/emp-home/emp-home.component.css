@@ -33,7 +33,7 @@
     width: 90%;
     margin-right: auto;
     margin-left: auto;
-    padding-bottom: 5px;
+    /* padding-bottom: 5px; */
     border-bottom: 1px solid rgba(10, 38, 71, 0.5);
 }
 
@@ -587,4 +587,46 @@ label{
 .draft{
     font-size: 10px;
     margin-left: 6px
+}
+.statusstyle{
+    color: #C11B17;
+    font-weight: 600;
+}
+.statusstyle1{
+    color: #1E90FF;
+    font-weight: 600;
+}
+.refineup :hover{
+    background-color: white;
+}
+.dropdown .show{
+    border: none;
+}
+.refine-content .search-box .dropdown .show{
+    background-color:white;
+    border: none;
+    color: #000;
+}
+.checkbox{
+margin-right: 13px;
+}
+.dropdown-toggle::after{
+    display: none !important;
+}
+.dropdown-toggle .fa{
+    margin-left: 77px;
+    font-weight:800;
+}
+.refhead{
+    padding-left: 14px;
+    font-weight: 500;
+    font-size: 14px;
+}
+.depart .dropdown-toggle .fa{
+    margin-left: 39px;
+    font-weight:800;
+}
+.de-data{
+    font-size: 12px;
+    font-weight: 500;
 }

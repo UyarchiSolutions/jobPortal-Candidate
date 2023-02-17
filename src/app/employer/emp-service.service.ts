@@ -62,6 +62,9 @@ get_category(id:any){
 get_role(id:any){
   return this.http.get(this.baseurl+'/v1/educationDetails/get_Role/' + id)
 }
+get_roles(count:any){
+  return this.http.get(this.baseurl+'/v1/educationDetails/get_Role_all/'+count)
+}
 save_search(data:any){
   return this.http.post(this.baseurl + "/v1/employerCandidateSearch/outSearchSave",data,{headers:{auth:Cookie.get('emptokens')}});
 
@@ -72,10 +75,9 @@ get_save_search(){
 change_status(id:any,data:any){
   return this.http.put(this.baseurl+'/v1/employerdetail/update_active_deactive/' + id,data)
 }
-get_candidate_details(id:any){
+get_candidate_details(id:any,jobid:any){
   console.log('id',id);
-  return this.http.get(this.baseurl+'/v1/candidateDetail/candidate_detials/' + id)
-
+  return this.http.get(this.baseurl+'/v1/candidateDetail/candidate_detials/' + id+ '/' +jobid)
 }
 get_job_detail(id:any){
   return this.http.get(this.baseurl+'/v1/employerdetail/getByIdEmpDetails/' + id)
@@ -153,5 +155,8 @@ get_courses(data:any){
 get_specialization(data:any){
   return this.http.post(this.baseurl+'/v1/educationdetails/get_all_specialization',data)
 
+}
+change_status_candidates(id:any,data:any){
+  return this.http.put(this.baseurl+'/v1/employerdetail/statusChange_employer/'+id,data)
 }
 }

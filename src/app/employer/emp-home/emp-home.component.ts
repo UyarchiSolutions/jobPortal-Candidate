@@ -64,6 +64,9 @@ export class EmpHomeComponent implements OnInit {
   data_list: any;
   createdAt: any;
   splitdata: any;
+  depart_data: any;
+  cat_data: any;
+  role_data: any;
   constructor(private empservice: EmpServiceService,private fb:FormBuilder, private router: Router,) { }
   is_viewpost : boolean = false;
   is_viewapplies : boolean = false;
@@ -76,6 +79,8 @@ export class EmpHomeComponent implements OnInit {
     this.get_save_search()
     this.get_course_list()
     this.get_folder_list()
+    this.get_depart()
+    this.cat()
   }
   getJobpostDetails(){
     this.empservice.myjobPost().subscribe((res:any)=>{
@@ -375,5 +380,18 @@ dispalye(data: any) {
   }
   this.searchForm.get('keyskills')?.setValue(value)
 
+}
+get_depart(){
+  this.empservice.get_department().subscribe((res:any) => {
+    console.log(res);
+    this.depart_data = res
+  })
+}
+cat(){
+  var count = 5;
+  this.empservice.get_roles(count).subscribe((res:any) => {
+    console.log(res);
+    this.role_data = res
+  })
 }
 }

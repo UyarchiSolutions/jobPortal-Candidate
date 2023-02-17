@@ -118,3 +118,16 @@ align-items: center;
 .content-box{
     justify-content: space-between;
 }
+.select-type{
+
+    color: #B4B4B4 !important;
+    font-size: 1rem;
+    font-weight: 500;
+}
+.send-drop{
+    background-color: #0A2647;
+}
+.drop-icon{
+    font-family: 'Lato', 'Font Awesome 5 Free';
+    font-weight: 900;
+}
