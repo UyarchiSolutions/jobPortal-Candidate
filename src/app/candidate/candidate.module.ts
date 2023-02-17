@@ -16,6 +16,9 @@ import { ApplymailjobsComponent } from './applymailjobs/applymailjobs.component'
 import { ViewFulldetailsComponent } from './view-fulldetails/view-fulldetails.component';
 import { JobpreviewPopupComponent } from './jobpreview-popup/jobpreview-popup.component';
 import { GetallcandidateProfileComponent } from './getallcandidate-profile/getallcandidate-profile.component';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { SafePipe } from './safe.pipe';
+import { CandidatechangepasswordComponent } from './candidatechangepassword/candidatechangepassword.component';
 
 
 
@@ -32,7 +35,9 @@ import { GetallcandidateProfileComponent } from './getallcandidate-profile/getal
     ApplymailjobsComponent,
     ViewFulldetailsComponent,
     JobpreviewPopupComponent,
-    GetallcandidateProfileComponent
+    GetallcandidateProfileComponent,
+    SafePipe,
+    CandidatechangepasswordComponent
   ],
   imports: [
     CommonModule,
@@ -40,7 +45,7 @@ import { GetallcandidateProfileComponent } from './getallcandidate-profile/getal
     ReactiveFormsModule,
     HttpClientModule,
     GooglePlaceModule,
-
+    NgxExtendedPdfViewerModule
   ]
 })
 export class CandidateModule { }

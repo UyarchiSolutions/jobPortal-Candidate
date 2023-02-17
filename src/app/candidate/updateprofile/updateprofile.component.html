@@ -39,7 +39,7 @@
                   <div class="single-row">
                     <label for="">DOB :</label>
                     <div class="content-box">
-                      <input type="Date" class="form-control" formControlName="dob" placeholder="Enter Key Skills">
+                      <input type="Date" [max]="now" class="form-control" formControlName="dob" placeholder="Enter Key Skills">
                     </div>
                   </div>
                   <div class="single-row">
@@ -53,8 +53,8 @@
                     <label></label>
                     <div class="content-box" style="background: white;">
                       <ul style="padding-left: 0px;">
-                        <li *ngFor="let skill of keySkill" style="cursor:pointer" (click)="checkSkill($event,skill)">
-                          <span>{{skill}}</span>
+                        <li *ngFor="let skill of keySkill" style="cursor:pointer" (click)="checkSkill($event,skill.Skill_Title)">
+                          <span>{{skill.Skill_Title}}</span>
                         </li>
                       </ul>
                     </div>

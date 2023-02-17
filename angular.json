@@ -66,6 +66,7 @@
             "production": {
               "browserTarget": "Jobportal:build:production"
             },
+
             "development": {
               "browserTarget": "Jobportal:build:development"
             }
