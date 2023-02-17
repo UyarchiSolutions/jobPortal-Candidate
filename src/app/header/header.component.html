@@ -51,35 +51,34 @@
       <button type="button" *ngIf="!idShow" class="btn btn-light m-3" routerLink="/canlogin">Login</button>
       <button type="button" *ngIf="!idShow" class="btn btn-warning" routerLink="/can-register">Register</button>
       <div class="dropdown" *ngIf="!idShow">
-        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <button class="btn dropdown-toggle" style="" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           For Employers
         </button>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="/login">Login</a></li>
           <li><a class="dropdown-item" href="/register">Register</a></li>
           <li><a class="dropdown-item" href="#">Buy Plan</a></li>
-          <!-- <div class="container top-header">
-            <div class="top-header-menu">
-              <p>TreaTJobs</p>
-              <p>JobBuzz</p>
-            </div>
-          </div> -->
         </ul>
       </div>
       <div *ngIf="idShow">
         <div class="nav-menu  col-3 ">
           <button type="button" class="btn  ms-5 register invisible">Register</button>
           <div class="dropdown" style="margin-right: 22%;">
-            <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn  dropdown-toggle icon" type="button" style="margin-right: 38px;width: 134px;" data-bs-toggle="dropdown" aria-expanded="false">
               {{userNAme}}
             </button>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item home" routerLink="/getAllprofile">My Profile</a></li>
               <li><a class="dropdown-item myplans">My Plan</a></li>
               <li><a class="dropdown-item upcominglive">UpComing live</a></li>
-              <li><a class="dropdown-item upcominglive">Change Password</a></li>
+              <li><a class="dropdown-item upcominglive" routerLink="/changePassword">Change Password</a></li>
               <li><a class="dropdown-item upcominglive" (click)="logOut()">Log Out</a></li>
             </ul>
+            <!-- <ul class="dropdown-menu"  *ngIf="logo">
+              <li><a class="dropdown-item home" routerLink="/canJobs">Home</a></li>
+              <li><a class="dropdown-item myplans">My Plan</a></li>
+              <li><a class="dropdown-item upcominglive">UpComing live</a></li>
+            </ul> -->
           </div>
         </div>
       </div>

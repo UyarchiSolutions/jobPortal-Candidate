@@ -153,11 +153,11 @@ export class CanGetComponent implements OnInit {
   }
   // search
   search() {
-    console.log(this.searchForm.get('search')?.valid)
+    console.log(this.searchForm.get('search')?.value)
     console.log(this.searchForm.get('location')?.valid)
     console.log(this.searchForm.get('experience')?.value)
     console.log(this.searchForm.get('searchbox')?.value, "value")
-    this.searchForm.get('search')?.setValue(this.searchForm.get('searchbox')?.value)
+    // this.searchForm.get('search')?.setValue(this.searchForm.get('searchbox')?.value)
     // if (this.searchForm.get('search')?.valid && this.searchForm.get('location')?.valid && this.searchForm.get('experience')?.valid) {
     this.get_allJobs();
     // }

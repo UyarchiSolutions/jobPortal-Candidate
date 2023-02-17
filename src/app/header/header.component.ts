@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { Cookie } from 'ng2-cookies';
 import { CanditService } from '../candit.service';
 
@@ -11,8 +11,17 @@ import { CanditService } from '../candit.service';
 export class HeaderComponent implements OnInit {
   idShow=false;
   userNAme:any;
+  logo=false
   constructor(private canditService:CanditService,private router:Router) {
-
+    // router.events.forEach((event:any) => {
+    //   if (event instanceof NavigationStart) {
+    //     if (event['url'] == '/getAllprofile') {
+    //      this.logo=true;
+    //     } else {
+    //       this.logo=false;
+    //     }
+    //   }
+    // });
    }
 
   ngOnInit() {
