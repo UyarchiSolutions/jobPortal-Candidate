@@ -151,7 +151,7 @@ export class EducationdetailsComponent implements OnInit {
     })
     delete data.Education;
     console.log(data)
-    this.candidate.eduction(this.userID, data).subscribe((res: any) => {
+    this.candidate.eduction(data).subscribe((res: any) => {
         this.router.navigate(['/can-proffesinal'],{queryParams:{id:this.userID}})
     })
   }

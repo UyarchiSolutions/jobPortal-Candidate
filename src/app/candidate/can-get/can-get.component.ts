@@ -47,6 +47,7 @@ export class CanGetComponent implements OnInit {
     SalaryTo: new FormControl(null, [Validators.required]),
     locationSet: new FormControl(null, [Validators.required]),
     searchalert: new FormControl(null),
+    update:new FormControl("advance details")
   })
   datavalues: any;
   jobs: any = [];
@@ -57,6 +58,7 @@ export class CanGetComponent implements OnInit {
   range: any = 5;
   roles: any = [];
   getLocation:any=[];
+  status:any='null';
   constructor(private canditSarvice: CanditateService, private fb: FormBuilder, private router: Router, private activateroute: ActivatedRoute) { }
 
 
@@ -117,9 +119,9 @@ location(){
   })
 }
   // redirect to employer details
-  apply(id: any) {
+  apply(id: any,tab:any) {
     console.log('workinf')
-    this.router.navigate(['/can-employ'], { queryParams: { id: id } })
+    this.router.navigate(['/can-employ'], { queryParams: { id: id,tab:tab }})
   }
   // get all jobs
   onClickJop() {
@@ -130,7 +132,7 @@ location(){
   onClickApplied() {
     console.log("bfhdfhdfb")
     this.tab = 2
-    this.canditSarvice.getAppliedJobs().subscribe((res: any) => {
+    this.canditSarvice.getAppliedJobs(this.status).subscribe((res: any) => {
       this.appliedJobs = res;
     })
   }
@@ -284,7 +286,7 @@ location(){
     }
   }
   setalert() {
-    this.canditSarvice.educationDetail(this.setAlertForm.value).subscribe((res: any) => {
+    this.canditSarvice.eduction(this.setAlertForm.value).subscribe((res: any) => {
       this.alert = false;
     })
   }

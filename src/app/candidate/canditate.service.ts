@@ -56,8 +56,8 @@ export class CanditateService {
     return this.http.post(this.baseUrl+`/v1/candidateDetail/createCandidateSavejob`,data,{headers:{auth:Cookie.get('tokens')}})
   }
   // get applied jobd
-  getAppliedJobs(){
-    return this.http.get(this.baseUrl+`/v1/candidateDetail/getByIdAppliedJobs`,{headers:{auth:Cookie.get('tokens')}})
+  getAppliedJobs(value:any){
+    return this.http.get(this.baseUrl+`/v1/candidateDetail/getByIdAppliedJobs/${value}`,{headers:{auth:Cookie.get('tokens')}})
   }
   // get saved
   getSavedJob(){
@@ -212,7 +212,7 @@ forgotPassword(id:any,data:any){
 getLocation(){
   return this.http.get(this.baseUrl+`/v1/district/getAllDistrict_all/all`)
 }
-eduction(id:any,data:any){
+eduction(data:any){
   return this.http.put(this.baseUrl+`/v1/candidateDetail/edit_details`,data,{headers:{auth:Cookie.get('tokens')}})
 }
 }

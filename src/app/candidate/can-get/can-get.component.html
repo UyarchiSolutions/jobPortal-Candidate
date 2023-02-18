@@ -175,7 +175,8 @@
                       Location<i class="fa fa-angle-down" style="margin-left: 78px;"></i>
                     </button>
                     <ul class="dropdown-menu filter" aria-labelledby="dropdownMenuButton1">
-                      <li *ngFor="let loc of getLocation"><input type="checkbox" value="{{loc.district}}" (change)="addLocation($event)">{{loc.district}}</li>
+                      <li *ngFor="let loc of getLocation"><input type="checkbox" value="{{loc.district}}"
+                          (change)="addLocation($event)">{{loc.district}}</li>
 
                     </ul>
                   </div>
@@ -190,17 +191,17 @@
                       Salary<i class="fa fa-angle-down" style="margin-left: 95px;"></i>
                     </button>
                     <ul class="dropdown-menu filter" aria-labelledby="dropdownMenuButton1">
-                        <li><input type="checkbox" value="0-1" (change)="salaryrange($event)">0 to 1 lac</li>
-                        <li><input type="checkbox" value="1-2" (change)="salaryrange($event)">1 to 2 lac</li>
-                        <li><input type="checkbox" value="2-3" (change)="salaryrange($event)">2 to 3 lac</li>
-                        <li><input type="checkbox" value="2-4" (change)="salaryrange($event)">3 to 4 lac</li>
-                        <li><input type="checkbox" value="4-5" (change)="salaryrange($event)">4 to 5 lac</li>
-                        <li><input type="checkbox" value="5-8" (change)="salaryrange($event)">5 to 8 lac</li>
-                        <li><input type="checkbox" value="8-10" (change)="salaryrange($event)">8 to 10 lac</li>
-                        <li><input type="checkbox" value="10-13" (change)="salaryrange($event)">10 to 13 lac</li>
-                        <li><input type="checkbox"  value="13-15" (change)="salaryrange($event)">13 to 15 lac</li>
-                        <li ><input type="checkbox" value="15-20" (change)="salaryrange($event)">15 to 20 lac</li>
-                        <li ><input type="checkbox" value="30-more" (change)="salaryrange($event)">30 lac+</li>
+                      <li><input type="checkbox" value="0-1" (change)="salaryrange($event)">0 to 1 lac</li>
+                      <li><input type="checkbox" value="1-2" (change)="salaryrange($event)">1 to 2 lac</li>
+                      <li><input type="checkbox" value="2-3" (change)="salaryrange($event)">2 to 3 lac</li>
+                      <li><input type="checkbox" value="2-4" (change)="salaryrange($event)">3 to 4 lac</li>
+                      <li><input type="checkbox" value="4-5" (change)="salaryrange($event)">4 to 5 lac</li>
+                      <li><input type="checkbox" value="5-8" (change)="salaryrange($event)">5 to 8 lac</li>
+                      <li><input type="checkbox" value="8-10" (change)="salaryrange($event)">8 to 10 lac</li>
+                      <li><input type="checkbox" value="10-13" (change)="salaryrange($event)">10 to 13 lac</li>
+                      <li><input type="checkbox" value="13-15" (change)="salaryrange($event)">13 to 15 lac</li>
+                      <li><input type="checkbox" value="15-20" (change)="salaryrange($event)">15 to 20 lac</li>
+                      <li><input type="checkbox" value="30-more" (change)="salaryrange($event)">30 lac+</li>
                     </ul>
                   </div>
                 </div>
@@ -495,9 +496,9 @@
               </div>
               <div class="col applied">
                 <div class="col" *ngIf="!job.appliedStatus">
-                  <a (click)="apply(job._id)">Apply Now </a>
+                  <a (click)="apply(job._id,tab)">Apply Now </a>
                 </div>
-                <a (click)="apply(job._id)"> <i *ngIf="job.appliedStatus == 'Applied'">
+                <a (click)="apply(job._id,tab)"> <i *ngIf="job.appliedStatus == 'Applied'">
                     <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M6 12.5C2.6862 12.5 0 9.8138 0 6.5C0 3.1862 2.6862 0.5 6 0.5C9.3138 0.5 12 3.1862 12 6.5C12 9.8138 9.3138 12.5 6 12.5ZM6 11.3C7.27304 11.3 8.49394 10.7943 9.39411 9.89411C10.2943 8.99394 10.8 7.77304 10.8 6.5C10.8 5.22696 10.2943 4.00606 9.39411 3.10589C8.49394 2.20571 7.27304 1.7 6 1.7C4.72696 1.7 3.50606 2.20571 2.60589 3.10589C1.70571 4.00606 1.2 5.22696 1.2 6.5C1.2 7.77304 1.70571 8.99394 2.60589 9.89411C3.50606 10.7943 4.72696 11.3 6 11.3ZM5.4018 8.9L2.856 6.3542L3.7044 5.5058L5.4018 7.2032L8.7954 3.809L9.6444 4.6574L5.4018 8.9Z"
@@ -539,7 +540,7 @@
           </div>
           <!-- Applied jobs -->
           <div *ngIf="tab == 2">
-            <div class="row content-card-heading no-margin padding10">
+            <div class="row content-card-heading  padding10">
               <div class="col">
                 <!-- <i class='fas fa-sort-amount-down'></i> -->
                 Company
@@ -566,13 +567,23 @@
               </div>
               <div class="col">
                 <!-- <i class='fas fa-sort-amount-down'></i> -->
-                Sortby<i class="ms-1"><svg width="10" height="5" viewBox="0 0 10 5" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                      d="M4.9106 3.4494L1.2895 0.343127C0.994494 0.0900649 0.516198 0.0900649 0.221195 0.343127C-0.0738086 0.596188 -0.0738086 1.00648 0.221195 1.25954L4.35454 4.80523C4.47775 4.91093 4.63293 4.97247 4.79337 4.98988C5.02833 5.02584 5.27931 4.96595 5.46087 4.8102L9.77875 1.10621C10.0738 0.853151 10.0738 0.442857 9.77875 0.189795C9.48374 -0.0632663 9.00545 -0.0632658 8.71045 0.189795L4.9106 3.4494Z"
-                      fill="white" />
-                  </svg>
-                </i>
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false" style="background: transparent;padding:unset;border: none;font-size: 12px;">
+                    Sortby<i class="ms-1"><svg width="10" height="5" viewBox="0 0 10 5" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M4.9106 3.4494L1.2895 0.343127C0.994494 0.0900649 0.516198 0.0900649 0.221195 0.343127C-0.0738086 0.596188 -0.0738086 1.00648 0.221195 1.25954L4.35454 4.80523C4.47775 4.91093 4.63293 4.97247 4.79337 4.98988C5.02833 5.02584 5.27931 4.96595 5.46087 4.8102L9.77875 1.10621C10.0738 0.853151 10.0738 0.442857 9.77875 0.189795C9.48374 -0.0632663 9.00545 -0.0632658 8.71045 0.189795L4.9106 3.4494Z"
+                          fill="white" />
+                      </svg>
+                    </i>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+                </div>
               </div>
             </div>
             <div class="row content-card no-margin padding10 main-content" *ngFor="let appli of appliedJobs">
@@ -596,7 +607,7 @@
                 {{appli.appliedDate | date:'dd-MM-yyyy'}}
               </div>
               <div class="col applied">
-                <a style="cursor: pointer;" (click)="apply(appli.jodId)"><i><svg
+                <a style="cursor: pointer;" (click)="apply(appli.jodId,tab)"><i><svg
                       *ngIf="appli.approvedStatus == 'Applied'" width="12" height="13" viewBox="0 0 12 13" fill="none"
                       xmlns="http://www.w3.org/2000/svg">
                       <path
@@ -638,7 +649,7 @@
           </div>
           <!-- saved jobs -->
           <div *ngIf="tab == 3">
-            <div class="row content-card-heading no-margin padding10">
+            <div class="row content-card-heading padding10">
               <div class="col">
                 <!-- <i class='fas fa-sort-amount-down'></i> -->
                 Company
@@ -689,8 +700,8 @@
                 {{save.date}}
               </div>
               <div class="col applied">
-                <a (click)="apply(save.jobId)"><i><svg *ngIf="save.approvedStatus == 'Applied'" width="12" height="13"
-                      viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <a (click)="apply(save.jobId,tab)"><i><svg *ngIf="save.approvedStatus == 'Applied'" width="12"
+                      height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M6 12.5C2.6862 12.5 0 9.8138 0 6.5C0 3.1862 2.6862 0.5 6 0.5C9.3138 0.5 12 3.1862 12 6.5C12 9.8138 9.3138 12.5 6 12.5ZM6 11.3C7.27304 11.3 8.49394 10.7943 9.39411 9.89411C10.2943 8.99394 10.8 7.77304 10.8 6.5C10.8 5.22696 10.2943 4.00606 9.39411 3.10589C8.49394 2.20571 7.27304 1.7 6 1.7C4.72696 1.7 3.50606 2.20571 2.60589 3.10589C1.70571 4.00606 1.2 5.22696 1.2 6.5C1.2 7.77304 1.70571 8.99394 2.60589 9.89411C3.50606 10.7943 4.72696 11.3 6 11.3ZM5.4018 8.9L2.856 6.3542L3.7044 5.5058L5.4018 7.2032L8.7954 3.809L9.6444 4.6574L5.4018 8.9Z"
                         fill="white" />
@@ -744,8 +755,8 @@
                   <div class="content-box alertkeylist" style="background: white;">
                     <ul class="alertskill" style="padding-left: 0px;" class="">
                       <li class="ilkeylist" style="cursor: pointer;" *ngFor="let skill of keySkill"
-                        (click)="alretcheckSkill($event,skill)">
-                        <span>{{skill}}</span>
+                        (click)="alretcheckSkill($event,skill.Skill_Title)">
+                        <span>{{skill.Skill_Title}}</span>
                       </li>
                     </ul>
                   </div>
@@ -870,7 +881,7 @@
                   Status
                 </div>
               </div>
-              <div class="row content-card no-margin padding10 main-content" *ngFor="let alert of getAllalerts">
+              <div class="row content-card padding10 main-content" *ngFor="let alert of getAllalerts">
                 <div class="col">
                   {{alert.name}}
                 </div>
@@ -890,7 +901,42 @@
                   {{alert.date}}
                 </div>
                 <div class="col">
-                  <a (click)="apply(alert.jobId)">Apply Now </a>
+                  <a (click)="apply(alert._id,tab)"> <i *ngIf="alert.appliedStatus == 'Applied'">
+                      <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M6 12.5C2.6862 12.5 0 9.8138 0 6.5C0 3.1862 2.6862 0.5 6 0.5C9.3138 0.5 12 3.1862 12 6.5C12 9.8138 9.3138 12.5 6 12.5ZM6 11.3C7.27304 11.3 8.49394 10.7943 9.39411 9.89411C10.2943 8.99394 10.8 7.77304 10.8 6.5C10.8 5.22696 10.2943 4.00606 9.39411 3.10589C8.49394 2.20571 7.27304 1.7 6 1.7C4.72696 1.7 3.50606 2.20571 2.60589 3.10589C1.70571 4.00606 1.2 5.22696 1.2 6.5C1.2 7.77304 1.70571 8.99394 2.60589 9.89411C3.50606 10.7943 4.72696 11.3 6 11.3ZM5.4018 8.9L2.856 6.3542L3.7044 5.5058L5.4018 7.2032L8.7954 3.809L9.6444 4.6574L5.4018 8.9Z"
+                          fill="white" />
+                      </svg></i>
+                    <i> <svg *ngIf="alert.appliedStatus == 'shortlisted'" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_871_2584)">
+                          <path
+                            d="M20.8889 23.2222H3.11111C2.81643 23.2222 2.53381 23.1052 2.32544 22.8968C2.11706 22.6884 2 22.4058 2 22.1111V2.11111C2 1.81643 2.11706 1.53381 2.32544 1.32544C2.53381 1.11706 2.81643 1 3.11111 1H20.8889C21.1836 1 21.4662 1.11706 21.6746 1.32544C21.8829 1.53381 22 1.81643 22 2.11111V22.1111C22 22.4058 21.8829 22.6884 21.6746 22.8968C21.4662 23.1052 21.1836 23.2222 20.8889 23.2222ZM19.7778 21V3.22222H4.22222V21H19.7778ZM7.55556 6.55556H16.4444V8.77778H7.55556V6.55556ZM7.55556 11H16.4444V13.2222H7.55556V11ZM7.55556 15.4444H13.1111V17.6667H7.55556V15.4444Z"
+                            fill="#1877F2" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_871_2584">
+                            <rect width="24" height="24" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+
+                    </i>
+                    <i *ngIf="alert.appliedStatus == 'rejected'">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_871_2590)">
+                          <path
+                            d="M12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22ZM12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20ZM12 10.586L14.828 7.757L16.243 9.172L13.414 12L16.243 14.828L14.828 16.243L12 13.414L9.172 16.243L7.757 14.828L10.586 12L7.757 9.172L9.172 7.757L12 10.586Z"
+                            fill="#FF0000" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_871_2590">
+                            <rect width="24" height="24" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+
+                    </i><span style="margin-left: 2px;">{{alert.appliedStatus}}</span></a>
                 </div>
               </div>
             </div>
@@ -947,14 +993,34 @@
           </div>
           <div class="row content-card-footer no-margin padding10" *ngIf="tab != 4">
             <div class="col">
-              <div class="footer-menu">
-                <div class="pageination-logo">
-                  <img src="../../assets/image/left-arrow.png" alt="" class="p-left">
-                  <div class="pageination-number">1</div>
-                  <img src="../../assets/image/right-arrow.png" alt="" class="p-right">
-                </div>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col">
+              <div class="pageination-logo">
+                <img src="../../assets/image/left-arrow.png" alt="" class="p-left">
+                <div class="pageination-number">1</div>
+                <img src="../../assets/image/right-arrow.png" alt="" class="p-right">
               </div>
             </div>
+            <div class="col">
+            </div>
+            <div class="col" style="color: black;">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle range" type="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <i class='fas fa-sort-amount-down'></i> Range
+                </button>
+                <ul class="dropdown-menu">
+                  <li>10</li>
+                  <li>20</li>
+                  <li>40</li>
+                  <li>60</li>
+                  <li>80</li>
+                </ul>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

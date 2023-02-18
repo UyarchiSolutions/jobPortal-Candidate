@@ -81,28 +81,35 @@
                                 d="M9.51599 7.90035C10.9714 7.30205 11.9961 5.8703 11.9961 4.19922C11.9961 1.99008 10.2052 0.199219 7.99609 0.199219C5.78695 0.199219 3.99609 1.99008 3.99609 4.19922C3.99609 5.87045 5.02102 7.30231 6.47659 7.90051C3.23025 8.35175 0.796875 10.3197 0.796875 14.0978C0.796875 17.6273 2.92041 17.5022 5.8465 17.3299C6.52557 17.2899 7.24787 17.2473 7.99687 17.2473C8.74588 17.2473 9.46818 17.2899 10.1472 17.3299C13.0733 17.5022 15.1969 17.6273 15.1969 14.0978C15.1969 10.3192 12.7629 8.35127 9.51599 7.90035Z"
                                 fill="#8493A3" />
                             </svg>
-                          </i></span> {{job.openings}}</div>
+                          </i></span>Hiring {{job.openings}} Candidates</div>
+                      <div style="width: 250%;">
+                        <span>Walk In: From{{job.interviewstartDate | date:'dd-MM-YYYY'}} To
+                          {{job.interviewendDate | date:'dd-MM-YYYY'}},{{job.startTime}} to {{job.endTime}}</span>
+                      </div>
 
                     </div>
 
                     <div class="card-job-content-data col-6">
-                      <div>{{job.openings}} </div>
+                      <div> {{job.openings}} </div>
                       <div>{{job.experienceFrom}} to {{job.experienceTo}} </div>
                       <div>{{job.date}}</div>
+
                     </div>
+
                   </div>
                 </div>
 
                 <div class="col-4 ">
                   <div class="d-flex align-items-start">
                     <img src="../../assets/image/Google-Icon.jpg" width="80px">
-                    <button style="border: none;background-color: transparent;" (click)="saveJob(job._id)" disabled="job.saveButton == true"><i class="ms-5"><svg width="20" height="20" viewBox="0 0 30 30" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path
-                          d="M15 24.5439L5.73031 30L7.80032 19.0437L0 11.4594L10.5498 10.1437L15 0L19.4502 10.1437L30 11.4594L22.1997 19.0437L24.2697 30L15 24.5439ZM15 21.3765L20.5818 24.6614L19.3345 18.0652L24.0305 13.4978L17.6785 12.7059L15 6.59895L12.3215 12.7073L5.96951 13.4978L10.6655 18.0652L9.41821 24.6614L15 21.3765Z"
-                          fill="#8493A3" />
-                      </svg>
-                    </i></button>
+                    <button style="border: none;background-color: transparent;cursor: pointer;" (click)="saveJob(job._id)"
+                      [disabled]="job.saveButton == true"><i class="ms-5"><svg width="20" height="20" viewBox="0 0 30 30"
+                          fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M15 24.5439L5.73031 30L7.80032 19.0437L0 11.4594L10.5498 10.1437L15 0L19.4502 10.1437L30 11.4594L22.1997 19.0437L24.2697 30L15 24.5439ZM15 21.3765L20.5818 24.6614L19.3345 18.0652L24.0305 13.4978L17.6785 12.7059L15 6.59895L12.3215 12.7073L5.96951 13.4978L10.6655 18.0652L9.41821 24.6614L15 21.3765Z"
+                            fill="#8493A3" />
+                        </svg>
+                      </i></button>
                     <i class="ms-4"><svg width="20" height="21" viewBox="0 0 30 31" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -114,11 +121,11 @@
                   <button *ngIf="job.interviewType !='walk in'" class="btn mt-5 px-5"
                     [disabled]="job.candidatesubmitButton == true"
                     ngClass="{{job.candidatesubmitButton == true ? 'applied':'btn-brand-blue '}}"
-                    (click)="apply(job._id)">{{job.candidatesubmitButton == true ?'Applied' :'Apply Now'}}</button>
+                    (click)="apply(job._id)">{{!job.appliedStatus?'apply': job.appliedStatus}}</button>
                   <button *ngIf="job.interviewType =='walk in'" class="btn mt-5 px-5"
                     [disabled]="job.candidatesubmitButton == true"
                     ngClass="{{job.candidatesubmitButton == true ? 'applied':'btn-brand-blue '}}"
-                    (click)="apply(job._id)">{{job.candidatesubmitButton == true ?'Interested' :'Im Interest'}}</button>
+                    (click)="apply(job._id)">{{!job.appliedStatus?'Im intrest':job.appliedStatus}}</button>
                 </div>
 
               </div>
@@ -224,7 +231,7 @@
               <div class="col-10 mt-2">
                 <div class="col-12 d-flex mb-2">
                   <label class="col-4" style="font-weight: 500;">Website :</label>
-                  <a  class="awebsite" href="{{job.urltoApply}}" class="col-8">{{job.urltoApply}}</a>
+                  <a class="awebsite" href="{{job.urltoApply}}" class="col-8">{{job.urltoApply}}</a>
                 </div>
                 <div class=" col-12 d-flex">
                   <label class="col-4 " style="font-weight: 500;">About Company</label>

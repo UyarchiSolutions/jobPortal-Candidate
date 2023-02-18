@@ -556,3 +556,8 @@ h3 {
   margin-right: 5px;
 
 }
+.range{
+  border: none;
+  background: transparent;
+  color: black;
+}
