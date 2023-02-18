@@ -54,8 +54,9 @@ export class GetallcandidateProfileComponent implements OnInit {
   uploadfile() {
     this.tab = 5;
   }
+
   editAdvance_det() {
-    this.router.navigate(['/updateProfile'])
+    this.router.navigate(['/updateProfile'],{queryParams:{tab:"0"}})
   }
   editedu() {
     this.router.navigate(['/can-edu'])
@@ -142,5 +143,20 @@ export class GetallcandidateProfileComponent implements OnInit {
   }
   changePassword(){
     this.router.navigate(['/changePassword'])
+  }
+  isChecked(lang:any){
+    let value=false
+    console.log(lang,"lahdksd")
+    if(lang=='Speck'){
+
+      value =true
+
+    }
+    return value;
+  }
+  deactivate(){
+    this.candidateservice.deactivate().subscribe((res:any) => {
+      this.router.navigate(['/canlogin'])
+    })
   }
 }

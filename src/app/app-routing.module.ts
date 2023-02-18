@@ -19,6 +19,9 @@ import { ViewFulldetailsComponent } from './candidate/view-fulldetails/view-full
 import { JobpreviewPopupComponent } from './candidate/jobpreview-popup/jobpreview-popup.component';
 import { GetallcandidateProfileComponent } from './candidate/getallcandidate-profile/getallcandidate-profile.component';
 import { CandidatechangepasswordComponent } from './candidate/candidatechangepassword/candidatechangepassword.component';
+import { ForgotpasswordComponent } from './candidate/forgotpassword/forgotpassword.component';
+import { SendotpforgotComponent } from './candidate/sendotpforgot/sendotpforgot.component';
+import { NewpasswordComponent } from './candidate/newpassword/newpassword.component';
 
 const routes: Routes = [
    {path:"",component:CanHomeComponent},
@@ -42,6 +45,7 @@ const routes: Routes = [
    {path: 'add-recruiter',loadChildren: () => import('./employer/add-recruiter/add-recruiter.module').then(m => m.AddRecruiterModule) },
    {path: 'manage-recruiter',loadChildren: () => import('./employer/manage-recruiter/manage-recruiter.module').then(m => m.ManageRecruiterModule) },
    {path: 'edit-recruiter',loadChildren: () => import('./employer/edit-recruiter/edit-recruiter.module').then(m => m.EditRecruiterModule) },
+   {path: 'edit-jobpost',loadChildren: () => import('./employer/edit-jobpost/edit-jobpost.module').then(m => m.EditJobpostModule) },
 
 
 
@@ -59,7 +63,10 @@ const routes: Routes = [
     {path:"viewprofile",component:ViewFulldetailsComponent},
     {path:'mail-details',component:JobpreviewPopupComponent},
     {path:'getAllprofile',component:GetallcandidateProfileComponent},
-    {path:'changePassword',component:CandidatechangepasswordComponent}
+    {path:'changePassword',component:CandidatechangepasswordComponent},
+    {path:'forgotpassword',component:ForgotpasswordComponent},
+    {path:'sendOtp',component:SendotpforgotComponent},
+    {path:'newPAss',component:NewpasswordComponent}
 ];
 
 @NgModule({

@@ -23,6 +23,8 @@ import { SavedSearchComponent } from './saved-search/saved-search.component';
 import { AddRecruiterComponent } from './add-recruiter/add-recruiter.component';
 import { ManageRecruiterComponent } from './manage-recruiter/manage-recruiter.component';
 import { EditRecruiterComponent } from './edit-recruiter/edit-recruiter.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { EditJobpostComponent } from './edit-jobpost/edit-jobpost.component';
 
 
 
@@ -34,6 +36,8 @@ import { EditRecruiterComponent } from './edit-recruiter/edit-recruiter.componen
     CheckEmailComponent,
     VerifyOtpComponent,
     EmpCansearchComponent,
+    ChangePasswordComponent,
+    
     
     
     

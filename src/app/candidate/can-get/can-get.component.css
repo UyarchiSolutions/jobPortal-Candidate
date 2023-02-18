@@ -495,7 +495,8 @@ h3 {
   border: none;
   color: black;
 }
-.salarybtn{
+
+.salarybtn {
   background: transparent;
   border: none;
   color: black;
@@ -503,18 +504,21 @@ h3 {
   font-weight: 500;
   font-size: 14px;
 }
+
 .dropdown-toggle::after {
   display: none;
 }
-.fa-angle-down{
+
+.fa-angle-down {
   font-size: 17px;
   font-weight: 700;
 }
+
 /* .over{
   overflow: scroll;
   height: 50%;
 } */
-.refineSearch{
+.refineSearch {
   height: 500%;
   overflow: scroll;
 }
@@ -536,4 +540,19 @@ h3 {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.filter {
+  background-color: white;
+}
+
+.filter li {
+  margin: 4px;
+  /* width: 372px; */
+
+}
+
+.filter li input[type="checkbox"] {
+  margin-right: 5px;
+
 }

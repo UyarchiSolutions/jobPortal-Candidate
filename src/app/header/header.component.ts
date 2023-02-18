@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { Cookie } from 'ng2-cookies';
 import { CanditService } from '../candit.service';
 import { EmpServiceService } from '../employer/emp-service.service';
@@ -13,12 +13,16 @@ export class HeaderComponent implements OnInit {
   idShow=false;
   empshow = false;
   userNAme:any;
+  logo=false
+  empusername: any;
+
   constructor(private canditService:CanditService,private router:Router,private empservice: EmpServiceService) {
 
-   }
+  }
 
   ngOnInit() {
    this.userNAme =  localStorage.getItem('name')
+   this.empusername =  localStorage.getItem('empname')
    if(!Cookie.get('tokens')){
     this.idShow=false;
     }else{
@@ -49,11 +53,22 @@ export class HeaderComponent implements OnInit {
       console.log(res,"sdslkdlksnfjksnfjkn")
       this.userNAme=res
     })
+
+    this.empservice.name.subscribe((res:any) => {
+      console.log(res,"sdslkdlksnfjksnfjkn")
+      this.empusername=res
+    })
   }
   logOut(){
     Cookie.deleteAll();
     localStorage.clear()
    this.router.navigate(['/canlogin'])
    this.idShow=false;
+  }
+  emplogOut(){
+    Cookie.deleteAll();
+    localStorage.clear()
+   this.router.navigate(['/login'])
+   this.empshow=false;
   }
 }

@@ -43,4 +43,7 @@ export class CanLoginComponent implements OnInit {
     let expires: string = `expires=${d.toUTCString()}`;
     document.cookie = `tokens=${token}; ${expires}`;
   }
+  for(){
+    this.router.navigate(['/forgotpassword'])
+  }
 }
