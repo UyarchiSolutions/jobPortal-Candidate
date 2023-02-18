@@ -110,7 +110,7 @@ a {
 .icon::before {
   background-color: red;
   background-image: url(../../assets/image/profile.png);
-
+  /* margin-left: 100px; */
 }
 
 .dropdown-toggle1::before {

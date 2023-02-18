@@ -19,6 +19,9 @@ import { GetallcandidateProfileComponent } from './getallcandidate-profile/getal
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { SafePipe } from './safe.pipe';
 import { CandidatechangepasswordComponent } from './candidatechangepassword/candidatechangepassword.component';
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { SendotpforgotComponent } from './sendotpforgot/sendotpforgot.component';
+import { NewpasswordComponent } from './newpassword/newpassword.component';
 
 
 
@@ -37,7 +40,10 @@ import { CandidatechangepasswordComponent } from './candidatechangepassword/cand
     JobpreviewPopupComponent,
     GetallcandidateProfileComponent,
     SafePipe,
-    CandidatechangepasswordComponent
+    CandidatechangepasswordComponent,
+    ForgotpasswordComponent,
+    SendotpforgotComponent,
+    NewpasswordComponent
   ],
   imports: [
     CommonModule,

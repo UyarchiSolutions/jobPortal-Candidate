@@ -19,21 +19,20 @@ export class CanGetComponent implements OnInit {
   getAllalerts: any = [];
   getAllNotification: any = [];
   searchForm: any = this.fb.group({
-    experience: new FormControl(null, [Validators.required]),
-    search: new FormControl([], [Validators.required]),
+    search: new FormControl([]),
+    experience: new FormControl(null),
     experienceAnotherfrom: new FormControl(null),
     experienceAnotherto: new FormControl(null),
-    location: new FormControl(null, [Validators.required]),
-    preferredindustry: new FormControl(null),
-    salary: new FormControl(null),
-    workmode: new FormControl(null),
-    education: new FormControl(null),
-    salaryfilter: new FormControl(null),
-    role: new FormControl(null),
-    freshness: new FormControl(null),
-    locationfilter: new FormControl(null),
-    companytype: new FormControl(null),
-    postedby: new FormControl(null),
+    Location: new FormControl([]),
+    workmode: new FormControl([]),
+    department: new FormControl([]),
+    education: new FormControl([]),
+    role: new FormControl([]),
+    freshness: new FormControl([]),
+    companytype: new FormControl([]),
+    postedby: new FormControl([]),
+    preferredIndustry: new FormControl([]),
+    Salary: new FormControl([]),
     searchbox: new FormControl(null),
   })
   setAlertForm: any = this.fb.group({
@@ -55,26 +54,19 @@ export class CanGetComponent implements OnInit {
   industry: any = [];
   currentDepartment: any = [];
   course: any = [];
+  range: any = 5;
+  roles: any = [];
+
   constructor(private canditSarvice: CanditateService, private fb: FormBuilder, private router: Router, private activateroute: ActivatedRoute) { }
 
 
   ngOnInit() {
-
     this.recentSearch();
-    this.getSaveData();
-    this.getCourse()
-    this.canditSarvice.currentIndustry().subscribe((res: any) => {
-      this.industry = res;
-    })
-    this.canditSarvice.currentDepartment().subscribe((res: any) => {
-      this.currentDepartment = res;
-    })
     this.activateroute.queryParams.subscribe((res: any) => {
       if (res.tab) {
         this.tab = res.tab;
-        this. notification();
+        this.notification();
       }
-
       this.searchForm.patchValue({
         searchbox: res.search,
         location: res.location,
@@ -82,18 +74,42 @@ export class CanGetComponent implements OnInit {
       })
     })
     this.get_allJobs();
+    this.role(this.range);
+    this.getDeparment(this.range);
+    this.getEducation(this.range);
+    this.getIndustry(this.range)
   }
   get_allJobs() {
+    console.log(this.searchForm.value, "gfghgh")
     this.canditSarvice.getAlldetails(this.searchForm.value).subscribe((res: any) => {
       this.jobs = res;
       this.recentSearch();
     })
   }
-  getCourse() {
-    this.canditSarvice.courseAll().subscribe((res: any) => {
+  // get department
+  getDeparment(range: any) {
+    this.canditSarvice.getlimitDepartment(range).subscribe((res: any) => {
+      this.currentDepartment = res
+    })
+  }
+  // get Role
+  role(range: any) {
+    this.canditSarvice.getlimitRole(range).subscribe((res: any) => {
+      this.roles = res;
+    })
+  }
+  // get eduction
+  getEducation(range: any) {
+    this.canditSarvice.getlimitEducation(range).subscribe((res: any) => {
       this.course = res;
     })
   }
+  getIndustry(range: any) {
+    this.canditSarvice.getlimitIndustry(range).subscribe((res: any) => {
+      this.industry = res
+    })
+  }
+
   postedTime(time: any) {
     let date_1 = new Date(time);
     let date_2 = new Date();
@@ -187,7 +203,7 @@ export class CanGetComponent implements OnInit {
     })
   }
   checkSkill(event: any, skill: any) {
-    this.isDisplay=false;
+    this.isDisplay = false;
     let index: any = this.searchForm.get('search')?.value;
     console.log(index, "gfg")
     if (index.length != 0) {
@@ -211,7 +227,8 @@ export class CanGetComponent implements OnInit {
       this.searchForm.patchValue({
         location: res.location,
         experience: res.experience,
-        searchbox: res.search
+        searchbox: res.search,
+        search: res.search,
       })
       // this.datavalues = res.search
     })
@@ -353,7 +370,24 @@ export class CanGetComponent implements OnInit {
   }
   // check company type
   companyType(event: any) {
-
+    const data: any = this.searchForm.get('companytype')?.value;
+    if (event.target.checked) {
+      data.push((event.target.value))
+      this.searchForm.get('companytype')?.setValue(data)
+      console.log(this.searchForm.get('companytype')?.value, "values")
+    } else {
+      console.log("items")
+      let i: number = 0;
+      data.forEach((item: any) => {
+        console.log(item, "items")
+        if (item == event.target.value) {
+          data.splice(i, 1);
+          return;
+        }
+        i++;
+      });
+    }
+    this.get_allJobs();
   }
   // salaryrange
   salaryrange(event: any) {
@@ -364,7 +398,120 @@ export class CanGetComponent implements OnInit {
 
   }
   EductionDetails(event: any) {
+    const data: any = this.searchForm.get('education')?.value;
+    if (event.target.checked) {
+      data.push((event.target.value))
+    } else {
+      let i: number = 0;
+      data.forEach((item: any) => {
+        console.log(item, "items")
+        if (item == event.target.value) {
+          data.splice(i, 1);
+          return;
+        }
+        i++;
+      });
+    }
+    this.get_allJobs();
+  }
+  changeWorkmode(event: any) {
+    const data: any = this.searchForm.get('workmode')?.value;
 
+    if (event.target.checked) {
+      data.push((event.target.value))
+      this.searchForm.get('workmode')?.setValue(data)
+      console.log(this.searchForm.get('workmode')?.value, "values")
+    } else {
+      console.log("items")
+      let i: number = 0;
+      data.forEach((item: any) => {
+        console.log(item, "items")
+        if (item == event.target.value) {
+          data.splice(i, 1);
+          return;
+        }
+        i++;
+      });
+    }
+    this.get_allJobs();
+  }
+  experienceTo(experience: any) {
+    this.searchForm.get('experienceAnotherto')?.setValue(experience.target.value);
+    this.get_allJobs();
+  }
+  experienceFrom(exp: any) {
+    this.searchForm.get('experienceAnotherfrom')?.setValue(exp.target.value);
+    this.get_allJobs();
+  }
+  depatmentFilter(event: any) {
+    const data: any = this.searchForm.get('department')?.value;
+    if (event.target.checked) {
+      data.push((event.target.value))
+    } else {
+      console.log("items")
+      let i: number = 0;
+      data.forEach((item: any) => {
+        console.log(item, "items")
+        if (item == event.target.value) {
+          data.splice(i, 1);
+          return;
+        }
+        i++;
+      });
+    }
+    this.get_allJobs();
+  }
+  roleChange(event: any) {
+    const data: any = this.searchForm.get('role')?.value;
+    if (event.target.checked) {
+      data.push((event.target.value))
+    } else {
+      console.log("items")
+      let i: number = 0;
+      data.forEach((item: any) => {
+        console.log(item, "items")
+        if (item == event.target.value) {
+          data.splice(i, 1);
+          return;
+        }
+        i++;
+      });
+    }
+    this.get_allJobs();
+  }
+  industryBy(event: any) {
+    const data: any = this.searchForm.get('preferredIndustry')?.value;
+    if (event.target.checked) {
+      data.push((event.target.value))
+    } else {
+      console.log("items")
+      let i: number = 0;
+      data.forEach((item: any) => {
+        console.log(item, "items")
+        if (item == event.target.value) {
+          data.splice(i, 1);
+          return;
+        }
+        i++;
+      });
+    }
+    this.get_allJobs();
+  }
+  freshness(event: any) {
+    const data: any = this.searchForm.get('freshness')?.value;
+    if (event.target.checked) {
+      data.push((event.target.value))
+    } else {
+      let i: number = 0;
+      data.forEach((item: any) => {
+        if (item == event.target.value) {
+          data.splice(i, 1);
+          return;
+        }
+        i++;
+      });
+    }
+    this.get_allJobs();
   }
 }
 

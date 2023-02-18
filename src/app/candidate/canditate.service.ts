@@ -176,4 +176,32 @@ export class CanditateService {
 changePassword(data:any){
   return this.http.post(this.baseUrl+`/v1/candidateRegistration/change_pass`,data,{headers:{auth:Cookie.get('tokens')}})
 }
+// get Role
+getlimitRole(range:any){
+  return this.http.get(this.baseUrl+`/v1/educationDetails/get_Role_all/${range}`)
+}
+// get deparment
+getlimitDepartment(range:any){
+  return this.http.get(this.baseUrl+`/v1/educationDetails/get_Department_all/${range}`)
+}
+// get eduction
+getlimitEducation(range:any){
+  return this.http.get(this.baseUrl+`/v1/educationDetails/get_alleducation_all/${range}`)
+}
+// get industry
+getlimitIndustry(range:any){
+  return this.http.get(this.baseUrl+`/v1/educationDetails/get_Industries_all/${range}`)
+}
+// deactive profile
+deactivate(){
+  return this.http.get(this.baseUrl+`/v1/candidateRegistration/deactivate`,{headers:{auth:Cookie.get('tokens')}})
+}
+// forgotPassword
+sendmodile(data:any){
+  return this.http.post(this.baseUrl+`/v1/candidateRegistration/forget_password`,data)
+}
+// otp
+sendOTp(data:any){
+  return this.http.post(this.baseUrl+`/v1/candidateRegistration/forget_password_Otp`,data)
+}
 }

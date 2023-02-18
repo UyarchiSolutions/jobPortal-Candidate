@@ -19,6 +19,9 @@ import { ViewFulldetailsComponent } from './candidate/view-fulldetails/view-full
 import { JobpreviewPopupComponent } from './candidate/jobpreview-popup/jobpreview-popup.component';
 import { GetallcandidateProfileComponent } from './candidate/getallcandidate-profile/getallcandidate-profile.component';
 import { CandidatechangepasswordComponent } from './candidate/candidatechangepassword/candidatechangepassword.component';
+import { ForgotpasswordComponent } from './candidate/forgotpassword/forgotpassword.component';
+import { SendotpforgotComponent } from './candidate/sendotpforgot/sendotpforgot.component';
+import { NewpasswordComponent } from './candidate/newpassword/newpassword.component';
 
 const routes: Routes = [
    {path:"",component:CanHomeComponent},
@@ -59,7 +62,10 @@ const routes: Routes = [
     {path:"viewprofile",component:ViewFulldetailsComponent},
     {path:'mail-details',component:JobpreviewPopupComponent},
     {path:'getAllprofile',component:GetallcandidateProfileComponent},
-    {path:'changePassword',component:CandidatechangepasswordComponent}
+    {path:'changePassword',component:CandidatechangepasswordComponent},
+    {path:'forgotpassword',component:ForgotpasswordComponent},
+    {path:'sendOtp',component:SendotpforgotComponent},
+    {path:'newPAss',component:NewpasswordComponent}
 ];
 
 @NgModule({

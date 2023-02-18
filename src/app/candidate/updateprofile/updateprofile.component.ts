@@ -44,8 +44,8 @@ export class UpdateprofileComponent implements OnInit {
       this.lang = res;
     })
     this.activateRoute.queryParams.subscribe((res: any) => {
-      this.userId = res.id;
-      if (this.userId) {
+      this.userId = res;
+      if (this.userId.tab == "0" || this.userId.id) {
         this.getAlldata()
       }
     })
@@ -80,6 +80,7 @@ export class UpdateprofileComponent implements OnInit {
         gender: this.viewAll[0].gender,
         maritalStatus: this.viewAll[0].maritalStatus,
         relocate: this.viewAll[0].relocate,
+        searchbox:this.viewAll[0].keyskill
         // languages: this.fb.array([]),
       })
       console.log(this.viewAll, "dfsdfgfgf")
@@ -170,10 +171,12 @@ export class UpdateprofileComponent implements OnInit {
       })
     } else {
       this.candidateService.educationDetail(this.profileForm.value).subscribe((res: any) => {
-        this.router.navigate(['/viewprofile'])
-
+        if(this.userId.id){
+          this.router.navigate(['/viewprofile'])
+        }else{
+          this.router.navigate(['/getAllprofile'])
+        }
         this.candidateService.imageUpload(res.user._id, formData).subscribe((res: any) => {
-
         })
       })
     }
