@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { HttpClient, HttpParams} from '@angular/common/http';
 import { Env } from '../environment.dev';
 import { Cookie } from 'ng2-cookies';
@@ -9,6 +9,21 @@ import { Cookie } from 'ng2-cookies';
 export class EmpServiceService {
   baseurl = Env.baseAPi;
   constructor(private http: HttpClient) { }
+
+  @Output() get_token: EventEmitter<String> = new EventEmitter();
+  @Output() name: EventEmitter<String> = new EventEmitter();
+    set_current_token(token:any)
+    {
+        console.log(token)
+        this.get_token.emit(token);
+    }
+    get_usename(name:any){
+      console.log(name,"sds")
+      this.name.emit(name)
+    }
+
+
+
   employeeRegister(data:any){
     return this.http.post(this.baseurl+'/v1/employerRegistration/register',data)
   }
@@ -56,6 +71,9 @@ get_industry(){
 get_department(){
   return this.http.get(this.baseurl+'/v1/educationDetails/get_Department')
 }
+get_department_search(count:any){
+  return this.http.get(this.baseurl+'/v1/educationDetails/get_Department_all/'+count)
+}
 get_category(id:any){
   return this.http.get(this.baseurl+'/v1/educationDetails/get_Rolecategory/' + id)
 }
@@ -64,6 +82,10 @@ get_role(id:any){
 }
 get_roles(count:any){
   return this.http.get(this.baseurl+'/v1/educationDetails/get_Role_all/'+count)
+}
+get_industry_search(count:any){
+  return this.http.get(this.baseurl+'/v1/educationDetails/get_Industries_all/'+count)
+
 }
 save_search(data:any){
   return this.http.post(this.baseurl + "/v1/employerCandidateSearch/outSearchSave",data,{headers:{auth:Cookie.get('emptokens')}});
@@ -159,4 +181,5 @@ get_specialization(data:any){
 change_status_candidates(id:any,data:any){
   return this.http.put(this.baseurl+'/v1/employerdetail/statusChange_employer/'+id,data)
 }
+
 }

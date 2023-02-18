@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cookie } from 'ng2-cookies';
 import { CanditService } from '../candit.service';
+import { EmpServiceService } from '../employer/emp-service.service';
 
 @Component({
   selector: 'app-header',
@@ -10,8 +11,9 @@ import { CanditService } from '../candit.service';
 })
 export class HeaderComponent implements OnInit {
   idShow=false;
+  empshow = false;
   userNAme:any;
-  constructor(private canditService:CanditService,private router:Router) {
+  constructor(private canditService:CanditService,private router:Router,private empservice: EmpServiceService) {
 
    }
 
@@ -19,14 +21,27 @@ export class HeaderComponent implements OnInit {
    this.userNAme =  localStorage.getItem('name')
    if(!Cookie.get('tokens')){
     this.idShow=false;
-   }else{
+    }else{
     this.idShow=true
+    }
+   if(!Cookie.get('emptoken')){
+    this.empshow=false;
+   }else{
+    this.empshow=true
    }
     this.canditService.get_token.subscribe((res:any) => {
       if(res){
         this.idShow=true
       }else{
         this.idShow=false
+      }
+
+    })
+    this.empservice.get_token.subscribe((res:any) => {
+      if(res){
+        this.empshow=true
+      }else{
+        this.empshow=false
       }
 
     })

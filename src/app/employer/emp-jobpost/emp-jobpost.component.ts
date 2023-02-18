@@ -18,7 +18,7 @@ export class EmpJobpostComponent implements OnInit {
     jobTittle : new FormControl('', Validators.required),
     contactNumber : new FormControl('', Validators.required),
     jobDescription : new FormControl('', Validators.required),
-    keySkill : this.formBuilder.array([], Validators.required),
+    keySkill :  new FormControl([], Validators.required),
     educationalQualification : new FormControl('', Validators.required),
     salaryRangeFrom : new FormControl('', Validators.required),
     salaryRangeTo : new FormControl('', Validators.required),
@@ -46,7 +46,9 @@ export class EmpJobpostComponent implements OnInit {
     recruiterNumber:new FormControl(null, Validators.required),
     qualification:this.formBuilder.array([], Validators.required),
     course:this.formBuilder.array([], Validators.required),
-    specialization:this.formBuilder.array([], Validators.required)
+    specialization:this.formBuilder.array([], Validators.required),
+    searchbox: new FormControl(null),
+    
   });
   keySkill: any;
   latitude:any;
@@ -57,6 +59,7 @@ export class EmpJobpostComponent implements OnInit {
   role_data: any;
   is_new: boolean =false;
   is_list: boolean=false;
+ 
   dropdownSettings: IDropdownSettings = {
     singleSelection: false,
     idField: '_id',
@@ -100,12 +103,24 @@ export class EmpJobpostComponent implements OnInit {
   courseid: any;
   coursename: any;
   is_open: boolean = false;
+  quaid: any;
+  is_course: boolean = false;
+  quaname: any;
+  educationArray:any=[
+   
+  ];
+  spclname: any;
+  pushdata1:any;
+  pushdatac:any;
+  pushdatacs:any;
+  list:any;
   constructor(private formBuilder:FormBuilder,private router: Router,private empservice: EmpServiceService) { }
 
   ngOnInit(): void {
     this.get_industry_list()
     this.get_depart()
     this.get_qualification()
+    this.get()
   }
   job_post(){
     this.empservice.submitPostAJob(this.jobpostForm.value).subscribe((res:any)=>{
@@ -182,7 +197,7 @@ export class EmpJobpostComponent implements OnInit {
   dispalye(data: any) {
     console.log("lusu")
     let value = data.target.value.split(",");
-  
+    console.log(value)
     if (data.target.value) {
       this.isDisplay = true;
     } else {
@@ -218,17 +233,7 @@ export class EmpJobpostComponent implements OnInit {
       this.qua_data = res
     })
   }
-  putcourse(e:any){
-    const data: FormArray = this.jobpostForm.get('qualification') as FormArray;
-    console.log(e)
-    data.push(new FormControl(e._id))
-    this.pushdata = data
-    console.log(data)
-    this.empservice.get_courses({arr:this.pushdata.value}).subscribe((res:any) => {
-      this.coursedata = res
-      console.log(res)
-    })
-  }
+  
   DeSelect_putcourse(e:any){
     console.log(e)
     let i: number = 0;
@@ -257,17 +262,131 @@ export class EmpJobpostComponent implements OnInit {
   put(e:any){
 
   }
-  selectcourse(e:any){
+  selectqualificaion(e:any,event:any){
+    console.log(event.target.checked)
+    if(event.target.checked){
+      const data: FormArray = this.jobpostForm.get('qualification') as FormArray;
+      data.push(new FormControl(e._id))
+      this.pushdata = data
+      this.quaid = Array(e._id)
+      this.quaname = e.qualification
+      console.log("fd",this.quaid,this.quaname)
+      this.empservice.get_courses({arr:this.quaid}).subscribe((res:any) => {
+        this.coursedata = res[0].allCourses
+        this.is_course = true
+        console.log(this.coursedata)
+      })
+    }
+    else{
+      this.is_course = false
+      let i: number = 0;
+      this.pushdata.forEach((item: any) => {
+        if (item == e._id) {
+          this.pushdata.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
+    
+  }
+  selectcourse(e:any,event:any){
     console.log(e)
-   this.courseid = Array(e._id)
-   this.coursename = e.Course
-   this.empservice.get_specialization({arr:this.courseid}).subscribe((res:any) => {
-    this.spcldata = res
-    this.is_open = true
-    console.log(res)
-  })
-  }
-  selectspcl(e:any){
+    this.courseid = Array(e._id)
+    this.coursename = e.Course
+    if(event.target.checked){
+      const data: FormArray = this.jobpostForm.get('course') as FormArray;
+      data.push(new FormControl(e._id))
+      this.pushdatac = data
+      this.empservice.get_specialization({arr:this.courseid}).subscribe((res:any) => {
+      this.spcldata = res
+      this.is_open = true
+      console.log(res)
+      })
+    }
+    else{
+      this.is_open = false
+      let i: number = 0;
+      this.educationArray.forEach((item: any) => {
+        if (item.coursename == this.coursename) {
+          this.educationArray.splice(i);
+          return;
+        }
+        i++;
+      });
 
+      this.pushdatac.forEach((item: any) => {
+        if (item == e._id) {
+          this.pushdatac.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
+    console.log(this.educationArray)
+   
   }
+  selectspcl(e:any,event:any){
+    this.spclname = e.Specialization
+    
+    if(event.target.checked){
+      this.educationArray.push(
+        {
+          coursename:this.coursename,
+          spclname: this.spclname
+        }
+      )
+      const data: FormArray = this.jobpostForm.get('specialization') as FormArray;
+      data.push(new FormControl(e._id))
+      this.pushdatacs = data
+    }
+    else{
+      const filteredPeople = this.educationArray.findIndex((item:any) => item.spclname == this.spclname);
+      console.log(filteredPeople)
+      this.educationArray.splice(filteredPeople,1);
+      console.log(this.educationArray)
+
+      let i: number = 0;
+      this.pushdatacs.forEach((item: any) => {
+        if (item == e._id) {
+          this.pushdatacs.removeAt(i);
+          return;
+        }
+        i++;
+      });
+    }
+    
+  }
+  rem(data:any){
+    console.log(data)
+    const filteredPeople = this.educationArray.findIndex((item:any) => item.coursename == data.coursename &&  item.spclname == data.spclname);
+    console.log(filteredPeople)
+    this.educationArray.splice(filteredPeople,1);
+    console.log(this.educationArray)
+  }
+  isChecke(data: any) {
+    if (this.educationArray.find((a: any) => a.spclname == data)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  get(){
+    this.empservice.get_recruiter().subscribe((data) =>{
+      console.log(data)
+      this.list = data
+    })
+  }
+  changerecruiter(data:any){
+    console.log(data.target.value)
+    this.empservice.getdetails_recruiter(data.target.value).subscribe((data:any) =>{
+      this.jobpostForm.patchValue({
+        recruiterName:data.recruiterName,
+        recruiterEmail:data.email,
+        recruiterNumber:data.mobileNumber
+      })
+    })
+  }
+
+  
 }

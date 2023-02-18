@@ -3,12 +3,46 @@
     padding-bottom: 20px;
 }
 .data{
-    max-height: 400px;
+    max-height: 500px;
     overflow: auto;
+    width: 360px;
+    max-width: 360px;
+    list-style: none;
 }
 .subdata{
-    max-height: 200px;
+    max-height: 300px;
     overflow: auto;
     list-style: none;
     max-width: 500px;
+    text-transform: capitalize;
+}
+.single-row button{
+    background-color: white;
+    /* padding: 6px 225px 6px 14px; */
+    border: 1px solid #ced4da;
+}
+.dropdown-toggle::after{
+    margin-left: 293px !important;
+    display: none;
+}
+.fsize{
+    font-size: 14px;
+}
+.badge1{
+    border: none;
+    padding: 5px 7px 5px 7px;
+    border-radius: 26px;
+    background: #E7E9ED;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+.remove{
+    font-size: 16px;
+    margin: 2px
+}
+.salarybtn{
+    /* width: 360px; */
+    max-width: 360px;
+    padding: 5px 322px 8px 0px
 }

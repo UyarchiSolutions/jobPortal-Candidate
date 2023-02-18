@@ -626,6 +626,14 @@ margin-right: 13px;
     margin-left: 39px;
     font-weight:800;
 }
+.role .dropdown-toggle .fa{
+    margin-left: 95px;
+    font-weight:800;
+}
+.indus .dropdown-toggle .fa{
+    margin-left: 68px;
+    font-weight:800;
+}
 .de-data{
     font-size: 12px;
     font-weight: 500;

@@ -35,6 +35,8 @@ export class LoginComponent implements OnInit {
     this.empservice.loginFormEmployee(this.loginForm.value).subscribe(
       (res: any) => {
         this.access = res.tokens.refresh.token;
+        this.empservice.set_current_token(res.tokens.refresh.token);
+        this.empservice.get_usename(res.user.name)
         this.setCookie(res.tokens.refresh.token);
         this.router.navigateByUrl('emp-home');
       },
@@ -47,6 +49,6 @@ export class LoginComponent implements OnInit {
     let d: Date = new Date();
     d.setTime(d.getTime() + 24 * 60 * 60 * 1000);
     let expires: string = `expires=${d.toUTCString()}`;
-    document.cookie = `emptokens=${token}; ${expires}`;
+    document.cookie = `emptoken=${token}; ${expires}`;
   }
 }

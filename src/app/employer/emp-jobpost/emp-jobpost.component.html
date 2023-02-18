@@ -117,7 +117,7 @@
                                 </div>
                             </div> -->
 
-                                    <div class="single-row">
+                                    <!-- <div class="single-row">
                                         <label for="">Qualification :</label>
                                         <div class="content-box">
                                             <ng-multiselect-dropdown id="quaInput" class="w-100"
@@ -127,29 +127,43 @@
                                                 (onDeSelect)="DeSelect_putcourse($event)">
                                             </ng-multiselect-dropdown>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="single-row">
-                                        <label for="">Course :</label>
+                                        <label for="">Education :</label>
                                         <div class="content-box">
-                                            <div class="dropdown">
-                                                <button class="btn dropdown-toggle salarybtn refhead" type="button"
+                                            <div class="dropdown salarybtn">
+                                                <button *ngIf="educationArray.length == 0" class="btn dropdown-toggle salarybtn refhead" type="button"
                                                     id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                                                    aria-expanded="false">
-                                                    Courses<i class="fa fa-angle-down"></i>
+                                                    aria-expanded="false" style="background: white;color: #B4B4B4">
+                                                     Select Qualification
+                                                </button>
+                                                <button *ngIf="educationArray.length>0" class="btn dropdown-toggle salarybtn refhead" type="button"
+                                                    id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                    aria-expanded="false" style="background: white;">
+                                                    <span class="badge1"  (click)="rem(data)" *ngFor="let data of educationArray">{{data.coursename}} - {{data.spclname}} <span class="remove">x</span></span>
                                                 </button>
                                                 <ul class="dropdown-menu p-3 data" aria-labelledby="dropdownMenuButton1">
-                                                    <li value="0" *ngFor="let data of coursedata"><input type="checkbox"
-                                                            class="checkbox" value="{{data}}"
-                                                            (change)="selectcourse(data)">
-                                                        {{data.Course}}
-                                                        <ul class="subdata" *ngIf="is_open && coursename==data.Course">
-                                                            <li *ngFor="let data of spcldata"><input
-                                                                    type="checkbox" class="checkbox"
-                                                                    value="{{data}}" (change)="selectspcl(data)">{{data.Specialization}}</li>
+                                                    <li *ngFor="let data of qua_data"><input type="checkbox"
+                                                        class="checkbox" value="{{data}}"
+                                                        (change)="selectqualificaion(data,$event)">
+                                                        <span class="fsize" style="margin-left:10px">{{data.qualification}}</span>
+                                                        <ul class="p-3 data" *ngIf="is_course && quaname==data.qualification">
+                                                            <li *ngFor="let data of coursedata"><input type="checkbox"
+                                                                    class="checkbox" value="{{data}}"
+                                                                    (change)="selectcourse(data,$event)">
+                                                                  <span class="fsize" style="margin-left:10px">{{data.Course}}</span>
+                                                                <ul class="subdata" *ngIf="is_open && coursename==data.Course">
+                                                                    <li *ngFor="let data of spcldata"><input
+                                                                            type="checkbox" class="checkbox"
+                                                                            value="{{data}}" [checked]="isChecke(data.Specialization)" (change)="selectspcl(data,$event)">
+                                                                <span class="fsize" style="margin-left:10px">{{data.Specialization}}</span></li>
+                                                                </ul>
+                                                            </li>
+        
                                                         </ul>
                                                     </li>
-
                                                 </ul>
+                                               
                                             </div>
                                         </div>
                                     </div>
@@ -427,9 +441,9 @@
                                     <div class="single-row" *ngIf="is_list">
                                         <label for="">Select Recruiter :</label>
                                         <div class="content-box">
-                                            <select class="form-control select-type">
-                                                <option value="option1" disabled selected>Option</option>
-
+                                            <select class="form-control select-type" (change)="changerecruiter($event)">
+                                                <option value="option1" disabled selected>Select</option>
+                                                <option value="{{data._id}}" *ngFor="let data of list">{{data.recruiterName}}</option>
                                             </select>
                                         </div>
                                     </div>

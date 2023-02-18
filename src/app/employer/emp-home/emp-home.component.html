@@ -144,6 +144,16 @@
                             </li>
                             <li class="refine-content">
                                 <div class="search-box">
+                                    <select class="form-control select-type" style="background-color: white;">
+                                        <option value="option1" selected>Location</option>
+                                        <option value="option2">Option 2</option>
+                                        <option value="option3">Option 3</option>
+                                    </select>
+                                </div>
+
+                            </li>
+                            <li class="refine-content">
+                                <div class="search-box">
                                     <button class="btn collapsebtn" type="button" data-bs-toggle="collapse"
                                         data-bs-target="#collapseExample" aria-expanded="false" style="padding-left: 14px;
                                         font-weight: 500;
@@ -152,7 +162,7 @@
                                     <div class="collapse" id="collapseExample">
                                         <div class="card card-body" style="padding: 0px;">
                                             <div style="display:flex">
-                                                <select class="form-control select-type">
+                                                <select class="form-control select-type" formControlName="experiencefrom">
                                                 <option value="option1" selected>From</option>
                                                 <option value="0">Freshers</option>
                                                 <option value="1">1 Year</option>
@@ -167,7 +177,7 @@
                                                 <option value="10">10 Year</option>
                                                 <option value="11">11 Year</option>
                                                 </select>
-                                                <select class="form-control select-type">
+                                                <select class="form-control select-type" formControlName="experienceto">
                                                 <option value="option1" selected>To</option>
                                                 <option value="0">Freshers</option>
                                                 <option value="1">1 Year</option>
@@ -188,6 +198,8 @@
                                 </div>
 
                             </li>
+                          
+                           
                             <li class="refine-content">
                                 <div class="search-box refineup">
                                     <div class="dropdown">
@@ -196,25 +208,30 @@
                                         Salary<i class="fa fa-angle-down"></i>
                                       </button>
                                       <ul class="dropdown-menu p-3" aria-labelledby="dropdownMenuButton1">
-                                        <li value="0"><input type="checkbox" class="checkbox">0 to 1 lac</li>
-                                        <li value="1 to 2 lac"><input type="checkbox" class="checkbox">1 to 2 lac</li>
-                                        <li value="2 to 4 lac"><input type="checkbox" class="checkbox">2 to 4 lac</li>
-                                        <li value="4 to 6 lac"><input type="checkbox" class="checkbox">4 to 6 lac</li>
-                                        <li value="6 to 8 lac"><input type="checkbox" class="checkbox">6 to 8 lac</li>
-                                        <li value="8 to 9 lac"><input type="checkbox" class="checkbox">8 to 9 lac</li>
+                                        <li value="0"><input type="checkbox" class="checkbox" (change)="filtersalary($event)" value="0 to 1 lac">0 to 1 lac</li>
+                                        <li value="1 to 2 lac"><input type="checkbox" class="checkbox" (change)="filtersalary($event)" value="1 to 2">1 to 2 lac</li>
+                                        <li value="2 to 4 lac"><input type="checkbox" class="checkbox" (change)="filtersalary($event)" value="2 to 4">2 to 4 lac</li>
+                                        <li value="4 to 6 lac"><input type="checkbox" class="checkbox" (change)="filtersalary($event)" value="4 to 6">4 to 6 lac</li>
+                                        <li value="6 to 8 lac"><input type="checkbox" class="checkbox" (change)="filtersalary($event)" value="6 to 8">6 to 8 lac</li>
+                                        <li value="8 to 9 lac"><input type="checkbox" class="checkbox" (change)="filtersalary($event)" value="8 to 9">8 to 9 lac</li>
                                       </ul>
                                     </div>
                                   </div>
 
                             </li>
                             <li class="refine-content">
-                                <div class="search-box">
-                                    <select class="form-control select-type" style="background-color: white;">
-                                        <option value="option1" selected>Location</option>
-                                        <option value="option2">Option 2</option>
-                                        <option value="option3">Option 3</option>
-                                    </select>
-                                </div>
+                                <div class="search-box refineup">
+                                    <div class="dropdown role">
+                                      <button class="btn dropdown-toggle salarybtn refhead" type="button" id="dropdownMenuButton1"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Role<i class="fa fa-angle-down"></i>
+                                      </button>
+                                      <ul class="dropdown-menu p-3 de-data" aria-labelledby="dropdownMenuButton1">
+                                        <li *ngFor="let data of role_data"><input type="checkbox" class="checkbox" value="{{data._id}}" (change)="filterrole($event)">{{data.Job_role}}</li>
+                                        <div class="mt-3" style="cursor: pointer;text-decoration: underline;" (click)="viewall_role('null')">view all</div>
+                                      </ul>
+                                    </div>
+                                  </div>
 
                             </li>
                             <li class="refine-content">
@@ -225,26 +242,24 @@
                                         Department<i class="fa fa-angle-down"></i>
                                       </button>
                                       <ul class="dropdown-menu p-3 de-data" aria-labelledby="dropdownMenuButton1">
-                                        <li value="0" *ngFor="let data of depart_data"><input type="checkbox" class="checkbox">{{data.Department}}</li>
+                                        <li *ngFor="let data of depart_data"><input type="checkbox" class="checkbox" value="{{data._id}}" (change)="filterdepart($event)">{{data.Department}}</li>
+                                        <div class="mt-3" style="cursor: pointer;text-decoration: underline;" (click)="viewall_depart('null')">view all</div>
                                       </ul>
                                     </div>
                                   </div>
 
                             </li>
+                           
                             <li class="refine-content">
                                 <div class="search-box refineup">
-                                    <div class="dropdown">
+                                    <div class="dropdown indus">
                                       <button class="btn dropdown-toggle salarybtn refhead" type="button" id="dropdownMenuButton1"
                                         data-bs-toggle="dropdown" aria-expanded="false">
-                                        Role<i class="fa fa-angle-down"></i>
+                                        Industry<i class="fa fa-angle-down"></i>
                                       </button>
-                                      <ul class="dropdown-menu p-3" aria-labelledby="dropdownMenuButton1">
-                                        <li value="0"><input type="checkbox" class="checkbox">0 to 1 lac</li>
-                                        <li value="1 to 2 lac"><input type="checkbox" class="checkbox">1 to 2 lac</li>
-                                        <li value="2 to 4 lac"><input type="checkbox" class="checkbox">2 to 4 lac</li>
-                                        <li value="4 to 6 lac"><input type="checkbox" class="checkbox">4 to 6 lac</li>
-                                        <li value="6 to 8 lac"><input type="checkbox" class="checkbox">6 to 8 lac</li>
-                                        <li value="8 to 9 lac"><input type="checkbox" class="checkbox">8 to 9 lac</li>
+                                      <ul class="dropdown-menu p-3 de-data" aria-labelledby="dropdownMenuButton1">
+                                        <li *ngFor="let data of indus_data"><input type="checkbox" class="checkbox" value="{{data._id}}" (change)="filterindus($event)">{{data.Industry}}</li>
+                                        <div class="mt-3" style="cursor: pointer;text-decoration: underline;" (click)="viewall_indus('null')">view all</div>
                                       </ul>
                                     </div>
                                   </div>
@@ -254,7 +269,7 @@
                         </ul>
 
                         <div class="refine-result">
-                            <button type="submit" class="btn btn-brand-blue register-btn">Refine Result</button>
+                            <button type="submit" class="btn btn-brand-blue register-btn" (click)="search()">Refine Result</button>
                         </div>
                     </div>
                 </div>
@@ -820,10 +835,28 @@ aria-labelledby="exampleModalLabel" aria-hidden="true" [formGroup]="searchForm">
                         <div class="row">
                           <div class="register-form">
                             <div class="single-row">
-                                <label for="">Any Keywords :</label>
+                                <!-- <label for="">Any Keywords :</label>
                                 <div class="content-box">
                                     <input type="text" class="form-control" placeholder="Enter Any Keywords" formControlName="anykeywords">
-                                </div>
+                                </div> -->
+
+                                <label for="">Key Skills :</label>
+                                        <div class="content-box">
+                                            <input type="text" class="form-control" (keyup)="dispalye($event)"
+                                                placeholder="Enter Key Skills" formControlName="searchbox">
+                                        </div>
+                                    </div>
+                                    <div class="single-row" *ngIf="isDisplay" style="margin-top:0px;">
+                                        <label></label>
+                                        <div class="content-box" style="background: white;">
+                                            <ul style="padding-left: 0px;list-style: none;
+                                  margin-left: 12px;">
+                                                <li *ngFor="let skill of keySkill" style="cursor:pointer"
+                                                    (click)="checkSkill($event,skill.Skill_Title)">
+                                                    <span>{{skill?.Skill_Title}}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
                 
                             </div>
                 

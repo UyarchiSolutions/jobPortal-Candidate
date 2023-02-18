@@ -48,9 +48,9 @@
       <img src="../../assets/image/logo.png" alt="" class="brand-logo">
     </a>
     <div class="nav-menu px-3">
-      <button type="button" *ngIf="!idShow" class="btn btn-light m-3" routerLink="/canlogin">Login</button>
-      <button type="button" *ngIf="!idShow" class="btn btn-warning" routerLink="/can-register">Register</button>
-      <div class="dropdown" *ngIf="!idShow">
+      <button type="button" *ngIf="!idShow && !empshow" class="btn btn-light m-3" routerLink="/canlogin">Login</button>
+      <button type="button" *ngIf="!idShow && !empshow" class="btn btn-warning" routerLink="/can-register">Register</button>
+      <div class="dropdown" *ngIf="!idShow && !empshow">
         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           For Employers
         </button>
@@ -65,6 +65,23 @@
             </div>
           </div> -->
         </ul>
+      </div>
+      <div *ngIf="empshow">
+        <div class="nav-menu  col-3 ">
+          <button type="button" class="btn  ms-5 register invisible">Register</button>
+          <div class="dropdown" style="margin-right: 22%;">
+            <button class="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{userNAme}}
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item home" routerLink="/getAllprofile">My Profile</a></li>
+              <li><a class="dropdown-item myplans">My Plan</a></li>
+              <li><a class="dropdown-item upcominglive">UpComing live</a></li>
+              <li><a class="dropdown-item upcominglive">Change Password</a></li>
+              <li><a class="dropdown-item upcominglive" (click)="logOut()">Log Out</a></li>
+            </ul>
+          </div>
+        </div>
       </div>
       <div *ngIf="idShow">
         <div class="nav-menu  col-3 ">
