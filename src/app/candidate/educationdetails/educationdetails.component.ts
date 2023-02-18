@@ -11,6 +11,7 @@ import { CanditateService } from '../canditate.service';
 export class EducationdetailsComponent implements OnInit {
   qualification: any = [];
   educationForm: any = this.fb.group({
+    update:new FormControl("educational details"),
     educationArray: this.fb.array([]),
   })
   drCourse: any = [];
@@ -31,7 +32,8 @@ export class EducationdetailsComponent implements OnInit {
       this.qualification = res;
     })
     this.activate.queryParams.subscribe((res: any) => {
-      this.userID = res.id
+      this.userID = res.id;
+      console.log(this.userID,"sdsdsd");
       // if (this.userID == null) {
         this.addPhase();
       // }
@@ -149,8 +151,8 @@ export class EducationdetailsComponent implements OnInit {
     })
     delete data.Education;
     console.log(data)
-    this.candidate.educationDetail(data).subscribe((res: any) => {
-      this.router.navigate(['/can-proffesinal'])
+    this.candidate.eduction(this.userID, data).subscribe((res: any) => {
+        this.router.navigate(['/can-proffesinal'],{queryParams:{id:this.userID}})
     })
   }
   addAllcontrol: any = []

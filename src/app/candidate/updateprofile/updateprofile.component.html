@@ -99,18 +99,18 @@
                     <div class="content-box">
                       <!-- <input type="text" class="form-control" placeholder="Enter CTC" formControlName="expectedctc"> -->
                       <select class="form-control select-type douple-input-first" formControlName="expectedctc">
-                        <option value="option1" disabled selected>Year</option>
-                        <option value="1">0 to 1 lac</option>
-                        <option value="1 to 2 lac">1 to 2 lac</option>
-                        <option value="2 to 3 lac">2 to 3 lac</option>
-                        <option value="3 to 4 lac">3 to 4 lac</option>
-                        <option value="4 to 5 lac">4 to 5 lac</option>
-                        <option value="5 to 6 lac">5 to 6 lac</option>
-                        <option value="6 to 7 lac">6 to 7 lac</option>
-                        <option value="7 to 8 lac">7 to 8 lac</option>
-                        <option value="8 to 9 lac">8 to 9 lac</option>
-                        <option value="9 to 10 lac">9 to 10 lac</option>
-                        <option value="10 to 11 lac">10 to11 lac</option>
+                        <option value="option1" disabled selected>Expected CTC</option>
+                        <option value="0-1">0 to 1 lac</option>
+                        <option value="1-2">1 to 2 lac</option>
+                        <option value="2-3">2 to 3 lac</option>
+                        <option value="2-4">3 to 4 lac</option>
+                        <option value="4-5">4 to 5 lac</option>
+                        <option value="5-8">5 to 8 lac</option>
+                        <option value="8-10">8 to 10 lac</option>
+                        <option value="10-13">10 to 13 lac</option>
+                        <option value="13-15">13 to 15 lac</option>
+                        <option value="15-20">15 to 20 lac</option>
+                        <option value="30-more">30 lac+</option>
                       </select>
 
                     </div>
@@ -120,21 +120,21 @@
                     <label for="">Current CTC :</label>
                     <div class="content-box">
                       <select class="form-control select-type douple-input-first" formControlName="currentctc">
-                        <option value="option1" disabled selected>Year</option>
-                        <option value="1 lac">1 lac</option>
-                        <option value="2 lac">2 lac</option>
-                        <option value="3 lac">3 lac</option>
-                        <option value="4 lac">4 lac</option>
-                        <option value="5 lac">5 lac</option>
-                        <option value="6 lac">6 lac</option>
-                        <option value="7 lac">7 lac</option>
-                        <option value="8 lac">8 lac</option>
-                        <option value="9 lac">9 lac</option>
-                        <option value="10 lac">10 lac</option>
-                        <option value="11 lac">11 lac</option>
+                        <option value="option1" disabled selected></option>
+                        <option value="1">1 lac</option>
+                        <option value="2">2 lac</option>
+                        <option value="3">3 lac</option>
+                        <option value="4">4 lac</option>
+                        <option value="5">5 lac</option>
+                        <option value="6">6 lac</option>
+                        <option value="7">7 lac</option>
+                        <option value="8">8 lac</option>
+                        <option value="9">9 lac</option>
+                        <option value="10">10 lac</option>
+                        <option value="11">11 lac</option>
                       </select>
-                      <select class="form-control select-type douple-input-second">
-                        <option value="option1" disabled selected>Month</option>
+                      <select class="form-control select-type douple-input-second" formControlName="currentctc_th">
+                        <option value="option1" disabled selected></option>
                         <option value="5000">5000</option>
                         <option value="10000">10000</option>
                         <option value="15000">15000</option>
@@ -234,7 +234,7 @@
                       </a>
                       <ul class="dropdown-menu" style="width: 60%;padding: 3%;" aria-labelledby="dropdownMenuLink">
                         <li *ngFor="let lan of lang">
-                          <input type="checkbox" value="{{lan.School_Medium}}" (change)="insLang($event)" /><span
+                          <input type="checkbox" value="{{lan.School_Medium}}" [checked]="checkeLang(lan.School_Medium)" (change)="insLang($event)" /><span
                             style="margin: 9px;">{{lan.School_Medium}}</span>
                         </li>
                       </ul>
@@ -249,17 +249,17 @@
                         <div class="content-box">
                           <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Speck"
-                              (change)="kownaction($event,i,lang)">
+                              (change)="kownaction($event,i,lang)" [checked]="chekedKnown(i,'Speck',lang)">
                             <label class="form-check-label" for="inlineCheckbox1">Speck</label>
                           </div>
                           <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Read"
-                              (change)="kownaction($event,i,lang)">
+                              (change)="kownaction($event,i,lang)" [checked]="chekedKnown(i,'Read',lang)">
                             <label class="form-check-label" for="inlineCheckbox2">Read</label>
                           </div>
                           <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="Write"
-                              (change)="kownaction($event,i,lang)">
+                              (change)="kownaction($event,i,lang)"  [checked]="chekedKnown(i,'Write',lang)">
                             <label class="form-check-label" for="inlineCheckbox3">Write</label>
                           </div>
                         </div>

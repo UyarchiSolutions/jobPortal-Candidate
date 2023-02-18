@@ -175,10 +175,8 @@
                       Location<i class="fa fa-angle-down" style="margin-left: 78px;"></i>
                     </button>
                     <ul class="dropdown-menu filter" aria-labelledby="dropdownMenuButton1">
-                      <li value="Start up"><input type="checkbox">Start up</li>
-                      <li value="1 to 2 lac"><input type="checkbox">MNC</li>
-                      <li value="Corparate"><input type="checkbox">Corparate</li>
-                      <li value="Foregin MNC"><input type="checkbox">Foregin MNC</li>
+                      <li *ngFor="let loc of getLocation"><input type="checkbox" value="{{loc.district}}" (change)="addLocation($event)">{{loc.district}}</li>
+
                     </ul>
                   </div>
                 </div>
@@ -192,12 +190,17 @@
                       Salary<i class="fa fa-angle-down" style="margin-left: 95px;"></i>
                     </button>
                     <ul class="dropdown-menu filter" aria-labelledby="dropdownMenuButton1">
-                      <li value="0"><input type="checkbox">0 to 1 lac</li>
-                      <li value="1 to 2 lac"><input type="checkbox">1 to 2 lac</li>
-                      <li value="2 to 4 lac"><input type="checkbox">2 to 4 lac</li>
-                      <li value="4 to 6 lac"><input type="checkbox">4 to 6 lac</li>
-                      <li value="6 to 8 lac"><input type="checkbox">6 to 8 lac</li>
-                      <li value="8 to 9 lac"><input type="checkbox">8 to 9 lac</li>
+                        <li><input type="checkbox" value="0-1" (change)="salaryrange($event)">0 to 1 lac</li>
+                        <li><input type="checkbox" value="1-2" (change)="salaryrange($event)">1 to 2 lac</li>
+                        <li><input type="checkbox" value="2-3" (change)="salaryrange($event)">2 to 3 lac</li>
+                        <li><input type="checkbox" value="2-4" (change)="salaryrange($event)">3 to 4 lac</li>
+                        <li><input type="checkbox" value="4-5" (change)="salaryrange($event)">4 to 5 lac</li>
+                        <li><input type="checkbox" value="5-8" (change)="salaryrange($event)">5 to 8 lac</li>
+                        <li><input type="checkbox" value="8-10" (change)="salaryrange($event)">8 to 10 lac</li>
+                        <li><input type="checkbox" value="10-13" (change)="salaryrange($event)">10 to 13 lac</li>
+                        <li><input type="checkbox"  value="13-15" (change)="salaryrange($event)">13 to 15 lac</li>
+                        <li ><input type="checkbox" value="15-20" (change)="salaryrange($event)">15 to 20 lac</li>
+                        <li ><input type="checkbox" value="30-more" (change)="salaryrange($event)">30 lac+</li>
                     </ul>
                   </div>
                 </div>
@@ -935,7 +938,7 @@
                 {{job.salaryRangeFrom}} To {{job.salaryRangeTo}}
               </div>
               <div class="col">
-                {{postedTime(job.date)}}
+                {{job.date}}
               </div>
               <div class="col">
                 <a (click)="applynotification(job._id)">Apply Now </a>

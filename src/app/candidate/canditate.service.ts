@@ -204,4 +204,15 @@ sendmodile(data:any){
 sendOTp(data:any){
   return this.http.post(this.baseUrl+`/v1/candidateRegistration/forget_password_Otp`,data)
 }
+// forgot password
+forgotPassword(id:any,data:any){
+  return this.http.post(this.baseUrl+`/v1/candidateRegistration/forget_password_set/${id}`,data)
+}
+// get all location
+getLocation(){
+  return this.http.get(this.baseUrl+`/v1/district/getAllDistrict_all/all`)
+}
+eduction(id:any,data:any){
+  return this.http.put(this.baseUrl+`/v1/candidateDetail/edit_details`,data,{headers:{auth:Cookie.get('tokens')}})
+}
 }
