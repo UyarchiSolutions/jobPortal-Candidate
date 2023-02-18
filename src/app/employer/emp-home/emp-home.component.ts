@@ -13,6 +13,7 @@ export class EmpHomeComponent implements OnInit {
   data: any;
   applied_data: any;
   isDisplay=false
+  isDisplayad=false
   keySkill: any;
   value: any;
   dropdownSettings: IDropdownSettings = {
@@ -25,11 +26,8 @@ export class EmpHomeComponent implements OnInit {
     enableCheckAll: false
   };
   searchForm: any = this.fb.group({
-    keyskills: this.fb.array([]),
-    location: new FormControl(null),
-    anykeywords: new FormControl(null),
-    experiencefrom: new FormControl(null),
-    experienceto: new FormControl(null),
+    keyskills: new FormControl([]),
+    Location: new FormControl([]),
     experience: new FormControl(null),
     qualification: new FormControl(null),
     course:this.fb.array([]),
@@ -38,6 +36,13 @@ export class EmpHomeComponent implements OnInit {
     displayDetails: new FormControl(null),
     searchTittle:new FormControl(null),
     searchbox: new FormControl(null),
+    experiencefrom: new FormControl(null),
+    experienceto: new FormControl(null),
+    salary:this.fb.array([]),
+    role: this.fb.array([]),
+    department:this.fb.array([]),
+    industry:this.fb.array([]),
+    noticeperiod:this.fb.array([]),
   })
   folderForm:any = this.fb.group({
     folderName:new FormControl(null)
@@ -67,11 +72,18 @@ export class EmpHomeComponent implements OnInit {
   depart_data: any;
   cat_data: any;
   role_data: any;
+  depart_count:any = 5;
+  role_count:any = 5;
+  indus_data: any;
+  searchArray: any;
+  cityList: any;
+  Tab=0;
   constructor(private empservice: EmpServiceService,private fb:FormBuilder, private router: Router,) { }
   is_viewpost : boolean = false;
   is_viewapplies : boolean = false;
   is_viewcan:boolean = true;
   is_icon1 = false;
+  indus_count:any = 5
   ngOnInit(): void {
     this.getJobpostDetails()
     this.get_can()
@@ -81,6 +93,8 @@ export class EmpHomeComponent implements OnInit {
     this.get_folder_list()
     this.get_depart()
     this.cat()
+    this.getall_indus()
+    this.get_city()
   }
   getJobpostDetails(){
     this.empservice.myjobPost().subscribe((res:any)=>{
@@ -89,6 +103,7 @@ export class EmpHomeComponent implements OnInit {
     })
   }
   current_link(){
+    this.Tab = 1;
     this.is_viewpost = true
     this.is_viewapplies = false
     this.is_viewcan = false
@@ -96,6 +111,7 @@ export class EmpHomeComponent implements OnInit {
   }
   current_applies(id :any){
     console.log('current_applies',id);
+    this.Tab = 2;
     this.is_viewapplies = true
     this.is_viewpost = false
     this.is_viewcan = false
@@ -108,6 +124,7 @@ export class EmpHomeComponent implements OnInit {
 
   }
   can_list(){
+    this.Tab=0;
     this.is_viewcan = true
     this.is_viewapplies = false
     this.is_viewpost = false
@@ -153,6 +170,7 @@ export class EmpHomeComponent implements OnInit {
   checkSkill(event: any, skill: any) {
     console.log('checkSkill',skill);
     let index: any = this.searchForm.get('keyskills')?.value;
+    console.log(index)
     console.log(this.searchForm.get('keyskills')?.value)
     if (index.length != 0) {
       let value = index.splice([index.length - 1], 1);
@@ -161,6 +179,8 @@ export class EmpHomeComponent implements OnInit {
       console.log( this.searchForm.get('keyskills')?.value)
       let search: any = index.toString() + ","
       this.searchForm.get('searchbox')?.setValue(search);
+      this.isDisplay = false
+      this.isDisplayad =false
     }
   }
   recent_search(){
@@ -173,9 +193,11 @@ export class EmpHomeComponent implements OnInit {
     this.empservice.get_rcnt_search(id).subscribe((res: any) => {
       this.is_icon = true
       this.is_search_icon = false
+      this.searchArray = res.keyskills
+      this.searchForm.get('searchbox')?.setValue(this.searchArray);
       console.log(res.keyskills)
       this.searchForm.patchValue({
-        location: res.location,
+        Location: res.location,
         experience: res.experience
       })
     })
@@ -234,7 +256,7 @@ export class EmpHomeComponent implements OnInit {
   })
  }
 advanced_search(){
-   if(this.searchForm.get('anykeywords')?.valid && this.searchForm.get('location')?.valid && this.searchForm.get('experiencefrom')?.valid && this.searchForm.get('experienceto')?.valid && this.searchForm.get('salaryRange')?.valid && this.searchForm.get('gender')?.valid && this.searchForm.get('course')?.valid && this.searchForm.get('displayDetails')?.valid){
+   if(this.searchForm.get('anykeywords')?.valid && this.searchForm.get('Location')?.valid && this.searchForm.get('experiencefrom')?.valid && this.searchForm.get('experienceto')?.valid && this.searchForm.get('salaryRange')?.valid && this.searchForm.get('gender')?.valid && this.searchForm.get('course')?.valid && this.searchForm.get('displayDetails')?.valid){
   this.empservice.view_can(this.searchForm.value).subscribe((res:any)=>{
     console.log(res);
     this.search()
@@ -367,7 +389,6 @@ sendjob(){
 dispalye(data: any) {
   console.log("lusu")
   let value = data.target.value.split(",");
-  console.log(value)
   if (data.target.value) {
     this.isDisplay = true;
   } else {
@@ -378,20 +399,190 @@ dispalye(data: any) {
       this.getKeyskills(value[value.length - 1])
     }
   }
+  console.log(value)
+
   this.searchForm.get('keyskills')?.setValue(value)
+  console.log("fgvfdg", this.searchForm.get('keyskills')?.value)
+
+}
+dispalyead(data: any) {
+  console.log("lusu")
+  let value = data.target.value.split(",");
+  if (data.target.value) {
+    this.isDisplayad = true;
+  } else {
+    this.isDisplayad = false
+  }
+  if (value.length != 0) {
+    if (value[value.length - 1] != null && value[value.length - 1] != '') {
+      this.getKeyskills(value[value.length - 1])
+    }
+  }
+  console.log(value)
+
+  this.searchForm.get('keyskills')?.setValue(value)
+  console.log("fgvfdg", this.searchForm.get('keyskills')?.value)
 
 }
 get_depart(){
-  this.empservice.get_department().subscribe((res:any) => {
+  
+  this.empservice.get_department_search(this.depart_count).subscribe((res:any) => {
+    console.log(res);
+    this.depart_data = res
+  })
+}
+viewall_depart(count:any){
+
+  this.empservice.get_department_search(count).subscribe((res:any) => {
     console.log(res);
     this.depart_data = res
   })
 }
 cat(){
-  var count = 5;
+  this.empservice.get_roles(this.role_count).subscribe((res:any) => {
+    console.log(res);
+    this.role_data = res
+  })
+}
+viewall_role(count:any){
   this.empservice.get_roles(count).subscribe((res:any) => {
     console.log(res);
     this.role_data = res
   })
+}
+getall_indus(){
+  this.empservice.get_industry_search(this.indus_count).subscribe((res:any) => {
+    console.log(res);
+    this.indus_data = res
+})
+}
+viewall_indus(count:any){
+  this.empservice.get_industry_search(count).subscribe((res:any) => {
+    console.log(res);
+    this.indus_data = res
+  })
+}
+viewall_city(count:any){
+
+}
+filterrole(e:any){
+  const data = this.searchForm.get('role')?.value;
+  if(e.target.checked){
+    console.log(e.target.value)
+    data.push(e.target.value)
+  }
+  else{
+    let i: number = 0;
+    data.forEach((item: any) => {
+      if (item == e.target.value) {
+        data.splice(i,1);
+        return;
+      }
+      i++;
+    });
+  }
+ 
+}
+filterdepart(e:any){
+  const data1 = this.searchForm.get('department')?.value;
+  if(e.target.checked){
+    console.log(e.target.value)
+    data1.push(e.target.value)
+  }
+  else{
+    let i: number = 0;
+    data1.forEach((item: any) => {
+      if (item == e.target.value) {
+        data1.splice(i,1);
+        return;
+      }
+      i++;
+    });
+    
+  }
+
+}
+filterindus(e:any){
+  const data2 = this.searchForm.get('industry')?.value;
+  if(e.target.checked){
+    console.log(e.target.value)
+    data2.push(e.target.value)
+  }
+  else{
+    let i: number = 0;
+    data2.forEach((item: any) => {
+      if (item == e.target.value) {
+        data2.splice(i,1);
+        return;
+      }
+      i++;
+    });
+    
+  }
+
+}
+filterlocation(e:any){
+  const data = this.searchForm.get('Location')?.value;
+  if(e.target.checked){
+    console.log(e.target.value)
+    data.push(e.target.value)
+  }
+  else{
+    let i: number = 0;
+    data.forEach((item: any) => {
+      if (item == e.target.value) {
+        data.splice(i,1);
+        return;
+      }
+      i++;
+    });
+  }
+  console.log(data)
+}
+filternotice(e:any){
+  const data = this.searchForm.get('noticeperiod')?.value;
+  if(e.target.checked){
+    console.log(e.target.value)
+    data.push(e.target.value)
+  }
+  else{
+    let i: number = 0;
+    data.forEach((item: any) => {
+      if (item == e.target.value) {
+        data.splice(i,1);
+        return;
+      }
+      i++;
+    });
+  }
+  console.log(data)
+}
+filtersalary(e:any){
+  const data = this.searchForm.get('salary')?.value;
+  if(e.target.checked){
+    console.log(e.target.value)
+    data.push(e.target.value)
+  }
+  else{
+    let i: number = 0;
+    data.forEach((item: any) => {
+      if (item == e.target.value) {
+        data.splice(i,1);
+        return;
+      }
+      i++;
+    });
+  }
+
+}
+get_city(){
+  this.empservice.get_city().subscribe((res:any)=>{
+    console.log(res);
+    this.cityList = res
+  })
+}
+edit_jobpost(id:any){
+  const queryString = new URLSearchParams(id).toString()
+  this.router.navigateByUrl('/edit-jobpost?id=' + queryString)
 }
 }

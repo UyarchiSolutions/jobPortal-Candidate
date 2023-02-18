@@ -75,7 +75,8 @@
                         </div>
     
                         <div class="advanced-search">
-                            <button type="submit" class="btn btn-brand-trans" data-bs-toggle="modal" data-bs-target="#exampleModal">Advance Search</button>
+                            <button type="submit" class="btn btn-brand-trans" data-bs-toggle="modal" style="color: #fff;
+                            font-size: 14px;" data-bs-target="#exampleModal">Advance Search</button>
                         </div>
                     </div>
                 </div>
@@ -130,17 +131,38 @@
                         <ul>
                             <li class="sidebarmenu-heading"> <span class="icon-text m-l-1">Refine Result</span></li>
                             <li class="refine-content">
-                                <div>
-                                    <div class="search-box">
-                                        <label for="">Key Words</label>
-                                        <div class="sidebar-search-box">
-                                            <input type="text" class="form-control location" formControlName="anykeywords">
-                                            <button type="submit" class="btn btn-brand-orange"><img
-                                                    src="../../assets/image/search.png" alt=""
-                                                    class="search-icon"></button>
-                                        </div>
+                                <div class="search-box">
+                                    <label for="" style="font-size:14px !important;font-weight:500">Key Words</label>
+                                    <div class="">
+                                        <input type="text" class="form-control keyskill location" formControlName="anykeywords" (keyup)="dispalyead($event)" formControlName="searchbox">
+                                        <div class="" *ngIf="isDisplayad" style="margin-top:0px;">
+                                            <label></label>
+                                            <div class="content-box keylist" style="background: white;">
+                                                <ul class="ulkeylist" style="padding-left: 0px;" class="">
+                                                <li class="ilkeylist" style="cursor:pointer" *ngFor="let skill of keySkill"
+                                                    (click)="checkSkill($event,skill.Skill_Title)">
+                                                    <span>{{skill?.Skill_Title}}</span>
+                                                </li>
+                                                </ul>
+                                            </div>
+                                            </div>
                                     </div>
                                 </div>
+                            </li>
+                            <li class="refine-content">
+                                <div class="search-box refineup">
+                                    <div class="dropdown location">
+                                      <button class="btn dropdown-toggle salarybtn refhead" type="button" id="dropdownMenuButton1"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Location<i class="fa fa-angle-down"></i>
+                                      </button>
+                                      <ul class="dropdown-menu p-3 de-data" aria-labelledby="dropdownMenuButton1">
+                                        <li *ngFor="let data of cityList"><input type="checkbox" class="checkbox" value="{{data.district}}" (change)="filterlocation($event)">{{data.district}}</li>
+                                        <!-- <div class="mt-3" style="cursor: pointer;text-decoration: underline;" (click)="viewall_city('null')">view all</div> -->
+                                      </ul>
+                                    </div>
+                                  </div>
+
                             </li>
                             <li class="refine-content">
                                 <div class="search-box">
@@ -152,7 +174,7 @@
                                     <div class="collapse" id="collapseExample">
                                         <div class="card card-body" style="padding: 0px;">
                                             <div style="display:flex">
-                                                <select class="form-control select-type">
+                                                <select class="form-control select-type" formControlName="experiencefrom">
                                                 <option value="option1" selected>From</option>
                                                 <option value="0">Freshers</option>
                                                 <option value="1">1 Year</option>
@@ -167,7 +189,7 @@
                                                 <option value="10">10 Year</option>
                                                 <option value="11">11 Year</option>
                                                 </select>
-                                                <select class="form-control select-type">
+                                                <select class="form-control select-type" formControlName="experienceto">
                                                 <option value="option1" selected>To</option>
                                                 <option value="0">Freshers</option>
                                                 <option value="1">1 Year</option>
@@ -188,33 +210,40 @@
                                 </div>
 
                             </li>
+                          
+                           
                             <li class="refine-content">
                                 <div class="search-box refineup">
-                                    <div class="dropdown">
+                                    <div class="dropdown salary">
                                       <button class="btn dropdown-toggle salarybtn refhead" type="button" id="dropdownMenuButton1"
                                         data-bs-toggle="dropdown" aria-expanded="false">
                                         Salary<i class="fa fa-angle-down"></i>
                                       </button>
-                                      <ul class="dropdown-menu p-3" aria-labelledby="dropdownMenuButton1">
-                                        <li value="0"><input type="checkbox" class="checkbox">0 to 1 lac</li>
-                                        <li value="1 to 2 lac"><input type="checkbox" class="checkbox">1 to 2 lac</li>
-                                        <li value="2 to 4 lac"><input type="checkbox" class="checkbox">2 to 4 lac</li>
-                                        <li value="4 to 6 lac"><input type="checkbox" class="checkbox">4 to 6 lac</li>
-                                        <li value="6 to 8 lac"><input type="checkbox" class="checkbox">6 to 8 lac</li>
-                                        <li value="8 to 9 lac"><input type="checkbox" class="checkbox">8 to 9 lac</li>
+                                      <ul class="dropdown-menu p-3 de-data" aria-labelledby="dropdownMenuButton1">
+                                        <li value="0"><input type="checkbox" class="checkbox" (change)="filtersalary($event)" value="0 to 1">0 to 1 lac</li>
+                                        <li value="1 to 2 lac"><input type="checkbox" class="checkbox" (change)="filtersalary($event)" value="1 to 2">1 to 2 lac</li>
+                                        <li value="2 to 4 lac"><input type="checkbox" class="checkbox" (change)="filtersalary($event)" value="2 to 4">2 to 4 lac</li>
+                                        <li value="4 to 6 lac"><input type="checkbox" class="checkbox" (change)="filtersalary($event)" value="4 to 6">4 to 6 lac</li>
+                                        <li value="6 to 8 lac"><input type="checkbox" class="checkbox" (change)="filtersalary($event)" value="6 to 8">6 to 8 lac</li>
+                                        <li value="8 to 9 lac"><input type="checkbox" class="checkbox" (change)="filtersalary($event)" value="8 to 9">8 to 9 lac</li>
                                       </ul>
                                     </div>
                                   </div>
 
                             </li>
                             <li class="refine-content">
-                                <div class="search-box">
-                                    <select class="form-control select-type" style="background-color: white;">
-                                        <option value="option1" selected>Location</option>
-                                        <option value="option2">Option 2</option>
-                                        <option value="option3">Option 3</option>
-                                    </select>
-                                </div>
+                                <div class="search-box refineup">
+                                    <div class="dropdown role">
+                                      <button class="btn dropdown-toggle salarybtn refhead" type="button" id="dropdownMenuButton1"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Role<i class="fa fa-angle-down"></i>
+                                      </button>
+                                      <ul class="dropdown-menu p-3 de-data" aria-labelledby="dropdownMenuButton1">
+                                        <li *ngFor="let data of role_data"><input type="checkbox" class="checkbox" value="{{data._id}}" (change)="filterrole($event)">{{data.Job_role}}</li>
+                                        <div class="mt-3" style="cursor: pointer;text-decoration: underline;" (click)="viewall_role('null')">view all</div>
+                                      </ul>
+                                    </div>
+                                  </div>
 
                             </li>
                             <li class="refine-content">
@@ -225,7 +254,24 @@
                                         Department<i class="fa fa-angle-down"></i>
                                       </button>
                                       <ul class="dropdown-menu p-3 de-data" aria-labelledby="dropdownMenuButton1">
-                                        <li value="0" *ngFor="let data of depart_data"><input type="checkbox" class="checkbox">{{data.Department}}</li>
+                                        <li *ngFor="let data of depart_data"><input type="checkbox" class="checkbox" value="{{data._id}}" (change)="filterdepart($event)">{{data.Department}}</li>
+                                        <div class="mt-3" style="cursor: pointer;text-decoration: underline;" (click)="viewall_depart('null')">view all</div>
+                                      </ul>
+                                    </div>
+                                  </div>
+
+                            </li>
+                           
+                            <li class="refine-content">
+                                <div class="search-box refineup">
+                                    <div class="dropdown indus">
+                                      <button class="btn dropdown-toggle salarybtn refhead" type="button" id="dropdownMenuButton1"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Industry<i class="fa fa-angle-down"></i>
+                                      </button>
+                                      <ul class="dropdown-menu p-3 de-data" aria-labelledby="dropdownMenuButton1">
+                                        <li *ngFor="let data of indus_data"><input type="checkbox" class="checkbox" value="{{data._id}}" (change)="filterindus($event)">{{data.Industry}}</li>
+                                        <div class="mt-3" style="cursor: pointer;text-decoration: underline;" (click)="viewall_indus('null')">view all</div>
                                       </ul>
                                     </div>
                                   </div>
@@ -233,28 +279,26 @@
                             </li>
                             <li class="refine-content">
                                 <div class="search-box refineup">
-                                    <div class="dropdown">
+                                    <div class="dropdown Notice">
                                       <button class="btn dropdown-toggle salarybtn refhead" type="button" id="dropdownMenuButton1"
                                         data-bs-toggle="dropdown" aria-expanded="false">
-                                        Role<i class="fa fa-angle-down"></i>
+                                        Notice Period<i class="fa fa-angle-down"></i>
                                       </button>
-                                      <ul class="dropdown-menu p-3" aria-labelledby="dropdownMenuButton1">
-                                        <li value="0"><input type="checkbox" class="checkbox">0 to 1 lac</li>
-                                        <li value="1 to 2 lac"><input type="checkbox" class="checkbox">1 to 2 lac</li>
-                                        <li value="2 to 4 lac"><input type="checkbox" class="checkbox">2 to 4 lac</li>
-                                        <li value="4 to 6 lac"><input type="checkbox" class="checkbox">4 to 6 lac</li>
-                                        <li value="6 to 8 lac"><input type="checkbox" class="checkbox">6 to 8 lac</li>
-                                        <li value="8 to 9 lac"><input type="checkbox" class="checkbox">8 to 9 lac</li>
+                                      <ul class="dropdown-menu p-3 de-data" aria-labelledby="dropdownMenuButton1">
+                                        <li value="1 to 2 lac"><input type="checkbox" class="checkbox" (change)="filternotice($event)" value="immediate">immediate</li>
+                                        <li value="2 to 4 lac"><input type="checkbox" class="checkbox" (change)="filternotice($event)" value="15">15 days</li>
+                                        <li value="4 to 6 lac"><input type="checkbox" class="checkbox" (change)="filternotice($event)" value="30">30 days</li>
+                                        <li value="6 to 8 lac"><input type="checkbox" class="checkbox" (change)="filternotice($event)" value="60">60 days</li>
+                                        <li value="8 to 9 lac"><input type="checkbox" class="checkbox" (change)="filternotice($event)" value="90">90 days</li>
                                       </ul>
                                     </div>
                                   </div>
 
                             </li>
-
                         </ul>
 
                         <div class="refine-result">
-                            <button type="submit" class="btn btn-brand-blue register-btn">Refine Result</button>
+                            <button type="submit" class="btn btn-brand-blue register-btn" (click)="search()">Refine Result</button>
                         </div>
                     </div>
                 </div>
@@ -274,13 +318,13 @@
                             <i class='fas fa-sort-amount-down'></i>
                         </div>
 
-                        <div class="all-candidates col" (click)="can_list()">
+                        <div class="col" (click)="can_list()" ngClass="{{Tab == 0?'actives':'all-candidates'}}">
 
                             <i class='fas fa-user-alt'></i>
                             All Candidates
                         </div>
 
-                        <div class="job-post col" (click)="current_link()">
+                        <div class="job-post col" (click)="current_link()" ngClass="{{Tab == 1 || Tab == 2?'actives':'all-candidates'}}">
                             <i class='fas fa-sort-amount-down'></i>
                              Job Post
                         </div>
@@ -300,197 +344,7 @@
                         </div>
                         <!-- </div> -->
                     </div>
-                    <div *ngIf="is_viewpost">
-                        <div class="row no-margin bg-grey p-1">
-                            <div class="col-8">
-
-                            </div>
-                            <div class="col-4 d-flex justify-content-end">
-
-                               
-                                <div class="filter-bar-btn  ">
-                                    <button class="btn btn-brand-blue"><svg width="14" height="10" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M11.7868 0C12.1696 0 12.4802 0.3136 12.4802 0.7V3.3299L11.0935 4.7299V1.4H1.38669V12.6H11.0935V10.6694L12.4802 9.2694V13.3C12.4802 13.6864 12.1696 14 11.7868 14H0.693344C0.310618 14 0 13.6864 0 13.3V0.7C0 0.3136 0.310618 0 0.693344 0H11.7868ZM13.0196 4.7656L14 5.7554L8.60717 11.2L7.6254 11.1986L7.62678 10.2102L13.0196 4.7656ZM6.93344 7V8.4H3.46672V7H6.93344ZM9.01347 4.2V5.6H3.46672V4.2H9.01347Z" fill="white"/>
-                                        </svg>
-                                        <span class="draft">Draft</span></button>
-                                    <button class="btn btn-brand-blue" routerLink="/emp-postjob"><svg width="15" height="10" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M6.5 6V0H8.5V6H14.5V8H8.5V14H6.5V8H0.5V6H6.5Z" fill="white"/>
-                                        </svg>
-                                        <span class="draft">Add Job</span></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row content-card-heading no-margin padding10"  style="font-size:13px" >
-                            <div class="col">
-                                Posted Date
-                            </div>
-                            <div class="col">
-                                Job Title
-                            </div>
-                            <div class="col">
-                                <i class='fas fa-clock-o'></i>
-                                Experience
-                            </div>
-                            <div class="col">
-                                Salary
-                            </div>
-                            <div class="col">
-                                Applies
-                            </div>
-                            <div class="col">
-                                Location
-                            </div>
-                            <div class="col">
-                                Action
-                            </div>
-                        </div>
-                        <div class="row content-card no-margin padding10" *ngFor="let list of data" style="cursor:pointer" [formGroup]="activeform">
-                        
-                            <div class="col">
-                                {{list.createdAt |  date: 'yyyy-MM-dd'}}
-                            </div>
-                            <div class="col" (click)="view_post_details()">
-                                {{list.jobTittle}}
-                            </div>
-                            <div class="col" (click)="current_applies(list._id)">
-                                {{list.experienceFrom}} to {{list.experienceTo}}
-                            </div>
-                            <div class="col" (click)="current_applies(list._id)">
-                                {{list.salaryRangeFrom}} to {{list.salaryRangeTo}} lacs
-                            </div>
-                            <div class="col">
-                                <button class="applie-des" (click)="current_applies(list._id)">{{list.appliedcount}}</button>
-                            </div>
-                            <div class="col" (click)="current_applies(list._id)">
-                                {{list.jobLocation}}
-                            </div>
-                            <div class="col d-flex">
-                                <i class='fas fa-pencil-alt'></i>
-                                <div class="form-check form-switch" style="padding-left: 4.5em !important">
-                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" formControlName="active" (change)="change_status(list._id,$event)" [checked]="list.active" />
-                                </div>
-                               
-                            </div>
-    
-
-                            <!-- <div class="col-1">
-                                <i class='fas fa-sort-amount-down text-white-color'></i>
-
-                            </div> -->
-                        </div>
-                        <div class="row no-margin padding10" style="color:#fff;background-color: #82C3EC">
-                            <div class="col">
-                              
-                            </div>
-                            <div class="col">
-                               
-                            </div>
-                            <div class="col">
-                                <div class="pageination-logo">
-                                    <img src="../../assets/image/left-arrow.png" alt="" class="p-left">
-                                    <div class="pageination-number">1</div>
-                                    <img src="../../assets/image/right-arrow.png" alt="" class="p-right">
-                                </div>
-                            </div>
-                            <div class="col">
-                            </div>
-                            <div class="col">
-                                <i class='fas fa-sort-amount-down'></i>
-                                Range
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="is_viewapplies">
-                        <div class="row no-margin bg-grey">
-                            <div class="col">
-
-                                <div class="filter-label">
-
-                                    <span class="badge bg-light text-dark">
-                                        <span>BA-English</span>
-
-                                        <span class="close-mark">x</span>
-                                    </span>
-
-                                    <span class="badge bg-light text-dark">
-                                        <span>Chennai</span>
-
-                                        <span class="close-mark">x</span>
-                                    </span>
-
-
-                                    <span class="badge bg-light text-dark">
-                                        <span>0 to 2 Years</span>
-
-                                        <span class="close-mark">x</span>
-                                    </span>
-
-
-
-
-
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="row content-card-heading no-margin padding10"  style="font-size:13px" >
-                            <div class="col-1">
-                                <div class="form-check">
-                                     <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-                                 </div>
-                            </div>
-                            <div class="col">
-                                Name
-                            </div>
-                            <div class="col">
-                                Location
-                            </div>
-                            <div class="col">
-                               Qualification
-                            </div>
-                            <div class="col">
-                                Salary
-                            </div>
-                            <div class="col">
-                                 Experience
-                            </div>
-                            <div class="col">
-                                Status
-                            </div>
-                            
-                        </div>
-                        <div class="row content-card no-margin padding10" *ngFor="let list of applied_data" style="cursor:pointer">
-                            <div class="col-1">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
-                                </div>
-                            </div>
-                            <div class="col">
-                                <a [routerLink]="['/emp-action']" [queryParams]="{id:list.candidateData._id,job:list._id}">{{list.candidateData.name}}</a>
-                            </div>
-                            <div class="col">
-                                <a [routerLink]="['/emp-action']" [queryParams]="{id:list.candidateData._id,job:list._id}">{{list.candidateData.locationCurrent}}</a>
-                            </div>
-                            <div class="col">
-                                <a [routerLink]="['/emp-action']" [queryParams]="{id:list.candidateData._id,job:list._id}">{{get_appliedcan_qualification(list)}}</a>
-                            </div>
-                            <div class="col" *ngIf="list.candidateData.workStatus == 'Experience'">
-                                <a [routerLink]="['/emp-action']" [queryParams]="{id:list.candidateData._id,job:list._id}">{{list.candidateData.currentctc}}</a>
-                            </div>
-                            <div class="col" *ngIf="list.candidateData.workStatus == 'Fresher'">
-                                <a [routerLink]="['/emp-action']" [queryParams]="{id:list.candidateData._id,job:list._id}">{{list.candidateData.expectedctc}}</a>
-                            </div>
-                            <div class="col">
-                                <a [routerLink]="['/emp-action']" [queryParams]="{id:list.candidateData._id,job:list._id}">{{list.candidateData.experienceYear}}Year - {{list.candidateData.experienceMonth}}Months </a>
-                            </div>
-                            <div class="col" [ngClass]="{'statusstyle': list.status == 'rejected'}">
-                                {{list.status}}
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="is_viewcan">
+                    <div *ngIf="Tab == 0">
                         <div class="row no-margin bg-grey">
                             <div class="col">
 
@@ -607,6 +461,197 @@
                             </div>
                         </div>
                     </div>
+                    <div *ngIf="Tab == 1">
+                        <div class="row no-margin bg-grey p-1">
+                            <div class="col-8">
+
+                            </div>
+                            <div class="col-4 d-flex justify-content-end">
+
+                               
+                                <div class="filter-bar-btn  ">
+                                    <button class="btn btn-brand-blue"><svg width="14" height="10" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11.7868 0C12.1696 0 12.4802 0.3136 12.4802 0.7V3.3299L11.0935 4.7299V1.4H1.38669V12.6H11.0935V10.6694L12.4802 9.2694V13.3C12.4802 13.6864 12.1696 14 11.7868 14H0.693344C0.310618 14 0 13.6864 0 13.3V0.7C0 0.3136 0.310618 0 0.693344 0H11.7868ZM13.0196 4.7656L14 5.7554L8.60717 11.2L7.6254 11.1986L7.62678 10.2102L13.0196 4.7656ZM6.93344 7V8.4H3.46672V7H6.93344ZM9.01347 4.2V5.6H3.46672V4.2H9.01347Z" fill="white"/>
+                                        </svg>
+                                        <span class="draft">Draft</span></button>
+                                    <button class="btn btn-brand-blue" routerLink="/emp-postjob"><svg width="15" height="10" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.5 6V0H8.5V6H14.5V8H8.5V14H6.5V8H0.5V6H6.5Z" fill="white"/>
+                                        </svg>
+                                        <span class="draft">Add Job</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row content-card-heading no-margin padding10"  style="font-size:13px" >
+                            <div class="col">
+                                Posted Date
+                            </div>
+                            <div class="col">
+                                Job Title
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-clock-o'></i>
+                                Experience
+                            </div>
+                            <div class="col">
+                                Salary
+                            </div>
+                            <div class="col">
+                                Applies
+                            </div>
+                            <div class="col">
+                                Location
+                            </div>
+                            <div class="col">
+                                Action
+                            </div>
+                        </div>
+                        <div class="row content-card no-margin padding10" *ngFor="let list of data" style="cursor:pointer" [formGroup]="activeform">
+                        
+                            <div class="col">
+                                {{list.createdAt |  date: 'yyyy-MM-dd'}}
+                            </div>
+                            <div class="col" (click)="view_post_details()">
+                                {{list.jobTittle}}
+                            </div>
+                            <div class="col" (click)="current_applies(list._id)">
+                                {{list.experienceFrom}} to {{list.experienceTo}}
+                            </div>
+                            <div class="col" (click)="current_applies(list._id)">
+                                {{list.salaryRangeFrom}} to {{list.salaryRangeTo}} 
+                            </div>
+                            <div class="col">
+                                <button class="applie-des" (click)="current_applies(list._id)">{{list.appliedcount}}</button>
+                            </div>
+                            <div class="col" (click)="current_applies(list._id)">
+                                {{list.jobLocation}}
+                            </div>
+                            <div class="col d-flex">
+                                <a routerLink="/edit-jobpost" [queryParams]="{id:list._id}"><i class='fas fa-pencil-alt'></i></a>
+                                <div class="form-check form-switch" style="padding-left: 4.5em !important">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" formControlName="active" (change)="change_status(list._id,$event)" [checked]="list.active" />
+                                </div>
+                               
+                            </div>
+    
+
+                            <!-- <div class="col-1">
+                                <i class='fas fa-sort-amount-down text-white-color'></i>
+
+                            </div> -->
+                        </div>
+                        <div class="row no-margin padding10" style="color:#fff;background-color: #82C3EC">
+                            <div class="col">
+                              
+                            </div>
+                            <div class="col">
+                               
+                            </div>
+                            <div class="col">
+                                <div class="pageination-logo">
+                                    <img src="../../assets/image/left-arrow.png" alt="" class="p-left">
+                                    <div class="pageination-number">1</div>
+                                    <img src="../../assets/image/right-arrow.png" alt="" class="p-right">
+                                </div>
+                            </div>
+                            <div class="col">
+                            </div>
+                            <div class="col">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Range
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="Tab == 2">
+                        <div class="row no-margin bg-grey">
+                            <div class="col">
+
+                                <div class="filter-label">
+
+                                    <span class="badge bg-light text-dark">
+                                        <span>BA-English</span>
+
+                                        <span class="close-mark">x</span>
+                                    </span>
+
+                                    <span class="badge bg-light text-dark">
+                                        <span>Chennai</span>
+
+                                        <span class="close-mark">x</span>
+                                    </span>
+
+
+                                    <span class="badge bg-light text-dark">
+                                        <span>0 to 2 Years</span>
+
+                                        <span class="close-mark">x</span>
+                                    </span>
+
+
+
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row content-card-heading no-margin padding10"  style="font-size:13px" >
+                            <div class="col-1">
+                                <div class="form-check">
+                                     <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                 </div>
+                            </div>
+                            <div class="col">
+                                Name
+                            </div>
+                            <div class="col">
+                                Location
+                            </div>
+                            <div class="col">
+                               Qualification
+                            </div>
+                            <div class="col">
+                                Salary
+                            </div>
+                            <div class="col">
+                                 Experience
+                            </div>
+                            <div class="col">
+                                Status
+                            </div>
+                            
+                        </div>
+                        <div class="row content-card no-margin padding10" *ngFor="let list of applied_data" style="cursor:pointer">
+                            <div class="col-1">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <a [routerLink]="['/emp-action']" [queryParams]="{id:list.candidateData._id,job:list._id}">{{list.candidateData.name}}</a>
+                            </div>
+                            <div class="col">
+                                <a [routerLink]="['/emp-action']" [queryParams]="{id:list.candidateData._id,job:list._id}">{{list.candidateData.locationCurrent}}</a>
+                            </div>
+                            <div class="col">
+                                <a [routerLink]="['/emp-action']" [queryParams]="{id:list.candidateData._id,job:list._id}">{{get_appliedcan_qualification(list)}}</a>
+                            </div>
+                            <div class="col" *ngIf="list.candidateData.workStatus == 'Experience'">
+                                <a [routerLink]="['/emp-action']" [queryParams]="{id:list.candidateData._id,job:list._id}">{{list.candidateData.currentctc}}</a>
+                            </div>
+                            <div class="col" *ngIf="list.candidateData.workStatus == 'Fresher'">
+                                <a [routerLink]="['/emp-action']" [queryParams]="{id:list.candidateData._id,job:list._id}">{{list.candidateData.expectedctc}}</a>
+                            </div>
+                            <div class="col">
+                                <a [routerLink]="['/emp-action']" [queryParams]="{id:list.candidateData._id,job:list._id}">{{list.candidateData.experienceYear}}Year - {{list.candidateData.experienceMonth}}Months </a>
+                            </div>
+                            <div class="col" [ngClass]="{'statusstyle': list.status == 'rejected'}">
+                                {{list.status}}
+                            </div>
+                        </div>
+                    </div>
+                   
                     <div *ngIf="is_canfolderlist">
                         <div class="row no-margin bg-grey">
                             <div class="col">
@@ -820,10 +865,28 @@ aria-labelledby="exampleModalLabel" aria-hidden="true" [formGroup]="searchForm">
                         <div class="row">
                           <div class="register-form">
                             <div class="single-row">
-                                <label for="">Any Keywords :</label>
+                                <!-- <label for="">Any Keywords :</label>
                                 <div class="content-box">
                                     <input type="text" class="form-control" placeholder="Enter Any Keywords" formControlName="anykeywords">
-                                </div>
+                                </div> -->
+
+                                <label for="">Key Skills :</label>
+                                        <div class="content-box">
+                                            <input type="text" class="form-control" (keyup)="dispalye($event)"
+                                                placeholder="Enter Key Skills" formControlName="searchbox">
+                                        </div>
+                                    </div>
+                                    <div class="single-row" *ngIf="isDisplay" style="margin-top:0px;">
+                                        <label></label>
+                                        <div class="content-box" style="background: white;">
+                                            <ul style="padding-left: 0px;list-style: none;
+                                  margin-left: 12px;">
+                                                <li *ngFor="let skill of keySkill" style="cursor:pointer"
+                                                    (click)="checkSkill($event,skill.Skill_Title)">
+                                                    <span>{{skill?.Skill_Title}}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
                 
                             </div>
                 

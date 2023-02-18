@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
-
 import { EmpServiceService } from '../emp-service.service';
 
 @Component({
-  selector: 'app-emp-jobpost',
-  templateUrl: './emp-jobpost.component.html',
-  styleUrls: ['./emp-jobpost.component.css']
+  selector: 'app-edit-jobpost',
+  templateUrl: './edit-jobpost.component.html',
+  styleUrls: ['./edit-jobpost.component.css']
 })
-export class EmpJobpostComponent implements OnInit {
+export class EditJobpostComponent implements OnInit {
   isDisplay = false
   checkedList : any=[];
   jobpostForm:any = this.formBuilder.group({
@@ -114,13 +113,64 @@ export class EmpJobpostComponent implements OnInit {
   pushdatac:any;
   pushdatacs:any;
   list:any;
-  constructor(private formBuilder:FormBuilder,private router: Router,private empservice: EmpServiceService) { }
+  postid: any;
+  jobdetails: any;
+  constructor(private formBuilder:FormBuilder,private router: Router,private empservice: EmpServiceService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.queryParams
+    .subscribe(params => {
+      console.log(params['id']); 
+      this.postid=params['id'];
+    }
+  );
+
+
     this.get_industry_list()
     this.get_depart()
     this.get_qualification()
     this.get()
+    this.get_jobpost_detail(this.postid)
+  }
+  get_jobpost_detail(postid: any){
+    this.empservice.get_job_detail(postid).subscribe((res:any)=>{
+      console.log(res);
+      this.jobdetails = res.user[0]
+      this.jobpostForm.patchValue({
+        jobTittle : this.jobdetails.jobTittle,
+        contactNumber : this.jobdetails.contactNumber,
+        jobDescription : this.jobdetails.jobDescription,
+        keySkill :  this.jobdetails.keySkill,
+        // educationalQualification : ,
+        salaryRangeFrom : this.jobdetails.salaryRangeFrom,
+        salaryRangeTo : this.jobdetails.salaryRangeTo,
+        experienceFrom : this.jobdetails.experienceFrom,
+        experienceTo : this.jobdetails.experienceTo,
+        interviewType : this.jobdetails.interviewType,
+        candidateDescription : this.jobdetails.candidateDescription,
+        salaryDescription : this.jobdetails.salaryDescription,
+        urltoApply : this.jobdetails.urltoApply,
+        workplaceType : this.jobdetails.workplaceType,
+        industry : this.jobdetails.industry,
+        preferedIndustry : this.jobdetails.preferedIndustry,
+        jobLocation : this.jobdetails.jobLocation,
+        employmentType : this.jobdetails.employmentType,
+        openings : this.jobdetails.openings,
+        department: this.jobdetails.department,
+        roleCategory: this.jobdetails.roleCategory,
+        role: this.jobdetails.role,
+        interviewstartDate: this.jobdetails.interviewstartDate,
+        interviewendDate: this.jobdetails.interviewendDate,
+        startTime: this.jobdetails.startTime,
+        endTime: this.jobdetails.endTime,
+        recruiterName:this.jobdetails.recruiterName,
+        recruiterEmail:this.jobdetails.recruiterEmail,
+        recruiterNumber:this.jobdetails.recruiterNumber,
+        qualification:this.jobdetails.qualification,
+        course:this.jobdetails.course,
+        specialization:this.jobdetails.specialization,
+      });
+    })
   }
   job_post(){
     this.empservice.submitPostAJob(this.jobpostForm.value).subscribe((res:any)=>{
@@ -129,7 +179,6 @@ export class EmpJobpostComponent implements OnInit {
       if(res){
       }
     })
-
   }
   search_skills(data:any){
     if (data.target.value) {
@@ -388,6 +437,4 @@ export class EmpJobpostComponent implements OnInit {
       })
     })
   }
-
-  
 }

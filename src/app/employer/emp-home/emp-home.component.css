@@ -255,7 +255,9 @@ padding: 8px 0px;
     padding-bottom: 5px;
     border-bottom: 1px solid rgba(10, 38, 71, 0.5);
 }
-
+.refine-content:hover{
+    background-color: white;
+}
 .refine-content label{
     font-size: 14px;
     font-weight: 500;
@@ -626,7 +628,31 @@ margin-right: 13px;
     margin-left: 39px;
     font-weight:800;
 }
+.role .dropdown-toggle .fa{
+    margin-left: 95px;
+    font-weight:800;
+}
+.indus .dropdown-toggle .fa{
+    margin-left: 68px;
+    font-weight:800;
+}
+.location .dropdown-toggle .fa{
+    margin-left: 65px;
+    font-weight:800;
+}
+.salary .dropdown-toggle .fa{
+    margin-left: 80px;
+    font-weight:800;
+}
+.Notice .dropdown-toggle .fa{
+    margin-left: 32px;
+    font-weight:800;
+}
 .de-data{
     font-size: 12px;
     font-weight: 500;
+}
+.actives{
+    color: #0A2647;
+    background-color: #fff !important;
 }
