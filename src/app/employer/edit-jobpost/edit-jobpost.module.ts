@@ -9,14 +9,14 @@ import { EditJobpostComponent } from './edit-jobpost.component';
 
 
 @NgModule({
-  declarations: [EditJobpostComponent],
-  imports: [
-    CommonModule,
-    EditJobpostRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    GooglePlaceModule,
-    NgMultiSelectDropDownModule.forRoot(),
-  ]
+    declarations: [EditJobpostComponent],
+    imports: [
+        CommonModule,
+        EditJobpostRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        GooglePlaceModule,
+        NgMultiSelectDropDownModule.forRoot(),
+    ]
 })
 export class EditJobpostModule { }

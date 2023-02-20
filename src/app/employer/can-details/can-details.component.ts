@@ -125,4 +125,13 @@ export class CanDetailsComponent implements OnInit {
     var queryString = new URLSearchParams(data).toString();
     this.router.navigateByUrl('/sendJob?'+queryString);
   }
+  save_candidate(){
+    var data: any ={
+      candidateId:Array(this.id)
+    }
+    this.empservice.saved_can(data).subscribe((res:any)=>{
+      
+      console.log(res);
+    })
+  }
 }

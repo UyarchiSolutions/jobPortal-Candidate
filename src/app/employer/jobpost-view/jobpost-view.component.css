@@ -1,0 +1,307 @@
+.login-content a{
+    color: #000;
+    text-decoration: none;
+}
+
+
+.button{
+    margin-top: 10px;
+    width: 180px;
+}
+
+.btn-bg-brand-blue{
+    background-color: #0A2647;
+    color: #fff;
+}
+
+.forgot-pass{
+    text-align: right;
+    font-size: 10px;
+    color: #0A2647;
+}
+
+.ad-image img{
+    width: 100%;
+}
+
+
+.btn-brand-blue{
+    min-width: 150px;
+}
+
+.login-main .col-2 img{
+    width: 100%;
+
+}
+select {
+    -webkit-appearance: listbox !important;
+    }
+.view-job{
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 14px;
+
+}
+.content-box h5{
+    font-size: 16px;
+    font-weight: 500;
+}
+.job-attached{
+    border-radius:0.35rem;
+    border: 1px solid #ced4da;
+}
+.job-attached .col-12 .col-6{
+    font-size: 14px;
+}
+.content-box button{
+    padding: 6px 12px !important;
+    min-width: 150px;
+}
+textarea{
+    min-height: 100px;
+}
+.register-content {
+    background-color: #fff;
+}
+
+.register-content-row {
+    background-color: #E7E9ED;
+    margin-top: 10px;
+
+}
+
+.hero-col {
+    padding: 0;
+}
+
+.custom-row {
+    margin-top: 0px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+
+.job-card {
+    color: #0A2647;
+    font-weight: 400;
+
+}
+
+.job-card i {
+    color: #D9D9D9;
+}
+
+.border-remove {
+    border: none;
+}
+
+.card-job-title {
+    font-size: 26px;
+    font-weight: 500;
+
+}
+
+.card-job-sub-title {
+    font-size: 16px;
+}
+
+
+.job-post-view-logo {
+    width: 70px;
+}
+
+.width-custom {
+    width: 25px;
+    text-align: left;
+}
+
+.card-job-content-data div {
+    margin-top: 5px;
+}
+
+.job-view {
+    margin: 16px;
+}
+
+.single-row {
+    align-items: normal;
+    justify-content: flex-start;
+    font-size: 14px;
+}
+
+.single-row label {
+    min-width: 30%;
+}
+
+.call {
+    width: 15px;
+}
+
+.content-box {
+    font-weight: 400;
+}
+
+.arrow {
+    font-size: 32px;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.pre-next-page {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.pre-next-page img {
+    width: 20px;
+}
+
+
+/* card-header */
+
+.card-wrap{
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.card-image-section{
+    min-width: 30%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-content-data{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.card-job-content-heading{
+    width: 45%;
+}
+
+.apply-now button{
+    width: 50%;
+}
+
+.g-image-section{
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-header-heading{
+    margin-bottom: 20px;
+}
+/* card-header */
+
+.subject{
+    background-color: #E7E9ED;
+}
+.register-content-row{
+    padding-top: 0 !important;
+    box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
+}
+h5{
+    margin-bottom: 0 !important;
+}
+
+.subject-content p{
+    margin-bottom: 8px;
+}
+.second-row{
+    border-top: solid  rgba(0, 0, 0, 0.25) 1px ;
+    border-bottom: solid  rgba(0, 0, 0, 0.25) 1px ;
+
+}
+.second-row p{
+    margin-bottom: 8px;
+}
+.third-row{
+    margin: 8px 16px !important;
+}
+.fourth-row{
+    padding: 16px 0;
+}
+.single-row .content-box button{
+    padding: 8px 66px;
+    font-weight: 500;
+}
+.register-content-row{
+    border-radius: 5px !important;
+    background-color: #E7E9ED;
+}
+.job-post-register-content{
+    margin-top: 10px !important;
+}
+.card-body{
+    padding: 16px !important;
+    width: 95% !important;
+    margin: auto;
+    margin-top: 20px;
+    border-top:none !important;
+    box-shadow: none !important;
+
+}
+.job-card{
+
+border-bottom: solid #E7E9ED 4px;
+}
+/* popup */
+.popup{
+    background-color:#ffffff;
+    position: absolute;
+    top: 50%;
+    padding: 10px 0;
+    left: 50%;
+    width: fit-content !important;
+border-radius: 10px;
+    transform: translate(-50%,-50%);
+}
+.job-post-register-content{
+ 
+height: 90vh !important;
+width: 60vw !important;
+overflow: scroll;
+}
+.custom-row{
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+select {
+    -webkit-appearance: listbox !important;
+    }
+label{
+    font-size: 16px !important;
+}
+.selection>p{
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+.popup-parent{
+    height: 100vh !important;
+    width: 100vw !important;
+    background-color: rgba(0, 0, 0, 0.333) !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+}
+.ug-selection p{
+    font-size: 12px;
+    margin-bottom: 0;
+    padding-left: 5px;
+}
+.education{
+    display: flex;
+    flex-direction: column;
+}
+.popup-container{
+background-color: red !important;
+height: 100vh !important;
+}

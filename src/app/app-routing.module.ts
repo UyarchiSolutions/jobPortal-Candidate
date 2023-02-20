@@ -46,6 +46,7 @@ const routes: Routes = [
    {path: 'manage-recruiter',loadChildren: () => import('./employer/manage-recruiter/manage-recruiter.module').then(m => m.ManageRecruiterModule) },
    {path: 'edit-recruiter',loadChildren: () => import('./employer/edit-recruiter/edit-recruiter.module').then(m => m.EditRecruiterModule) },
    {path: 'edit-jobpost',loadChildren: () => import('./employer/edit-jobpost/edit-jobpost.module').then(m => m.EditJobpostModule) },
+   {path: 'view-jobpost',loadChildren: () => import('./employer/jobpost-view/jobpost-view.module').then(m => m.JobpostViewModule) },
 
 
 

@@ -2,6 +2,32 @@
     height: fit-content;
     padding-bottom: 20px;
 }
+.register-content1 {
+    background-color: #fff;
+}
+
+.register-content-row1 {
+    background-color: #E7E9ED;
+    margin-top: 10px;
+
+}
+.register-content-row1{
+    padding-top: 0 !important;
+    box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
+}
+.register-content-row1{
+    border-radius: 5px !important;
+    background-color: #E7E9ED;
+}
+.job-post-register-content1{
+    margin-top: 10px !important;
+}
+.job-post-register-content1{
+ 
+    height: 90vh !important;
+    width: 60vw !important;
+    overflow: scroll;
+    }
 .data{
     max-height: 500px;
     overflow: auto;
@@ -46,3 +72,61 @@
     max-width: 360px;
     padding: 5px 322px 8px 0px
 }
+
+.popup-parent{
+    height: 100vh !important;
+    width: 100vw !important;
+    background-color: rgba(0, 0, 0, 0.333) !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+}
+.ug-selection p{
+    font-size: 12px;
+    margin-bottom: 0;
+    padding-left: 5px;
+}
+.education{
+    display: flex;
+    flex-direction: column;
+}
+.popup-container{
+background-color: red !important;
+height: 100vh !important;
+}
+.popup{
+    background-color:#ffffff;
+    position: absolute;
+    top: 50%;
+    padding: 10px 0;
+    left: 50%;
+    width: fit-content !important;
+border-radius: 10px;
+    transform: translate(-50%,-50%);
+}
+
+.custom-row{
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+select {
+    -webkit-appearance: listbox !important;
+    }
+label{
+    font-size: 16px !important;
+}
+.selection>p{
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+.custom-row{
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    margin-top: 0px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+}
+

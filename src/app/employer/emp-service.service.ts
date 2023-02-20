@@ -184,4 +184,13 @@ change_status_candidates(id:any,data:any){
 get_city(){
 return this.http.get(this.baseurl+'/v1/district/getAllDistrict_all/all')
 }
+saved_can(data:any){
+  return this.http.post(this.baseurl+'/v1/employerCandidateSearch/createSaveSeprate',data,{headers:{auth:Cookie.get('emptoken')}})
+}
+getall_saved_candidates(){
+  return this.http.get(this.baseurl+'/v1/employerCandidateSearch/getSaveSeprate',{headers:{auth:Cookie.get('emptoken')}})
+}
+updatePostAJob(id:any,data:any){
+return this.http.put(this.baseurl+'/v1/employerdetail/updateEmpDetails/'+id,data)
+}
 }

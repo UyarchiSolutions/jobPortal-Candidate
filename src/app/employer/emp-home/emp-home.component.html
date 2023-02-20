@@ -318,18 +318,18 @@
                             <i class='fas fa-sort-amount-down'></i>
                         </div>
 
-                        <div class="col" (click)="can_list()" ngClass="{{Tab == 0?'actives':'all-candidates'}}">
+                        <div class="col" style="cursor:pointer" (click)="can_list()" ngClass="{{Tab == 0?'actives':'all-candidates'}}">
 
                             <i class='fas fa-user-alt'></i>
                             All Candidates
                         </div>
 
-                        <div class="job-post col" (click)="current_link()" ngClass="{{Tab == 1 || Tab == 2?'actives':'all-candidates'}}">
+                        <div class="job-post col" style="cursor:pointer" (click)="current_link()" ngClass="{{Tab == 1 || Tab == 2?'actives':'all-candidates'}}">
                             <i class='fas fa-sort-amount-down'></i>
                              Job Post
                         </div>
 
-                        <div class="saved-candidates col">
+                        <div class="saved-candidates col" style="cursor:pointer" (click)="viewsaved_can()" ngClass="{{Tab == 3?'actives':'all-candidates'}}">
                             <i><svg width="23" height="22" viewBox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                   d="M10.4312 1.839C10.4774 1.72632 10.5561 1.62992 10.6572 1.56208C10.7584 1.49423 10.8774 1.45801 10.9992 1.45801C11.121 1.45801 11.24 1.49423 11.3411 1.56208C11.4423 1.62992 11.5209 1.72632 11.5671 1.839L13.8881 7.42133C13.9316 7.52578 14.003 7.61623 14.0945 7.68271C14.186 7.74919 14.2941 7.78914 14.4069 7.79814L20.4338 8.2809C20.9788 8.32459 21.1994 9.00504 20.7844 9.36002L16.1927 13.2942C16.1069 13.3676 16.043 13.4632 16.0079 13.5705C15.9728 13.6778 15.968 13.7927 15.9939 13.9026L17.3974 19.7841C17.4256 19.9021 17.4182 20.0259 17.3762 20.1397C17.3341 20.2535 17.2593 20.3523 17.1611 20.4235C17.0629 20.4948 16.9458 20.5354 16.8246 20.5402C16.7034 20.545 16.5834 20.5137 16.4799 20.4504L11.3192 17.2994C11.2228 17.2406 11.1121 17.2095 10.9992 17.2095C10.8863 17.2095 10.7756 17.2406 10.6792 17.2994L5.51844 20.4515C5.41496 20.5148 5.29503 20.5461 5.1738 20.5413C5.05256 20.5365 4.93547 20.4959 4.83729 20.4246C4.73912 20.3533 4.66428 20.2546 4.62222 20.1408C4.58016 20.027 4.57277 19.9032 4.60097 19.7852L6.00447 13.9026C6.0305 13.7927 6.02572 13.6777 5.99065 13.5704C5.95558 13.4631 5.89158 13.3675 5.80569 13.2942L1.214 9.36002C1.12205 9.28095 1.05553 9.17646 1.02281 9.05969C0.990088 8.94292 0.992621 8.81909 1.03009 8.70375C1.06756 8.58842 1.1383 8.48674 1.23341 8.4115C1.32852 8.33626 1.44375 8.29083 1.56461 8.2809L7.59147 7.79814C7.70424 7.78914 7.81234 7.74919 7.90387 7.68271C7.99541 7.61623 8.06682 7.52578 8.11027 7.42133L10.4312 1.839Z"
@@ -651,7 +651,123 @@
                             </div>
                         </div>
                     </div>
-                   
+                    <div *ngIf="Tab == 3">
+                        <div class="row no-margin bg-grey">
+                            <div class="col">
+
+                                <div class="filter-label">
+
+                                    <span class="badge bg-light text-dark">
+                                        <span>BA-English</span>
+
+                                        <span class="close-mark">x</span>
+                                    </span>
+
+                                    <span class="badge bg-light text-dark">
+                                        <span>Chennai</span>
+
+                                        <span class="close-mark">x</span>
+                                    </span>
+
+
+                                    <span class="badge bg-light text-dark">
+                                        <span>0 to 2 Years</span>
+
+                                        <span class="close-mark">x</span>
+                                    </span>
+
+
+
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row content-card-heading no-margin padding10"  style="font-size:13px" >
+                            <div class="col-1">
+                                <div class="form-check">
+                                     <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                 </div>
+                            </div>
+                            <div class="col">
+                                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                                Name
+                            </div>
+                            <div class="col">
+                                Location
+                            </div>
+                            <div class="col">
+                               Qualification
+                            </div>
+                            <div class="col">
+                                Salary
+                            </div>
+                            <div class="col">
+                                 Experience
+                            </div>
+                            
+                        </div>
+                        <div class="row content-card no-margin padding10" *ngFor="let list of savedList" style="cursor:pointer">
+                            <div class="col-1">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" [value]="list.candidateData._id" (change)="canId($event)" value="" aria-label="...">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <a>{{list.candidateData.name}}</a>
+                            </div>
+                            <div class="col">
+                                <a>{{list.candidateData.locationCurrent}}</a>
+                            </div>
+                            <div class="col">
+                                <a>{{get_appliedcan_qualification(list)}}</a>
+                            </div>
+                            <div class="col" *ngIf="list.candidateData.workStatus == 'Experience'">
+                                <a>{{list.candidateData.currentctc}}</a>
+                            </div>
+                            <div class="col" *ngIf="list.candidateData.workStatus == 'Fresher'">
+                                <a>{{list.candidateData.expectedctc}}</a>
+                            </div>
+                            <div class="col">
+                                <a>{{list.candidateData.experienceYear}}Year - {{list.candidateData.experienceMonth}}Months</a>
+                            </div>
+                         
+                        </div>
+                        <div class="row no-margin padding10" style="color:#fff;background-color: #82C3EC;cursor: pointer;">
+                            <div class="col">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-light p-1">Send</button>
+                                    <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                      <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                      <li (click)="sendmail()"><a class="dropdown-item">Send a mail</a></li>
+                                      <li (click)="sendjob()"><a class="dropdown-item">Send a job</a></li>
+                                    </ul>
+                                  </div>
+                            </div>
+                          
+                            <div class="col mt-2" data-bs-toggle="modal" data-bs-target="#savefolder" style="cursor:pointer">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Save
+                            </div>
+                            <div class="col mt-1">
+                                <div class="pageination-logo">
+                                    <img src="../../assets/image/left-arrow.png" alt="" class="p-left">
+                                    <div class="pageination-number">1</div>
+                                    <img src="../../assets/image/right-arrow.png" alt="" class="p-right">
+                                </div>
+                            </div>
+                            <div class="col">
+                            </div>
+                            <div class="col mt-2">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Range
+                            </div>
+                        </div>
+                    </div>
                     <div *ngIf="is_canfolderlist">
                         <div class="row no-margin bg-grey">
                             <div class="col">

@@ -115,6 +115,7 @@ export class EditJobpostComponent implements OnInit {
   list:any;
   postid: any;
   jobdetails: any;
+  Tab=0;
   constructor(private formBuilder:FormBuilder,private router: Router,private empservice: EmpServiceService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -169,11 +170,31 @@ export class EditJobpostComponent implements OnInit {
         qualification:this.jobdetails.qualification,
         course:this.jobdetails.course,
         specialization:this.jobdetails.specialization,
+        searchbox:this.jobdetails.keySkill
       });
+      if(this.jobdetails.recruiterName && this.jobdetails.recruiterEmail && this.jobdetails.recruiterNumber){
+        this.is_new = true
+      }
+      if(this.jobdetails.department){
+        this.rolecategorybind()
+      }
     })
+    
+  }
+  checkradio(data:any){
+
+    // if(this.jobdetails.recruiterName && this.jobdetails.recruiterEmail && this.jobdetails.recruiterNumber){
+    //   let val = 'new'
+      if(data == 'new'){
+        return true;
+      }
+      else{
+        return false;
+      }
+    // }
   }
   job_post(){
-    this.empservice.submitPostAJob(this.jobpostForm.value).subscribe((res:any)=>{
+    this.empservice.updatePostAJob(this.postid,this.jobpostForm.value).subscribe((res:any)=>{
       console.log(res);
       this.jobpostForm.reset();
       if(res){
@@ -236,6 +257,19 @@ export class EditJobpostComponent implements OnInit {
     this.empservice.get_category(data.target.value).subscribe((res:any) => {
       console.log(res);
       this.cat_data = res
+    })
+  }
+  rolecategorybind(){
+    this.empservice.get_category(this.jobdetails.department).subscribe((res:any) => {
+      console.log(res);
+      this.cat_data = res
+      this.rolebind()
+    })
+  }
+  rolebind(){
+    this.empservice.get_role(this.jobdetails.roleCategory).subscribe((res:any) => {
+      console.log(res);
+      this.role_data = res
     })
   }
   cat(data: any){
@@ -436,5 +470,8 @@ export class EditJobpostComponent implements OnInit {
         recruiterNumber:data.mobileNumber
       })
     })
+  }
+  test(){
+    this.Tab = 1
   }
 }

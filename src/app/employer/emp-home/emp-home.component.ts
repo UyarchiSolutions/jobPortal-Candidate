@@ -78,6 +78,7 @@ export class EmpHomeComponent implements OnInit {
   searchArray: any;
   cityList: any;
   Tab=0;
+  savedList: any;
   constructor(private empservice: EmpServiceService,private fb:FormBuilder, private router: Router,) { }
   is_viewpost : boolean = false;
   is_viewapplies : boolean = false;
@@ -95,6 +96,7 @@ export class EmpHomeComponent implements OnInit {
     this.cat()
     this.getall_indus()
     this.get_city()
+    this.getsaved_can()
   }
   getJobpostDetails(){
     this.empservice.myjobPost().subscribe((res:any)=>{
@@ -584,5 +586,15 @@ get_city(){
 edit_jobpost(id:any){
   const queryString = new URLSearchParams(id).toString()
   this.router.navigateByUrl('/edit-jobpost?id=' + queryString)
+}
+getsaved_can(){
+  this.empservice.getall_saved_candidates().subscribe((res:any)=>{
+    console.log(res);
+    this.savedList = res
+  })
+}
+viewsaved_can(){
+  console.log("xdvfdvf")
+  this.Tab = 3
 }
 }

@@ -25,6 +25,7 @@ import { ManageRecruiterComponent } from './manage-recruiter/manage-recruiter.co
 import { EditRecruiterComponent } from './edit-recruiter/edit-recruiter.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { EditJobpostComponent } from './edit-jobpost/edit-jobpost.component';
+import { JobpostViewComponent } from './jobpost-view/jobpost-view.component';
 
 
 
@@ -37,6 +38,7 @@ import { EditJobpostComponent } from './edit-jobpost/edit-jobpost.component';
     VerifyOtpComponent,
     EmpCansearchComponent,
     ChangePasswordComponent,
+    
     
     
     
