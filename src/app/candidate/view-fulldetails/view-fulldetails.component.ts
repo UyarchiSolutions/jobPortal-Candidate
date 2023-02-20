@@ -32,4 +32,7 @@ export class ViewFulldetailsComponent implements OnInit {
   gotoEdu(id:any){
     this.router.navigate(['/can-edu'],{queryParams:{id:id}})
   }
+  go(){
+    this.router.navigate(['/canJobs'])
+  }
 }

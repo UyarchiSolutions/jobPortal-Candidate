@@ -190,227 +190,233 @@
               <h3>Education Details</h3>
             </div>
             <div class="col-2">
-              <span class=" edit-icon" (click)="gotoEdu(details._id)"><i style="font-size: 11px;color: white;" class="fa fa-pencil"></i></span>
+              <span class=" edit-icon" (click)="gotoEdu(details._id)"><i style="font-size: 11px;color: white;"
+                  class="fa fa-pencil"></i></span>
             </div>
           </div>
           <div class="row">
             <div class="register-form">
-              <h5 class="m-auto mb-4">Education Details :</h5>
-              <div class="single-row">
-                <label for="">Qualification :</label>
-                <div class="content-box">
-                  <p>{{details.drQualification}}</p>
+              <div *ngIf="details.drQualification">
+                <h5 class="m-auto mb-4">Doctorate/MPhil</h5>
+                <div class="single-row">
+                  <label for="">Qualification :</label>
+                  <div class="content-box">
+                    <p>{{details.drQualification}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">University :</label>
+                  <div class="content-box">
+                    <p>{{details.drUniversity}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Specification :</label>
+                  <div class="content-box">
+                    <p>{{details.drSpecialization}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Course :</label>
+                  <div class="content-box">
+                    <p>{{details.drcourses}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Grading System :</label>
+                  <div class="content-box">
+                    <p>{{details.drGradingSystem}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Marks :</label>
+                  <div class="content-box">
+                    <p>{{details.drMarks}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Course Type :</label>
+                  <div class="content-box">
+                    <p>{{details.drCourseType}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Passed Out Year :</label>
+                  <div class="content-box">
+                    <p>{{details.drCourseDurationFrom}}-{{details.drCourseDurationTo}}</p>
+                  </div>
                 </div>
               </div>
-              <div class="single-row">
-                <label for="">University :</label>
-                <div class="content-box">
-                  <p>{{details.drUniversity}}</p>
+              <div *ngIf="details.pgQualification">
+                <h5 class="m-auto mb-4 mt-4">PG course:</h5>
+                <div class="single-row">
+                  <label for="">Qualification :</label>
+                  <div class="content-box">
+                    <p>{{details.pgQualification}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">University :</label>
+                  <div class="content-box">
+                    <p>{{details.pgUniversity}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Specification :</label>
+                  <div class="content-box">
+                    <p>{{details.pgSpecialization}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Course :</label>
+                  <div class="content-box">
+                    <p>{{details.pgCourse}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Grading System :</label>
+                  <div class="content-box">
+                    <p>{{details.pgGradingSystem}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Marks :</label>
+                  <div class="content-box">
+                    <p>{{details.pgMarks}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Course Type :</label>
+                  <div class="content-box">
+                    <p>{{details.pgCourseType}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Passed Out Year :</label>
+                  <div class="content-box">
+                    <p>{{details.pgCourseDurationFrom}}-{{details.pgCourseDurationTo}}</p>
+                  </div>
                 </div>
               </div>
-              <div class="single-row">
-                <label for="">Specification :</label>
-                <div class="content-box">
-                  <p>{{details.drSpecialization}}</p>
+              <div *ngIf="details.ugQualification">
+                <h5 class="m-auto mb-4 mt-4">UG Course :</h5>
+                <div class="single-row">
+                  <label for="">Qualification :</label>
+                  <div class="content-box">
+                    <p>{{details.ugQualification}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">University :</label>
+                  <div class="content-box">
+                    <p>{{details.ugUniversity}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Specification :</label>
+                  <div class="content-box">
+                    <p>{{details.ugSpecialization}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Course :</label>
+                  <div class="content-box">
+                    <p>{{details.ugCourse}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Grading System :</label>
+                  <div class="content-box">
+                    <p>{{details.ugGradingSystem}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Marks :</label>
+                  <div class="content-box">
+                    <p>{{details.ugMarks}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Course Type :</label>
+                  <div class="content-box">
+                    <p>{{details.ugCourseType}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Passed Out Year :</label>
+                  <div class="content-box">
+                    <p>{{details.ugCourseDurationFrom}}-{{details.ugCourseDurationTo}}</p>
+                  </div>
                 </div>
               </div>
-              <div class="single-row">
-                <label for="">Course :</label>
-                <div class="content-box">
-                  <p>{{details.drcourses}}</p>
+              <div *ngIf="details.Qualification">
+                <h5 class="m-auto mb-4 mt-4">HSC :</h5>
+                <div class="single-row">
+                  <label for="">Qualification :</label>
+                  <div class="content-box">
+                    <p>{{details.hsQualification}}</p>
+                  </div>
                 </div>
-              </div>
-              <div class="single-row">
-                <label for="">Grading System :</label>
-                <div class="content-box">
-                  <p>{{details.drGradingSystem}}</p>
+                <div class="single-row">
+                  <label for="">Board :</label>
+                  <div class="content-box">
+                    <p>{{details.hsBoard}}</p>
+                  </div>
                 </div>
-              </div>
-              <div class="single-row">
-                <label for="">Marks :</label>
-                <div class="content-box">
-                  <p>{{details.drMarks}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">Course Type :</label>
-                <div class="content-box">
-                  <p>{{details.drCourseType}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">Passed Out Year :</label>
-                <div class="content-box">
-                  <p>{{details.drCourseDurationFrom}}-{{details.drCourseDurationTo}}</p>
-                </div>
-              </div>
-              <button>remove</button>
-              <h5 class="m-auto mb-4 mt-4">Education Details 2 :</h5>
-              <div class="single-row">
-                <label for="">Qualification :</label>
-                <div class="content-box">
-                  <p>{{details.pgQualification}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">University :</label>
-                <div class="content-box">
-                  <p>{{details.pgUniversity}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">Specification :</label>
-                <div class="content-box">
-                  <p>{{details.pgSpecialization}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">Course :</label>
-                <div class="content-box">
-                  <p>{{details.pgCourse}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">Grading System :</label>
-                <div class="content-box">
-                  <p>{{details.pgGradingSystem}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">Marks :</label>
-                <div class="content-box">
-                  <p>{{details.pgMarks}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">Course Type :</label>
-                <div class="content-box">
-                  <p>{{details.pgCourseType}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">Passed Out Year :</label>
-                <div class="content-box">
-                  <p>{{details.pgCourseDurationFrom}}-{{details.pgCourseDurationTo}}</p>
-                </div>
-              </div>
-              <button>remove</button>
-              <h5 class="m-auto mb-4 mt-4">Education Details 3 :</h5>
-              <div class="single-row">
-                <label for="">Qualification :</label>
-                <div class="content-box">
-                  <p>{{details.ugQualification}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">University :</label>
-                <div class="content-box">
-                  <p>{{details.ugUniversity}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">Specification :</label>
-                <div class="content-box">
-                  <p>{{details.ugSpecialization}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">Course :</label>
-                <div class="content-box">
-                  <p>{{details.ugCourse}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">Grading System :</label>
-                <div class="content-box">
-                  <p>{{details.ugGradingSystem}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">Marks :</label>
-                <div class="content-box">
-                  <p>{{details.ugMarks}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">Course Type :</label>
-                <div class="content-box">
-                  <p>{{details.ugCourseType}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">Passed Out Year :</label>
-                <div class="content-box">
-                  <p>{{details.ugCourseDurationFrom}}-{{details.ugCourseDurationTo}}</p>
-                </div>
-              </div>
-              <button>remove</button>
-              <h5 class="m-auto mb-4 mt-4">Education Details 4 :</h5>
-              <div class="single-row">
-                <label for="">Qualification :</label>
-                <div class="content-box">
-                  <p>{{details.hsBoard}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">Board :</label>
-                <div class="content-box">
-                  <p>{{details.hsBoard}}</p>
-                </div>
-              </div>
 
-              <div class="single-row">
-                <label for="">Medium :</label>
-                <div class="content-box">
-                  <p>{{details.hsMedium}}</p>
+                <div class="single-row">
+                  <label for="">Medium :</label>
+                  <div class="content-box">
+                    <p>{{details.hsMedium}}</p>
+                  </div>
                 </div>
-              </div>
 
-              <div class="single-row">
-                <label for="">Marks :</label>
-                <div class="content-box">
-                  <p>{{details.hstotalmarks}}</p>
+                <div class="single-row">
+                  <label for="">Marks :</label>
+                  <div class="content-box">
+                    <p>{{details.hstotalmarks}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Passed Out Year :</label>
+                  <div class="content-box">
+                    <p>{{details.hsPassedYear}}</p>
+                  </div>
                 </div>
               </div>
-              <div class="single-row">
-                <label for="">Passed Out Year :</label>
-                <div class="content-box">
-                  <p>{{details.hsPassedYear}}</p>
+              <div *ngIf="details.sslcQualification">
+                <h5 class="m-auto mb-4 mt-4">SSLC :</h5>
+                <div class="single-row">
+                  <label for="">Qualification :</label>
+                  <div class="content-box">
+                    <p>{{details.sslcQualification}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Board :</label>
+                  <div class="content-box">
+                    <p>{{details.hsBoard}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Medium :</label>
+                  <div class="content-box">
+                    <p>{{details.sslcMedium}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Marks :</label>
+                  <div class="content-box">
+                    <p>{{details.sslctotalmarks}}</p>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Passed out Year :</label>
+                  <div class="content-box">
+                    <p>{{details.sslcPassedYear}}</p>
+                  </div>
                 </div>
               </div>
-              <button >remove</button>
-              <h5 class="m-auto mb-4 mt-4">Education Details 4 :</h5>
-              <div class="single-row">
-                <label for="">Qualification :</label>
-                <div class="content-box">
-                  <p>{{details.sslcQualification}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">Board :</label>
-                <div class="content-box">
-                  <p>{{details.hsBoard}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">Medium :</label>
-                <div class="content-box">
-                  <p>{{details.sslcMedium}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">Marks :</label>
-                <div class="content-box">
-                  <p>{{details.sslctotalmarks}}</p>
-                </div>
-              </div>
-              <div class="single-row">
-                <label for="">Passed out Year :</label>
-                <div class="content-box">
-                  <p>{{details.sslcPassedYear}}</p>
-                </div>
-              </div>
-              <button>remove</button>
               <!-- professional details -->
               <div class="row">
                 <div class="col-2"></div>
@@ -418,7 +424,8 @@
                   <h3>Professional Details</h3>
                 </div>
                 <div class="col-2">
-                  <span class="edit-icon"><i style="font-size: 11px;color: white;" class="fa fa-pencil" (click)="gotoProffistional(details._id)"></i></span>
+                  <span class="edit-icon"><i style="font-size: 11px;color: white;" class="fa fa-pencil"
+                      (click)="gotoProffistional(details._id)"></i></span>
                 </div>
               </div>
               <div class="row">
@@ -439,7 +446,7 @@
                     <label for="">Role Category :</label>
                     <div class="content-box">
                       <p>{{details.roleCategory
-                      }}</p>
+                        }}</p>
                     </div>
                   </div>
                   <div class="single-row">
@@ -450,12 +457,12 @@
                   </div>
                 </div>
               </div>
-              <!-- <div class="single-row  mt-5 mb-5">
+              <div class="single-row  mt-5 mb-5">
                 <label for=""> </label>
                 <div class="content-box">
-                  <button type="submit" class="btn btn-brand-blue mb-2">Log In</button>
+                  <button type="submit" class="btn btn-brand-blue mb-2" (click)="go()">Go</button>
                 </div>
-              </div> -->
+              </div>
             </div>
           </div>
         </div>

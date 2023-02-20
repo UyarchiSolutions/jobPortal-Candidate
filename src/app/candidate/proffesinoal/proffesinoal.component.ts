@@ -77,7 +77,7 @@ export class ProffesinoalComponent implements OnInit {
     formdata.append('roleCategory', this.proffesonalForm.get('roleCategory')?.value)
     formdata.append('role', this.proffesonalForm.get('role')?.value)
     this.candidateservice.updateEduction(formdata).subscribe((res: any) => {
-     this.router.navigate(['/canJobs'])
+     this.router.navigate(['/viewprofile'])
     })
   }
 }

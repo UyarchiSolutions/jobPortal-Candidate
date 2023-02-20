@@ -113,11 +113,11 @@
                   <button *ngIf="mail.jobDetails.interviewType !='walk in'" class="btn btn-brand-blue mt-5 px-5"
                     [disabled]="mail.appliedStatus == 'Applied'"
                     ngClass="{{mail.appliedStatus == 'Applied' ? 'applied':''}}"
-                    (click)="apply(mail.jobDetails._id)">{{mail.appliedStatus == 'Applied' ?'Applied' :'Apply Now'}}</button>
+                    (click)="apply(mail.jobDetails._id)">{{mail.appliedStatus}}</button>
                   <button *ngIf="mail.jobDetails.interviewType =='walk in'" class="btn btn-brand-blue mt-5 px-5"
                     [disabled]="mail.appliedStatus == 'Applied'"
                     ngClass="{{mail.appliedStatus == 'Applied' ? 'applied':''}}"
-                    (click)="apply(mail.jobDetails._id)">{{mail.appliedStatus == 'Applied' ?'Interested' :'Im Interest'}}</button>
+                    (click)="apply(mail.jobDetails._id)">{{mail.appliedStatus}}</button>
                 </div>
 
 

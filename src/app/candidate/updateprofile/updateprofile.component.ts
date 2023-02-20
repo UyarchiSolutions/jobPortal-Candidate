@@ -29,12 +29,15 @@ export class UpdateprofileComponent implements OnInit {
     relocate: new FormControl('', Validators.required),
     languages: this.fb.array([]),
     searchbox: new FormControl(null),
+    currentctc_th:new FormControl('', Validators.required),
+    update:new FormControl()
   })
   viewAll: any = [];
   keySkill: any;
   lang: any = [];
   userId: any;
-  now:any;
+  now: any;
+  getLang: any = []
   constructor(private fb: FormBuilder, private candidateService: CanditateService, private router: Router, private activateRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -48,6 +51,7 @@ export class UpdateprofileComponent implements OnInit {
       if (this.userId.tab == "0" || this.userId.id) {
         this.getAlldata()
       }
+
     })
     const datePipe = formatDate(new Date(), 'yyyy-MM-dd', 'en-IN')
     const time = formatDate(new Date(), 'hh:mm', 'en-IN')
@@ -80,16 +84,24 @@ export class UpdateprofileComponent implements OnInit {
         gender: this.viewAll[0].gender,
         maritalStatus: this.viewAll[0].maritalStatus,
         relocate: this.viewAll[0].relocate,
-        searchbox:this.viewAll[0].keyskill
-        // languages: this.fb.array([]),
+        searchbox: this.viewAll[0].keyskill,
+        update:new FormControl('advance details')
+
+        // languages: this.viewAll[0].keyskill
       })
-      console.log(this.viewAll, "dfsdfgfgf")
+      this.getLang = this.viewAll[0].languages;
+      this.viewAll[0].languages.forEach((element: any) => {
+        const data = this.profileForm.get('languages').push(this.fb.group({
+          lang: new FormControl(element.lang),
+          know: this.fb.array(element.know)
+        }));
+      });
     })
   }
   selectImg1: any;
   selectedImg1(event: any) {
     this.selectImg1 = event.target.files[0];
-    console.log(this.selectImg1, "this.selectImg1");
+
   }
   getQualified() {
     return (<FormArray>this.profileForm.get('qualify')).controls
@@ -118,9 +130,9 @@ export class UpdateprofileComponent implements OnInit {
   // push skills
 
   checkSkill(event: any, skill: any) {
-    this.isDisplay=false;
+    this.isDisplay = false;
     let index: any = this.profileForm.get('keyskill')?.value;
-    console.log(index.length,"wORKINGDKSDK")
+    console.log(index.length, "wORKINGDKSDK")
     if (index.length != 0) {
       console.log("workinf")
       let value = index.splice([index.length - 1], 1);
@@ -162,27 +174,44 @@ export class UpdateprofileComponent implements OnInit {
     language.get('kown')?.setValue(Known)
   }
   updateprofile() {
-    const formData = new FormData();
-    if (!this.userId) {
-      this.candidateService.updateProfile(this.profileForm.value).subscribe((res: any) => {
-        this.candidateService.imageUpload(res.user._id, formData).subscribe((res: any) => {
-        })
-        this.router.navigate(['/can-edu'], { queryParams: { id: res.user._id } })
-      })
-    } else {
+    const formData=new FormData();
+    formData.append('image',this.selectImg1);
+    console.log(this.userId)
+    if (this.userId.tab == "0" || this.userId.id) {
       this.candidateService.educationDetail(this.profileForm.value).subscribe((res: any) => {
-        if(this.userId.id){
+        if (this.userId.id) {
           this.router.navigate(['/viewprofile'])
-        }else{
+        } else {
           this.router.navigate(['/getAllprofile'])
         }
         this.candidateService.imageUpload(res.user._id, formData).subscribe((res: any) => {
         })
       })
+    } else {
+      this.candidateService.updateProfile(this.profileForm.value).subscribe((res: any) => {
+        this.candidateService.imageUpload(res.user._id, formData).subscribe((res: any) => {
+        })
+        this.router.navigate(['/can-edu'], { queryParams: { id: res.user._id } })
+      })
     }
 
   }
-  addcontrol() {
-    return
+  checkeLang(val: any) {
+    if (this.getLang.find((a: any) => a.lang == val)) {
+      return true;
+
+    } else {
+      return false
+    }
+  }
+  chekedKnown(index: any, lang: any, value: any) {
+    console.log(value.value.know, "sdfdfdfgfgh")
+    let knowIndex = value.value.know.findIndex((a: any) => (a == lang))
+    if (knowIndex != -1) {
+      return true
+    } else {
+      return false
+    }
+
   }
 }

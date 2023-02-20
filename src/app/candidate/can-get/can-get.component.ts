@@ -47,6 +47,7 @@ export class CanGetComponent implements OnInit {
     SalaryTo: new FormControl(null, [Validators.required]),
     locationSet: new FormControl(null, [Validators.required]),
     searchalert: new FormControl(null),
+    update:new FormControl("advance details")
   })
   datavalues: any;
   jobs: any = [];
@@ -56,7 +57,8 @@ export class CanGetComponent implements OnInit {
   course: any = [];
   range: any = 5;
   roles: any = [];
-
+  getLocation:any=[];
+  status:any='null';
   constructor(private canditSarvice: CanditateService, private fb: FormBuilder, private router: Router, private activateroute: ActivatedRoute) { }
 
 
@@ -77,7 +79,8 @@ export class CanGetComponent implements OnInit {
     this.role(this.range);
     this.getDeparment(this.range);
     this.getEducation(this.range);
-    this.getIndustry(this.range)
+    this.getIndustry(this.range);
+    this.location()
   }
   get_allJobs() {
     console.log(this.searchForm.value, "gfghgh")
@@ -109,21 +112,16 @@ export class CanGetComponent implements OnInit {
       this.industry = res
     })
   }
-
-  postedTime(time: any) {
-    let date_1 = new Date(time);
-    let date_2 = new Date();
-    const days = (date_1: any, date_2: any) => {
-      let difference = date_2.getTime() - date_1.getTime();
-      let TotalDays = Math.ceil(difference / (1000 * 3600 * 24));
-      return TotalDays;
-    }
-    return days(date_1, date_2)
-  }
+// get all location
+location(){
+  this.canditSarvice.getLocation().subscribe((res:any) => {
+  this.getLocation=res;
+  })
+}
   // redirect to employer details
-  apply(id: any) {
+  apply(id: any,tab:any) {
     console.log('workinf')
-    this.router.navigate(['/can-employ'], { queryParams: { id: id } })
+    this.router.navigate(['/can-employ'], { queryParams: { id: id,tab:tab }})
   }
   // get all jobs
   onClickJop() {
@@ -134,7 +132,7 @@ export class CanGetComponent implements OnInit {
   onClickApplied() {
     console.log("bfhdfhdfb")
     this.tab = 2
-    this.canditSarvice.getAppliedJobs().subscribe((res: any) => {
+    this.canditSarvice.getAppliedJobs(this.status).subscribe((res: any) => {
       this.appliedJobs = res;
     })
   }
@@ -288,7 +286,7 @@ export class CanGetComponent implements OnInit {
     }
   }
   setalert() {
-    this.canditSarvice.educationDetail(this.setAlertForm.value).subscribe((res: any) => {
+    this.canditSarvice.eduction(this.setAlertForm.value).subscribe((res: any) => {
       this.alert = false;
     })
   }
@@ -391,7 +389,22 @@ export class CanGetComponent implements OnInit {
   }
   // salaryrange
   salaryrange(event: any) {
-
+    const data: any = this.searchForm.get('Salary')?.value;
+    if (event.target.checked) {
+      data.push((event.target.value))
+      console.log(data,"dat")
+    } else {
+      let i: number = 0;
+      data.forEach((item: any) => {
+        console.log(item, "items")
+        if (item == event.target.value) {
+          data.splice(i, 1);
+          return;
+        }
+        i++;
+      });
+    }
+    this.get_allJobs();
   }
   // company type
   postedBy(event: any) {
@@ -416,7 +429,6 @@ export class CanGetComponent implements OnInit {
   }
   changeWorkmode(event: any) {
     const data: any = this.searchForm.get('workmode')?.value;
-
     if (event.target.checked) {
       data.push((event.target.value))
       this.searchForm.get('workmode')?.setValue(data)
@@ -505,6 +517,23 @@ export class CanGetComponent implements OnInit {
       let i: number = 0;
       data.forEach((item: any) => {
         if (item == event.target.value) {
+          data.splice(i, 1);
+          return;
+        }
+        i++;
+      });
+    }
+    this.get_allJobs();
+  }
+  addLocation(e:any){
+    const data: any = this.searchForm.get('Location')?.value;
+    if (e.target.checked) {
+      data.push((e.target.value))
+      console.log(data,"values")
+    } else {
+      let i: number = 0;
+      data.forEach((item: any) => {
+        if (item == e.target.value) {
           data.splice(i, 1);
           return;
         }
