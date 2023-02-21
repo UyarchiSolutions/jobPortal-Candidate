@@ -18,6 +18,10 @@ export class CanGetComponent implements OnInit {
   afterSearch: any;
   getAllalerts: any = [];
   getAllNotification: any = [];
+  displaycount = 0;
+  page = 0;
+  pagetotal = 0;
+  totalcount = 0;
   searchForm: any = this.fb.group({
     search: new FormControl([]),
     experience: new FormControl(null),
@@ -34,6 +38,8 @@ export class CanGetComponent implements OnInit {
     preferredIndustry: new FormControl([]),
     Salary: new FormControl([]),
     searchbox: new FormControl(null),
+    page: new FormControl(0),
+    range: new FormControl(10)
   })
   setAlertForm: any = this.fb.group({
     currentIndustry: new FormControl(null, [Validators.required]),
@@ -47,7 +53,7 @@ export class CanGetComponent implements OnInit {
     SalaryTo: new FormControl(null, [Validators.required]),
     locationSet: new FormControl(null, [Validators.required]),
     searchalert: new FormControl(null),
-    update:new FormControl("advance details")
+    update: new FormControl("advance details")
   })
   datavalues: any;
   jobs: any = [];
@@ -57,8 +63,8 @@ export class CanGetComponent implements OnInit {
   course: any = [];
   range: any = 5;
   roles: any = [];
-  getLocation:any=[];
-  status:any='null';
+  getLocation: any = [];
+  status: any = 'null';
   constructor(private canditSarvice: CanditateService, private fb: FormBuilder, private router: Router, private activateroute: ActivatedRoute) { }
 
 
@@ -83,9 +89,16 @@ export class CanGetComponent implements OnInit {
     this.location()
   }
   get_allJobs() {
-    console.log(this.searchForm.value, "gfghgh")
+    this.searchForm.patchValue({
+      page: this.page
+    })
     this.canditSarvice.getAlldetails(this.searchForm.value).subscribe((res: any) => {
-      this.jobs = res;
+      this.jobs = res.data;
+      this.displaycount = this.page;
+      this.totalcount = res.count;
+      this.pagetotal = Math.ceil(res.count / this.searchForm.get('range')?.value);
+      console.log(this.displaycount)
+      console.log(this.pagetotal - 1 == this.displaycount, "page")
       this.recentSearch();
     })
   }
@@ -112,16 +125,16 @@ export class CanGetComponent implements OnInit {
       this.industry = res
     })
   }
-// get all location
-location(){
-  this.canditSarvice.getLocation().subscribe((res:any) => {
-  this.getLocation=res;
-  })
-}
+  // get all location
+  location() {
+    this.canditSarvice.getLocation().subscribe((res: any) => {
+      this.getLocation = res;
+    })
+  }
   // redirect to employer details
-  apply(id: any,tab:any) {
+  apply(id: any, tab: any) {
     console.log('workinf')
-    this.router.navigate(['/can-employ'], { queryParams: { id: id,tab:tab }})
+    this.router.navigate(['/can-employ'], { queryParams: { id: id, tab: tab } })
   }
   // get all jobs
   onClickJop() {
@@ -390,9 +403,10 @@ location(){
   // salaryrange
   salaryrange(event: any) {
     const data: any = this.searchForm.get('Salary')?.value;
+    console.log(data)
     if (event.target.checked) {
       data.push((event.target.value))
-      console.log(data,"dat")
+      console.log(data, "dat")
     } else {
       let i: number = 0;
       data.forEach((item: any) => {
@@ -525,11 +539,11 @@ location(){
     }
     this.get_allJobs();
   }
-  addLocation(e:any){
+  addLocation(e: any) {
     const data: any = this.searchForm.get('Location')?.value;
     if (e.target.checked) {
       data.push((e.target.value))
-      console.log(data,"values")
+      console.log(data, "values")
     } else {
       let i: number = 0;
       data.forEach((item: any) => {
@@ -541,6 +555,53 @@ location(){
       });
     }
     this.get_allJobs();
+  }
+
+  filter(value: any) {
+    this.status = value;
+    this.onClickApplied();
+  }
+  changeRange(range: any) {
+    this.searchForm.patchValue({
+      range: range
+    })
+    this.get_allJobs();
+  }
+  pagination(val: any) {
+    console.log("sdbsjhdj")
+    if (val == 1) {
+      console.log("sdbsjhdj")
+      this.page = this.page + 1;
+      if (this.tab == 0) {
+        this.get_allJobs();
+      } else if (this.tab == 1) {
+        this.onClickApplied();
+      } else if (this.tab == 3) {
+        this.savedJobs()
+      } else if (this.tab == 4) {
+        this.jobAlert()
+      } else if (this.tab == 5) {
+        this.notification()
+      }
+
+
+    }
+    if (val == 0) {
+      if (this.page != 0) {
+        this.page = this.page - 1;
+        if (this.tab == 0) {
+          this.get_allJobs();
+        } else if (this.tab == 1) {
+          this.onClickApplied();
+        } else if (this.tab == 3) {
+          this.savedJobs()
+        } else if (this.tab == 4) {
+          this.jobAlert()
+        } else if (this.tab == 5) {
+          this.notification()
+        }
+      }
+    }
   }
 }
 

@@ -561,3 +561,8 @@ h3 {
   background: transparent;
   color: black;
 }
+.dropdown #mydiv{
+  min-width:60px;
+  padding-left: 20px;
+
+}

@@ -22,6 +22,13 @@ export class GetallcandidateProfileComponent implements OnInit {
     experience: new FormControl(),
     searchbox: new FormControl(),
   })
+  Candidateform: any = this.fb.group({
+    name: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]),
+    email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
+    workStatus: new FormControl('', Validators.required),
+    mobileNumber: new FormControl('', Validators.required),
+    location: new FormControl('', Validators.required),
+  });
   details: any;
   pdfUrl: any;
   keySkill: any;
@@ -34,6 +41,14 @@ export class GetallcandidateProfileComponent implements OnInit {
   getallDetails() {
     this.candidateservice.viewDetails().subscribe((res: any) => {
       this.getAlldetails = res.user;
+      console.log(this.getAlldetails[0].name,"namename")
+      this.Candidateform.patchValue({
+        name: this.getAlldetails[0].name,
+        email: this.getAlldetails[0].email,
+        workStatus: this.getAlldetails[0].workStatus,
+        mobileNumber: this.getAlldetails[0].mobileNumber,
+        location: this.getAlldetails[0].location
+      })
       this.pdfUrl = `https://livebroadcast.click/resumes/1675427235220.pdf`;
       console.log(this.pdfUrl, "dl,ld,")
     })
@@ -54,9 +69,11 @@ export class GetallcandidateProfileComponent implements OnInit {
   uploadfile() {
     this.tab = 5;
   }
-
+  full() {
+    this.tab = 6;
+  }
   editAdvance_det() {
-    this.router.navigate(['/updateProfile'],{queryParams:{tab:"0"}})
+    this.router.navigate(['/updateProfile'], { queryParams: { tab: "0" } })
   }
   editedu() {
     this.router.navigate(['/can-edu'])
@@ -141,22 +158,29 @@ export class GetallcandidateProfileComponent implements OnInit {
     localStorage.clear()
     this.router.navigate(['/canlogin'])
   }
-  changePassword(){
+  changePassword() {
     this.router.navigate(['/changePassword'])
   }
-  isChecked(lang:any){
-    let value=false
-    console.log(lang,"lahdksd")
-    if(lang=='Speck'){
+  isChecked(lang: any) {
+    let value = false
+    console.log(lang, "lahdksd")
+    if (lang == 'Speck') {
 
-      value =true
+      value = true
 
     }
     return value;
   }
-  deactivate(){
-    this.candidateservice.deactivate().subscribe((res:any) => {
+  deactivate() {
+    this.candidateservice.deactivate().subscribe((res: any) => {
       this.router.navigate(['/canlogin'])
     })
+  }
+  homePage(tab: any) {
+
+  }
+  isEdit = 10;
+  edit() {
+    this.tab = 10;
   }
 }
