@@ -60,8 +60,8 @@ export class SendJobComponent implements OnInit {
        mailId: this.jobId,
        subject:this.postForm.get('subject')?.value,
        signature:this.postForm.get('signature')?.value,
-       email:this.postForm.get('email')?.value
-
+       email:'noreply-tj@uyarchi.com',
+       mail:'job'
     }
     this.empservice.sendajob(data).subscribe((res:any)=>{
         console.log(res)
