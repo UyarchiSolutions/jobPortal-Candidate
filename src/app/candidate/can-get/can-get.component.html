@@ -562,14 +562,14 @@
                 Salary
               </div>
               <div class="col">
-                <!-- <i class='fas fa-sort-amount-down'></i> -->
                 Applied
               </div>
               <div class="col">
                 <!-- <i class='fas fa-sort-amount-down'></i> -->
-                <div class="dropdown">
+                <div class="dropdown" style="text-align: center;">
                   <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false" style="background: transparent;padding:unset;border: none;font-size: 12px;">
+                    aria-expanded="false"
+                    style="background: transparent;padding:unset;border: none;font-size: 12px;text-align: center;">
                     Sortby<i class="ms-1"><svg width="10" height="5" viewBox="0 0 10 5" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -578,10 +578,11 @@
                       </svg>
                     </i>
                   </button>
-                  <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  <ul class="dropdown-menu" id="mydiv" style="cursor: pointer;">
+                    <li (click)="filter('null')">select</li>
+                    <li (click)="filter('viewed')">Viewed</li>
+                    <li (click)="filter('shortlisted')">Shortlisted</li>
+                    <li (click)="filter('rejected')">Rejected</li>
                   </ul>
                 </div>
               </div>
@@ -944,7 +945,7 @@
           <!-- notification -->
           <div *ngIf="tab == 5">
 
-            <div class="row content-card-heading no-margin padding10">
+            <div class="row content-card-heading padding10">
               <div class="col">
                 Company
               </div>
@@ -987,7 +988,7 @@
                 {{job.date}}
               </div>
               <div class="col">
-                <a (click)="applynotification(job._id)">Apply Now </a>
+                <a (click)="applynotification(job._id)">{{job.appliedStatus=='Applied'?job.appliedStatus:"Apply now"}} </a>
               </div>
             </div>
           </div>
@@ -998,9 +999,9 @@
             </div>
             <div class="col">
               <div class="pageination-logo">
-                <img src="../../assets/image/left-arrow.png" alt="" class="p-left">
-                <div class="pageination-number">1</div>
-                <img src="../../assets/image/right-arrow.png" alt="" class="p-right">
+                <button style="border: none;" (click)="pagination(0)" ><img src="../../assets/image/left-arrow.png" alt="" style="margin-top: 17px;" class="p-left"></button>
+                <div class="pageination-number">{{page+1}}</div>
+                <button  style="border: none;" (click)="pagination(1)"><img src="../../assets/image/right-arrow.png" style="margin-top: 17px;" alt="" class="p-right"></button>
               </div>
             </div>
             <div class="col">
@@ -1011,12 +1012,12 @@
                   aria-expanded="false">
                   <i class='fas fa-sort-amount-down'></i> Range
                 </button>
-                <ul class="dropdown-menu">
-                  <li>10</li>
-                  <li>20</li>
-                  <li>40</li>
-                  <li>60</li>
-                  <li>80</li>
+                <ul style="cursor: pointer;" class="dropdown-menu">
+                  <li (click)="changeRange(2)">10</li>
+                  <li (click)="changeRange(20)">20</li>
+                  <li (click)="changeRange(40)">40</li>
+                  <li (click)="changeRange(60)">60</li>
+                  <li (click)="changeRange(80)">80</li>
                 </ul>
               </div>
             </div>
@@ -1097,13 +1098,6 @@
         <div>
           <div class="row">
             <div class="register-form" [formGroup]="searchForm">
-              <!-- <div class="single-row">
-                <label for="">Designation/Keyskills:</label>
-                <div class="content-box">
-                  <input type="text" class="form-control" placeholder="Enter  Any Keywords">
-                </div>
-
-              </div> -->
               <div class="single-row">
                 <label for="">Key Skills :</label>
                 <div class="content-box">
@@ -1125,13 +1119,18 @@
               <div class="single-row">
                 <label for="">Salary Range:</label>
                 <div class="content-box">
-                  <select id="select" class="form-control" formControlName="Salary">
+                  <select id="select" class="form-control" (change)="salaryrange($event)">
                     <option [ngValue]="null">From</option>
-                    <option value="0 to 1 lac">0 to 1 lac</option>
-                    <option value="2 to 4 lac">2 to 4 lac</option>
-                    <option value="4 to 6 lac">4 to 6 lac</option>
-                    <option value="6 to 8 lac">6 to 8 lac</option>
-                    <option value="8 to 9 lac">8 to 9 lac</option>
+                    <option value="1-2">1 to 2 lac</option>
+                    <option value="2-3">2 to 3 lac</option>
+                    <option value="2-4">2 to 4 lac</option>
+                    <option value="4-5">4 to 5 lac</option>
+                    <option value="5-8">5 to 8 lac</option>
+                    <option value="8-10">8 to 10 lac</option>
+                    <option value="10-13">10 to 13 lac</option>
+                    <option value="13-15">13 to 15 lac</option>
+                    <option value="15-20">15 to 20 lac</option>
+                    <option value="30-more">30 to morelac</option>
                   </select>
                 </div>
               </div>
@@ -1170,8 +1169,6 @@
                   </select>
                 </div>
               </div>
-
-
               <div class="single-row">
                 <label for="">Job Location:</label>
                 <div class="content-box">
@@ -1183,6 +1180,7 @@
                 <div class="content-box">
                   <select id="select" class="form-control">
                     <option [ngValue]="null">Select</option>
+                    <option value="{{insdustry._id}}" *ngFor="let insdustry of industry">{{insdustry.Industry}}</option>
                   </select>
                 </div>
               </div>
