@@ -591,11 +591,19 @@ label{
     margin-left: 6px
 }
 .statusstyle{
-    color: #C11B17;
+    color: #de0711;
+    font-weight: 600;
+}
+.statusstyl1{
+    color: #1d6fdb;
     font-weight: 600;
 }
 .statusstyle1{
     color: #1E90FF;
+    font-weight: 600;
+}
+.statusstyle2{
+    color: green;
     font-weight: 600;
 }
 .refineup :hover{
@@ -655,4 +663,23 @@ margin-right: 13px;
 .actives{
     color: #0A2647;
     background-color: #fff !important;
+}
+.mailstatus{
+    color: #fff;
+}
+.notes{
+    border: transparent;
+}
+.rangdrop{
+    background-color: transparent;
+    border:none;
+}
+.dropup .dropdown-toggle .show{
+    background-color: #fff;
+    color: #000;
+}
+.dropup .dropdown-menu.show {
+    display: block;
+    min-width: 135px !important;
+    padding: 2px 2px 2px 13px;
 }

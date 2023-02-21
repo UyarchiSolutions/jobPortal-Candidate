@@ -25,6 +25,9 @@ export class EmpHomeComponent implements OnInit {
     allowSearchFilter: true,
     enableCheckAll: false
   };
+  notesForm:any = this.fb.group({
+    comment: new FormControl('',Validators.required)
+  })
   searchForm: any = this.fb.group({
     keyskills: new FormControl([]),
     Location: new FormControl([]),
@@ -43,6 +46,8 @@ export class EmpHomeComponent implements OnInit {
     department:this.fb.array([]),
     industry:this.fb.array([]),
     noticeperiod:this.fb.array([]),
+    range:new FormControl(1),
+    page:new FormControl(0),
   })
   folderForm:any = this.fb.group({
     folderName:new FormControl(null)
@@ -79,6 +84,11 @@ export class EmpHomeComponent implements OnInit {
   cityList: any;
   Tab=0;
   savedList: any;
+  mailList: any;
+  notes_can_id: any;
+  comments: any;
+  page = 0;
+  range = 1;
   constructor(private empservice: EmpServiceService,private fb:FormBuilder, private router: Router,) { }
   is_viewpost : boolean = false;
   is_viewapplies : boolean = false;
@@ -96,7 +106,6 @@ export class EmpHomeComponent implements OnInit {
     this.cat()
     this.getall_indus()
     this.get_city()
-    this.getsaved_can()
   }
   getJobpostDetails(){
     this.empservice.myjobPost().subscribe((res:any)=>{
@@ -139,7 +148,9 @@ export class EmpHomeComponent implements OnInit {
   get_can(){
     this.empservice.view_can(this.searchForm.value).subscribe((res:any)=>{
       console.log(res);
-     this.can_data = res.user
+     this.can_data = res.user.data
+     console.log(this.can_data);
+
     })
   }
   search(){
@@ -354,6 +365,24 @@ get_appliedcan_qualification(list:any){
     return this.data_list.sslcQualification
   }
   
+}
+get_appliedcanall_qualification(list:any){
+  this.data_list = list?.candidateDetail[0]
+  if(this.data_list.drQualification == 'Doctorate/phD'){
+    return this.data_list.drcourses + ' ' + this.data_list.drSpecialization
+  }
+  else if(this.data_list.pgQualification == 'Masters/Post-Graduation'){
+    return this.data_list.pgCourse + ' ' + this.data_list.pgSpecialization
+  }
+  else if(this.data_list.ugQualification == 'Graduation/Diploma'){
+    return this.data_list.ugCourse + ' ' + this.data_list.ugSpecialization
+  }
+  else if(this.data_list.hsQualification == 'HSC'){
+    return this.data_list.hsQualification
+  }
+  else{
+    return this.data_list.sslcQualification
+  }
 }
 get_qua_list(list:any){
   console.log()
@@ -587,14 +616,48 @@ edit_jobpost(id:any){
   const queryString = new URLSearchParams(id).toString()
   this.router.navigateByUrl('/edit-jobpost?id=' + queryString)
 }
+
+viewsaved_can(){
+  this.Tab = 3
+  this.range = 5
+  this.page =0
+  this.getsaved_can()
+}
 getsaved_can(){
-  this.empservice.getall_saved_candidates().subscribe((res:any)=>{
+  this.empservice.getall_saved_candidates(this.range,this.page).subscribe((res:any)=>{
     console.log(res);
-    this.savedList = res
+    this.savedList = res.data
   })
 }
-viewsaved_can(){
-  console.log("xdvfdvf")
-  this.Tab = 3
+notify(){
+  this.Tab =5
+  this.range = 5
+  this.page =0
+  this.empservice.get_mail_notification(this.range,this.page).subscribe((res:any)=>{
+    console.log(res);
+    this.mailList = res.data
+  })
+}
+autoGrowTextZone(e:any) {
+  e.target.style.height = "0px";
+  e.target.style.height = (e.target.scrollHeight + 25)+"px";
+}
+getcanid_notes(id:any,comment:any){
+   this.notes_can_id = id
+   console.log(this.notes_can_id,this.comments)
+}
+submitNotes(){
+  var data={
+    candidateId:this.notes_can_id,
+    comment:this.notesForm.get('comment')?.value
+  }
+  this.empservice.notes(data).subscribe((res:any)=>{
+    console.log(res);
+    this.notesForm.reset()
+    this.notify()
+  })
+}
+clkrange(count:any){
+
 }
 }

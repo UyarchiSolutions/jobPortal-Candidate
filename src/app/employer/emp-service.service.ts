@@ -187,10 +187,16 @@ return this.http.get(this.baseurl+'/v1/district/getAllDistrict_all/all')
 saved_can(data:any){
   return this.http.post(this.baseurl+'/v1/employerCandidateSearch/createSaveSeprate',data,{headers:{auth:Cookie.get('emptoken')}})
 }
-getall_saved_candidates(){
-  return this.http.get(this.baseurl+'/v1/employerCandidateSearch/getSaveSeprate',{headers:{auth:Cookie.get('emptoken')}})
+getall_saved_candidates(range:number,page:number){
+  return this.http.get(this.baseurl+'/v1/employerCandidateSearch/getSaveSeprate/'+range+'/'+page,{headers:{auth:Cookie.get('emptoken')}})
 }
 updatePostAJob(id:any,data:any){
 return this.http.put(this.baseurl+'/v1/employerdetail/updateEmpDetails/'+id,data)
+}
+get_mail_notification(range:number,page:number){
+return this.http.get(this.baseurl+'/v1/employerdetail/getAll_Mail_notification_employerside/'+range+'/'+page,{headers:{auth:Cookie.get('emptoken')}})
+}
+notes(data:any){
+  return this.http.post(this.baseurl+'/v1/employerdetail/employer_comment',data,{headers:{auth:Cookie.get('emptoken')}})
 }
 }

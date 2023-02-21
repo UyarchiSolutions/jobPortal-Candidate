@@ -52,7 +52,7 @@
                                         </select>
                                     </div>
 
-                                    <div *ngIf="getstatus == ''"><button type="submit"
+                                    <div *ngIf="getstatus != 'rejected' && getstatus != 'shortlisted'"><button type="submit"
                                             class="btn btn-brand-trans register-btn btn-shadow btn-padding" (click)="status('rejected')">Reject</button>
                                     </div>
                                     <div *ngIf="getstatus == 'rejected'">

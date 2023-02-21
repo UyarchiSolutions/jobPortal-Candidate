@@ -130,3 +130,106 @@ label{
     border-radius: 5px;
 }
 
+.job-post-register-content{
+    margin-top: 10px !important;
+}
+.job-post-register-content{
+ 
+    height: 90vh !important;
+    width: 60vw !important;
+    overflow: scroll;
+    }
+
+.job-card {
+    color: #0A2647;
+    font-weight: 400;
+
+}
+
+.job-card i {
+    color: #D9D9D9;
+}
+.job-card{
+
+    border-bottom: solid #E7E9ED 4px;
+}
+.border-remove {
+    border: none;
+}
+.card-content-data{
+    display: flex;
+    justify-content: space-between;
+}
+.job-view {
+    margin: 16px;
+}
+.card-body{
+    padding: 16px !important;
+    width: 95% !important;
+    margin: auto;
+    margin-top: 20px;
+    border-top:none !important;
+    box-shadow: none !important;
+
+}
+
+.card-job-content-heading{
+    width: 45%;
+}
+.card-job-title {
+    font-size: 26px;
+    font-weight: 500;
+
+}
+.card-job-sub-title {
+    font-size: 16px;
+}
+.card-job-content-data div {
+    margin-top: 5px;
+}
+.single-row1 {
+    display:flex;
+    align-items: normal !important;
+    justify-content: flex-start !important;
+    font-size: 14px;
+}
+
+.single-row1 label {
+    min-width: 30%;
+}
+.single-row1 .content-box1 button{
+    padding: 8px 66px;
+    font-weight: 500;
+}
+.content-box1 {
+    font-weight: 400;
+}
+.content-box1 button{
+    padding: 6px 12px !important;
+    min-width: 150px;
+}
+.content-box1 h5{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.second-row{
+    border-top: solid  rgba(0, 0, 0, 0.25) 1px ;
+    border-bottom: solid  rgba(0, 0, 0, 0.25) 1px ;
+
+}
+.second-row p{
+    margin-bottom: 8px;
+}
+.card-header-heading{
+    margin-bottom: 20px;
+}
+.job-post-view-logo {
+    width: 70px;
+}
+.third-row{
+    margin: 8px 16px !important;
+}
+.fourth-row{
+    padding: 16px 0;
+}

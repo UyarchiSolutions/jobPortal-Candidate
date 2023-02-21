@@ -317,9 +317,7 @@
                         <div class="sort col col-1">
                             <i class='fas fa-sort-amount-down'></i>
                         </div>
-
                         <div class="col" style="cursor:pointer" (click)="can_list()" ngClass="{{Tab == 0?'actives':'all-candidates'}}">
-
                             <i class='fas fa-user-alt'></i>
                             All Candidates
                         </div>
@@ -339,8 +337,21 @@
                             Saved Candidates
                         </div>
 
-                        <div class="icon-alert col-1">
-                            <i class='fas fa-sort-amount-down'></i>
+                        <div class="icon-alert col-1" (click)="notify()" ngClass="{{Tab == 5?'actives':'all-candidates'}}">
+                            <i *ngIf="Tab == 5"><svg width="24" height="25" viewBox="0 0 24 25" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M21.6 17.8571H24V20.2381H0V17.8571H2.4V9.52381C2.4 6.99794 3.41143 4.57552 5.21178 2.78946C7.01212 1.0034 9.45392 0 12 0C14.5461 0 16.9879 1.0034 18.7882 2.78946C20.5886 4.57552 21.6 6.99794 21.6 9.52381V17.8571ZM19.2 17.8571V9.52381C19.2 7.62941 18.4414 5.81259 17.0912 4.47305C15.7409 3.1335 13.9096 2.38095 12 2.38095C10.0904 2.38095 8.25909 3.1335 6.90883 4.47305C5.55857 5.81259 4.8 7.62941 4.8 9.52381V17.8571H19.2ZM8.4 22.619H15.6V25H8.4V22.619Z"
+                                  fill="#0A2647" />
+                              </svg>
+                            </i>
+                            <i *ngIf="Tab != 5"><svg width="24" height="25" viewBox="0 0 24 25" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M21.6 17.8571H24V20.2381H0V17.8571H2.4V9.52381C2.4 6.99794 3.41143 4.57552 5.21178 2.78946C7.01212 1.0034 9.45392 0 12 0C14.5461 0 16.9879 1.0034 18.7882 2.78946C20.5886 4.57552 21.6 6.99794 21.6 9.52381V17.8571ZM19.2 17.8571V9.52381C19.2 7.62941 18.4414 5.81259 17.0912 4.47305C15.7409 3.1335 13.9096 2.38095 12 2.38095C10.0904 2.38095 8.25909 3.1335 6.90883 4.47305C5.55857 5.81259 4.8 7.62941 4.8 9.52381V17.8571H19.2ZM8.4 22.619H15.6V25H8.4V22.619Z"
+                                  fill="white" />
+                              </svg>
+                            </i>
                         </div>
                         <!-- </div> -->
                     </div>
@@ -400,7 +411,9 @@
                             <div class="col">
                                  Experience
                             </div>
-                            
+                            <div class="sort col col-1">
+                                <i class='fas fa-sort-amount-down'></i>
+                            </div>
                         </div>
                         <div class="row content-card no-margin padding10" *ngFor="let list of can_data" style="cursor:pointer">
                             <div class="col-1">
@@ -426,7 +439,12 @@
                             <div class="col">
                                 <a [routerLink]="['/can-details']" [queryParams]="{id:list.candiadteId}">{{list.experienceYear}}Year - {{list.experienceMonth}}Months</a>
                             </div>
-                         
+                            <div class="col col-1">
+                                <i data-bs-toggle="modal" data-bs-target="#notes" (click)="getcanid_notes(list.candiadteId,list.comment)"><svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 10.76C1 12.36 2.15179 13.754 3.77641 13.987C4.87179 14.144 5.97949 14.266 7.09744 14.351C7.57538 14.388 8.01333 14.632 8.28 15.022L11 19L13.72 15.022C13.9867 14.632 14.4246 14.388 14.9026 14.352C16.0205 14.266 17.1282 14.144 18.2236 13.987C19.8482 13.754 21 12.361 21 10.759V4.741C21 3.139 19.8482 1.746 18.2236 1.513C15.8318 1.17072 13.4175 0.99926 11 1C8.54667 1 6.13436 1.175 3.77641 1.513C2.15179 1.746 1 3.14 1 4.741V10.759V10.76Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </i>
+                            </div>
                         </div>
                         <div class="row no-margin padding10" style="color:#fff;background-color: #82C3EC;cursor: pointer;">
                             <div class="col">
@@ -457,7 +475,19 @@
                             </div>
                             <div class="col mt-2">
                                 <i class='fas fa-sort-amount-down'></i>
-                                Range
+                                <div class="btn-group dropup">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle rangdrop" data-bs-toggle="dropdown" aria-expanded="false">
+                                      Range
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li (change)="clkrange('10')">10</li>
+                                        <li (change)="clkrange('20')">20</li>
+                                        <li (change)="clkrange('30')">40</li>
+                                        <li (change)="clkrange('40')">60</li>
+                                        <li (change)="clkrange('50')">80</li>
+                                        <li (change)="clkrange('60')">160</li>
+                                    </ul>
+                                  </div>
                             </div>
                         </div>
                     </div>
@@ -620,7 +650,9 @@
                             <div class="col">
                                 Status
                             </div>
-                            
+                            <div class="sort col col-1">
+                                <i class='fas fa-sort-amount-down'></i>
+                            </div>
                         </div>
                         <div class="row content-card no-margin padding10" *ngFor="let list of applied_data" style="cursor:pointer">
                             <div class="col-1">
@@ -646,8 +678,50 @@
                             <div class="col">
                                 <a [routerLink]="['/emp-action']" [queryParams]="{id:list.candidateData._id,job:list._id}">{{list.candidateData.experienceYear}}Year - {{list.candidateData.experienceMonth}}Months </a>
                             </div>
-                            <div class="col" [ngClass]="{'statusstyle': list.status == 'rejected'}">
+                            <div class="col statusstyle" *ngIf="list.status == 'rejected'">
+                                <i><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_871_2590)">
+                                      <path
+                                        d="M12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22ZM12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20ZM12 10.586L14.828 7.757L16.243 9.172L13.414 12L16.243 14.828L14.828 16.243L12 13.414L9.172 16.243L7.757 14.828L10.586 12L7.757 9.172L9.172 7.757L12 10.586Z"
+                                        fill="#FF0000" />
+                                    </g>
+                                    <defs>
+                                      <clipPath id="clip0_871_2590">
+                                        <rect width="24" height="24" fill="white" />
+                                      </clipPath>
+                                    </defs>
+                                  </svg></i>
                                 {{list.status}}
+                            </div>
+                            <div class="col statusstyle1" *ngIf="list.status == 'shortlisted'">
+                               <i><svg width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_871_2584)">
+                                <path
+                                    d="M20.8889 23.2222H3.11111C2.81643 23.2222 2.53381 23.1052 2.32544 22.8968C2.11706 22.6884 2 22.4058 2 22.1111V2.11111C2 1.81643 2.11706 1.53381 2.32544 1.32544C2.53381 1.11706 2.81643 1 3.11111 1H20.8889C21.1836 1 21.4662 1.11706 21.6746 1.32544C21.8829 1.53381 22 1.81643 22 2.11111V22.1111C22 22.4058 21.8829 22.6884 21.6746 22.8968C21.4662 23.1052 21.1836 23.2222 20.8889 23.2222ZM19.7778 21V3.22222H4.22222V21H19.7778ZM7.55556 6.55556H16.4444V8.77778H7.55556V6.55556ZM7.55556 11H16.4444V13.2222H7.55556V11ZM7.55556 15.4444H13.1111V17.6667H7.55556V15.4444Z"
+                                    fill="#1877F2" />
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_871_2584">
+                                    <rect width="24" height="24" fill="white" />
+                                </clipPath>
+                                </defs>
+                            </svg>
+                            </i>
+                                {{list.status}}
+                            </div>
+                            <div class="col statusstyle2" *ngIf="list.status == 'Applied'">
+                                <i><svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 12.5C2.6862 12.5 0 9.8138 0 6.5C0 3.1862 2.6862 0.5 6 0.5C9.3138 0.5 12 3.1862 12 6.5C12 9.8138 9.3138 12.5 6 12.5ZM6 11.3C7.27304 11.3 8.49394 10.7943 9.39411 9.89411C10.2943 8.99394 10.8 7.77304 10.8 6.5C10.8 5.22696 10.2943 4.00606 9.39411 3.10589C8.49394 2.20571 7.27304 1.7 6 1.7C4.72696 1.7 3.50606 2.20571 2.60589 3.10589C1.70571 4.00606 1.2 5.22696 1.2 6.5C1.2 7.77304 1.70571 8.99394 2.60589 9.89411C3.50606 10.7943 4.72696 11.3 6 11.3ZM5.4018 8.9L2.856 6.3542L3.7044 5.5058L5.4018 7.2032L8.7954 3.809L9.6444 4.6574L5.4018 8.9Z" fill="#34A853"/>
+                                    </svg>
+                                </i>
+                                 {{list.status}}
+                             </div>
+                             <div class="col col-1">
+                                <i data-bs-toggle="modal" data-bs-target="#notes" (click)="getcanid_notes(list.candidateData._id,list.comment)"><svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 10.76C1 12.36 2.15179 13.754 3.77641 13.987C4.87179 14.144 5.97949 14.266 7.09744 14.351C7.57538 14.388 8.01333 14.632 8.28 15.022L11 19L13.72 15.022C13.9867 14.632 14.4246 14.388 14.9026 14.352C16.0205 14.266 17.1282 14.144 18.2236 13.987C19.8482 13.754 21 12.361 21 10.759V4.741C21 3.139 19.8482 1.746 18.2236 1.513C15.8318 1.17072 13.4175 0.99926 11 1C8.54667 1 6.13436 1.175 3.77641 1.513C2.15179 1.746 1 3.14 1 4.741V10.759V10.76Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </i>
                             </div>
                         </div>
                     </div>
@@ -707,6 +781,9 @@
                             <div class="col">
                                  Experience
                             </div>
+                            <div class="sort col col-1">
+                                <i class='fas fa-sort-amount-down'></i>
+                            </div>
                             
                         </div>
                         <div class="row content-card no-margin padding10" *ngFor="let list of savedList" style="cursor:pointer">
@@ -733,6 +810,13 @@
                             <div class="col">
                                 <a>{{list.candidateData.experienceYear}}Year - {{list.candidateData.experienceMonth}}Months</a>
                             </div>
+                            <div class="col col-1">
+                                <i data-bs-toggle="modal" data-bs-target="#notes" (click)="getcanid_notes(list.candidateData._id,list.comment)"><svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 10.76C1 12.36 2.15179 13.754 3.77641 13.987C4.87179 14.144 5.97949 14.266 7.09744 14.351C7.57538 14.388 8.01333 14.632 8.28 15.022L11 19L13.72 15.022C13.9867 14.632 14.4246 14.388 14.9026 14.352C16.0205 14.266 17.1282 14.144 18.2236 13.987C19.8482 13.754 21 12.361 21 10.759V4.741C21 3.139 19.8482 1.746 18.2236 1.513C15.8318 1.17072 13.4175 0.99926 11 1C8.54667 1 6.13436 1.175 3.77641 1.513C2.15179 1.746 1 3.14 1 4.741V10.759V10.76Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </i>
+                                    
+                            </div>
                          
                         </div>
                         <div class="row no-margin padding10" style="color:#fff;background-color: #82C3EC;cursor: pointer;">
@@ -749,6 +833,144 @@
                                   </div>
                             </div>
                           
+                            <div class="col mt-2" data-bs-toggle="modal" data-bs-target="#savefolder" style="cursor:pointer">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Save
+                            </div>
+                            <div class="col mt-1">
+                                <div class="pageination-logo">
+                                    <img src="../../assets/image/left-arrow.png" alt="" class="p-left">
+                                    <div class="pageination-number">1</div>
+                                    <img src="../../assets/image/right-arrow.png" alt="" class="p-right">
+                                </div>
+                            </div>
+                            <div class="col">
+                            </div>
+                            <div class="col mt-2">
+                                <i class='fas fa-sort-amount-down'></i>
+                                Range
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="Tab == 5">
+                        <div class="row no-margin bg-grey">
+                            <div class="col">
+
+                                <div class="filter-label">
+
+                                    <span class="badge bg-light text-dark">
+                                        <span>BA-English</span>
+
+                                        <span class="close-mark">x</span>
+                                    </span>
+
+                                    <span class="badge bg-light text-dark">
+                                        <span>Chennai</span>
+
+                                        <span class="close-mark">x</span>
+                                    </span>
+
+
+                                    <span class="badge bg-light text-dark">
+                                        <span>0 to 2 Years</span>
+
+                                        <span class="close-mark">x</span>
+                                    </span>
+
+
+
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row content-card-heading no-margin padding10"  style="font-size:13px" >
+                            <div class="col-1">
+                                <div class="form-check">
+                                     <input class="form-check-input" type="checkbox" id="checkboxNoLabel" value="" aria-label="...">
+                                 </div>
+                            </div>
+                            <div class="col">
+                                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                                Name
+                            </div>
+                            <div class="col">
+                                Location
+                            </div>
+                            <div class="col">
+                               Qualification
+                            </div>
+                            <div class="col">
+                                Experience
+                            </div>
+                            <div class="col">
+                                 Job Tittle
+                            </div>
+                            <div class="col">
+                                Status
+                           </div>
+                           <div class="sort col col-1">
+                            <i class='fas fa-sort-amount-down'></i>
+                            </div>
+                            
+                        </div>
+                        <div class="row content-card no-margin padding10" *ngFor="let list of mailList" style="cursor:pointer">
+                            <div class="col-1">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="checkboxNoLabel" [value]="list.candidateDetail[0]._id" (change)="canId($event)" value="" aria-label="...">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <a>{{list.candidateDetail[0].name}}</a>
+                            </div>
+                            <div class="col">
+                                <a>{{list.candidateDetail[0].locationCurrent}}</a>
+                            </div>
+                            <div class="col">
+                                <a>{{get_appliedcanall_qualification(list)}}</a>
+                            </div>
+                            <div class="col">
+                                <a>{{list.candidateDetail[0].experienceYear}}Year - {{list.candidateDetail[0].experienceMonth}}Months</a>
+                            </div>
+                            <div class="col" style="text-decoration: underline;">
+                                <a>{{list.jobTittle}}</a>
+                            </div>
+                            <div class="col mailstatus" *ngIf="list.status == 'Pending'">
+                                <i><svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0.6 0.0996094H11.4C11.5591 0.0996094 11.7117 0.162823 11.8243 0.275345C11.9368 0.387867 12 0.540479 12 0.699609V10.2996C12 10.4587 11.9368 10.6114 11.8243 10.7239C11.7117 10.8364 11.5591 10.8996 11.4 10.8996H0.6C0.44087 10.8996 0.288258 10.8364 0.175736 10.7239C0.0632141 10.6114 0 10.4587 0 10.2996V0.699609C0 0.540479 0.0632141 0.387867 0.175736 0.275345C0.288258 0.162823 0.44087 0.0996094 0.6 0.0996094ZM10.8 2.64241L6.0432 6.90241L1.2 2.62921V9.69961H10.8V2.64241ZM1.5066 1.29961L6.0366 5.29681L10.5012 1.29961H1.5066Z" fill="white"/>
+                                    </svg></i>
+                                <span style="margin-left:11px">Mailed</span>
+                            </div>
+                            <div class="col" style="color: green;" *ngIf="list.status == 'Applied'">
+                                <i><svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 12.5C2.6862 12.5 0 9.8138 0 6.5C0 3.1862 2.6862 0.5 6 0.5C9.3138 0.5 12 3.1862 12 6.5C12 9.8138 9.3138 12.5 6 12.5ZM6 11.3C7.27304 11.3 8.49394 10.7943 9.39411 9.89411C10.2943 8.99394 10.8 7.77304 10.8 6.5C10.8 5.22696 10.2943 4.00606 9.39411 3.10589C8.49394 2.20571 7.27304 1.7 6 1.7C4.72696 1.7 3.50606 2.20571 2.60589 3.10589C1.70571 4.00606 1.2 5.22696 1.2 6.5C1.2 7.77304 1.70571 8.99394 2.60589 9.89411C3.50606 10.7943 4.72696 11.3 6 11.3ZM5.4018 8.9L2.856 6.3542L3.7044 5.5058L5.4018 7.2032L8.7954 3.809L9.6444 4.6574L5.4018 8.9Z" fill="#34A853"/>
+                                    </svg>
+                                </i>
+                                <span style="margin-left:11px">{{list.status}}</span>
+                            </div>
+                            <div class="col col-1">
+                                <i data-bs-toggle="modal" data-bs-target="#notes" (click)="getcanid_notes(list.candidateDetail[0]._id,list.comment)"><svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 10.76C1 12.36 2.15179 13.754 3.77641 13.987C4.87179 14.144 5.97949 14.266 7.09744 14.351C7.57538 14.388 8.01333 14.632 8.28 15.022L11 19L13.72 15.022C13.9867 14.632 14.4246 14.388 14.9026 14.352C16.0205 14.266 17.1282 14.144 18.2236 13.987C19.8482 13.754 21 12.361 21 10.759V4.741C21 3.139 19.8482 1.746 18.2236 1.513C15.8318 1.17072 13.4175 0.99926 11 1C8.54667 1 6.13436 1.175 3.77641 1.513C2.15179 1.746 1 3.14 1 4.741V10.759V10.76Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </i>
+                                    
+                            </div>
+                        </div>
+                        <div class="row no-margin padding10" style="color:#fff;background-color: #82C3EC;cursor: pointer;">
+                            <div class="col">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-light p-1">Send</button>
+                                    <button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                      <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                      <li (click)="sendmail()"><a class="dropdown-item">Send a mail</a></li>
+                                      <li (click)="sendjob()"><a class="dropdown-item">Send a job</a></li>
+                                    </ul>
+                                  </div>
+                            </div>
                             <div class="col mt-2" data-bs-toggle="modal" data-bs-target="#savefolder" style="cursor:pointer">
                                 <i class='fas fa-sort-amount-down'></i>
                                 Save
@@ -1299,3 +1521,29 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
     </div>
 </div>
 </div>
+
+<div class="modal fade" id="notes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"  [formGroup]="notesForm">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+            <div class="">
+                <div class="" *ngIf="notesForm.get('comment')?.value">
+                    <textarea class="form-control notes" style="min-height:0px" (keyup)="autoGrowTextZone($event)" id="exampleFormControlTextarea1" rows="3"
+                        placeholder="Type Your Notes Here...."
+                        formControlName="comment"></textarea>
+                </div>
+                <div class="" *ngIf="comments == ''">
+                    <textarea class="form-control notes" style="min-height:0px" (keyup)="autoGrowTextZone($event)" id="exampleFormControlTextarea1" rows="3"
+                        placeholder="Type Your Notes Here...."
+                        formControlName="comment"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer" *ngIf="comments == ''"> 
+          <button type="button" class="btn btn-primary" (click)="submitNotes()" data-bs-dismiss="modal">Submit</button>
+        </div>
+        <div class="modal-footer" *ngIf="notesForm.get('comment')?.value"> 
+            <button type="button" class="btn btn-primary" (click)="submitNotes()" data-bs-dismiss="modal">Submit</button>
+          </div>
+      </div>
+    </div></div>
