@@ -556,13 +556,34 @@ h3 {
   margin-right: 5px;
 
 }
-.range{
+
+.range {
   border: none;
   background: transparent;
   color: black;
 }
-.dropdown #mydiv{
-  min-width:60px;
+
+.dropdown #mydiv {
+  min-width: 60px;
   padding-left: 20px;
 
+}
+
+.wrap{
+   width: 93px;
+  height: 2em;
+  line-height: 1em;
+  font-size: 14px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  margin-bottom: 12px;
+  cursor: pointer;
+  word-break: break-all;
+  overflow:hidden;
+  white-space: nowrap;
+}
+.wrap:hover{
+  overflow: visible;
+  white-space: normal;
+  height:auto;  /* just added this line */
 }

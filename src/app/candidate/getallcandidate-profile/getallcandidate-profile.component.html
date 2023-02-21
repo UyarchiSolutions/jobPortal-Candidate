@@ -743,6 +743,326 @@
             [src]="'https://streamingupload.s3.ap-south-1.amazonaws.com/bill-2022-12.pdf' | safe"></iframe>
         </div>
       </div>
+      <div class="row register-content-row " *ngIf="tab ==6">
+        <div class="col">
+        </div>
+        <div class="col">
+          <h3 style="text-align:center;color: #FD841F;font-weight: 700;">Advanced Details</h3>
+        </div>
+        <div class="col d-flex">
+          <span class="edit-icon"><i><svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M8.81431 3.4089L12.5911 7.18659L3.7768 16H0V12.2223L8.81431 3.4089ZM10.0732 2.14997L11.9616 0.260678C12.1286 0.093766 12.355 0 12.5911 0C12.8272 0 13.0536 0.093766 13.2206 0.260678L15.7393 2.77943C15.9062 2.94639 16 3.17281 16 3.4089C16 3.64498 15.9062 3.8714 15.7393 4.03836L13.85 5.92676L10.0732 2.14997Z"
+                  fill="white" />
+              </svg>
+            </i></span>
+        </div>
+        <div class="content m-auto col-8 mt-5 " *ngFor="let details of getAlldetails">
+          <div class="col-12 d-flex">
+            <label class="col-5">Key Skill : </label>
+            <p class="col-7">{{details.keyskill}}</p>
+          </div>
+
+          <div class="col-12 d-flex">
+            <label class="col-5">Salary Range : </label>
+            <p class="col-7">{{details.salaryFrom}}</p>
+          </div>
+
+          <div class="col-12 d-flex">
+            <label class="col-5">Experience : </label>
+            <p class="col-7">{{details.experienceYear}} Year {{details.experienceMonth}} Month</p>
+          </div>
+
+          <div class="col-12 d-flex">
+            <label class="col-5">Native Address : </label>
+            <p class="col-7">{{details.locationNative}}</p>
+          </div>
+
+          <div class="col-12 d-flex">
+            <label class="col-5">Notice Period : </label>
+            <p class="col-7">{{details.noticeperiod}}</p>
+          </div>
+
+          <div class="col-12 d-flex">
+            <label class="col-5">Current Skill Set : </label>
+            <p class="col-7">{{details.currentSkill}}</p>
+          </div>
+
+          <div class="col-12 d-flex">
+            <label class="col-5">Preferred Skill Set : </label>
+            <p class="col-7">{{details.preferredSkill}}</p>
+          </div>
+
+          <div class="col-12 d-flex">
+            <label class="col-5">Gender :</label>
+            <p class="col-7">{{details.gender}}</p>
+          </div>
+
+          <div class="col-12 d-flex">
+            <label class="col-5">Marital Status : </label>
+            <p class="col-7">{{details.maritalStatus}}</p>
+          </div>
+
+          <div class="col-12 d-flex">
+            <label class="col-5">Language : </label>
+            <div class="col-7">
+              <div class="col-12 d-flex flex-wrap" *ngFor="let lang of details.languages;let i=index">
+                <p class="col-3">{{lang.lang}}</p>
+                <!-- <div> -->
+
+                <div class="select col-3">
+                  <!-- <i><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g clip-path="url(#clip0_871_2590)">
+                            <path
+                              d="M12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22ZM12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20ZM12 10.586L14.828 7.757L16.243 9.172L13.414 12L16.243 14.828L14.828 16.243L12 13.414L9.172 16.243L7.757 14.828L10.586 12L7.757 9.172L9.172 7.757L12 10.586Z"
+                              fill="#FF0000" />
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_871_2590">
+                              <rect width="24" height="24" fill="white" />
+                            </clipPath>
+                          </defs>
+                        </svg></i>
+                      <i>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M8 16C3.5816 16 0 12.4184 0 8C0 3.5816 3.5816 0 8 0C12.4184 0 16 3.5816 16 8C16 12.4184 12.4184 16 8 16ZM8 14.4C9.69739 14.4 11.3253 13.7257 12.5255 12.5255C13.7257 11.3253 14.4 9.69739 14.4 8C14.4 6.30261 13.7257 4.67475 12.5255 3.47452C11.3253 2.27428 9.69739 1.6 8 1.6C6.30261 1.6 4.67475 2.27428 3.47452 3.47452C2.27428 4.67475 1.6 6.30261 1.6 8C1.6 9.69739 2.27428 11.3253 3.47452 12.5255C4.67475 13.7257 6.30261 14.4 8 14.4ZM7.2024 11.2L3.808 7.8056L4.9392 6.6744L7.2024 8.9376L11.7272 4.412L12.8592 5.5432L7.2024 11.2Z"
+                            fill="#00FF44" />
+                        </svg>
+
+                      </i> -->
+                  <label>Speak</label>
+                </div>
+                <div class="select col-3">
+                  <input type="radio" class="mb-3"><label>Read</label>
+                </div>
+                <div class="select col-3">
+                  <input type="radio" class="mb-3"><label>Write</label>
+                </div>
+                <!-- </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class=" pt-5 pb-5 row register-content-row height-register-content" style="height: fit-content;">
+          <div class="col">
+          </div>
+          <div class="col">
+            <h3 style="text-align:center;color: #FD841F;font-weight: 700;">Education Details</h3>
+          </div>
+          <div class="col"></div>
+          <div class="content m-auto" *ngFor="let details of getAlldetails">
+            <div class="content m-auto col-8 mt-5 ">
+
+              <h5 class="col-12 mb-4">Doctorate/Mphil :</h5>
+              <div class="col-12 d-flex">
+                <label class="col-5">Qualification : </label>
+                <p class="col-7">{{details.drQualification}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">University : </label>
+                <p class="col-7">{{details.drUniversity}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Specification : </label>
+                <p class="col-7">{{details.drSpecialization}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Course : </label>
+                <p class="col-7">{{details.drcourses}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Grading Sysytem : </label>
+                <p class="col-7">{{details.drGradingSystem}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Marks : </label>
+                <p class="col-7">{{details.drMarks}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Course Type : </label>
+                <p class="col-7">{{details.drCourseType}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Passed Out Year :</label>
+                <p class="col-7">{{details.drCourseDurationFrom}} To {{details.drCourseDurationTo}}</p>
+              </div>
+
+              <h5 class="col-12 mt-4 mb-4">Education Detail 2</h5>
+              <div class="col-12 d-flex">
+                <label class="col-5">Qualification : </label>
+                <p class="col-7">{{details.pgQualification}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">University : </label>
+                <p class="col-7">{{details.pgUniversity}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Specification : </label>
+                <p class="col-7">{{details.pgSpecialization }}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Course : </label>
+                <p class="col-7">{{details.pgCourse}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Grading Sysytem : </label>
+                <p class="col-7">{{details.pgGradingSystem}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Marks : </label>
+                <p class="col-7">{{details.pgMarks}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Course Type : </label>
+                <p class="col-7">{{details.pgCourseType}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Passed Out Year :</label>
+                <p class="col-7">{{details.pgCourseDurationFrom}} To {{details.pgCourseDurationTo}}</p>
+              </div>
+              <h5 class="col-12 mt-4 mb-4">Education Detail 3</h5>
+              <div class="col-12 d-flex">
+                <label class="col-5">Qualification : </label>
+                <p class="col-7">{{details.ugQualification}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">University : </label>
+                <p class="col-7">{{details.ugUniversity}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Specification : </label>
+                <p class="col-7">{{details.ugSpecialization}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Course : </label>
+                <p class="col-7">{{details.ugCourse}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Grading Sysytem : </label>
+                <p class="col-7">{{details.ugGradingSystem}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Marks : </label>
+                <p class="col-7">{{details.ugMarks}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Course Type : </label>
+                <p class="col-7">{{details.ugCourseType}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Passed Out Year :</label>
+                <p class="col-7">{{details.ugCourseDurationFrom}} To {{details.ugCourseDurationTo}}</p>
+              </div>
+              <h5 class="col-12 mt-4 mb-4">Education Detail 3</h5>
+              <div class="col-12 d-flex">
+                <label class="col-5">Qualification : </label>
+                <p class="col-7">{{details.hsQualification}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Board : </label>
+                <p class="col-7">{{details.hsBoard}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Medium : </label>
+                <p class="col-7">{{details.hsMedium}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Mark : </label>
+                <p class="col-7">{{details.hstotalmarks}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Passed out year: </label>
+                <p class="col-7">{{details.hsPassedYear}}</p>
+              </div>
+              <h5 class="col-12 mt-4 mb-4">Education Detail 3</h5>
+              <div class="col-12 d-flex">
+                <label class="col-5">Qualification : </label>
+                <p class="col-7">{{details.sslcQualification}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Board : </label>
+                <p class="col-7">{{details.sslcBoard}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Medium : </label>
+                <p class="col-7">{{details.sslcMedium}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Mark : </label>
+                <p class="col-7">{{details.sslctotalmarks}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
+                <label class="col-5">Passed out year: </label>
+                <p class="col-7">{{details.sslcPassedYear}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="register-content-row">
+          <div class="row">
+            <div class="col"></div>
+            <div class="col">
+              <h3 style="text-align:center;color: #FD841F;font-weight: 700;">Professional Details</h3>
+            </div>
+            <div class="col-4 add-pan-btn">
+              <button type="submit" class="btn btn-brand-blue mb-2 btn-custom" (click)="editProffi()">Edit
+                Profile</button>
+            </div>
+          </div>
+          <div class="content m-auto col-8 mt-5 " *ngFor="let details of getAlldetails">
+            <div class="col-12 d-flex">
+              <label class="col-5">Current Industry: </label>
+              <p class="col-7">{{details.industry}}</p>
+            </div>
+
+            <div class="col-12 d-flex">
+              <label class="col-5">Current Department : </label>
+              <p class="col-7">{{details.department}}</p>
+            </div>
+
+            <div class="col-12 d-flex">
+              <label class="col-5">Role Category : </label>
+              <p class="col-7">{{details.roleCategory}}</p>
+            </div>
+
+            <div class="col-12 d-flex">
+              <label class="col-5">Job Role : </label>
+              <p class="col-7">{{details.role}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="col-2">
