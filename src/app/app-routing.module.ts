@@ -22,6 +22,7 @@ import { CandidatechangepasswordComponent } from './candidate/candidatechangepas
 import { ForgotpasswordComponent } from './candidate/forgotpassword/forgotpassword.component';
 import { SendotpforgotComponent } from './candidate/sendotpforgot/sendotpforgot.component';
 import { NewpasswordComponent } from './candidate/newpassword/newpassword.component';
+import { RedirectComponent } from './redirect/redirect.component';
 
 const routes: Routes = [
    {path:"",component:CanHomeComponent},
@@ -67,7 +68,8 @@ const routes: Routes = [
     {path:'changePassword',component:CandidatechangepasswordComponent},
     {path:'forgotpassword',component:ForgotpasswordComponent},
     {path:'sendOtp',component:SendotpforgotComponent},
-    {path:'newPAss',component:NewpasswordComponent}
+    {path:'newPAss',component:NewpasswordComponent},
+    {path:'redirect',component:RedirectComponent}
 ];
 
 @NgModule({

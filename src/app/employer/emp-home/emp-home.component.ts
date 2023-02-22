@@ -66,7 +66,7 @@ export class EmpHomeComponent implements OnInit {
         Department = this.depart_data[index].Department;
       }
       return Department;
-    } 
+    }
     else if (type == 'role') {
       let index = this.role_data.findIndex((a: any) => a._id == value);
       let Role = '';
@@ -74,7 +74,7 @@ export class EmpHomeComponent implements OnInit {
         Role = this.role_data[index].Job_role;
       }
       return Role;
-    } 
+    }
     else if (type == 'industry') {
       let index = this.indus_data.findIndex((a: any) => a._id == value);
       let Industry = '';
@@ -82,11 +82,11 @@ export class EmpHomeComponent implements OnInit {
         Industry = this.indus_data[index].Industry;
       }
       return Industry;
-    } 
+    }
     else if (type == 'salary') {
       let Salary = value;
       return Salary;
-    } 
+    }
     else {
       return '';
     }
@@ -335,6 +335,7 @@ export class EmpHomeComponent implements OnInit {
   pushCourse(e: any) {
     const data: FormArray = this.searchForm.get('course') as FormArray;
     console.log(e);
+
     data.push(new FormControl(e.Course));
   }
   save_folder() {

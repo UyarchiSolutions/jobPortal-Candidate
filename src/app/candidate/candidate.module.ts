@@ -22,6 +22,7 @@ import { CandidatechangepasswordComponent } from './candidatechangepassword/cand
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { SendotpforgotComponent } from './sendotpforgot/sendotpforgot.component';
 import { NewpasswordComponent } from './newpassword/newpassword.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 
@@ -51,7 +52,9 @@ import { NewpasswordComponent } from './newpassword/newpassword.component';
     ReactiveFormsModule,
     HttpClientModule,
     GooglePlaceModule,
-    NgxExtendedPdfViewerModule
+    NgxExtendedPdfViewerModule,
+    NgMultiSelectDropDownModule.forRoot(),
+
   ]
 })
 export class CandidateModule { }

@@ -11,12 +11,13 @@ import { CanditateService } from '../canditate.service';
 })
 export class UpdateprofileComponent implements OnInit {
   qualification: any;
+  isSubmitted:any=false;
   profileForm: any = this.fb.group({
-    image: new FormControl('', [Validators.required]),
+    image: new FormControl(''),
     keyskill: new FormControl(null, [Validators.required]),
     dob: new FormControl('', Validators.required),
     experienceYear: new FormControl('', Validators.required),
-    experienceMonth: new FormControl('', Validators.required),
+    experienceMonth: new FormControl(''),
     expectedctc: new FormControl('', Validators.required),
     currentctc: new FormControl('', Validators.required),   //display only experience
     locationCurrent: new FormControl('', Validators.required),
@@ -27,10 +28,10 @@ export class UpdateprofileComponent implements OnInit {
     gender: new FormControl('', Validators.required),
     maritalStatus: new FormControl('', Validators.required),
     relocate: new FormControl('', Validators.required),
-    languages: this.fb.array([]),
+    languages: this.fb.array([],Validators.required),
     searchbox: new FormControl(null),
-    currentctc_th:new FormControl('', Validators.required),
-    update:new FormControl()
+    currentctc_th: new FormControl('', Validators.required),
+    update: new FormControl()
   })
   viewAll: any = [];
   keySkill: any;
@@ -41,6 +42,7 @@ export class UpdateprofileComponent implements OnInit {
   constructor(private fb: FormBuilder, private candidateService: CanditateService, private router: Router, private activateRoute: ActivatedRoute) { }
 
   ngOnInit() {
+
     this.candidateService.getKeyskill().subscribe((res: any) => {
     })
     this.candidateService.getLanguages().subscribe((res: any) => {
@@ -56,7 +58,7 @@ export class UpdateprofileComponent implements OnInit {
     const datePipe = formatDate(new Date(), 'yyyy-MM-dd', 'en-IN')
     const time = formatDate(new Date(), 'hh:mm', 'en-IN')
     this.now = datePipe
-
+  console.log(this.profileForm.get('languages')?.valid,"validators")
 
   }
   getKeyskills(value: any) {
@@ -85,7 +87,7 @@ export class UpdateprofileComponent implements OnInit {
         maritalStatus: this.viewAll[0].maritalStatus,
         relocate: this.viewAll[0].relocate,
         searchbox: this.viewAll[0].keyskill,
-        update:new FormControl('advance details')
+        update: new FormControl('advance details')
 
         // languages: this.viewAll[0].keyskill
       })
@@ -121,10 +123,14 @@ export class UpdateprofileComponent implements OnInit {
     if (value.length != 0) {
       if (value[value.length - 1] != null && value[value.length - 1] != '') {
         this.getKeyskills(value[value.length - 1])
+        console.log("well working")
+      }else{
+        console.log("working")
+        console.log(this.profileForm.get('keyskill')?.setErrors({'incorrect':true}),"bjdfjdbfjdfb")
       }
     }
     this.profileForm.get('keyskill')?.setValue(value)
-    console.log(this.profileForm.value)
+    console.log(this.profileForm.get('keyskill')?.valid,"invalid ---------->")
 
   }
   // push skills
@@ -147,16 +153,16 @@ export class UpdateprofileComponent implements OnInit {
   insLang(val: any) {
     if (val.target.checked) {
       const data = this.profileForm.get('languages').push(this.fb.group({
-        lang: new FormControl(val.target.value),
-        know: this.fb.array([])
+        lang: new FormControl(val.target.value,Validators.required),
+        know: this.fb.array([],Validators.required)
       }));
     } else {
       let index = this.languages.value.findIndex((i: any) => i.lang == val.target.value);
       if (index != -1) {
         this.languages?.removeAt(index)
       }
-      console.log(this.languages.value)
     }
+    console.log(this.profileForm.get('languages')?.invalid,"vailss")
   }
   get languages() {
     return this.profileForm.get('languages') as FormArray;
@@ -174,25 +180,28 @@ export class UpdateprofileComponent implements OnInit {
     language.get('kown')?.setValue(Known)
   }
   updateprofile() {
-    const formData=new FormData();
-    formData.append('image',this.selectImg1);
+    this.isSubmitted=true
+    const formData = new FormData();
+    formData.append('image', this.selectImg1);
     console.log(this.userId)
-    if (this.userId.tab == "0" || this.userId.id) {
-      this.candidateService.educationDetail(this.profileForm.value).subscribe((res: any) => {
-        if (this.userId.id) {
-          this.router.navigate(['/viewprofile'])
-        } else {
-          this.router.navigate(['/getAllprofile'])
-        }
-        this.candidateService.imageUpload(res.user._id, formData).subscribe((res: any) => {
+    if (this.profileForm.valid) {
+      if (this.userId.tab == "0" || this.userId.id) {
+        this.candidateService.educationDetail(this.profileForm.value).subscribe((res: any) => {
+          if (this.userId.id) {
+            this.router.navigate(['/viewprofile'])
+          } else {
+            this.router.navigate(['/getAllprofile'])
+          }
+          this.candidateService.imageUpload(res.user._id, formData).subscribe((res: any) => {
+          })
         })
-      })
-    } else {
-      this.candidateService.updateProfile(this.profileForm.value).subscribe((res: any) => {
-        this.candidateService.imageUpload(res.user._id, formData).subscribe((res: any) => {
+      } else {
+        this.candidateService.updateProfile(this.profileForm.value).subscribe((res: any) => {
+          this.candidateService.imageUpload(res.user._id, formData).subscribe((res: any) => {
+          })
+          this.router.navigate(['/can-edu'], { queryParams: { id: res.user._id } })
         })
-        this.router.navigate(['/can-edu'], { queryParams: { id: res.user._id } })
-      })
+      }
     }
 
   }
@@ -213,5 +222,12 @@ export class UpdateprofileComponent implements OnInit {
       return false
     }
 
+  }
+  expreience(val:any){
+   if(val.target.value == 0){
+    this.profileForm.get('currentctc').setErrors(null)
+   }else{
+    this.profileForm.get('currentctc').setErrors({'incorrect':true})
+   }
   }
 }

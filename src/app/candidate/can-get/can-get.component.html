@@ -316,10 +316,7 @@
           </div>
         </div>
       </div>
-
-
     </div>
-
     <div class="col-8">
 
       <div class="row register-content-row no-padding">
@@ -428,18 +425,20 @@
           <div class="row no-margin bg-grey " *ngIf="tab ==0">
             <div class="col">
               <div class="filter-label">
-                <span class="badge searchlabel bg-light text-dark" *ngIf="searchForm.get('search')?.valid">
-                  <span>{{searchForm.get('search')?.value}}</span>
-                  <span class="close-mark" (click)="searchfilter('search')">x</span>
-                </span>
-                <span class="badge searchlabel bg-light text-dark" *ngIf="searchForm.get('location')?.valid">
+                <ng-container *ngIf="searchForm.get('search')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('search')?.value">
+                    <span>{{find_value(item,'keyskill')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'keyskill')">x</span>
+                  </span>
+                </ng-container>
+                <!-- <span class="badge searchlabel bg-light text-dark" *ngIf="searchForm.get('location')?.valid">
                   <span>{{searchForm.get('location')?.value}}</span>
                   <span class="close-mark" (click)="searchfilter('location')">x</span>
                 </span>
                 <span class="badge searchlabel bg-light text-dark" *ngIf="searchForm.get('experience')?.valid">
                   <span>{{searchForm.get('experience')?.value}}</span>
                   <span class="close-mark" (click)="searchfilter('experience')">x</span>
-                </span>
+                </span> -->
               </div>
             </div>
           </div>
@@ -787,14 +786,17 @@
                   <label>Salary :</label>
                   <div class="content-box">
                     <select id="select" class="form-control" formControlName="salaryFrom">
-                      <option value="option1" disabled selected>Year</option>
-                      <option value="0">0 to 1 lac</option>
-                      <option value="1 to 2 lac">1 to 2 lac</option>
-                      <option value="2 to 4 lac">2 to 4 lac</option>
-                      <option value="4 to 6 lac">4 to 6 lac</option>
-                      <option value="6 to 8 lac">6 to 8 lac</option>
-                      <option value="8 to 9 lac">8 to 9 lac</option>
-
+                      <option [ngValue]="null">From</option>
+                      <option value="1-2">1 to 2 lac</option>
+                      <option value="2-3">2 to 3 lac</option>
+                      <option value="2-4">2 to 4 lac</option>
+                      <option value="4-5">4 to 5 lac</option>
+                      <option value="5-8">5 to 8 lac</option>
+                      <option value="8-10">8 to 10 lac</option>
+                      <option value="10-13">10 to 13 lac</option>
+                      <option value="13-15">13 to 15 lac</option>
+                      <option value="15-20">15 to 20 lac</option>
+                      <option value="30-more">30 to morelac</option>
                     </select>
                   </div>
                 </div>
@@ -989,7 +991,8 @@
                 {{job.date}}
               </div>
               <div class="col">
-                <a (click)="applynotification(job._id)">{{job.appliedStatus=='Applied'?job.appliedStatus:"Apply now"}} </a>
+                <a (click)="applynotification(job._id)">{{job.appliedStatus=='Applied'?job.appliedStatus:"Apply now"}}
+                </a>
               </div>
             </div>
           </div>
@@ -1000,9 +1003,11 @@
             </div>
             <div class="col">
               <div class="pageination-logo">
-                <button style="border: none;" (click)="pagination(0)" ><img src="../../assets/image/left-arrow.png" alt="" style="margin-top: 17px;" class="p-left"></button>
+                <button style="border: none;" (click)="pagination(0)"><img src="../../assets/image/left-arrow.png"
+                    alt="" style="margin-top: 17px;" class="p-left"></button>
                 <div class="pageination-number">{{page+1}}</div>
-                <button  style="border: none;" (click)="pagination(1)"><img src="../../assets/image/right-arrow.png" style="margin-top: 17px;" alt="" class="p-right"></button>
+                <button style="border: none;" (click)="pagination(1)"><img src="../../assets/image/right-arrow.png"
+                    style="margin-top: 17px;" alt="" class="p-right"></button>
               </div>
             </div>
             <div class="col">
@@ -1176,7 +1181,7 @@
                   <input type="text" class="form-control" placeholder="Enter  Job Location" formControlName="Location">
                 </div>
               </div>
-              <div class="single-row">
+              <!-- <div class="single-row">
                 <label for="">Prefered Industry :</label>
                 <div class="content-box">
                   <select id="select" class="form-control">
@@ -1184,7 +1189,17 @@
                     <option value="{{insdustry._id}}" *ngFor="let insdustry of industry">{{insdustry.Industry}}</option>
                   </select>
                 </div>
-              </div>
+              </div> -->
+              <div class="single-row">
+                <label for="">Course :</label>
+                <div class="content-box">
+                    <ng-multiselect-dropdown id="courseInput" class="w-100"
+                        style="background-color: white;" name='courses'
+                        [settings]="dropdownSettings" [data]="allIndustry"
+                        (onSelect)="pushCourse($event)"  (onDeSelect)="onDeSelect($event)">
+                    </ng-multiselect-dropdown>
+                </div>
+            </div>
               <div class="single-row  mt-5">
                 <label for=""> </label>
                 <div class="content-box">

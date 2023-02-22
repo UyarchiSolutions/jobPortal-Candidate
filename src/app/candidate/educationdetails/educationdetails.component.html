@@ -114,7 +114,7 @@
                       <label for="">University:</label>
                       <div class="content-box">
                         <input type="text" class="form-control" formControlName="drUniversity"
-                          placeholder="Enter Marks">
+                          placeholder="Enter University">
                       </div>
                     </div>
                     <div class="single-row">
@@ -129,11 +129,18 @@
 
                     </div>
                     <div class="single-row">
-                      <label for="">Marks :</label>
-                      <div class="content-box">
-                        <input type="text" class="form-control" formControlName="drMarks" placeholder="Enter Marks">
+                      <label for="">Grade :</label>
+                      <div class="content-box" *ngIf="phase.get('drGradingSystem')?.value=='CGPA'">
+                        <input type="text" class="form-control" formControlName="drMarks" placeholder="Enter Grade">
+                      </div>
+                      <div class="input-group content-box"  *ngIf="phase.get('drGradingSystem')?.value=='Percentage'">
+                        <input type="text" class="form-control" id="validationDefaultUsername" placeholder="Enter Grade" aria-describedby="inputGroupPrepend2" formControlName="drMarks" placeholder="Enter Grade">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroupPrepend2">%</span>
+                        </div>
                       </div>
                     </div>
+
                   </div>
                   <!-- master/post graduate -->
                   <div class="phd-master-graduation" *ngIf="phase.get('Education')?.value=='Masters/Post-Graduation'">
@@ -217,7 +224,7 @@
 
                     </div>
                     <div class="single-row">
-                      <label for="">Marks :</label>
+                      <label for="">Grade :</label>
                       <div class="content-box">
                         <input type="text" class="form-control" formControlName="pgMarks" placeholder="Enter Marks">
                       </div>
@@ -290,7 +297,7 @@
                       <label for="">University:</label>
                       <div class="content-box">
                         <input type="text" class="form-control" formControlName="ugUniversity"
-                          placeholder="Enter Marks">
+                          placeholder="Enter University">
                       </div>
                     </div>
                     <div class="single-row">
@@ -305,9 +312,9 @@
 
                     </div>
                     <div class="single-row">
-                      <label for="">Marks:</label>
+                      <label for="">Grade:</label>
                       <div class="content-box">
-                        <input type="text" class="form-control" formControlName="ugMarks" placeholder="Enter Marks">
+                        <input type="text" class="form-control" formControlName="ugMarks" placeholder="Enter Grade">
                       </div>
                     </div>
                   </div>
@@ -344,9 +351,9 @@
                     </div>
 
                     <div class="single-row">
-                      <label for="">Marks :</label>
+                      <label for="">Grade :</label>
                       <div class="content-box">
-                        <input type="text" class="form-control" placeholder="Enter Marks"
+                        <input type="text" class="form-control" placeholder="Enter Grade"
                           formControlName="hstotalmarks">
                       </div>
                     </div>
@@ -382,9 +389,9 @@
                       </div>
                     </div>
                     <div class="single-row">
-                      <label for="">Marks :</label>
+                      <label for="">Grade :</label>
                       <div class="content-box">
-                        <input type="text" class="form-control" placeholder="Enter Marks"
+                        <input type="text" class="form-control" placeholder="Enter Grade"
                           formControlName="sslctotalmarks">
                       </div>
                     </div>

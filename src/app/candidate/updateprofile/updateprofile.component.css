@@ -77,7 +77,8 @@
 .dropdown-toggle::after {
   display: none;
 }
-.dropdown-toggle{
+
+.dropdown-toggle {
   background: white;
   color: grey;
   width: 100%;
@@ -86,19 +87,36 @@
 
 }
 
-.list{
+.list {
   width: 205%;
   color: grey;
 }
-ul{
+
+ul {
   list-style: none;
 }
-ul li{
+
+ul li {
   width: 323%;
 }
-.tamil,.english{
+
+.tamil,
+.english {
   margin-top: 0 !important;
 }
-.tamil i,.english i{
+
+.tamil i,
+.english i {
   margin-right: 5px;
+}
+
+.error-data {
+  font-size: 15px;
+  color: red;
+}
+.error-data p{
+  margin-bottom: unset;
+}
+.lable-data span{
+  color: red;
 }

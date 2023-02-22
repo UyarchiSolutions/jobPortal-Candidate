@@ -39,4 +39,7 @@ export class JobpreviewPopupComponent implements OnInit {
 gotoBack(){
   this.router.navigate(['/canJobs'],{queryParams:{tab:5}})
 }
+diviedLac(value:any){
+  return value/100000
+}
 }

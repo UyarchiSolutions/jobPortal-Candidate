@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployerModule } from './employer/employer.module';
 import { NgxEditorModule } from "ngx-editor";
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { RedirectComponent } from './redirect/redirect.component';
 
 
 
@@ -21,6 +22,7 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     CanHomeComponent,
     HeaderComponent,
     FooterComponent,
+    RedirectComponent,
 
   ],
   imports: [

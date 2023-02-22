@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { CanditateService } from '../canditate.service';
 
@@ -65,6 +66,15 @@ export class CanGetComponent implements OnInit {
   roles: any = [];
   getLocation: any = [];
   status: any = 'null';
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: false,
+    idField: '_id',
+    textField: 'Industry',
+    itemsShowLimit: 3,
+    limitSelection: 3,
+    allowSearchFilter: true,
+    enableCheckAll: false,
+  };
   constructor(private canditSarvice: CanditateService, private fb: FormBuilder, private router: Router, private activateroute: ActivatedRoute) { }
 
 
@@ -86,7 +96,8 @@ export class CanGetComponent implements OnInit {
     this.getDeparment(this.range);
     this.getEducation(this.range);
     this.getIndustry(this.range);
-    this.location()
+    this.location();
+    this.getAll_industry()
   }
   get_allJobs() {
     this.searchForm.patchValue({
@@ -125,6 +136,29 @@ export class CanGetComponent implements OnInit {
       this.industry = res
     })
   }
+  allIndustry:any=[];
+  getAll_industry(){
+    this.canditSarvice.currentIndustry().subscribe((res: any) => {
+    this.allIndustry=res;
+    })
+  }
+  pushCourse(e: any) {
+    const data=this.searchForm.get('preferredIndustry')?.value;
+    console.log(e);
+    data.push(e._id);
+  }
+  onDeSelect(id:any){
+    const data=this.searchForm.get('preferredIndustry')?.value;
+    let i: number = 0;
+    data.forEach((item: any) => {
+      if (item == id._id) {
+        data.splice(i, 1);
+        console.log(data,"data------------>")
+        return;
+      }
+      i++;
+  })
+}
   // get all location
   location() {
     this.canditSarvice.getLocation().subscribe((res: any) => {
@@ -271,7 +305,7 @@ export class CanGetComponent implements OnInit {
   }
   isshow: any = false
   dispalyedData(data: any) {
-    console.log("mental")
+
     let value = data.target.value.split(",");
     if (data.target.value) {
       this.isshow = true;
@@ -286,8 +320,8 @@ export class CanGetComponent implements OnInit {
     this.setAlertForm.get('keyskillSet')?.setValue(value)
   }
   alretcheckSkill(event: any, skill: any) {
+    this.isshow=false;
     let index: any = this.setAlertForm.get('keyskillSet')?.value;
-
     console.log(skill, "skill")
     if (index.length != 0) {
       console.log(index, "index")
@@ -299,6 +333,7 @@ export class CanGetComponent implements OnInit {
     }
   }
   setalert() {
+    console.log(this.setAlertForm.value,"gggggg")
     this.canditSarvice.eduction(this.setAlertForm.value).subscribe((res: any) => {
       this.alert = false;
     })
@@ -307,20 +342,7 @@ export class CanGetComponent implements OnInit {
   advanceSearch() {
     this.get_allJobs();
   }
-  searchfilter(val: any) {
-    // const data: FormArray = this.searchForm.get('search') as FormArray;
-    // if (val == 'search') {
-    //   (this.searchForm.controls['search']).clear();
-    //   this.datavalues = [];
 
-    // }
-    // if (val == 'location') {
-    //   this.searchForm.get('location')?.setValue(null)
-    // }
-    // if (val == 'experience') {
-    //   this.searchForm.get('experience')?.setValue(null)
-    // }
-  }
   applynotification(id: any) {
     this.router.navigate(['/mail-details'], { queryParams: { id: id } })
   }
@@ -567,41 +589,68 @@ export class CanGetComponent implements OnInit {
     })
     this.get_allJobs();
   }
+  search_data: any;
+  find_value(value: any, type: any) {
+    if (type == 'keyskill') {
+      let index = this.keySkill.findIndex((a: any) => a.Skill_Title == value);
+      let keyskil = '';
+      if (index != -1) {
+        keyskil = this.keySkill[index].Skill_Title;
+      }
+      return keyskil;
+    }else {
+      return '';
+    }
+  }
+  remove_filter(value: any, type: any) {
+    if (type == 'keyskill') {
+    console.log(value,"values")
+      let skill: any = this.searchForm.get('search')?.value;
+      let index = skill.findIndex((a: any) => a.Skill_Title == value);
+      if (index != -1) {
+        this.searchForm.get('search')?.value.splice(index, 1);
+      }
+    }
+  }
   pagination(val: any) {
     console.log("sdbsjhdj")
     if (val == 1) {
       console.log("sdbsjhdj")
       this.page = this.page + 1;
-      if (this.tab == 0) {
-        this.get_allJobs();
-      } else if (this.tab == 1) {
-        this.onClickApplied();
-      } else if (this.tab == 3) {
-        this.savedJobs()
-      } else if (this.tab == 4) {
-        this.jobAlert()
-      } else if (this.tab == 5) {
-        this.notification()
-      }
-
+      console.log(this.page)
+      // if (this.tab == 0) {
+      //   this.get_allJobs();
+      // } else if (this.tab == 1) {
+      //   this.onClickApplied();
+      // } else if (this.tab == 3) {
+      //   this.savedJobs()
+      // } else if (this.tab == 4) {
+      //   this.jobAlert()
+      // } else if (this.tab == 5) {
+      //   this.notification()
+      // }
+      this.get_allJobs();
 
     }
     if (val == 0) {
       if (this.page != 0) {
         this.page = this.page - 1;
-        if (this.tab == 0) {
-          this.get_allJobs();
-        } else if (this.tab == 1) {
-          this.onClickApplied();
-        } else if (this.tab == 3) {
-          this.savedJobs()
-        } else if (this.tab == 4) {
-          this.jobAlert()
-        } else if (this.tab == 5) {
-          this.notification()
-        }
+        console.log(this.page)
+        this.get_allJobs();
+        // if (this.tab == 0) {
+        //   this.get_allJobs();
+        // } else if (this.tab == 1) {
+        //   this.onClickApplied();
+        // } else if (this.tab == 3) {
+        //   this.savedJobs()
+        // } else if (this.tab == 4) {
+        //   this.jobAlert()
+        // } else if (this.tab == 5) {
+        //   this.notification()
+        // }
       }
     }
   }
+
 }
 
