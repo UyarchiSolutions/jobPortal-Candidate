@@ -199,4 +199,11 @@ return this.http.get(this.baseurl+'/v1/employerdetail/getAll_Mail_notification_e
 notes(data:any){
   return this.http.post(this.baseurl+'/v1/employerdetail/employer_comment',data,{headers:{auth:Cookie.get('emptoken')}})
 }
+get_notes(id:any){
+  return this.http.get(this.baseurl+'/v1/employerdetail/employer_comment_id/'+id,{headers:{auth:Cookie.get('emptoken')}})
+
+}
+edit_notes(id:any,data:any){
+return this.http.put(this.baseurl+'/v1/employerdetail/comment_edit/'+id,data)
+}
 }

@@ -143,7 +143,7 @@
                                         <div class="" *ngIf="isDisplayad" style="margin-top:0px;">
                                             <label></label>
                                             <div class="content-box keylist" style="background: white;">
-                                                <ul class="ulkeylist" style="padding-left: 0px;" class="">
+                                                <ul class="ulkeylist" style="padding-left: 0px;font-size:14px" class="">
                                                     <li class="ilkeylist" style="cursor:pointer"
                                                         *ngFor="let skill of keySkill"
                                                         (click)="checkSkill($event,skill.Skill_Title)">
@@ -395,36 +395,63 @@
                             <div class="col">
 
                                 <div class="filter-label">
-                                    <ng-container *ngIf="searchForm.get('salary')?.value != null">
+                                    <ng-container *ngIf="searchForm.get('keyskills')?.value != null">
                                         <span class="badge bg-light text-dark"
-                                            *ngFor="let item of searchForm.get('salary')?.value">
-                                            <span>{{find_value(item,'salary')}}</span>
-                                            <span class="close-mark" (click)="remove_filter(item,'salary')">x</span>
+                                            *ngFor="let item of searchForm.get('keyskills')?.value" style="cursor:pointer">
+                                            <span>{{find_value(item,'keyskills')}}</span>
+                                            <span class="close-mark" (click)="remove_filter(item,'keyskills')">x</span>
+                                        </span>
+                                    </ng-container>
+                                    <ng-container *ngIf="searchForm.get('Location')?.value != null">
+                                        <span class="badge bg-light text-dark"
+                                            *ngFor="let item of searchForm.get('Location')?.value">
+                                            <span>{{find_value(item,'Location')}}</span>
+                                            <span class="close-mark" (click)="remove_filter(item,'Location')">x</span>
+                                        </span>
+                                    </ng-container>
+                                    <ng-container *ngIf="searchForm.get('experiencefrom')?.value != '' && searchForm.get('experienceto')?.value != ''">
+                                        <span class="badge bg-light text-dark" style="cursor:pointer">
+                                            <span>{{find_value_exp(searchForm.get('experiencefrom')?.value ,searchForm.get('experienceto')?.value)}} Years</span>
+                                            <span class="close-mark" (click)="remove_filter_exp(searchForm.get('experiencefrom')?.value,searchForm.get('experienceto')?.value)">x</span>
                                         </span>
                                    </ng-container>
+                                    <ng-container *ngIf="searchForm.get('salary')?.value != null">
+                                        <span class="badge bg-light text-dark" style="cursor:pointer"
+                                            *ngFor="let item of searchForm.get('salary')?.value">
+                                            <span>{{find_value(item,'salary')}} lac</span>
+                                            <span class="close-mark" (click)="remove_filter(item,'salary')">x</span>
+                                        </span>
+                                    </ng-container>
                                     <ng-container *ngIf="searchForm.get('department')?.value != null">
-                                        <span class="badge bg-light text-dark"
+                                        <span class="badge bg-light text-dark" style="cursor:pointer"
                                             *ngFor="let item of searchForm.get('department')?.value">
                                             <span>{{find_value(item,'department')}}</span>
                                             <span class="close-mark" (click)="remove_filter(item,'department')">x</span>
                                         </span>
-                                   </ng-container>
-                                   <ng-container *ngIf="searchForm.get('role')?.value != null">
-                                    <span class="badge bg-light text-dark"
+                                    </ng-container>
+                                     <ng-container *ngIf="searchForm.get('role')?.value != null">
+                                    <span class="badge bg-light text-dark" style="cursor:pointer"
                                         *ngFor="let item of searchForm.get('role')?.value">
                                         <span>{{find_value(item,'role')}}</span>
                                         <span class="close-mark" (click)="remove_filter(item,'role')">x</span>
                                     </span>
-                               </ng-container>
-                               <ng-container *ngIf="searchForm.get('industry')?.value != null">
-                                <span class="badge bg-light text-dark"
-                                    *ngFor="let item of searchForm.get('industry')?.value">
-                                    <span>{{find_value(item,'industry')}}</span>
-                                    <span class="close-mark" (click)="remove_filter(item,'industry')">x</span>
-                                </span>
-                           </ng-container>
+                                    </ng-container>
+                                    <ng-container *ngIf="searchForm.get('industry')?.value != null" style="cursor:pointer">
+                                        <span class="badge bg-light text-dark" style="cursor:pointer"
+                                            *ngFor="let item of searchForm.get('industry')?.value">
+                                            <span>{{find_value(item,'industry')}}</span>
+                                            <span class="close-mark" (click)="remove_filter(item,'industry')">x</span>
+                                        </span>
+                                    </ng-container>
+                                    <ng-container *ngIf="searchForm.get('noticeperiod')?.value != null" style="cursor:pointer">
+                                        <span class="badge bg-light text-dark" style="cursor:pointer"
+                                            *ngFor="let item of searchForm.get('noticeperiod')?.value">
+                                            <span *ngIf="item == 'immediate'">{{find_value(item,'noticeperiod')}} </span>
+                                            <span *ngIf="item != 'immediate'">{{find_value(item,'noticeperiod')}} days</span>
+                                            <span class="close-mark" (click)="remove_filter(item,'noticeperiod')">x</span>
+                                        </span>
+                                    </ng-container>
                                 </div>
-
                             </div>
                         </div>
                         <div class="row content-card-heading no-margin padding10" style="font-size:13px">
@@ -489,7 +516,7 @@
                             </div>
                             <div class="col col-1">
                                 <i data-bs-toggle="modal" data-bs-target="#notes"
-                                    (click)="getcanid_notes(list.candiadteId,list.comment)"><svg width="22" height="20"
+                                    ><svg width="22" height="20"
                                         viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M1 10.76C1 12.36 2.15179 13.754 3.77641 13.987C4.87179 14.144 5.97949 14.266 7.09744 14.351C7.57538 14.388 8.01333 14.632 8.28 15.022L11 19L13.72 15.022C13.9867 14.632 14.4246 14.388 14.9026 14.352C16.0205 14.266 17.1282 14.144 18.2236 13.987C19.8482 13.754 21 12.361 21 10.759V4.741C21 3.139 19.8482 1.746 18.2236 1.513C15.8318 1.17072 13.4175 0.99926 11 1C8.54667 1 6.13436 1.175 3.77641 1.513C2.15179 1.746 1 3.14 1 4.741V10.759V10.76Z"
@@ -800,7 +827,7 @@
                             </div>
                             <div class="col col-1">
                                 <i data-bs-toggle="modal" data-bs-target="#notes"
-                                    (click)="getcanid_notes(list.candidateData._id,list.comment)"><svg width="22"
+                                    ><svg width="22"
                                         height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M1 10.76C1 12.36 2.15179 13.754 3.77641 13.987C4.87179 14.144 5.97949 14.266 7.09744 14.351C7.57538 14.388 8.01333 14.632 8.28 15.022L11 19L13.72 15.022C13.9867 14.632 14.4246 14.388 14.9026 14.352C16.0205 14.266 17.1282 14.144 18.2236 13.987C19.8482 13.754 21 12.361 21 10.759V4.741C21 3.139 19.8482 1.746 18.2236 1.513C15.8318 1.17072 13.4175 0.99926 11 1C8.54667 1 6.13436 1.175 3.77641 1.513C2.15179 1.746 1 3.14 1 4.741V10.759V10.76Z"
@@ -902,7 +929,7 @@
                             </div>
                             <div class="col col-1">
                                 <i data-bs-toggle="modal" data-bs-target="#notes"
-                                    (click)="getcanid_notes(list.candidateData._id,list.comment)"><svg width="22"
+                                   ><svg width="22"
                                         height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M1 10.76C1 12.36 2.15179 13.754 3.77641 13.987C4.87179 14.144 5.97949 14.266 7.09744 14.351C7.57538 14.388 8.01333 14.632 8.28 15.022L11 19L13.72 15.022C13.9867 14.632 14.4246 14.388 14.9026 14.352C16.0205 14.266 17.1282 14.144 18.2236 13.987C19.8482 13.754 21 12.361 21 10.759V4.741C21 3.139 19.8482 1.746 18.2236 1.513C15.8318 1.17072 13.4175 0.99926 11 1C8.54667 1 6.13436 1.175 3.77641 1.513C2.15179 1.746 1 3.14 1 4.741V10.759V10.76Z"
@@ -961,25 +988,16 @@
 
                                         <span class="close-mark">x</span>
                                     </span>
-
                                     <span class="badge bg-light text-dark">
                                         <span>Chennai</span>
 
                                         <span class="close-mark">x</span>
                                     </span>
-
-
                                     <span class="badge bg-light text-dark">
                                         <span>0 to 2 Years</span>
 
                                         <span class="close-mark">x</span>
                                     </span>
-
-
-
-
-
-
                                 </div>
 
                             </div>
@@ -1061,7 +1079,7 @@
                             </div>
                             <div class="col col-1">
                                 <i data-bs-toggle="modal" data-bs-target="#notes"
-                                    (click)="getcanid_notes(list.candidateDetail[0]._id,list.comment)"><svg width="22"
+                                    (click)="getcanid_notes(list.candidateDetail[0]._id,list.commentId)"><svg width="22"
                                         height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M1 10.76C1 12.36 2.15179 13.754 3.77641 13.987C4.87179 14.144 5.97949 14.266 7.09744 14.351C7.57538 14.388 8.01333 14.632 8.28 15.022L11 19L13.72 15.022C13.9867 14.632 14.4246 14.388 14.9026 14.352C16.0205 14.266 17.1282 14.144 18.2236 13.987C19.8482 13.754 21 12.361 21 10.759V4.741C21 3.139 19.8482 1.746 18.2236 1.513C15.8318 1.17072 13.4175 0.99926 11 1C8.54667 1 6.13436 1.175 3.77641 1.513C2.15179 1.746 1 3.14 1 4.741V10.759V10.76Z"
@@ -1674,32 +1692,25 @@
     </div>
 </div>
 
-<div class="modal fade" id="notes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+<div class="modal" id="notes" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
     [formGroup]="notesForm">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="">
-                    <div class="" *ngIf="notesForm.get('comment')?.value">
+                    <div class="">
                         <textarea class="form-control notes" style="min-height:0px" (keyup)="autoGrowTextZone($event)"
                             id="exampleFormControlTextarea1" rows="3" placeholder="Type Your Notes Here...."
                             formControlName="comment"></textarea>
                     </div>
-                    <div class="" *ngIf="comments == ''">
-                        <textarea class="form-control notes" style="min-height:0px" (keyup)="autoGrowTextZone($event)"
-                            id="exampleFormControlTextarea1" rows="3" placeholder="Type Your Notes Here...."
-                            formControlName="comment"></textarea>
-                    </div>
+                    
                 </div>
             </div>
-            <div class="modal-footer" *ngIf="comments == ''">
+            <div class="modal-footer">
                 <button type="button" class="btn btn-primary" (click)="submitNotes()"
                     data-bs-dismiss="modal">Submit</button>
             </div>
-            <div class="modal-footer" *ngIf="notesForm.get('comment')?.value">
-                <button type="button" class="btn btn-primary" (click)="submitNotes()"
-                    data-bs-dismiss="modal">Submit</button>
-            </div>
+           
         </div>
     </div>
 </div>

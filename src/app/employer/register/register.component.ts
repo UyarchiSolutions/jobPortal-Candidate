@@ -35,7 +35,12 @@ export class RegisterComponent implements OnInit {
     location: new FormControl('', Validators.required),
     lat: new FormControl(''),
     long: new FormControl(''),
-
+    registrationType: new FormControl('', Validators.required),
+    industryType: new FormControl('', Validators.required),
+    companyWebsite: new FormControl('', Validators.required),
+    postedBy: new FormControl('', Validators.required),
+    companyDescription: new FormControl('', Validators.required),
+    companyAddress: new FormControl('', Validators.required),
   });
   
   ngOnInit(): void {
@@ -62,14 +67,22 @@ export class RegisterComponent implements OnInit {
     jobForm.append('lat', this.RegisterForm.get('lat')?.value);
     jobForm.append('long', this.RegisterForm.get('long')?.value);
     jobForm.append('location', this.RegisterForm.get('location')?.value);
+    jobForm.append('registrationType', this.RegisterForm.get('registrationType')?.value);
+    jobForm.append('industryType', this.RegisterForm.get('industryType')?.value);
+    jobForm.append('companyWebsite', this.RegisterForm.get('companyWebsite')?.value);
+    jobForm.append('postedBy', this.RegisterForm.get('postedBy')?.value);
+    jobForm.append('companyDescription', this.RegisterForm.get('companyDescription')?.value);
+    jobForm.append('companyAddress', this.RegisterForm.get('companyAddress')?.value);
+    
     // jobForm.append('',this.myAddres)
     console.log(jobForm)
     this.empservice.employeeRegister(jobForm).subscribe((res:any)=>{
       console.log(res);
+      this.router.navigate(['/empcheck-mail'])
+
     },error => {
       error.message
     })
-    this.router.navigate(['/empcheck-mail'])
 
   }
   addresume(file:any){

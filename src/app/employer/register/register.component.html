@@ -9,7 +9,7 @@
                     <img src="../../assets/image/hero.png" alt="" class="hero-image">
                 </div>
             </div>
-            <div class="row register-content-row height-register-content">
+            <div class="row register-content-row">
                 <div class="col register-content">
                     <div class="row">
                         <div class="col"></div>
@@ -47,7 +47,52 @@
                                 </div>
 
                             </div>
-
+                            <div class="single-row">
+                                <label for="">Registration Type :</label>
+                                <div class="content-box">
+                                    <select class="form-control select-type" formControlName="registrationType">
+                                        <option value="option1" disabled selected >Select Type</option>
+                                        <option value="Private Limited">Private Limited</option>
+                                        <option value="Public Limited">Public Limited</option>
+                                        <option value="One Person Company">One Person Company (OPC)</option>
+                                        <option value="Proprietorship">Proprietorship</option>
+                                        <option value="Partnership Firm">Partnership Firm</option>
+                                        <option value="State Government Undertaking">State Government Undertaking</option>
+                                        <option value="Central Government Undertaking">Central Government Undertaking</option>
+                                      </select>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Industry Type :</label>
+                                <div class="content-box">
+                                    <select class="form-control select-type" formControlName="industryType">
+                                        <option value="option1" disabled selected >Select Type</option>
+                                        <option value="Analytics/KPO/Research">Analytics/KPO/Research</option>
+                                        <option value="BPO Call Center">BPO Call Center</option>
+                                        <option value="It Sevices/Consulting">It Sevices/Consulting</option>
+                                        <option value="Hardware">Hardware</option>
+                                        <option value="Networking">Networking</option>
+                                      </select>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Company Type :</label>
+                                <div class="content-box">
+                                    <select class="form-control select-type" formControlName="companyType">
+                                        <option value="option1" disabled selected >Select Type</option>
+                                        <option value="foreign-mnc">Foreign MNC</option>
+                                        <option value="corporate">Corporate</option>
+                                        <option value="indian mnc">Indian MNC</option>
+                                        <option value="start up">Start up</option>
+                                      </select>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Company Website :</label>
+                                <div class="content-box">
+                                    <input type="text" class="form-control" placeholder="Website URL" formControlName="companyWebsite">
+                                </div>
+                            </div>
                             <div class="single-row">
                                 <label for="">Password :</label>
                                 <div class="content-box">
@@ -60,66 +105,57 @@
                                     <input type="password" class="form-control" placeholder="Confoirm Your Password" formControlName="confirm_password">
                                 </div>
                             </div>
-
                             <div class="single-row">
-                                <label for="">Mobile Number :</label>
+                                <label for="">Hiring For :</label>
                                 <div class="content-box">
-                                    <input type="text" class="form-control" placeholder="Enter Your Mobile Number" formControlName="mobileNumber">
+                                    <select class="form-control select-type" formControlName="postedBy">
+                                        <option value="option1" disabled selected >Select Type</option>
+                                        <option value="Company">Own</option>
+                                        <option value="Consultancy">Other Clients</option>
+                                      </select>
                                 </div>
                             </div>
-
                             <div class="single-row">
-                                <label for="">Contact Name :</label>
+                                <label for="">Primary Contact :</label>
                                 <div class="content-box">
                                     <input type="text" class="form-control" placeholder="Enter Contact Persion Name" formControlName="contactName">
                                 </div>
                             </div>
-
                             <div class="single-row">
-                                <label for="">Company Type :</label>
+                                <label for="">Primary Number :</label>
                                 <div class="content-box">
-                                    <select class="form-control select-type" formControlName="companyType">
-                                        <option value="option1" disabled selected >Select Type</option>
-                                        <option value="foreign-mnc">Foreign MNC</option>
-                                        <option value="corporate">Corporate</option>
-                                        <option value="indian mnc">Indian MNC</option>
-                                        <option value="start up">Start up</option>
-
-                                      </select>
+                                    <input type="text" class="form-control" placeholder="Enter Your Primary Mobile Number" formControlName="mobileNumber">
                                 </div>
                             </div>
-
                             <div class="single-row">
-                                <label for="">Pin Code :</label>
+                                <label for="">Company Description:</label>
                                 <div class="content-box">
-                                    <input type="number" class="form-control" placeholder="Enter Your Pin Code" formControlName="pincode">
+                                    <textarea class="form-control" id="exampleFormControlTextarea1"  rows="3" formControlName="companyDescription"></textarea>
                                 </div>
                             </div>
-
                             <div class="single-row">
-                                <label for="">About Company :</label>
-                                <div class="content-box">
-                                    <textarea class="form-control" id="exampleFormControlTextarea1"  rows="3" formControlName="aboutCompany"></textarea>
-                                </div>
-                            </div>
-
-
-                            <div class="single-row">
-                                <label for="">About Company :</label>
+                                <label for="">Company Profile :</label>
                                 <div class="content-box">
                                     <div class="location-content">
                                         <label for="select-logo-file" class="form-control choose-file">Choose File</label>
                                         <div>  <input type="file" id="select-logo-file" (change)="addresume($event)" accept=".ppt,.pptx,.pdf"  class="form-control choose-file"
                                             placeholder="+Add Logo"  style="display: none;" >
                                         <span class="ppt-data">[PPT, PDF]</span></div>
-
-                                       
                                     </div>
                                 </div>
                             </div>
-
-
-
+                            <div class="single-row">
+                                <label for="">Corporate Address:</label>
+                                <div class="content-box">
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Enter Your Company Address" rows="3" formControlName="companyAddress"></textarea>
+                                </div>
+                            </div>
+                            <div class="single-row">
+                                <label for="">Pin Code :</label>
+                                <div class="content-box">
+                                    <input type="number" class="form-control" placeholder="Enter Your Pin Code" formControlName="pincode">
+                                </div>
+                            </div>
                             <div class="single-row">
                                 <label for="select-logo">Location :</label>
                                 <div class="content-box">
@@ -131,7 +167,7 @@
                                 <label for=""> </label>
 
                                 <div class="content-box">
-                                    <button type="submit" class="btn btn-brand-blue register-btn">Register</button>
+                                    <button type="submit" class="btn btn-brand-blue register-btn mb-5">Register</button>
                                 </div>
                             </div>
 

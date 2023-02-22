@@ -48,6 +48,10 @@ export class EmpJobpostComponent implements OnInit {
     course:this.formBuilder.array([], Validators.required),
     specialization:this.formBuilder.array([], Validators.required),
     searchbox: new FormControl(null),
+    apply_method:new FormControl(null),
+    recruiterList:new FormControl(null),
+    recruiterList1:new FormControl(null),
+
     
   });
   keySkill: any;
@@ -114,6 +118,9 @@ export class EmpJobpostComponent implements OnInit {
   pushdatac:any;
   pushdatacs:any;
   list:any;
+  apply_method: any;
+  is_new1: boolean = false;
+  is_list1: boolean = false;
   constructor(private formBuilder:FormBuilder,private router: Router,private empservice: EmpServiceService) { }
 
   ngOnInit(): void {
@@ -212,17 +219,37 @@ export class EmpJobpostComponent implements OnInit {
     this.jobpostForm.get('keySkill')?.setValue(value)
     console.log(this.jobpostForm.get('keySkill')?.value)
   }
-  recriterlist(e:any){
+  recriterlist1(e:any){
    console.log(e.target.value)
-   if(e.target.value == 'list'){
-        this.is_list = true;
-        this.is_new = false;
+   if(e.target.value == 'list1'){
+        this.is_list1 = true;
+        this.is_new1 = false;
    }
    else{
-        this.is_new = true;
-        this.is_list = false;
+        this.jobpostForm.get('recruiterName')?.setValue('');
+        this.jobpostForm.get('recruiterEmail')?.setValue('');
+        this.jobpostForm.get('recruiterNumber')?.setValue('');
+        this.is_new1 = true;
+        this.is_list1 = false;
    }
+   console.log(this.is_new,this.is_list)
   }
+  recriterlist(e:any){
+    console.log(e.target.value)
+    if(e.target.value == 'list'){
+         this.is_list = true;
+         this.is_new = false;
+    }
+    else{
+         this.jobpostForm.get('recruiterName')?.setValue('');
+         this.jobpostForm.get('recruiterEmail')?.setValue('');
+         this.jobpostForm.get('recruiterNumber')?.setValue('');
+
+         this.is_new = true;
+         this.is_list = false;
+    }
+    console.log(this.is_new,this.is_list)
+   }
   pushCourse(e:any){
     const data: FormArray = this.jobpostForm.get('preferedIndustry') as FormArray;
     console.log(e)
@@ -388,6 +415,9 @@ export class EmpJobpostComponent implements OnInit {
       })
     })
   }
-
+  choose_apply(e:any){
+      this.apply_method = e.target.value
+      console.log(this.apply_method)
+  }
   
 }
