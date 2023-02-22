@@ -51,12 +51,13 @@ export class EmpHomeComponent implements OnInit {
     department: this.fb.array([]),
     industry: this.fb.array([]),
     noticeperiod: this.fb.array([]),
-    range: new FormControl(1),
+    range: new FormControl(10),
     page: new FormControl(0),
   });
   folderForm: any = this.fb.group({
     folderName: new FormControl(null),
   });
+  comment_id: any;
   find_value(value: any, type: any) {
     console.log(value);
     if (type == 'department') {
@@ -87,6 +88,30 @@ export class EmpHomeComponent implements OnInit {
       let Salary = value;
       return Salary;
     } 
+    else if (type == 'noticeperiod') {
+      let Noticeperiod = value;
+      return Noticeperiod;
+    } 
+    else if (type == 'Location') {
+      let index = this.cityList.findIndex((a: any) => a.district == value);
+      let Location = '';
+      if (index != -1) {
+        Location = this.cityList[index].district;
+      }
+      return Location;
+    } 
+    else if (type == 'keyskills') {
+      let keyskills = value;
+      return keyskills;
+    }
+    else {
+      return '';
+    }
+  }
+  find_value_exp(expfrom: any,expto: any){
+    if(expfrom && expto){
+      return expfrom+'to'+expto
+    }
     else {
       return '';
     }
@@ -99,7 +124,60 @@ export class EmpHomeComponent implements OnInit {
         this.searchForm.get('department')?.value.splice(index, 1);
       }
     }
+    if (type == 'role') {
+      let role: any = this.searchForm.get('role')?.value;
+      let index = role.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('role')?.value.splice(index, 1);
+      }
+    }
+    if (type == 'industry') {
+      let industry: any = this.searchForm.get('industry')?.value;
+      let index = industry.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('industry')?.value.splice(index, 1);
+      }
+    }
+    if (type == 'noticeperiod') {
+      let noticeperiod: any = this.searchForm.get('noticeperiod')?.value;
+      let index = noticeperiod.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('noticeperiod')?.value.splice(index, 1);
+      }
+    }
+    if (type == 'salary') {
+      let salary: any = this.searchForm.get('salary')?.value;
+      let index = salary.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('salary')?.value.splice(index, 1);
+      }
+    }
+    if (type == 'Location') {
+      let Location: any = this.searchForm.get('Location')?.value;
+      let index = Location.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('Location')?.value.splice(index, 1);
+      }
+    }
+    if (type == 'keyskills') {
+      let keyskills: any = this.searchForm.get('keyskills')?.value;
+      let index = keyskills.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('keyskills')?.value.splice(index, 1);
+      }
+    }
+    if (type == 'keyskills') {
+      let keyskills: any = this.searchForm.get('keyskills')?.value;
+      let index = keyskills.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('keyskills')?.value.splice(index, 1);
+      }
+    }
   }
+  remove_filter_exp(expfrom: any,expto: any){
+     this.searchForm.get('experiencefrom')?.setValue('')
+    this.searchForm.get('experienceto')?.setValue('')
+  }  
   activeform: any = this.fb.group({
     active: new FormControl(true),
   });
@@ -135,7 +213,7 @@ export class EmpHomeComponent implements OnInit {
   notes_can_id: any;
   comments: any;
   page = 0;
-  range = 1;
+  range = 5;
   constructor(
     private empservice: EmpServiceService,
     private fb: FormBuilder,
@@ -662,28 +740,52 @@ export class EmpHomeComponent implements OnInit {
     this.empservice
       .get_mail_notification(this.range, this.page)
       .subscribe((res: any) => {
-        console.log(res);
         this.mailList = res.data;
+        console.log(this.mailList);
+
       });
   }
   autoGrowTextZone(e: any) {
     e.target.style.height = '0px';
     e.target.style.height = e.target.scrollHeight + 25 + 'px';
   }
-  getcanid_notes(id: any, comment: any) {
+  getcanid_notes(id: any,comment_id:any) {
     this.notes_can_id = id;
-    console.log(this.notes_can_id, this.comments);
+    this.comment_id = comment_id;
+    console.log(this.notes_can_id,comment_id);
+    if( this.comment_id != null && this.comment_id != undefined && this.comment_id != ''){
+      this.empservice.get_notes(comment_id).subscribe((res: any) => {
+        console.log(res);
+        this.notesForm.patchValue({
+          comment:res.comment
+        })
+      });
+    }
+   
   }
   submitNotes() {
-    var data = {
-      candidateId: this.notes_can_id,
-      comment: this.notesForm.get('comment')?.value,
-    };
-    this.empservice.notes(data).subscribe((res: any) => {
-      console.log(res);
-      this.notesForm.reset();
-      this.notify();
-    });
+    if( this.comment_id != null && this.comment_id != undefined && this.comment_id != ''){
+      console.log(this.comment_id,this.notesForm.get('comment')?.value)
+      var datas = {
+        comment: this.notesForm.get('comment')?.value
+      }
+      this.empservice.edit_notes(this.comment_id,datas).subscribe((res: any) => {
+        console.log(res); 
+        this.notesForm.reset();
+        this.notify();
+      });
+    }
+    else{
+      var data = {
+        candidateId: this.notes_can_id,
+        comment: this.notesForm.get('comment')?.value,
+      };
+      this.empservice.notes(data).subscribe((res: any) => {
+        console.log(res);
+        this.notesForm.reset();
+        this.notify();
+      });
+    }
   }
   clkrange(count: number) {}
 }

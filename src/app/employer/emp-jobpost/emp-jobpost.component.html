@@ -363,22 +363,29 @@
                                                 formControlName="urltoApply">
                                         </div>
                                     </div>
-
-
-                                    <div class="single-row">
-                                        <label for="">Mobile Number :</label>
+                                    <div class="single-row" *ngIf="jobpostForm.get('interviewType')?.value == 'online'">
+                                        <label for="">Apply Method :</label>
                                         <div class="content-box">
-                                            <input type="number" class="form-control" placeholder="Enter Mobile Number"
-                                                formControlName="contactNumber">
+                                            <select class="form-control select-type" (change)="choose_apply($event)" formControlName = 'apply_method'>
+                                                <option value="option1" disabled selected>Select</option>
+                                                <option value="email">Email</option>
+                                                <option value="telephone">Telephonic Applicant</option>
+                                                <option value="treatjobs">Apply via Treatjobs</option>
+                                            </select>
                                         </div>
                                     </div>
-                                    <div class="single-row">
+
+
+
+
+
+                                    <div class="single-row" *ngIf="jobpostForm.get('interviewType')?.value == 'walk in'">
                                         <label for="">Recruiter Details :</label>
                                         <div class="content-box">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" value="list"
                                                     (change)="recriterlist($event)" name="flexRadioDefault"
-                                                    id="flexRadioDefault1">
+                                                    id="flexRadioDefault1" formControlName="recruiterList">
                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                     Recruiter List
                                                 </label>
@@ -386,14 +393,14 @@
                                             <div class="form-check ms-5">
                                                 <input class="form-check-input" type="radio" value="new"
                                                     (change)="recriterlist($event)" name="flexRadioDefault"
-                                                    id="flexRadioDefault1">
+                                                    id="flexRadioDefault1" formControlName="recruiterList">
                                                 <label class="form-check-label" for="flexRadioDefault1">
                                                     New Recruiter
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="single-row" *ngIf="is_list">
+                                    <div class="single-row" *ngIf="is_list && jobpostForm.get('interviewType')?.value == 'walk in'" >
                                         <label for="">Select Recruiter :</label>
                                         <div class="content-box">
                                             <select class="form-control select-type" (change)="changerecruiter($event)">
@@ -402,7 +409,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="single-row" *ngIf="is_new">
+                                    <div class="single-row" *ngIf="is_new && jobpostForm.get('interviewType')?.value == 'walk in'">
                                         <label for="">Recruiter Name :</label>
                                         <div class="content-box">
                                             <input type="text" class="form-control" placeholder="Enter Name"
@@ -410,7 +417,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="single-row" *ngIf="is_new">
+                                    <div class="single-row" *ngIf="is_new && jobpostForm.get('interviewType')?.value == 'walk in'">
                                         <label for="">Recruiter Email Id :</label>
                                         <div class="content-box">
                                             <input type="email" class="form-control" placeholder="Enter Email ID"
@@ -418,11 +425,78 @@
                                         </div>
                                     </div>
 
-                                    <div class="single-row" *ngIf="is_new">
+                                    <div class="single-row" *ngIf="is_new && jobpostForm.get('interviewType')?.value == 'walk in'">
                                         <label for="">Recruiter Number :</label>
                                         <div class="content-box">
                                             <input type="number" class="form-control" placeholder="Enter Number"
                                                 formControlName="recruiterNumber">
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                    <div class="single-row" *ngIf="jobpostForm.get('interviewType')?.value == 'online' && apply_method == 'telephone'">
+                                        <label for="">Recruiter Details :</label>
+                                        <div class="content-box">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" value="list1"
+                                                    (change)="recriterlist1($event)" name="flexRadioDefault"
+                                                    id="flexRadioDefault1" formControlName="recruiterList1">
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    Recruiter List
+                                                </label>
+                                            </div>
+                                            <div class="form-check ms-5">
+                                                <input class="form-check-input" type="radio" value="new1"
+                                                    (change)="recriterlist1($event)" name="flexRadioDefault"
+                                                    id="flexRadioDefault1" formControlName="recruiterList1">
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    New Recruiter
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-row" *ngIf="is_list1 && jobpostForm.get('interviewType')?.value == 'online' && apply_method == 'telephone'" >
+                                        <label for="">Select Recruiter :</label>
+                                        <div class="content-box">
+                                            <select class="form-control select-type" (change)="changerecruiter($event)">
+                                                <option value="option1" disabled selected>Select</option>
+                                                <option value="{{data._id}}" *ngFor="let data of list">{{data.recruiterName}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="single-row" *ngIf="is_new1 && jobpostForm.get('interviewType')?.value == 'online' && apply_method == 'telephone'">
+                                        <label for="">Recruiter Name :</label>
+                                        <div class="content-box">
+                                            <input type="text" class="form-control" placeholder="Enter Name"
+                                                formControlName="recruiterName">
+                                        </div>
+                                    </div>
+
+                                    <div class="single-row" *ngIf="is_new1 && jobpostForm.get('interviewType')?.value == 'online' && apply_method == 'telephone'">
+                                        <label for="">Recruiter Email Id :</label>
+                                        <div class="content-box">
+                                            <input type="email" class="form-control" placeholder="Enter Email ID"
+                                                formControlName="recruiterEmail">
+                                        </div>
+                                    </div>
+
+                                    <div class="single-row" *ngIf="is_new1 && jobpostForm.get('interviewType')?.value == 'online' && apply_method == 'telephone'">
+                                        <label for="">Recruiter Number :</label>
+                                        <div class="content-box">
+                                            <input type="number" class="form-control" placeholder="Enter Number"
+                                                formControlName="recruiterNumber">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="single-row" *ngIf="apply_method == 'email' && jobpostForm.get('interviewType')?.value == 'online'">
+                                        <label for="">Recruiter Email Id :</label>
+                                        <div class="content-box">
+                                            <input type="email" class="form-control" placeholder="Enter Email ID"
+                                                formControlName="recruiterEmail">
                                         </div>
                                     </div>
                                     <div class="single-row douple-btn">
