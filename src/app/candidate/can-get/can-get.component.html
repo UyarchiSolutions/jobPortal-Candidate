@@ -479,10 +479,10 @@
               <div class="col">
                 {{job.name}}
               </div>
-              <div class="col">
-                {{job.jobTittle}}
+              <div class="col wrap">
+                {{job.role}}
               </div>
-              <div class="col">
+              <div class="col wrap">
                 {{job.jobLocation}}
               </div>
               <div class="col">
@@ -591,10 +591,10 @@
               <div class="col">
                 {{appli.companyName}}
               </div>
-              <div class="col">
-                {{appli.designation}}
+              <div class="col wrap">
+                {{appli.role}}
               </div>
-              <div class="col">
+              <div class="col wrap">
                 {{appli.jobLocation}}
               </div>
               <div class="col">
@@ -607,6 +607,7 @@
               <div class="col">
                 {{appli.appliedDate | date:'dd-MM-yyyy'}}
               </div>
+
               <div class="col applied">
                 <a style="cursor: pointer;" (click)="apply(appli.jodId,tab)"><i><svg
                       *ngIf="appli.approvedStatus == 'Applied'" width="12" height="13" viewBox="0 0 12 13" fill="none"
@@ -655,11 +656,11 @@
                 <!-- <i class='fas fa-sort-amount-down'></i> -->
                 Company
               </div>
-              <div class="col">
+              <div class="col warp">
                 <!-- <i class='fas fa-sort-amount-down'></i> -->
                 Designation
               </div>
-              <div class="col">
+              <div class="col warp">
                 <!-- <i class='fas fa-sort-amount-down'></i> -->
                 City
               </div>
@@ -685,7 +686,7 @@
                 {{save.companyName}}
               </div>
               <div class="col">
-                {{save.jobTittle}}
+                {{save.role}}
               </div>
               <div class="col">
                 {{save.jobLocation}}
@@ -887,9 +888,9 @@
                   {{alert.name}}
                 </div>
                 <div class="col">
-                  {{alert.jobTittle}}
+                  <p class="wrap">{{alert.role}}</p>
                 </div>
-                <div class="col">
+                <div class="col wrap">
                   {{alert.jobLocation}}
                 </div>
                 <div class="col">
@@ -972,10 +973,10 @@
               <div class="col">
                 {{job.employerregistrations.name}}
               </div>
-              <div class="col">
-                {{job.jobTittle}}
+              <div class="col warp">
+                {{job.role}}
               </div>
-              <div class="col">
+              <div class="col warp">
                 {{job.jobLocation}}
               </div>
               <div class="col">

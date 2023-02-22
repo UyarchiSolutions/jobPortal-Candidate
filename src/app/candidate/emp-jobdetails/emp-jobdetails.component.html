@@ -102,9 +102,9 @@
                 <div class="col-4 ">
                   <div class="d-flex align-items-start">
                     <img src="../../assets/image/Google-Icon.jpg" width="80px">
-                    <button style="border: none;background-color: transparent;cursor: pointer;" (click)="saveJob(job._id)"
-                      [disabled]="job.saveButton == true"><i class="ms-5"><svg width="20" height="20" viewBox="0 0 30 30"
-                          fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <button style="border: none;background-color: transparent;cursor: pointer;"
+                      (click)="saveJob(job._id)" [disabled]="job.saveButton == true"><i class="ms-5"><svg width="20"
+                          height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M15 24.5439L5.73031 30L7.80032 19.0437L0 11.4594L10.5498 10.1437L15 0L19.4502 10.1437L30 11.4594L22.1997 19.0437L24.2697 30L15 24.5439ZM15 21.3765L20.5818 24.6614L19.3345 18.0652L24.0305 13.4978L17.6785 12.7059L15 6.59895L12.3215 12.7073L5.96951 13.4978L10.6655 18.0652L9.41821 24.6614L15 21.3765Z"
                             fill="#8493A3" />
@@ -177,31 +177,26 @@
               <div class="single-row">
                 <label for="">Role :</label>
                 <div class="content-box">
-                  UI UX Design
+                  {{job.role}}
                 </div>
               </div>
               <div class="single-row">
                 <label for="">Job Description :</label>
                 <div class="content-box">
-                  <ul>
-                    <li>{{job.jobDescription}}</li>
-                  </ul>
+                  {{job.jobDescription}}
+
                 </div>
               </div>
               <div class="single-row">
                 <label for="">Candidate Description :</label>
                 <div class="content-box">
-                  <ul>
-                    <li>{{job.candidateDescription}}</li>
-                  </ul>
+                  {{job.candidateDescription}}
                 </div>
               </div>
               <div class="single-row">
                 <label for="">Perks & Benefits :</label>
                 <div class="content-box">
-                  <ul>
-                    <li>{{job.salaryDescription}}</li>
-                  </ul>
+                {{job.salaryDescription}}
                 </div>
               </div>
               <div class="single-row">
