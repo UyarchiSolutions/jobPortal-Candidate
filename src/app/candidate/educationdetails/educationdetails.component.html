@@ -32,18 +32,17 @@
                 <div *ngFor="let phase of Qualification.controls; let i = index;" [formGroupName]="i">
                   <div class="single-row">
                     <label for="">Qualification :</label>
-                    <div class="content-box">
+                    <div class="content-box errorCondent1">
                       <select id="select" class="form-control" (change)="qualifiacation($event,i,phase)"
                         formControlName="Education">
                         <option value="null" disabled selected>Select</option>
                         <option value="{{quli.qualification}}" *ngFor="let quli of qualification">{{quli.qualification}}
                         </option>
-                        <!-- <option value="Doctoate/PhD">Doctorate/Phd</option>
-                        <option value="Masters/Post-Graduation">Masters/Post Graduation</option>
-                        <option value="Graduation/Diploma">Graduation/Diploma</option>
-                        <option value="HSC">HSC</option>
-                        <option value="SSLC">SSLC</option> -->
                       </select>
+                      <div class="text-danger"
+                        *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('Education').invalid">
+                        <small>Qualification required{{i}}</small>
+                      </div>
                     </div>
 
                   </div>
@@ -52,33 +51,45 @@
                     <div class="single-row">
                       <label for="">Course :</label>
                       <!-- <input type="text" class="form-control" placeholder="Enter Course" formControlName="pgCourse"> -->
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <select class="form-control select-type" formControlName="drCourse"
                           (change)="specialization($event,phase)">
                           <option [ngValue]="null" disabled selected>Select</option>
                           <option value="{{course._id}}" *ngFor="let course of drCourse">{{course.Course}}</option>
                         </select>
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('drCourse').invalid">
+                          <small>Course required{{i}}</small>
+                        </div>
                       </div>
                     </div>
                     <div class="single-row">
                       <label for="">Specialization :</label>
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <select class="form-control select-type" formControlName="drSpecialization">
                           <option [ngValue]="null" disabled selected>Select</option>
                           <option value="{{course._id}}" *ngFor="let course of drsep">
                             {{course.Specialization}}</option>
                         </select>
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('drSpecialization').invalid">
+                          <small>Specialization required</small>
+                        </div>
                       </div>
                     </div>
                     <div class="single-row">
                       <label for="">Course Type :</label>
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <select class="form-control select-type" formControlName="drCourseType">
                           <option value="option1" disabled selected>Select</option>
                           <option value="Full Time">Full Time</option>
                           <option value="Part Time">Part Time</option>
                           <option value="Distance">Distance</option>
                         </select>
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('drCourseType').invalid">
+                          <small>Course Type required</small>
+                        </div>
                       </div>
                     </div>
                     <div class="single-row">
@@ -108,36 +119,71 @@
                           <option value="2022">2022</option>
                           <option value="2023">2023</option>
                         </select>
+
+                      </div>
+                    </div>
+                    <div class="single-row">
+                      <label for=""></label>
+                      <div class="content-box">
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('drCourseDurationFrom').invalid">
+                          <small>Course Duration required</small>
+                        </div>
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('drCourseDurationTo').invalid">
+                          <small>Course Duration required</small>
+                        </div>
                       </div>
                     </div>
                     <div class="single-row">
                       <label for="">University:</label>
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <input type="text" class="form-control" formControlName="drUniversity"
                           placeholder="Enter University">
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('drUniversity').invalid">
+                          <small>University Duration required</small>
+                        </div>
                       </div>
                     </div>
                     <div class="single-row">
                       <label for="">Grading System :</label>
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <select class="form-control select-type" formControlName="drGradingSystem">
                           <option value="option1" disabled selected>Select</option>
                           <option value="CGPA">CGPA</option>
                           <option value="Percentage">Percentage</option>
                         </select>
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('drGradingSystem').invalid">
+                          <small>Grading required</small>
+                        </div>
                       </div>
 
                     </div>
-                    <div class="single-row">
+                    <div class="single-row" *ngIf="phase.get('drGradingSystem')?.value">
                       <label for="">Grade :</label>
-                      <div class="content-box" *ngIf="phase.get('drGradingSystem')?.value=='CGPA'">
-                        <input type="text" class="form-control" formControlName="drMarks" placeholder="Enter Grade">
+                      <div class="content-box errorCondent1" *ngIf="phase.get('drGradingSystem')?.value=='CGPA'">
+                        <input type="number" class="form-control" formControlName="drMarks" placeholder="Enter Grade">
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('drMarks').invalid">
+                          <small>Grade required</small>
+                        </div>
                       </div>
-                      <div class="input-group content-box"  *ngIf="phase.get('drGradingSystem')?.value=='Percentage'">
-                        <input type="text" class="form-control" id="validationDefaultUsername" placeholder="Enter Grade" aria-describedby="inputGroupPrepend2" formControlName="drMarks" placeholder="Enter Grade">
+                      <div class="input-group content-box" *ngIf="phase.get('drGradingSystem')?.value=='Percentage'">
+                        <input type="number" class="form-control" id="validationDefaultUsername" placeholder="Enter Grade"
+                          aria-describedby="inputGroupPrepend2" formControlName="drMarks" placeholder="Enter Grade">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="inputGroupPrepend2">%</span>
                         </div>
+
+                      </div>
+                    </div>
+                    <div class="single-row"  *ngIf="phase.get('drGradingSystem')?.value">
+                      <label for=""></label>
+                      <div class="text-danger"
+                        *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('drMarks').invalid">
+                        <small>Grade required</small>
                       </div>
                     </div>
 
@@ -147,38 +193,50 @@
                     <div class="single-row">
                       <label for="">Course :</label>
                       <!-- <input type="text" class="form-control" placeholder="Enter Course" formControlName="pgCourse"> -->
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <select class="form-control select-type" formControlName="pgCourse"
                           (change)="specialization($event,phase)">
                           <option [ngValue]="null" disabled selected>Select</option>
                           <option value="{{course._id}}" *ngFor="let course of pgCourse">{{course.Course}}</option>
                         </select>
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('pgCourse').invalid">
+                          <small>Course required</small>
+                        </div>
                       </div>
                     </div>
                     <div class="single-row">
                       <label for="">Specialization :</label>
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <select class="form-control select-type" formControlName="pgSpecialization">
                           <option [ngValue]="null" disabled selected>Select</option>
                           <option value="{{course._id}}" *ngFor="let course of pgSpe">
                             {{course.Specialization}}</option>
                         </select>
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('pgSpecialization').invalid">
+                          <small>Specialization required</small>
+                        </div>
                       </div>
                     </div>
                     <div class="single-row">
                       <label for="">Course Type :</label>
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <select class="form-control select-type" formControlName="pgCourseType">
                           <option value="option1" disabled selected>Select</option>
                           <option value="Full Time">Full Time</option>
                           <option value="Part Time">Part Time</option>
                           <option value="Distance">Distance</option>
                         </select>
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('pgCourseType').invalid">
+                          <small>Specialization required</small>
+                        </div>
                       </div>
                     </div>
                     <div class="single-row">
                       <label for="">Course Duration :</label>
-                      <div class="content-box">
+                      <div class="content-box ">
                         <select class="form-control select-type douple-input-first"
                           formControlName="pgCourseDurationFrom">
                           <option value="option1" disabled selected>From</option>
@@ -203,30 +261,63 @@
                           <option value="2022">2022</option>
                           <option value="2023">2023</option>
                         </select>
+
+                      </div>
+                    </div>
+                    <div class="single-row">
+                      <label for=""></label>
+                      <div class="content-box">
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('pgCourseDurationFrom').invalid">
+                          <small>Duration required</small>
+                        </div>
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('pgCourseDurationTo').invalid">
+                          <small>Duration required</small>
+                        </div>
                       </div>
                     </div>
                     <div class="single-row">
                       <label for="">University:</label>
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <input type="text" class="form-control" formControlName="pgUniversity"
                           placeholder="Enter Marks">
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('pgUniversity').invalid">
+                          <small>University required</small>
+                        </div>
                       </div>
                     </div>
                     <div class="single-row">
                       <label for="">Grading System :</label>
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <select class="form-control select-type" formControlName="pgGradingSystem">
                           <option value="option1" disabled selected>Select</option>
                           <option value="CGPA">CGPA</option>
                           <option value="Percentage">Percentage</option>
                         </select>
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('pgGradingSystem').invalid">
+                          <small>University required</small>
+                        </div>
                       </div>
 
                     </div>
-                    <div class="single-row">
+                    <div class="single-row" *ngIf="phase.get('pgGradingSystem')?.value">
                       <label for="">Grade :</label>
-                      <div class="content-box">
-                        <input type="text" class="form-control" formControlName="pgMarks" placeholder="Enter Marks">
+                      <div class="content-box" *ngIf="phase.get('pgGradingSystem')?.value!='Percentage'">
+                        <input type="number" class="form-control" formControlName="pgMarks" placeholder="Enter Marks">
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('pgMarks').invalid">
+                          <small>University required</small>
+                        </div>
+                      </div>
+                      <div class="input-group content-box" *ngIf="phase.get('pgGradingSystem')?.value=='Percentage'">
+                        <input type="number" class="form-control" id="validationDefaultUsername" placeholder="Enter Grade"
+                          aria-describedby="inputGroupPrepend2" formControlName="pgMarks" placeholder="Enter Grade">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroupPrepend2">%</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -235,33 +326,45 @@
                     <div class="single-row">
                       <label for="">Course :</label>
                       <!-- <input type="text" class="form-control" placeholder="Enter Course" formControlName="pgCourse"> -->
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <select class="form-control select-type" formControlName="ugCourse"
                           (change)="specialization($event,phase)">
                           <option [ngValue]="null" disabled selected>Select</option>
                           <option value="{{course._id}}" *ngFor="let course of ugcourse">{{course.Course}}</option>
                         </select>
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('ugCourse').invalid">
+                          <small>Course required</small>
+                        </div>
                       </div>
                     </div>
                     <div class="single-row">
                       <label for="">Specialization :</label>
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <select class="form-control select-type" formControlName="ugSpecialization">
                           <option [ngValue]="null" disabled selected>Select</option>
                           <option value="{{course._id}}" *ngFor="let course of ugSpe">
                             {{course.Specialization}}</option>
                         </select>
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('ugSpecialization').invalid">
+                          <small>Specialization required</small>
+                        </div>
                       </div>
                     </div>
                     <div class="single-row">
                       <label for="">Course Type :</label>
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <select class="form-control select-type" formControlName="ugCourseType">
                           <option value="option1" disabled selected>Select</option>
                           <option value="Full Time">Full Time</option>
                           <option value="Part Time">Part Time</option>
                           <option value="Distance">Distance</option>
                         </select>
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('ugCourseType').invalid">
+                          <small>Specialization required</small>
+                        </div>
                       </div>
                     </div>
                     <div class="single-row">
@@ -294,67 +397,117 @@
                       </div>
                     </div>
                     <div class="single-row">
+                      <label for=""></label>
+                      <div class="content-box ">
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('ugCourseDurationFrom').invalid">
+                          <small>Duration required</small>
+                        </div>
+                        <div class="text-danger" style="margin-left: 65px;"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('ugCourseDurationTo').invalid">
+                          <small>Duration required</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="single-row">
                       <label for="">University:</label>
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <input type="text" class="form-control" formControlName="ugUniversity"
                           placeholder="Enter University">
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('ugUniversity').invalid">
+                          <small>University required</small>
+                        </div>
                       </div>
                     </div>
                     <div class="single-row">
                       <label for="">Grading System :</label>
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <select class="form-control select-type" formControlName="ugGradingSystem">
                           <option value="option1" disabled selected>Select</option>
                           <option value="CGPA">CGPA</option>
                           <option value="Percentage">Percentage</option>
                         </select>
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('ugGradingSystem').invalid">
+                          <small>Grading System required</small>
+                        </div>
                       </div>
 
                     </div>
-                    <div class="single-row">
+                    <div class="single-row" *ngIf="phase.get('ugGradingSystem')?.value">
                       <label for="">Grade:</label>
-                      <div class="content-box">
-                        <input type="text" class="form-control" formControlName="ugMarks" placeholder="Enter Grade">
+                      <div class="content-box" *ngIf="phase.get('ugGradingSystem')?.value !='Percentage'">
+                        <input type="number" class="form-control" formControlName="ugMarks" placeholder="Enter Grade">
+                      </div>
+                      <div class="input-group content-box" *ngIf="phase.get('ugGradingSystem')?.value=='Percentage'">
+                        <input type="number" class="form-control" id="validationDefaultUsername" placeholder="Enter Grade"
+                          aria-describedby="inputGroupPrepend2" formControlName="ugMarks" placeholder="Enter Grade">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroupPrepend2">%</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-
+                  <div class="single-row" *ngIf="phase.get('ugGradingSystem')?.value">
+                    <label for=""></label>
+                    <div class="text-danger"
+                      *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('ugMarks').invalid">
+                      <small>Grade required</small>
+                    </div>
+                  </div>
 
                   <!-- HSC -->
                   <div class="hsc-sslsc" *ngIf="phase.get('Education')?.value=='HSC'">
                     <div class="single-row">
                       <label for="">Board :</label>
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <input type="text" class="form-control" placeholder="Enter Board" formControlName="hsBoard">
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('hsBoard').invalid">
+                          <small>Board System required</small>
+                        </div>
                       </div>
                     </div>
                     <div class="single-row">
                       <label for="">Passed Out Year :</label>
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <select class="form-control select-type" formControlName="hsPassedYear">
                           <option value="option1" disabled selected>Select</option>
                           <option value="2016">2016</option>
                           <option value="2017">2017</option>
                         </select>
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('hsPassedYear').invalid">
+                          <small>Passed Out Year required</small>
+                        </div>
                       </div>
 
                     </div>
                     <div class="single-row">
                       <label for="">School Medium:</label>
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <select class="form-control select-type" formControlName="hsMedium">
                           <option value="option1" disabled selected>Select</option>
                           <option value="Tamil">Tamil</option>
                           <option value="English">English</option>
                         </select>
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('hsMedium').invalid">
+                          <small>Passed Out Year required</small>
+                        </div>
                       </div>
                     </div>
 
                     <div class="single-row">
                       <label for="">Grade :</label>
-                      <div class="content-box">
-                        <input type="text" class="form-control" placeholder="Enter Grade"
+                      <div class="content-box errorCondent1">
+                        <input type="number" class="form-control" placeholder="Enter Grade"
                           formControlName="hstotalmarks">
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('hstotalmarks').invalid">
+                          <small>Grade required</small>
+                        </div>
                       </div>
                     </div>
 
@@ -363,36 +516,52 @@
                   <div class="hsc-sslsc" *ngIf="phase.get('Education')?.value=='SSLC'">
                     <div class="single-row">
                       <label for="">Board :</label>
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <input type="text" class="form-control" placeholder="Enter Board" formControlName="sslcBoard">
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('sslcBoard').invalid">
+                          <small>Board required</small>
+                        </div>
                       </div>
                     </div>
                     <div class="single-row">
                       <label for="">Passed Out Year :</label>
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <select class="form-control select-type" formControlName="sslcPassedYear">
                           <option value="option1" disabled selected>Select</option>
                           <option value="2016">2016</option>
                           <option value="2017">2017</option>
                         </select>
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('sslcPassedYear').invalid">
+                          <small>Board required</small>
+                        </div>
                       </div>
 
                     </div>
                     <div class="single-row">
                       <label for="">School Medium:</label>
-                      <div class="content-box">
+                      <div class="content-box errorCondent1">
                         <select class="form-control select-type" formControlName="sslcMedium">
                           <option value="option1" disabled selected>Select</option>
                           <option value="Tamil">Tamil</option>
                           <option value="English">English</option>
                         </select>
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('sslcMedium').invalid">
+                          <small>Board required</small>
+                        </div>
                       </div>
                     </div>
                     <div class="single-row">
                       <label for="">Grade :</label>
-                      <div class="content-box">
-                        <input type="text" class="form-control" placeholder="Enter Grade"
+                      <div class="content-box errorCondent1">
+                        <input type="number" class="form-control" placeholder="Enter Grade"
                           formControlName="sslctotalmarks">
+                        <div class="text-danger"
+                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('sslctotalmarks').invalid">
+                          <small>Grade required</small>
+                        </div>
                       </div>
                     </div>
 

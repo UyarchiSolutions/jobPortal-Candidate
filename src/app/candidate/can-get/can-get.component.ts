@@ -136,29 +136,29 @@ export class CanGetComponent implements OnInit {
       this.industry = res
     })
   }
-  allIndustry:any=[];
-  getAll_industry(){
+  allIndustry: any = [];
+  getAll_industry() {
     this.canditSarvice.currentIndustry().subscribe((res: any) => {
-    this.allIndustry=res;
+      this.allIndustry = res;
     })
   }
   pushCourse(e: any) {
-    const data=this.searchForm.get('preferredIndustry')?.value;
+    const data = this.searchForm.get('preferredIndustry')?.value;
     console.log(e);
     data.push(e._id);
   }
-  onDeSelect(id:any){
-    const data=this.searchForm.get('preferredIndustry')?.value;
+  onDeSelect(id: any) {
+    const data = this.searchForm.get('preferredIndustry')?.value;
     let i: number = 0;
     data.forEach((item: any) => {
       if (item == id._id) {
         data.splice(i, 1);
-        console.log(data,"data------------>")
+        console.log(data, "data------------>")
         return;
       }
       i++;
-  })
-}
+    })
+  }
   // get all location
   location() {
     this.canditSarvice.getLocation().subscribe((res: any) => {
@@ -320,7 +320,7 @@ export class CanGetComponent implements OnInit {
     this.setAlertForm.get('keyskillSet')?.setValue(value)
   }
   alretcheckSkill(event: any, skill: any) {
-    this.isshow=false;
+    this.isshow = false;
     let index: any = this.setAlertForm.get('keyskillSet')?.value;
     console.log(skill, "skill")
     if (index.length != 0) {
@@ -333,7 +333,7 @@ export class CanGetComponent implements OnInit {
     }
   }
   setalert() {
-    console.log(this.setAlertForm.value,"gggggg")
+    console.log(this.setAlertForm.value, "gggggg")
     this.canditSarvice.eduction(this.setAlertForm.value).subscribe((res: any) => {
       this.alert = false;
     })
@@ -444,7 +444,20 @@ export class CanGetComponent implements OnInit {
   }
   // company type
   postedBy(event: any) {
-
+    const data: any = this.searchForm.get('postedby')?.value
+    if (event.target.checked) {
+      data.push((event.target.value))
+    } else {
+      let i: number = 0;
+      data.forEach((item: any) => {
+        if (item == event.target.value) {
+          data.splice(i, 1);
+          return;
+        }
+        i++;
+      });
+    }
+    this.get_allJobs();
   }
   EductionDetails(event: any) {
     const data: any = this.searchForm.get('education')?.value;
@@ -598,13 +611,13 @@ export class CanGetComponent implements OnInit {
         keyskil = this.keySkill[index].Skill_Title;
       }
       return keyskil;
-    }else {
+    } else {
       return '';
     }
   }
   remove_filter(value: any, type: any) {
     if (type == 'keyskill') {
-    console.log(value,"values")
+      console.log(value, "values")
       let skill: any = this.searchForm.get('search')?.value;
       let index = skill.findIndex((a: any) => a.Skill_Title == value);
       if (index != -1) {

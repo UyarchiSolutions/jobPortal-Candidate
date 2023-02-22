@@ -329,19 +329,19 @@
                       </ul>
                     </div>
                   </div>
-                  <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('languages')?.invalid">
+                  <!-- <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('languages')?.invalid">
                     <label for=""></label>
                     <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('languages')?.invalid">
                       <p>Language is required!</p>
                     </div>
-                  </div>
+                  </div> -->
                   <div class="" formArrayName="languages" style="margin-top: 13px;">
                     <div for="" *ngFor="let lang of languages.controls;let i=index" [formGroupName]="i">
-                      <div class="content-box d-flex align-items-start">
+                      <div class="content-box d-flex align-items-start" style="justify-content: space-between;">
                         <div class="tamil d-flex align-items-start">
                           <p>{{lang.get('lang')?.value}}</p>
                         </div>
-                        <div class="content-box" style="margin-left: 55%;">
+                        <div class="content-box" >
                           <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Speck"
                               (change)="kownaction($event,i,lang)" [checked]="chekedKnown(i,'Speck',lang)">

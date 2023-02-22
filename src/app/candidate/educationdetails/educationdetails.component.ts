@@ -11,8 +11,7 @@ import { CanditateService } from '../canditate.service';
 export class EducationdetailsComponent implements OnInit {
   qualification: any = [];
   educationForm: any = this.fb.group({
-    update:new FormControl("educational details"),
-    educationArray: this.fb.array([]),
+    educationArray: this.fb.array([], [Validators.required]),
   })
   drCourse: any = [];
   drsep: any = [];
@@ -24,7 +23,8 @@ export class EducationdetailsComponent implements OnInit {
   sslcspe: any = [];
   userID: any;
   private _fb: any;
-  constructor(private fb: FormBuilder, private candidate: CanditateService, private activate: ActivatedRoute,private router:Router) { }
+  isSubmitted = false;
+  constructor(private fb: FormBuilder, private candidate: CanditateService, private activate: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -33,14 +33,18 @@ export class EducationdetailsComponent implements OnInit {
     })
     this.activate.queryParams.subscribe((res: any) => {
       this.userID = res.id;
-      console.log(this.userID,"sdsdsd");
-      // if (this.userID == null) {
-        this.addPhase();
-      // }
+      console.log(this.userID, "sdsdsd");
+      if (this.userID == null) {
+      this.addPhase();
+      }
     })
     // this.Qualification.controls.forEach((res: any) => {
-    this.getAlldata()
+    this.getAlldata();
+    // if (!this.data) {
+    //   this.addPhase();
+    // }
     // })
+    console.log(this.educationForm.get('educationArray').controls[0].status);
   }
   q: any;
   qualifiacation(val: any, index: any, phase: any) {
@@ -53,13 +57,12 @@ export class EducationdetailsComponent implements OnInit {
       SSLC: ['sslcQualification', 'sslcBoard', 'sslcPassedYear', 'sslcMedium', 'sslctotalmarks']
     }
     let value = val.target.value;
-
+    console.log(val.target.value, "target")
     allcontrols.forEach((a: any) => {
       <FormArray>phase.removeControl(a)
     })
-    console.log(value, "values")
     ss[value].forEach((a: any) => {
-      <FormArray>phase.addControl(a, new FormControl())
+      <FormArray>phase.addControl(a, new FormControl('', Validators.required))
     })
     phase.get('Education')?.setValue(value);
     let q = this.qualification.find((data: any) => data.qualification == val.target.value)
@@ -70,6 +73,7 @@ export class EducationdetailsComponent implements OnInit {
       this.candidate.getdoctorate(q._id).subscribe((res: any) => {
         this.drCourse = res
       })
+
     }
     // pg
     if (val.target.value == 'Masters/Post-Graduation') {
@@ -134,6 +138,7 @@ export class EducationdetailsComponent implements OnInit {
   get Qualification() {
     return this.educationForm.controls['educationArray'] as FormArray;
   }
+
   addPhase() {
     let conrols = this.fb.group({
       Education: new FormControl('', [Validators.required]),
@@ -145,22 +150,26 @@ export class EducationdetailsComponent implements OnInit {
     this.addPhase();
   }
   submit() {
+    this.isSubmitted = true;
     let data: any = {}
     this.educationForm.get('educationArray').value.forEach((e: any) => {
       data = { ...data, ...e }
     })
     delete data.Education;
-    console.log(data)
-    this.candidate.eduction(data).subscribe((res: any) => {
-        this.router.navigate(['/can-proffesinal'],{queryParams:{id:this.userID}})
-    })
+    console.log(this.educationForm.get('educationArray').valid, "validators")
+    if (this.educationForm.get('educationArray').valid) {
+      this.candidate.eduction(data).subscribe((res: any) => {
+        this.router.navigate(['/can-proffesinal'], { queryParams: { id: this.userID } })
+      })
+    }
   }
-  addAllcontrol: any = []
+  addAllcontrol: any = [];
+  data: any = []
   getAlldata() {
     this.candidate.viewDetails().subscribe((res: any) => {
       if (res.user.length != 0) {
         let value = res.user[0];
-
+        this.data = res
         if (value.drQualification == 'Doctorate/phD') {
           this.candidate.getdoctorate(value.candidateDetails.drQualification).subscribe((res: any) => {
             this.drCourse = res

@@ -18,43 +18,57 @@
             </div>
 
           </div>
-          <div class="row" [formGroup]="proffesonalForm" >
+          <div class="row" [formGroup]="proffesonalForm">
             <div class="register-form">
               <div class="single-row">
                 <label for="">Current Industry :</label>
-                <div class="content-box">
-                  <select id="select" class="form-control" formControlName="industry">
+                <div class="content-box conten1">
+                  <select id="select" class="form-control" formControlName="industry"
+                    [class.is-invalid]="proffesonalForm.get('industry').invalid && proffesonalForm.get('industry').touched">
                     <option [ngValue]="null" disabled selected>Select</option>
                     <option value="{{ind._id}}" *ngFor="let ind of industry">{{ind.Industry}}</option>
                   </select>
+                  <div class="text-danger" *ngIf="isSubmit&&proffesonalForm.get('industry').invalid">
+                    <small>Current Industry required</small>
+                  </div>
                 </div>
-
               </div>
               <div class="single-row">
                 <label for="">Current Department :</label>
-                <div class="content-box">
-                  <select id="select" class="form-control" formControlName="department" (change)="changeDeparment($event)">
+                <div class="content-box conten1">
+                  <select id="select" class="form-control" formControlName="department"
+                    (change)="changeDeparment($event)">
                     <option [ngValue]="null" disabled selected>Select</option>
                     <option *ngFor="let dep of currentDepartment" value="{{dep._id}}">{{dep.Department}}</option>
                   </select>
+                  <div class="text-danger" *ngIf="isSubmit&&proffesonalForm.get('department').invalid">
+                    <small>Current Department required</small>
+                  </div>
                 </div>
               </div>
               <div class="single-row">
                 <label for="">Role Category :</label>
-                <div class="content-box">
+                <div class="content-box conten1">
                   <select id="select" class="form-control" (change)="getRole($event)" formControlName="roleCategory">
-                    <option  [ngValue]="null" disabled selected>Select</option>
-                    <option value="" *ngFor="let cat of currentCategory" value="{{cat._id}}">{{cat.Role_Category}}</option>
+                    <option [ngValue]="null" disabled selected>Select</option>
+                    <option value="" *ngFor="let cat of currentCategory" value="{{cat._id}}">{{cat.Role_Category}}
+                    </option>
                   </select>
+                  <div class="text-danger" *ngIf="isSubmit&&proffesonalForm.get('roleCategory').invalid">
+                    <small>Role Category required</small>
+                  </div>
                 </div>
               </div>
               <div class="single-row">
                 <label for="">Job Role :</label>
-                <div class="content-box">
+                <div class="content-box conten1">
                   <select id="select" class="form-control" formControlName="role">
                     <option [ngValue]="null" disabled selected>Select</option>
                     <option *ngFor="let role of getroles" value="{{role._id}}">{{role.Job_role}}</option>
                   </select>
+                  <div class="text-danger" *ngIf="isSubmit&&proffesonalForm.get('role').invalid">
+                    <small>Job Role required</small>
+                  </div>
                 </div>
               </div>
               <div class="single-row  mt-5">
