@@ -282,7 +282,7 @@
             <div class="modal-body">
                 <div class="container" style="width:800px">
                     <div class="col register-content">
-                      <div class="report-popup">
+                      <div class="report-popup" [formGroup]="reportForm">
 
                         <div class="popup">
                         
@@ -290,57 +290,42 @@
                             <h1>Report</h1>
                             <h3>UI UX Designer</h3>
                             <h5>JP Morgan</h5>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <div class="form-check" (change)="report($event)">
+                              <input class="form-check-input" formControlName="report" type="radio" value="It's offensive or harassing" id="flexRadioDefault1">
                               <label class="form-check-label" for="flexRadioDefault1">
                                 It's offensive or harassing
                               </label>
                             </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <div class="form-check" (change)="report($event)">
+                              <input class="form-check-input" type="radio" formControlName="report" value="Asking for money or seems like a fake job" id="flexRadioDefault1">
                               <label class="form-check-label" for="flexRadioDefault1">
                                 Asking for money or seems like a fake job
                               </label>
                             </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <div class="form-check" (change)="report($event)">
+                              <input class="form-check-input" type="radio" formControlName="report" value="Incorrect company, location or job details" id="flexRadioDefault1">
                               <label class="form-check-label" for="flexRadioDefault1">
                                 Incorrect company, location or job details
                               </label>
                             </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <div class="form-check" (change)="report($event)">
+                              <input class="form-check-input" type="radio" formControlName="report" value="I think it's NOT a Job, but selling something" id="flexRadioDefault1">
                               <label class="form-check-label" for="flexRadioDefault1">
                                 I think it's NOT a Job, but selling something
                               </label>
                             </div>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <div class="form-check" (change)="report($event)">
+                              <input class="form-check-input" value="Others" formControlName="report"  type="radio" id="flexRadioDefault1">
                               <label class="form-check-label" for="flexRadioDefault1">
                                 Others
                               </label>
                             </div>
                            
-                            <div>
-                                <input type="radio" name="radio">It's offensive or harassing
-                            </div>
-                            <div>
-                                <input type="radio">Asking for money or seems like a fake job
-                            </div>
-                            <div>
-                                <input type="radio">Incorrect company, location or job details
-                            </div>
-                            <div>
-                                <input type="radio">I think it's NOT a Job, but selling something
-                            </div>
-                            <div>
-                                <input type="radio">Others
-                            </div>
-                            <div>
-                               <textarea></textarea>
+                            <div *ngIf="reportForm.get('report')?.value == 'Others'">
+                               <textarea class="form-control" formControlName="reportothers" placeholder="Type hre....."></textarea>
                             </div>
                             <div class="submit-btn">
-                            <button>Submit</button></div>
+                            <button (click)="submit_report()">Submit</button></div>
                         </div>
                         
                         
@@ -349,7 +334,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>8
         </div>
     </div>
 </div>

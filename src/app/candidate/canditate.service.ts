@@ -215,4 +215,8 @@ getLocation(){
 eduction(data:any){
   return this.http.put(this.baseUrl+`/v1/candidateDetail/edit_details`,data,{headers:{auth:Cookie.get('tokens')}})
 }
+can_report(data:any){
+  return this.http.post(this.baseUrl+`/v1/faqe/create_report`,data,{headers:{auth:Cookie.get('tokens')}})
+
+}
 }
