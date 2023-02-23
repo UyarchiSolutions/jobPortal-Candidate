@@ -431,14 +431,48 @@
                     <span class="close-mark" (click)="remove_filter(item,'keyskill')">x</span>
                   </span>
                 </ng-container>
-                <!-- <span class="badge searchlabel bg-light text-dark" *ngIf="searchForm.get('location')?.valid">
-                  <span>{{searchForm.get('location')?.value}}</span>
-                  <span class="close-mark" (click)="searchfilter('location')">x</span>
-                </span>
-                <span class="badge searchlabel bg-light text-dark" *ngIf="searchForm.get('experience')?.valid">
-                  <span>{{searchForm.get('experience')?.value}}</span>
-                  <span class="close-mark" (click)="searchfilter('experience')">x</span>
-                </span> -->
+                <ng-container *ngIf="searchForm.get('experience')?.value != ''">
+                  <span class="badge searchlabel bg-light text-dark">
+                    <span>{{find_value_exp(searchForm.get('experience')?.value)}}</span>
+                    <span class="close-mark" (click)="remove_filter_exp(searchForm.get('experience')?.value)">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('workmode')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('workmode')?.value">
+                    <span>{{find_value(item,'workMode')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'workMode')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('department')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('department')?.value">
+                    <span>{{find_value(item,'department')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'department')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('Salary')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('Salary')?.value">
+                    <span>{{find_value(item,'Salary')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'Salary')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('companytype')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('companytype')?.value">
+                    <span>{{find_value(item,'companytype')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'companytype')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('role')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('role')?.value">
+                    <span>{{find_value(item,'role')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'role')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('education')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('education')?.value">
+                    <span>{{find_value(item,'education')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'education')">x</span>
+                  </span>
+                </ng-container>
               </div>
             </div>
           </div>
@@ -1019,7 +1053,7 @@
                   <i class='fas fa-sort-amount-down'></i> Range
                 </button>
                 <ul style="cursor: pointer;" class="dropdown-menu">
-                  <li (click)="changeRange(2)">10</li>
+                  <li (click)="changeRange(10)">10</li>
                   <li (click)="changeRange(20)">20</li>
                   <li (click)="changeRange(40)">40</li>
                   <li (click)="changeRange(60)">60</li>

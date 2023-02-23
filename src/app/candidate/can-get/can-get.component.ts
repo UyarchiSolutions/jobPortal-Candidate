@@ -15,7 +15,7 @@ export class CanGetComponent implements OnInit {
   tab = 0;
   appliedJobs: any = [];
   saveJobs: any = [];
-  keySkill: any;
+  keySkill: any = [];
   afterSearch: any;
   getAllalerts: any = [];
   getAllNotification: any = [];
@@ -608,22 +608,75 @@ export class CanGetComponent implements OnInit {
       let index = this.keySkill.findIndex((a: any) => a.Skill_Title == value);
       let keyskil = '';
       if (index != -1) {
-        keyskil = this.keySkill[index].Skill_Title;
+        keyskil = value;
       }
-      return keyskil;
+      return value;
+    } else if (type == 'workMode') {
+      let workmode = value;
+
+      return workmode
+    } else if (type == 'department') {
+      let index = this.currentDepartment.findIndex((a: any) => a._id == value);
+      let department = '';
+      if (index != -1) {
+
+        department = this.currentDepartment[index].Department;
+      }
+      return department;
+    }else if(type =='Salary'){
+
+      let Salary = value;
+      return Salary;
+    }else if(type =='companytype'){
+      let companytype = value;
+      return companytype;
+    }else if(type =='role'){
+      let index = this.roles.findIndex((a: any) => a._id == value);
+      let role = '';
+      if (index != -1) {
+        role = this.roles[index].Job_role;
+      }
+      return role;
+    }else if(type =='education'){
+      let index = this.course.findIndex((a: any) => console.log(a._id == value));
+      let education = '';
+      if (index != -1) {
+        education = this.roles[index].Course;
+      }
+      return education;
     } else {
       return '';
     }
   }
   remove_filter(value: any, type: any) {
     if (type == 'keyskill') {
-      console.log(value, "values")
       let skill: any = this.searchForm.get('search')?.value;
-      let index = skill.findIndex((a: any) => a.Skill_Title == value);
+      console.log(skill, 'woking lusu')
+      let index = skill.findIndex((a: any) => a == value);
       if (index != -1) {
         this.searchForm.get('search')?.value.splice(index, 1);
+        let search: any = skill.toString()
+        this.searchForm.get('searchbox')?.setValue(search);
+      }
+    } else if (type == 'workMode') {
+      let noticeperiod: any = this.searchForm.get('workmode')?.value;
+      let index = noticeperiod.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('workmode')?.value.splice(index, 1);
       }
     }
+  }
+  find_value_exp(expfrom: any) {
+    if (expfrom) {
+      return expfrom + 'year'
+    }
+    else {
+      return '';
+    }
+  }
+  remove_filter_exp(expfrom: any) {
+    this.searchForm.get('experience')?.setValue('')
+
   }
   pagination(val: any) {
     console.log("sdbsjhdj")
@@ -631,36 +684,33 @@ export class CanGetComponent implements OnInit {
       console.log("sdbsjhdj")
       this.page = this.page + 1;
       console.log(this.page)
-      // if (this.tab == 0) {
-      //   this.get_allJobs();
-      // } else if (this.tab == 1) {
-      //   this.onClickApplied();
-      // } else if (this.tab == 3) {
-      //   this.savedJobs()
-      // } else if (this.tab == 4) {
-      //   this.jobAlert()
-      // } else if (this.tab == 5) {
-      //   this.notification()
-      // }
-      this.get_allJobs();
-
+      if (this.tab == 0) {
+        this.get_allJobs();
+      } else if (this.tab == 1) {
+        this.onClickApplied();
+      } else if (this.tab == 3) {
+        this.savedJobs()
+      } else if (this.tab == 4) {
+        this.jobAlert()
+      } else if (this.tab == 5) {
+        this.notification()
+      }
     }
     if (val == 0) {
       if (this.page != 0) {
         this.page = this.page - 1;
         console.log(this.page)
-        this.get_allJobs();
-        // if (this.tab == 0) {
-        //   this.get_allJobs();
-        // } else if (this.tab == 1) {
-        //   this.onClickApplied();
-        // } else if (this.tab == 3) {
-        //   this.savedJobs()
-        // } else if (this.tab == 4) {
-        //   this.jobAlert()
-        // } else if (this.tab == 5) {
-        //   this.notification()
-        // }
+        if (this.tab == 0) {
+          this.get_allJobs();
+        } else if (this.tab == 1) {
+          this.onClickApplied();
+        } else if (this.tab == 3) {
+          this.savedJobs()
+        } else if (this.tab == 4) {
+          this.jobAlert()
+        } else if (this.tab == 5) {
+          this.notification()
+        }
       }
     }
   }
