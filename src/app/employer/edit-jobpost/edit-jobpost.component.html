@@ -29,23 +29,32 @@
                                         <label for="">Job Title :</label>
                                         <div class="content-box">
                                             <input type="text" class="form-control" placeholder="Enter Job Title"
-                                                formControlName="jobTittle">
+                                                formControlName="jobTittle"  [class.is-invalid]="jobpostForm.get('jobTittle').invalid && jobpostForm.get('jobTittle').touched">
+                                                <div *ngIf="(jobpostForm.get('jobTittle').invalid && jobpostForm.get('jobTittle').touched) || jobpostForm.get('jobTittle').dirty">
+                                                    <small *ngIf="jobpostForm.get('jobTittle').errors?.required" class="text-danger">Jobtittle is required</small>
+                                                </div>
                                         </div>
                                     </div>
                                     <div class="single-row">
                                         <label for="">Job Description :</label>
                                         <div class="content-box">
                                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                                placeholder="Enter Job Description"
+                                                placeholder="Enter Job Description" [class.is-invalid]="jobpostForm.get('jobDescription').invalid && jobpostForm.get('jobDescription').touched"
                                                 formControlName="jobDescription"></textarea>
+                                                <div *ngIf="(jobpostForm.get('jobDescription').invalid && jobpostForm.get('jobDescription').touched) || jobpostForm.get('jobDescription').dirty">
+                                                    <small *ngIf="jobpostForm.get('jobDescription').errors?.required" class="text-danger">Job description is required</small>
+                                                </div>
                                         </div>
                                     </div>
                                     <div class="single-row">
                                         <label for="">Candidate Description :</label>
                                         <div class="content-box">
                                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                                                placeholder="Enter Candidate Description"
+                                                placeholder="Enter Candidate Description" [class.is-invalid]="jobpostForm.get('candidateDescription').invalid && jobpostForm.get('candidateDescription').touched"
                                                 formControlName="candidateDescription"></textarea>
+                                                <div *ngIf="(jobpostForm.get('candidateDescription').invalid && jobpostForm.get('candidateDescription').touched) || jobpostForm.get('candidateDescription').dirty">
+                                                    <small *ngIf="jobpostForm.get('candidateDescription').errors?.required" class="text-danger">Candidate description is required</small>
+                                                </div>
                                         </div>
                                     </div>
                                     <div class="single-row">
@@ -60,15 +69,21 @@
                                         <label for="">Job Location :</label>
                                         <div class="content-box">
                                             <input type="text" class="form-control" ngx-google-places-autocomplete
-                                                [options]="options" (onAddressChange)="handleAddressChange($event)"
-                                                placeholder="Enter Job location">
+                                                [options]="options" (onAddressChange)="handleAddressChange($event)" [class.is-invalid]="jobpostForm.get('jobLocation').invalid && jobpostForm.get('jobLocation').touched"
+                                                placeholder="Enter Job location" formControlName="jobLocation">
+                                                <div *ngIf="(jobpostForm.get('jobLocation').invalid && jobpostForm.get('jobLocation').touched) || jobpostForm.get('jobLocation').dirty">
+                                                    <small *ngIf="jobpostForm.get('jobLocation').errors?.required" class="text-danger">Joblocation is required</small>
+                                                </div>
                                         </div>
                                     </div>
                                     <div class="single-row">
                                         <label for="">Key Skills :</label>
                                         <div class="content-box">
-                                            <input type="text" class="form-control" (keyup)="dispalye($event)"
+                                            <input type="text" class="form-control" (keyup)="dispalye($event)" [class.is-invalid]="jobpostForm.get('searchbox').invalid && jobpostForm.get('searchbox').touched"
                                                 placeholder="Enter Key Skills" formControlName="searchbox">
+                                                <div *ngIf="(jobpostForm.get('searchbox').invalid && jobpostForm.get('searchbox').touched) || jobpostForm.get('searchbox').dirty">
+                                                    <small *ngIf="jobpostForm.get('searchbox').errors?.required" class="text-danger">Keyskill is required</small>
+                                                </div>
                                         </div>
                                     </div>
                                     <div class="single-row" *ngIf="isDisplay" style="margin-top:0px;">
@@ -136,7 +151,7 @@
                                         <label for="">Experience :</label>
                                         <div class="content-box">
                                             <select class="form-control select-type douple-input-first"
-                                                formControlName="experienceFrom">
+                                                formControlName="experienceFrom" [class.is-invalid]="jobpostForm.get('experienceFrom').invalid && jobpostForm.get('experienceFrom').touched">
                                                 <option value="option1" disabled selected>Year</option>
                                                 <option value="0">0 Year</option>
                                                 <option value="1">1 Year</option>
@@ -154,7 +169,7 @@
 
 
                                             <select class="form-control select-type douple-input-second"
-                                                formControlName="experienceTo">
+                                                formControlName="experienceTo" [class.is-invalid]="jobpostForm.get('experienceTo').invalid && jobpostForm.get('experienceTo').touched">
                                                 <option value="option1" disabled selected>Year</option>
                                                 <option value="0">0 Year</option>
                                                 <option value="1">1 Year</option>
@@ -175,12 +190,15 @@
                                     <div class="single-row">
                                         <label for="">Industry :</label>
                                         <div class="content-box">
-                                            <select class="form-control select-type" formControlName="industry">
+                                            <select class="form-control select-type" formControlName="industry" [class.is-invalid]="jobpostForm.get('industry').invalid && jobpostForm.get('industry').touched">
                                                 <option disabled [ngValue]="null" selected value="select">Select
                                                 </option>
                                                 <option value="{{industry.Industry}}"
                                                     *ngFor="let industry of indus_data">{{industry.Industry}}</option>
                                             </select>
+                                            <div *ngIf="(jobpostForm.get('industry').invalid && jobpostForm.get('industry').touched) || jobpostForm.get('industry').dirty">
+                                                <small *ngIf="jobpostForm.get('industry').errors?.required" class="text-danger">Industry is required</small>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="single-row">
@@ -193,7 +211,7 @@
                                             <ng-multiselect-dropdown id="courseInput" class="w-100"
                                                 style="background-color: white;" name='industry'
                                                 [settings]="dropdownSettings" [data]="indus_data"
-                                                (onSelect)="pushCourse($event)">
+                                                (onSelect)="pushCourse($event)" formControlName="preferedIndustry" [class.is-invalid]="jobpostForm.get('preferedIndustry').invalid && jobpostForm.get('preferedIndustry').touched">
                                             </ng-multiselect-dropdown>
                                         </div>
                                     </div>
@@ -217,47 +235,60 @@
                                         <label for="">Department :</label>
                                         <div class="content-box">
                                             <select class="form-control select-type" formControlName="department"
-                                                (change)="depart($event)">
+                                                (change)="depart($event)" [class.is-invalid]="jobpostForm.get('department').invalid && jobpostForm.get('department').touched">
                                                 <option value="option1" [ngValue]="null" disabled selected>Select
                                                 </option>
                                                 <option value="{{depart_list._id}}"
                                                     *ngFor="let depart_list of depart_data">{{depart_list.Department}}
                                                 </option>
                                             </select>
+                                            <div *ngIf="(jobpostForm.get('department').invalid && jobpostForm.get('department').touched) || jobpostForm.get('department').dirty">
+                                                <small *ngIf="jobpostForm.get('department').errors?.required" class="text-danger">Department is required</small>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="single-row" *ngIf="jobpostForm.get('department')?.value">
                                         <label for="">Role Category :</label>
                                         <div class="content-box">
-                                            <select class="form-control select-type" formControlName="roleCategory"
+                                            <select class="form-control select-type" formControlName="roleCategory" [class.is-invalid]="jobpostForm.get('roleCategory').invalid && jobpostForm.get('roleCategory').touched"
                                                 (change)="cat($event)">
                                                 <option value="option1" [ngValue]="null" disabled selected>Select
                                                 </option>
                                                 <option value="{{cat_list._id}}" *ngFor="let cat_list of cat_data">
                                                     {{cat_list.Role_Category}}</option>
                                             </select>
+                                            <div *ngIf="(jobpostForm.get('roleCategory').invalid && jobpostForm.get('roleCategory').touched) || jobpostForm.get('roleCategory').dirty">
+                                                <small *ngIf="jobpostForm.get('roleCategory').errors?.required" class="text-danger">Role category is required</small>
+                                            </div>
+                                            
                                         </div>
                                     </div>
                                     <div class="single-row" *ngIf="jobpostForm.get('roleCategory')?.value">
                                         <label for="">Role :</label>
                                         <div class="content-box">
-                                            <select class="form-control select-type" formControlName="role">
+                                            <select class="form-control select-type" formControlName="role" [class.is-invalid]="jobpostForm.get('role').invalid && jobpostForm.get('role').touched">
                                                 <option value="option1" [ngValue]="null" disabled selected>Select
                                                 </option>
                                                 <option value="{{role_list._id}}" *ngFor="let role_list of role_data">
                                                     {{role_list.Job_role}}</option>
                                             </select>
+                                            <div *ngIf="(jobpostForm.get('role').invalid && jobpostForm.get('role').touched) || jobpostForm.get('role').dirty">
+                                                <small *ngIf="jobpostForm.get('role').errors?.required" class="text-danger">Role is required</small>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="single-row">
                                         <label for="">Interview Type :</label>
                                         <div class="content-box">
-                                            <select class="form-control select-type" formControlName="interviewType">
+                                            <select class="form-control select-type" formControlName="interviewType" [class.is-invalid]="jobpostForm.get('interviewType').invalid && jobpostForm.get('interviewType').touched">
                                                 <option value="option1" [ngValue]="null" disabled selected>Select
                                                 </option>
                                                 <option value="walk in">Walk In</option>
                                                 <option value="online">Online</option>
                                             </select>
+                                            <div *ngIf="(jobpostForm.get('interviewType').invalid && jobpostForm.get('interviewType').touched) || jobpostForm.get('interviewType').dirty">
+                                                <small *ngIf="jobpostForm.get('interviewType').errors?.required" class="text-danger">Interview type is required</small>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="single-row"
@@ -265,16 +296,16 @@
                                         <label for="">Date :</label>
                                         <div class="content-box">
                                             <input type="date" class="form-control douple-input-first"
-                                                placeholder="From" formControlName="interviewstartDate">
+                                                placeholder="From" formControlName="interviewstartDate" [class.is-invalid]="jobpostForm.get('interviewstartDate').invalid && jobpostForm.get('interviewstartDate').touched">
                                             <input type="date" class="form-control douple-input-second" placeholder="To"
-                                                formControlName="interviewendDate">
+                                                formControlName="interviewendDate"  [class.is-invalid]="jobpostForm.get('interviewendDate').invalid && jobpostForm.get('interviewendDate').touched">
                                         </div>
                                     </div>
                                     <div class="single-row"
                                         *ngIf="jobpostForm.get('interviewType')?.value == 'walk in'">
                                         <label for="">Time :</label>
                                         <div class="content-box">
-                                            <select class="form-control select-type" formControlName="startTime">
+                                            <select class="form-control select-type" formControlName="startTime" [class.is-invalid]="jobpostForm.get('startTime').invalid && jobpostForm.get('startTime').touched">
                                                 <option value="option1" [ngValue]="null" disabled selected>From</option>
                                                 <option value="08.00 Am">08.00 Am</option>
                                                 <option value="08.30 Am">08.30 Am</option>
@@ -298,7 +329,7 @@
                                                 <option value="05.30 Pm">05.30 Pm</option>
                                                 <option value="06.00 Pm">06.00 Pm</option>
                                             </select>
-                                            <select class="form-control select-type" formControlName="endTime">
+                                            <select class="form-control select-type" formControlName="endTime" [class.is-invalid]="jobpostForm.get('endTime').invalid && jobpostForm.get('endTime').touched">
                                                 <option value="option1" [ngValue]="null" disabled selected>To</option>
                                                 <option value="08.00 Am">08.00 Am</option>
                                                 <option value="08.30 Am">08.30 Am</option>
@@ -327,7 +358,7 @@
                                     <div class="single-row">
                                         <label for="">Employment Type :</label>
                                         <div class="content-box">
-                                            <select class="form-control select-type" formControlName="employmentType">
+                                            <select class="form-control select-type" formControlName="employmentType" [class.is-invalid]="jobpostForm.get('employmentType').invalid && jobpostForm.get('employmentType').touched">
                                                 <option value="option1" [ngValue]="null" disabled selected>Select
                                                 </option>
                                                 <option value="fulltime">Full Time</option>
@@ -335,6 +366,9 @@
                                                 <option value="contract">Contract</option>
                                                 <option value="temporary">Temporary</option>
                                             </select>
+                                            <div *ngIf="(jobpostForm.get('employmentType').invalid && jobpostForm.get('employmentType').touched) || jobpostForm.get('employmentType').dirty">
+                                                <small *ngIf="jobpostForm.get('employmentType').errors?.required" class="text-danger">Employent type is required</small>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="single-row">
@@ -347,13 +381,16 @@
                                     <div class="single-row">
                                         <label for="">Work Mode :</label>
                                         <div class="content-box">
-                                            <select class="form-control select-type" formControlName="workplaceType">
+                                            <select class="form-control select-type" formControlName="workplaceType" [class.is-invalid]="jobpostForm.get('workplaceType').invalid && jobpostForm.get('workplaceType').touched">
                                                 <option value="option1" [ngValue]="null" disabled selected>Select
                                                 </option>
                                                 <option value="onsite">Onsite</option>
                                                 <option value="hybrid">Hybrid</option>
                                                 <option value="work from home">Work From Home</option>
                                             </select>
+                                            <div *ngIf="(jobpostForm.get('workplaceType').invalid && jobpostForm.get('workplaceType').touched) || jobpostForm.get('workplaceType').dirty">
+                                                <small *ngIf="jobpostForm.get('workplaceType').errors?.required" class="text-danger">Workmode is required</small>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="single-row">
@@ -372,6 +409,20 @@
                                                 formControlName="contactNumber">
                                         </div>
                                     </div> -->
+                                    <div class="single-row" *ngIf="jobpostForm.get('interviewType')?.value == 'online'">
+                                        <label for="">Apply Method :</label>
+                                        <div class="content-box content-box-block">
+                                            <select class="form-control select-type" (change)="choose_apply($event)" formControlName ="apply_method" [class.is-invalid]="jobpostForm.get('apply_method').invalid && jobpostForm.get('apply_method').touched">
+                                                <option value="option1" disabled selected>Select</option>
+                                                <option value="email">Email</option>
+                                                <option value="telephone">Telephonic Applicant</option>
+                                                <option value="treatjobs">Apply via Treatjobs</option>
+                                            </select>
+                                            <div *ngIf="(jobpostForm.get('apply_method').invalid && jobpostForm.get('apply_method').touched) || jobpostForm.get('apply_method').dirty">
+                                                <small *ngIf="jobpostForm.get('apply_method').errors?.required" class="text-danger">Applymethod is required</small>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="single-row">
                                         <label for="">Recruiter Details :</label>
                                         <div class="content-box">

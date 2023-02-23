@@ -11,7 +11,7 @@ import { EmpServiceService } from '../emp-service.service';
 export class SendMailComponent implements OnInit {
   canid: any;
   mailForm:any = this.fb.group({
-    email:new FormControl(null),
+    email:new FormControl('noreply-tj@uyarchi.com'),
     subject:new FormControl(null),
     message:new FormControl(null),
     signature:new FormControl(null)
@@ -25,6 +25,10 @@ export class SendMailComponent implements OnInit {
       this.canid=params['candidates'];
     }
   );
+  this.mailForm.patchValue({
+    email:this.mailForm.get('email')?.value
+  })
+
   }
   sendamail(){
     var data={
@@ -32,10 +36,12 @@ export class SendMailComponent implements OnInit {
       subject:this.mailForm.get('subject')?.value,
       signature:this.mailForm.get('signature')?.value,
       email:this.mailForm.get('email')?.value,
-      message:this.mailForm.get('message')?.value
+      message:this.mailForm.get('message')?.value,
+      mail:'mail'
    }
     this.empservice.sendajob(data).subscribe((res:any)=> {
      console.log(res)
+     this.mailForm.reset();
     })
   }
 }

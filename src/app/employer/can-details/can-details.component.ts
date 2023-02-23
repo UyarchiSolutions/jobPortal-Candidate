@@ -29,17 +29,17 @@ export class CanDetailsComponent implements OnInit {
     .subscribe(params => {
       console.log(params['id']); 
       this.id=params['id'];
-      this.jobid=params['job'];
-      this.get_candidate_details(this.id,this.jobid)
+      // this.jobid=params['job'];
+      this.get_candidate_details(this.id)
     }
   );
   this.getJobpostDetails()
   this.get_folder_list()
   }
-  get_candidate_details(id:any,jobid:any){
-    this.empservice.get_candidate_details(id,jobid).subscribe((res:any)=>{
+  get_candidate_details(id:any){
+    this.empservice.get_candidate_id(id).subscribe((res:any)=>{
       this.candidate_data = res[0]
-      console.log(res);
+      console.log( this.candidate_data.workStatus);
       // this.folderForm.patchValue({
       //   folderName:this.folderName
       // })
@@ -130,7 +130,6 @@ export class CanDetailsComponent implements OnInit {
       candidateId:Array(this.id)
     }
     this.empservice.saved_can(data).subscribe((res:any)=>{
-      
       console.log(res);
     })
   }

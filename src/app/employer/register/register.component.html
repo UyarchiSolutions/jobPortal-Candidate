@@ -26,32 +26,38 @@
                                     <div>
                                         <label for="select-logo" class="form-control logo-btn">+Add Logo</label>
                                         <input type="file" id="select-logo" class="form-control logo-btn"
-                                            placeholder="+Add Logo" style="display: none;" formControlName="logo">
+                                            placeholder="+Add Logo" style="display: none;" formControlName="logo" (change)="selectedImg1($event)" accept="image/gif, image/jpeg, image/png">
                                     </div>
                                 </div>
 
                             </div>
                             <div class="single-row">
                                 <label for="">Company Name :</label>
-                                <div class="content-box">
-                                    <input type="text" class="form-control" min="1" step="1"
+                                <div class="content-box content-box-block">
+                                    <input type="text" class="form-control" [class.is-invalid]="RegisterForm.get('name').invalid && RegisterForm.get('name').touched" min="1" step="1"
                                     ng-pattern="/^[a-zA-Z\s]*$/" placeholder="Enter Your Company Name" formControlName="name">
+                                    <div *ngIf="(RegisterForm.get('name').invalid && RegisterForm.get('name').touched) || RegisterForm.get('name').dirty">
+                                        <small *ngIf="RegisterForm.get('name').errors?.required" class="text-danger">Name is required</small>
+                                    </div>
                                 </div>
-
                             </div>
 
                             <div class="single-row">
                                 <label for="">Company Email :</label>
-                                <div class="content-box">
-                                    <input type="email" class="form-control" placeholder="Enter Your Company Email" formControlName="email">
+                                <div class="content-box content-box-block">
+                                    <input type="email" class="form-control" [class.is-invalid]="RegisterForm.get('email').invalid && RegisterForm.get('email').touched" placeholder="Enter Your Company Email" formControlName="email">
+                                    <div *ngIf="(RegisterForm.get('email').invalid && RegisterForm.get('email').touched) || RegisterForm.get('email').dirty">
+                                        <small *ngIf="RegisterForm.get('email').errors?.required" class="text-danger">Email is required</small>
+                                        <small class="text-danger" *ngif="RegisterForm.get('email').errors?.email">Email address is invalid</small>
+                                    </div>
                                 </div>
 
                             </div>
                             <div class="single-row">
                                 <label for="">Registration Type :</label>
-                                <div class="content-box">
-                                    <select class="form-control select-type" formControlName="registrationType">
-                                        <option value="option1" disabled selected >Select Type</option>
+                                <div class="content-box content-box-block">
+                                    <select class="form-control select-type" formControlName="registrationType" [class.is-invalid]="RegisterForm.get('registrationType').invalid && RegisterForm.get('registrationType').touched">
+                                        <option value="option1" [ngValue]="null" disabled selected >Select Type</option>
                                         <option value="Private Limited">Private Limited</option>
                                         <option value="Public Limited">Public Limited</option>
                                         <option value="One Person Company">One Person Company (OPC)</option>
@@ -60,107 +66,144 @@
                                         <option value="State Government Undertaking">State Government Undertaking</option>
                                         <option value="Central Government Undertaking">Central Government Undertaking</option>
                                       </select>
+                                      <div *ngIf="(RegisterForm.get('registrationType').invalid && RegisterForm.get('registrationType').touched) || RegisterForm.get('registrationType').dirty">
+                                        <small *ngIf="RegisterForm.get('registrationType').errors?.required" class="text-danger">Registration type is required</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="single-row">
                                 <label for="">Industry Type :</label>
-                                <div class="content-box">
-                                    <select class="form-control select-type" formControlName="industryType">
-                                        <option value="option1" disabled selected >Select Type</option>
+                                <div class="content-box content-box-block">
+                                    <select class="form-control select-type" formControlName="industryType" [class.is-invalid]="RegisterForm.get('industryType').invalid && RegisterForm.get('industryType').touched">
+                                        <option value="option1" [ngValue]="null" disabled selected >Select Type</option>
                                         <option value="Analytics/KPO/Research">Analytics/KPO/Research</option>
                                         <option value="BPO Call Center">BPO Call Center</option>
                                         <option value="It Sevices/Consulting">It Sevices/Consulting</option>
                                         <option value="Hardware">Hardware</option>
                                         <option value="Networking">Networking</option>
                                       </select>
+                                      <div *ngIf="(RegisterForm.get('industryType').invalid && RegisterForm.get('industryType').touched) || RegisterForm.get('industryType').dirty">
+                                        <small *ngIf="RegisterForm.get('industryType').errors?.required" class="text-danger">Industry Type is required</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="single-row">
                                 <label for="">Company Type :</label>
-                                <div class="content-box">
-                                    <select class="form-control select-type" formControlName="companyType">
-                                        <option value="option1" disabled selected >Select Type</option>
+                                <div class="content-box content-box-block">
+                                    <select class="form-control select-type" formControlName="companyType" [class.is-invalid]="RegisterForm.get('companyType').invalid && RegisterForm.get('companyType').touched">
+                                        <option value="option1" [ngValue]="null" disabled selected >Select Type</option>
                                         <option value="foreign-mnc">Foreign MNC</option>
                                         <option value="corporate">Corporate</option>
                                         <option value="indian mnc">Indian MNC</option>
                                         <option value="start up">Start up</option>
                                       </select>
+                                      <div *ngIf="(RegisterForm.get('companyType').invalid && RegisterForm.get('companyType').touched) || RegisterForm.get('companyType').dirty">
+                                        <small *ngIf="RegisterForm.get('companyType').errors?.required" class="text-danger">Company type is required</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="single-row">
                                 <label for="">Company Website :</label>
                                 <div class="content-box">
                                     <input type="text" class="form-control" placeholder="Website URL" formControlName="companyWebsite">
+                                
                                 </div>
                             </div>
                             <div class="single-row">
                                 <label for="">Password :</label>
-                                <div class="content-box">
-                                    <input type="password" class="form-control" placeholder="Enter Your Password" formControlName="password">
+                                <div class="content-box content-box-block">
+                                    <input type="password" class="form-control" placeholder="Enter Your Password" formControlName="password" [class.is-invalid]="RegisterForm.get('password').invalid && RegisterForm.get('password').touched">
+                                    <div *ngIf="(RegisterForm.get('password').invalid && RegisterForm.get('password').touched) || RegisterForm.get('password').dirty">
+                                        <small *ngIf="RegisterForm.get('password').errors?.required" class="text-danger">Password is required</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="single-row">
                                 <label for="">Confirm Password :</label>
-                                <div class="content-box">
-                                    <input type="password" class="form-control" placeholder="Confoirm Your Password" formControlName="confirm_password">
+                                <div class="content-box content-box-block">
+                                    <input type="password" class="form-control" placeholder="Confoirm Your Password" formControlName="confirm_password" [class.is-invalid]="RegisterForm.get('confirm_password').invalid && RegisterForm.get('confirm_password').touched">
+                                    <div *ngIf="(RegisterForm.get('confirm_password').invalid && RegisterForm.get('confirm_password').touched) || RegisterForm.get('confirm_password').dirty">
+                                        <small *ngIf="RegisterForm.get('confirm_password').errors?.required" class="text-danger">Confirm Password is required</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="single-row">
                                 <label for="">Hiring For :</label>
-                                <div class="content-box">
-                                    <select class="form-control select-type" formControlName="postedBy">
-                                        <option value="option1" disabled selected >Select Type</option>
+                                <div class="content-box content-box-block">
+                                    <select class="form-control select-type" formControlName="postedBy" [class.is-invalid]="RegisterForm.get('postedBy').invalid && RegisterForm.get('postedBy').touched">
+                                        <option value="option1" [ngValue]="null" disabled selected >Select Type</option>
                                         <option value="Company">Own</option>
                                         <option value="Consultancy">Other Clients</option>
                                       </select>
+                                      <div *ngIf="(RegisterForm.get('postedBy').invalid && RegisterForm.get('postedBy').touched) || RegisterForm.get('postedBy').dirty">
+                                        <small *ngIf="RegisterForm.get('postedBy').errors?.required" class="text-danger">Hiringfor is required</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="single-row">
                                 <label for="">Primary Contact :</label>
-                                <div class="content-box">
-                                    <input type="text" class="form-control" placeholder="Enter Contact Persion Name" formControlName="contactName">
+                                <div class="content-box content-box-block">
+                                    <input type="text" class="form-control" placeholder="Enter Contact Persion Name" formControlName="contactName" [class.is-invalid]="RegisterForm.get('contactName').invalid && RegisterForm.get('contactName').touched">
+                                    <div *ngIf="(RegisterForm.get('contactName').invalid && RegisterForm.get('contactName').touched) || RegisterForm.get('contactName').dirty">
+                                        <small *ngIf="RegisterForm.get('contactName').errors?.required" class="text-danger">Contact name is required</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="single-row">
                                 <label for="">Primary Number :</label>
-                                <div class="content-box">
-                                    <input type="text" class="form-control" placeholder="Enter Your Primary Mobile Number" formControlName="mobileNumber">
+                                <div class="content-box content-box-block">
+                                    <input type="text" class="form-control" placeholder="Enter Your Primary Mobile Number" formControlName="mobileNumber" [class.is-invalid]="RegisterForm.get('mobileNumber').invalid && RegisterForm.get('mobileNumber').touched">
+                                    <div *ngIf="(RegisterForm.get('mobileNumber').invalid && RegisterForm.get('mobileNumber').touched) || RegisterForm.get('mobileNumber').dirty">
+                                        <small *ngIf="RegisterForm.get('mobileNumber').errors?.required" class="text-danger">Mobile number is required</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="single-row">
                                 <label for="">Company Description:</label>
-                                <div class="content-box">
-                                    <textarea class="form-control" id="exampleFormControlTextarea1"  rows="3" formControlName="companyDescription"></textarea>
+                                <div class="content-box content-box-block">
+                                    <textarea class="form-control" id="exampleFormControlTextarea1"  rows="3" formControlName="companyDescription" [class.is-invalid]="RegisterForm.get('companyDescription').invalid && RegisterForm.get('companyDescription').touched"></textarea>
+                                    <div *ngIf="(RegisterForm.get('companyDescription').invalid && RegisterForm.get('companyDescription').touched) || RegisterForm.get('companyDescription').dirty">
+                                        <small *ngIf="RegisterForm.get('companyDescription').errors?.required" class="text-danger">Company description is required</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="single-row">
                                 <label for="">Company Profile :</label>
-                                <div class="content-box">
+                                <div class="content-box content-box-block">
                                     <div class="location-content">
                                         <label for="select-logo-file" class="form-control choose-file">Choose File</label>
-                                        <div>  <input type="file" id="select-logo-file" (change)="addresume($event)" accept=".ppt,.pptx,.pdf"  class="form-control choose-file"
-                                            placeholder="+Add Logo"  style="display: none;" >
+                                        <div>  <input type="file" id="select-logo-file" (change)="addresume($event)" accept=".ppt,.pptx,.pdf" class="form-control choose-file"
+                                            placeholder="+Add Logo"  style="display: none;" formControlName="image">
                                         <span class="ppt-data">[PPT, PDF]</span></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="single-row">
                                 <label for="">Corporate Address:</label>
-                                <div class="content-box">
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Enter Your Company Address" rows="3" formControlName="companyAddress"></textarea>
+                                <div class="content-box content-box-block">
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" [class.is-invalid]="RegisterForm.get('companyAddress').invalid && RegisterForm.get('companyAddress').touched" placeholder="Enter Your Company Address" rows="3" formControlName="companyAddress"></textarea>
+                                    <div *ngIf="(RegisterForm.get('companyAddress').invalid && RegisterForm.get('companyAddress').touched) || RegisterForm.get('companyAddress').dirty">
+                                        <small *ngIf="RegisterForm.get('companyAddress').errors?.required" class="text-danger">Address is required</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="single-row">
                                 <label for="">Pin Code :</label>
-                                <div class="content-box">
-                                    <input type="number" class="form-control" placeholder="Enter Your Pin Code" formControlName="pincode">
+                                <div class="content-box content-box-block">
+                                    <input type="number" class="form-control" [class.is-invalid]="RegisterForm.get('pincode').invalid && RegisterForm.get('pincode').touched" placeholder="Enter Your Pin Code" formControlName="pincode">
+                                    <div *ngIf="(RegisterForm.get('pincode').invalid && RegisterForm.get('pincode').touched) || RegisterForm.get('pincode').dirty">
+                                        <small *ngIf="RegisterForm.get('pincode').errors?.required" class="text-danger">Pincode is required</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="single-row">
                                 <label for="select-logo">Location :</label>
-                                <div class="content-box">
+                                <div class="content-box content-box-block">
                                     <input class="form-control" ngx-google-places-autocomplete [options]="options"
-                                    (onAddressChange)="handleAddressChange($event)" placeholder="Enter Your Location">
+                                    (onAddressChange)="handleAddressChange($event)" placeholder="Enter Your Location" [class.is-invalid]="RegisterForm.get('location').invalid && RegisterForm.get('location').touched" formControlName="location">
+                                    <div *ngIf="(RegisterForm.get('location').invalid && RegisterForm.get('location').touched) || RegisterForm.get('location').dirty">
+                                        <small *ngIf="RegisterForm.get('location').errors?.required" class="text-danger">Location is required</small>
+                                    </div>
                                 </div>
                             </div>
                             <div class="single-row single-row-final-btn">

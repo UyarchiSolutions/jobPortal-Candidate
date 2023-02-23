@@ -41,7 +41,7 @@
 
                             <div class="search-box second-search-box">
                                 <input type="text" class="form-control location" placeholder="Enter Location"
-                                    formControlName="location">
+                                    formControlName="getlocation">
                             </div>
 
                             <div class="search-box">
@@ -137,7 +137,7 @@
                                 <div class="search-box">
                                     <label for="" style="font-size:14px !important;font-weight:500">Key Words</label>
                                     <div class="">
-                                        <input type="text" class="form-control keyskill location"
+                                        <input type="text" style="font-size: 14px;" class="form-control keyskill location"
                                             formControlName="anykeywords" (keyup)="dispalyead($event)"
                                             formControlName="searchbox">
                                         <div class="" *ngIf="isDisplayad" style="margin-top:0px;">
@@ -393,7 +393,6 @@
                     <div *ngIf="Tab == 0">
                         <div class="row no-margin bg-grey">
                             <div class="col">
-
                                 <div class="filter-label">
                                     <ng-container *ngIf="searchForm.get('keyskills')?.value != null">
                                         <span class="badge bg-light text-dark"
@@ -409,7 +408,7 @@
                                             <span class="close-mark" (click)="remove_filter(item,'Location')">x</span>
                                         </span>
                                     </ng-container>
-                                    <ng-container *ngIf="searchForm.get('experiencefrom')?.value != '' && searchForm.get('experienceto')?.value != ''">
+                                    <ng-container *ngIf="searchForm.get('experiencefrom')?.value != null && searchForm.get('experienceto')?.value != null">
                                         <span class="badge bg-light text-dark" style="cursor:pointer">
                                             <span>{{find_value_exp(searchForm.get('experiencefrom')?.value ,searchForm.get('experienceto')?.value)}} Years</span>
                                             <span class="close-mark" (click)="remove_filter_exp(searchForm.get('experiencefrom')?.value,searchForm.get('experienceto')?.value)">x</span>
@@ -515,7 +514,7 @@
                                     Year</a>
                             </div>
                             <div class="col col-1">
-                                <i data-bs-toggle="modal" data-bs-target="#notes"
+                                <i data-bs-toggle="modal" (click)="getcanid_notes(list.candiadteId,list.commentId)" data-bs-target="#notes"
                                     ><svg width="22" height="20"
                                         viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -690,31 +689,6 @@
                             <div class="col">
 
                                 <div class="filter-label">
-
-                                    <span class="badge bg-light text-dark">
-                                        <span>BA-English</span>
-
-                                        <span class="close-mark">x</span>
-                                    </span>
-
-                                    <span class="badge bg-light text-dark">
-                                        <span>Chennai</span>
-
-                                        <span class="close-mark">x</span>
-                                    </span>
-
-
-                                    <span class="badge bg-light text-dark">
-                                        <span>0 to 2 Years</span>
-
-                                        <span class="close-mark">x</span>
-                                    </span>
-
-
-
-
-
-
                                 </div>
 
                             </div>
@@ -841,35 +815,8 @@
                     <div *ngIf="Tab == 3">
                         <div class="row no-margin bg-grey">
                             <div class="col">
-
                                 <div class="filter-label">
-
-                                    <span class="badge bg-light text-dark">
-                                        <span>BA-English</span>
-
-                                        <span class="close-mark">x</span>
-                                    </span>
-
-                                    <span class="badge bg-light text-dark">
-                                        <span>Chennai</span>
-
-                                        <span class="close-mark">x</span>
-                                    </span>
-
-
-                                    <span class="badge bg-light text-dark">
-                                        <span>0 to 2 Years</span>
-
-                                        <span class="close-mark">x</span>
-                                    </span>
-
-
-
-
-
-
                                 </div>
-
                             </div>
                         </div>
                         <div class="row content-card-heading no-margin padding10" style="font-size:13px">
@@ -982,22 +929,6 @@
                             <div class="col">
 
                                 <div class="filter-label">
-
-                                    <span class="badge bg-light text-dark">
-                                        <span>BA-English</span>
-
-                                        <span class="close-mark">x</span>
-                                    </span>
-                                    <span class="badge bg-light text-dark">
-                                        <span>Chennai</span>
-
-                                        <span class="close-mark">x</span>
-                                    </span>
-                                    <span class="badge bg-light text-dark">
-                                        <span>0 to 2 Years</span>
-
-                                        <span class="close-mark">x</span>
-                                    </span>
                                 </div>
 
                             </div>
@@ -1058,7 +989,7 @@
                             <div class="col name" style="text-decoration: underline;">
                                 <a>{{list.jobTittle}}</a>
                             </div>
-                            <div class="col mailstatus" *ngIf="list.status == 'Pending'">
+                            <div class="col mailstatus" *ngIf="list.status == null">
                                 <i><svg width="12" height="11" viewBox="0 0 12 11" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path

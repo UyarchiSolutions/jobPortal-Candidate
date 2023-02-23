@@ -41,3 +41,6 @@
 .single-row-final-btn{
     margin-top: 20px;
 }
+.content-box-block{
+    display: block !important;
+}
