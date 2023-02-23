@@ -742,3 +742,12 @@ margin-right: 13px;
         white-space: normal;
         height:auto;  /* just added this line */
     }
+.in-heght{
+    height: 163px;
+    max-height: 163px;
+}
+.no-folder{
+    font-size: 14px;
+    text-align: center;
+    color: #B4B4B4;
+}

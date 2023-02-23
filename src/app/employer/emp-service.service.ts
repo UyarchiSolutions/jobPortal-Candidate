@@ -22,8 +22,6 @@ export class EmpServiceService {
       this.name.emit(name)
     }
 
-
-
   employeeRegister(data:any){
     return this.http.post(this.baseurl+'/v1/employerRegistration/register',data)
   }
@@ -209,5 +207,9 @@ get_notes(id:any){
 }
 edit_notes(id:any,data:any){
 return this.http.put(this.baseurl+'/v1/employerdetail/comment_edit/'+id,data)
+}
+get_location_search(data:any){
+return this.http.get(this.baseurl+'/v1/district/'+data)
+
 }
 }

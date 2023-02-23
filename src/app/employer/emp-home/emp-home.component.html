@@ -41,7 +41,19 @@
 
                             <div class="search-box second-search-box">
                                 <input type="text" class="form-control location" placeholder="Enter Location"
-                                    formControlName="getlocation">
+                                    formControlName="getlocation" (keyup)="get_location_search($event)">
+                                <div class="" *ngIf="islocation" style="margin-top:0px;">
+                                    <label></label>
+                                    <div class="content-box keylist" style="background: white;">
+                                        <ul class="ulkeylist" style="padding-left: 0px;" class="">
+                                            <li class="ilkeylist" style="cursor:pointer" *ngFor="let search of searchLocation"
+                                            (click)="checklocation($event,search.district)">
+                                                <span>{{search.district}}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                    
                             </div>
 
                             <div class="search-box">
@@ -93,7 +105,7 @@
 
 
                 <div class="col">
-                    <div class="sidebarmenu recent-search no-margin" style="cursor: pointer;">
+                    <div class="sidebarmenu recent-search no-margin in-heght" style="cursor: pointer;">
                         <ul>
                             <li class="sidebarmenu-heading no-margin"><span class="icon-text m-l-1">Saved Folder</span>
                             </li>
@@ -108,10 +120,13 @@
                                     </div>
                                 </div>
                             </li>
-                            <div class="view-jobs py-1" routerLink="/saved-folder">
+                            <div class="view-jobs py-1" *ngIf="folder_list.length > 0" routerLink="/saved-folder">
                                 View all
                             </div>
                         </ul>
+                        <div class="py-4 no-folder" *ngIf="folder_list.length == 0">
+                            No saved folders found
+                        </div>
                     </div>
 
                 </div>
@@ -183,7 +198,7 @@
                                             <div style="display:flex">
                                                 <select class="form-control select-type"
                                                     formControlName="experiencefrom">
-                                                    <option value="option1" selected>From</option>
+                                                    <option value="option1" [ngValue]="null" disabled selected>From</option>
                                                     <option value="0">Freshers</option>
                                                     <option value="1">1 Year</option>
                                                     <option value="2">2 Year</option>
@@ -198,7 +213,7 @@
                                                     <option value="11">11 Year</option>
                                                 </select>
                                                 <select class="form-control select-type" formControlName="experienceto">
-                                                    <option value="option1" selected>To</option>
+                                                    <option value="option1" [ngValue]="null" disabled selected>To</option>
                                                     <option value="0">Freshers</option>
                                                     <option value="1">1 Year</option>
                                                     <option value="2">2 Year</option>
@@ -398,48 +413,48 @@
                                         <span class="badge bg-light text-dark"
                                             *ngFor="let item of searchForm.get('keyskills')?.value" style="cursor:pointer">
                                             <span>{{find_value(item,'keyskills')}}</span>
-                                            <span class="close-mark" (click)="remove_filter(item,'keyskills')">x</span>
+                                            <!-- <span class="close-mark" (click)="remove_filter(item,'keyskills')">x</span> -->
                                         </span>
                                     </ng-container>
                                     <ng-container *ngIf="searchForm.get('Location')?.value != null">
                                         <span class="badge bg-light text-dark"
                                             *ngFor="let item of searchForm.get('Location')?.value">
                                             <span>{{find_value(item,'Location')}}</span>
-                                            <span class="close-mark" (click)="remove_filter(item,'Location')">x</span>
+                                            <!-- <span class="close-mark" (click)="remove_filter(item,'Location')">x</span> -->
                                         </span>
                                     </ng-container>
                                     <ng-container *ngIf="searchForm.get('experiencefrom')?.value != null && searchForm.get('experienceto')?.value != null">
                                         <span class="badge bg-light text-dark" style="cursor:pointer">
                                             <span>{{find_value_exp(searchForm.get('experiencefrom')?.value ,searchForm.get('experienceto')?.value)}} Years</span>
-                                            <span class="close-mark" (click)="remove_filter_exp(searchForm.get('experiencefrom')?.value,searchForm.get('experienceto')?.value)">x</span>
+                                            <!-- <span class="close-mark" (click)="remove_filter_exp(searchForm.get('experiencefrom')?.value,searchForm.get('experienceto')?.value)">x</span> -->
                                         </span>
                                    </ng-container>
                                     <ng-container *ngIf="searchForm.get('salary')?.value != null">
                                         <span class="badge bg-light text-dark" style="cursor:pointer"
                                             *ngFor="let item of searchForm.get('salary')?.value">
                                             <span>{{find_value(item,'salary')}} lac</span>
-                                            <span class="close-mark" (click)="remove_filter(item,'salary')">x</span>
+                                            <!-- <span class="close-mark" (click)="remove_filter(item,'salary')">x</span> -->
                                         </span>
                                     </ng-container>
                                     <ng-container *ngIf="searchForm.get('department')?.value != null">
                                         <span class="badge bg-light text-dark" style="cursor:pointer"
                                             *ngFor="let item of searchForm.get('department')?.value">
                                             <span>{{find_value(item,'department')}}</span>
-                                            <span class="close-mark" (click)="remove_filter(item,'department')">x</span>
+                                            <!-- <span class="close-mark" (click)="remove_filter(item,'department')">x</span> -->
                                         </span>
                                     </ng-container>
                                      <ng-container *ngIf="searchForm.get('role')?.value != null">
                                     <span class="badge bg-light text-dark" style="cursor:pointer"
                                         *ngFor="let item of searchForm.get('role')?.value">
                                         <span>{{find_value(item,'role')}}</span>
-                                        <span class="close-mark" (click)="remove_filter(item,'role')">x</span>
+                                        <!-- <span class="close-mark" (click)="remove_filter(item,'role')">x</span> -->
                                     </span>
                                     </ng-container>
                                     <ng-container *ngIf="searchForm.get('industry')?.value != null" style="cursor:pointer">
                                         <span class="badge bg-light text-dark" style="cursor:pointer"
                                             *ngFor="let item of searchForm.get('industry')?.value">
                                             <span>{{find_value(item,'industry')}}</span>
-                                            <span class="close-mark" (click)="remove_filter(item,'industry')">x</span>
+                                            <!-- <span class="close-mark" (click)="remove_filter(item,'industry')">x</span> -->
                                         </span>
                                     </ng-container>
                                     <ng-container *ngIf="searchForm.get('noticeperiod')?.value != null" style="cursor:pointer">
@@ -447,7 +462,7 @@
                                             *ngFor="let item of searchForm.get('noticeperiod')?.value">
                                             <span *ngIf="item == 'immediate'">{{find_value(item,'noticeperiod')}} </span>
                                             <span *ngIf="item != 'immediate'">{{find_value(item,'noticeperiod')}} days</span>
-                                            <span class="close-mark" (click)="remove_filter(item,'noticeperiod')">x</span>
+                                            <!-- <span class="close-mark" (click)="remove_filter(item,'noticeperiod')">x</span> -->
                                         </span>
                                     </ng-container>
                                 </div>
@@ -494,7 +509,7 @@
                             </div>
                             <div class="col name">
                                 <a [routerLink]="['/can-details']"
-                                    [queryParams]="{id:list.candiadteId}">{{list.locationCurrent}}</a>
+                                    [queryParams]="{id:list.candiadteId}">{{list.locationSet}}</a>
                             </div>
                             <div class="col">
                                 <a [routerLink]="['/can-details']"
@@ -735,9 +750,9 @@
                                 <a [routerLink]="['/emp-action']"
                                     [queryParams]="{id:list.candidateData._id,job:list._id}">{{list.candidateData.name}}</a>
                             </div>
-                            <div class="col Year">
+                            <div class="col Year name">
                                 <a [routerLink]="['/emp-action']"
-                                    [queryParams]="{id:list.candidateData._id,job:list._id}">{{list.candidateData.locationCurrent}}</a>
+                                    [queryParams]="{id:list.candidateData._id,job:list._id}">{{list.candidateData.locationSet}}</a>
                             </div>
                             <div class="col">
                                 <a [routerLink]="['/emp-action']"
@@ -860,7 +875,7 @@
                                 <a>{{list.candidateData.name}}</a>
                             </div>
                             <div class="col name">
-                                <a>{{list.candidateData.locationCurrent}}</a>
+                                <a>{{list.candidateData.locationSet}}</a>
                             </div>
                             <div class="col">
                                 <a>{{get_appliedcan_qualification(list)}}</a>
@@ -977,7 +992,7 @@
                                 <a>{{list.candidateDetail[0].name}}</a>
                             </div>
                             <div class="col name">
-                                <a>{{list.candidateDetail[0].locationCurrent}}</a>
+                                <a>{{list.candidateDetail[0].locationSet}}</a>
                             </div>
                             <div class="col">
                                 <a>{{get_appliedcanall_qualification(list)}}</a>
@@ -1163,22 +1178,25 @@
 
 
                 <div class="col">
-                    <div class="right-sidebar">
+                    <div class="right-sidebar" style="height: 338px;
+                    overflow: auto">
                         <div class="sidebarmenu recent-search">
                             <ul>
                                 <li class="sidebarmenu-heading"> <span class="icon-custom"><i
                                             class='far fa-user'></i></span> <span class="icon-text">Recent Search</span>
                                 </li>
                                 <li *ngFor="let search_list of rcnt_data" (click)="get_recnt_search(search_list._id)">
-                                    <div><span class="icon-custom icon-custom-recent"><i
-                                                class='far fa-address-card'></i></span>
-                                        <span class="icon-text">{{search_list.keyskills[0]}}</span>
+                                    <div>
+                                        <span class="icon-custom icon-custom-recent">
+                                            <i class='far fa-address-card'></i>
+                                        </span>
+                                        <span class="icon-text" *ngFor="let ski of search_list.keyskills">{{ski}}</span>
                                     </div>
 
                                     <div class="job-listing-bottom">
-                                        <div><span class="icon-custom icon-custom-recent"><i
+                                        <div class="name"><span class="icon-custom icon-custom-recent"><i
                                                     class='far fa-address-card'></i></span>
-                                            <span class="icon-text">{{search_list.location}}</span>
+                                            <span class="icon-text" *ngFor="let loca of search_list.Location">{{loca}}</span>
                                         </div>
                                         <div><span class="icon-custom icon-custom-recent"><i
                                                     class='far fa-address-card'></i></span>
@@ -1201,7 +1219,7 @@
             </div>
 
 
-            <div class="row">
+            <div class="row mt-4">
 
                 <div class="col">
 
@@ -1297,7 +1315,6 @@
                                             </li>
                                         </ul>
                                     </div>
-
                                 </div>
 
                                 <div class="single-row">
@@ -1305,7 +1322,7 @@
                                     <div class="content-box">
                                         <select id="select" class="form-control" formControlName="experiencefrom">
                                             <option [ngValue]="null" disabled selected>From</option>
-                                            <option value="Fresher">0 Year</option>
+                                            <option value="0">Fresher</option>
                                             <option value="1">1 Year</option>
                                             <option value="2">2 Year</option>
                                             <option value="3">3 Year</option>
@@ -1320,7 +1337,7 @@
                                         </select>
                                         <select id="select" class="form-control" formControlName="experienceto">
                                             <option value="option1" [ngValue]="null" disabled selected>To</option>
-                                            <option value="Fresher">0 Year</option>
+                                            <option value="0">Fresher</option>
                                             <option value="1">1 Year</option>
                                             <option value="2">2 Year</option>
                                             <option value="3">3 Year</option>
@@ -1335,7 +1352,6 @@
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="single-row">
                                     <label for="">Salary Range :</label>
                                     <div class="content-box">
@@ -1355,9 +1371,23 @@
                                 <div class="single-row">
                                     <label for="">Job Location :</label>
                                     <div class="content-box">
-                                        <input type="text" class="form-control" placeholder="Enter  Job Location"
-                                            formControlName="location">
+                                        <!-- <input type="text" class="form-control" placeholder="Enter  Job Location"
+                                            formControlName="location"> -->
+                                    <input type="text" class="form-control location" placeholder="Enter Job Location"
+                                    formControlName="getlocation" (keyup)="get_location_search($event)">
+                                       
                                     </div>
+                                </div>
+                                <div class="single-row" *ngIf="islocation" style="margin-top:0px;">
+                                        <label></label>
+                                        <div class="content-box" style="background: white;">
+                                            <ul class="" style="padding-left: 15px;" class="">
+                                                <li class="" style="cursor:pointer" *ngFor="let search of searchLocation"
+                                                (click)="checklocation($event,search.district)">
+                                                    <span>{{search.district}}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
                                 </div>
                                 <div class="single-row">
                                     <label for="">Gender :</label>

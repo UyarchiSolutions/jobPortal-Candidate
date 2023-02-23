@@ -21,6 +21,7 @@ export class EmpHomeComponent implements OnInit {
   isDisplayad = false;
   keySkill: any;
   value: any;
+  islocation = false
   dropdownSettings: IDropdownSettings = {
     singleSelection: false,
     idField: '_id',
@@ -59,6 +60,7 @@ export class EmpHomeComponent implements OnInit {
     folderName: new FormControl(null),
   });
   comment_id: any;
+  searchLocation: any;
   find_value(value: any, type: any) {
     console.log(value);
     if (type == 'department') {
@@ -111,18 +113,20 @@ export class EmpHomeComponent implements OnInit {
   }
   find_value_exp(expfrom: any,expto: any){
     if(expfrom && expto){
-      return expfrom+'to'+expto
+      return expfrom +'to'+ expto
     }
     else {
       return '';
     }
   }
+  is_check = false
   remove_filter(value: any, type: any) {
     if (type == 'department') {
       let department: any = this.searchForm.get('department')?.value;
       let index = department.findIndex((a: any) => a == value);
       if (index != -1) {
         this.searchForm.get('department')?.value.splice(index, 1);
+        this.is_check=true
       }
     }
     if (type == 'role') {
@@ -168,14 +172,27 @@ export class EmpHomeComponent implements OnInit {
         let search: any = keyskills.toString()
         this.searchForm.get('searchbox')?.setValue(search);
       }
-
     }
-    
+    this.get_can()
   }
   remove_filter_exp(expfrom: any,expto: any){
      this.searchForm.get('experiencefrom')?.setValue('')
     this.searchForm.get('experienceto')?.setValue('')
   }
+  // getcheck(type:any,id:any){
+  //    console.log(type,id)
+  //    if(type == 'department'){
+  //     let department: any = this.searchForm.get('department')?.value;
+  //     let index = department.findIndex((a: any) => a == id);
+  //     if(index != -1){
+  //       return true
+  //     }
+  //     else{
+  //       return false
+  //     }
+  //    }
+
+  // } 
   addlocation(data:any){
    
   }
@@ -326,6 +343,7 @@ export class EmpHomeComponent implements OnInit {
       this.isDisplayad = false;
     }
   }
+  
   recent_search() {
     this.empservice.rcnt_search().subscribe((res: any) => {
       this.rcnt_data = res;
@@ -399,21 +417,12 @@ export class EmpHomeComponent implements OnInit {
     });
   }
   advanced_search() {
-    if (
-      this.searchForm.get('anykeywords')?.valid &&
-      this.searchForm.get('Location')?.valid &&
-      this.searchForm.get('experiencefrom')?.valid &&
-      this.searchForm.get('experienceto')?.valid &&
-      this.searchForm.get('salaryRange')?.valid &&
-      this.searchForm.get('gender')?.valid &&
-      this.searchForm.get('course')?.valid &&
-      this.searchForm.get('displayDetails')?.valid
-    ) {
+    console.log("fsfds")
+    
       this.empservice.view_can(this.searchForm.value).subscribe((res: any) => {
         console.log(res);
         this.search();
       });
-    }
   }
   pushCourse(e: any) {
     const data: FormArray = this.searchForm.get('course') as FormArray;
@@ -795,4 +804,30 @@ export class EmpHomeComponent implements OnInit {
     }
   }
   clkrange(count: number) {}
+  checklocation(event: any, location: any) {
+      console.log('checkSkill', location);
+      let index: any = this.searchForm.get('Location')?.value;
+      index.push(location);
+      console.log(this.searchForm.get('Location')?.value)
+      let search: any = index.toString();
+      this.searchForm.get('getlocation')?.setValue(search);
+      console.log(this.searchForm.get('getlocation')?.value)
+      this.islocation = false
+  }
+  get_location_search(e:any){
+    let value = e.target.value;
+    if (e.target.value) {
+      this.islocation = true;
+    } else {
+      this.islocation = false;
+    }
+    this.searchedLocation(value);
+  }
+  searchedLocation(value:any){
+    this.empservice.get_location_search(value).subscribe((res: any) => {
+      console.log(res);
+      this.islocation = true
+      this.searchLocation =res
+    });
+  }
 }
