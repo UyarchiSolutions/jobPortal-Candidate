@@ -23,6 +23,7 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
 import { SendotpforgotComponent } from './sendotpforgot/sendotpforgot.component';
 import { NewpasswordComponent } from './newpassword/newpassword.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { ReportPopupComponent } from './report-popup/report-popup.component';
 
 
 
@@ -44,7 +45,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     CandidatechangepasswordComponent,
     ForgotpasswordComponent,
     SendotpforgotComponent,
-    NewpasswordComponent
+    NewpasswordComponent,
+    ReportPopupComponent
   ],
   imports: [
     CommonModule,

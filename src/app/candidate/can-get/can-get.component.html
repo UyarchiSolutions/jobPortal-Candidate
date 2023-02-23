@@ -473,6 +473,30 @@
                     <span class="close-mark" (click)="remove_filter(item,'education')">x</span>
                   </span>
                 </ng-container>
+                <ng-container *ngIf="searchForm.get('postedby')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('postedby')?.value">
+                    <span>{{find_value(item,'postedby')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'postedby')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('preferredIndustry')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('preferredIndustry')?.value">
+                    <span>{{find_value(item,'preferredIndustry')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'preferredIndustry')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('freshness')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('freshness')?.value">
+                    <span>{{find_value(item,'freshness')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'freshness')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('experiencefrom')?.value != '' && searchForm.get('experienceto')?.value != ''">
+                  <span class="badge searchlabel bg-light text-dark">
+                    <span>{{find_expfromTo(searchForm.get('experiencefrom')?.value ,searchForm.get('experienceto')?.value)}}</span>
+                    <span class="close-mark" (click)="remove_filterexpFromto(searchForm.get('experiencefrom')?.value,searchForm.get('experienceto')?.value)">x</span>
+                  </span>
+                </ng-container>
               </div>
             </div>
           </div>

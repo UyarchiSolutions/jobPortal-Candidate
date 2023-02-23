@@ -1,0 +1,63 @@
+.report-popup{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.404);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+.report-popup .popup{
+    width: 60vw;
+    height: fit-content;
+    padding: 4vh 0;
+    background-color: #EEEEEE;
+    box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
+border-radius: 10px;
+}
+.report-popup .popup-container{
+    width: 50%;
+    margin: auto;
+}
+.report-popup h1{
+    text-align: center;
+    color: #FD841F;
+}
+.report-popup h3{
+    margin-top: 20px;
+    font-size: 25px;
+    font-weight: 500;
+}
+.report-popup h5{
+    margin-bottom: 20px;
+}
+.report-popup .popup-container div{
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+.report-popup .popup-container input{
+    margin-right: 10px;
+    cursor: pointer;
+}
+.report-popup textarea{
+    width: 90%;
+    min-height: 150px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
+border-radius: 10px;
+border: none;
+}
+.report-popup .submit-btn{
+    display: flex;
+    justify-content: center;
+}
+.report-popup .submit-btn button{
+    background-color: #0A2647;
+    color: white;
+    padding: 6px 25px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
