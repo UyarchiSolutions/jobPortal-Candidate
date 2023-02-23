@@ -51,8 +51,9 @@ export class EmpHomeComponent implements OnInit {
     department: this.fb.array([]),
     industry: this.fb.array([]),
     noticeperiod: this.fb.array([]),
-    range: new FormControl(10),
+    range: new FormControl(50),
     page: new FormControl(0),
+    getlocation:new FormControl(null)
   });
   folderForm: any = this.fb.group({
     folderName: new FormControl(null),
@@ -164,19 +165,19 @@ export class EmpHomeComponent implements OnInit {
       let index = keyskills.findIndex((a: any) => a == value);
       if (index != -1) {
         this.searchForm.get('keyskills')?.value.splice(index, 1);
+        let search: any = keyskills.toString()
+        this.searchForm.get('searchbox')?.setValue(search);
       }
+
     }
-    if (type == 'keyskills') {
-      let keyskills: any = this.searchForm.get('keyskills')?.value;
-      let index = keyskills.findIndex((a: any) => a == value);
-      if (index != -1) {
-        this.searchForm.get('keyskills')?.value.splice(index, 1);
-      }
-    }
+    
   }
   remove_filter_exp(expfrom: any,expto: any){
      this.searchForm.get('experiencefrom')?.setValue('')
     this.searchForm.get('experienceto')?.setValue('')
+  }
+  addlocation(data:any){
+   
   }
   activeform: any = this.fb.group({
     active: new FormControl(true),
@@ -213,7 +214,7 @@ export class EmpHomeComponent implements OnInit {
   notes_can_id: any;
   comments: any;
   page = 0;
-  range = 5;
+  range = 50;
   constructor(
     private empservice: EmpServiceService,
     private fb: FormBuilder,
@@ -255,8 +256,10 @@ export class EmpHomeComponent implements OnInit {
     this.is_viewapplies = true;
     this.is_viewpost = false;
     this.is_viewcan = false;
-    this.empservice.view_post(id).subscribe((res: any) => {
-      this.applied_data = res;
+    this.range = 50;
+    this.page = 0;
+    this.empservice.view_post(id, this.range, this.page).subscribe((res: any) => {
+      this.applied_data = res.data;
       console.log(this.applied_data);
     });
   }
@@ -280,6 +283,8 @@ export class EmpHomeComponent implements OnInit {
     });
   }
   search() {
+    // const data= this.searchForm.get('Location')?.value;
+    // data.push(this.searchForm.get('getlocation')?.value);
     console.log('search', this.searchForm.value);
     // if(this.searchForm.get('keyskills')?.valid && this.searchForm.get('location')?.valid && this.searchForm.get('experience')?.valid){
     this.empservice.view_can(this.searchForm.value).subscribe((res: any) => {
@@ -722,7 +727,7 @@ export class EmpHomeComponent implements OnInit {
 
   viewsaved_can() {
     this.Tab = 3;
-    this.range = 5;
+    this.range = 50;
     this.page = 0;
     this.getsaved_can();
   }
@@ -736,7 +741,7 @@ export class EmpHomeComponent implements OnInit {
   }
   notify() {
     this.Tab = 5;
-    this.range = 5;
+    this.range = 50;
     this.page = 0;
     this.empservice
       .get_mail_notification(this.range, this.page)
@@ -751,6 +756,7 @@ export class EmpHomeComponent implements OnInit {
     e.target.style.height = e.target.scrollHeight + 25 + 'px';
   }
   getcanid_notes(id: any,comment_id:any) {
+    console.log("dgsgsdg")
     this.notes_can_id = id;
     this.comment_id = comment_id;
     console.log(this.notes_can_id,comment_id);

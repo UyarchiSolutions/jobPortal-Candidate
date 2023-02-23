@@ -20,20 +20,20 @@ export class EmpJobpostComponent implements OnInit {
     jobDescription : new FormControl('', Validators.required),
     keySkill :  new FormControl([], Validators.required),
     educationalQualification : new FormControl('', Validators.required),
-    salaryRangeFrom : new FormControl('', Validators.required),
-    salaryRangeTo : new FormControl('', Validators.required),
+    salaryRangeFrom : new FormControl(''),
+    salaryRangeTo : new FormControl(''),
     experienceFrom : new FormControl('', Validators.required),
     experienceTo : new FormControl('', Validators.required),
     interviewType : new FormControl(null, Validators.required),
     candidateDescription : new FormControl('', Validators.required),
-    salaryDescription : new FormControl('', Validators.required),
-    urltoApply : new FormControl('', Validators.required),
+    salaryDescription : new FormControl(''),
+    urltoApply : new FormControl(''),
     workplaceType : new FormControl(null, Validators.required),
     industry : new FormControl(null, Validators.required),
     preferedIndustry : this.formBuilder.array([], Validators.required),
     jobLocation : new FormControl('', Validators.required),
     employmentType : new FormControl(null, Validators.required),
-    openings : new FormControl('', Validators.required),
+    openings : new FormControl(''),
     department: new FormControl(null, Validators.required),
     roleCategory: new FormControl(null, Validators.required),
     role: new FormControl(null, Validators.required),
@@ -47,11 +47,10 @@ export class EmpJobpostComponent implements OnInit {
     qualification:this.formBuilder.array([], Validators.required),
     course:this.formBuilder.array([], Validators.required),
     specialization:this.formBuilder.array([], Validators.required),
-    searchbox: new FormControl(null),
-    apply_method:new FormControl(null),
-    recruiterList:new FormControl(null),
-    recruiterList1:new FormControl(null),
-
+    searchbox: new FormControl(null,Validators.required),
+    apply_method:new FormControl(null,Validators.required),
+    recruiterList:new FormControl(null,Validators.required),
+    recruiterList1:new FormControl(null,Validators.required),
     
   });
   keySkill: any;
@@ -130,6 +129,12 @@ export class EmpJobpostComponent implements OnInit {
     this.get()
   }
   job_post(){
+    // if (this.jobpostForm.invalid) {
+    //     for (const control of Object.keys(this.jobpostForm.controls)) {
+    //       this.jobpostForm.controls[control].markAsTouched();
+    //     }
+    //     return;
+    //   }
     this.empservice.submitPostAJob(this.jobpostForm.value).subscribe((res:any)=>{
       console.log(res);
       this.jobpostForm.reset();
@@ -244,7 +249,6 @@ export class EmpJobpostComponent implements OnInit {
          this.jobpostForm.get('recruiterName')?.setValue('');
          this.jobpostForm.get('recruiterEmail')?.setValue('');
          this.jobpostForm.get('recruiterNumber')?.setValue('');
-
          this.is_new = true;
          this.is_list = false;
     }
@@ -252,8 +256,9 @@ export class EmpJobpostComponent implements OnInit {
    }
   pushCourse(e:any){
     const data: FormArray = this.jobpostForm.get('preferedIndustry') as FormArray;
-    console.log(e)
-    data.push(new FormControl(e.Industry))
+    data.push(new FormControl(e._id))
+    console.log(data)
+
   }
   get_qualification(){
     this.empservice.get_qualification().subscribe((res:any) => {

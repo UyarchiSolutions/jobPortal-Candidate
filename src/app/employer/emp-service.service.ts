@@ -48,9 +48,9 @@ export class EmpServiceService {
   myjobPost(){
     return this.http.get(this.baseurl+'/v1/employerdetail/getEmpDetails',{headers:{auth:Cookie.get('emptoken')}})
   }
-  view_post(id: any){
+  view_post(id: any,range:any,page:any){
     console.log(id)
-    return this.http.get(this.baseurl + "/v1/employerdetail/getAllApplied_postjobs_Candidates/" + id);
+    return this.http.get(this.baseurl + "/v1/employerdetail/getAllApplied_postjobs_Candidates/" + id +'/' + range + '/' + page);
   }
  view_can(data:any){
   console.log(data)
@@ -100,6 +100,10 @@ change_status(id:any,data:any){
 get_candidate_details(id:any,jobid:any){
   console.log('id',id);
   return this.http.get(this.baseurl+'/v1/candidateDetail/candidate_detials/' + id+ '/' +jobid)
+}
+get_candidate_id(id:any){
+  console.log('id',id);
+  return this.http.get(this.baseurl+'/v1/candidateDetail/candidate_detials_id/' + id)
 }
 get_job_detail(id:any){
   return this.http.get(this.baseurl+'/v1/employerdetail/getByIdEmpDetails/' + id)

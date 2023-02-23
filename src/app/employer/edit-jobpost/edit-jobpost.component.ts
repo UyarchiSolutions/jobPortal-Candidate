@@ -19,20 +19,20 @@ export class EditJobpostComponent implements OnInit {
     jobDescription : new FormControl('', Validators.required),
     keySkill :  new FormControl([], Validators.required),
     educationalQualification : new FormControl('', Validators.required),
-    salaryRangeFrom : new FormControl('', Validators.required),
-    salaryRangeTo : new FormControl('', Validators.required),
+    salaryRangeFrom : new FormControl(''),
+    salaryRangeTo : new FormControl(''),
     experienceFrom : new FormControl('', Validators.required),
     experienceTo : new FormControl('', Validators.required),
     interviewType : new FormControl(null, Validators.required),
     candidateDescription : new FormControl('', Validators.required),
-    salaryDescription : new FormControl('', Validators.required),
-    urltoApply : new FormControl('', Validators.required),
+    salaryDescription : new FormControl(''),
+    urltoApply : new FormControl(''),
     workplaceType : new FormControl(null, Validators.required),
     industry : new FormControl(null, Validators.required),
     preferedIndustry : this.formBuilder.array([], Validators.required),
     jobLocation : new FormControl('', Validators.required),
     employmentType : new FormControl(null, Validators.required),
-    openings : new FormControl('', Validators.required),
+    openings : new FormControl(''),
     department: new FormControl(null, Validators.required),
     roleCategory: new FormControl(null, Validators.required),
     role: new FormControl(null, Validators.required),
@@ -116,6 +116,7 @@ export class EditJobpostComponent implements OnInit {
   postid: any;
   jobdetails: any;
   Tab=0;
+  apply_method: any;
   constructor(private formBuilder:FormBuilder,private router: Router,private empservice: EmpServiceService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -142,7 +143,6 @@ export class EditJobpostComponent implements OnInit {
         contactNumber : this.jobdetails.contactNumber,
         jobDescription : this.jobdetails.jobDescription,
         keySkill :  this.jobdetails.keySkill,
-        // educationalQualification : ,
         salaryRangeFrom : this.jobdetails.salaryRangeFrom,
         salaryRangeTo : this.jobdetails.salaryRangeTo,
         experienceFrom : this.jobdetails.experienceFrom,
@@ -170,7 +170,10 @@ export class EditJobpostComponent implements OnInit {
         qualification:this.jobdetails.qualification,
         course:this.jobdetails.course,
         specialization:this.jobdetails.specialization,
-        searchbox:this.jobdetails.keySkill
+        searchbox:this.jobdetails.keySkill,
+        apply_method:new FormControl(null,Validators.required),
+        recruiterList:new FormControl(null,Validators.required),
+        recruiterList1:new FormControl(null,Validators.required),
       });
       if(this.jobdetails.recruiterName && this.jobdetails.recruiterEmail && this.jobdetails.recruiterNumber){
         this.is_new = true
@@ -183,16 +186,27 @@ export class EditJobpostComponent implements OnInit {
   }
   checkradio(data:any){
 
-    // if(this.jobdetails.recruiterName && this.jobdetails.recruiterEmail && this.jobdetails.recruiterNumber){
-    //   let val = 'new'
+    if(this.jobdetails.recruiterName && this.jobdetails.recruiterEmail && this.jobdetails.recruiterNumber){
       if(data == 'new'){
         return true;
       }
       else{
         return false;
       }
-    // }
+    }
+    else{
+      if(data == 'list'){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
   }
+  choose_apply(e:any){
+    this.apply_method = e.target.value
+    console.log(this.apply_method)
+}
   job_post(){
     this.empservice.updatePostAJob(this.postid,this.jobpostForm.value).subscribe((res:any)=>{
       console.log(res);
@@ -245,6 +259,7 @@ export class EditJobpostComponent implements OnInit {
     this.empservice.get_industry().subscribe((res:any) => {
       console.log(res);
       this.indus_data = res
+      // console.log(this.)
     })
   }
   get_depart(){
@@ -309,7 +324,7 @@ export class EditJobpostComponent implements OnInit {
   pushCourse(e:any){
     const data: FormArray = this.jobpostForm.get('preferedIndustry') as FormArray;
     console.log(e)
-    data.push(new FormControl(e.Industry))
+    data.push(new FormControl(e._id))
   }
   get_qualification(){
     this.empservice.get_qualification().subscribe((res:any) => {

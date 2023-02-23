@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
   file:any
   latitude: any;
   longtitude: any;
+  selectImg1: any;
   constructor(private formBuilder: FormBuilder, private router: Router,private empservice: EmpServiceService) {
 
    }
@@ -23,24 +24,25 @@ export class RegisterComponent implements OnInit {
       Validators.maxLength(50),
       Validators.pattern('^[a-zA-Z ]*$'),
     ]),
-    email: new FormControl(''),
+    email: new FormControl('',[Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
     confirm_password: new FormControl('', Validators.required),
-    mobileNumber: new FormControl('',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+    mobileNumber: new FormControl('',Validators.required),
     contactName: new FormControl('', Validators.required),
-    companyType: new FormControl('', Validators.required),
+    companyType: new FormControl(null, Validators.required),
     pincode: new FormControl('', Validators.required),
     aboutCompany: new FormControl('', Validators.required),
     choosefile: new FormControl('', Validators.required),
     location: new FormControl('', Validators.required),
     lat: new FormControl(''),
     long: new FormControl(''),
-    registrationType: new FormControl('', Validators.required),
-    industryType: new FormControl('', Validators.required),
-    companyWebsite: new FormControl('', Validators.required),
-    postedBy: new FormControl('', Validators.required),
+    registrationType: new FormControl(null, Validators.required),
+    industryType: new FormControl(null, Validators.required),
+    companyWebsite: new FormControl(''),
+    postedBy: new FormControl(null, Validators.required),
     companyDescription: new FormControl('', Validators.required),
     companyAddress: new FormControl('', Validators.required),
+    
   });
   
   ngOnInit(): void {
@@ -52,37 +54,49 @@ export class RegisterComponent implements OnInit {
     });
   }
   reg_submit(){
-    var jobForm = new FormData();
-    jobForm.append('logo', this.RegisterForm.get('logo')?.value);
-    jobForm.append('name', this.RegisterForm.get('name')?.value);
-    jobForm.append('email', this.RegisterForm.get('email')?.value);
-    jobForm.append('password', this.RegisterForm.get('password')?.value);
-    jobForm.append('confirm_password', this.RegisterForm.get('confirm_password')?.value);
-    jobForm.append('mobileNumber', this.RegisterForm.get('mobileNumber')?.value);
-    jobForm.append('contactName', this.RegisterForm.get('contactName')?.value);
-    jobForm.append('companyType', this.RegisterForm.get('companyType')?.value);
-    jobForm.append('pincode', this.RegisterForm.get('pincode')?.value);
-    jobForm.append('aboutCompany', this.RegisterForm.get('aboutCompany')?.value);
-    jobForm.append('choosefile', this.file);
-    jobForm.append('lat', this.RegisterForm.get('lat')?.value);
-    jobForm.append('long', this.RegisterForm.get('long')?.value);
-    jobForm.append('location', this.RegisterForm.get('location')?.value);
-    jobForm.append('registrationType', this.RegisterForm.get('registrationType')?.value);
-    jobForm.append('industryType', this.RegisterForm.get('industryType')?.value);
-    jobForm.append('companyWebsite', this.RegisterForm.get('companyWebsite')?.value);
-    jobForm.append('postedBy', this.RegisterForm.get('postedBy')?.value);
-    jobForm.append('companyDescription', this.RegisterForm.get('companyDescription')?.value);
-    jobForm.append('companyAddress', this.RegisterForm.get('companyAddress')?.value);
-    
-    // jobForm.append('',this.myAddres)
-    console.log(jobForm)
-    this.empservice.employeeRegister(jobForm).subscribe((res:any)=>{
-      console.log(res);
-      this.router.navigate(['/empcheck-mail'])
+    // if (this.RegisterForm.invalid) {
+    //   for (const control of Object.keys(this.RegisterForm.controls)) {
+    //     this.RegisterForm.controls[control].markAsTouched();
+    //   }
+    //   return;
+    // }
+     
+        var jobForm = new FormData();
+        jobForm.append('name', this.RegisterForm.get('name')?.value);
+        jobForm.append('email', this.RegisterForm.get('email')?.value);
+        jobForm.append('password', this.RegisterForm.get('password')?.value);
+        jobForm.append('confirm_password', this.RegisterForm.get('confirm_password')?.value);
+        jobForm.append('mobileNumber', this.RegisterForm.get('mobileNumber')?.value);
+        jobForm.append('contactName', this.RegisterForm.get('contactName')?.value);
+        jobForm.append('companyType', this.RegisterForm.get('companyType')?.value);
+        jobForm.append('pincode', this.RegisterForm.get('pincode')?.value);
+        jobForm.append('aboutCompany', this.RegisterForm.get('aboutCompany')?.value);
+        jobForm.append('choosefile', this.file);
+        jobForm.append('lat', this.RegisterForm.get('lat')?.value);
+        jobForm.append('long', this.RegisterForm.get('long')?.value);
+        jobForm.append('location', this.RegisterForm.get('location')?.value);
+        jobForm.append('registrationType', this.RegisterForm.get('registrationType')?.value);
+        jobForm.append('industryType', this.RegisterForm.get('industryType')?.value);
+        jobForm.append('companyWebsite', this.RegisterForm.get('companyWebsite')?.value);
+        jobForm.append('postedBy', this.RegisterForm.get('postedBy')?.value);
+        jobForm.append('companyDescription', this.RegisterForm.get('companyDescription')?.value);
+        jobForm.append('logo', this.selectImg1)
+        jobForm.append('companyAddress', this.RegisterForm.get('companyAddress')?.value);
+        
+        // jobForm.append('',this.myAddres)
+        console.log(jobForm)
+        this.empservice.employeeRegister(jobForm).subscribe((res:any)=>{
+          console.log(res);
+          this.router.navigate(['/empcheck-mail'])
 
-    },error => {
-      error.message
-    })
+        },error => {
+          error.message
+        })
+    
+
+  }
+  selectedImg1(event: any) {
+    this.selectImg1 = event.target.files[0];
 
   }
   addresume(file:any){
