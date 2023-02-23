@@ -623,27 +623,41 @@ export class CanGetComponent implements OnInit {
         department = this.currentDepartment[index].Department;
       }
       return department;
-    }else if(type =='Salary'){
+    } else if (type == 'Salary') {
 
       let Salary = value;
       return Salary;
-    }else if(type =='companytype'){
+    } else if (type == 'companytype') {
       let companytype = value;
       return companytype;
-    }else if(type =='role'){
+    } else if (type == 'role') {
       let index = this.roles.findIndex((a: any) => a._id == value);
       let role = '';
       if (index != -1) {
         role = this.roles[index].Job_role;
       }
       return role;
-    }else if(type =='education'){
-      let index = this.course.findIndex((a: any) => console.log(a._id == value));
+    } else if (type == 'education') {
+      let index = this.course.findIndex((a: any) => a._id == value);
+
       let education = '';
       if (index != -1) {
-        education = this.roles[index].Course;
+        education = this.course[index].Course;
       }
       return education;
+    } else if (type == 'postedby') {
+      let posted = value;
+      return posted;
+    } else if (type == 'preferredIndustry') {
+      let index = this.industry.findIndex((a: any) => a._id == value);
+      let instries = '';
+      if (index != -1) {
+        instries = this.industry[index].Industry;
+      }
+      return instries;
+    } else if (type == 'freshness') {
+      let fresh = value;
+      return fresh;
     } else {
       return '';
     }
@@ -664,6 +678,55 @@ export class CanGetComponent implements OnInit {
       if (index != -1) {
         this.searchForm.get('workmode')?.value.splice(index, 1);
       }
+    } else if (type == 'department') {
+      let deparment: any = this.searchForm.get('department')?.value;
+      let index = deparment.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('department')?.value.splice(index, 1);
+      }
+    } else if (type == 'Salary') {
+      let salary: any = this.searchForm.get('Salary')?.value;
+      console.log(this.searchForm.get('Salary')?.value, "workin index")
+      let index = salary.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('Salary')?.value.splice(index, 1);
+      }
+    } else if (type == 'companytype') {
+      let salary: any = this.searchForm.get('companytype')?.value;
+      let index = salary.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('companytype')?.value.splice(index, 1);
+      }
+    } else if (type == 'role') {
+      let salary: any = this.searchForm.get('role')?.value;
+      let index = salary.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('role')?.value.splice(index, 1);
+      }
+    } else if (type == 'education') {
+      let salary: any = this.searchForm.get('education')?.value;
+      let index = salary.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('education')?.value.splice(index, 1);
+      }
+    } else if (type == 'postedby') {
+      let salary: any = this.searchForm.get('postedby')?.value;
+      let index = salary.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('postedby')?.value.splice(index, 1);
+      }
+    } else if (type == 'preferredIndustry') {
+      let salary: any = this.searchForm.get('preferredIndustry')?.value;
+      let index = salary.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('preferredIndustry')?.value.splice(index, 1);
+      }
+    } else if (type == 'freshness') {
+      let salary: any = this.searchForm.get('freshness')?.value;
+      let index = salary.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('freshness')?.value.splice(index, 1);
+      }
     }
   }
   find_value_exp(expfrom: any) {
@@ -677,6 +740,18 @@ export class CanGetComponent implements OnInit {
   remove_filter_exp(expfrom: any) {
     this.searchForm.get('experience')?.setValue('')
 
+  }
+  find_expfromTo(expfrom: any,expto: any){
+    if(expfrom && expto){
+      return expfrom+'to'+expto
+    }
+    else {
+      return '';
+    }
+  }
+  remove_filterexpFromto(expfrom:any,expTo:any){
+    this.searchForm.get('experiencefrom')?.setValue('')
+    this.searchForm.get('experienceto')?.setValue('')
   }
   pagination(val: any) {
     console.log("sdbsjhdj")
