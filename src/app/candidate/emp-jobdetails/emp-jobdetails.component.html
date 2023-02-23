@@ -44,8 +44,8 @@
                 <div class="col-8">
                   <div class="card-content card-job-content-heading mb-3 col-12 ">
                     <div class="col-12">
-                      <div class="card-job-title col-12">
-                        {{job.jobTittle}}
+                      <div class="card-job-title col-12" style="width: 396px;">
+                        {{job.role}}
                       </div>
                       <div class="card-job-sub-title">
                         {{job.companyName}}
@@ -68,13 +68,13 @@
                                 fill="#8493A3" />
                             </svg>
                           </i></span> {{job.jobTittle}}</div>
-                      <div> <span class="icon-custom width-custom"><i><svg width="16" height="19" viewBox="0 0 16 19"
+                      <div class="wrap"> <span class="icon-custom width-custom"><i><svg width="16" height="19" viewBox="0 0 16 19"
                               fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path fill-rule="evenodd" clip-rule="evenodd"
                                 d="M7.99687 18.5996C7.99687 18.5996 15.1969 11.7761 15.1969 7.79961C15.1969 3.82316 11.9733 0.599609 7.99687 0.599609C4.02042 0.599609 0.796875 3.82316 0.796875 7.79961C0.796875 11.7761 7.99687 18.5996 7.99687 18.5996ZM7.99531 9.6C8.98942 9.6 9.79531 8.79411 9.79531 7.8C9.79531 6.80589 8.98942 6 7.99531 6C7.0012 6 6.19531 6.80589 6.19531 7.8C6.19531 8.79411 7.0012 9.6 7.99531 9.6Z"
                                 fill="#8493A3" />
                             </svg>
-                          </i></span> {{job.jobLocation}}</div>
+                          </i></span>{{job.jobLocation}}</div>
                       <div> <span class="icon-custom width-custom"><i><svg width="16" height="18" viewBox="0 0 16 18"
                               fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path fill-rule="evenodd" clip-rule="evenodd"
@@ -196,7 +196,7 @@
               <div class="single-row">
                 <label for="">Perks & Benefits :</label>
                 <div class="content-box">
-                {{job.salaryDescription}}
+                  {{job.salaryDescription}}
                 </div>
               </div>
               <div class="single-row">

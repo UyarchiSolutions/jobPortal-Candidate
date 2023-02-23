@@ -20,6 +20,7 @@ export class ProffesinoalComponent implements OnInit {
   getroles: any = []
   userId: any;
   viewAll: any = [];
+  isSubmit=false;
   constructor(private fb: FormBuilder, private candidateservice: CanditateService, private router: Router, private activaterouter: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -32,7 +33,7 @@ export class ProffesinoalComponent implements OnInit {
     this.activaterouter.queryParams.subscribe((res: any) => {
       this.userId = res.id;
       // if (this.userId) {
-        this.getAlldata()
+      this.getAlldata()
       // }
     })
   }
@@ -70,14 +71,18 @@ export class ProffesinoalComponent implements OnInit {
     })
   }
   updateProfile() {
+    this.isSubmit=true;
     const formdata = new FormData();
 
     formdata.append('industry', this.proffesonalForm.get('industry')?.value)
     formdata.append('department', this.proffesonalForm.get('department')?.value)
     formdata.append('roleCategory', this.proffesonalForm.get('roleCategory')?.value)
     formdata.append('role', this.proffesonalForm.get('role')?.value)
-    this.candidateservice.updateEduction(formdata).subscribe((res: any) => {
-     this.router.navigate(['/viewprofile'])
-    })
+    if (this.proffesonalForm.valid) {
+      this.candidateservice.updateEduction(formdata).subscribe((res: any) => {
+        this.router.navigate(['/viewprofile'])
+        this.isSubmit=false;
+      })
+    }
   }
 }

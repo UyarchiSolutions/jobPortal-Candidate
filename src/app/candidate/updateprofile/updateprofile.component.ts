@@ -28,7 +28,7 @@ export class UpdateprofileComponent implements OnInit {
     gender: new FormControl('', Validators.required),
     maritalStatus: new FormControl('', Validators.required),
     relocate: new FormControl('', Validators.required),
-    languages: this.fb.array([],Validators.required),
+    languages: this.fb.array([]),
     searchbox: new FormControl(null),
     currentctc_th: new FormControl('', Validators.required),
     update: new FormControl()
@@ -153,8 +153,8 @@ export class UpdateprofileComponent implements OnInit {
   insLang(val: any) {
     if (val.target.checked) {
       const data = this.profileForm.get('languages').push(this.fb.group({
-        lang: new FormControl(val.target.value,Validators.required),
-        know: this.fb.array([],Validators.required)
+        lang: new FormControl(val.target.value),
+        know: this.fb.array([])
       }));
     } else {
       let index = this.languages.value.findIndex((i: any) => i.lang == val.target.value);
@@ -199,7 +199,7 @@ export class UpdateprofileComponent implements OnInit {
         this.candidateService.updateProfile(this.profileForm.value).subscribe((res: any) => {
           this.candidateService.imageUpload(res.user._id, formData).subscribe((res: any) => {
           })
-          this.router.navigate(['/can-edu'], { queryParams: { id: res.user._id } })
+          this.router.navigate(['/can-edu'])
         })
       }
     }

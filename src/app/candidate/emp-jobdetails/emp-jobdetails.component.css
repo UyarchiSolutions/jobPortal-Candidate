@@ -212,8 +212,29 @@ h5 {
   border: none;
   background: transparent
 }
-.awebsite{
+
+.awebsite {
   color: blue;
   text-decoration: underline;
 }
 
+.wrap {
+  width: 100px;
+  height: 2em;
+  line-height: 1em;
+  font-size: 14px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  margin-bottom: 12px;
+  cursor: pointer;
+  word-break: break-all;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.wrap:hover {
+  overflow: visible;
+  white-space: normal;
+  height: auto;
+  /* just added this line */
+}
