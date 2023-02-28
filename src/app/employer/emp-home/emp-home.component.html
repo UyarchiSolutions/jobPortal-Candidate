@@ -24,9 +24,9 @@
                                 <input type="text" class="form-control keyskill"
                                     placeholder="Enter Designation / Key skills" (keyup)="dispalye($event)"
                                     formControlName="searchbox">
-                                <div class="" *ngIf="isDisplay" style="margin-top:0px;">
-                                    <label></label>
-                                    <div class="content-box keylist" style="background: white;">
+                                <!-- <div class="" *ngIf="isDisplay" style="margin-top:0px;">
+                                    <label></label> -->
+                                    <div class="content-box keylist" *ngIf="isDisplay" style="background: white;">
                                         <ul class="ulkeylist" style="padding-left: 0px;" class="">
                                             <li class="ilkeylist" style="cursor:pointer" *ngFor="let skill of keySkill"
                                                 (click)="checkSkill($event,skill.Skill_Title)">
@@ -34,12 +34,12 @@
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
+                                <!-- </div> -->
                             </div>
 
 
 
-                            <div class="search-box second-search-box">
+                            <div class="search-box second-search-box" style=" width: 17% !important;">
                                 <input type="text" class="form-control location" placeholder="Enter Location"
                                     formControlName="getlocation" (keyup)="get_location_search($event)">
                                 <div class="" *ngIf="islocation" style="margin-top:0px;">
@@ -71,6 +71,25 @@
                                     <option value="9">9 Year</option>
                                     <option value="10">10 Year</option>
                                     <option value="11">11 Year</option>
+                                    <option value="12">12 Year</option>
+                                    <option value="13">13 Year</option>
+                                    <option value="14">14 Year</option>
+                                    <option value="15">15 Year</option>
+                                    <option value="16">16 Year</option>
+                                    <option value="17">17 Year</option>
+                                    <option value="18">18 Year</option>
+                                    <option value="19">19 Year</option>
+                                    <option value="20">20 Year</option>
+                                    <option value="21">21 Year</option>
+                                    <option value="22">22 Year</option>
+                                    <option value="23">23 Year</option>
+                                    <option value="24">24 Year</option>
+                                    <option value="25">25 Year</option>
+                                    <option value="26">26 Year</option>
+                                    <option value="27">27 Year</option>
+                                    <option value="28">28 Year</option>
+                                    <option value="29">29 Year</option>
+                                    <option value="30">30 Year</option>
                                 </select>
                             </div>
                             <div class="search-box" (click)="can_list()">
@@ -171,9 +190,9 @@
                                 </div>
                             </li>
                             <li class="refine-content">
-                                <div class="search-box refineup">
+                                <div class="search-box refineup m-0">
                                     <div class="dropdown location">
-                                        <button class="btn dropdown-toggle salarybtn refhead" type="button"
+                                        <button class="btn dropdown-toggle salarybtn refhead refine-btn" type="button"
                                             id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                             Location<i class="fa fa-angle-down"></i>
                                         </button>
@@ -199,7 +218,7 @@
                                                 <select class="form-control select-type"
                                                     formControlName="experiencefrom">
                                                     <option value="option1" [ngValue]="null" disabled selected>From</option>
-                                                    <option value="0">Freshers</option>
+                                                    <option value="0">Fresher</option>
                                                     <option value="1">1 Year</option>
                                                     <option value="2">2 Year</option>
                                                     <option value="3">3 Year</option>
@@ -211,10 +230,29 @@
                                                     <option value="9">9 Year</option>
                                                     <option value="10">10 Year</option>
                                                     <option value="11">11 Year</option>
+                                                    <option value="12">12 Year</option>
+                                                    <option value="13">13 Year</option>
+                                                    <option value="14">14 Year</option>
+                                                    <option value="15">15 Year</option>
+                                                    <option value="16">16 Year</option>
+                                                    <option value="17">17 Year</option>
+                                                    <option value="18">18 Year</option>
+                                                    <option value="19">19 Year</option>
+                                                    <option value="20">20 Year</option>
+                                                    <option value="21">21 Year</option>
+                                                    <option value="22">22 Year</option>
+                                                    <option value="23">23 Year</option>
+                                                    <option value="24">24 Year</option>
+                                                    <option value="25">25 Year</option>
+                                                    <option value="26">26 Year</option>
+                                                    <option value="27">27 Year</option>
+                                                    <option value="28">28 Year</option>
+                                                    <option value="29">29 Year</option>
+                                                    <option value="30">30 Year</option>
                                                 </select>
                                                 <select class="form-control select-type" formControlName="experienceto">
                                                     <option value="option1" [ngValue]="null" disabled selected>To</option>
-                                                    <option value="0">Freshers</option>
+                                                    <option value="0">Fresher</option>
                                                     <option value="1">1 Year</option>
                                                     <option value="2">2 Year</option>
                                                     <option value="3">3 Year</option>
@@ -226,6 +264,25 @@
                                                     <option value="9">9 Year</option>
                                                     <option value="10">10 Year</option>
                                                     <option value="11">11 Year</option>
+                                                    <option value="12">12 Year</option>
+                                                    <option value="13">13 Year</option>
+                                                    <option value="14">14 Year</option>
+                                                    <option value="15">15 Year</option>
+                                                    <option value="16">16 Year</option>
+                                                    <option value="17">17 Year</option>
+                                                    <option value="18">18 Year</option>
+                                                    <option value="19">19 Year</option>
+                                                    <option value="20">20 Year</option>
+                                                    <option value="21">21 Year</option>
+                                                    <option value="22">22 Year</option>
+                                                    <option value="23">23 Year</option>
+                                                    <option value="24">24 Year</option>
+                                                    <option value="25">25 Year</option>
+                                                    <option value="26">26 Year</option>
+                                                    <option value="27">27 Year</option>
+                                                    <option value="28">28 Year</option>
+                                                    <option value="29">29 Year</option>
+                                                    <option value="30">30 Year</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -236,9 +293,9 @@
 
 
                             <li class="refine-content">
-                                <div class="search-box refineup">
+                                <div class="search-box refineup m-0">
                                     <div class="dropdown salary">
-                                        <button class="btn dropdown-toggle salarybtn refhead" type="button"
+                                        <button class="btn dropdown-toggle salarybtn refhead refine-btn" type="button"
                                             id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                             Salary<i class="fa fa-angle-down"></i>
                                         </button>
@@ -261,9 +318,9 @@
 
                             </li>
                             <li class="refine-content">
-                                <div class="search-box refineup">
+                                <div class="search-box refineup m-0">
                                     <div class="dropdown role">
-                                        <button class="btn dropdown-toggle salarybtn refhead" type="button"
+                                        <button class="btn dropdown-toggle salarybtn refhead refine-btn" type="button"
                                             id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                             Role<i class="fa fa-angle-down"></i>
                                         </button>
@@ -279,9 +336,9 @@
 
                             </li>
                             <li class="refine-content">
-                                <div class="search-box refineup">
+                                <div class="search-box refineup m-0">
                                     <div class="dropdown depart">
-                                        <button class="btn dropdown-toggle salarybtn refhead" type="button"
+                                        <button class="btn dropdown-toggle salarybtn refhead refine-btn" type="button"
                                             id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                             Department<i class="fa fa-angle-down"></i>
                                         </button>
@@ -298,9 +355,9 @@
                             </li>
 
                             <li class="refine-content">
-                                <div class="search-box refineup">
+                                <div class="search-box refineup m-0">
                                     <div class="dropdown indus">
-                                        <button class="btn dropdown-toggle salarybtn refhead" type="button"
+                                        <button class="btn dropdown-toggle salarybtn refhead refine-btn" type="button"
                                             id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                             Industry<i class="fa fa-angle-down"></i>
                                         </button>
@@ -316,9 +373,9 @@
 
                             </li>
                             <li class="refine-content">
-                                <div class="search-box refineup">
+                                <div class="search-box refineup m-0">
                                     <div class="dropdown Notice">
-                                        <button class="btn dropdown-toggle salarybtn refhead" type="button"
+                                        <button class="btn dropdown-toggle salarybtn refhead refine-btn" type="button"
                                             id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                             Notice Period<i class="fa fa-angle-down"></i>
                                         </button>
@@ -570,8 +627,8 @@
                             </div>
                             <div class="col">
                             </div>
-                            <div class="col mt-2">
-                                <i class='fas fa-sort-amount-down'></i>
+                            <div class="col">
+                                <!-- <i class='fas fa-sort-amount-down'></i> -->
                                 <div class="btn-group dropup">
                                     <button type="button" class="btn btn-secondary dropdown-toggle rangdrop"
                                         data-bs-toggle="dropdown" aria-expanded="false">

@@ -553,9 +553,8 @@ label{
   
   .keylist {
     margin-top: 0px;
-    position: relative;
-    bottom: 24px;
-    width: 100%;
+    position: absolute;
+    width: 315px;
     border-radius: 5px;
   
   }
@@ -575,7 +574,10 @@ label{
     padding: 2px 16px 0px 13px;
   
   }
-  
+   .refine-btn{
+    width: 182px;
+    max-width: 182px;
+   }
   .nodata {
     padding: 10px 10px 2px;
   
@@ -659,6 +661,10 @@ margin-right: 13px;
 .de-data{
     font-size: 12px;
     font-weight: 500;
+    min-width: 181px;
+    max-width: 181px;
+    max-height: 330px;
+    overflow: auto;
 }
 .actives{
     color: #0A2647;

@@ -117,6 +117,10 @@ export class EditJobpostComponent implements OnInit {
   jobdetails: any;
   Tab=0;
   apply_method: any;
+  roledata: any;
+  quadata: any;
+  depdata: any;
+  inddata: any;
   constructor(private formBuilder:FormBuilder,private router: Router,private empservice: EmpServiceService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -488,5 +492,17 @@ export class EditJobpostComponent implements OnInit {
   }
   test(){
     this.Tab = 1
+  }
+  pre(){
+    // this.Tab = 1
+    let index = this.role_data.findIndex((r: any) => r._id === this.jobpostForm.get('role')?.value)
+    this.roledata = this.role_data[index].Job_role
+    console.log(this.roledata)
+    let index1 = this.qua_data.findIndex((r: any) => r._id === this.jobpostForm.get('qualification')?.value)
+    this.quadata = this.qua_data[index1].qualification
+    let index2 = this.depart_data.findIndex((r: any) => r._id === this.jobpostForm.get('department')?.value)
+    this.depdata = this.depart_data[index2].Department
+    let index3 = this.indus_data.findIndex((r: any) => r._id === this.jobpostForm.get('preferedIndustry')?.value)
+    this.inddata = this.indus_data[index3].Industry
   }
 }
