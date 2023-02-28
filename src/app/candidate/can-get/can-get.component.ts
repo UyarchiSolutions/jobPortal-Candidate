@@ -686,7 +686,6 @@ export class CanGetComponent implements OnInit {
       }
     } else if (type == 'Salary') {
       let salary: any = this.searchForm.get('Salary')?.value;
-      console.log(this.searchForm.get('Salary')?.value, "workin index")
       let index = salary.findIndex((a: any) => a == value);
       if (index != -1) {
         this.searchForm.get('Salary')?.value.splice(index, 1);
