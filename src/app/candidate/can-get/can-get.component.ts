@@ -749,8 +749,8 @@ export class CanGetComponent implements OnInit {
     }
   }
   remove_filterexpFromto(expfrom:any,expTo:any){
-    this.searchForm.get('experiencefrom')?.setValue('')
-    this.searchForm.get('experienceto')?.setValue('')
+    this.searchForm.get('experienceAnotherfrom')?.setValue(null)
+    this.searchForm.get('experienceAnotherto')?.setValue(null)
   }
   pagination(val: any) {
     console.log("sdbsjhdj")
@@ -788,6 +788,8 @@ export class CanGetComponent implements OnInit {
       }
     }
   }
-
+convertsalary(value:any){
+  return value/100000
+}
 }
 

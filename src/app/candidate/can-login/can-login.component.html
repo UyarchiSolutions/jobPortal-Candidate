@@ -61,16 +61,28 @@
                   </div>
 
                 </div>
-
+                <div class="single-row  error-massage" *ngIf="login.get('email')?.invalid && isSubmmitted">
+                  <label for=""></label>
+                  <div class="content-box">
+                    <p>Email is required</p>
+                  </div>
+                </div>
                 <div class="single-row">
                   <label for="">Password :</label>
                   <div class="content-box">
-                    <input type="password" class="form-control" placeholder="Enter  Password" formControlName="password">
+                    <input type="password" class="form-control" placeholder="Enter  Password"
+                      formControlName="password">
                   </div>
                 </div>
-
+                <div class="single-row error-massage">
+                  <label for=""></label>
+                  <div class="content-box" >
+                    <p  *ngIf="login.get('password')?.invalid && isSubmmitted">Password is required</p>
+                    <p *ngIf="passwordStatus">Password doesn't match</p>
+                  </div>
+                </div>
                 <div class="forgot-pass">
-                  <a (click)="for()" >Forgot Password!</a>
+                  <a (click)="for()">Forgot Password!</a>
                 </div>
 
 

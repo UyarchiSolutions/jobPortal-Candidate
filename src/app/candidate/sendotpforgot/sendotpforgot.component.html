@@ -23,9 +23,15 @@
               <div class="single-row">
                   <label for="">OTP :</label>
                   <div class="content-box">
-                      <input type="number" class="form-control" placeholder="Enter OTP" formControlName="otp">
+                      <input type="number" class="form-control"  maxlength="6" placeholder="Enter OTP" formControlName="otp">
                   </div>
               </div>
+              <div class="single-row error-data" *ngIf="issubmit && !otpForm.get('otp')?.valid">
+                <label for=""></label>
+                <div class="content-box">
+                   <p>OTP is required!</p>
+                </div>
+            </div>
               <div class="resend-otp">
                 <a href="#">Resend OTP</a>
               </div>

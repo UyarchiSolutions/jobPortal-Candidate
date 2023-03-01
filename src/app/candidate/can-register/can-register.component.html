@@ -56,16 +56,34 @@
                       <input type="text" class="form-control" placeholder="Enter Your Full Name" formControlName="name">
                     </div>
                   </div>
+                  <div class="single-row error-data" *ngIf="isSubmitted&&Candidateform.get('name')?.invalid">
+                    <label for=""></label>
+                    <div class="content-box">
+                      <p>Full Name is required!</p>
+                    </div>
+                  </div>
                   <div class="single-row">
                     <label for="">Email ID:</label>
                     <div class="content-box">
                       <input type="email" class="form-control" placeholder="Enter Your Email ID"  formControlName="email">
                     </div>
                   </div>
+                  <div class="single-row error-data" *ngIf="isSubmitted&&Candidateform.get('email')?.invalid">
+                    <label for=""></label>
+                    <div class="content-box">
+                      <p>EmailID is required!</p>
+                    </div>
+                  </div>
                   <div class="single-row">
                     <label for="">Mobile Number :</label>
                     <div class="content-box">
-                      <input type="number" class="form-control" placeholder="Enter Your Mobile Number"  formControlName="mobileNumber">
+                      <input type="number"  maxlength="10" pattern="[6789][0-9]{9}" class="form-control" placeholder="Enter Your Mobile Number"  formControlName="mobileNumber">
+                    </div>
+                  </div>
+                  <div class="single-row error-data" *ngIf="isSubmitted && Candidateform.get('mobileNumber')?.invalid">
+                    <label for=""></label>
+                    <div class="content-box">
+                      <p>Mobile Number required!</p>
                     </div>
                   </div>
                   <div class="single-row">
@@ -78,16 +96,34 @@
                       </select>
                     </div>
                   </div>
+                  <div class="single-row error-data" *ngIf="isSubmitted && Candidateform.get('workStatus')?.invalid">
+                    <label for=""></label>
+                    <div class="content-box">
+                      <p>Work Status  required!</p>
+                    </div>
+                  </div>
                   <div class="single-row">
                     <label for="">Password :</label>
                     <div class="content-box">
                       <input type="password" formControlName="password" class="form-control" placeholder="Enter Your Password">
                     </div>
                   </div>
+                  <div class="single-row error-data" *ngIf="isSubmitted&&Candidateform.get('password')?.invalid">
+                    <label for=""></label>
+                    <div class="content-box">
+                      <p>Password  required!</p>
+                    </div>
+                  </div>
                   <div class="single-row">
                     <label for="">Confirm Password :</label>
                     <div class="content-box">
                       <input type="password" class="form-control" formControlName="confirmpassword" placeholder="Confirm Your Password">
+                    </div>
+                  </div>
+                  <div class="single-row error-data" *ngIf="isSubmitted&&Candidateform.get('confirmpassword')?.invalid">
+                    <label for=""></label>
+                    <div class="content-box">
+                      <p>Confirm Password   required!</p>
                     </div>
                   </div>
                   <div class="single-row">
@@ -101,10 +137,22 @@
                       <div class="resume-content-type">.docx, .doc, .pdf</div>
                     </div>
                   </div>
+                  <div class="single-row error-data" *ngIf="isSubmitted&&Candidateform.get('resume')?.invalid">
+                    <label for=""></label>
+                    <div class="content-box">
+                      <p>Resume  required!</p>
+                    </div>
+                  </div>
                   <div class="single-row">
                     <label for="">Current Location :</label>
                     <div class="content-box">
-                      <input type="text" class="form-control" ngx-google-places-autocomplete [options]="options"  (onAddressChange)="handleAddressChange($event)" placeholder="Enter Your Location">
+                      <input type="text" class="form-control" ngx-google-places-autocomplete [options]="options"  (onAddressChange)="handleAddressChange($event)" placeholder="Enter Your Location" formControlName="location">
+                    </div>
+                  </div>
+                  <div class="single-row error-data" *ngIf="isSubmitted&&Candidateform.get('location')?.invalid">
+                    <label for=""></label>
+                    <div class="content-box">
+                      <p>Current Location  required!</p>
                     </div>
                   </div>
                   <div class="single-row single-row-final-btn">

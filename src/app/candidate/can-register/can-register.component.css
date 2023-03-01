@@ -32,3 +32,6 @@ padding-bottom: 20px;
 .choose-file-wrap{
   align-items: flex-end;
 }
+.error-data{
+  color: red;
+}

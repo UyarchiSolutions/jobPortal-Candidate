@@ -30,7 +30,7 @@ export class UpdateprofileComponent implements OnInit {
     relocate: new FormControl('', Validators.required),
     languages: this.fb.array([]),
     searchbox: new FormControl(null),
-    currentctc_th: new FormControl('', Validators.required),
+    currentctc_th: new FormControl(''),
     update: new FormControl()
   })
   viewAll: any = [];
@@ -92,6 +92,11 @@ export class UpdateprofileComponent implements OnInit {
         // languages: this.viewAll[0].keyskill
       })
       this.getLang = this.viewAll[0].languages;
+      if(this.viewAll[0].experienceYear){
+        this.profileForm.get('currentctc').setErrors({'incorrect':true})
+      }else{
+        this.profileForm.get('currentctc').setErrors(null)
+      }
       this.viewAll[0].languages.forEach((element: any) => {
         const data = this.profileForm.get('languages').push(this.fb.group({
           lang: new FormControl(element.lang),
@@ -130,7 +135,6 @@ export class UpdateprofileComponent implements OnInit {
       }
     }
     this.profileForm.get('keyskill')?.setValue(value)
-    console.log(this.profileForm.get('keyskill')?.valid,"invalid ---------->")
 
   }
   // push skills
@@ -150,10 +154,11 @@ export class UpdateprofileComponent implements OnInit {
     }
   }
   languageskill: any = [];
+  selectlanguages:any=[];
   insLang(val: any) {
     if (val.target.checked) {
       const data = this.profileForm.get('languages').push(this.fb.group({
-        lang: new FormControl(val.target.value),
+        lang: new FormControl(val.target.value,Validators.required),
         know: this.fb.array([])
       }));
     } else {
@@ -183,7 +188,7 @@ export class UpdateprofileComponent implements OnInit {
     this.isSubmitted=true
     const formData = new FormData();
     formData.append('image', this.selectImg1);
-    console.log(this.userId)
+    console.log(this.profileForm)
     if (this.profileForm.valid) {
       if (this.userId.tab == "0" || this.userId.id) {
         this.candidateService.educationDetail(this.profileForm.value).subscribe((res: any) => {
@@ -226,7 +231,9 @@ export class UpdateprofileComponent implements OnInit {
   expreience(val:any){
    if(val.target.value == 0){
     this.profileForm.get('currentctc').setErrors(null)
+    console.log(this.profileForm.get('experienceYear')?.value,this.profileForm.get('currentctc').setErrors(null))
    }else{
+    console.log(this.profileForm.get('experienceYear')?.value,this.profileForm.get('currentctc').setErrors({'incorrect':true}))
     this.profileForm.get('currentctc').setErrors({'incorrect':true})
    }
   }

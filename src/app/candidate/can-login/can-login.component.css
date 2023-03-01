@@ -36,3 +36,6 @@
 a{
   cursor: pointer;
 }
+.error-massage{
+  color: red;
+}

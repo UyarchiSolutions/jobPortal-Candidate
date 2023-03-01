@@ -68,8 +68,8 @@
                                 fill="#8493A3" />
                             </svg>
                           </i></span> {{job.jobTittle}}</div>
-                      <div class="wrap"> <span class="icon-custom width-custom"><i><svg width="16" height="19" viewBox="0 0 16 19"
-                              fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <div class="wrap"> <span class="icon-custom width-custom"><i><svg width="16" height="19"
+                              viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path fill-rule="evenodd" clip-rule="evenodd"
                                 d="M7.99687 18.5996C7.99687 18.5996 15.1969 11.7761 15.1969 7.79961C15.1969 3.82316 11.9733 0.599609 7.99687 0.599609C4.02042 0.599609 0.796875 3.82316 0.796875 7.79961C0.796875 11.7761 7.99687 18.5996 7.99687 18.5996ZM7.99531 9.6C8.98942 9.6 9.79531 8.79411 9.79531 7.8C9.79531 6.80589 8.98942 6 7.99531 6C7.0012 6 6.19531 6.80589 6.19531 7.8C6.19531 8.79411 7.0012 9.6 7.99531 9.6Z"
                                 fill="#8493A3" />
@@ -149,7 +149,7 @@
               <div class="single-row">
                 <label for="">Qualification :</label>
                 <div class="content-box">
-                  B.E
+                  <p *ngFor="let job of job.qualifications">{{job.qualification+'-'}}</p>
                 </div>
 
               </div>
@@ -171,7 +171,7 @@
               <div class="single-row">
                 <label for="">Department :</label>
                 <div class="content-box">
-                  {{job.workplaceType}}
+                  {{job.department}}
                 </div>
               </div>
               <div class="single-row">
@@ -202,12 +202,12 @@
               <div class="single-row">
                 <label for="">Industry :</label>
                 <div class="content-box">
-                  {{job.industry}} </div>
+                 <p *ngFor="let industry of job.preferredIndustrys"> {{industry.Industry}}</p> </div>
               </div>
               <div class="single-row">
                 <label for="">Preferred Industry :</label>
                 <div class="content-box">
-                  {{job.preferedIndustry}}
+                  {{job.industry}}
                 </div>
               </div>
             </div>
@@ -251,7 +251,7 @@
               <div class="col-10 ">
                 <div class="col-12 d-flex mb-2">
                   <label class="col-4" style="font-weight: 500;">Mobile Number :</label>
-                  <a href="#" class="col-8">{{job.recruiterName}}</a>
+                  <a href="#" class="col-8">{{job.recruiterNumber}}</a>
                 </div>
               </div>
               <div class="col-10 ">
@@ -263,7 +263,8 @@
               <div>
                 <button data-bs-toggle="modal" data-bs-target="#reports">
                   reports
-                </button></div>
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -275,68 +276,66 @@
   </div>
 </div>
 
-
 <div class="modal" id="reports" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content popup-parent">
-            <div class="modal-body">
-                <div class="container" style="width:800px">
-                    <div class="col register-content">
-                      <div class="report-popup" [formGroup]="reportForm">
-
-                        <div class="popup">
-                        
-                        <div class="popup-container">
-                            <h1>Report</h1>
-                            <h3>UI UX Designer</h3>
-                            <h5>JP Morgan</h5>
-                            <div class="form-check" (change)="report($event)">
-                              <input class="form-check-input" formControlName="report" type="radio" value="It's offensive or harassing" id="flexRadioDefault1">
-                              <label class="form-check-label" for="flexRadioDefault1">
-                                It's offensive or harassing
-                              </label>
-                            </div>
-                            <div class="form-check" (change)="report($event)">
-                              <input class="form-check-input" type="radio" formControlName="report" value="Asking for money or seems like a fake job" id="flexRadioDefault1">
-                              <label class="form-check-label" for="flexRadioDefault1">
-                                Asking for money or seems like a fake job
-                              </label>
-                            </div>
-                            <div class="form-check" (change)="report($event)">
-                              <input class="form-check-input" type="radio" formControlName="report" value="Incorrect company, location or job details" id="flexRadioDefault1">
-                              <label class="form-check-label" for="flexRadioDefault1">
-                                Incorrect company, location or job details
-                              </label>
-                            </div>
-                            <div class="form-check" (change)="report($event)">
-                              <input class="form-check-input" type="radio" formControlName="report" value="I think it's NOT a Job, but selling something" id="flexRadioDefault1">
-                              <label class="form-check-label" for="flexRadioDefault1">
-                                I think it's NOT a Job, but selling something
-                              </label>
-                            </div>
-                            <div class="form-check" (change)="report($event)">
-                              <input class="form-check-input" value="Others" formControlName="report"  type="radio" id="flexRadioDefault1">
-                              <label class="form-check-label" for="flexRadioDefault1">
-                                Others
-                              </label>
-                            </div>
-                           
-                            <div *ngIf="reportForm.get('report')?.value == 'Others'">
-                               <textarea class="form-control" formControlName="reportothers" placeholder="Type hre....."></textarea>
-                            </div>
-                            <div class="submit-btn">
-                            <button (click)="submit_report()">Submit</button></div>
-                        </div>
-                        
-                        
-                        </div>
-                        
-                        </div>
-                    </div>
+  <div class="modal-dialog">
+    <div class="modal-content popup-parent">
+      <div class="modal-body">
+        <div class="container" style="width:800px">
+          <div class="col register-content">
+            <div class="report-popup" [formGroup]="reportForm">
+              <div class="popup">
+                <div class="popup-container">
+                  <h1>Report</h1>
+                  <h3>UI UX Designer</h3>
+                  <h5>JP Morgan</h5>
+                  <div class="form-check" (change)="report($event)">
+                    <input class="form-check-input" formControlName="report" type="radio"
+                      value="It's offensive or harassing" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      It's offensive or harassing
+                    </label>
+                  </div>
+                  <div class="form-check" (change)="report($event)">
+                    <input class="form-check-input" type="radio" formControlName="report"
+                      value="Asking for money or seems like a fake job" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Asking for money or seems like a fake job
+                    </label>
+                  </div>
+                  <div class="form-check" (change)="report($event)">
+                    <input class="form-check-input" type="radio" formControlName="report"
+                      value="Incorrect company, location or job details" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Incorrect company, location or job details
+                    </label>
+                  </div>
+                  <div class="form-check" (change)="report($event)">
+                    <input class="form-check-input" type="radio" formControlName="report"
+                      value="I think it's NOT a Job, but selling something" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      I think it's NOT a Job, but selling something
+                    </label>
+                  </div>
+                  <div class="form-check" (change)="report($event)">
+                    <input class="form-check-input" value="Others" formControlName="report" type="radio"
+                      id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      Others
+                    </label>
+                  </div>
+                  <div *ngIf="reportForm.get('report')?.value == 'Others'">
+                    <textarea class="form-control" formControlName="reportothers"
+                      placeholder="Type hre....."></textarea>
+                  </div>
+                  <div class="submit-btn">
+                    <button (click)="submit_report()">Submit</button>
+                  </div>
                 </div>
-            </div>8
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
-
-
