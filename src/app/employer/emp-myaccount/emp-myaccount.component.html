@@ -1,4 +1,3 @@
-<p>emp-myaccount works!</p>
 <div class="container-fluid register">
     <div class="row">
         <div class="col-2 ad-image">
@@ -122,21 +121,19 @@
                     </div>
 
                     <div class="register-form">
-                        <div class="single-row">
+                        <div class="single-row" *ngIf="data.logo">
                             <label for="">Company Logo :</label>
                             <div class="content-box">
                                 <div>
-                                    <img src="../../assets/image/g.png" alt="" class="company-logo">
+                                    <img [src]="data.logo" alt="" class="company-logo">
                                 </div>
                             </div>
-
                         </div>
                         <div class="single-row">
                             <label for="">Company Name :</label>
                             <div class="content-box">
                                 {{data.name}}
                             </div>
-
                         </div>
 
                         <div class="single-row">
@@ -160,30 +157,57 @@
                                {{data.mobileNumber}}
                             </div>
                         </div>
-
+                        <div class="single-row">
+                            <label for="">Registration Type :</label>
+                            <div class="content-box">
+                               {{data.registrationType}}
+                            </div>
+                        </div>
+                        <div class="single-row">
+                            <label for="">Industry Type :</label>
+                            <div class="content-box">
+                               {{data.industryType}}
+                            </div>
+                        </div>
                         <div class="single-row">
                             <label for="">Company Type :</label>
                             <div class="content-box">
                                {{data.companyType}}
                             </div>
                         </div>
-
+                        <div class="single-row" *ngIf="data.companyWebsite">
+                            <label for="">Company Website :</label>
+                            <div class="content-box">
+                               {{data.companyWebsite}}
+                            </div>
+                        </div>
+                        <div class="single-row">
+                            <label for="">Hiring For :</label>
+                            <div class="content-box">
+                               {{data.postedBy}}
+                            </div>
+                        </div>
+                        <div class="single-row">
+                            <label for="">Company Description :</label>
+                            <div class="content-box">
+                               {{data.companyDescription}}
+                            </div>
+                        </div>
+                        <div class="single-row">
+                            <label for="">Corporate Address :</label>
+                            <div class="content-box">
+                               {{data.companyAddress}}
+                            </div>
+                        </div>
                         <div class="single-row">
                             <label for="">Pin Code :</label>
                             <div class="content-box">
                                {{data.pincode}}
                             </div>
                         </div>
+                     
 
-                        <div class="single-row about-company-content">
-                            <label for="">About Company :</label>
-                            <div class="content-box about-company">
-                                <div>
-                                    <span>{{data.aboutCompany}}</span>
-                                    
-                                </div>
-                            </div>
-                        </div>
+                       
                         <!-- <div class="single-row about-company-content">
                             <label for="">Location :</label>
                             <div class="content-box about-company">
@@ -216,10 +240,17 @@
                         </div> -->
                         <div class="single-row about-company-content">
                             <label for="">Location :</label>
-                            <div class="content-box about-company">
+                            <div class="content-box about-company" style="display:block !important">
                                 <div>
                                 <span>{{data.location}}</span>
                                 </div>
+                                <div >
+                                    <agm-map [latitude]="lat" [longitude]="long" [zoom]="zoom" zoomControl="true" class="map">
+                                        <agm-marker [latitude]="lat" [longitude]="long">
+                                        </agm-marker>
+                                       </agm-map>
+                                </div>
+                                   
                             </div>
                         </div>
 

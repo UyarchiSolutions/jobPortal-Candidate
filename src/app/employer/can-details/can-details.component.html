@@ -589,10 +589,11 @@ aria-labelledby="exampleModalLabel" aria-hidden="true" [formGroup]="folderForm">
                             <div class="single-row  col-8 m-auto mt-4" *ngIf="folderForm.get('folderName')?.value">
                       
                                 <div class="content-box back-btn">
-                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5">Back</button>
+                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal">Back</button>
                                 </div>
                                 <div class="content-box submit-btn">
-                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal" (click)="create_new_folder()">Save</button>
+                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" (click)="create_new_folder(clk)">Save</button>
+                                    <button type="button" data-bs-dismiss="modal" style="display:none;" #clk></button>
                                 </div>
                             </div>
                             <div class="create-folder col-5 m-auto mt-4 d-flex align-items-center" (click)="save_folder()" style="cursor:pointer">
@@ -622,7 +623,8 @@ aria-labelledby="exampleModalLabel" aria-hidden="true" [formGroup]="folderForm">
                                       <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5">Back</button>
                                   </div>
                                   <div class="content-box submit-btn">
-                                      <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal" (click)="create_new_folder()">Save</button>
+                                      <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" (click)="create_new_folder(clk)">Save</button>
+                                      <button type="button" data-bs-dismiss="modal" style="display:none;" #clk></button>
                                   </div>
                               </div>
                              
@@ -680,7 +682,8 @@ aria-labelledby="exampleModalLabel" aria-hidden="true" [formGroup]="folderForm">
                                     <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5">Back</button>
                                 </div>
                                 <div class="content-box submit-btn">
-                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal" (click)="create_new_folder()">Save</button>
+                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" (click)="create_new_folder(clk)">Save</button>
+                                    <button type="button" data-bs-dismiss="modal" style="display:none;" #clk></button>
                                 </div>
                             </div>
                             <div class="create-folder col-5 m-auto mt-4 d-flex align-items-center" (click)="save_folder()" style="cursor:pointer">
@@ -700,17 +703,19 @@ aria-labelledby="exampleModalLabel" aria-hidden="true" [formGroup]="folderForm">
                             <div class="register-form">
                               <div class="single-row">
                                   <label for="">Create Folder :</label>
-                                  <div class="content-box">
+                                  <div class="content-box" style="display:block;">
                                       <input class="form-control" placeholder="Enter Folder Name" formControlName="folderName">
+                                     
                                       </div>
                               </div>
                               <div class="single-row  col-8 m-auto mt-4">
                       
                                   <div class="content-box back-btn">
-                                      <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5">Back</button>
+                                      <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal">Back</button>
                                   </div>
                                   <div class="content-box submit-btn">
-                                      <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal" (click)="create_new_folder()">Save</button>
+                                      <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" (click)="create_new_folder(clk)">Save</button>
+                                      <button type="button" data-bs-dismiss="modal" style="display:none;" #clk></button>
                                   </div>
                               </div>
                              

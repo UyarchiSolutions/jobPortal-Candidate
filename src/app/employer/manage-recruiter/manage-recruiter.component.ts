@@ -9,7 +9,7 @@ import { EmpServiceService } from '../emp-service.service';
   styleUrls: ['./manage-recruiter.component.css']
 })
 export class ManageRecruiterComponent implements OnInit {
-  list: any;
+  list:any=[];
   id: any;
   reqlist: any;
 

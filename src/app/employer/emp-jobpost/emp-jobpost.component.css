@@ -120,6 +120,7 @@
     align-items: normal;
     justify-content: flex-start;
     font-size: 16px;
+    margin-top:10px;
 }
 
 .single-rows label{

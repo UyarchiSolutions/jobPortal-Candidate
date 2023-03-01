@@ -62,7 +62,7 @@
                       formControlName="email" [class.is-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched && submitted">
                       <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched && submitted">
                         <small *ngIf="loginForm.get('email')?.errors" class="text-danger">Email is required</small>
-                        <small class="text-danger" *ngif="loginForm.get('email').errors?.email">Email address is invalid</small>
+                        <!-- <small class="text-danger" *ngIf="loginForm.get('email').errors.email">Email address is invalid</small> -->
                     </div>
                   </div>
                  

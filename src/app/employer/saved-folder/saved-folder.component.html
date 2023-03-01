@@ -14,7 +14,7 @@
             <div class="row register-content-row height-register-content mb-5">
                 <div class="col register-content pb-3">
                     <div class="row">
-                        <div class="col">
+                        <div class="col" routerLink="/emp-home" style="cursor:pointer">
                             <i class="ms-3"><svg width="15" height="25" viewBox="0 0 20 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.27179 15L20 26.6672L16.3641 30L0 15L16.3641 0L20 3.33281L7.27179 15Z" fill="#0A2647"/>
                                 </svg>
@@ -88,17 +88,17 @@
 aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-lg">
     <div class="modal-content popup-parent">
-        <div class="modal-body">
-                <div class="container">
-                    <div class="col register-content py-2 pb-5">
+        <div class="modal-body" style="background-color: #E7E9ED;border-radius: 10px;">
+               
+                    <div class="col register-content pb-4">
                         <div class="row px-4">
-                          <div class="col-2"></div>
+                          <!-- <div class="col-2"></div> -->
                           <div class="col">
                             <h3>Save Folder</h3>
                           </div>
-                          <div class="col-2 mt-2 d-flex justify-content-end">
+                          <!-- <div class="col-2 mt-2 d-flex justify-content-end">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
+                          </div> -->
                         </div>
                         <div class="row" [formGroup]="editForm">
                             <div class="register-form">
@@ -108,7 +108,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
                                       <input class="form-control" placeholder="Enter Folder Name" formControlName="folderName">
                                       </div>
                               </div>
-                              <div class="single-row  col-8 m-auto mt-4">
+                              <div class="single-row  col-8 m-auto mt-5">
                       
                                   <div class="content-box back-btn">
                                       <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal">Back</button>
@@ -126,7 +126,6 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
                 
                 
                       </div>
-                </div>
         </div>
     </div>
 </div>
@@ -134,19 +133,19 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
 
 <div class="modal" id="deletefolder" tabindex="-1"
 aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-lg">
+<div class="modal-dialog modal-md">
     <div class="modal-content popup-parent">
-        <div class="modal-body">
-                <div class="container">
-                    <div class="col register-content py-2 pb-5">
+        <div class="modal-body" style="background-color: #E7E9ED;border-radius: 10px;">
+              
+                    <div class="col register-content py-2 pb-4">
                         <div class="row px-4">
-                          <div class="col-2"></div>
+                          <!-- <div class="col-2"></div> -->
                           <div class="col">
                             <h3>Delete Folder</h3>
                           </div>
-                          <div class="col-2 mt-2 d-flex justify-content-end">
+                          <!-- <div class="col-2 mt-2 d-flex justify-content-end">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
+                          </div> -->
                         </div>
                         <div class="row">
                             <div class="register-form">
@@ -155,10 +154,10 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
                               </div>
                               <div class="single-row  col-8 m-auto mt-4" style="justify-content: center">
                       
-                                  <div class="content-box back-btn" style="margin-left: 54px;">
+                                  <div class="content-box back-btn" style="margin-left: 15px;">
                                       <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal">No</button>
                                   </div>
-                                  <div class="content-box submit-btn">
+                                  <div class="content-box submit-btn" style="margin-left: 15px;">
                                       <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" (click)="delete()" data-bs-dismiss="modal">Yes</button>
                                   </div>
                               </div>
@@ -171,7 +170,6 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
                 
                 
                       </div>
-                </div>
         </div>
     </div>
 </div>
