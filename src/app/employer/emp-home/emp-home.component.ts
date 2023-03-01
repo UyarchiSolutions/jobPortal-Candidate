@@ -35,7 +35,7 @@ export class EmpHomeComponent implements OnInit {
     comment: new FormControl('', Validators.required),
   });
   searchForm: any = this.fb.group({
-    keyskills: new FormControl([]),
+    keyskills: new FormControl([],Validators.required),
     Location: new FormControl([]),
     experience: new FormControl(null),
     qualification: new FormControl(null),
@@ -44,7 +44,7 @@ export class EmpHomeComponent implements OnInit {
     gender: new FormControl(null),
     displayDetails: new FormControl(null),
     searchTittle: new FormControl(null),
-    searchbox: new FormControl(null),
+    searchbox: new FormControl(null,Validators.required),
     experiencefrom: new FormControl(null),
     experienceto: new FormControl(null),
     salary: this.fb.array([]),
@@ -52,7 +52,7 @@ export class EmpHomeComponent implements OnInit {
     department: this.fb.array([]),
     industry: this.fb.array([]),
     noticeperiod: this.fb.array([]),
-    range: new FormControl(50),
+    range: new FormControl(10),
     page: new FormControl(0),
     getlocation:new FormControl(null)
   });
@@ -61,6 +61,7 @@ export class EmpHomeComponent implements OnInit {
   });
   comment_id: any;
   searchLocation: any;
+  err: any;
   find_value(value: any, type: any) {
     console.log(value);
     if (type == 'department') {
@@ -286,9 +287,9 @@ export class EmpHomeComponent implements OnInit {
     this.is_viewcan = true;
     this.is_viewapplies = false;
     this.is_viewpost = false;
-    this.is_icon = true;
+    // this.is_icon = true;
     this.is_search_icon = false;
-    this.is_icon = true;
+    // this.is_icon = true;
     this.is_canfolderlist = false;
     this.search();
   }
@@ -300,17 +301,19 @@ export class EmpHomeComponent implements OnInit {
     });
   }
   search() {
-    // const data= this.searchForm.get('Location')?.value;
-    // data.push(this.searchForm.get('getlocation')?.value);
     console.log('search', this.searchForm.value);
     // if(this.searchForm.get('keyskills')?.valid && this.searchForm.get('location')?.valid && this.searchForm.get('experience')?.valid){
-    this.empservice.view_can(this.searchForm.value).subscribe((res: any) => {
-      console.log(res);
-      this.can_data = res.user.data;
-      this.recent_search();
-      //  this.searchForm.reset();
-    });
-    // }
+    if(this.searchForm.get('keyskills')?.valid){
+      this.empservice.view_can(this.searchForm.value).subscribe((res: any) => {
+        console.log(res);
+        this.can_data = res.user.data;
+        this.recent_search();
+      });
+    }
+    else{
+      this.err = 'Please choose any key skill to search';
+      // alert(this.err)
+    }
   }
 
   search_skills(data: any) {
@@ -803,7 +806,10 @@ export class EmpHomeComponent implements OnInit {
       });
     }
   }
-  clkrange(count: number) {}
+  clkrange(count: any) {
+    this.searchForm.get('range').setValue(count);
+    this.get_can()
+  }
   checklocation(event: any, location: any) {
       console.log('checkSkill', location);
       let index: any = this.searchForm.get('Location')?.value;

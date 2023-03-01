@@ -29,6 +29,9 @@
                             <label for="">Recruiter Name :</label>
                             <div class="content-box">
                                 <input type="text" class="form-control" placeholder="Enter Name" formControlName="recruiterName">
+                                <div *ngIf="submitted && addform.get('recruiterName')?.invalid">
+                                    <small *ngIf="addform.get('recruiterName').errors?.required" class="text-danger">Name is required</small>
+                                </div>
                             </div>
 
                         </div>
@@ -37,6 +40,10 @@
                             <label for="">Recruiter Email ID :</label>
                             <div class="content-box">
                                 <input type="text" class="form-control" placeholder="Enter Email ID" formControlName="email">
+                                <div *ngIf="submitted && addform.get('email')?.invalid">
+                                    <small *ngIf="addform.get('email').errors?.required" class="text-danger">Email is required</small>
+                                    <small class="text-danger" *ngif="addform.get('email').errors?.email">Email address is invalid</small>
+                                </div>
                             </div>
 
                         </div>
@@ -44,7 +51,10 @@
                         <div class="single-row">
                             <label for="">Recruiter Number :</label>
                             <div class="content-box">
-                                <input type="number" class="form-control" placeholder="Enter Mobile Number" formControlName="mobileNumber">
+                                <input type="number" maxlength="10" pattern="[6789][0-9]{9}" class="form-control" placeholder="Enter Mobile Number" formControlName="mobileNumber">
+                                <div *ngIf="submitted && addform.get('mobileNumber')?.invalid">
+                                    <small *ngIf="addform.get('mobileNumber').errors?.required" class="text-danger">Number is required</small>
+                                </div>
                             </div>
                         </div>
                         <div class="single-row douple-btn">

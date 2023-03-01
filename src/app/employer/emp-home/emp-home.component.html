@@ -15,17 +15,21 @@
         <div class="col-8  login-main">
             <div class="row ">
                 <div class="col search-box-wrap">
-
+                    <div class="" style="color:#fff;margin-left: 92px;
+                    position: absolute;" *ngIf="err">
+                        {{err}}
+                    </div>
                     <div class="advanced-search-wrap ">
 
                         <div class="search-boxs">
-
+                           
                             <div class="search-box first-search-box">
                                 <input type="text" class="form-control keyskill"
                                     placeholder="Enter Designation / Key skills" (keyup)="dispalye($event)"
                                     formControlName="searchbox">
                                 <!-- <div class="" *ngIf="isDisplay" style="margin-top:0px;">
                                     <label></label> -->
+                                    
                                     <div class="content-box keylist" *ngIf="isDisplay" style="background: white;">
                                         <ul class="ulkeylist" style="padding-left: 0px;" class="">
                                             <li class="ilkeylist" style="cursor:pointer" *ngFor="let skill of keySkill"
@@ -470,14 +474,14 @@
                                         <span class="badge bg-light text-dark"
                                             *ngFor="let item of searchForm.get('keyskills')?.value" style="cursor:pointer">
                                             <span>{{find_value(item,'keyskills')}}</span>
-                                            <!-- <span class="close-mark" (click)="remove_filter(item,'keyskills')">x</span> -->
+                                            <span class="close-mark" (click)="remove_filter(item,'keyskills')">x</span>
                                         </span>
                                     </ng-container>
                                     <ng-container *ngIf="searchForm.get('Location')?.value != null">
                                         <span class="badge bg-light text-dark"
                                             *ngFor="let item of searchForm.get('Location')?.value">
                                             <span>{{find_value(item,'Location')}}</span>
-                                            <!-- <span class="close-mark" (click)="remove_filter(item,'Location')">x</span> -->
+                                            <span class="close-mark" (click)="remove_filter(item,'Location')">x</span>
                                         </span>
                                     </ng-container>
                                     <ng-container *ngIf="searchForm.get('experiencefrom')?.value != null && searchForm.get('experienceto')?.value != null">
@@ -490,28 +494,28 @@
                                         <span class="badge bg-light text-dark" style="cursor:pointer"
                                             *ngFor="let item of searchForm.get('salary')?.value">
                                             <span>{{find_value(item,'salary')}} lac</span>
-                                            <!-- <span class="close-mark" (click)="remove_filter(item,'salary')">x</span> -->
+                                            <span class="close-mark" (click)="remove_filter(item,'salary')">x</span>
                                         </span>
                                     </ng-container>
                                     <ng-container *ngIf="searchForm.get('department')?.value != null">
                                         <span class="badge bg-light text-dark" style="cursor:pointer"
                                             *ngFor="let item of searchForm.get('department')?.value">
                                             <span>{{find_value(item,'department')}}</span>
-                                            <!-- <span class="close-mark" (click)="remove_filter(item,'department')">x</span> -->
+                                            <span class="close-mark" (click)="remove_filter(item,'department')">x</span>
                                         </span>
                                     </ng-container>
                                      <ng-container *ngIf="searchForm.get('role')?.value != null">
                                     <span class="badge bg-light text-dark" style="cursor:pointer"
                                         *ngFor="let item of searchForm.get('role')?.value">
                                         <span>{{find_value(item,'role')}}</span>
-                                        <!-- <span class="close-mark" (click)="remove_filter(item,'role')">x</span> -->
+                                        <span class="close-mark" (click)="remove_filter(item,'role')">x</span>
                                     </span>
                                     </ng-container>
                                     <ng-container *ngIf="searchForm.get('industry')?.value != null" style="cursor:pointer">
                                         <span class="badge bg-light text-dark" style="cursor:pointer"
                                             *ngFor="let item of searchForm.get('industry')?.value">
                                             <span>{{find_value(item,'industry')}}</span>
-                                            <!-- <span class="close-mark" (click)="remove_filter(item,'industry')">x</span> -->
+                                            <span class="close-mark" (click)="remove_filter(item,'industry')">x</span>
                                         </span>
                                     </ng-container>
                                     <ng-container *ngIf="searchForm.get('noticeperiod')?.value != null" style="cursor:pointer">
@@ -519,7 +523,7 @@
                                             *ngFor="let item of searchForm.get('noticeperiod')?.value">
                                             <span *ngIf="item == 'immediate'">{{find_value(item,'noticeperiod')}} </span>
                                             <span *ngIf="item != 'immediate'">{{find_value(item,'noticeperiod')}} days</span>
-                                            <!-- <span class="close-mark" (click)="remove_filter(item,'noticeperiod')">x</span> -->
+                                            <span class="close-mark" (click)="remove_filter(item,'noticeperiod')">x</span>
                                         </span>
                                     </ng-container>
                                 </div>
@@ -635,12 +639,12 @@
                                         Range
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li (change)="clkrange(1)">10</li>
-                                        <li (change)="clkrange(20)">20</li>
-                                        <li (change)="clkrange(30)">40</li>
-                                        <li (change)="clkrange(40)">60</li>
-                                        <li (change)="clkrange(50)">80</li>
-                                        <li (change)="clkrange(60)">160</li>
+                                        <li (click)="clkrange(10)">10</li>
+                                        <li (click)="clkrange(20)">20</li>
+                                        <li (click)="clkrange(40)">40</li>
+                                        <li (click)="clkrange(60)">60</li>
+                                        <li (click)="clkrange(80)">80</li>
+                                        <li (click)="clkrange(160)">160</li>
                                     </ul>
                                 </div>
                             </div>

@@ -122,6 +122,36 @@
                                 </i></span>
                         </div>
                     </div>
+                    <div class="row content-card no-margin padding10" *ngIf="list.length == 0">
+                        
+
+                        <div class="col table-title">
+
+                           
+                          
+
+                        </div>
+
+                        <div class="col table-title">
+                         
+
+                        </div>
+
+                        <div class="col table-title">
+                          
+                          No Recruiters found
+
+                        </div>
+
+            
+
+                        <div class="col table-title">
+                          
+                        </div>
+                        <div class="col" style="cursor: pointer;">
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -134,19 +164,19 @@
 
 <div class="modal" id="delete" tabindex="-1"
 aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-lg">
+<div class="modal-dialog modal-md">
     <div class="modal-content popup-parent">
-        <div class="modal-body">
-                <div class="container">
-                    <div class="col register-content py-2 pb-5">
+        <div class="modal-body" style="background-color: #E7E9ED;border-radius: 10px;">
+                <!-- <div class="container"> -->
+                    <div class="col register-content py-2 pb-4">
                         <div class="row px-4">
-                          <div class="col-2"></div>
+                          <!-- <div class="col-2"></div> -->
                           <div class="col">
                             <h3>Delete Recruiter</h3>
                           </div>
-                          <div class="col-2 mt-2 d-flex justify-content-end">
+                          <!-- <div class="col-2 mt-2 d-flex justify-content-end">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
+                          </div> -->
                         </div>
                         <div class="row">
                             <div class="register-form">
@@ -155,10 +185,10 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
                               </div>
                               <div class="single-row  col-8 m-auto mt-4" style="justify-content: center">
                       
-                                  <div class="content-box back-btn" style="margin-left: 54px;">
+                                  <div class="content-box back-btn" style="margin-left: 15px;">
                                       <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal">No</button>
                                   </div>
-                                  <div class="content-box submit-btn">
+                                  <div class="content-box submit-btn" style="margin-left: 15px;">
                                       <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" (click)="confirmdelete()" data-bs-dismiss="modal">Yes</button>
                                   </div>
                               </div>
@@ -171,7 +201,7 @@ aria-labelledby="exampleModalLabel" aria-hidden="true">
                 
                 
                       </div>
-                </div>
+                <!-- </div> -->
         </div>
     </div>
 </div>

@@ -42,7 +42,7 @@ export class EmpJobpostComponent implements OnInit {
     startTime: new FormControl(null, Validators.required),
     endTime: new FormControl(null, Validators.required),
     recruiterName:new FormControl(null, Validators.required),
-    recruiterEmail:new FormControl(null, Validators.required),
+    recruiterEmail:new FormControl(null, [Validators.required,Validators.email]),
     recruiterNumber:new FormControl(null, Validators.required),
     qualification:this.formBuilder.array([], Validators.required),
     course:this.formBuilder.array([], Validators.required),
@@ -124,6 +124,7 @@ export class EmpJobpostComponent implements OnInit {
   quadata: any;
   depdata: any;
   inddata: any;
+  submitted: boolean = false;
   constructor(private formBuilder:FormBuilder,private router: Router,private empservice: EmpServiceService) { }
 
   ngOnInit(): void {
@@ -133,18 +134,22 @@ export class EmpJobpostComponent implements OnInit {
     this.get()
   }
   job_post(){
-    // if (this.jobpostForm.invalid) {
-    //     for (const control of Object.keys(this.jobpostForm.controls)) {
-    //       this.jobpostForm.controls[control].markAsTouched();
-    //     }
-    //     return;
-    //   }
-    this.empservice.submitPostAJob(this.jobpostForm.value).subscribe((res:any)=>{
-      console.log(res);
-      this.jobpostForm.reset();
-      if(res){
-      }
-    })
+    console.log(this.jobpostForm.value)
+    this.submitted = true;
+    if(this.jobpostForm.valid){
+      this.empservice.submitPostAJob(this.jobpostForm.value).subscribe((res:any)=>{
+        console.log(res);
+        this.jobpostForm.reset();
+        if(res){
+          var data:any= {
+            Tab : 1
+          }
+          var queryString = new URLSearchParams(data).toString();
+          this.router.navigateByUrl('/emp-home?' + queryString);
+        }
+      })
+    }
+    
 
   }
   search_skills(data:any){
@@ -213,15 +218,28 @@ export class EmpJobpostComponent implements OnInit {
     })
   }
   pre(){
-    let index = this.role_data.findIndex((r: any) => r._id === this.jobpostForm.get('role')?.value)
-    this.roledata = this.role_data[index].Job_role
-    console.log(this.roledata)
-    let index1 = this.qua_data.findIndex((r: any) => r._id === this.jobpostForm.get('qualification')?.value)
-    this.quadata = this.qua_data[index1].qualification
-    let index2 = this.depart_data.findIndex((r: any) => r._id === this.jobpostForm.get('department')?.value)
-    this.depdata = this.depart_data[index2].Department
-    let index3 = this.indus_data.findIndex((r: any) => r._id === this.jobpostForm.get('preferedIndustry')?.value)
-    this.inddata = this.indus_data[index3].Industry
+    
+    console.log(this.depart_data)
+    if(this.jobpostForm.get('role')?.value){
+      let index = this.role_data.find((r: any) => r._id == this.jobpostForm.get('role')?.value)
+      this.roledata = index.Job_role
+      console.log(this.roledata)
+    }
+    // if(this.jobpostForm.get('qualification')?.value){
+    //   let index = this.qua_data.find((r: any) => r._id == this.jobpostForm.get('qualification')?.value)
+    //   this.quadata = index.qualification     
+    // }
+    if(this.jobpostForm.get('department')?.value){
+      let index = this.depart_data.find((r: any) => r._id == this.jobpostForm.get('department')?.value)
+      console.log(this.jobpostForm.get('department')?.value)
+      this.depdata = index.Department
+        console.log(index,this.depdata)
+    }
+    if(this.jobpostForm.get('preferedIndustry')?.value){
+      let index = this.indus_data.find((r: any) => r._id == this.jobpostForm.get('preferedIndustry')?.value)
+      this.inddata = index.Industry
+    }
+    
   }
   dispalye(data: any) {
     console.log("lusu")
