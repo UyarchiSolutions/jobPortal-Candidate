@@ -16,6 +16,7 @@ export class SendMailComponent implements OnInit {
     message:new FormControl(null),
     signature:new FormControl(null)
   })
+  canArray: any;
   constructor(private empservice: EmpServiceService,private route: ActivatedRoute, private router: Router,private fb:FormBuilder) { }
 
   ngOnInit(): void {
@@ -23,6 +24,8 @@ export class SendMailComponent implements OnInit {
     .subscribe(params => {
       console.log(params['candidates']); 
       this.canid=params['candidates'];
+      this.canArray = this.canid.split(",")
+      console.log(this.canArray);
     }
   );
   this.mailForm.patchValue({
@@ -32,7 +35,7 @@ export class SendMailComponent implements OnInit {
   }
   sendamail(){
     var data={
-      candidates:Array(this.canid),
+      candidates:this.canArray,
       subject:this.mailForm.get('subject')?.value,
       signature:this.mailForm.get('signature')?.value,
       email:this.mailForm.get('email')?.value,

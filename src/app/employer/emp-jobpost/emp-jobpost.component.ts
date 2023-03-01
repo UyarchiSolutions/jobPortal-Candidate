@@ -20,8 +20,8 @@ export class EmpJobpostComponent implements OnInit {
     jobDescription : new FormControl('', Validators.required),
     keySkill :  new FormControl([], Validators.required),
     educationalQualification : new FormControl('', Validators.required),
-    salaryRangeFrom : new FormControl(''),
-    salaryRangeTo : new FormControl(''),
+    salaryRangeFrom : new FormControl(null),
+    salaryRangeTo : new FormControl(null),
     experienceFrom : new FormControl('', Validators.required),
     experienceTo : new FormControl('', Validators.required),
     interviewType : new FormControl(null, Validators.required),
@@ -120,6 +120,10 @@ export class EmpJobpostComponent implements OnInit {
   apply_method: any;
   is_new1: boolean = false;
   is_list1: boolean = false;
+  roledata: any;
+  quadata: any;
+  depdata: any;
+  inddata: any;
   constructor(private formBuilder:FormBuilder,private router: Router,private empservice: EmpServiceService) { }
 
   ngOnInit(): void {
@@ -179,6 +183,7 @@ export class EmpJobpostComponent implements OnInit {
     console.log(address.geometry.location.lng());
     this.latitude = address.geometry.location.lat();
     this.longtitude = address.geometry.location.lng();
+    console.log(this.latitude, this.longtitude)
     this.jobpostForm.patchValue({
       jobLocation:address.formatted_address
     })
@@ -206,6 +211,17 @@ export class EmpJobpostComponent implements OnInit {
       console.log(res);
       this.role_data = res
     })
+  }
+  pre(){
+    let index = this.role_data.findIndex((r: any) => r._id === this.jobpostForm.get('role')?.value)
+    this.roledata = this.role_data[index].Job_role
+    console.log(this.roledata)
+    let index1 = this.qua_data.findIndex((r: any) => r._id === this.jobpostForm.get('qualification')?.value)
+    this.quadata = this.qua_data[index1].qualification
+    let index2 = this.depart_data.findIndex((r: any) => r._id === this.jobpostForm.get('department')?.value)
+    this.depdata = this.depart_data[index2].Department
+    let index3 = this.indus_data.findIndex((r: any) => r._id === this.jobpostForm.get('preferedIndustry')?.value)
+    this.inddata = this.indus_data[index3].Industry
   }
   dispalye(data: any) {
     console.log("lusu")

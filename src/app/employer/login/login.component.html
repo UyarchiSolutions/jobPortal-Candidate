@@ -57,18 +57,26 @@
 
                 <div class="single-row">
                   <label for="">Email ID :</label>
-                  <div class="content-box">
-                    <input type="email" class="form-control" placeholder="Enter Your Email ID" name="email"
-                      formControlName="email">
+                  <div class="content-box" style="display:block">
+                    <input type="email" class="form-control" placeholder="Enter Your Email ID"
+                      formControlName="email" [class.is-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched && submitted">
+                      <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched && submitted">
+                        <small *ngIf="loginForm.get('email')?.errors" class="text-danger">Email is required</small>
+                        <small class="text-danger" *ngif="loginForm.get('email').errors?.email">Email address is invalid</small>
+                    </div>
                   </div>
+                 
 
                 </div>
 
                 <div class="single-row">
                   <label for="">Password :</label>
-                  <div class="content-box">
+                  <div class="content-box" style="display:block">
                     <input type="password" class="form-control" placeholder="Enter  Password" name="password"
-                      formControlName="password">
+                      formControlName="password" [class.is-invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched && submitted">
+                      <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched && submitted">
+                        <small *ngIf="loginForm.get('password')?.errors" class="text-danger">Password is required</small>
+                    </div>
                   </div>
                 </div>
 
