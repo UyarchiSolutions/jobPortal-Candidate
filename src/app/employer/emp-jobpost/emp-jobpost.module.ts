@@ -17,6 +17,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     FormsModule,
     GooglePlaceModule,
     NgMultiSelectDropDownModule.forRoot(),
+   
   ]
 })
 export class EmpJobpostModule { }

@@ -13,6 +13,7 @@ import { NgxEditorModule } from "ngx-editor";
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { RedirectComponent } from './redirect/redirect.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { AgmCoreModule } from '@agm/core';
 
 
 
@@ -37,6 +38,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     NgxEditorModule,
     NgxExtendedPdfViewerModule,
     NgMultiSelectDropDownModule.forRoot(),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDoYhbYhtl9HpilAZSy8F_JHmzvwVDoeHI',
+    }),
 
   ],
   providers: [],

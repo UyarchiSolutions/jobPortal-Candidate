@@ -22,6 +22,8 @@ export class CanDetailsComponent implements OnInit {
     folderName:new FormControl(null)
   })
   jobid: any;
+  submitted = false
+  err:any
   constructor(private empservice: EmpServiceService,private route: ActivatedRoute, private router: Router,private fb:FormBuilder) { }
 
   ngOnInit(): void {
@@ -77,17 +79,23 @@ export class CanDetailsComponent implements OnInit {
       folderName:''
     })
  }
- create_new_folder(){
-   var data={
-     candidateId:Array(this.id),
-     folderName:this.folderForm.get('folderName').value
-   }
-   console.log(data)
-   this.empservice.create_folder(data).subscribe((res:any)=>{
-     this.folderForm.reset();
-    this.get_folder_list();
-     console.log(res);
-   })
+ create_new_folder(clk:any){
+  
+  if(this.folderForm.get('folderName').value){
+    var data={
+      candidateId:Array(this.id),
+      folderName:this.folderForm.get('folderName').value
+    }
+    console.log(data)
+    this.empservice.create_folder(data).subscribe((res:any)=>{
+      clk.click();
+      this.folderForm.reset();
+     this.get_folder_list();
+      console.log(res);
+    })
+  }
+ 
+  
  }
  exis_fold(){
    this.is_new = false;

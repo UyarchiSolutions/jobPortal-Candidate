@@ -16,7 +16,9 @@
                         <div class="col">
                             <h3>Add Recruiter</h3>
                         </div>
-                        <div class="col"></div>
+                        <div class="col">
+                            <button class="btn btn-brand-blue" [routerLink]="['/manage-recruiter']">Manage Recruiter</button>
+                          </div>
                     </div>
 
                   <div class="row">
@@ -27,10 +29,10 @@
                     <div class="register-form" [formGroup]="addform">
                         <div class="single-row">
                             <label for="">Recruiter Name :</label>
-                            <div class="content-box">
-                                <input type="text" class="form-control" placeholder="Enter Name" formControlName="recruiterName">
+                            <div class="content-box" style="display:block;">
+                                <input type="text" class="form-control" style="text-transform: capitalize;" placeholder="Enter Name" formControlName="recruiterName">
                                 <div *ngIf="submitted && addform.get('recruiterName')?.invalid">
-                                    <small *ngIf="addform.get('recruiterName').errors?.required" class="text-danger">Name is required</small>
+                                    <small class="text-danger">Name is required</small>
                                 </div>
                             </div>
 
@@ -38,11 +40,10 @@
 
                         <div class="single-row">
                             <label for="">Recruiter Email ID :</label>
-                            <div class="content-box">
+                            <div class="content-box" style="display:block">
                                 <input type="text" class="form-control" placeholder="Enter Email ID" formControlName="email">
                                 <div *ngIf="submitted && addform.get('email')?.invalid">
-                                    <small *ngIf="addform.get('email').errors?.required" class="text-danger">Email is required</small>
-                                    <small class="text-danger" *ngif="addform.get('email').errors?.email">Email address is invalid</small>
+                                    <small class="text-danger">Email is required</small>
                                 </div>
                             </div>
 
@@ -50,10 +51,10 @@
 
                         <div class="single-row">
                             <label for="">Recruiter Number :</label>
-                            <div class="content-box">
+                            <div class="content-box" style="display:block">
                                 <input type="number" maxlength="10" pattern="[6789][0-9]{9}" class="form-control" placeholder="Enter Mobile Number" formControlName="mobileNumber">
                                 <div *ngIf="submitted && addform.get('mobileNumber')?.invalid">
-                                    <small *ngIf="addform.get('mobileNumber').errors?.required" class="text-danger">Number is required</small>
+                                    <small class="text-danger">Number is required</small>
                                 </div>
                             </div>
                         </div>

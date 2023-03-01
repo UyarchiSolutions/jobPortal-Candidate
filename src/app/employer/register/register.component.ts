@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
   latitude: any;
   longtitude: any;
   selectImg1: any;
+  submitted = false
   constructor(private formBuilder: FormBuilder, private router: Router,private empservice: EmpServiceService) {
 
    }
@@ -24,14 +25,17 @@ export class RegisterComponent implements OnInit {
       Validators.maxLength(50),
       Validators.pattern('^[a-zA-Z ]*$'),
     ]),
-    email: new FormControl('',[Validators.required, Validators.email]),
+    email: new FormControl('',[Validators.required, Validators.email,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
     password: new FormControl('', Validators.required),
     confirm_password: new FormControl('', Validators.required),
     mobileNumber: new FormControl('',Validators.required),
-    contactName: new FormControl('', Validators.required),
+    contactName: new FormControl('', [
+      Validators.required,
+      Validators.maxLength(50),
+      Validators.pattern('^[a-zA-Z ]*$'),
+    ]),
     companyType: new FormControl(null, Validators.required),
     pincode: new FormControl('', Validators.required),
-    aboutCompany: new FormControl('', Validators.required),
     choosefile: new FormControl('', Validators.required),
     location: new FormControl('', Validators.required),
     lat: new FormControl(''),
@@ -60,38 +64,41 @@ export class RegisterComponent implements OnInit {
     //   }
     //   return;
     // }
-     
-        var jobForm = new FormData();
-        jobForm.append('name', this.RegisterForm.get('name')?.value);
-        jobForm.append('email', this.RegisterForm.get('email')?.value);
-        jobForm.append('password', this.RegisterForm.get('password')?.value);
-        jobForm.append('confirm_password', this.RegisterForm.get('confirm_password')?.value);
-        jobForm.append('mobileNumber', this.RegisterForm.get('mobileNumber')?.value);
-        jobForm.append('contactName', this.RegisterForm.get('contactName')?.value);
-        jobForm.append('companyType', this.RegisterForm.get('companyType')?.value);
-        jobForm.append('pincode', this.RegisterForm.get('pincode')?.value);
-        jobForm.append('aboutCompany', this.RegisterForm.get('aboutCompany')?.value);
-        jobForm.append('choosefile', this.file);
-        jobForm.append('lat', this.RegisterForm.get('lat')?.value);
-        jobForm.append('long', this.RegisterForm.get('long')?.value);
-        jobForm.append('location', this.RegisterForm.get('location')?.value);
-        jobForm.append('registrationType', this.RegisterForm.get('registrationType')?.value);
-        jobForm.append('industryType', this.RegisterForm.get('industryType')?.value);
-        jobForm.append('companyWebsite', this.RegisterForm.get('companyWebsite')?.value);
-        jobForm.append('postedBy', this.RegisterForm.get('postedBy')?.value);
-        jobForm.append('companyDescription', this.RegisterForm.get('companyDescription')?.value);
-        jobForm.append('logo', this.selectImg1)
-        jobForm.append('companyAddress', this.RegisterForm.get('companyAddress')?.value);
+        console.log(this.RegisterForm.value)
+        this.submitted = true;
+        if(this.RegisterForm.valid){
+          var jobForm = new FormData();
+          jobForm.append('name', this.RegisterForm.get('name')?.value);
+          jobForm.append('email', this.RegisterForm.get('email')?.value);
+          jobForm.append('password', this.RegisterForm.get('password')?.value);
+          jobForm.append('confirm_password', this.RegisterForm.get('confirm_password')?.value);
+          jobForm.append('mobileNumber', this.RegisterForm.get('mobileNumber')?.value);
+          jobForm.append('contactName', this.RegisterForm.get('contactName')?.value);
+          jobForm.append('companyType', this.RegisterForm.get('companyType')?.value);
+          jobForm.append('pincode', this.RegisterForm.get('pincode')?.value);
+          jobForm.append('choosefile', this.file);
+          jobForm.append('lat', this.RegisterForm.get('lat')?.value);
+          jobForm.append('long', this.RegisterForm.get('long')?.value);
+          jobForm.append('location', this.RegisterForm.get('location')?.value);
+          jobForm.append('registrationType', this.RegisterForm.get('registrationType')?.value);
+          jobForm.append('industryType', this.RegisterForm.get('industryType')?.value);
+          jobForm.append('companyWebsite', this.RegisterForm.get('companyWebsite')?.value);
+          jobForm.append('postedBy', this.RegisterForm.get('postedBy')?.value);
+          jobForm.append('companyDescription', this.RegisterForm.get('companyDescription')?.value);
+          jobForm.append('logo', this.selectImg1)
+          jobForm.append('companyAddress', this.RegisterForm.get('companyAddress')?.value);
+          
+          // jobForm.append('',this.myAddres)
+          console.log(jobForm)
+          this.empservice.employeeRegister(jobForm).subscribe((res:any)=>{
+            console.log(res);
+            this.router.navigate(['/empcheck-mail'])
+  
+          },error => {
+            error.message
+          })
+        }
         
-        // jobForm.append('',this.myAddres)
-        console.log(jobForm)
-        this.empservice.employeeRegister(jobForm).subscribe((res:any)=>{
-          console.log(res);
-          this.router.navigate(['/empcheck-mail'])
-
-        },error => {
-          error.message
-        })
     
 
   }

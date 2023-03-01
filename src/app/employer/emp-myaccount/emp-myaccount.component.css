@@ -151,3 +151,8 @@ align-items: normal;
 .sidebarmenu ul{
     list-style: none;
 }
+.map{
+    display: block;
+    width: 409px;
+    height: 285px;
+}
