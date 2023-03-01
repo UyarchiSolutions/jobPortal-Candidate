@@ -357,12 +357,15 @@ label {
 }
 
 .keylist {
-  margin-top: 0px;
+  /* margin-top: 0px;
   position: relative;
   bottom: 24px;
   width: 100%;
+  border-radius: 5px; */
+  position: absolute;
+  width: 313px;
   border-radius: 5px;
-
+  top: 244px;
 }
 
 ul {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CanditateService } from '../canditate.service';
 
@@ -11,8 +11,9 @@ import { CanditateService } from '../canditate.service';
 export class SendotpforgotComponent implements OnInit {
   otpForm=this.fb.group({
     mobilenumber:new FormControl(''),
-    otp:new FormControl('')
+    otp:new FormControl('',Validators.required)
   })
+  issubmit=false;
   constructor(private router:Router,private candidateservice:CanditateService,private fb:FormBuilder,private activate:ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -24,9 +25,13 @@ export class SendotpforgotComponent implements OnInit {
   }
   // newPAss'
   verifyOtp(){
-    this.candidateservice.sendOTp(this.otpForm.value).subscribe((res:any) => {
-      this.router.navigate(['/newPAss'],{queryParams:{id:res.id}})
-    })
-
+    this.issubmit=true;
+    let otp:any=this.otpForm.get('otp')?.value;
+    if(this.otpForm.get('otp')?.valid){
+      this.candidateservice.sendOTp(this.otpForm.value).subscribe((res:any) => {
+        this.issubmit=false;
+        this.router.navigate(['/newPAss'],{queryParams:{id:res.id}})
+      })
+    }
   }
 }

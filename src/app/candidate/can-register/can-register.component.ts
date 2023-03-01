@@ -10,7 +10,8 @@ import { CanditateService } from '../canditate.service';
   styleUrls: ['./can-register.component.css']
 })
 export class CanRegisterComponent implements OnInit {
-  Candidateform:any =this.fb.group({
+  isSubmitted=false;
+  Candidateform: any = this.fb.group({
     name: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]),
     email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
     password: new FormControl('', Validators.required),
@@ -20,13 +21,13 @@ export class CanRegisterComponent implements OnInit {
     mobileNumber: new FormControl('', Validators.required),
     lat: new FormControl('', Validators.required),
     long: new FormControl('', Validators.required),
-    addressLoaction : new FormControl(''),
+    addressLoaction: new FormControl(''),
     location: new FormControl('', Validators.required),
   });
-  candidateFile:any;
-  constructor(private fb:FormBuilder,private canditateService:CanditateService,private router:Router) { }
+  candidateFile: any;
+  constructor(private fb: FormBuilder, private canditateService: CanditateService, private router: Router) { }
 
-  ngOnInit(){
+  ngOnInit() {
 
   }
   // File upload
@@ -40,13 +41,14 @@ export class CanRegisterComponent implements OnInit {
         res.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
       ) {
         this.candidateFile = res;
-        console.log(this.candidateFile,"sdsdfsf")
+        console.log(this.candidateFile, "sdsdfsf")
       }
     }
   }
   // rgister api
   submit() {
-    console.log(this.Candidateform.value,'sbdjshdbh')
+    this.isSubmitted=true;
+    console.log(this.Candidateform.value, 'sbdjshdbh')
     var jobForm = new FormData();
     jobForm.append('name', this.Candidateform.get('name')?.value);
     jobForm.append('email', this.Candidateform.get('email')?.value);
@@ -58,23 +60,23 @@ export class CanRegisterComponent implements OnInit {
     jobForm.append('long', this.Candidateform.get('long')?.value);
     jobForm.append('location', this.Candidateform.get('location')?.value)
     jobForm.append('resume', this.candidateFile);
-     this.canditateService.submitcandicate(jobForm).subscribe( (res: any) => {
-      this.router.navigate(['/checkmailCan'])
-    },
+    if (this.Candidateform.valid) {
+      this.canditateService.submitcandicate(jobForm).subscribe((res: any) => {
+        this.router.navigate(['/checkmailCan'])
+      },
         error => {
           error.error.message;
           console.log(error.error.message, 'ppppp');
-        }
-
-      );
-
+        });
+        this.isSubmitted=false;
+    }
   }
   options: any = {
     componentRestrictions: { country: 'IN' },
   };
 
-  latitude:any;
-  longtitude:any;
+  latitude: any;
+  longtitude: any;
   handleAddressChange(address: Address) {
     console.log(address);
     console.log(address.geometry.location.lat());
@@ -85,9 +87,9 @@ export class CanRegisterComponent implements OnInit {
     this.longtitude = String(this.longtitude)
 
     this.Candidateform.patchValue({
-      lat:  this.latitude,
+      lat: this.latitude,
       long: this.longtitude,
-      location:address.formatted_address
+      location: address.formatted_address
     })
   }
 }

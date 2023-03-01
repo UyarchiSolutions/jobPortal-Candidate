@@ -72,7 +72,6 @@
   </div>
   <div class="row">
     <div class="col-2">
-
       <div class="row refine-container no-margin">
         <div class="col">
           <div class="sidebarmenu myprofile refine-sidebar">
@@ -431,7 +430,7 @@
                     <span class="close-mark" (click)="remove_filter(item,'keyskill')">x</span>
                   </span>
                 </ng-container>
-                <ng-container *ngIf="searchForm.get('experience')?.value != ''">
+                <ng-container *ngIf="searchForm.get('experience')?.value != null">
                   <span class="badge searchlabel bg-light text-dark">
                     <span>{{find_value_exp(searchForm.get('experience')?.value)}}</span>
                     <span class="close-mark" (click)="remove_filter_exp(searchForm.get('experience')?.value)">x</span>
@@ -491,10 +490,10 @@
                     <span class="close-mark" (click)="remove_filter(item,'freshness')">x</span>
                   </span>
                 </ng-container>
-                <ng-container *ngIf="searchForm.get('experiencefrom')?.value != '' && searchForm.get('experienceto')?.value != ''">
+                <ng-container *ngIf="searchForm.get('experienceAnotherfrom')?.value != null && searchForm.get('experienceAnotherto')?.value != null">
                   <span class="badge searchlabel bg-light text-dark">
-                    <span>{{find_expfromTo(searchForm.get('experiencefrom')?.value ,searchForm.get('experienceto')?.value)}}</span>
-                    <span class="close-mark" (click)="remove_filterexpFromto(searchForm.get('experiencefrom')?.value,searchForm.get('experienceto')?.value)">x</span>
+                    <span>{{find_expfromTo(searchForm.get('experienceAnotherfrom')?.value ,searchForm.get('experienceAnotherto')?.value)}}</span>
+                    <span class="close-mark" (click)="remove_filterexpFromto(searchForm.get('experienceAnotherfrom')?.value,searchForm.get('experienceAnotherto')?.value)">x</span>
                   </span>
                 </ng-container>
               </div>
@@ -546,7 +545,7 @@
                 {{job.experienceFrom}} To {{job.experienceTo}}
               </div>
               <div class="col">
-                {{job.salaryRangeFrom}} To {{job.salaryRangeTo}}
+                {{convertsalary(job.salaryRangeFrom)}} To {{(job.salaryRangeTo)}}
               </div>
               <div class="col">
                 {{job.date}}
@@ -1239,15 +1238,7 @@
                   <input type="text" class="form-control" placeholder="Enter  Job Location" formControlName="Location">
                 </div>
               </div>
-              <!-- <div class="single-row">
-                <label for="">Prefered Industry :</label>
-                <div class="content-box">
-                  <select id="select" class="form-control">
-                    <option [ngValue]="null">Select</option>
-                    <option value="{{insdustry._id}}" *ngFor="let insdustry of industry">{{insdustry.Industry}}</option>
-                  </select>
-                </div>
-              </div> -->
+
               <div class="single-row">
                 <label for="">Course :</label>
                 <div class="content-box">

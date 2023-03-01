@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { CanditateService } from '../candidate/canditate.service';
 import { CanditService } from '../candit.service';
 
@@ -10,7 +11,7 @@ import { CanditService } from '../candit.service';
 })
 export class CanHomeComponent implements OnInit {
   jobs: any = [];
-  searchForm:any = this.fb.group({
+  searchForm: any = this.fb.group({
     search: new FormControl([]),
     experience: new FormControl(null),
     experienceAnotherfrom: new FormControl(null),
@@ -33,7 +34,17 @@ export class CanHomeComponent implements OnInit {
   page = 0;
   pagetotal = 0;
   totalcount = 0;
-  range=5;
+  range = 5;
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: false,
+    idField: '_id',
+    textField: 'Industry',
+    itemsShowLimit: 3,
+    limitSelection: 3,
+    allowSearchFilter: true,
+    enableCheckAll: false,
+  };
+  yearArray: any = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30']
   constructor(private canditSarvice: CanditService, private fb: FormBuilder, private candidateService: CanditateService) { }
 
   ngOnInit() {
@@ -176,6 +187,27 @@ export class CanHomeComponent implements OnInit {
   postedBy(event: any) {
 
   }
+  pushCourse(e: any) {
+    const data = this.searchForm.get('preferredIndustry')?.value;
+    console.log(e);
+    data.push(e._id);
+  }
+  onDeSelect(id: any) {
+    const data = this.searchForm.get('preferredIndustry')?.value;
+    let i: number = 0;
+    data.forEach((item: any) => {
+      if (item == id._id) {
+        data.splice(i, 1);
+        console.log(data, "data------------>")
+        return;
+      }
+      i++;
+    })
+  }
+  // advance search
+  advanceSearch() {
+    this.getjobS();
+  }
   EductionDetails(event: any) {
     const data: any = this.searchForm.get('education')?.value;
     if (event.target.checked) {
@@ -198,12 +230,9 @@ export class CanHomeComponent implements OnInit {
     if (event.target.checked) {
       data.push((event.target.value))
       this.searchForm.get('workmode')?.setValue(data)
-      console.log(this.searchForm.get('workmode')?.value, "values")
     } else {
-      console.log("items")
       let i: number = 0;
       data.forEach((item: any) => {
-        console.log(item, "items")
         if (item == event.target.value) {
           data.splice(i, 1);
           return;
@@ -212,6 +241,14 @@ export class CanHomeComponent implements OnInit {
       });
     }
     this.getjobS();
+  }
+  isCheck_details(val: any) {
+    const data: any = this.searchForm.get('workmode')?.value;
+    if (data.findIndex((res: any) => res == val)) {
+      return true;
+    } else {
+      return false;
+    }
   }
   experienceTo(experience: any) {
     this.searchForm.get('experienceAnotherto')?.setValue(experience.target.value);
@@ -329,8 +366,176 @@ export class CanHomeComponent implements OnInit {
       }
     }
   }
-  viewmore(val:any){
-    this.range=val;
+  viewmore(val: any) {
+    this.range = val;
     this.getDeparment(this.range);
+  }
+  find_value(value: any, type: any) {
+    if (type == 'keyskill') {
+      let index = this.keySkill.findIndex((a: any) => a.Skill_Title == value);
+      let keyskil = '';
+      if (index != -1) {
+        keyskil = value;
+      }
+      return value;
+    } else if (type == 'workMode') {
+      let workmode = value;
+
+      return workmode
+    } else if (type == 'department') {
+      let index = this.currentDepartment.findIndex((a: any) => a._id == value);
+      let department = '';
+      if (index != -1) {
+
+        department = this.currentDepartment[index].Department;
+      }
+      return department;
+    } else if (type == 'Salary') {
+
+      let Salary = value;
+      return Salary;
+    } else if (type == 'companytype') {
+      let companytype = value;
+      return companytype;
+    } else if (type == 'role') {
+      let index = this.roles.findIndex((a: any) => a._id == value);
+      let role = '';
+      if (index != -1) {
+        role = this.roles[index].Job_role;
+      }
+      return role;
+    } else if (type == 'education') {
+      let index = this.course.findIndex((a: any) => a._id == value);
+
+      let education = '';
+      if (index != -1) {
+        education = this.course[index].Course;
+      }
+      return education;
+    } else if (type == 'postedby') {
+      let posted = value;
+      return posted;
+    } else if (type == 'preferredIndustry') {
+      let index = this.industry.findIndex((a: any) => a._id == value);
+      let instries = '';
+      if (index != -1) {
+        instries = this.industry[index].Industry;
+      }
+      return instries;
+    } else if (type == 'freshness') {
+      let fresh = value;
+      return fresh;
+    } else {
+      return '';
+    }
+  }
+  remove_filter(value: any, type: any) {
+    if (type == 'keyskill') {
+      let skill: any = this.searchForm.get('search')?.value;
+      console.log(skill, 'woking lusu')
+      let index = skill.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('search')?.value.splice(index, 1);
+        let search: any = skill.toString()
+        this.searchForm.get('searchbox')?.setValue(search);
+      }
+    } else if (type == 'workMode') {
+      let noticeperiod: any = this.searchForm.get('workmode')?.value;
+      let index = noticeperiod.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('workmode')?.value.splice(index, 1);
+      }
+    } else if (type == 'department') {
+      let deparment: any = this.searchForm.get('department')?.value;
+      let index = deparment.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('department')?.value.splice(index, 1);
+      }
+    } else if (type == 'Salary') {
+      let salary: any = this.searchForm.get('Salary')?.value;
+      let index = salary.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('Salary')?.value.splice(index, 1);
+      }
+    } else if (type == 'companytype') {
+      let salary: any = this.searchForm.get('companytype')?.value;
+      let index = salary.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('companytype')?.value.splice(index, 1);
+      }
+    } else if (type == 'role') {
+      let salary: any = this.searchForm.get('role')?.value;
+      let index = salary.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('role')?.value.splice(index, 1);
+      }
+    } else if (type == 'education') {
+      let salary: any = this.searchForm.get('education')?.value;
+      let index = salary.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('education')?.value.splice(index, 1);
+      }
+    } else if (type == 'postedby') {
+      let salary: any = this.searchForm.get('postedby')?.value;
+      let index = salary.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('postedby')?.value.splice(index, 1);
+      }
+    } else if (type == 'preferredIndustry') {
+      let salary: any = this.searchForm.get('preferredIndustry')?.value;
+      let index = salary.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('preferredIndustry')?.value.splice(index, 1);
+      }
+    } else if (type == 'freshness') {
+      let salary: any = this.searchForm.get('freshness')?.value;
+      let index = salary.findIndex((a: any) => a == value);
+      if (index != -1) {
+        this.searchForm.get('freshness')?.value.splice(index, 1);
+      }
+    }
+  }
+  find_value_exp(expfrom: any) {
+    if (expfrom) {
+      return expfrom + 'year'
+    }
+    else {
+      return '';
+    }
+  }
+  remove_filter_exp(expfrom: any) {
+    this.searchForm.get('experience')?.setValue('')
+
+  }
+  find_expfromTo(expfrom: any, expto: any) {
+    if (expfrom && expto) {
+      return expfrom + 'to' + expto
+    }
+    else {
+      return '';
+    }
+  }
+  remove_filterexpFromto(expfrom: any, expTo: any) {
+    this.searchForm.get('experienceAnotherfrom')?.setValue(null)
+    this.searchForm.get('experienceAnotherto')?.setValue(null)
+  }
+  salaryConvert(value: any) {
+    return value / 100000
+  }
+  myArray: any = [];
+  val:any;
+  yearChange() {
+    this.myArray = [];
+    this.val = this.searchForm.get('experienceAnotherfrom')?.value;
+    this.myArray = this.yearArray.filter((res: any) => this.val < res)
+    console.log(this.myArray,"nvknvnv")
+  }
+  data_array(data:any){
+    console.log(this.val)
+    if(this.val < data){
+     console.log(data,"data")
+      return data
+    }
+    return data
   }
 }

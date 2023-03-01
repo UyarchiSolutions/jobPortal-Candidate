@@ -12,14 +12,23 @@ export class ForgotpasswordComponent implements OnInit {
   sendOtpFom:any=this.fb.group({
     mobilenumber:new FormControl('', Validators.required)
   })
+  isSubmitted=false;
   constructor(private router:Router,private fb:FormBuilder,private candidate:CanditateService) { }
 
   ngOnInit(): void {
   }
+  wrongMobile=false
   sendOtp(){
-    this.candidate.sendmodile(this.sendOtpFom.value).subscribe((res:any) => {
-      this.router.navigate(['/sendOtp'],{queryParams:{mobile:this.sendOtpFom.get('mobilenumber')?.value}})
-
-    })
+    this.isSubmitted=true;
+    if(this.sendOtpFom.valid){
+      this.candidate.sendmodile(this.sendOtpFom.value).subscribe((res:any) => {
+        this.router.navigate(['/sendOtp'],{queryParams:{mobile:this.sendOtpFom.get('mobilenumber')?.value}})
+        this.isSubmitted=false;
+      },error =>{
+        if(error.error.message =='mobileNumber not found'){
+          this.wrongMobile=true;
+        }
+      })
+    }
   }
 }

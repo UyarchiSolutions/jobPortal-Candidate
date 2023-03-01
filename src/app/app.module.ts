@@ -12,6 +12,7 @@ import { EmployerModule } from './employer/employer.module';
 import { NgxEditorModule } from "ngx-editor";
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { RedirectComponent } from './redirect/redirect.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 
 
@@ -34,8 +35,8 @@ import { RedirectComponent } from './redirect/redirect.component';
     EmployerModule,
     GooglePlaceModule,
     NgxEditorModule,
-    NgxExtendedPdfViewerModule
-
+    NgxExtendedPdfViewerModule,
+    NgMultiSelectDropDownModule.forRoot(),
 
   ],
   providers: [],

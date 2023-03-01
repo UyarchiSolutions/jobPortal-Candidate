@@ -167,7 +167,7 @@ h3{
 top: 20px;
 right: 0px;
         position: absolute;
-      
+
 }
 .or-line::before{
 
@@ -180,7 +180,7 @@ top: 20px;
 
 
     position: absolute;
-  
+
 }
 
 
@@ -195,14 +195,14 @@ top: 20px;
     padding: 6px 10px;
     border-radius: 5px;
     font-size: 14px;
-    
+
 }
 .sigin-button img{
     width: 30px;
     height: 30px;
  }
 
- 
+
  .final-btn-wrap{
     margin-top: 20px;
 }
@@ -244,7 +244,7 @@ top: 20px;
 }
 .sidebarmenu ul{
     padding: 0px 0px;
-   
+
 
 
 }
@@ -354,7 +354,7 @@ align-items: normal;
     margin-right: 10.9%;
     margin-bottom:20px ;
     font-size: 14px;
-   
+
 
 
 }
@@ -368,7 +368,7 @@ align-items: normal;
 .sidebarmenu{
     border-radius: 5px;
     background-color: #E7E9ED;
-   
+
 
 }
 
@@ -405,6 +405,8 @@ align-items: normal;
     display: flex;
     justify-content: space-around
 }
-
+.error-data{
+  color: red;
+}
 
 /* heading-side-btn *//* You can add global styles to this file, and also import other style files */

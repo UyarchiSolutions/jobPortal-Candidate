@@ -62,7 +62,8 @@
               </div>
             </div>
             <div class="advanced-search">
-              <button type="submit" class="btn btn-brand-trans"><a href="#">Advanced Search</a></button>
+              <button type="submit" class="btn btn-brand-trans" data-bs-toggle="modal" data-bs-target="#exampleModal"><a
+                  href="#">Advanced Search</a></button>
             </div>
           </div>
         </div>
@@ -70,29 +71,15 @@
 
     </div>
     <div class="col-2 ad-image">
-
-
       <div class="row">
-
-
-
         <div class="col">
           <img src="../../assets/image/myaccountimg2.png" alt="">
-
         </div>
       </div>
-
-
-
     </div>
   </div>
-
-
-
   <div class="row">
-
     <div class="col-2">
-
       <div class="row refine-container no-margin">
         <div class="col">
           <div class="sidebarmenu myprofile refine-sidebar">
@@ -112,7 +99,7 @@
                     <ul class="dropdown-menu filter" aria-labelledby="dropdownMenuButton1">
                       <li value="Start up">Work Mode</li>
                       <li value="1 to 2 lac"><input type="checkbox" value="onsite"
-                          (change)="changeWorkmode($event)">Onsite</li>
+                          (change)="changeWorkmode($event)" [checked]="isCheck_details('onsite')">Onsite</li>
                       <li value="Corparate"><input type="checkbox" value="work from home"
                           (change)="changeWorkmode($event)">Work form home</li>
                       <li value="Foregin MNC"><input type="checkbox" value="hybrid"
@@ -148,6 +135,26 @@
                         <option value="9">9 Year</option>
                         <option value="10">10 Year</option>
                         <option value="11">11 Year</option>
+                        <option value="12">12 Year</option>
+                        <option value="13">13 Year</option>
+                        <option value="14">14 Year</option>
+                        <option value="15">15 Year</option>
+                        <option value="16">16 Year</option>
+                        <option value="17">17 Year</option>
+                        <option value="18">18 Year</option>
+                        <option value="19">19 Year</option>
+                        <option value="20">20 Year</option>
+                        <option value="21">21 Year</option>
+                        <option value="22">22 Year</option>
+                        <option value="23">23 Year</option>
+                        <option value="24">24 Year</option>
+                        <option value="25">25 Year</option>
+                        <option value="26">26 Year</option>
+                        <option value="27">27 Year</option>
+                        <option value="28">28 Year</option>
+                        <option value="29">29 Year</option>
+                        <option value="30">30 Year</option>
+
                       </select>
                       <select class="form-control select-type" formControlName="experienceAnotherto"
                         (change)="experienceTo($event)">
@@ -164,6 +171,25 @@
                         <option value="9">9 Year</option>
                         <option value="10">10 Year</option>
                         <option value="11">11 Year</option>
+                        <option value="12">12 Year</option>
+                        <option value="13">13 Year</option>
+                        <option value="14">14 Year</option>
+                        <option value="15">15 Year</option>
+                        <option value="16">16 Year</option>
+                        <option value="17">17 Year</option>
+                        <option value="18">18 Year</option>
+                        <option value="19">19 Year</option>
+                        <option value="20">20 Year</option>
+                        <option value="21">21 Year</option>
+                        <option value="22">22 Year</option>
+                        <option value="23">23 Year</option>
+                        <option value="24">24 Year</option>
+                        <option value="25">25 Year</option>
+                        <option value="26">26 Year</option>
+                        <option value="27">27 Year</option>
+                        <option value="28">28 Year</option>
+                        <option value="29">29 Year</option>
+                        <option value="30">30 Year</option>
                       </select>
                     </div>
                   </div>
@@ -356,18 +382,90 @@
           <div class="row no-margin bg-grey ">
             <div class="col">
               <div class="filter-label">
-                <span class="badge bg-light text-dark">
-                  <span>BA-English</span>
-                  <span class="close-mark">x</span>
-                </span>
-                <span class="badge bg-light text-dark">
-                  <span>Chennai</span>
-                  <span class="close-mark">x</span>
-                </span>
-                <span class="badge bg-light text-dark">
-                  <span>0 to 2 Years</span>
-                  <span class="close-mark">x</span>
-                </span>
+                <ng-container *ngIf="searchForm.get('search')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark"
+                    *ngFor="let item of searchForm.get('search')?.value">
+                    <span>{{find_value(item,'keyskill')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'keyskill')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('experience')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark">
+                    <span>{{find_value_exp(searchForm.get('experience')?.value)}}</span>
+                    <span class="close-mark" (click)="remove_filter_exp(searchForm.get('experience')?.value)">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('workmode')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark"
+                    *ngFor="let item of searchForm.get('workmode')?.value">
+                    <span>{{find_value(item,'workMode')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'workMode')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('department')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark"
+                    *ngFor="let item of searchForm.get('department')?.value">
+                    <span>{{find_value(item,'department')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'department')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('Salary')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark"
+                    *ngFor="let item of searchForm.get('Salary')?.value">
+                    <span>{{find_value(item,'Salary')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'Salary')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('companytype')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark"
+                    *ngFor="let item of searchForm.get('companytype')?.value">
+                    <span>{{find_value(item,'companytype')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'companytype')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('role')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('role')?.value">
+                    <span>{{find_value(item,'role')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'role')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('education')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark"
+                    *ngFor="let item of searchForm.get('education')?.value">
+                    <span>{{find_value(item,'education')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'education')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('postedby')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark"
+                    *ngFor="let item of searchForm.get('postedby')?.value">
+                    <span>{{find_value(item,'postedby')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'postedby')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('preferredIndustry')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark"
+                    *ngFor="let item of searchForm.get('preferredIndustry')?.value">
+                    <span>{{find_value(item,'preferredIndustry')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'preferredIndustry')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('freshness')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark"
+                    *ngFor="let item of searchForm.get('freshness')?.value">
+                    <span>{{find_value(item,'freshness')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'freshness')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container
+                  *ngIf="searchForm.get('experienceAnotherfrom')?.value != null && searchForm.get('experienceAnotherto')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark">
+                    <span>{{find_expfromTo(searchForm.get('experienceAnotherfrom')?.value
+                      ,searchForm.get('experienceAnotherto')?.value)}}</span>
+                    <span class="close-mark"
+                      (click)="remove_filterexpFromto(searchForm.get('experienceAnotherfrom')?.value,searchForm.get('experienceAnotherto')?.value)">x</span>
+                  </span>
+                </ng-container>
               </div>
             </div>
           </div>
@@ -416,7 +514,7 @@
               {{job.experienceFrom}} To {{job.experienceTo}}
             </div>
             <div class="col">
-              {{job.salaryRangeFrom}} To {{job.salaryRangeTo}}
+              {{job.salaryRangeFrom}} To {{job.salaryRangeTo}} lac
             </div>
             <div class="col">
               {{job.date}}
@@ -465,6 +563,160 @@
       <div class="row no-margin">
         <div class="col ad-image">
           <img src="../../assets/image/sidebar-ad.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="background-color: #EEEEEE; ">
+      <div class="modal-header" style="justify-content: center;">
+        <h3 class="modal-title">Search Job</h3>
+      </div>
+      <div class="modal-body ">
+        <div>
+          <div class="row">
+            <div class="register-form" [formGroup]="searchForm">
+              <div class="single-row">
+                <label for="">Key Skills :</label>
+                <div class="content-box">
+                  <input type="text" class="form-control" (keyup)="dispalye($event)" placeholder="Enter Key Skills"
+                    formControlName="searchbox">
+                </div>
+              </div>
+              <div class="single-row" *ngIf="isDisplay" style="margin-top:0px;">
+                <label></label>
+                <div class="content-box" style="background: white;">
+                  <ul style="padding-left: 0px;">
+                    <li *ngFor="let skill of keySkill" style="cursor:pointer"
+                      (click)="checkSkill($event,skill.Skill_Title)">
+                      <span>{{skill.Skill_Title}}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="single-row">
+                <label for="">Salary Range:</label>
+                <div class="content-box">
+                  <select id="select" class="form-control" (change)="salaryrange($event)">
+                    <option [ngValue]="null">From</option>
+                    <option value="1-2">1 to 2 lac</option>
+                    <option value="2-3">2 to 3 lac</option>
+                    <option value="2-4">2 to 4 lac</option>
+                    <option value="4-5">4 to 5 lac</option>
+                    <option value="5-8">5 to 8 lac</option>
+                    <option value="8-10">8 to 10 lac</option>
+                    <option value="10-13">10 to 13 lac</option>
+                    <option value="13-15">13 to 15 lac</option>
+                    <option value="15-20">15 to 20 lac</option>
+                    <option value="30-more">30 to morelac</option>
+                  </select>
+                </div>
+              </div>
+              <div class="single-row">
+                <label for="">Experience:</label>
+                <div class="content-box">
+                  <select id="select" class="form-control" formControlName="experienceAnotherfrom" (change)="yearChange()">
+                    <option [ngValue]="null">From</option>
+                    <option value="0">Freshers</option>
+                    <option value="1">1 Year</option>
+                    <option value="2">2 Year</option>
+                    <option value="3">3 Year</option>
+                    <option value="4">4 Year</option>
+                    <option value="5">5 Year</option>
+                    <option value="6">6 Year</option>
+                    <option value="7">7 Year</option>
+                    <option value="8">8 Year</option>
+                    <option value="9">9 Year</option>
+                    <option value="10">10 Year</option>
+                    <option value="11">11 Year</option>
+                    <option value="12">12 Year</option>
+                    <option value="13">13 Year</option>
+                    <option value="14">14 Year</option>
+                    <option value="15">15 Year</option>
+                    <option value="16">16 Year</option>
+                    <option value="17">17 Year</option>
+                    <option value="18">18 Year</option>
+                    <option value="19">19 Year</option>
+                    <option value="20">20 Year</option>
+                    <option value="21">21 Year</option>
+                    <option value="22">22 Year</option>
+                    <option value="23">23 Year</option>
+                    <option value="24">24 Year</option>
+                    <option value="25">25 Year</option>
+                    <option value="26">26 Year</option>
+                    <option value="27">27 Year</option>
+                    <option value="28">28 Year</option>
+                    <option value="29">29 Year</option>
+                    <option value="30">30 Year</option>
+                  </select>
+                  <select id="select" class="form-control" formControlName="experienceAnotherto">
+                    <option [ngValue]="null">To</option>
+                    <option value="0">Freshers</option>
+                    <!-- <option value="{{year}}" *ngFor="let year of yearArray;">{{data_array(year)}}Year</option> -->
+                    <option value="2">2 Year</option>
+                    <option value="2">2 Year</option>
+                    <option value="3">3 Year</option>
+                    <option value="4">4 Year</option>
+                    <option value="5">5 Year</option>
+                    <option value="6">6 Year</option>
+                    <option value="7">7 Year</option>
+                    <option value="8">8 Year</option>
+                    <option value="9">9 Year</option>
+                    <option value="10">10 Year</option>
+                    <option value="11">11 Year</option>
+                    <option value="12">12 Year</option>
+                    <option value="13">13 Year</option>
+                    <option value="14">14 Year</option>
+                    <option value="15">15 Year</option>
+                    <option value="16">16 Year</option>
+                    <option value="17">17 Year</option>
+                    <option value="18">18 Year</option>
+                    <option value="19">19 Year</option>
+                    <option value="20">20 Year</option>
+                    <option value="21">21 Year</option>
+                    <option value="22">22 Year</option>
+                    <option value="23">23 Year</option>
+                    <option value="24">24 Year</option>
+                    <option value="25">25 Year</option>
+                    <option value="26">26 Year</option>
+                    <option value="27">27 Year</option>
+                    <option value="28">28 Year</option>
+                    <option value="29">29 Year</option>
+                    <option value="30">30 Year</option>
+
+
+                  </select>
+                </div>
+              </div>
+              <div class="single-row">
+                <label for="">Job Location:</label>
+                <div class="content-box">
+                  <input type="text" class="form-control" placeholder="Enter  Job Location"  formControlName="Location">
+                </div>
+              </div>
+
+              <div class="single-row">
+                <label for="">Course :</label>
+                <div class="content-box">
+                  <ng-multiselect-dropdown id="courseInput" class="w-100" style="background-color: white;"
+                    name='courses' [settings]="dropdownSettings" [data]="industry" (onSelect)="pushCourse($event)"
+                    (onDeSelect)="onDeSelect($event)">
+                  </ng-multiselect-dropdown>
+                </div>
+              </div>
+              <div class="single-row  mt-5">
+                <label for=""> </label>
+                <div class="content-box">
+                  <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" (click)="advanceSearch()"
+                    data-bs-dismiss="modal">Search</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
