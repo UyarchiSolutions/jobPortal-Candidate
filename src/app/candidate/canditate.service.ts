@@ -223,4 +223,20 @@ can_report(data:any){
 get_prefered(val:any){
   return this.http.get(this.baseUrl+`/v1/educationDetails/get_Industries_all_search/${val}`)
 }
+// edit basic dtails
+edit_basic(id:any,data:any){
+return this.http.put(this.baseUrl+`/v1/candidateRegistration/getUser_update/${id}`,data,{headers:{auth:Cookie.get('tokens')}})
+}
+verifymail(id:any,data:any){
+  return this.http.put(this.baseUrl+`/v1/candidateRegistration/update_email_send_otp/${id}`,data)
+}
+verifiedMail(data:any){
+  return this.http.post(this.baseUrl+`/v1/candidateRegistration/update_email_send_otp_verify`,data)
+}
+verify_mobile(id:any,data:any){
+  return this.http.put(this.baseUrl+`/v1/candidateRegistration/update_mobilenumber_send_otp/${id}`,data)
+}
+verifiedMobile(data:any){
+  return this.http.post(this.baseUrl+`/v1/candidateRegistration/update_mobilenumber_otp_verify`,data)
+}
 }

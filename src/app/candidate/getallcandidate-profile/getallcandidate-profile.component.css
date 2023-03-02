@@ -222,3 +222,46 @@ keyskill {
   place-content: center;
   border-radius: 5px;
 }
+
+.wrap {
+  width: 108px;
+  height: 2em;
+  line-height: 1em;
+  font-size: 15px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  margin-bottom: 12px;
+  cursor: pointer;
+  word-break: break-all;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.wrap:hover {
+  overflow: visible;
+  white-space: normal;
+  height: auto;
+  /* just added this line */
+}
+
+.edit {
+  display: inline;
+  padding: 4px 4px 5px 10px;
+  width: 60%;
+  height: 36px;
+  border-radius: 3px;
+  background: white;
+  border: 1px solid #ced4da;
+}
+
+.verify {
+  font-weight: 500;
+  font-size: 13px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.phone {
+  margin-top: 18px;
+
+}

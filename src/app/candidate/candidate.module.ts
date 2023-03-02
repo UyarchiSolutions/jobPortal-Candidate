@@ -24,6 +24,8 @@ import { SendotpforgotComponent } from './sendotpforgot/sendotpforgot.component'
 import { NewpasswordComponent } from './newpassword/newpassword.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ReportPopupComponent } from './report-popup/report-popup.component';
+import { EmailverificationComponent } from './emailverification/emailverification.component';
+import { MobileverificationComponent } from './mobileverification/mobileverification.component';
 
 
 
@@ -46,7 +48,9 @@ import { ReportPopupComponent } from './report-popup/report-popup.component';
     ForgotpasswordComponent,
     SendotpforgotComponent,
     NewpasswordComponent,
-    ReportPopupComponent
+    ReportPopupComponent,
+    EmailverificationComponent,
+    MobileverificationComponent
   ],
   imports: [
     CommonModule,

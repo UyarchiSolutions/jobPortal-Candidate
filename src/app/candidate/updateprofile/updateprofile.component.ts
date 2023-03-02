@@ -2,6 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { CanditateService } from '../canditate.service';
 
 @Component({
@@ -30,7 +31,8 @@ export class UpdateprofileComponent implements OnInit {
     gender: new FormControl('', Validators.required),
     maritalStatus: new FormControl('', Validators.required),
     relocate: new FormControl('', Validators.required),
-    languages: this.fb.array([]),
+    preferredLocation:new FormControl('', Validators.required),
+    languages: this.fb.array([], Validators.required),
     searchbox: new FormControl(null),
     currentctc_th: new FormControl(''),
     update: new FormControl()
@@ -68,7 +70,9 @@ export class UpdateprofileComponent implements OnInit {
       this.keySkill = res;
     })
   }
-
+  options: any = {
+    componentRestrictions: { country: 'IN' },
+  };
   getAlldata() {
     this.candidateService.viewDetails().subscribe((res: any) => {
       this.viewAll = res.user;
@@ -85,20 +89,29 @@ export class UpdateprofileComponent implements OnInit {
         locationNative: this.viewAll[0].locationNative,
         noticeperiod: this.viewAll[0].noticeperiod,
         currentSkill: this.viewAll[0].currentSkill,
+        currentbox: this.viewAll[0].currentSkill,
         preferredSkill: this.viewAll[0].preferredSkill,
+        prefredBox: this.viewAll[0].preferredSkill,
         gender: this.viewAll[0].gender,
         maritalStatus: this.viewAll[0].maritalStatus,
         relocate: this.viewAll[0].relocate,
         searchbox: this.viewAll[0].keyskill,
+        preferredLocation: this.viewAll[0].preferredLocation,
         update: new FormControl('advance details')
 
         // languages: this.viewAll[0].keyskill
       })
+      console.log(this.profileForm.get('currentSkill')?.value,"sdksfjnfjnjn")
       this.getLang = this.viewAll[0].languages;
       if (this.viewAll[0].experienceYear) {
         this.profileForm.get('currentctc').setErrors({ 'incorrect': true })
       } else {
         this.profileForm.get('currentctc').setErrors(null)
+      }
+      if (this.viewAll[0].relocate == 'Yes') {
+        this.profileForm.get('preferredLocation').setErrors({ 'incorrect': true })
+      } else {
+        this.profileForm.get('preferredLocation').setErrors(null)
       }
       this.viewAll[0].languages.forEach((element: any) => {
         const data = this.profileForm.get('languages').push(this.fb.group({
@@ -190,8 +203,7 @@ export class UpdateprofileComponent implements OnInit {
       if (value[value.length - 1] != null && value[value.length - 1] != '') {
         this.getAllpreferd(value[value.length - 1])
       } else {
-        // console.log("working")
-        // console.log(this.profileForm.get('prefredBox')?.setErrors({'incorrect':true}),"bjdfjdbfjdfb")
+
       }
     }
     this.profileForm.get('currentSkill')?.setValue(value)
@@ -226,7 +238,7 @@ export class UpdateprofileComponent implements OnInit {
   insLang(val: any) {
     if (val.target.checked) {
       const data = this.profileForm.get('languages').push(this.fb.group({
-        lang: new FormControl(val.target.value, Validators.required),
+        lang: new FormControl(val.target.value),
         know: this.fb.array([])
       }));
     } else {
@@ -235,7 +247,7 @@ export class UpdateprofileComponent implements OnInit {
         this.languages?.removeAt(index)
       }
     }
-    console.log(this.profileForm.get('languages')?.invalid, "vailss")
+
   }
   get languages() {
     return this.profileForm.get('languages') as FormArray;
@@ -252,31 +264,51 @@ export class UpdateprofileComponent implements OnInit {
     }
     language.get('kown')?.setValue(Known)
   }
+  changeRelocate(data:any){
+    if(data.target.value == 'Yes'){
+      this.profileForm.get('preferredLocation').setErrors({ 'incorrect': true })
+    }else{
+      this.profileForm.get('preferredLocation').setErrors(null)
+    }
+  }
   updateprofile() {
     this.isSubmitted = true
     const formData = new FormData();
     formData.append('image', this.selectImg1);
-    console.log(this.profileForm.value, "values")
-    console.log(this.profileForm.valid, "values")
-    // if (this.profileForm.valid) {
-    //   if (this.userId.tab == "0" || this.userId.id) {
-    //     this.candidateService.educationDetail(this.profileForm.value).subscribe((res: any) => {
-    //       if (this.userId.id) {
-    //         this.router.navigate(['/viewprofile'])
-    //       } else {
-    //         this.router.navigate(['/getAllprofile'])
-    //       }
-    //       this.candidateService.imageUpload(res.user._id, formData).subscribe((res: any) => {
-    //       })
-    //     })
-    //   } else {
-    //     this.candidateService.updateProfile(this.profileForm.value).subscribe((res: any) => {
-    //       this.candidateService.imageUpload(res.user._id, formData).subscribe((res: any) => {
-    //       })
-    //       this.router.navigate(['/can-edu'])
-    //     })
-    //   }
-    // }
+    console.log(this.profileForm.get('dob')?.valid, "values")
+    console.log(this.profileForm.get('experienceYear')?.valid, "experienceYear")
+    console.log(this.profileForm.get('experienceMonth')?.valid, "experienceMonth")
+    console.log(this.profileForm.get('expectedctc')?.valid, "expectedctc")
+    console.log(this.profileForm.get('currentctc')?.valid, "currentctc")
+    console.log(this.profileForm.get('locationCurrent')?.valid, "locationCurrent")
+    console.log(this.profileForm.get('locationNative')?.valid, "locationNative")
+    console.log(this.profileForm.get('noticeperiod')?.valid, "noticeperiod")
+    console.log(this.profileForm.get('currentSkill')?.valid, "currentSkill")
+    console.log(this.profileForm.get('preferredSkill')?.valid, "preferredSkill")
+    console.log(this.profileForm.get('gender')?.valid, "gender")
+    console.log(this.profileForm.get('maritalStatus')?.valid, "maritalStatus")
+    console.log(this.profileForm.get('languages')?.valid, "languages")
+    console.log(this.profileForm.get('relocate')?.valid, "relocate")
+    console.log(this.profileForm)
+    if (this.profileForm.valid) {
+      if (this.userId.tab == "0" || this.userId.id) {
+        this.candidateService.educationDetail(this.profileForm.value).subscribe((res: any) => {
+          if (this.userId.id) {
+            this.router.navigate(['/viewprofile'])
+          } else {
+            this.router.navigate(['/getAllprofile'])
+          }
+          this.candidateService.imageUpload(res.user._id, formData).subscribe((res: any) => {
+          })
+        })
+      } else {
+        this.candidateService.updateProfile(this.profileForm.value).subscribe((res: any) => {
+          this.candidateService.imageUpload(res.user._id, formData).subscribe((res: any) => {
+          })
+          this.router.navigate(['/can-edu'])
+        })
+      }
+    }
 
   }
   checkeLang(val: any) {
@@ -288,7 +320,6 @@ export class UpdateprofileComponent implements OnInit {
     }
   }
   chekedKnown(index: any, lang: any, value: any) {
-    console.log(value.value.know, "sdfdfdfgfgh")
     let knowIndex = value.value.know.findIndex((a: any) => (a == lang))
     if (knowIndex != -1) {
       return true
@@ -306,4 +337,21 @@ export class UpdateprofileComponent implements OnInit {
       this.profileForm.get('currentctc').setErrors({ 'incorrect': true })
     }
   }
+
+  latitude:any;
+  longtitude:any;
+  handleAddressChange(address: Address) {
+
+    this.latitude = address.geometry.location.lat();
+    this.latitude = String(this.latitude)
+    this.longtitude = address.geometry.location.lng();
+    this.longtitude = String(this.longtitude)
+
+    this.profileForm.patchValue({
+      lat: this.latitude,
+      long: this.longtitude,
+      preferredLocation: address.formatted_address
+    })
+  }
+
 }

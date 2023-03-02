@@ -247,33 +247,59 @@
             <div class="col" [formGroup]="Candidateform">
               <div class="register-form">
                 <div class="single-row">
-                  <label for="">Full name:</label>
+                  <label for="">Full name<span class="text-danger">*</span>:</label>
                   <div class="content-box">
-                    <input type="text" class="form-control" (keyup)="dispalye($event)" placeholder="Enter Full name"
-                      formControlName="name">
+                    <input type="text" class="form-control" placeholder="Enter Full name" formControlName="name">
+                  </div>
+                </div>
+                <div class="single-row" *ngIf="isSubmit&&Candidateform.get('name')?.invalid">
+                  <label for=""></label>
+                  <div class="content-box">
+                    <p class="text-danger">Full name is Required!</p>
                   </div>
                 </div>
               </div>
               <div class="register-form">
                 <div class="single-row">
-                  <label for="">Email ID :</label>
-                  <div class="content-box">
-                    <input type="text" class="form-control" (keyup)="dispalye($event)" placeholder="Enter Email ID"
-                      formControlName="email">
+                  <label for="">Email ID<span class="text-danger">*</span>:</label>
+                  <div class="edit">
+                    <input type="email" style="outline: 0; border: 0;width: 296px;" placeholder="Enter Email ID"
+                      formControlName="email" (keyup)="chackeMail($event)">
+                    <span class="verify"
+                      *ngIf="Candidateform.get('email')?.value !=email && Candidateform.get('email')?.valid"
+                      (click)="verify()">verify</span>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for=""></label>
+                  <div class="content-box" *ngIf="isSubmit&&Candidateform.get('email')?.invalid">
+                    <p class="text-danger">Full name is Required!</p>
                   </div>
                 </div>
               </div>
+              <!-- <div style="border: 1px solid gray; display: inline; padding: 2px">
+                <input type="text" style="outline: 0; border: 0" />
+                <span>.domain.com</span>
+              </div> -->
+
               <div class="register-form">
                 <div class="single-row">
-                  <label for="">Mobile Number :</label>
-                  <div class="content-box">
-                    <input type="text" class="form-control" (keyup)="dispalye($event)" placeholder="Enter Mobile Number"
+                  <label for="">Mobile Number<span class="text-danger">*:</span></label>
+                  <div class="edit">
+                    <input type="number" style="outline: 0; border: 0;width: 296px;" placeholder="Enter Mobile Number"
                       formControlName="mobileNumber">
+                    <span *ngIf="Candidateform.get('mobileNumber')?.value !=mobile" class="verify" (click)="verifymobile()">verify</span>
+                  </div>
+                </div>
+                <div class="single-row" *ngIf="isSubmit&&Candidateform.get('mobileNumber')?.invalid">
+                  <label for=""></label>
+                  <div class="content-box">
+                    <p class="text-danger">Full name is Required!</p>
                   </div>
                 </div>
               </div>
               <div class="single-row">
-                <label for="" style="margin-left: 15%;">Work Status:</label>
+                <label for="" style="margin-left: 15%;">Work Status<span class="text-danger">*:</span></label>
                 <div class="content-box">
                   <select style="margin-left: 27px;width: 70%;" class="form-control select-type"
                     formControlName="workStatus">
@@ -283,12 +309,25 @@
                   </select>
                 </div>
               </div>
+              <div class="single-row" *ngIf="isSubmit&&Candidateform.get('workStatus')?.invalid">
+                <label for=""></label>
+                <div class="content-box">
+                  <p class="text-danger">Work Status is Required!</p>
+                </div>
+              </div>
               <div class="register-form">
                 <div class="single-row">
-                  <label for="">Location:</label>
+                  <label for="">Location<span class="text-danger">*:</span></label>
                   <div class="content-box">
-                    <input type="text" class="form-control" (keyup)="dispalye($event)" placeholder="Enter Location"
-                      formControlName="location">
+                    <input type="text" class="form-control" ngx-google-places-autocomplete [options]="options"
+                      (onAddressChange)="handleAddressChange($event)"
+                      placeholder="Enter Location" formControlName="location">
+                  </div>
+                </div>
+                <div class="single-row" *ngIf="isSubmit&&Candidateform.get('location')?.invalid">
+                  <label for=""></label>
+                  <div class="content-box">
+                    <p class="text-danger">Work Status is Required!</p>
                   </div>
                 </div>
               </div>
@@ -296,7 +335,7 @@
                 <label for=""> </label>
 
                 <div class="content-box">
-                  <button type="submit" class="btn btn-brand-blue register-btn">Submit</button>
+                  <button type="submit" class="btn btn-brand-blue register-btn" (click)="editBasic()">Submit</button>
                 </div>
               </div>
             </div>
@@ -311,7 +350,14 @@
               <h3>My Account</h3>
             </div>
             <div class="col-4 add-pan-btn">
-              <button type="submit" class="btn btn-brand-blue mb-2 btn-custom" (click)="edit()">Edit Profile</button>
+              <span class="row" *ngFor="let details of getAlldetails" class="edit-icon" style="cursor: pointer;"
+                (click)="edit(details._id)"><i><svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.81431 3.4089L12.5911 7.18659L3.7768 16H0V12.2223L8.81431 3.4089ZM10.0732 2.14997L11.9616 0.260678C12.1286 0.093766 12.355 0 12.5911 0C12.8272 0 13.0536 0.093766 13.2206 0.260678L15.7393 2.77943C15.9062 2.94639 16 3.17281 16 3.4089C16 3.64498 15.9062 3.8714 15.7393 4.03836L13.85 5.92676L10.0732 2.14997Z"
+                      fill="white" />
+                  </svg>
+                </i></span>
             </div>
           </div>
           <div class="row" *ngFor="let details of getAlldetails">
@@ -329,21 +375,53 @@
                     <div class="card-content">
                       <div>
                         <div class="">
-                          <div> <span class="icon-custom-card"><i class="fa fa-download"></i></span>{{details.email}}
+                          <div><svg width="20" height="18" viewBox="0 0 20 18" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path
+                                d="M1 0H19C19.2652 0 19.5196 0.105357 19.7071 0.292893C19.8946 0.48043 20 0.734784 20 1V17C20 17.2652 19.8946 17.5196 19.7071 17.7071C19.5196 17.8946 19.2652 18 19 18H1C0.734784 18 0.48043 17.8946 0.292893 17.7071C0.105357 17.5196 0 17.2652 0 17V1C0 0.734784 0.105357 0.48043 0.292893 0.292893C0.48043 0.105357 0.734784 0 1 0V0ZM18 4.238L10.072 11.338L2 4.216V16H18V4.238ZM2.511 2L10.061 8.662L17.502 2H2.511Z"
+                                fill="#0A2647" />
+                            </svg>
+                            {{details.email}}
                           </div>
                         </div>
-                        <div class="">
-                          <div> <span class="icon-custom-card"><i
-                                class="fa fa-download"></i></span>{{details.mobileNumber}} </div>
+                        <div class="phone">
+                          <div> <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path
+                                d="M7.07333 8.53556C8.11593 10.3672 9.6328 11.8841 11.4644 12.9267L12.4467 11.5511C12.6046 11.3299 12.8382 11.1743 13.1031 11.1137C13.3681 11.0531 13.646 11.0917 13.8844 11.2222C15.4559 12.081 17.1913 12.5975 18.9767 12.7378C19.2553 12.7599 19.5154 12.8861 19.7051 13.0915C19.8947 13.2968 20 13.566 20 13.8456V18.8033C20.0001 19.0784 19.8981 19.3438 19.7137 19.548C19.5294 19.7522 19.2759 19.8808 19.0022 19.9089C18.4133 19.97 17.82 20 17.2222 20C7.71111 20 0 12.2889 0 2.77778C0 2.18 0.03 1.58667 0.0911111 0.997778C0.119172 0.724108 0.24776 0.470579 0.451989 0.28626C0.656217 0.101941 0.921562 -5.92864e-05 1.19667 2.58525e-08H6.15444C6.43396 -3.50206e-05 6.70322 0.105279 6.90853 0.294945C7.11385 0.484611 7.24014 0.744693 7.26222 1.02333C7.40247 2.80866 7.91897 4.54409 8.77778 6.11556C8.90829 6.35396 8.9469 6.63193 8.8863 6.89688C8.82569 7.16183 8.67007 7.39538 8.44889 7.55333L7.07333 8.53556V8.53556ZM4.27111 7.80556L6.38222 6.29778C5.78309 5.00455 5.37261 3.63205 5.16333 2.22222H2.23333C2.22667 2.40667 2.22333 2.59222 2.22333 2.77778C2.22222 11.0622 8.93778 17.7778 17.2222 17.7778C17.4078 17.7778 17.5933 17.7744 17.7778 17.7667V14.8367C16.368 14.6274 14.9955 14.2169 13.7022 13.6178L12.1944 15.7289C11.5874 15.493 10.9978 15.2145 10.43 14.8956L10.3656 14.8589C8.1862 13.6186 6.38142 11.8138 5.14111 9.63444L5.10444 9.57C4.78545 9.00222 4.50698 8.4126 4.27111 7.80556V7.80556Z"
+                                fill="#0A2647" />
+                            </svg>
+                            {{details.mobileNumber}} </div>
                         </div>
                       </div>
-                      <div class="">
+                      <div>
                         <div class="">
+
+                          <div><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M18 6H2V8H18V6ZM2 4H0V6V8V10H2H18H20V8V6V4H18H2Z" fill="#0A2647" />
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M16.0005 0H4.00049V5H7.76376C7.2889 4.46928 7.00016 3.76852 7.00016 3.00033V2.00033H13.0002V3.00033C13.0002 3.76852 12.7114 4.46928 12.2366 5H16.0005V0Z"
+                                fill="#0A2647" />
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M18 10H2V18H18V10ZM2 8H0V10V18V20H2H18H20V18V10V8H18H2Z" fill="#0A2647" />
+                              <path
+                                d="M8.49951 9.8335H11.4995V10.0002C11.4995 10.8286 10.8279 11.5002 9.99951 11.5002C9.17108 11.5002 8.49951 10.8286 8.49951 10.0002V9.8335Z"
+                                fill="white" stroke="#0A2647" />
+                            </svg>
+                            {{details.workStatus}}
+                          </div>
                         </div>
-                        <div> <span class="icon-custom-card"><i class="fa fa-download"></i></span>{{details.workStatus}}
+                        <div class="phone">
+                          <div class="wrap"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                              xmlns="http://www.w3.org/2000/svg">
+                              <path
+                                d="M10 19.3137L4.34311 13.6568C3.2243 12.538 2.46239 11.1125 2.15371 9.56068C1.84504 8.00884 2.00347 6.40031 2.60898 4.93851C3.21448 3.4767 4.23986 2.22728 5.55545 1.34824C6.87104 0.469189 8.41775 0 10 0C11.5822 0 13.129 0.469189 14.4445 1.34824C15.7601 2.22728 16.7855 3.4767 17.391 4.93851C17.9965 6.40031 18.155 8.00884 17.8463 9.56068C17.5376 11.1125 16.7757 12.538 15.6569 13.6568L10 19.3137ZM14.4 12.3999C15.2701 11.5297 15.8627 10.421 16.1027 9.21404C16.3427 8.00706 16.2195 6.75601 15.7485 5.61909C15.2776 4.48216 14.48 3.51042 13.4568 2.82675C12.4336 2.14307 11.2306 1.77816 10 1.77816C8.76939 1.77816 7.56641 2.14307 6.54319 2.82675C5.51996 3.51042 4.72244 4.48216 4.25148 5.61909C3.78052 6.75601 3.65726 8.00706 3.89729 9.21404C4.13733 10.421 4.72987 11.5297 5.6 12.3999L10 16.7999L14.4 12.3999V12.3999ZM10 9.7777C9.5285 9.7777 9.07632 9.5904 8.74292 9.257C8.40952 8.92361 8.22222 8.47142 8.22222 7.99993C8.22222 7.52843 8.40952 7.07625 8.74292 6.74285C9.07632 6.40945 9.5285 6.22215 10 6.22215C10.4715 6.22215 10.9237 6.40945 11.2571 6.74285C11.5905 7.07625 11.7778 7.52843 11.7778 7.99993C11.7778 8.47142 11.5905 8.92361 11.2571 9.257C10.9237 9.5904 10.4715 9.7777 10 9.7777Z"
+                                fill="#0A2647" />
+                            </svg>
+                            {{details.location}}</div>
                         </div>
-                        <div><span class="icon-custom-card"><i
-                              class="fa fa-download"></i></span>{{details.locationCurrent}}</div>
                       </div>
                     </div>
                   </div>
@@ -360,9 +438,15 @@
             <div class="col">
               <h3>Advanced Details</h3>
             </div>
+
             <div class="col-4 add-pan-btn">
-              <button type="submit" class="btn btn-brand-blue mb-2 btn-custom" (click)="editAdvance_det()">Edit
-                Profile</button>
+              <span class="edit-icon" style="cursor: pointer;" (click)="editAdvance_det()"><i><svg width="16"
+                    height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.81431 3.4089L12.5911 7.18659L3.7768 16H0V12.2223L8.81431 3.4089ZM10.0732 2.14997L11.9616 0.260678C12.1286 0.093766 12.355 0 12.5911 0C12.8272 0 13.0536 0.093766 13.2206 0.260678L15.7393 2.77943C15.9062 2.94639 16 3.17281 16 3.4089C16 3.64498 15.9062 3.8714 15.7393 4.03836L13.85 5.92676L10.0732 2.14997Z"
+                      fill="white" />
+                  </svg>
+                </i></span>
             </div>
           </div>
           <div class="content m-auto col-8 mt-5 " *ngFor="let details of getAlldetails">
@@ -373,7 +457,7 @@
 
             <div class="col-12 d-flex">
               <label class="col-5">Salary Range : </label>
-              <p class="col-7">{{details.salaryFrom}}</p>
+              <p class="col-7">{{details.expectedctc}} lac</p>
             </div>
 
             <div class="col-12 d-flex">
@@ -415,11 +499,15 @@
               <label class="col-5">Language : </label>
               <div class="col-7">
                 <div class="col-12 d-flex flex-wrap" *ngFor="let lang of details.languages;let i=index">
-                  <p class="col-3">{{lang.lang}}</p>
+                  <p class="col-3">{{lang.lang}} </p>
+                  <!-- <p class="col-3">{{lang.know[0]}}</p> -->
                   <!-- <div> -->
 
                   <div class="select col-3">
-                    <!-- <i><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <div *ngIf="isDisplayIcon(lang.know,'Speak')">
+
+                      <i *ngIf="!check">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <g clip-path="url(#clip0_871_2590)">
                             <path
                               d="M12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22ZM12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20ZM12 10.586L14.828 7.757L16.243 9.172L13.414 12L16.243 14.828L14.828 16.243L12 13.414L9.172 16.243L7.757 14.828L10.586 12L7.757 9.172L9.172 7.757L12 10.586Z"
@@ -430,22 +518,73 @@
                               <rect width="24" height="24" fill="white" />
                             </clipPath>
                           </defs>
-                        </svg></i>
-                      <i>
+                        </svg>
+                      </i>
+                      <i *ngIf="check">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M8 16C3.5816 16 0 12.4184 0 8C0 3.5816 3.5816 0 8 0C12.4184 0 16 3.5816 16 8C16 12.4184 12.4184 16 8 16ZM8 14.4C9.69739 14.4 11.3253 13.7257 12.5255 12.5255C13.7257 11.3253 14.4 9.69739 14.4 8C14.4 6.30261 13.7257 4.67475 12.5255 3.47452C11.3253 2.27428 9.69739 1.6 8 1.6C6.30261 1.6 4.67475 2.27428 3.47452 3.47452C2.27428 4.67475 1.6 6.30261 1.6 8C1.6 9.69739 2.27428 11.3253 3.47452 12.5255C4.67475 13.7257 6.30261 14.4 8 14.4ZM7.2024 11.2L3.808 7.8056L4.9392 6.6744L7.2024 8.9376L11.7272 4.412L12.8592 5.5432L7.2024 11.2Z"
                             fill="#00FF44" />
                         </svg>
 
-                      </i> -->
+                      </i>
+                    </div>
                     <label>Speak</label>
                   </div>
                   <div class="select col-3">
-                    <input type="radio" class="mb-3"><label>Read</label>
+                    <div *ngIf="isDisplayIcon2(lang.know,'Read')">
+
+                      <i *ngIf="!isCheck">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g clip-path="url(#clip0_871_2590)">
+                            <path
+                              d="M12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22ZM12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20ZM12 10.586L14.828 7.757L16.243 9.172L13.414 12L16.243 14.828L14.828 16.243L12 13.414L9.172 16.243L7.757 14.828L10.586 12L7.757 9.172L9.172 7.757L12 10.586Z"
+                              fill="#FF0000" />
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_871_2590">
+                              <rect width="24" height="24" fill="white" />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </i>
+                      <i *ngIf="isCheck">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M8 16C3.5816 16 0 12.4184 0 8C0 3.5816 3.5816 0 8 0C12.4184 0 16 3.5816 16 8C16 12.4184 12.4184 16 8 16ZM8 14.4C9.69739 14.4 11.3253 13.7257 12.5255 12.5255C13.7257 11.3253 14.4 9.69739 14.4 8C14.4 6.30261 13.7257 4.67475 12.5255 3.47452C11.3253 2.27428 9.69739 1.6 8 1.6C6.30261 1.6 4.67475 2.27428 3.47452 3.47452C2.27428 4.67475 1.6 6.30261 1.6 8C1.6 9.69739 2.27428 11.3253 3.47452 12.5255C4.67475 13.7257 6.30261 14.4 8 14.4ZM7.2024 11.2L3.808 7.8056L4.9392 6.6744L7.2024 8.9376L11.7272 4.412L12.8592 5.5432L7.2024 11.2Z"
+                            fill="#00FF44" />
+                        </svg>
+
+                      </i>
+                    </div>
+                    <label>Read</label>
                   </div>
                   <div class="select col-3">
-                    <input type="radio" class="mb-3"><label>Write</label>
+                    <div *ngIf="isDisplayIcon3(lang.know,'Write')">
+
+                      <i *ngIf="!ischeck3">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <g clip-path="url(#clip0_871_2590)">
+                            <path
+                              d="M12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22ZM12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20ZM12 10.586L14.828 7.757L16.243 9.172L13.414 12L16.243 14.828L14.828 16.243L12 13.414L9.172 16.243L7.757 14.828L10.586 12L7.757 9.172L9.172 7.757L12 10.586Z"
+                              fill="#FF0000" />
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_871_2590">
+                              <rect width="24" height="24" fill="white" />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      </i>
+                      <i *ngIf="ischeck3">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path
+                            d="M8 16C3.5816 16 0 12.4184 0 8C0 3.5816 3.5816 0 8 0C12.4184 0 16 3.5816 16 8C16 12.4184 12.4184 16 8 16ZM8 14.4C9.69739 14.4 11.3253 13.7257 12.5255 12.5255C13.7257 11.3253 14.4 9.69739 14.4 8C14.4 6.30261 13.7257 4.67475 12.5255 3.47452C11.3253 2.27428 9.69739 1.6 8 1.6C6.30261 1.6 4.67475 2.27428 3.47452 3.47452C2.27428 4.67475 1.6 6.30261 1.6 8C1.6 9.69739 2.27428 11.3253 3.47452 12.5255C4.67475 13.7257 6.30261 14.4 8 14.4ZM7.2024 11.2L3.808 7.8056L4.9392 6.6744L7.2024 8.9376L11.7272 4.412L12.8592 5.5432L7.2024 11.2Z"
+                            fill="#00FF44" />
+                        </svg>
+                      </i>
+                    </div>
+                    <label>Write</label>
                   </div>
                   <!-- </div> -->
                 </div>
@@ -462,7 +601,8 @@
               <h3>Education Details</h3>
             </div>
             <div class="col-4 add-pan-btn">
-              <button type="submit" class="btn btn-brand-blue mb-2 btn-custom" (click)="editedu()">Edit Profile</button>
+              <button type="submit" class="btn btn-brand-blue mb-2 btn-custom" (click)="editedu()">Edit
+                Profile</button>
             </div>
           </div>
           <div class="content m-auto col-8 mt-5 " *ngFor="let details of getAlldetails">
