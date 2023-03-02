@@ -120,3 +120,32 @@ ul li {
 .lable-data span{
   color: red;
 }
+.drop-data{
+  background: white;
+  position: absolute;
+  width: 357px;
+  left: 615px;
+  top: 569px;
+  border-radius: 4px;
+}
+.drop-data ul{
+  max-width: 117px;
+  padding-left: 15px;
+
+}
+.pre-data{
+  background: white;
+  position: absolute;
+  left: 613px;
+  width: 365px;
+  top: 957px;
+  border-radius: 7px;
+}
+.current-data{
+  background: white;
+  position: absolute;
+  left: 307px;
+  width: 365px;
+  top: 454px;
+  border-radius: 7px;
+}

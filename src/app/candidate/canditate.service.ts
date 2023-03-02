@@ -219,4 +219,8 @@ can_report(data:any){
   return this.http.post(this.baseUrl+`/v1/faqe/create_report`,data,{headers:{auth:Cookie.get('tokens')}})
 
 }
+// key up preferd
+get_prefered(val:any){
+  return this.http.get(this.baseUrl+`/v1/educationDetails/get_Industries_all_search/${val}`)
+}
 }

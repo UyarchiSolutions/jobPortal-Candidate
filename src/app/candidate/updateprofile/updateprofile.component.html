@@ -49,17 +49,18 @@
                       <p>Date of birth is required!</p>
                     </div>
                   </div>
+
                   <div class="single-row">
                     <label for="" class="lable-data">Key Skills <span>*</span>:</label>
                     <div class="content-box">
-                      <input type="text" class="form-control" (keyup)="dispalye($event)" placeholder="Enter Key Skills"
-                        formControlName="searchbox">
+                      <input type="text" class="form-control" (keyup)="displayPrefered($event)" placeholder="Enter Key Skills"
+                        formControlName="prefredBox">
                     </div>
                   </div>
                   <div class="single-row" *ngIf="isDisplay" style="margin-top:0px;">
                     <label></label>
-                    <div class="content-box" style="background: white;">
-                      <ul style="padding-left: 0px;">
+                    <div class="content-box drop-data">
+                      <ul >
                         <li *ngFor="let skill of keySkill" style="cursor:pointer"
                           (click)="checkSkill($event,skill.Skill_Title)">
                           <span>{{skill.Skill_Title}}</span>
@@ -239,24 +240,53 @@
                       <p>Notice Period is required!</p>
                     </div>
                   </div>
-                  <div class="single-row">
+                  <!-- <div class="single-row">
                     <label for="" class="lable-data">Current Skill Set <span>*</span>:</label>
                     <div class="content-box">
                       <input type="text" class="form-control" placeholder="Enter Skill Set"
                         formControlName="currentSkill">
                     </div>
-                  </div>
-                  <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('currentSkill')?.invalid">
+                  </div> -->
+                  <!-- <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('currentSkill')?.invalid">
                     <label for=""></label>
                     <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('currentSkill')?.invalid">
                       <p>Current Skill Set is required!</p>
                     </div>
+                  </div> -->
+                  <div class="single-row">
+                    <label for="" class="lable-data">Current Skill Set<span>*</span>:</label>
+                    <div class="content-box">
+                      <input type="text" class="form-control" (keyup)="displaycurent($event)" placeholder="Enter Key Skills"
+                        formControlName="currentbox">
+                    </div>
+                  </div>
+                  <div class="single-row current-data" *ngIf="iscurrent" style="margin-top:0px;">
+                    <label></label>
+                    <div class="content-box current-data">
+                      <ul >
+                        <li *ngFor="let skill of prferedSkill" style="cursor:pointer"
+                          (click)="checkcurrent($event,skill.Industry)">
+                          <span>{{skill.Industry}}</span>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                   <div class="single-row">
-                    <label for="" class="lable-data">Preferred Skill Set <span>*</span>:</label>
+                    <label for="" class="lable-data">Prefered skill <span>*</span>:</label>
                     <div class="content-box">
-                      <input type="text" class="form-control" placeholder="Enter Skill Set"
-                        formControlName="preferredSkill">
+                      <input type="text" class="form-control" (keyup)="displayPrefered($event)" placeholder="Enter Key Skills"
+                        formControlName="prefredBox">
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="isShow" style="margin-top:0px;">
+                    <label></label>
+                    <div class="content-box pre-data">
+                      <ul >
+                        <li *ngFor="let skill of prferedSkill" style="cursor:pointer"
+                          (click)="checkPrefered($event,skill.Industry)">
+                          <span>{{skill.Industry}}</span>
+                        </li>
+                      </ul>
                     </div>
                   </div>
                   <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('preferredSkill')?.invalid">
