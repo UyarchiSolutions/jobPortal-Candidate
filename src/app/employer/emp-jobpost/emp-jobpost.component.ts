@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup,AbstractControl, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
-
+import { Editor, Toolbar } from 'ngx-editor';
 import { EmpServiceService } from '../emp-service.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-emp-jobpost',
@@ -22,8 +23,8 @@ export class EmpJobpostComponent implements OnInit {
     educationalQualification : new FormControl('', Validators.required),
     salaryRangeFrom : new FormControl(null),
     salaryRangeTo : new FormControl(null),
-    experienceFrom : new FormControl('', Validators.required),
-    experienceTo : new FormControl('', Validators.required),
+    experienceFrom : new FormControl(null, Validators.required),
+    experienceTo : new FormControl(null, Validators.required),
     interviewType : new FormControl(null, Validators.required),
     candidateDescription : new FormControl('', Validators.required),
     salaryDescription : new FormControl(''),
@@ -31,7 +32,8 @@ export class EmpJobpostComponent implements OnInit {
     workplaceType : new FormControl(null, Validators.required),
     industry : new FormControl(null, Validators.required),
     preferedIndustry : this.formBuilder.array([], Validators.required),
-    jobLocation : new FormControl('', Validators.required),
+    jobLocation : new FormControl([], Validators.required),
+    location:new FormControl([], Validators.required),
     employmentType : new FormControl(null, Validators.required),
     openings : new FormControl(''),
     department: new FormControl(null, Validators.required),
@@ -51,6 +53,7 @@ export class EmpJobpostComponent implements OnInit {
     apply_method:new FormControl(null,Validators.required),
     recruiterList:new FormControl(null,Validators.required),
     recruiterList1:new FormControl(null,Validators.required),
+    venue:new FormControl(null,Validators.required)
     
   });
   keySkill: any;
@@ -125,13 +128,53 @@ export class EmpJobpostComponent implements OnInit {
   depdata: any;
   inddata: any;
   submitted: boolean = false;
+  now: any;
+  nowto:any;
+  predictions: any;
   constructor(private formBuilder:FormBuilder,private router: Router,private empservice: EmpServiceService) { }
 
   ngOnInit(): void {
+    const datePipe = formatDate(new Date(), 'yyyy-MM-dd', 'en-IN')
+    const time = formatDate(new Date(), 'hh:mm', 'en-IN')
+    this.now = datePipe
+    
+    this.editor = new Editor();
+    this.editorcan = new Editor();
+    this.editorsal = new Editor();
     this.get_industry_list()
     this.get_depart()
     this.get_qualification()
     this.get()
+  }
+  editordoc = '';
+  editor!: Editor;
+  editorcan!: Editor;
+  editorsal!: Editor;
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline'],
+    ['ordered_list', 'bullet_list'],
+    ['link'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
+
+  get doc(): AbstractControl {
+    return this.jobpostForm.get('jobDescription')?.value;
+  }
+  get docs(): AbstractControl {
+    return this.jobpostForm.get('candidateDescription')?.value;
+  }
+  get docsa(): AbstractControl {
+    return this.jobpostForm.get('salaryDescription')?.value;
+  }
+  checkFrom(){
+    const to = this.jobpostForm.get('interviewstartDate')?.value
+    console.log(to)
+    const datePipe = formatDate(to, 'yyyy-MM-dd', 'en-IN')
+    this.nowto = datePipe
+  }
+  ngOnDestroy(): void {
+    this.editor.destroy();
   }
   job_post(){
     console.log(this.jobpostForm.value)
@@ -458,5 +501,43 @@ export class EmpJobpostComponent implements OnInit {
       this.apply_method = e.target.value
       console.log(this.apply_method)
   }
-  
+  MAX_LENGTH = 250;
+  somefunction(event:any) {
+    console.log("dfgdf")
+    if (event.editor.getLength() > this.MAX_LENGTH) {
+      event.editor.deleteText(this.MAX_LENGTH, event.editor.getLength());
+    }
+  }
+  isLoc =false
+  get_area_location(e:any){
+    if(e.target.value){
+      var data={
+        input:e.target.value
+      }
+      this.empservice.get_area_location(data).subscribe((data:any) =>{
+        console.log(data)
+        this.predictions = data.predictions
+        this.isLoc = true;
+      })
+    }
+    else{
+      this.isLoc = false;
+    }
+    
+  }
+  choose(data:any,location:any){
+   
+    let datas = this.jobpostForm.get('jobLocation')?.value;
+    datas.push(location)
+
+    let val = data.structured_formatting.main_text
+    let datatext = this.jobpostForm.get('location')?.value;
+    datatext.push(val)
+   
+  }
+
+
+
+
+
 }

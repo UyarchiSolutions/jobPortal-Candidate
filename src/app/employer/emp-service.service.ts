@@ -212,4 +212,8 @@ get_location_search(data:any){
 return this.http.get(this.baseurl+'/v1/district/'+data)
 
 }
+get_area_location(value:any){
+  const queryString = new URLSearchParams(value).toString();
+  return this.http.get(this.baseurl+'/v1/employerdetail/location_api?'+queryString)
+}
 }

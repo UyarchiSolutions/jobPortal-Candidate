@@ -6,6 +6,7 @@ import { EmpJobpostComponent } from './emp-jobpost.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { NgxEditorModule } from 'ngx-editor';
 
 
 @NgModule({
@@ -17,7 +18,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     FormsModule,
     GooglePlaceModule,
     NgMultiSelectDropDownModule.forRoot(),
-   
+    NgxEditorModule,
   ]
 })
 export class EmpJobpostModule { }

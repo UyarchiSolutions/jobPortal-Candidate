@@ -29,17 +29,14 @@
     font-size: 14px;
 }
 .badge1{
-    border: none;
-    padding: 5px 7px 5px 7px;
-    border-radius: 26px;
-    background: #E7E9ED;
-    font-size: 13px;
-    font-weight: 500;
+    /* border: 1px solid #ced4da; */
+    font-weight: 600;
+    color: #000;
   }
 
 .remove{
-    font-size: 16px;
-    margin: 2px
+    font-size: 14px;
+    
 }
 .salarybtn{
     /* width: 360px; */
@@ -49,8 +46,21 @@
 .content-box-block{
     display: block !important;
 }
-
-
+.close-mark{
+    color: #D9D9D9;
+}
+.locarea{
+    background: white;
+    position: absolute;
+    top: 747px;
+    width: 361px;
+    left: 614px;
+    max-width: 362px;
+    /* height: 265px; */
+    max-height: 270px;
+    overflow: auto;
+    border-radius: 6px;
+}
 
 
 
@@ -173,4 +183,14 @@ h5{
 .single-rows .content-boxs button{
     padding: 8px 66px;
     font-weight: 500;
+}
+.reqloc{
+    margin-right: 195px;
+    font-weight: 500;
+}
+.NgxEditor{
+    border:none !important;
+}
+.single-row sup{
+    color: red;
 }
