@@ -59,7 +59,7 @@
                                     <div class="single-row">
                                         <label for="">Candidate Description <sup>*</sup> :</label>
                                         <div class="content-box content-box-block">
-                                            <ngx-editor [editor]="editorcan" style="border:none !important;" [placeholder]="'Enter Candidate description'" maxlength="250" formControlName="candidateDescription">
+                                            <ngx-editor [editor]="editorcan" style="border:none !important;" [placeholder]="'Enter Candidate description'" formControlName="candidateDescription">
                                             </ngx-editor>
                                             <ngx-editor-menu [editor]="editorcan" [toolbar]="toolbar">
                                             </ngx-editor-menu>
@@ -75,7 +75,7 @@
                                     <div class="single-row">
                                         <label for="">Perks & Benefits :</label>
                                         <div class="content-box content-box-block">
-                                            <ngx-editor [editor]="editorsal" style="border:none !important;" [placeholder]="'Enter Salary description'" maxlength="250" formControlName="salaryDescription">
+                                            <ngx-editor [editor]="editorsal" style="border:none !important;" [placeholder]="'Enter Salary description'" formControlName="salaryDescription">
                                             </ngx-editor>
                                             <ngx-editor-menu [editor]="editorsal" [toolbar]="toolbar">
                                             </ngx-editor-menu>
@@ -95,9 +95,9 @@
                                            </ng-container>
                                             <input type="text" class="form-control" formControlName="loc" (keyup)="get_area_location($event)"
                                                 placeholder="Enter Job location">
-                                                <div *ngIf="submitted && jobpostForm.get('jobLocation')?.invalid" class="">
+                                                <!-- <div *ngIf="submitted && jobpostForm.get('jobLocation')?.invalid" class="">
                                                     <small class="text-danger reqloc">Joblocation is required</small>
-                                                </div>
+                                                </div> -->
                                                 <!-- <div class="" style="margin-left:19px;">
                                                     <button type="submit" class="btn-brand-blue px-2 py-1" style="border-radius:6px">Add</button>
                                                 </div> -->
