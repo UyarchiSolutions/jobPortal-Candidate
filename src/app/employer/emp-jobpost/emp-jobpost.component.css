@@ -51,9 +51,9 @@
 }
 .locarea{
     background: white;
-    position: absolute;
+    /* position: absolute; */
     top: 747px;
-    width: 361px;
+    width: 360px;
     left: 614px;
     max-width: 362px;
     /* height: 265px; */
@@ -61,7 +61,18 @@
     overflow: auto;
     border-radius: 6px;
 }
-
+.name{
+    /* width:120px;
+    height: 2em; 
+    line-height: 1em; 
+    font-weight: 400; */
+    text-overflow: ellipsis;
+    margin-bottom: 9px;
+    cursor: pointer;
+    word-break: break-all;
+    /* overflow:hidden; */
+    white-space: nowrap;
+}
 
 
 
