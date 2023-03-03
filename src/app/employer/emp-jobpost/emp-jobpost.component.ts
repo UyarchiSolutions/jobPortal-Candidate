@@ -17,7 +17,6 @@ export class EmpJobpostComponent implements OnInit {
   checkedList : any=[];
   jobpostForm:any = this.formBuilder.group({
     jobTittle : new FormControl('', Validators.required),
-    contactNumber : new FormControl('', Validators.required),
     jobDescription : new FormControl('', Validators.required),
     keySkill :  new FormControl([], Validators.required),
     educationalQualification : new FormControl('', Validators.required),
@@ -43,8 +42,8 @@ export class EmpJobpostComponent implements OnInit {
     interviewendDate: new FormControl(null, Validators.required),
     startTime: new FormControl(null, Validators.required),
     endTime: new FormControl(null, Validators.required),
-    recruiterName:new FormControl(null, Validators.required),
-    recruiterEmail:new FormControl(null, [Validators.required,Validators.email]),
+    recruiterName:new FormControl(null, [Validators.required,Validators.maxLength(50),Validators.pattern('^[a-zA-Z ]*$')]),
+    recruiterEmail:new FormControl(null, [Validators.required,Validators.email,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
     recruiterNumber:new FormControl(null, Validators.required),
     qualification:this.formBuilder.array([], Validators.required),
     course:this.formBuilder.array([], Validators.required),
@@ -54,9 +53,73 @@ export class EmpJobpostComponent implements OnInit {
     recruiterList:new FormControl(null,Validators.required),
     recruiterList1:new FormControl(null,Validators.required),
     venue:new FormControl(null,Validators.required),
-    loc:new FormControl(null,Validators.required)
+    loc:new FormControl(null,Validators.required),
+    recruiterId:new FormControl(null,Validators.required)
     
   });
+  job_post(){
+    console.log(this.jobpostForm.value)
+    this.submitted = true;
+    if(this.jobpostForm.valid){
+
+      var jobForm = new FormData();
+      jobForm.append('jobTittle', this.jobpostForm.get('jobTittle')?.value);
+      jobForm.append('jobDescription', this.jobpostForm.get('jobDescription')?.value);
+      jobForm.append('keySkill', this.jobpostForm.get('keySkill')?.value);
+      jobForm.append('educationalQualification', this.jobpostForm.get('educationalQualification')?.value);
+      jobForm.append('salaryRangeFrom', this.jobpostForm.get('salaryRangeFrom')?.value);
+      jobForm.append('salaryRangeTo', this.jobpostForm.get('salaryRangeTo')?.value);
+      jobForm.append('experienceFrom', this.jobpostForm.get('experienceFrom')?.value);
+      jobForm.append('experienceTo', this.jobpostForm.get('experienceTo')?.value);
+      jobForm.append('interviewType', this.jobpostForm.get('interviewType')?.value);
+      jobForm.append('candidateDescription', this.jobpostForm.get('candidateDescription')?.value);
+      jobForm.append('salaryDescription', this.jobpostForm.get('salaryDescription')?.value);
+      jobForm.append('urltoApply', this.jobpostForm.get('urltoApply')?.value);
+      jobForm.append('workplaceType', this.jobpostForm.get('workplaceType')?.value);
+      jobForm.append('industry', this.jobpostForm.get('industry')?.value);
+      jobForm.append('preferedIndustry', this.jobpostForm.get('preferedIndustry')?.value);
+      jobForm.append('jobLocation', this.jobpostForm.get('jobLocation')?.value);
+      jobForm.append('employmentType', this.jobpostForm.get('employmentType')?.value);
+      jobForm.append('openings', this.jobpostForm.get('openings')?.value);
+      jobForm.append('department', this.jobpostForm.get('department')?.value);
+      jobForm.append('roleCategory', this.jobpostForm.get('roleCategory')?.value);
+      jobForm.append('role', this.jobpostForm.get('role')?.value);
+      jobForm.append('interviewstartDate', this.jobpostForm.get('interviewstartDate')?.value);
+      jobForm.append('interviewendDate', this.jobpostForm.get('interviewendDate')?.value);
+      jobForm.append('startTime', this.jobpostForm.get('startTime')?.value);
+      jobForm.append('endTime', this.jobpostForm.get('endTime')?.value);
+      jobForm.append('recruiterName', this.jobpostForm.get('recruiterName')?.value);
+      jobForm.append('recruiterEmail', this.jobpostForm.get('recruiterEmail')?.value);
+      jobForm.append('recruiterNumber', this.jobpostForm.get('recruiterNumber')?.value);
+      jobForm.append('qualification', this.jobpostForm.get('qualification')?.value);
+      jobForm.append('course', this.jobpostForm.get('course')?.value);
+      jobForm.append('specialization', this.jobpostForm.get('specialization')?.value);
+      jobForm.append('searchbox', this.jobpostForm.get('searchbox')?.value);
+      jobForm.append('apply_method', this.jobpostForm.get('apply_method')?.value);
+      jobForm.append('recruiterList', this.jobpostForm.get('recruiterList')?.value);
+      jobForm.append('recruiterList1', this.jobpostForm.get('recruiterList1')?.value);
+      jobForm.append('venue', this.jobpostForm.get('venue')?.value);
+      jobForm.append('recruiterId', this.jobpostForm.get('recruiterId')?.value);
+    
+
+
+
+
+      this.empservice.submitPostAJob(jobForm).subscribe((res:any)=>{
+        console.log(res);
+        this.jobpostForm.reset();
+        if(res){
+          var data:any= {
+            Tab : 1
+          }
+          var queryString = new URLSearchParams(data).toString();
+          this.router.navigateByUrl('/emp-home?' + queryString);
+        }
+      })
+    }
+    
+
+  }
   keySkill: any;
   latitude:any;
   longtitude:any;
@@ -180,25 +243,7 @@ export class EmpJobpostComponent implements OnInit {
   ngOnDestroy(): void {
     this.editor.destroy();
   }
-  job_post(){
-    console.log(this.jobpostForm.value)
-    this.submitted = true;
-    if(this.jobpostForm.valid){
-      this.empservice.submitPostAJob(this.jobpostForm.value).subscribe((res:any)=>{
-        console.log(res);
-        this.jobpostForm.reset();
-        if(res){
-          var data:any= {
-            Tab : 1
-          }
-          var queryString = new URLSearchParams(data).toString();
-          this.router.navigateByUrl('/emp-home?' + queryString);
-        }
-      })
-    }
-    
-
-  }
+  
   search_skills(data:any){
     if (data.target.value) {
       this.isDisplay = true;
@@ -274,28 +319,32 @@ export class EmpJobpostComponent implements OnInit {
       this.role_data = res
     })
   }
-  pre(){
+  pre(preview:any){
+    this.submitted = true
+    if(this.jobpostForm.valid){
+      preview.click();  
+      console.log(this.depart_data)
+      if(this.jobpostForm.get('role')?.value){
+        let index = this.role_data.find((r: any) => r._id == this.jobpostForm.get('role')?.value)
+        this.roledata = index.Job_role
+        console.log(this.roledata)
+      }
+      // if(this.jobpostForm.get('qualification')?.value){
+      //   let index = this.qua_data.find((r: any) => r._id == this.jobpostForm.get('qualification')?.value)
+      //   this.quadata = index.qualification     
+      // }
+      if(this.jobpostForm.get('department')?.value){
+        let index = this.depart_data.find((r: any) => r._id == this.jobpostForm.get('department')?.value)
+        console.log(this.jobpostForm.get('department')?.value)
+        this.depdata = index.Department
+          console.log(index,this.depdata)
+      }
+      if(this.jobpostForm.get('preferedIndustry')?.value){
+        let index = this.indus_data.find((r: any) => r._id == this.jobpostForm.get('preferedIndustry')?.value)
+        this.inddata = index.Industry
+      }
+    }
     
-    console.log(this.depart_data)
-    if(this.jobpostForm.get('role')?.value){
-      let index = this.role_data.find((r: any) => r._id == this.jobpostForm.get('role')?.value)
-      this.roledata = index.Job_role
-      console.log(this.roledata)
-    }
-    // if(this.jobpostForm.get('qualification')?.value){
-    //   let index = this.qua_data.find((r: any) => r._id == this.jobpostForm.get('qualification')?.value)
-    //   this.quadata = index.qualification     
-    // }
-    if(this.jobpostForm.get('department')?.value){
-      let index = this.depart_data.find((r: any) => r._id == this.jobpostForm.get('department')?.value)
-      console.log(this.jobpostForm.get('department')?.value)
-      this.depdata = index.Department
-        console.log(index,this.depdata)
-    }
-    if(this.jobpostForm.get('preferedIndustry')?.value){
-      let index = this.indus_data.find((r: any) => r._id == this.jobpostForm.get('preferedIndustry')?.value)
-      this.inddata = index.Industry
-    }
     
   }
   dispalye(data: any) {
@@ -335,13 +384,22 @@ export class EmpJobpostComponent implements OnInit {
     if(e.target.value == 'list'){
          this.is_list = true;
          this.is_new = false;
+         this.jobpostForm.get('recruiterId')?.setErrors({ incorrect: true });
+         this.jobpostForm.get('recruiterName')?.setErrors(null);
+         this.jobpostForm.get('recruiterEmail')?.setErrors(null);
+         this.jobpostForm.get('recruiterNumber')?.setErrors(null);
     }
     else{
+        
          this.jobpostForm.get('recruiterName')?.setValue('');
          this.jobpostForm.get('recruiterEmail')?.setValue('');
          this.jobpostForm.get('recruiterNumber')?.setValue('');
          this.is_new = true;
          this.is_list = false;
+         this.jobpostForm.get('recruiterId')?.setErrors(null);
+         this.jobpostForm.get('recruiterName')?.setErrors({ incorrect: true });
+         this.jobpostForm.get('recruiterEmail')?.setErrors({ incorrect: true });
+         this.jobpostForm.get('recruiterNumber')?.setErrors({ incorrect: true });
     }
     console.log(this.is_new,this.is_list)
    }
@@ -513,7 +571,21 @@ export class EmpJobpostComponent implements OnInit {
   }
   choose_apply(e:any){
       this.apply_method = e.target.value
-      console.log(this.apply_method)
+      if(this.apply_method == 'email'){
+        this.jobpostForm.get('recruiterEmail')?.setErrors({ incorrect: true });
+        this.jobpostForm.get('recruiterList1')?.setErrors(null);
+      }
+      if(this.apply_method == 'telephone'){
+      
+        this.jobpostForm.get('recruiterEmail')?.setErrors(null);
+        this.jobpostForm.get('recruiterList1')?.setErrors({ incorrect: true });
+        
+      }
+      if(this.apply_method == 'treatjobs'){
+        this.jobpostForm.get('recruiterEmail')?.setErrors(null);
+        this.jobpostForm.get('recruiterList1')?.setErrors(null);
+       
+      }
   }
   MAX_LENGTH = 250;
   somefunction(event:any) {
@@ -541,13 +613,15 @@ export class EmpJobpostComponent implements OnInit {
   }
   choose(e:any,location:any){
     let datas = this.jobpostForm.get('jobLocation')?.value;
-    let data = this.jobpostForm.get('location')?.value;
     if(location){
       datas.push(location)
+      this.isLoc = false
     }
-    this.val = e.structured_formatting.main_text
-    data.push(this.val)
-    console.log(data,datas)
+    console.log(datas)
+    // let data = this.jobpostForm.get('location')?.value;
+    // this.val = e.structured_formatting.main_text
+    // data.push(this.val)
+    // console.log(data,datas)
     this.jobpostForm.patchValue({
       loc:''
     })
@@ -562,7 +636,8 @@ export class EmpJobpostComponent implements OnInit {
       this.jobpostForm.get('endTime')?.setErrors({ incorrect: true });
       this.jobpostForm.get('venue')?.setErrors({ incorrect: true });
       this.jobpostForm.get('recruiterList')?.setErrors({ incorrect: true });
-      // if()
+      this.jobpostForm.get('apply_method')?.setErrors(null);
+     
     }
     else{
       this.jobpostForm.get('interviewstartDate')?.setErrors(null);
@@ -571,23 +646,41 @@ export class EmpJobpostComponent implements OnInit {
       this.jobpostForm.get('endTime')?.setErrors(null);
       this.jobpostForm.get('venue')?.setErrors(null);
       this.jobpostForm.get('recruiterList')?.setErrors(null);
+      this.jobpostForm.get('apply_method')?.setErrors({ incorrect: true });
     }
-    
-    // else {
-    //   if (this.payment.get('payType')?.valid) {
-    //     this.payment.get('payType')?.setErrors({ incorrect: true });
-    //   }
-    //   if (this.payment.get('amount')?.valid) {
-    //     console.log(this.payment.value);
-    //     console.log('workin fine');
-    //     this.payment.get('amount')?.setErrors({ incorrect: true });
-    //   }
-    //   if (this.payment.get('paymentStatus')?.valid) {
-    //     this.payment.get('paymentStatus')?.setErrors({ incorrect: true });
-    //   }
-    // }
   }
-
-
+  remove_location(data:any){
+    let array = this.jobpostForm.get('jobLocation')?.value;
+    let i: number = 0;
+    array.forEach((item: any) => {
+      if (item == data) {
+        array.splice(i, 1);
+        return;
+      }
+      i++;
+    });
+    if(array.length == 0){
+      this.isLoc = false
+    }
+    console.log(array.length)
+  }
+  get_maintext(data:any){
+    console.log(data)   
+    let text = data.split(',')
+    console.log(text[0])
+    return text[0]
+  }
+  onDeSelect(id: any) {
+    const data = this.jobpostForm.get('preferedIndustry')?.value;
+    let i: number = 0;
+    data.forEach((item: any) => {
+      if (item == id._id) {
+        data.splice(i, 1);
+        console.log(data, "data------------>")
+        return;
+      }
+      i++;
+    })
+  }
 
 }

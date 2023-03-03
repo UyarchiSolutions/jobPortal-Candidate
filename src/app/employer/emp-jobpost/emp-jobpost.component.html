@@ -88,14 +88,14 @@
                                         <label for="">Job Location <sup>*</sup> :</label>
                                         <div class="content-box content-box-block">
                                             <ng-container *ngIf="jobpostForm.get('location')?.value">
-                                                <span class="badge bg-light badge1 mb-1 mx-1" style="cursor:pointer" *ngFor="let data of jobpostForm.get('location')?.value">
-                                                    <span>{{data}}</span>
+                                                <span class="badge bg-light badge1 mb-1 mx-1" style="cursor:pointer" (click)="remove_location(data)" *ngFor="let data of jobpostForm.get('jobLocation')?.value">
+                                                    <span>{{get_maintext(data)}}</span>
                                                     <span class="close-mark mx-1">x</span>
                                                 </span>
                                            </ng-container>
                                             <input type="text" class="form-control" formControlName="loc" (keyup)="get_area_location($event)"
                                                 placeholder="Enter Job location">
-                                                <div *ngIf="submitted && jobpostForm.get('location')?.invalid" class="">
+                                                <div *ngIf="submitted && jobpostForm.get('jobLocation')?.invalid" class="">
                                                     <small class="text-danger reqloc">Joblocation is required</small>
                                                 </div>
                                                 <!-- <div class="" style="margin-left:19px;">
@@ -341,7 +341,7 @@
                                             <ng-multiselect-dropdown id="courseInput" class="w-100"
                                                 style="background-color: white;" name='industry'
                                                 [settings]="dropdownSettings" [data]="indus_data"
-                                                (onSelect)="pushCourse($event)">
+                                                (onSelect)="pushCourse($event)" (onDeSelect)="onDeSelect($event)">
                                             </ng-multiselect-dropdown>
                                             <div *ngIf="submitted && jobpostForm.get('preferedIndustry')?.invalid">
                                                 <small class="text-danger">Preferred industry is required</small>
@@ -582,22 +582,22 @@
                                             </div>
                                            
                                         </div>
-                                        <div *ngIf="submitted && jobpostForm.get('recruiterList').invalid">
-                                            <small class="text-danger">field is required</small>
+                                    </div>
+                                    <div class="single-row" *ngIf="jobpostForm.get('interviewType')?.value == 'walk in'">
+                                        <label for=""></label>
+                                         <div *ngIf="submitted && jobpostForm.get('recruiterList').invalid" style="margin-right: 249px;
+                                         font-weight: 500;">
+                                                <small class="text-danger">Choose any one</small>
                                         </div>
                                     </div>
-                                    <!-- <div class="single-row">
-                                        <label for=""></label>
-                                        
-                                    </div> -->
                                     <div class="single-row" *ngIf="is_list && jobpostForm.get('interviewType')?.value == 'walk in'" >
                                         <label for="">Select Recruiter :</label>
                                         <div class="content-box content-box-block">
-                                            <select class="form-control select-type" (change)="changerecruiter($event)" formControlName="recruiterName">
+                                            <select class="form-control select-type" (change)="changerecruiter($event)" formControlName="recruiterId">
                                                 <option value="option1" disabled selected>Select</option>
                                                 <option value="{{data.recruiterName}}" *ngFor="let data of list">{{data.recruiterName}}</option>
                                             </select>
-                                            <div *ngIf="(jobpostForm.get('recruiterName').invalid && jobpostForm.get('recruiterName').touched) || jobpostForm.get('recruiterName').dirty">
+                                            <div *ngIf="submitted && jobpostForm.get('recruiterId')?.invalid">
                                                 <small class="text-danger">choose any one recruiter</small>
                                             </div>
                                         </div>
@@ -607,7 +607,7 @@
                                         <div class="content-box content-box-block">
                                             <input type="text" class="form-control" placeholder="Enter Name"
                                                 formControlName="recruiterName">
-                                                <div *ngIf="(jobpostForm.get('recruiterName').invalid && jobpostForm.get('recruiterName').touched) || jobpostForm.get('recruiterName').dirty">
+                                                <div *ngIf="submitted && jobpostForm.get('recruiterName')?.invalid">
                                                     <small class="text-danger">recruiter name is required</small>
                                                 </div>
                                             </div>
@@ -618,7 +618,7 @@
                                         <div class="content-box content-box-block">
                                             <input type="email" class="form-control" placeholder="Enter Email ID"
                                                 formControlName="recruiterEmail">
-                                            <div *ngIf="(jobpostForm.get('recruiterEmail').invalid && jobpostForm.get('recruiterEmail').touched) || jobpostForm.get('recruiterEmail').dirty">
+                                            <div *ngIf="submitted && jobpostForm.get('recruiterEmail')?.invalid">
                                                 <small *ngIf="jobpostForm.get('recruiterEmail')?.errors?.required" class="text-danger">recruiter email is required</small>
                                                 <small class="text-danger" *ngIf="jobpostForm.get('email')?.errors?.email">Email address is invalid</small>
                                             </div>    
@@ -630,15 +630,11 @@
                                         <div class="content-box content-box-block">
                                             <input type="number" class="form-control" placeholder="Enter Number"
                                                 formControlName="recruiterNumber">
-                                            <div *ngIf="(jobpostForm.get('recruiterNumber').invalid && jobpostForm.get('recruiterNumber').touched) || jobpostForm.get('recruiterNumber').dirty">
+                                            <div *ngIf="submitted &&  jobpostForm.get('recruiterNumber')?.invalid">
                                                 <small class="text-danger">recruiter number is required</small>
                                             </div> 
                                         </div>
                                     </div>
-
-
-
-
 
                                     <div class="single-row" *ngIf="jobpostForm.get('interviewType')?.value == 'online' && apply_method == 'telephone'">
                                         <label for="">Recruiter Details :</label>
@@ -659,7 +655,7 @@
                                                     New Recruiter
                                                 </label>
                                             </div>
-                                            <div *ngIf="(jobpostForm.get('recruiterList').invalid && jobpostForm.get('recruiterList').touched) || jobpostForm.get('recruiterList').dirty">
+                                            <div *ngIf="submitted && jobpostForm.get('recruiterList')?.invalid">
                                                 <small class="text-danger">field is required</small>
                                             </div>
                                         </div>
@@ -671,7 +667,7 @@
                                                 <option value="option1" disabled selected>Select</option>
                                                 <option value="{{data.recruiterName}}" *ngFor="let data of list">{{data.recruiterName}}</option>
                                             </select>
-                                            <div *ngIf="(jobpostForm.get('recruiterName').invalid && jobpostForm.get('recruiterName').touched) || jobpostForm.get('recruiterName').dirty">
+                                            <div *ngIf="submitted && jobpostForm.get('recruiterName')?.invalid">
                                                 <small class="text-danger">choose any one recruiter</small>
                                             </div>
                                         </div>
@@ -681,7 +677,7 @@
                                         <div class="content-box content-box-block">
                                             <input type="text" class="form-control" placeholder="Enter Name"
                                                 formControlName="recruiterName">
-                                            <div *ngIf="(jobpostForm.get('recruiterName').invalid && jobpostForm.get('recruiterName').touched) || jobpostForm.get('recruiterName').dirty">
+                                            <div *ngIf="submitted && jobpostForm.get('recruiterName')?.invalid">
                                                 <small class="text-danger">recruiter name is required</small>
                                             </div>
                                         </div>
@@ -692,7 +688,7 @@
                                         <div class="content-box content-box-block">
                                             <input type="email" class="form-control" placeholder="Enter Email ID"
                                                 formControlName="recruiterEmail">
-                                            <div *ngIf="(jobpostForm.get('recruiterEmail').invalid && jobpostForm.get('recruiterEmail').touched) || jobpostForm.get('recruiterEmail').dirty">
+                                            <div *ngIf="submitted && jobpostForm.get('recruiterEmail')?.invalid">
                                                 <small *ngIf="jobpostForm.get('recruiterEmail').errors?.required" class="text-danger">recruiter email is required</small>
                                                 <small class="text-danger" *ngIf="jobpostForm.get('email')?.errors?.email">Email address is invalid</small>
                                             </div>  
@@ -704,7 +700,7 @@
                                         <div class="content-box content-box-block">
                                             <input type="number" class="form-control" placeholder="Enter Number"
                                                 formControlName="recruiterNumber">
-                                            <div *ngIf="(jobpostForm.get('recruiterNumber').invalid && jobpostForm.get('recruiterNumber').touched) || jobpostForm.get('recruiterNumber').dirty">
+                                            <div *ngIf="submitted && jobpostForm.get('recruiterNumber')?.invalid">
                                                 <small class="text-danger">recruiter number is required</small>
                                             </div> 
                                         </div>
@@ -716,7 +712,7 @@
                                         <div class="content-box content-box-block">
                                             <input type="email" class="form-control" placeholder="Enter Email ID"
                                                 formControlName="recruiterEmail">
-                                            <div *ngIf="(jobpostForm.get('recruiterEmail').invalid && jobpostForm.get('recruiterEmail').touched) || jobpostForm.get('recruiterEmail').dirty">
+                                            <div *ngIf="submitted && jobpostForm.get('recruiterEmail')?.invalid">
                                                 <small *ngIf="jobpostForm.get('recruiterEmail').errors?.required" class="text-danger">recruiter email is required</small>
                                                 <small class="text-danger" *ngIf="jobpostForm.get('email')?.errors?.email">Email address is invalid</small>
                                             </div> 
@@ -725,7 +721,8 @@
                                     <div class="single-row douple-btn">
                                         <div class="content-box">
                                             <button type="submit"
-                                                class="btn btn-brand-grey mb-2 btn-custom" data-bs-toggle="modal" data-bs-target="#reports" (click)="pre()">Preview</button>
+                                                class="btn btn-brand-grey mb-2 btn-custom"  (click)="pre(preview)">Preview</button>
+                                                <button type="button" style="display:none" #preview data-bs-toggle="modal" data-bs-target="#reports"></button>
                                         </div>
                                         <div class="content-box">
                                             <button type="submit"
