@@ -30,7 +30,6 @@ import { AgmCoreModule } from '@agm/core';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    CandidateModule,
     ReactiveFormsModule,
     FormsModule,
     EmployerModule,

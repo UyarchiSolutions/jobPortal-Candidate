@@ -53,14 +53,14 @@
                   <div class="single-row">
                     <label for="" class="lable-data">Key Skills <span>*</span>:</label>
                     <div class="content-box">
-                      <input type="text" class="form-control" (keyup)="displayPrefered($event)" placeholder="Enter Key Skills"
-                        formControlName="prefredBox">
+                      <input type="text" class="form-control" (keyup)="dispalye($event)"
+                        placeholder="Enter Key Skills" formControlName="searchbox">
                     </div>
                   </div>
                   <div class="single-row" *ngIf="isDisplay" style="margin-top:0px;">
                     <label></label>
                     <div class="content-box drop-data">
-                      <ul >
+                      <ul>
                         <li *ngFor="let skill of keySkill" style="cursor:pointer"
                           (click)="checkSkill($event,skill.Skill_Title)">
                           <span>{{skill.Skill_Title}}</span>
@@ -71,7 +71,7 @@
                   <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('keyskill')?.invalid">
                     <label for=""></label>
                     <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('keyskill')?.invalid">
-                      <p>Key Skills is required!{{this.profileForm.get('keyskill')?.invalid}}</p>
+                      <p>Key Skills is required!</p>
                     </div>
                   </div>
                   <div class="single-row">
@@ -153,7 +153,7 @@
                       <p>Expected CTC is required!</p>
                     </div>
                   </div>
-                  <div class="single-row" *ngIf="profileForm.get('experienceYear')?.value != '0'">
+                  <div class="single-row" *ngIf="profileForm.get('experienceYear')?.value != 0">
                     <label for="" class="lable-data">Current CTC <span>*</span>:</label>
                     <div class="content-box">
                       <select class="form-control select-type douple-input-first" formControlName="currentctc">
@@ -189,7 +189,7 @@
                     </div>
 
                   </div>
-                  <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('currentctc')?.invalid">
+                  <div class="single-row" *ngIf="profileForm.get('experienceYear')?.value != 0">
                     <label for=""></label>
                     <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('currentctc')?.invalid">
                       <p>Current CTC is required!</p>
@@ -256,14 +256,14 @@
                   <div class="single-row">
                     <label for="" class="lable-data">Current Skill Set<span>*</span>:</label>
                     <div class="content-box">
-                      <input type="text" class="form-control" (keyup)="displaycurent($event)" placeholder="Enter Key Skills"
-                        formControlName="currentbox">
+                      <input type="text" class="form-control" (keyup)="displaycurent($event)"
+                        placeholder="Enter Key Skills" formControlName="currentbox">
                     </div>
                   </div>
-                  <div class="single-row current-data" *ngIf="iscurrent" style="margin-top:0px;">
+                  <div class="single-row" *ngIf="iscurrent">
                     <label></label>
-                    <div class="content-box current-data">
-                      <ul >
+                    <div class="content-box current-data" >
+                      <ul  style="max-width: 109px;">
                         <li *ngFor="let skill of prferedSkill" style="cursor:pointer"
                           (click)="checkcurrent($event,skill.Industry)">
                           <span>{{skill.Industry}}</span>
@@ -271,17 +271,23 @@
                       </ul>
                     </div>
                   </div>
+                  <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('currentSkill')?.invalid">
+                    <label for=""></label>
+                    <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('currentSkill')?.invalid">
+                      <p>Current Skill Set is required!</p>
+                    </div>
+                  </div>
                   <div class="single-row">
                     <label for="" class="lable-data">Prefered skill <span>*</span>:</label>
                     <div class="content-box">
-                      <input type="text" class="form-control" (keyup)="displayPrefered($event)" placeholder="Enter Key Skills"
-                        formControlName="prefredBox">
+                      <input type="text" class="form-control" (keyup)="displayPrefered($event)"
+                        placeholder="Enter Key Skills" formControlName="prefredBox">
                     </div>
                   </div>
                   <div class="single-row" *ngIf="isShow" style="margin-top:0px;">
                     <label></label>
                     <div class="content-box pre-data">
-                      <ul >
+                      <ul>
                         <li *ngFor="let skill of prferedSkill" style="cursor:pointer"
                           (click)="checkPrefered($event,skill.Industry)">
                           <span>{{skill.Industry}}</span>
@@ -331,7 +337,7 @@
                   <div class="single-row">
                     <label for="" class="lable-data">Willing To Relocate <span>*</span>:</label>
                     <div class="content-box">
-                      <select class="form-control select-type" formControlName="relocate">
+                      <select class="form-control select-type" formControlName="relocate" (change)="changeRelocate($event)">
                         <option value="option1" disabled selected>Select</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
@@ -344,6 +350,19 @@
                       <p>Willing To Relocate is required!</p>
                     </div>
                   </div>
+                  <div class="single-row" *ngIf="this.profileForm.get('relocate')?.value =='Yes'">
+                    <label for="" class="lable-data">Prefered Location<span>*</span>:</label>
+                    <div class="content-box">
+                      <input type="text" class="form-control"
+                        placeholder="Enter Key Skills" formControlName="preferredLocation">
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="this.profileForm.get('relocate')?.value =='Yes'">
+                    <label for=""></label>
+                    <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('preferredLocation')?.invalid">
+                      <p>Prefered Location is required!</p>
+                    </div>
+                  </div>
                   <div class="dropdown single-row">
                     <label for="" class="lable-data">Language <span>*</span>:</label>
                     <div class="content-box">
@@ -351,7 +370,7 @@
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Language <span></span>
                       </a>
-                      <ul class="dropdown-menu" style="width: 60%;padding: 3%;" aria-labelledby="dropdownMenuLink">
+                      <ul class="dropdown-menu lang" style="width: 60%;padding: 3%;" aria-labelledby="dropdownMenuLink">
                         <li *ngFor="let lan of lang">
                           <input type="checkbox" value="{{lan.School_Medium}}" [checked]="checkeLang(lan.School_Medium)"
                             (change)="insLang($event)" /><span style="margin: 9px;">{{lan.School_Medium}}</span>
@@ -359,22 +378,22 @@
                       </ul>
                     </div>
                   </div>
-                  <!-- <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('languages')?.invalid">
+                  <div class="single-row">
                     <label for=""></label>
                     <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('languages')?.invalid">
-                      <p>Language is required!</p>
+                      <p>Languages is required!</p>
                     </div>
-                  </div> -->
+                  </div>
                   <div class="" formArrayName="languages" style="margin-top: 13px;">
                     <div for="" *ngFor="let lang of languages.controls;let i=index" [formGroupName]="i">
-                      <div class="content-box d-flex align-items-start" style="justify-content: space-between;">
+                      <div class="content-box d-flex align-items-start w-100 justify-content-between" style="justify-content: space-between;">
                         <div class="tamil d-flex align-items-start">
                           <p>{{lang.get('lang')?.value}}</p>
                         </div>
-                        <div class="content-box" >
+                        <div class="content-box">
                           <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Speck"
-                              (change)="kownaction($event,i,lang)" [checked]="chekedKnown(i,'Speck',lang)">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Speak"
+                              (change)="kownaction($event,i,lang)" [checked]="chekedKnown(i,'Speak',lang)">
                             <label class="form-check-label" for="inlineCheckbox1">Speck</label>
                           </div>
                           <div class="form-check form-check-inline">
@@ -389,14 +408,15 @@
                           </div>
                         </div>
                       </div>
+                      <div class="single-row" *ngIf="isSubmitted && languages.controls[i].get('know')?.invalid">
+                        <label for=""></label>
+                        <div class="error-data" *ngIf="isSubmitted && lang.get('know')?.invalid">
+                          <p>choose any one</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('know')?.invalid">
-                    <label for=""></label>
-                    <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('know')?.invalid">
-                      <p>Language is required!</p>
-                    </div>
-                  </div>
+
                 </div>
               </div>
             </div>

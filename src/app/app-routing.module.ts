@@ -24,6 +24,8 @@ import { SendotpforgotComponent } from './candidate/sendotpforgot/sendotpforgot.
 import { NewpasswordComponent } from './candidate/newpassword/newpassword.component';
 import { RedirectComponent } from './redirect/redirect.component';
 import { ReportPopupComponent } from './candidate/report-popup/report-popup.component';
+import { EmailverificationComponent } from './candidate/emailverification/emailverification.component';
+import { MobileverificationComponent } from './candidate/mobileverification/mobileverification.component';
 
 const routes: Routes = [
    {path:"",component:CanHomeComponent},
@@ -71,7 +73,9 @@ const routes: Routes = [
     {path:'sendOtp',component:SendotpforgotComponent},
     {path:'newPAss',component:NewpasswordComponent},
     {path:'redirect',component:RedirectComponent},
-    {path:'report',component:ReportPopupComponent}
+    {path:'report',component:ReportPopupComponent},
+    {path:'email-verification',component:EmailverificationComponent},
+    {path:'mobile-verification',component:MobileverificationComponent}
 ];
 
 @NgModule({

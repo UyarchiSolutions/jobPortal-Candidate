@@ -144,8 +144,14 @@ ul li {
 .current-data{
   background: white;
   position: absolute;
-  left: 307px;
+  left: 615px;
   width: 365px;
-  top: 454px;
+  top: 909px;
   border-radius: 7px;
+}
+.lang{
+  max-height: 218px;
+
+  overflow: auto;
+
 }

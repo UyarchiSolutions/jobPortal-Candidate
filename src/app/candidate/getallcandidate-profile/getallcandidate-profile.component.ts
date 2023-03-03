@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Cookie } from 'ng2-cookies';
+import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { CanditateService } from '../canditate.service';
 
 @Component({
@@ -12,6 +13,7 @@ import { CanditateService } from '../canditate.service';
 export class GetallcandidateProfileComponent implements OnInit {
   getAlldetails: any = []
   tab = 0;
+  email: any;
   recentData: any = [];
   resumeForm: any = this.fb.group({
     resume: new FormControl('', Validators.required)
@@ -23,36 +25,58 @@ export class GetallcandidateProfileComponent implements OnInit {
     searchbox: new FormControl(),
   })
   Candidateform: any = this.fb.group({
-    name: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z ]*$')]),
+    name: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z-.]*$')]),
     email: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
     workStatus: new FormControl('', Validators.required),
     mobileNumber: new FormControl('', Validators.required),
     location: new FormControl('', Validators.required),
   });
+  isSubmit = false;
   details: any;
   pdfUrl: any;
   keySkill: any;
-  constructor(private candidateservice: CanditateService, private router: Router, private fb: FormBuilder) { }
+  mobile: any;
+  check: boolean = false;
+  mailData:any;
+  mobile_data:any;
+  constructor(private candidateservice: CanditateService, private router: Router, private fb: FormBuilder,private activaterouter:ActivatedRoute) { }
 
   ngOnInit() {
     this.getallDetails();
     this.recentSearch();
+    this.activaterouter.queryParams.subscribe((params:any) =>{
+      this.tab=params.taps
+    })
+
+
   }
   getallDetails() {
     this.candidateservice.viewDetails().subscribe((res: any) => {
       this.getAlldetails = res.user;
-      console.log(this.getAlldetails[0].name,"namename")
+      this.email = this.getAlldetails[0].email;
+      this.mobile = this.getAlldetails[0].mobileNumber;
+      this.id=this.getAlldetails[0]._id
+      console.log(this.id)
+      if(this.tab==10){
+        this.mailData=localStorage.getItem('emailId')
+        this.mobile_data=localStorage.getItem('mobileId')
+      }else{
+        this.tab=0;
+        this.mailData=this.getAlldetails[0].email;
+        this.mobile_data= this.getAlldetails[0].mobileNumber
+      }
+      console.log(this.tab,'tab')
       this.Candidateform.patchValue({
         name: this.getAlldetails[0].name,
-        email: this.getAlldetails[0].email,
+        email:this.mailData,
         workStatus: this.getAlldetails[0].workStatus,
-        mobileNumber: this.getAlldetails[0].mobileNumber,
+        mobileNumber: this.mobile_data,
         location: this.getAlldetails[0].location
       })
       this.pdfUrl = `https://livebroadcast.click/resumes/1675427235220.pdf`;
-      console.log(this.pdfUrl, "dl,ld,")
     })
   }
+
   getBasic() {
     this.tab = 0
   }
@@ -180,7 +204,102 @@ export class GetallcandidateProfileComponent implements OnInit {
 
   }
   isEdit = 10;
-  edit() {
+  id: any;
+  edit(id: any) {
+    this.id = id
     this.tab = 10;
+  }
+  latitude: any;
+  longtitude: any;
+  handleAddressChange(address: Address) {
+    this.latitude = address.geometry.location.lat();
+    this.latitude = String(this.latitude)
+    this.longtitude = address.geometry.location.lng();
+    this.longtitude = String(this.longtitude)
+
+    this.Candidateform.patchValue({
+      lat: this.latitude,
+      long: this.longtitude,
+      location: address.formatted_address
+    })
+  }
+  options: any = {
+    componentRestrictions: { country: 'IN' },
+  };
+
+  editBasic() {
+    this.isSubmit = true;
+    if (this.Candidateform.valid) {
+      this.candidateservice.edit_basic(this.id, this.Candidateform.value).subscribe((res: any) => {
+        this.tab = 0;
+        this.getallDetails();
+        localStorage.setItem('name', this.Candidateform.get('name')?.value)
+        this.router.navigate(['/getAllprofile'])
+      })
+    }
+  }
+  mailValue: any;
+  chackeMail(va: any) {
+    this.mailValue = va.target.value;
+  }
+  verify() {
+    const data = {
+      email: this.Candidateform.get('email')?.value
+    }
+    this.candidateservice.verifymail(this.id, data).subscribe((res: any) => {
+      localStorage.setItem('emailId',this.Candidateform.get('email')?.value )
+      this.router.navigate(['/email-verification'], { queryParams: { mail: this.Candidateform.get('email')?.value } })
+    })
+  }
+  verifymobile(){
+    const data = {
+      mobileNumber: this.Candidateform.get('mobileNumber')?.value
+    }
+    this.candidateservice.verify_mobile(this.id, data).subscribe((res: any) => {
+      localStorage.setItem('mobileId',this.Candidateform.get('mobileNumber')?.value )
+      this.router.navigate(['/mobile-verification'], { queryParams: { mobileNumber: this.Candidateform.get('mobileNumber')?.value } })
+    })
+  }
+  index: any;
+  isDisplayIcon(value: any, know: any) {
+    this.index = value.find((res: any) => res == know)
+    if (this.index) {
+      console.log(this.index, "ssdf")
+      if (this.index == know) {
+        this.check = true;
+      }
+      else {
+        this.check = false;
+      }
+      return true;
+    }
+    else {
+      this.check = false;
+      return false;
+    }
+  }
+  isCheck=false;
+  isDisplayIcon2(value: any, know: any) {
+    this.index = value.find((res: any) => res == know)
+    if (this.index) {
+      this.isCheck = true;
+      return this.isCheck;
+    }
+    else {
+      this.isCheck = false;
+      return this.isCheck;
+    }
+  }
+  ischeck3=false;
+  isDisplayIcon3(value: any, know: any) {
+    this.index = value.find((res: any) => res == know)
+    if (this.index) {
+        this.ischeck3 = true;
+      return this.ischeck3;
+    }
+    else {
+      this.ischeck3 = false;
+      return this.ischeck3;
+    }
   }
 }
