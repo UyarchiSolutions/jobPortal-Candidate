@@ -53,7 +53,8 @@ export class EmpJobpostComponent implements OnInit {
     apply_method:new FormControl(null,Validators.required),
     recruiterList:new FormControl(null,Validators.required),
     recruiterList1:new FormControl(null,Validators.required),
-    venue:new FormControl(null,Validators.required)
+    venue:new FormControl(null,Validators.required),
+    loc:new FormControl(null,Validators.required)
     
   });
   keySkill: any;
@@ -131,6 +132,9 @@ export class EmpJobpostComponent implements OnInit {
   now: any;
   nowto:any;
   predictions: any;
+  datatext: any;
+  val: any;
+  address: any;
   constructor(private formBuilder:FormBuilder,private router: Router,private empservice: EmpServiceService) { }
 
   ngOnInit(): void {
@@ -232,8 +236,18 @@ export class EmpJobpostComponent implements OnInit {
     this.latitude = address.geometry.location.lat();
     this.longtitude = address.geometry.location.lng();
     console.log(this.latitude, this.longtitude)
+    this.address = address.formatted_address
+    let datas = this.jobpostForm.get('jobLocation')?.value;
+    let data = this.jobpostForm.get('location')?.value;
+    datas.push(this.address)
+    let split = this.address.split(',');
+     data.push(split[0])
+    console.log(datas)
+    console.log(data)
+    // this.val = e.structured_formatting.main_text
+   
     this.jobpostForm.patchValue({
-      jobLocation:address.formatted_address
+      loc:''
     })
   }
   get_industry_list(){
@@ -525,18 +539,54 @@ export class EmpJobpostComponent implements OnInit {
     }
     
   }
-  choose(data:any,location:any){
-   
+  choose(e:any,location:any){
     let datas = this.jobpostForm.get('jobLocation')?.value;
-    datas.push(location)
-
-    let val = data.structured_formatting.main_text
-    let datatext = this.jobpostForm.get('location')?.value;
-    datatext.push(val)
-   
+    let data = this.jobpostForm.get('location')?.value;
+    if(location){
+      datas.push(location)
+    }
+    this.val = e.structured_formatting.main_text
+    data.push(this.val)
+    console.log(data,datas)
+    this.jobpostForm.patchValue({
+      loc:''
+    })
   }
-
-
+  type:any;
+  checkerr_inter(e:any){
+    this.type = e.target.value
+    if (this.type == 'walk in') {
+      this.jobpostForm.get('interviewstartDate')?.setErrors({ incorrect: true });
+      this.jobpostForm.get('interviewendDate')?.setErrors({ incorrect: true });
+      this.jobpostForm.get('startTime')?.setErrors({ incorrect: true });
+      this.jobpostForm.get('endTime')?.setErrors({ incorrect: true });
+      this.jobpostForm.get('venue')?.setErrors({ incorrect: true });
+      this.jobpostForm.get('recruiterList')?.setErrors({ incorrect: true });
+      // if()
+    }
+    else{
+      this.jobpostForm.get('interviewstartDate')?.setErrors(null);
+      this.jobpostForm.get('interviewendDate')?.setErrors(null);
+      this.jobpostForm.get('startTime')?.setErrors(null);
+      this.jobpostForm.get('endTime')?.setErrors(null);
+      this.jobpostForm.get('venue')?.setErrors(null);
+      this.jobpostForm.get('recruiterList')?.setErrors(null);
+    }
+    
+    // else {
+    //   if (this.payment.get('payType')?.valid) {
+    //     this.payment.get('payType')?.setErrors({ incorrect: true });
+    //   }
+    //   if (this.payment.get('amount')?.valid) {
+    //     console.log(this.payment.value);
+    //     console.log('workin fine');
+    //     this.payment.get('amount')?.setErrors({ incorrect: true });
+    //   }
+    //   if (this.payment.get('paymentStatus')?.valid) {
+    //     this.payment.get('paymentStatus')?.setErrors({ incorrect: true });
+    //   }
+    // }
+  }
 
 
 
