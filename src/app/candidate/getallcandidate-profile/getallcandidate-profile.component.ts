@@ -37,15 +37,15 @@ export class GetallcandidateProfileComponent implements OnInit {
   keySkill: any;
   mobile: any;
   check: boolean = false;
-  mailData:any;
-  mobile_data:any;
-  constructor(private candidateservice: CanditateService, private router: Router, private fb: FormBuilder,private activaterouter:ActivatedRoute) { }
+  mailData: any;
+  mobile_data: any;
+  constructor(private candidateservice: CanditateService, private router: Router, private fb: FormBuilder, private activaterouter: ActivatedRoute) { }
 
   ngOnInit() {
     this.getallDetails();
     this.recentSearch();
-    this.activaterouter.queryParams.subscribe((params:any) =>{
-      this.tab=params.taps
+    this.activaterouter.queryParams.subscribe((params: any) => {
+      this.tab = params.taps
     })
 
 
@@ -55,20 +55,20 @@ export class GetallcandidateProfileComponent implements OnInit {
       this.getAlldetails = res.user;
       this.email = this.getAlldetails[0].email;
       this.mobile = this.getAlldetails[0].mobileNumber;
-      this.id=this.getAlldetails[0]._id
+      this.id = this.getAlldetails[0]._id
       console.log(this.id)
-      if(this.tab==10){
-        this.mailData=localStorage.getItem('emailId')
-        this.mobile_data=localStorage.getItem('mobileId')
-      }else{
-        this.tab=0;
-        this.mailData=this.getAlldetails[0].email;
-        this.mobile_data= this.getAlldetails[0].mobileNumber
+      if (this.tab == 10) {
+        this.mailData = localStorage.getItem('emailId')
+        this.mobile_data = localStorage.getItem('mobileId')
+      } else {
+        this.tab = 0;
+        this.mailData = this.getAlldetails[0].email;
+        this.mobile_data = this.getAlldetails[0].mobileNumber
       }
-      console.log(this.tab,'tab')
+      console.log(this.tab, 'tab')
       this.Candidateform.patchValue({
         name: this.getAlldetails[0].name,
-        email:this.mailData,
+        email: this.mailData,
         workStatus: this.getAlldetails[0].workStatus,
         mobileNumber: this.mobile_data,
         location: this.getAlldetails[0].location
@@ -247,16 +247,16 @@ export class GetallcandidateProfileComponent implements OnInit {
       email: this.Candidateform.get('email')?.value
     }
     this.candidateservice.verifymail(this.id, data).subscribe((res: any) => {
-      localStorage.setItem('emailId',this.Candidateform.get('email')?.value )
+      localStorage.setItem('emailId', this.Candidateform.get('email')?.value)
       this.router.navigate(['/email-verification'], { queryParams: { mail: this.Candidateform.get('email')?.value } })
     })
   }
-  verifymobile(){
+  verifymobile() {
     const data = {
       mobileNumber: this.Candidateform.get('mobileNumber')?.value
     }
     this.candidateservice.verify_mobile(this.id, data).subscribe((res: any) => {
-      localStorage.setItem('mobileId',this.Candidateform.get('mobileNumber')?.value )
+      localStorage.setItem('mobileId', this.Candidateform.get('mobileNumber')?.value)
       this.router.navigate(['/mobile-verification'], { queryParams: { mobileNumber: this.Candidateform.get('mobileNumber')?.value } })
     })
   }
@@ -264,41 +264,37 @@ export class GetallcandidateProfileComponent implements OnInit {
   isDisplayIcon(value: any, know: any) {
     this.index = value.find((res: any) => res == know)
     if (this.index) {
-      console.log(this.index, "ssdf")
-      if (this.index == know) {
-        this.check = true;
-      }
-      else {
-        this.check = false;
-      }
-      return true;
+      this.check = true;
+      return this.check
     }
     else {
       this.check = false;
-      return false;
+      return this.check;
     }
   }
-  isCheck=false;
+  isCheck = false;
   isDisplayIcon2(value: any, know: any) {
-    this.index = value.find((res: any) => res == know)
+    this.index = value.find((res: any) => res == know);
     if (this.index) {
       this.isCheck = true;
       return this.isCheck;
     }
     else {
       this.isCheck = false;
+
       return this.isCheck;
     }
   }
-  ischeck3=false;
+  ischeck3 = false;
   isDisplayIcon3(value: any, know: any) {
     this.index = value.find((res: any) => res == know)
     if (this.index) {
-        this.ischeck3 = true;
+      this.ischeck3 = true;
       return this.ischeck3;
     }
     else {
       this.ischeck3 = false;
+      console.log(this.ischeck3, "fngjgnhjfghj")
       return this.ischeck3;
     }
   }

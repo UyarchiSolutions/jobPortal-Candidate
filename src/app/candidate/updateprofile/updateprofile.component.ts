@@ -31,8 +31,9 @@ export class UpdateprofileComponent implements OnInit {
     gender: new FormControl('', Validators.required),
     maritalStatus: new FormControl('', Validators.required),
     relocate: new FormControl('', Validators.required),
-    preferredLocation:new FormControl('', Validators.required),
+    preferredLocation: new FormControl(null, Validators.required),
     languages: this.fb.array([], Validators.required),
+    locationdummy: new FormControl(null, Validators.required),
     searchbox: new FormControl(null),
     currentctc_th: new FormControl(''),
     update: new FormControl()
@@ -70,9 +71,7 @@ export class UpdateprofileComponent implements OnInit {
       this.keySkill = res;
     })
   }
-  options: any = {
-    componentRestrictions: { country: 'IN' },
-  };
+
   getAlldata() {
     this.candidateService.viewDetails().subscribe((res: any) => {
       this.viewAll = res.user;
@@ -101,7 +100,7 @@ export class UpdateprofileComponent implements OnInit {
 
         // languages: this.viewAll[0].keyskill
       })
-      console.log(this.profileForm.get('currentSkill')?.value,"sdksfjnfjnjn")
+      console.log(this.profileForm.get('currentSkill')?.value, "sdksfjnfjnjn")
       this.getLang = this.viewAll[0].languages;
       if (this.viewAll[0].experienceYear) {
         this.profileForm.get('currentctc').setErrors({ 'incorrect': true })
@@ -158,10 +157,10 @@ export class UpdateprofileComponent implements OnInit {
     let val = data.target.value.split(",");
     if (data.target.value) {
       this.isShow = true
-      console.log(this.isShow,"isndj")
+      console.log(this.isShow, "isndj")
     } else {
       this.isShow = false
-      console.log(this.isShow,"isndjsbjkbjbjkb")
+      console.log(this.isShow, "isndjsbjkbjbjkb")
     }
     if (val.length != 0) {
       if (val[val.length - 1] != null && val[val.length - 1] != '') {
@@ -173,7 +172,7 @@ export class UpdateprofileComponent implements OnInit {
     }
     this.profileForm.get('preferredSkill')?.setValue(val)
   }
-  checkPrefered(data:any,preSkill:any){
+  checkPrefered(data: any, preSkill: any) {
     this.isShow = false;
     let index: any = this.profileForm.get('preferredSkill')?.value;
     if (index.length != 0) {
@@ -184,14 +183,14 @@ export class UpdateprofileComponent implements OnInit {
       this.profileForm.get('prefredBox')?.setValue(search);
     }
   }
-  prferedSkill:any=[];
-  getAllpreferd(value:any){
+  prferedSkill: any = [];
+  getAllpreferd(value: any) {
     this.candidateService.get_prefered(value).subscribe((res: any) => {
-    this.prferedSkill=res;
-    console.log(this.prferedSkill,'dfjdngjdgn')
+      this.prferedSkill = res;
+      console.log(this.prferedSkill, 'dfjdngjdgn')
     })
   }
-  displaycurent(val:any){
+  displaycurent(val: any) {
     console.log("working")
     let value = val.target.value.split(",");
     if (val.target.value) {
@@ -208,8 +207,8 @@ export class UpdateprofileComponent implements OnInit {
     }
     this.profileForm.get('currentSkill')?.setValue(value)
   }
-  iscurrent=false;
-  checkcurrent(val:any,currentskill:any){
+  iscurrent = false;
+  checkcurrent(val: any, currentskill: any) {
     this.iscurrent = false;
     let index: any = this.profileForm.get('currentSkill')?.value;
     if (index.length != 0) {
@@ -252,22 +251,23 @@ export class UpdateprofileComponent implements OnInit {
   get languages() {
     return this.profileForm.get('languages') as FormArray;
   }
+  Known: any = []
   kownaction(val: any, i: any, language: any) {
-    console.log(i, "index");
-    let Known = language.get('know')?.value;
+    this.Known = language.get('know')?.value;
     let value = val.target.value;
-    let index = Known.findIndex((item: any) => item == value)
+    let index = this.Known.findIndex((item: any) => item == value)
     if (val.target.checked) {
-      Known.push(value)
+      this.Known.push(value);
+
     } else {
-      Known.splice(index, 1);
+      this.Known.splice(index, 1);
     }
-    language.get('kown')?.setValue(Known)
+    language.get('kown')?.setValue(this.Known)
   }
-  changeRelocate(data:any){
-    if(data.target.value == 'Yes'){
+  changeRelocate(data: any) {
+    if (data.target.value == 'Yes') {
       this.profileForm.get('preferredLocation').setErrors({ 'incorrect': true })
-    }else{
+    } else {
       this.profileForm.get('preferredLocation').setErrors(null)
     }
   }
@@ -337,21 +337,52 @@ export class UpdateprofileComponent implements OnInit {
       this.profileForm.get('currentctc').setErrors({ 'incorrect': true })
     }
   }
+  preferedLocations: any;
+  isLocation: any = false;
+  preferedLocation(data: any) {
+    let index: any = this.profileForm.get('preferredLocation')?.value;
+    let value = data.target.value.split(",");
+    if (data.target.value) {
+      this.isLocation = true;
+    } else {
+      this.isLocation = false
+    }
+    if (value.length != 0) {
+      if (value[value.length - 1] != null && value[value.length - 1] != '') {
+        this.getLocation(value[value.length - 1])
+      } else {
+        // console.log("working")
+        // console.log(this.profileForm.get('keyskill')?.setErrors({ 'incorrect': true }), "bjdfjdbfjdfb")
+      }
+    }
+    this.profileForm.get('preferredLocation')?.setValue(value)
+    // if(data.target.value){
+    //   this.isLocation=true
+    //   this.candidateService.get_allLocation(data.target.value).subscribe((res:any) => {
+    //     this.preferedLocations=res.predictions;
+    //     })
+    // }else{
+    //   this.isLocation=false;
+    // }
 
-  latitude:any;
-  longtitude:any;
-  handleAddressChange(address: Address) {
-
-    this.latitude = address.geometry.location.lat();
-    this.latitude = String(this.latitude)
-    this.longtitude = address.geometry.location.lng();
-    this.longtitude = String(this.longtitude)
-
-    this.profileForm.patchValue({
-      lat: this.latitude,
-      long: this.longtitude,
-      preferredLocation: address.formatted_address
+  }
+  getLocation(value: any) {
+    this.candidateService.get_allLocation(value).subscribe((res: any) => {
+      this.preferedLocations = res.predictions;
     })
   }
-
+  val: any;
+  choose(e: any, location: any) {
+    let datas = this.profileForm.get('preferredLocation')?.value;
+    let data = this.profileForm.get('locationdummy')?.value;
+    if (location) {
+      datas.push(location)
+    }
+    this.val = e.structured_formatting.main_text
+    data.push(this.val)
+    console.log(data, datas)
+    this.profileForm.patchValue({
+      loc: ''
+    })
+  }
 }

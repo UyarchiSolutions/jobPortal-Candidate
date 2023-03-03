@@ -53,8 +53,8 @@
                   <div class="single-row">
                     <label for="" class="lable-data">Key Skills <span>*</span>:</label>
                     <div class="content-box">
-                      <input type="text" class="form-control" (keyup)="dispalye($event)"
-                        placeholder="Enter Key Skills" formControlName="searchbox">
+                      <input type="text" class="form-control" (keyup)="dispalye($event)" placeholder="Enter Key Skills"
+                        formControlName="searchbox">
                     </div>
                   </div>
                   <div class="single-row" *ngIf="isDisplay" style="margin-top:0px;">
@@ -262,8 +262,8 @@
                   </div>
                   <div class="single-row" *ngIf="iscurrent">
                     <label></label>
-                    <div class="content-box current-data" >
-                      <ul  style="max-width: 109px;">
+                    <div class="content-box current-data">
+                      <ul style="max-width: 109px;">
                         <li *ngFor="let skill of prferedSkill" style="cursor:pointer"
                           (click)="checkcurrent($event,skill.Industry)">
                           <span>{{skill.Industry}}</span>
@@ -337,7 +337,8 @@
                   <div class="single-row">
                     <label for="" class="lable-data">Willing To Relocate <span>*</span>:</label>
                     <div class="content-box">
-                      <select class="form-control select-type" formControlName="relocate" (change)="changeRelocate($event)">
+                      <select class="form-control select-type" formControlName="relocate"
+                        (change)="changeRelocate($event)">
                         <option value="option1" disabled selected>Select</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
@@ -353,14 +354,34 @@
                   <div class="single-row" *ngIf="this.profileForm.get('relocate')?.value =='Yes'">
                     <label for="" class="lable-data">Prefered Location<span>*</span>:</label>
                     <div class="content-box">
-                      <input type="text" class="form-control"
-                        placeholder="Enter Key Skills" formControlName="preferredLocation">
+                      <input type="text" class="form-control" placeholder="Enter Key Skills"
+                       (keyup)="preferedLocation($event)" formControlName="locationdummy">
                     </div>
                   </div>
                   <div class="single-row" *ngIf="this.profileForm.get('relocate')?.value =='Yes'">
                     <label for=""></label>
                     <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('preferredLocation')?.invalid">
                       <p>Prefered Location is required!</p>
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="isLocation" style="margin-top:0px;">
+                    <label></label>
+                    <div class="content-box content-box-block locarea" style="background: white;">
+                      <ul style="padding-left: 0px;list-style: none;
+                        margin-left: 6px;">
+                        <li *ngFor="let pre of preferedLocations" class="mt-1 name" style="cursor:pointer;font-size: 13px;"
+                          (click)="choose(pre,pre?.description)">
+                          <span><i>
+                              <svg width="15" height="15" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M10 19.3137L4.34311 13.6568C3.2243 12.538 2.46239 11.1125 2.15371 9.56068C1.84504 8.00884 2.00347 6.40031 2.60898 4.93851C3.21448 3.4767 4.23986 2.22728 5.55545 1.34824C6.87104 0.469189 8.41775 0 10 0C11.5822 0 13.129 0.469189 14.4445 1.34824C15.7601 2.22728 16.7855 3.4767 17.391 4.93851C17.9965 6.40031 18.155 8.00884 17.8463 9.56068C17.5376 11.1125 16.7757 12.538 15.6569 13.6568L10 19.3137ZM14.4 12.3999C15.2701 11.5297 15.8627 10.421 16.1027 9.21404C16.3427 8.00706 16.2195 6.75601 15.7485 5.61909C15.2776 4.48216 14.48 3.51042 13.4568 2.82675C12.4336 2.14307 11.2306 1.77816 10 1.77816C8.76939 1.77816 7.56641 2.14307 6.54319 2.82675C5.51996 3.51042 4.72244 4.48216 4.25148 5.61909C3.78052 6.75601 3.65726 8.00706 3.89729 9.21404C4.13733 10.421 4.72987 11.5297 5.6 12.3999L10 16.7999L14.4 12.3999V12.3999ZM10 9.7777C9.5285 9.7777 9.07632 9.5904 8.74292 9.257C8.40952 8.92361 8.22222 8.47142 8.22222 7.99993C8.22222 7.52843 8.40952 7.07625 8.74292 6.74285C9.07632 6.40945 9.5285 6.22215 10 6.22215C10.4715 6.22215 10.9237 6.40945 11.2571 6.74285C11.5905 7.07625 11.7778 7.52843 11.7778 7.99993C11.7778 8.47142 11.5905 8.92361 11.2571 9.257C10.9237 9.5904 10.4715 9.7777 10 9.7777Z"
+                                  fill="#0A2647" />
+                              </svg>
+                            </i></span>
+                          <span style="padding-left: 8px">{{pre?.description}}</span>
+                        </li>
+                      </ul>
                     </div>
                   </div>
                   <div class="dropdown single-row">
@@ -386,7 +407,8 @@
                   </div>
                   <div class="" formArrayName="languages" style="margin-top: 13px;">
                     <div for="" *ngFor="let lang of languages.controls;let i=index" [formGroupName]="i">
-                      <div class="content-box d-flex align-items-start w-100 justify-content-between" style="justify-content: space-between;">
+                      <div class="content-box d-flex align-items-start w-100 justify-content-between"
+                        style="justify-content: space-between;">
                         <div class="tamil d-flex align-items-start">
                           <p>{{lang.get('lang')?.value}}</p>
                         </div>

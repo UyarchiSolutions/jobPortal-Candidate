@@ -5,6 +5,7 @@ import { UpdateprofileRoutingModule } from './updateprofile-routing.module';
 import { UpdateprofileComponent } from './updateprofile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    GooglePlaceModule,
   ]
 })
 export class UpdateprofileModule { }

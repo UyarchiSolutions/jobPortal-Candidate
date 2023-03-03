@@ -505,6 +505,8 @@ h3 {
   padding-left: 6px;
   font-weight: 500;
   font-size: 14px;
+  width: 190px;
+
 }
 .dropdown-toggle::after {
   display: none;
@@ -525,4 +527,32 @@ h3 {
   background: transparent;
   border: none;
   color: black;
+}
+ .refine-content:hover{
+  background: white;
+}
+.dropdown #mydiv {
+  font-size: 12px;
+  font-weight: 500;
+  min-width: 181px;
+  max-width: 181px;
+  max-height: 330px;
+  overflow: auto;
+  margin-top: 5px !important;
+}
+.search-box1{
+  margin-right: auto;
+    margin-left: auto;
+}
+input[type="checkbox"]{
+  margin-right: 5px;
+
+}
+.btn1{
+  width: 100px;
+}
+.refine-content[_ngcontent-wuo-c169] .search-box[_ngcontent-wuo-c169] .dropdown[_ngcontent-wuo-c169] .show[_ngcontent-wuo-c169] {
+  background-color: white;
+  border: none;
+  color: #000;
 }

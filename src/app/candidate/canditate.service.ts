@@ -239,4 +239,12 @@ verify_mobile(id:any,data:any){
 verifiedMobile(data:any){
   return this.http.post(this.baseUrl+`/v1/candidateRegistration/update_mobilenumber_otp_verify`,data)
 }
+// location
+get_allLocation(data:any){
+  const value={
+    input:data
+  }
+  let query = new URLSearchParams(value).toString();
+  return this.http.get(this.baseUrl+`/v1/employerdetail/location_api?`+query)
+}
 }
