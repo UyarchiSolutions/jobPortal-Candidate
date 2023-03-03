@@ -355,7 +355,7 @@
                     <label for="" class="lable-data">Prefered Location<span>*</span>:</label>
                     <div class="content-box">
                       <input type="text" class="form-control" placeholder="Enter Key Skills"
-                       (keyup)="preferedLocation($event)">
+                       (keyup)="preferedLocation($event)" formControlName="locationdummy">
                     </div>
                   </div>
                   <div class="single-row" *ngIf="this.profileForm.get('relocate')?.value =='Yes'">

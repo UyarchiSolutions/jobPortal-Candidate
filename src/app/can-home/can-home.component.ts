@@ -244,6 +244,7 @@ export class CanHomeComponent implements OnInit {
   }
   isCheck_details(val: any) {
     const data: any = this.searchForm.get('workmode')?.value;
+    console.log(data,"datad")
     if (data.findIndex((res: any) => res == val)) {
       return true;
     } else {

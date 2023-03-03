@@ -22,14 +22,14 @@
                     <div class="advanced-search-wrap ">
 
                         <div class="search-boxs">
-                           
+
                             <div class="search-box first-search-box">
                                 <input type="text" class="form-control keyskill"
                                     placeholder="Enter Designation / Key skills" (keyup)="dispalye($event)"
                                     formControlName="searchbox">
                                 <!-- <div class="" *ngIf="isDisplay" style="margin-top:0px;">
                                     <label></label> -->
-                                    
+
                                     <div class="content-box keylist" *ngIf="isDisplay" style="background: white;">
                                         <ul class="ulkeylist" style="padding-left: 0px;" class="">
                                             <li class="ilkeylist" style="cursor:pointer" *ngFor="let skill of keySkill"
@@ -57,7 +57,7 @@
                                         </ul>
                                     </div>
                                 </div>
-                                    
+
                             </div>
 
                             <div class="search-box">
@@ -417,7 +417,6 @@
             <div class="row register-content-row no-padding">
                 <div class="col register-content no-margin-all">
                     <div class="row no-margin filter-bar">
-
                         <!-- <div class="filter-bar"> -->
                         <div class="sort col col-1">
                             <i class='fas fa-sort-amount-down'></i>
@@ -1436,7 +1435,7 @@
                                             formControlName="location"> -->
                                     <input type="text" class="form-control location" placeholder="Enter Job Location"
                                     formControlName="getlocation" (keyup)="get_location_search($event)">
-                                       
+
                                     </div>
                                 </div>
                                 <div class="single-row" *ngIf="islocation" style="margin-top:0px;">
@@ -1725,14 +1724,14 @@
                             id="exampleFormControlTextarea1" rows="3" placeholder="Type Your Notes Here...."
                             formControlName="comment"></textarea>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" (click)="submitNotes()"
                     data-bs-dismiss="modal">Submit</button>
             </div>
-           
+
         </div>
     </div>
 </div>

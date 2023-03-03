@@ -74,244 +74,299 @@
     <div class="col-2">
       <div class="row refine-container no-margin">
         <div class="col">
-          <div class="sidebarmenu myprofile refine-sidebar">
-            <ul>
-              <li class="sidebarmenu-heading"> <span class="icon-custom"><i class='far fa-user'></i></span> <span
-                  class="icon-text">All Filters</span>
-              </li>
-              <!-- 1 -->
-              <li class="refine-content">
-                <div class="search-box">
-                  <div class="dropdown">
-                    <button class="btn dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
-                      data-bs-toggle="dropdown" aria-expanded="false">
-                      Work Mode<i class="fa fa-angle-down" style="margin-left: 78px;"></i>
-                    </button>
-                    <ul class="dropdown-menu filter" aria-labelledby="dropdownMenuButton1">
-                      <li value="Start up">Work Mode</li>
-                      <li value="1 to 2 lac"><input type="checkbox" value="onsite"
-                          (change)="changeWorkmode($event)">Onsite</li>
-                      <li value="Corparate"><input type="checkbox" value="work from home"
-                          (change)="changeWorkmode($event)">Work form home</li>
-                      <li value="Foregin MNC"><input type="checkbox" value="hybrid"
-                          (change)="changeWorkmode($event)">Hybrid</li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
-              <!-- 2 -->
+          <div class="row refine-container no-margin">
+            <div class="col">
+              <div class="sidebarmenu myprofile refine-sidebar">
+                <ul>
+                  <li class="sidebarmenu-heading"> <span class="icon-custom"><i class='far fa-user'></i></span> <span
+                      class="icon-text">All Filters</span>
+                  </li>
 
-              <li class="refine-content">
-
-                <button class="btn collapsebtn" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#collapseExample" aria-expanded="false" style="padding-left: 14px;
-                    font-weight: 500;
-                    font-size: 14px;" aria-controls="collapseExample">Experience</button><i class="fa fa-angle-down"
-                  style="margin-left: 55px;"></i>
-                <div class="collapse" id="collapseExample">
-                  <div class="card card-body" style="padding: 0px;">
-                    <div style="display:flex">
-                      <select class="form-control select-type" formControlName="experienceAnotherfrom"
-                        (change)="experienceFrom($event)">
-                        <option [value]="null">From</option>
-                        <option value="0">Freshers</option>
-                        <option value="1">1 Year</option>
-                        <option value="2">2 Year</option>
-                        <option value="3">3 Year</option>
-                        <option value="4">4 Year</option>
-                        <option value="5">5 Year</option>
-                        <option value="6">6 Year</option>
-                        <option value="7">7 Year</option>
-                        <option value="8">8 Year</option>
-                        <option value="9">9 Year</option>
-                        <option value="10">10 Year</option>
-                        <option value="11">11 Year</option>
-                      </select>
-                      <select class="form-control select-type" formControlName="experienceAnotherto"
-                        (change)="experienceTo($event)">
-                        <option [value]="null">To</option>
-                        <option value="0">Freshers</option>
-                        <option value="1">1 Year</option>
-                        <option value="2">2 Year</option>
-                        <option value="3">3 Year</option>
-                        <option value="4">4 Year</option>
-                        <option value="5">5 Year</option>
-                        <option value="6">6 Year</option>
-                        <option value="7">7 Year</option>
-                        <option value="8">8 Year</option>
-                        <option value="9">9 Year</option>
-                        <option value="10">10 Year</option>
-                        <option value="11">11 Year</option>
-                      </select>
+                  <!-- 1 -->
+                  <li class="refine-content">
+                    <div class="search-box search-box1">
+                      <div class="dropdown">
+                        <button class="btn btn1 dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
+                          data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
+                          Work Mode<i class="fa fa-angle-down" style="margin-left: 59px;"></i>
+                        </button>
+                        <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
+                          <li><input type="checkbox" value="onsite" (change)="changeWorkmode($event)"
+                             >Onsite</li>
+                          <li><input type="checkbox" value="work from home"
+                              (change)="changeWorkmode($event)">Work form home</li>
+                          <li><input type="checkbox" value="hybrid"
+                              (change)="changeWorkmode($event)">Hybrid</li>
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </li>
-              <!-- 3 -->
-              <li class="refine-content">
-                <div class="search-box">
-                  <div class="dropdown">
-                    <button class="btn dropdown-toggle salarybtn" type="button"
-                      style="font-weight: 500;font-size: 14px;padding-left: 4px;" id="dropdownMenuButton1"
-                      data-bs-toggle="dropdown" aria-expanded="false">
-                      Deparment<i class="fa fa-angle-down" style="margin-left: 59px;"></i>
-                    </button>
-                    <ul class="dropdown-menu filter" aria-labelledby="dropdownMenuButton1">
-                      <li value="Start up" *ngFor="let dep of currentDepartment">
-                        <input type="checkbox" (change)="depatmentFilter($event)" value="{{dep._id}}">
-                        {{dep.Department}}
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
-              <!-- 4 -->
-              <li class="refine-content">
-                <div class="search-box">
-                  <div class="dropdown">
-                    <button class="btn dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
-                      data-bs-toggle="dropdown" aria-expanded="false">
-                      Location<i class="fa fa-angle-down" style="margin-left: 78px;"></i>
-                    </button>
-                    <ul class="dropdown-menu filter" aria-labelledby="dropdownMenuButton1">
-                      <li *ngFor="let loc of getLocation"><input type="checkbox" value="{{loc.district}}"
-                          (change)="addLocation($event)">{{loc.district}}</li>
+                  </li>
+                  <!-- 2 -->
 
-                    </ul>
-                  </div>
-                </div>
-              </li>
-              <!-- 5 -->
-              <li class="refine-content">
-                <div class="search-box">
-                  <div class="dropdown">
-                    <button class="btn dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
-                      data-bs-toggle="dropdown" aria-expanded="false">
-                      Salary<i class="fa fa-angle-down" style="margin-left: 95px;"></i>
-                    </button>
-                    <ul class="dropdown-menu filter" aria-labelledby="dropdownMenuButton1">
-                      <li><input type="checkbox" value="0-1" (change)="salaryrange($event)">0 to 1 lac</li>
-                      <li><input type="checkbox" value="1-2" (change)="salaryrange($event)">1 to 2 lac</li>
-                      <li><input type="checkbox" value="2-3" (change)="salaryrange($event)">2 to 3 lac</li>
-                      <li><input type="checkbox" value="2-4" (change)="salaryrange($event)">3 to 4 lac</li>
-                      <li><input type="checkbox" value="4-5" (change)="salaryrange($event)">4 to 5 lac</li>
-                      <li><input type="checkbox" value="5-8" (change)="salaryrange($event)">5 to 8 lac</li>
-                      <li><input type="checkbox" value="8-10" (change)="salaryrange($event)">8 to 10 lac</li>
-                      <li><input type="checkbox" value="10-13" (change)="salaryrange($event)">10 to 13 lac</li>
-                      <li><input type="checkbox" value="13-15" (change)="salaryrange($event)">13 to 15 lac</li>
-                      <li><input type="checkbox" value="15-20" (change)="salaryrange($event)">15 to 20 lac</li>
-                      <li><input type="checkbox" value="30-more" (change)="salaryrange($event)">30 lac+</li>
-                    </ul>
-                  </div>
-                </div>
+                  <li class="refine-content">
 
-              </li>
-              <!-- 6 -->
-              <li class="refine-content">
-                <div class="search-box">
-                  <div class="dropdown">
-                    <button class="btn dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
-                      data-bs-toggle="dropdown" aria-expanded="false">
-                      Company Type<i class="fa fa-angle-down" style="margin-left: 30px;"></i>
-                    </button>
-                    <ul class="dropdown-menu filter" aria-labelledby="dropdownMenuButton1">
-                      <li value="Start up"><input type="checkbox" (change)="companyType($event)" value="start up">Start
-                        up</li>
-                      <li value="1 to 2 lac"><input type="checkbox" (change)="companyType($event)"
-                          value="indian mnc">MNC</li>
-                      <li value="Corparate"><input type="checkbox" (change)="companyType($event)"
-                          value="corporate">Corparate</li>
-                      <li value="Foregin MNC"><input type="checkbox" (change)="companyType($event)"
-                          value="foreign-mnc">Foregin MNC</li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
-              <!-- 7 -->
-              <li class="refine-content">
-                <div class="dropdown">
-                  <button class="btn dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown" aria-expanded="false" style="padding-left: 18px;">
-                    Role<i class="fa fa-angle-down" style="margin-left: 106px;"></i>
-                  </button>
-                  <ul class="dropdown-menu filter" aria-labelledby="dropdownMenuButton1">
-                    <li value="Last 30 days" *ngFor="let role of roles"><input type="checkbox" value="{{role._id}}"
-                        (change)="roleChange($event)">{{role.Job_role}}</li>
+                    <button class="btn btn1 collapsebtn" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseExample" aria-expanded="false" style="
+                        font-weight: 500;
+                        font-size: 14px;" aria-controls="collapseExample">Experience</button><i class="fa fa-angle-down"
+                      style="margin-left: 45px;"></i>
+                    <div class="collapse" id="collapseExample">
+                      <div class="card card-body" style="padding: 0px;">
+                        <div style="display:flex">
+                          <select class="form-control select-type" formControlName="experienceAnotherfrom"
+                            (change)="experienceFrom($event)">
+                            <option [value]="null">From</option>
+                            <option value="0">Freshers</option>
+                            <option value="1">1 Year</option>
+                            <option value="2">2 Year</option>
+                            <option value="3">3 Year</option>
+                            <option value="4">4 Year</option>
+                            <option value="5">5 Year</option>
+                            <option value="6">6 Year</option>
+                            <option value="7">7 Year</option>
+                            <option value="8">8 Year</option>
+                            <option value="9">9 Year</option>
+                            <option value="10">10 Year</option>
+                            <option value="11">11 Year</option>
+                            <option value="12">12 Year</option>
+                            <option value="13">13 Year</option>
+                            <option value="14">14 Year</option>
+                            <option value="15">15 Year</option>
+                            <option value="16">16 Year</option>
+                            <option value="17">17 Year</option>
+                            <option value="18">18 Year</option>
+                            <option value="19">19 Year</option>
+                            <option value="20">20 Year</option>
+                            <option value="21">21 Year</option>
+                            <option value="22">22 Year</option>
+                            <option value="23">23 Year</option>
+                            <option value="24">24 Year</option>
+                            <option value="25">25 Year</option>
+                            <option value="26">26 Year</option>
+                            <option value="27">27 Year</option>
+                            <option value="28">28 Year</option>
+                            <option value="29">29 Year</option>
+                            <option value="30">30 Year</option>
 
-                  </ul>
-                </div>
-              </li>
-              <!-- 9 -->
-              <li class="refine-content">
-                <div class="search-box">
-                  <div class="dropdown">
-                    <button class="btn dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
-                      data-bs-toggle="dropdown" aria-expanded="false">
-                      Education<i class="fa fa-angle-down" style="margin-left: 68px;"></i>
-                    </button>
-                    <ul class="dropdown-menu filter" aria-labelledby="dropdownMenuButton1">
-                      <li value="Last 30 days" *ngFor="let cou of course"><input type="checkbox"
-                          (change)="EductionDetails($event)" value="{{cou._id}}">{{cou.Course}}</li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
-              <!-- 10 -->
-              <li class="refine-content">
-                <div class="search-box">
-                  <div class="dropdown">
-                    <button class="btn dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
-                      data-bs-toggle="dropdown" aria-expanded="false">
-                      Posed by<i class="fa fa-angle-down" style="margin-left: 73px;"></i>
-                    </button>
-                    <ul class="dropdown-menu filter" aria-labelledby="dropdownMenuButton1">
-                      <li value="Last 30 days"><input type="checkbox" (change)="postedBy($event)" value="Consultancy">Consultancy
-                      </li>
-                      <li value="Last 15 days"><input type="checkbox" (change)="postedBy($event)" value="Company">Company</li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
-              <!-- 11 -->
-              <li class="refine-content">
-                <div class="search-box">
-                  <div class="dropdown">
-                    <button class="btn dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
-                      data-bs-toggle="dropdown" aria-expanded="false">
-                      Industry<i class="fa fa-angle-down" style="margin-left: 80px;"></i>
-                    </button>
-                    <ul class="dropdown-menu filter" aria-labelledby="dropdownMenuButton1">
-                      <li value="Last 30 days" *ngFor="let ind of industry"><input type="checkbox"
-                          (change)="industryBy($event)" value="{{ind._id}}">{{ind.Industry}}</li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
-              <!-- 12 -->
-              <li class="refine-content">
-                <div class="dropdown">
-                  <button class="btn dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown" aria-expanded="false" style="padding-left: 18px;">
-                    Freshness<i class="fa fa-angle-down" style="margin-left: 66px;"></i>
-                  </button>
-                  <ul class="dropdown-menu filter" aria-labelledby="dropdownMenuButton1">
-                    <li value="Last 30 days"><input type="checkbox" (change)="freshness($event)" value="30">Last 30 days
-                    </li>
-                    <li value="Last 15 days"><input type="checkbox" (change)="freshness($event)" value="15">Last 15 days
-                    </li>
-                    <li value="Last 7 days"><input type="checkbox" (change)="freshness($event)" value="7">Last 7 days
-                    </li>
-                    <li value="Last 5 days"><input type="checkbox" (change)="freshness($event)" value="5">Last 5 days
-                    </li>
-                    <li value="Last 3 days"><input type="checkbox" (change)="freshness($event)" value="3">Last 3 days
-                    </li>
-                    <li value="Last 1 days"><input type="checkbox" (change)="freshness($event)" value="1">Last 1 days
-                    </li>
-                  </ul>
-                </div>
-              </li>
+                          </select>
+                          <select class="form-control select-type" formControlName="experienceAnotherto"
+                            (change)="experienceTo($event)">
+                            <option [value]="null">To</option>
+                            <option value="0">Freshers</option>
+                            <option value="1">1 Year</option>
+                            <option value="2">2 Year</option>
+                            <option value="3">3 Year</option>
+                            <option value="4">4 Year</option>
+                            <option value="5">5 Year</option>
+                            <option value="6">6 Year</option>
+                            <option value="7">7 Year</option>
+                            <option value="8">8 Year</option>
+                            <option value="9">9 Year</option>
+                            <option value="10">10 Year</option>
+                            <option value="11">11 Year</option>
+                            <option value="12">12 Year</option>
+                            <option value="13">13 Year</option>
+                            <option value="14">14 Year</option>
+                            <option value="15">15 Year</option>
+                            <option value="16">16 Year</option>
+                            <option value="17">17 Year</option>
+                            <option value="18">18 Year</option>
+                            <option value="19">19 Year</option>
+                            <option value="20">20 Year</option>
+                            <option value="21">21 Year</option>
+                            <option value="22">22 Year</option>
+                            <option value="23">23 Year</option>
+                            <option value="24">24 Year</option>
+                            <option value="25">25 Year</option>
+                            <option value="26">26 Year</option>
+                            <option value="27">27 Year</option>
+                            <option value="28">28 Year</option>
+                            <option value="29">29 Year</option>
+                            <option value="30">30 Year</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- 3 -->
+                  <li class="refine-content">
+                    <div class="search-box search-box1">
+                      <div class="dropdown">
+                        <button class="btn btn1 dropdown-toggle salarybtn" type="button"
+                          style="font-weight: 500;font-size: 14px;padding-left: 4px;width: 163px;" id="dropdownMenuButton1"
+                          data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
+                          Deparment<i class="fa fa-angle-down" style="margin-left: 59px;"></i>
+                        </button>
+                        <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
+                          <li value="Start up" *ngFor="let dep of currentDepartment">
+                            <input type="checkbox" (change)="depatmentFilter($event)" value="{{dep._id}}">
+                            {{dep.Department}}
+                          </li>
+                          <div style="margin-top: 7px;margin-left: 99px;">
+                            <a style="text-decoration: underline;" (click)="getDeparment('null')">View all</a>
+                          </div>
+                        </ul>
 
-            </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- 4 -->
+                  <li class="refine-content">
+                    <div class="search-box search-box1">
+                      <div class="dropdown">
+                        <button class="btn btn1 dropdown-toggle salarybtn" type="button" style="width:160px"
+                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
+                          Location<i class="fa fa-angle-down" style="margin-left: 77px;"></i>
+                        </button>
+                        <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
+                          <li *ngFor="let loc of getLocation"><input type="checkbox" value="{{loc.district}}"
+                              (change)="addLocation($event)">{{loc.district}}</li>
+
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- 5 -->
+                  <li class="refine-content">
+                    <div class="search-box search-box1">
+                      <div class="dropdown">
+                        <button class="btn btn1 dropdown-toggle salarybtn" style="width: 100px;" type="button"
+                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
+                          Salary<i class="fa fa-angle-down" style="margin-left: 92px;"></i>
+                        </button>
+                        <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
+                          <li><input type="checkbox" value="0-1" (change)="salaryrange($event)">0 to 1 lac</li>
+                          <li><input type="checkbox" value="1-2" (change)="salaryrange($event)">1 to 2 lac</li>
+                          <li><input type="checkbox" value="2-3" (change)="salaryrange($event)">2 to 3 lac</li>
+                          <li><input type="checkbox" value="2-4" (change)="salaryrange($event)">3 to 4 lac</li>
+                          <li><input type="checkbox" value="4-5" (change)="salaryrange($event)">4 to 5 lac</li>
+                          <li><input type="checkbox" value="5-8" (change)="salaryrange($event)">5 to 8 lac</li>
+                          <li><input type="checkbox" value="8-10" (change)="salaryrange($event)">8 to 10 lac</li>
+                          <li><input type="checkbox" value="10-13" (change)="salaryrange($event)">10 to 13 lac</li>
+                          <li><input type="checkbox" value="13-15" (change)="salaryrange($event)">13 to 15 lac</li>
+                          <li><input type="checkbox" value="15-20" (change)="salaryrange($event)">15 to 20 lac</li>
+                          <li><input type="checkbox" value="30-more" (change)="salaryrange($event)">30 lac+</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                  </li>
+                  <!-- 6 -->
+                  <li class="refine-content">
+                    <div class="search-box search-box1">
+                      <div class="dropdown">
+                        <button class="btn btn1 dropdown-toggle salarybtn" style="width: 100px;" type="button"
+                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
+                          Company Type<i class="fa fa-angle-down" style="margin-left: 28px;"></i>
+                        </button>
+                        <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
+                          <li value="Start up"><input type="checkbox" (change)="companyType($event)" value="start up">Start
+                            up</li>
+                          <li value="1 to 2 lac"><input type="checkbox" (change)="companyType($event)"
+                              value="indian mnc">MNC</li>
+                          <li value="Corparate"><input type="checkbox" (change)="companyType($event)"
+                              value="corporate">Corparate</li>
+                          <li value="Foregin MNC"><input type="checkbox" (change)="companyType($event)"
+                              value="foreign-mnc">Foregin MNC</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- 7 -->
+                  <li class="refine-content">
+                    <div class="dropdown search-box1">
+                      <button class="btn btn1 dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false" style="width: 100px;" data-bs-auto-close="outside">
+                        Role<i class="fa fa-angle-down" style="margin-left: 104px;"></i>
+                      </button>
+                      <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
+                        <li value="Last 30 days" *ngFor="let role of roles"><input type="checkbox" value="{{role._id}}"
+                            (change)="roleChange($event)">{{role.Job_role}}</li>
+                            <div style="margin-top: 7px;margin-left: 99px;">
+                              <a style="text-decoration: underline;" (click)="role('null')">View all</a>
+                            </div>
+                      </ul>
+
+                    </div>
+                  </li>
+                  <!-- 9 -->
+                  <li class="refine-content">
+                    <div class="search-box search-box1">
+                      <div class="dropdown">
+                        <button class="btn btn1 dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
+                          data-bs-toggle="dropdown" aria-expanded="false" style="width: 100px;" data-bs-auto-close="outside">
+                          Education<i class="fa fa-angle-down" style="margin-left: 65px;"></i>
+                        </button>
+                        <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
+                          <li value="Last 30 days" *ngFor="let cou of course"><input type="checkbox"
+                              (change)="EductionDetails($event)" value="{{cou._id}}">{{cou.Course}}</li>
+                          <div style="margin-top: 7px;margin-left: 99px;">
+                            <a style="text-decoration: underline;" (click)="getEducation('null')">View all</a>
+                          </div>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- 10 -->
+                  <li class="refine-content">
+                    <div class="search-box search-box1">
+                      <div class="dropdown">
+                        <button class="btn btn1 dropdown-toggle salarybtn" type="button" style="width: 100px"
+                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                          Posed by<i class="fa fa-angle-down" style="margin-left: 73px;"></i>
+                        </button>
+                        <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
+                          <li value="Last 30 days"><input type="checkbox" (change)="postedBy($event)" value="">Consultancy
+                          </li>
+                          <li value="Last 15 days"><input type="checkbox" (change)="postedBy($event)" value="">Company</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- 11 -->
+                  <li class="refine-content">
+                    <div class="search-box search-box1">
+                      <div class="dropdown">
+                        <button class="btn btn1 dropdown-toggle salarybtn" type="button" style="width: 100px"
+                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                          Industry<i class="fa fa-angle-down" style="margin-left: 80px;"></i>
+                        </button>
+                        <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
+                          <li value="Last 30 days" *ngFor="let ind of industry"><input type="checkbox"
+                              (change)="industryBy($event)" value="{{ind._id}}">{{ind.Industry}}</li>
+                          <div style="margin-top: 7px;margin-left: 99px;">
+                            <a style="text-decoration: underline;" (click)="getIndustry('null')">View all</a>
+                          </div>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- 12 -->
+                  <li class="refine-content">
+                    <div class="dropdown">
+                      <button class="btn btn1 dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false" style="width: 100px;" data-bs-auto-close="outside">
+                        Freshness<i class="fa fa-angle-down" style="margin-left: 66px;"></i>
+                      </button>
+                      <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
+                        <li value="Last 30 days"><input type="checkbox" (change)="freshness($event)" value="30">Last 30 days
+                        </li>
+                        <li value="Last 15 days"><input type="checkbox" (change)="freshness($event)" value="15">Last 15 days
+                        </li>
+                        <li value="Last 7 days"><input type="checkbox" (change)="freshness($event)" value="7">Last 7 days
+                        </li>
+                        <li value="Last 5 days"><input type="checkbox" (change)="freshness($event)" value="5">Last 5 days
+                        </li>
+                        <li value="Last 3 days"><input type="checkbox" (change)="freshness($event)" value="3">Last 3 days
+                        </li>
+                        <li value="Last 1 days"><input type="checkbox" (change)="freshness($event)" value="1">Last 1 days
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
