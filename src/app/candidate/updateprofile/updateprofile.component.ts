@@ -31,8 +31,9 @@ export class UpdateprofileComponent implements OnInit {
     gender: new FormControl('', Validators.required),
     maritalStatus: new FormControl('', Validators.required),
     relocate: new FormControl('', Validators.required),
-    preferredLocation:new FormControl('', Validators.required),
+    preferredLocation:new FormControl(null, Validators.required),
     languages: this.fb.array([], Validators.required),
+    locationdummy:new FormControl(null, Validators.required),
     searchbox: new FormControl(null),
     currentctc_th: new FormControl(''),
     update: new FormControl()
@@ -70,9 +71,7 @@ export class UpdateprofileComponent implements OnInit {
       this.keySkill = res;
     })
   }
-  options: any = {
-    componentRestrictions: { country: 'IN' },
-  };
+
   getAlldata() {
     this.candidateService.viewDetails().subscribe((res: any) => {
       this.viewAll = res.user;
@@ -337,21 +336,31 @@ export class UpdateprofileComponent implements OnInit {
       this.profileForm.get('currentctc').setErrors({ 'incorrect': true })
     }
   }
+  preferedLocations:any;
+  isLocation:any=false;
+  preferedLocation(data:any){
+    if(data.target.value){
+      this.isLocation=true
+      this.candidateService.get_allLocation(data.target.value).subscribe((res:any) => {
+        this.preferedLocations=res.predictions;
+        })
+    }else{
+      this.isLocation=false;
+    }
 
-  latitude:any;
-  longtitude:any;
-  handleAddressChange(address: Address) {
-
-    this.latitude = address.geometry.location.lat();
-    this.latitude = String(this.latitude)
-    this.longtitude = address.geometry.location.lng();
-    this.longtitude = String(this.longtitude)
-
+  }
+  val:any;
+  choose(e:any,location:any){
+    let datas = this.profileForm.get('preferredLocation')?.value;
+    let data = this.profileForm.get('locationdummy')?.value;
+    if(location){
+      datas.push(location)
+    }
+    this.val = e.structured_formatting.main_text
+    data.push(this.val)
+    console.log(data,datas)
     this.profileForm.patchValue({
-      lat: this.latitude,
-      long: this.longtitude,
-      preferredLocation: address.formatted_address
+      loc:''
     })
   }
-
 }
