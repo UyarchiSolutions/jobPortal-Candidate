@@ -134,7 +134,8 @@
                         (change)="addresume($event)" id="select-logo" class="form-control choose-file" placeholder="+Add Logo"
                           style="display: none;">
                       </div>
-                      <div class="resume-content-type">.docx, .doc, .pdf</div>
+                      <div *ngIf="!file_name" class="resume-content-type">.docx, .doc, .pdf</div>
+                      <div *ngIf="file_name" class="resume-content-type">{{file_name}}</div>
                     </div>
                   </div>
                   <div class="single-row error-data" *ngIf="isSubmitted&&Candidateform.get('resume')?.invalid">

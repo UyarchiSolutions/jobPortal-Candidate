@@ -24,6 +24,7 @@ export class EducationdetailsComponent implements OnInit {
   userID: any;
   private _fb: any;
   isSubmitted = false;
+  lang:any;
   constructor(private fb: FormBuilder, private candidate: CanditateService, private activate: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
@@ -45,6 +46,9 @@ export class EducationdetailsComponent implements OnInit {
     // }
     // })
     console.log(this.educationForm.get('educationArray').controls[0].status);
+    this.candidate.getLanguages().subscribe((res: any) => {
+      this.lang = res;
+    })
   }
   q: any;
   qualifiacation(val: any, index: any, phase: any) {
@@ -66,7 +70,7 @@ export class EducationdetailsComponent implements OnInit {
     })
     phase.get('Education')?.setValue(value);
     let q = this.qualification.find((data: any) => data.qualification == val.target.value)
-    console.log(q._id, "ssss");
+    console.log(phase.get('Education')?.setValue(value), "ssss");
     // dr
     if (val.target.value == 'Doctorate/phD') {
       phase.get('drQualification')?.setValue(q._id);
@@ -273,6 +277,14 @@ export class EducationdetailsComponent implements OnInit {
     });
   }
 
-
+  dropdown_disable(val:any){
+     if(this.qualification.find((res:any) => res.qualification ==val.get('Education')?.value)){
+      console.log("working")
+      return false;
+     }else{
+      console.log("working")
+      return false;
+     }
+  }
 
 }

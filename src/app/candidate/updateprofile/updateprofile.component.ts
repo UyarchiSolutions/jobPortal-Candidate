@@ -29,14 +29,14 @@ export class UpdateprofileComponent implements OnInit {
     preferredSkill: new FormControl(null, Validators.required),
     prefredBox: new FormControl(''),
     gender: new FormControl('', Validators.required),
-    maritalStatus: new FormControl('', Validators.required),
-    relocate: new FormControl('', Validators.required),
+    maritalStatus: new FormControl(null, Validators.required),
+    relocate: new FormControl(null, Validators.required),
     preferredLocation: new FormControl([], Validators.required),
     languages: this.fb.array([], Validators.required),
     searchbox: new FormControl(null),
     currentctc_th: new FormControl(''),
     update: new FormControl(),
-    location:new  FormControl()
+    location: new FormControl()
   })
   viewAll: any = [];
   keySkill: any;
@@ -107,11 +107,14 @@ export class UpdateprofileComponent implements OnInit {
       } else {
         this.profileForm.get('currentctc').setErrors(null)
       }
-      if (this.viewAll[0].relocate == 'Yes') {
-        this.profileForm.get('preferredLocation').setErrors({ 'incorrect': true })
-      } else {
-        this.profileForm.get('preferredLocation').setErrors(null)
-      }
+
+      // if (this.viewAll[0].relocate == 'Yes') {
+      //   console.log(this.viewAll[0].preferredLocation,"vbnvghvgvfg")
+      //   this.profileForm.get('preferredLocation').setErrors({ 'incorrect': true })
+      // } else {
+      //   this.profileForm.get('preferredLocation').setErrors(null)
+      // }
+
       this.viewAll[0].languages.forEach((element: any) => {
         const data = this.profileForm.get('languages').push(this.fb.group({
           lang: new FormControl(element.lang),
@@ -121,9 +124,18 @@ export class UpdateprofileComponent implements OnInit {
     })
   }
   selectImg1: any;
+  selectImg2: any;
   selectedImg1(event: any) {
     this.selectImg1 = event.target.files[0];
-
+    // for (let i = 0; i < filesAmount; i++) {
+    //   const res = img.target.files[i];
+    //   this.gallery.push(res);
+      var reader = new FileReader();
+      reader.readAsDataURL(this.selectImg1);
+      reader.onload = (event) => {
+        this.selectImg2.push((<FileReader>event.target).result);
+      // }
+    }
   }
   getQualified() {
     return (<FormArray>this.profileForm.get('qualify')).controls
@@ -143,9 +155,7 @@ export class UpdateprofileComponent implements OnInit {
     if (value.length != 0) {
       if (value[value.length - 1] != null && value[value.length - 1] != '') {
         this.getKeyskills(value[value.length - 1])
-        console.log("well working")
       } else {
-        console.log("working")
         console.log(this.profileForm.get('keyskill')?.setErrors({ 'incorrect': true }), "bjdfjdbfjdfb")
       }
     }
@@ -164,7 +174,7 @@ export class UpdateprofileComponent implements OnInit {
     }
     if (val.length != 0) {
       if (val[val.length - 1] != null && val[val.length - 1] != '') {
-        this.getAllpreferd(val[val.length - 1])
+        this.getKeyskills(val[val.length - 1])
       } else {
         // console.log("working")
         // console.log(this.profileForm.get('prefredBox')?.setErrors({'incorrect':true}),"bjdfjdbfjdfb")
@@ -200,7 +210,7 @@ export class UpdateprofileComponent implements OnInit {
     }
     if (value.length != 0) {
       if (value[value.length - 1] != null && value[value.length - 1] != '') {
-        this.getAllpreferd(value[value.length - 1])
+        this.getKeyskills(value[value.length - 1])
       } else {
 
       }
@@ -220,7 +230,7 @@ export class UpdateprofileComponent implements OnInit {
     }
   }
   // push skills
-
+  keySkill_alreay: any = false;
   checkSkill(event: any, skill: any) {
     this.isDisplay = false;
     let index: any = this.profileForm.get('keyskill')?.value;
@@ -230,7 +240,21 @@ export class UpdateprofileComponent implements OnInit {
       this.profileForm.get('keyskill')?.setValue(index)
       let search: any = index.toString() + ","
       this.profileForm.get('searchbox')?.setValue(search);
+      this.profileForm.get('searchbox')?.setValue(search);
     }
+    // if (index.length > 1) {
+    //   let skilIndex = index.findIndex((res: any) => res == skill)
+    //   if (skilIndex != -1) {
+    //     console.log("not working")
+    //     this.keySkill_alreay = true
+    //     this.profileForm.get('keyskill')?.setErrors({ 'incorrect': true })
+    //   } else {
+    //     this.keySkill_alreay = false;
+    //     this.profileForm.get('keyskill')?.setErrors(null)
+    //   }
+    // }else{
+    //   this.keySkill_alreay = false
+    // }
   }
   languageskill: any = [];
   selectlanguages: any = [];
@@ -346,7 +370,7 @@ export class UpdateprofileComponent implements OnInit {
     } else {
       this.isLocation = false
     }
-   this.getLocation(data.target.value)
+    this.getLocation(data.target.value)
   }
   getLocation(value: any) {
     this.candidateService.get_allLocation(value).subscribe((res: any) => {
@@ -354,19 +378,19 @@ export class UpdateprofileComponent implements OnInit {
     })
   }
   val: any;
-  datas:any=[];
+  datas: any = [];
   choose(e: any, location: any) {
-    this.isLocation=false;
+    this.isLocation = false;
     if (location) {
       this.datas.push(location);
       this.profileForm.patchValue({
-        location:''
+        location: ''
       })
     }
     this.profileForm.get('preferredLocation')?.setValue(this.datas)
-    console.log(this.profileForm.get('preferredLocation')?.valid,"value")
+    console.log(this.profileForm.get('preferredLocation')?.valid, "value")
   }
-  remove_location(data:any){
+  remove_location(data: any) {
     let array = this.profileForm.get('preferredLocation')?.value;
     let i: number = 0;
     array.forEach((item: any) => {
@@ -376,12 +400,12 @@ export class UpdateprofileComponent implements OnInit {
       }
       i++;
     });
-    if(array.length == 0){
+    if (array.length == 0) {
       // this.isLoc = false
     }
     console.log(array.length)
   }
-  get_maintext(data:any){
+  get_maintext(data: any) {
     console.log(data)
     let text = data.split(',')
     console.log(text[0])

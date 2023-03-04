@@ -31,6 +31,7 @@ export class CanRegisterComponent implements OnInit {
 
   }
   // File upload
+  file_name:any='';
   addresume(file: any) {
     console.log("sbdhsbdhj")
     this.candidateFile = null;
@@ -41,7 +42,8 @@ export class CanRegisterComponent implements OnInit {
         res.type == 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
       ) {
         this.candidateFile = res;
-        console.log(this.candidateFile, "sdsdfsf")
+        this.file_name=this.candidateFile.name
+        console.log(this.candidateFile.name, "sdsdfsf")
       }
     }
   }

@@ -35,8 +35,8 @@
                     <div class="content-box errorCondent1">
                       <select id="select" class="form-control" (change)="qualifiacation($event,i,phase)"
                         formControlName="Education">
-                        <option value="null" disabled selected>Select</option>
-                        <option value="{{quli.qualification}}" *ngFor="let quli of qualification">{{quli.qualification}}
+                        <option [ngValue]="null" disabled selected>Select</option>
+                        <option value="{{quli.qualification}}" [disabled]="dropdown_disable(phase)" *ngFor="let quli of qualification">{{quli.qualification}}
                         </option>
                       </select>
                       <div class="text-danger"
@@ -44,7 +44,6 @@
                         <small>Qualification required{{i}}</small>
                       </div>
                     </div>
-
                   </div>
                   <!-- doctorate/Phd -->
                   <div class="phd-master-graduation" *ngIf="phase.get('Education')?.value=='Doctorate/phD'">
@@ -462,11 +461,11 @@
                     <div class="single-row">
                       <label for="">Board :</label>
                       <div class="content-box errorCondent1">
-                        <input type="text" class="form-control" placeholder="Enter Board" formControlName="hsBoard">
-                        <div class="text-danger"
-                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('hsBoard').invalid">
-                          <small>Board System required</small>
-                        </div>
+                        <select class="form-control select-type" formControlName="hsBoard">
+                          <option [ngValue]="null" disabled selected>Select</option>
+                          <option *ngFor="let board of hscCourse" value="{{board.Board}}">{{board.Board}}</option>
+                          <option value="2017">2017</option>
+                        </select>
                       </div>
                     </div>
                     <div class="single-row">
@@ -488,9 +487,8 @@
                       <label for="">School Medium:</label>
                       <div class="content-box errorCondent1">
                         <select class="form-control select-type" formControlName="hsMedium">
-                          <option value="option1" disabled selected>Select</option>
-                          <option value="Tamil">Tamil</option>
-                          <option value="English">English</option>
+                          <option [ngValue]="null" disabled selected>Select</option>
+                          <option *ngFor="let languages of lang" value="{{languages.School_Medium}}">{{languages.School_Medium}}</option>
                         </select>
                         <div class="text-danger"
                           *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('hsMedium').invalid">
@@ -517,11 +515,11 @@
                     <div class="single-row">
                       <label for="">Board :</label>
                       <div class="content-box errorCondent1">
-                        <input type="text" class="form-control" placeholder="Enter Board" formControlName="sslcBoard">
-                        <div class="text-danger"
-                          *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('sslcBoard').invalid">
-                          <small>Board required</small>
-                        </div>
+                        <select class="form-control select-type" formControlName="sslcBoard">
+                          <option [ngValue]="null" disabled selected>Select</option>
+                          <option *ngFor="let board of sslcspe" value="{{board.Board}}">{{board.Board}}</option>
+                        </select>
+
                       </div>
                     </div>
                     <div class="single-row">
@@ -543,9 +541,8 @@
                       <label for="">School Medium:</label>
                       <div class="content-box errorCondent1">
                         <select class="form-control select-type" formControlName="sslcMedium">
-                          <option value="option1" disabled selected>Select</option>
-                          <option value="Tamil">Tamil</option>
-                          <option value="English">English</option>
+                          <option [ngValue]="null" disabled selected>Select</option>
+                          <option *ngFor="let languages of lang" value="{{languages.School_Medium}}">{{languages.School_Medium}}</option>
                         </select>
                         <div class="text-danger"
                           *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('sslcMedium').invalid">

@@ -259,6 +259,10 @@ export class CanGetComponent implements OnInit {
       this.searchForm.get('searchbox')?.setValue(search);
     }
   }
+  // location
+  // displayPlace($event:any){
+
+  // }
   // recent Search
   recentSearch() {
     this.canditSarvice.getRecentsearch().subscribe((res: any) => {
@@ -275,6 +279,7 @@ export class CanGetComponent implements OnInit {
         searchbox: res.search,
         search: res.search,
       })
+      console.log(res.experience,"search")
       // this.datavalues = res.search
     })
   }

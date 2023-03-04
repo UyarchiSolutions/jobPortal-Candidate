@@ -247,4 +247,8 @@ get_allLocation(data:any){
   let query = new URLSearchParams(value).toString();
   return this.http.get(this.baseUrl+`/v1/employerdetail/location_api?`+query)
 }
+//ssls borad
+get_Board(id:any){
+  return this.http.get(this.baseUrl+`/v1/educationDetails/get_sslc_course/${id}`)
+}
 }

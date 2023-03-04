@@ -34,6 +34,13 @@
                           style="display: none;" formControlName="image" accept="image/gif, image/jpeg, image/png"
                           (change)="selectedImg1($event)">
                       </div>
+                      <div>
+                        <label for="select-logo" class="form-control logo-btn">+ Add Profile
+                          Picture</label>
+                        <input type="file" id="select-logo" class="form-control logo-btn" placeholder="+Add Logo"
+                          style="display: none;" formControlName="image" accept="image/gif, image/jpeg, image/png"
+                          (change)="selectedImg1($event)">
+                      </div>
                     </div>
                   </div>
                   <div class="single-row">
@@ -61,7 +68,7 @@
                     <label></label>
                     <div class="content-box drop-data">
                       <ul>
-                        <li *ngFor="let skill of keySkill" style="cursor:pointer"
+                        <li *ngFor="let skill of keySkill"  style="cursor:pointer"
                           (click)="checkSkill($event,skill.Skill_Title)">
                           <span>{{skill.Skill_Title}}</span>
                         </li>
@@ -72,6 +79,12 @@
                     <label for=""></label>
                     <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('keyskill')?.invalid">
                       <p>Key Skills is required!</p>
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="keySkill_alreay">
+                    <label for=""></label>
+                    <div class="error-data" *ngIf="keySkill_alreay">
+                      <p>Key Skills Already exist!</p>
                     </div>
                   </div>
                   <div class="single-row">
@@ -264,9 +277,9 @@
                     <label></label>
                     <div class="content-box current-data">
                       <ul style="max-width: 109px;">
-                        <li *ngFor="let skill of prferedSkill" style="cursor:pointer"
-                          (click)="checkcurrent($event,skill.Industry)">
-                          <span>{{skill.Industry}}</span>
+                        <li *ngFor="let skill of keySkill" style="cursor:pointer"
+                          (click)="checkcurrent($event,skill.Skill_Title)">
+                          <span>{{skill.Skill_Title}}</span>
                         </li>
                       </ul>
                     </div>
@@ -281,16 +294,16 @@
                     <label for="" class="lable-data">Prefered skill <span>*</span>:</label>
                     <div class="content-box">
                       <input type="text" class="form-control" (keyup)="displayPrefered($event)"
-                        placeholder="Enter Key Skills" formControlName="prefredBox">
+                        placeholder="Enter Prefered Skills" formControlName="prefredBox">
                     </div>
                   </div>
                   <div class="single-row" *ngIf="isShow" style="margin-top:0px;">
                     <label></label>
                     <div class="content-box pre-data">
                       <ul>
-                        <li *ngFor="let skill of prferedSkill" style="cursor:pointer"
-                          (click)="checkPrefered($event,skill.Industry)">
-                          <span>{{skill.Industry}}</span>
+                        <li *ngFor="let skill of keySkill" style="cursor:pointer;width: 101%;"
+                          (click)="checkPrefered($event,skill.Skill_Title)">
+                          <span>{{skill.Skill_Title}}</span>
                         </li>
                       </ul>
                     </div>
@@ -322,7 +335,7 @@
                     <label for="" class="lable-data">Marital Status <span>*</span>:</label>
                     <div class="content-box">
                       <select class="form-control select-type" formControlName="maritalStatus">
-                        <option value="option1" disabled selected>Select</option>
+                        <option [ngValue]="null" disabled selected>Select</option>
                         <option value="Single">Single</option>
                         <option value="Married">Married</option>
                       </select>
@@ -339,7 +352,7 @@
                     <div class="content-box">
                       <select class="form-control select-type" formControlName="relocate"
                         (change)="changeRelocate($event)">
-                        <option value="option1" disabled selected>Select</option>
+                        <option [ngValue]="null" disabled selected>Select</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                       </select>

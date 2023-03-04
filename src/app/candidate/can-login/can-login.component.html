@@ -78,7 +78,12 @@
                   <label for=""></label>
                   <div class="content-box" >
                     <p  *ngIf="login.get('password')?.invalid && isSubmmitted">Password is required</p>
-                    <p *ngIf="passwordStatus">Password doesn't match</p>
+                  </div>
+                </div>
+                <div class="single-row error-massage">
+                  <label for=""></label>
+                  <div class="content-box" >
+                    <p *ngIf="login.get('password')?.valid&&passwordStatus">Password doesn't match</p>
                   </div>
                 </div>
                 <div class="forgot-pass">
