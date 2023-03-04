@@ -73,7 +73,7 @@ export class GetallcandidateProfileComponent implements OnInit {
         mobileNumber: this.mobile_data,
         location: this.getAlldetails[0].location
       })
-      this.pdfUrl = `https://livebroadcast.click/resumes/1675427235220.pdf`;
+      this.pdfUrl =this.getAlldetails[0].resume;
     })
   }
 

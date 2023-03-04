@@ -353,15 +353,17 @@
                   </div>
                   <div class="single-row" *ngIf="this.profileForm.get('relocate')?.value =='Yes'">
                     <label for="" class="lable-data">Prefered Location<span>*</span>:</label>
-                    <div class="content-box">
+                    <div class="content-box content-box-block">
+                      <ng-container *ngIf="profileForm.get('preferredLocation')?.value">
+                        <span class="badge bg-light badge1 mb-1 mx-1" style="cursor:pointer"
+                          (click)="remove_location(data)"
+                          *ngFor="let data of profileForm.get('preferredLocation')?.value">
+                          <span style="color: black;">{{get_maintext(data)}}</span>
+                          <span  style="color: black;" class="close-mark mx-1">x</span>
+                        </span>
+                      </ng-container>
                       <input type="text" class="form-control" placeholder="Enter Key Skills"
-                       (keyup)="preferedLocation($event)" formControlName="locationdummy">
-                    </div>
-                  </div>
-                  <div class="single-row" *ngIf="this.profileForm.get('relocate')?.value =='Yes'">
-                    <label for=""></label>
-                    <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('preferredLocation')?.invalid">
-                      <p>Prefered Location is required!</p>
+                        (keyup)="preferedLocation($event)" formControlName="location">
                     </div>
                   </div>
                   <div class="single-row" *ngIf="isLocation" style="margin-top:0px;">
@@ -369,8 +371,8 @@
                     <div class="content-box content-box-block locarea" style="background: white;">
                       <ul style="padding-left: 0px;list-style: none;
                         margin-left: 6px;">
-                        <li *ngFor="let pre of preferedLocations" class="mt-1 name" style="cursor:pointer;font-size: 13px;"
-                          (click)="choose(pre,pre?.description)">
+                        <li *ngFor="let pre of preferedLocations" class="mt-1 name"
+                          style="cursor:pointer;font-size: 13px;" (click)="choose(pre,pre.description)">
                           <span><i>
                               <svg width="15" height="15" viewBox="0 0 20 20" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -382,6 +384,12 @@
                           <span style="padding-left: 8px">{{pre?.description}}</span>
                         </li>
                       </ul>
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="this.profileForm.get('relocate')?.value =='Yes'">
+                    <label for=""></label>
+                    <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('preferredLocation')?.invalid">
+                      <p>Prefered Location is required!</p>
                     </div>
                   </div>
                   <div class="dropdown single-row">

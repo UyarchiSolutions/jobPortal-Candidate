@@ -8,7 +8,8 @@ import { CanditateService } from '../canditate.service';
   styleUrls: ['./view-fulldetails.component.css']
 })
 export class ViewFulldetailsComponent implements OnInit {
-  getAlldetails:any=[]
+  getAlldetails:any=[];
+  check:any=false;
   constructor(private canditateService:CanditateService,private router:Router) { }
 
   ngOnInit(){
@@ -34,5 +35,43 @@ export class ViewFulldetailsComponent implements OnInit {
   }
   go(){
     this.router.navigate(['/canJobs'])
+  }
+  index: any;
+  isDisplayIcon(value: any, know: any) {
+    this.index = value.find((res: any) => res == know)
+    if (this.index) {
+      this.check = true;
+      return this.check
+    }
+    else {
+      this.check = false;
+      return this.check;
+    }
+  }
+  isCheck = false;
+  isDisplayIcon2(value: any, know: any) {
+    this.index = value.find((res: any) => res == know);
+    if (this.index) {
+      this.isCheck = true;
+      return this.isCheck;
+    }
+    else {
+      this.isCheck = false;
+
+      return this.isCheck;
+    }
+  }
+  ischeck3 = false;
+  isDisplayIcon3(value: any, know: any) {
+    this.index = value.find((res: any) => res == know)
+    if (this.index) {
+      this.ischeck3 = true;
+      return this.ischeck3;
+    }
+    else {
+      this.ischeck3 = false;
+      console.log(this.ischeck3, "fngjgnhjfghj")
+      return this.ischeck3;
+    }
   }
 }

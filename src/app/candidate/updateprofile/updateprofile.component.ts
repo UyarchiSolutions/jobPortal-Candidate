@@ -31,12 +31,12 @@ export class UpdateprofileComponent implements OnInit {
     gender: new FormControl('', Validators.required),
     maritalStatus: new FormControl('', Validators.required),
     relocate: new FormControl('', Validators.required),
-    preferredLocation: new FormControl(null, Validators.required),
+    preferredLocation: new FormControl([], Validators.required),
     languages: this.fb.array([], Validators.required),
-    locationdummy: new FormControl(null, Validators.required),
     searchbox: new FormControl(null),
     currentctc_th: new FormControl(''),
-    update: new FormControl()
+    update: new FormControl(),
+    location:new  FormControl()
   })
   viewAll: any = [];
   keySkill: any;
@@ -340,31 +340,13 @@ export class UpdateprofileComponent implements OnInit {
   preferedLocations: any;
   isLocation: any = false;
   preferedLocation(data: any) {
-    let index: any = this.profileForm.get('preferredLocation')?.value;
-    let value = data.target.value.split(",");
+    let value = data.target.value
     if (data.target.value) {
       this.isLocation = true;
     } else {
       this.isLocation = false
     }
-    if (value.length != 0) {
-      if (value[value.length - 1] != null && value[value.length - 1] != '') {
-        this.getLocation(value[value.length - 1])
-      } else {
-        // console.log("working")
-        // console.log(this.profileForm.get('keyskill')?.setErrors({ 'incorrect': true }), "bjdfjdbfjdfb")
-      }
-    }
-    this.profileForm.get('preferredLocation')?.setValue(value)
-    // if(data.target.value){
-    //   this.isLocation=true
-    //   this.candidateService.get_allLocation(data.target.value).subscribe((res:any) => {
-    //     this.preferedLocations=res.predictions;
-    //     })
-    // }else{
-    //   this.isLocation=false;
-    // }
-
+   this.getLocation(data.target.value)
   }
   getLocation(value: any) {
     this.candidateService.get_allLocation(value).subscribe((res: any) => {
@@ -372,17 +354,37 @@ export class UpdateprofileComponent implements OnInit {
     })
   }
   val: any;
+  datas:any=[];
   choose(e: any, location: any) {
-    let datas = this.profileForm.get('preferredLocation')?.value;
-    let data = this.profileForm.get('locationdummy')?.value;
+    this.isLocation=false;
     if (location) {
-      datas.push(location)
+      this.datas.push(location);
+      this.profileForm.patchValue({
+        location:''
+      })
     }
-    this.val = e.structured_formatting.main_text
-    data.push(this.val)
-    console.log(data, datas)
-    this.profileForm.patchValue({
-      loc: ''
-    })
+    this.profileForm.get('preferredLocation')?.setValue(this.datas)
+    console.log(this.profileForm.get('preferredLocation')?.valid,"value")
+  }
+  remove_location(data:any){
+    let array = this.profileForm.get('preferredLocation')?.value;
+    let i: number = 0;
+    array.forEach((item: any) => {
+      if (item == data) {
+        array.splice(i, 1);
+        return;
+      }
+      i++;
+    });
+    if(array.length == 0){
+      // this.isLoc = false
+    }
+    console.log(array.length)
+  }
+  get_maintext(data:any){
+    console.log(data)
+    let text = data.split(',')
+    console.log(text[0])
+    return text[0]
   }
 }

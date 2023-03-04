@@ -37,11 +37,11 @@
               </div>
               <div class="search-box second-search-box">
                 <input type="text" class="form-control location" placeholder="Enter Location"
-                  formControlName="Location">
+                  formControlName="Location" style="width: 101%;">
               </div>
               <div class="search-box">
                 <select class="form-control select-type douple-input-first" formControlName="experience">
-                  <option value="option1" disabled selected>Year</option>
+                  <option [ngValue]="null" disabled selected>Year</option>
                   <option value="0">Freshers</option>
                   <option value="1">1 Year</option>
                   <option value="2">2 Year</option>
@@ -114,7 +114,7 @@
                 <button class="btn btn1 collapsebtn" type="button" data-bs-toggle="collapse"
                   data-bs-target="#collapseExample" aria-expanded="false" style="
                     font-weight: 500;
-                    font-size: 14px;" aria-controls="collapseExample">Experience</button><i class="fa fa-angle-down"
+                    font-size: 14px;padding-left: 0px;" aria-controls="collapseExample">Experience</button><i class="fa fa-angle-down"
                   style="margin-left: 45px;"></i>
                 <div class="collapse" id="collapseExample">
                   <div class="card card-body" style="padding: 0px;">
@@ -515,7 +515,7 @@
               {{job.name}}
             </div>
             <div class="col wrap">
-              {{job.jobTittle}}
+              {{job.role}}
             </div>
             <div class="col wrap">
               {{job.jobLocation}}

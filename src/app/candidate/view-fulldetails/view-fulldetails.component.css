@@ -61,3 +61,7 @@ select {
   border-radius: 5px;
 
 }
+.type{
+  font-style: italic;
+  font-size: 13px;
+}

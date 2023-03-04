@@ -55,7 +55,7 @@ export class EmpJobpostComponent implements OnInit {
     venue:new FormControl(null,Validators.required),
     loc:new FormControl(null,Validators.required),
     recruiterId:new FormControl(null,Validators.required)
-    
+
   });
   job_post(){
     console.log(this.jobpostForm.value)
@@ -100,7 +100,7 @@ export class EmpJobpostComponent implements OnInit {
       jobForm.append('recruiterList1', this.jobpostForm.get('recruiterList1')?.value);
       jobForm.append('venue', this.jobpostForm.get('venue')?.value);
       jobForm.append('recruiterId', this.jobpostForm.get('recruiterId')?.value);
-    
+
 
 
 
@@ -117,7 +117,7 @@ export class EmpJobpostComponent implements OnInit {
         }
       })
     }
-    
+
 
   }
   keySkill: any;
@@ -129,7 +129,7 @@ export class EmpJobpostComponent implements OnInit {
   role_data: any;
   is_new: boolean =false;
   is_list: boolean=false;
- 
+
   dropdownSettings: IDropdownSettings = {
     singleSelection: false,
     idField: '_id',
@@ -177,7 +177,7 @@ export class EmpJobpostComponent implements OnInit {
   is_course: boolean = false;
   quaname: any;
   educationArray:any=[
-   
+
   ];
   spclname: any;
   pushdata1:any;
@@ -194,7 +194,7 @@ export class EmpJobpostComponent implements OnInit {
   submitted: boolean = false;
   now: any;
   nowto:any;
-  predictions: any;
+  predictions: any=[];
   datatext: any;
   val: any;
   address: any;
@@ -204,7 +204,7 @@ export class EmpJobpostComponent implements OnInit {
     const datePipe = formatDate(new Date(), 'yyyy-MM-dd', 'en-IN')
     const time = formatDate(new Date(), 'hh:mm', 'en-IN')
     this.now = datePipe
-    
+
     this.editor = new Editor();
     this.editorcan = new Editor();
     this.editorsal = new Editor();
@@ -243,11 +243,11 @@ export class EmpJobpostComponent implements OnInit {
   ngOnDestroy(): void {
     this.editor.destroy();
   }
-  
+
   search_skills(data:any){
     if (data.target.value) {
       this.isDisplay = true;
-    } 
+    }
     else {
       this.isDisplay = false
     }
@@ -290,7 +290,7 @@ export class EmpJobpostComponent implements OnInit {
     console.log(datas)
     console.log(data)
     // this.val = e.structured_formatting.main_text
-   
+
     this.jobpostForm.patchValue({
       loc:''
     })
@@ -322,7 +322,7 @@ export class EmpJobpostComponent implements OnInit {
   pre(preview:any){
     this.submitted = true
     if(this.jobpostForm.valid){
-      preview.click();  
+      preview.click();
       console.log(this.depart_data)
       if(this.jobpostForm.get('role')?.value){
         let index = this.role_data.find((r: any) => r._id == this.jobpostForm.get('role')?.value)
@@ -331,7 +331,7 @@ export class EmpJobpostComponent implements OnInit {
       }
       // if(this.jobpostForm.get('qualification')?.value){
       //   let index = this.qua_data.find((r: any) => r._id == this.jobpostForm.get('qualification')?.value)
-      //   this.quadata = index.qualification     
+      //   this.quadata = index.qualification
       // }
       if(this.jobpostForm.get('department')?.value){
         let index = this.depart_data.find((r: any) => r._id == this.jobpostForm.get('department')?.value)
@@ -344,8 +344,8 @@ export class EmpJobpostComponent implements OnInit {
         this.inddata = index.Industry
       }
     }
-    
-    
+
+
   }
   dispalye(data: any) {
     console.log("lusu")
@@ -390,7 +390,7 @@ export class EmpJobpostComponent implements OnInit {
          this.jobpostForm.get('recruiterNumber')?.setErrors(null);
     }
     else{
-        
+
          this.jobpostForm.get('recruiterName')?.setValue('');
          this.jobpostForm.get('recruiterEmail')?.setValue('');
          this.jobpostForm.get('recruiterNumber')?.setValue('');
@@ -415,7 +415,7 @@ export class EmpJobpostComponent implements OnInit {
       this.qua_data = res
     })
   }
-  
+
   DeSelect_putcourse(e:any){
     console.log(e)
     let i: number = 0;
@@ -470,7 +470,7 @@ export class EmpJobpostComponent implements OnInit {
         i++;
       });
     }
-    
+
   }
   selectcourse(e:any,event:any){
     console.log(e)
@@ -506,11 +506,11 @@ export class EmpJobpostComponent implements OnInit {
       });
     }
     console.log(this.educationArray)
-   
+
   }
   selectspcl(e:any,event:any){
     this.spclname = e.Specialization
-    
+
     if(event.target.checked){
       this.educationArray.push(
         {
@@ -537,7 +537,7 @@ export class EmpJobpostComponent implements OnInit {
         i++;
       });
     }
-    
+
   }
   rem(data:any){
     console.log(data)
@@ -576,15 +576,15 @@ export class EmpJobpostComponent implements OnInit {
         this.jobpostForm.get('recruiterList1')?.setErrors(null);
       }
       if(this.apply_method == 'telephone'){
-      
+
         this.jobpostForm.get('recruiterEmail')?.setErrors(null);
         this.jobpostForm.get('recruiterList1')?.setErrors({ incorrect: true });
-        
+
       }
       if(this.apply_method == 'treatjobs'){
         this.jobpostForm.get('recruiterEmail')?.setErrors(null);
         this.jobpostForm.get('recruiterList1')?.setErrors(null);
-       
+
       }
   }
   MAX_LENGTH = 250;
@@ -609,7 +609,7 @@ export class EmpJobpostComponent implements OnInit {
     else{
       this.isLoc = false;
     }
-    
+
   }
   choose(e:any,location:any){
     let datas = this.jobpostForm.get('jobLocation')?.value;
@@ -637,7 +637,7 @@ export class EmpJobpostComponent implements OnInit {
       this.jobpostForm.get('venue')?.setErrors({ incorrect: true });
       this.jobpostForm.get('recruiterList')?.setErrors({ incorrect: true });
       this.jobpostForm.get('apply_method')?.setErrors(null);
-     
+
     }
     else{
       this.jobpostForm.get('interviewstartDate')?.setErrors(null);
@@ -665,7 +665,7 @@ export class EmpJobpostComponent implements OnInit {
     console.log(array.length)
   }
   get_maintext(data:any){
-    console.log(data)   
+    console.log(data)
     let text = data.split(',')
     console.log(text[0])
     return text[0]

@@ -177,3 +177,6 @@ close-mark{
   /* overflow:hidden; */
   white-space: nowrap;
 }
+.content-box-block{
+  display: block !important;
+}
