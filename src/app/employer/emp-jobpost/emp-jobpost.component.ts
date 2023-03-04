@@ -19,7 +19,6 @@ export class EmpJobpostComponent implements OnInit {
     jobTittle : new FormControl('', Validators.required),
     jobDescription : new FormControl('', Validators.required),
     keySkill :  new FormControl([], Validators.required),
-    educationalQualification : new FormControl('', Validators.required),
     salaryRangeFrom : new FormControl(null),
     salaryRangeTo : new FormControl(null),
     experienceFrom : new FormControl(null, Validators.required),
@@ -32,7 +31,7 @@ export class EmpJobpostComponent implements OnInit {
     industry : new FormControl(null, Validators.required),
     preferedIndustry : this.formBuilder.array([], Validators.required),
     jobLocation : new FormControl([], Validators.required),
-    location:new FormControl([], Validators.required),
+    location:new FormControl([]),
     employmentType : new FormControl(null, Validators.required),
     openings : new FormControl(''),
     department: new FormControl(null, Validators.required),
@@ -53,12 +52,13 @@ export class EmpJobpostComponent implements OnInit {
     recruiterList:new FormControl(null,Validators.required),
     recruiterList1:new FormControl(null,Validators.required),
     venue:new FormControl(null,Validators.required),
-    loc:new FormControl(null,Validators.required),
+    loc:new FormControl(null),
     recruiterId:new FormControl(null,Validators.required)
 
   });
   job_post(){
-    console.log(this.jobpostForm.value)
+    console.log(this.jobpostForm)
+    console.log(this.jobpostForm.valid)
     this.submitted = true;
     if(this.jobpostForm.valid){
 
@@ -282,13 +282,6 @@ export class EmpJobpostComponent implements OnInit {
     this.longtitude = address.geometry.location.lng();
     console.log(this.latitude, this.longtitude)
     this.address = address.formatted_address
-    let datas = this.jobpostForm.get('jobLocation')?.value;
-    let data = this.jobpostForm.get('location')?.value;
-    datas.push(this.address)
-    let split = this.address.split(',');
-     data.push(split[0])
-    console.log(datas)
-    console.log(data)
     // this.val = e.structured_formatting.main_text
 
     this.jobpostForm.patchValue({
@@ -611,20 +604,18 @@ export class EmpJobpostComponent implements OnInit {
     }
 
   }
+  datas:any=[]
   choose(e:any,location:any){
-    let datas = this.jobpostForm.get('jobLocation')?.value;
+
     if(location){
-      datas.push(location)
+      this.datas.push(location)
       this.isLoc = false
     }
-    console.log(datas)
-    // let data = this.jobpostForm.get('location')?.value;
-    // this.val = e.structured_formatting.main_text
-    // data.push(this.val)
-    // console.log(data,datas)
     this.jobpostForm.patchValue({
       loc:''
     })
+    this.jobpostForm.get('jobLocation')?.setValue(this.datas)
+    console.log(this.jobpostForm.get('jobLocation')?.valid)
   }
   type:any;
   checkerr_inter(e:any){
@@ -637,7 +628,6 @@ export class EmpJobpostComponent implements OnInit {
       this.jobpostForm.get('venue')?.setErrors({ incorrect: true });
       this.jobpostForm.get('recruiterList')?.setErrors({ incorrect: true });
       this.jobpostForm.get('apply_method')?.setErrors(null);
-
     }
     else{
       this.jobpostForm.get('interviewstartDate')?.setErrors(null);
@@ -647,6 +637,7 @@ export class EmpJobpostComponent implements OnInit {
       this.jobpostForm.get('venue')?.setErrors(null);
       this.jobpostForm.get('recruiterList')?.setErrors(null);
       this.jobpostForm.get('apply_method')?.setErrors({ incorrect: true });
+      console.log(this.jobpostForm.get('apply_method')?.valid,"sadsdsd")
     }
   }
   remove_location(data:any){
