@@ -17,8 +17,9 @@
               <h3>Education Details</h3>
             </div>
             <div class="col-2">
-              <button style="border: none;" (click)="addQualification()"><span class=" edit-icon"><i><svg width="14"
-                      height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <button style="border: none;" (click)="addQualification()" [disabled]="isSubmitted"><span
+                  class=" edit-icon"><i><svg width="14" height="14" viewBox="0 0 14 14" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
                       <path d="M14 8.31765H8.4549V14H5.5451V8.31765H0V5.68235H5.5451V0H8.4549V5.68235H14V8.31765Z"
                         fill="white" />
                     </svg>
@@ -36,7 +37,8 @@
                       <select id="select" class="form-control" (change)="qualifiacation($event,i,phase)"
                         formControlName="Education">
                         <option [ngValue]="null" disabled selected>Select</option>
-                        <option value="{{quli.qualification}}" [disabled]="dropdown_disable(phase)" *ngFor="let quli of qualification">{{quli.qualification}}
+                        <option value="{{quli.qualification}}" [disabled]="dropdown_disable(phase)"
+                          *ngFor="let quli of qualification">{{quli.qualification}}
                         </option>
                       </select>
                       <div class="text-danger"
@@ -170,15 +172,16 @@
                         </div>
                       </div>
                       <div class="input-group content-box" *ngIf="phase.get('drGradingSystem')?.value=='Percentage'">
-                        <input type="number" class="form-control" id="validationDefaultUsername" placeholder="Enter Grade"
-                          aria-describedby="inputGroupPrepend2" formControlName="drMarks" placeholder="Enter Grade">
+                        <input type="number" class="form-control" id="validationDefaultUsername"
+                          placeholder="Enter Grade" aria-describedby="inputGroupPrepend2" formControlName="drMarks"
+                          placeholder="Enter Grade">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="inputGroupPrepend2">%</span>
                         </div>
 
                       </div>
                     </div>
-                    <div class="single-row"  *ngIf="phase.get('drGradingSystem')?.value">
+                    <div class="single-row" *ngIf="phase.get('drGradingSystem')?.value">
                       <label for=""></label>
                       <div class="text-danger"
                         *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('drMarks').invalid">
@@ -312,8 +315,9 @@
                         </div>
                       </div>
                       <div class="input-group content-box" *ngIf="phase.get('pgGradingSystem')?.value=='Percentage'">
-                        <input type="number" class="form-control" id="validationDefaultUsername" placeholder="Enter Grade"
-                          aria-describedby="inputGroupPrepend2" formControlName="pgMarks" placeholder="Enter Grade">
+                        <input type="number" class="form-control" id="validationDefaultUsername"
+                          placeholder="Enter Grade" aria-describedby="inputGroupPrepend2" formControlName="pgMarks"
+                          placeholder="Enter Grade">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="inputGroupPrepend2">%</span>
                         </div>
@@ -440,8 +444,9 @@
                         <input type="number" class="form-control" formControlName="ugMarks" placeholder="Enter Grade">
                       </div>
                       <div class="input-group content-box" *ngIf="phase.get('ugGradingSystem')?.value=='Percentage'">
-                        <input type="number" class="form-control" id="validationDefaultUsername" placeholder="Enter Grade"
-                          aria-describedby="inputGroupPrepend2" formControlName="ugMarks" placeholder="Enter Grade">
+                        <input type="number" class="form-control" id="validationDefaultUsername"
+                          placeholder="Enter Grade" aria-describedby="inputGroupPrepend2" formControlName="ugMarks"
+                          placeholder="Enter Grade">
                         <div class="input-group-prepend">
                           <span class="input-group-text" id="inputGroupPrepend2">%</span>
                         </div>
@@ -488,7 +493,8 @@
                       <div class="content-box errorCondent1">
                         <select class="form-control select-type" formControlName="hsMedium">
                           <option [ngValue]="null" disabled selected>Select</option>
-                          <option *ngFor="let languages of lang" value="{{languages.School_Medium}}">{{languages.School_Medium}}</option>
+                          <option *ngFor="let languages of lang" value="{{languages.School_Medium}}">
+                            {{languages.School_Medium}}</option>
                         </select>
                         <div class="text-danger"
                           *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('hsMedium').invalid">
@@ -542,7 +548,8 @@
                       <div class="content-box errorCondent1">
                         <select class="form-control select-type" formControlName="sslcMedium">
                           <option [ngValue]="null" disabled selected>Select</option>
-                          <option *ngFor="let languages of lang" value="{{languages.School_Medium}}">{{languages.School_Medium}}</option>
+                          <option *ngFor="let languages of lang" value="{{languages.School_Medium}}">
+                            {{languages.School_Medium}}</option>
                         </select>
                         <div class="text-danger"
                           *ngIf="isSubmitted&&this.educationForm.get('educationArray').controls[i].get('sslcMedium').invalid">

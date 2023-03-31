@@ -9,10 +9,12 @@ import { CanditateService } from '../canditate.service';
   styleUrls: ['./educationdetails.component.css']
 })
 export class EducationdetailsComponent implements OnInit {
+
   qualification: any = [];
   educationForm: any = this.fb.group({
     educationArray: this.fb.array([], [Validators.required]),
   })
+
   drCourse: any = [];
   drsep: any = [];
   pgCourse: any = [];
@@ -25,7 +27,8 @@ export class EducationdetailsComponent implements OnInit {
   private _fb: any;
   isSubmitted = false;
   lang:any;
-  constructor(private fb: FormBuilder, private candidate: CanditateService, private activate: ActivatedRoute, private router: Router) { }
+  constructor(private fb: FormBuilder, private candidate: CanditateService, private activate: ActivatedRoute, private router: Router) {
+  }
 
   ngOnInit(): void {
 
@@ -151,7 +154,12 @@ export class EducationdetailsComponent implements OnInit {
   }
 
   addQualification() {
-    this.addPhase();
+    if(this.educationForm.valid){
+      let conrols = this.fb.group({
+        Education: new FormControl('', [Validators.required]),
+      });
+      this.Qualification.push(conrols)
+    }
   }
   submit() {
     this.isSubmitted = true;
@@ -160,7 +168,7 @@ export class EducationdetailsComponent implements OnInit {
       data = { ...data, ...e }
     })
     delete data.Education;
-    console.log(this.educationForm.get('educationArray').valid, "validators")
+    console.log(this.educationForm.get('educationArray').valid, "validators");
     if (this.educationForm.get('educationArray').valid) {
       this.candidate.eduction(data).subscribe((res: any) => {
         this.router.navigate(['/can-proffesinal'], { queryParams: { id: this.userID } })
