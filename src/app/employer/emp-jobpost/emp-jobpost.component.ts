@@ -43,7 +43,7 @@ export class EmpJobpostComponent implements OnInit {
     endTime: new FormControl(null, Validators.required),
     recruiterName:new FormControl(null, [Validators.required,Validators.maxLength(50),Validators.pattern('^[a-zA-Z ]*$')]),
     recruiterEmail:new FormControl(null, [Validators.required,Validators.email,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
-    recruiterNumber:new FormControl(null, Validators.required),
+    recruiterNumber:new FormControl(0, Validators.required),
     qualification:this.formBuilder.array([], Validators.required),
     course:this.formBuilder.array([], Validators.required),
     specialization:this.formBuilder.array([], Validators.required),
@@ -59,6 +59,8 @@ export class EmpJobpostComponent implements OnInit {
   job_post(){
     console.log(this.jobpostForm)
     console.log(this.jobpostForm.valid)
+    const recNMumber=this.jobpostForm.get('recruiterNumber')?.value
+    this.jobpostForm.patchValue({recruiterNumber:recNMumber});
     this.submitted = true;
     if(this.jobpostForm.valid){
 
@@ -105,7 +107,7 @@ export class EmpJobpostComponent implements OnInit {
 
 
 
-      this.empservice.submitPostAJob(jobForm).subscribe((res:any)=>{
+      this.empservice.submitPostAJob(this.jobpostForm.value).subscribe((res:any)=>{
         console.log(res);
         this.jobpostForm.reset();
         if(res){
@@ -564,19 +566,29 @@ export class EmpJobpostComponent implements OnInit {
   }
   choose_apply(e:any){
       this.apply_method = e.target.value
+      console.log(this.apply_method)
       if(this.apply_method == 'email'){
-        this.jobpostForm.get('recruiterEmail')?.setErrors({ incorrect: true });
-        this.jobpostForm.get('recruiterList1')?.setErrors(null);
+        // this.jobpostForm.get('recruiterEmail')?.setErrors({ incorrect: true });
+        this.jobpostForm.removeControl('recruiterEmail')
+        this.jobpostForm.removeControl('recruiterId')
+        this.jobpostForm.removeControl('recruiterName')
+        this.jobpostForm.removeControl('recruiterNumber')
+        // this.jobpostForm.get('recruiterList1')?.setErrors(null);
+        this.jobpostForm.removeControl('recruiterList1')
+
       }
       if(this.apply_method == 'telephone'){
+        this.jobpostForm.addControl('recruiterEmail')
+        this.jobpostForm.addControl('recruiterList1')
 
-        this.jobpostForm.get('recruiterEmail')?.setErrors(null);
-        this.jobpostForm.get('recruiterList1')?.setErrors({ incorrect: true });
 
       }
       if(this.apply_method == 'treatjobs'){
-        this.jobpostForm.get('recruiterEmail')?.setErrors(null);
-        this.jobpostForm.get('recruiterList1')?.setErrors(null);
+        this.jobpostForm.removeControl('recruiterEmail')
+        this.jobpostForm.removeControl('recruiterId')
+        this.jobpostForm.removeControl('recruiterName')
+        this.jobpostForm.removeControl('recruiterNumber')
+        this.jobpostForm.removeControl('recruiterList1')
 
       }
   }
@@ -620,24 +632,47 @@ export class EmpJobpostComponent implements OnInit {
   type:any;
   checkerr_inter(e:any){
     this.type = e.target.value
-    if (this.type == 'walk in') {
-      this.jobpostForm.get('interviewstartDate')?.setErrors({ incorrect: true });
-      this.jobpostForm.get('interviewendDate')?.setErrors({ incorrect: true });
-      this.jobpostForm.get('startTime')?.setErrors({ incorrect: true });
-      this.jobpostForm.get('endTime')?.setErrors({ incorrect: true });
-      this.jobpostForm.get('venue')?.setErrors({ incorrect: true });
-      this.jobpostForm.get('recruiterList')?.setErrors({ incorrect: true });
-      this.jobpostForm.get('apply_method')?.setErrors(null);
+    console.log(this.type)
+    if (this.type == "walk in") {
+      // this.jobpostForm.get('interviewstartDate')?.setErrors({ incorrect: true });
+      // this.jobpostForm.get('interviewendDate')?.setErrors({ incorrect: true });
+      // this.jobpostForm.get('startTime')?.setErrors({ incorrect: true });
+      // this.jobpostForm.get('endTime')?.setErrors({ incorrect: true });
+      // this.jobpostForm.get('venue')?.setErrors({ incorrect: true });
+      this.jobpostForm.addControl('interviewstartDate');
+      this.jobpostForm.addControl('interviewendDate');
+
+      this.jobpostForm.addControl('startTime');
+
+      this.jobpostForm.addControl('endTime');
+
+      this.jobpostForm.addControl('venue');
+      this.jobpostForm.addControl('recruiterList');
+
+      // this.jobpostForm.get('recruiterList')?.setErrors({ incorrect: true });
+      // this.jobpostForm.get('apply_method')?.setErrors(null);
+      this.jobpostForm.removeControl('apply_method');
     }
-    else{
-      this.jobpostForm.get('interviewstartDate')?.setErrors(null);
-      this.jobpostForm.get('interviewendDate')?.setErrors(null);
-      this.jobpostForm.get('startTime')?.setErrors(null);
-      this.jobpostForm.get('endTime')?.setErrors(null);
-      this.jobpostForm.get('venue')?.setErrors(null);
-      this.jobpostForm.get('recruiterList')?.setErrors(null);
-      this.jobpostForm.get('apply_method')?.setErrors({ incorrect: true });
-      console.log(this.jobpostForm.get('apply_method')?.valid,"sadsdsd")
+    else if(this.type=="online"){
+      // this.jobpostForm.get('interviewstartDate')?.setErrors(null);
+      this.jobpostForm.removeControl('interviewstartDate');
+      this.jobpostForm.removeControl('interviewendDate');
+
+      this.jobpostForm.removeControl('startTime');
+
+      this.jobpostForm.removeControl('endTime');
+
+      this.jobpostForm.removeControl('venue');
+      this.jobpostForm.removeControl('recruiterList');
+
+      // this.jobpostForm.get('interviewendDate')?.setErrors(null);
+      // this.jobpostForm.get('startTime')?.setErrors(null);
+      // this.jobpostForm.get('endTime')?.setErrors(null);
+      // this.jobpostForm.get('venue')?.setErrors(null);
+      // this.jobpostForm.get('recruiterList')?.setErrors(null);
+
+      // this.jobpostForm.get('apply_method')?.setErrors({ incorrect: true });
+      // console.log(this.jobpostForm.get('apply_method')?.valid,"sadsdsd")
     }
   }
   remove_location(data:any){

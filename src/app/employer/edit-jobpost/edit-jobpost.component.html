@@ -129,11 +129,11 @@
                                                                 <span class="fsize" style="margin-left:10px">{{data.Specialization}}</span></li>
                                                                 </ul>
                                                             </li>
-        
+
                                                         </ul>
                                                     </li>
                                                 </ul>
-                                               
+
                                             </div>
                                         </div>
                                     </div>
@@ -215,6 +215,36 @@
                                             </ng-multiselect-dropdown>
                                         </div>
                                     </div>
+
+
+
+                                    <div class="single-row">
+                                      <label for="">Preferred Industry <sup>*</sup> :</label>
+                                      <div class="content-box content-box-block" style="background: white">
+                                          <!-- <select class="form-control select-type" formControlName="preferedIndustry">
+                                      <option disabled [ngValue]="null" selected value="select">Select</option>
+                                      <option value="{{industry.Industry}}" *ngFor="let industry of indus_data">{{industry.Industry}}</option>
+                                  </select> -->
+                                          <ng-multiselect-dropdown id="courseInput" class="w-100"
+                                              style="background-color: white;" name='industry'
+                                              [settings]="dropdownSettings" [data]="indus_data"
+                                              (onSelect)="pushCourse($event)" (onDeSelect)="onDeSelect($event)">
+                                          </ng-multiselect-dropdown>
+                                          <div *ngIf="jobpostForm.get('preferedIndustry')?.invalid">
+                                              <small class="text-danger">Preferred industry is required</small>
+                                          </div>
+                                      </div>
+                                  </div>
+
+
+
+
+
+
+
+
+
+
                                     <!-- <div>
                                 <div>
                                     <button class="drop-toggle btn flat">
@@ -224,7 +254,7 @@
                                     </button>
                                     <div class="drop-show" *ngIf="showDropDown">
                                         <label *ngFor="let a of list">
-                                            <input type="checkbox" [(ngModel)]="a.checked" 
+                                            <input type="checkbox" [(ngModel)]="a.checked"
                                                 (change)="getSelectedValue(a.checked,a.name)" />
                                             <span>{{a.name}}</span>
                                         </label>
@@ -260,7 +290,7 @@
                                             <div *ngIf="(jobpostForm.get('roleCategory').invalid && jobpostForm.get('roleCategory').touched) || jobpostForm.get('roleCategory').dirty">
                                                 <small *ngIf="jobpostForm.get('roleCategory').errors?.required" class="text-danger">Role category is required</small>
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                     <div class="single-row" *ngIf="jobpostForm.get('roleCategory')?.value">
@@ -509,20 +539,20 @@
     <div class="popup container col-8">
 
         <div class="col  register-content1 job-post-register-content overflow-hidden mt-2">
-                  
-  
-  
-  
- 
-  
+
+
+
+
+
+
             <div class="row custom-row">
-               
+
                 <div class="card custom-card job-card border-remove">
-                  
+
                     <div class="card-body row ">
-                       
+
                       <div class="col-8">
-                       
+
                         <div class="card-content card-job-content-heading mb-3 col-12 ">
 
 
@@ -537,11 +567,11 @@
                             </div>
 
 
-                    
+
 
                         </div>
                         <div class="col-12 card-job d-flex ">
-                          
+
                                 <div class="card-job-content-data col-6">
                                     <div> <span class="icon-custom width-custom"><i><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                       <path fill-rule="evenodd" clip-rule="evenodd" d="M15.1969 3.68164H0.796875V7.52164H6.72454C6.61859 7.32109 6.55859 7.0925 6.55859 6.84991V6.75391H9.43859V6.84991C9.43859 7.0925 9.3786 7.32109 9.27264 7.52164H15.1969V3.68164Z" fill="#8493A3"/>
@@ -559,7 +589,7 @@
                                       </i></span>{{jobpostForm.get('openings')?.value}}</div>
 
                                 </div>
-                      
+
                                 <div class="card-job-content-data col-6">
                                     <div>₹ {{jobpostForm.get('salaryRangeFrom')?.value}} to {{jobpostForm.get('salaryRangeTo')?.value}} </div>
                                     <div>{{jobpostForm.get('experienceFrom')?.value}} to {{jobpostForm.get('experienceTo')?.value}} Years </div>
@@ -705,32 +735,32 @@
                 <label class="col-4" style="font-weight: 500;">Recruiter Name :</label>
                 <div class="col-8">{{jobpostForm.get('recruiterName')?.value}}</div>
               </div>
-              
+
               </div>
               <div class="col-10 ">
                 <div class="col-12 d-flex mb-2">
                 <label class="col-4" style="font-weight: 500;">Mobile Number :</label>
                 <div class="col-8">{{jobpostForm.get('recruiterEmail')?.value}}</div>
               </div>
-              
+
               </div>
               <div class="col-10 ">
                 <div class="col-12 d-flex mb-2">
                 <label class="col-4" style="font-weight: 500;">Email Id :</label>
                 <div class="col-8">{{jobpostForm.get('recruiterNumber')?.value}}</div>
               </div>
-              
+
               </div>
             </div>
         </div>
-    </div>            
-  
-  
-  
- 
-  
-      
-    
+    </div>
+
+
+
+
+
+
+
     </div>
 </div>
 
@@ -740,11 +770,11 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-body">
-                
+
                     <div class="col register-content">
                       <div class="">
                         <div class="">
-  
+
                           <div class="">
                               <div class="col-12  login-main" style="background-color: white;">
                                   <div class="row ">
@@ -752,32 +782,32 @@
                                   <div class="" >
                                       <div class="" style=" overflow: hidden;">
                                          <h2 style="margin: 20px 0;text-align: center;color: #FD841F;" >Job Post</h2>
-                                    
+
                                           <div class="">
-                        
-                                            
+
+
                                                   <div class="card-body row px-5" style="border-bottom: solid rgba(0, 0, 0, 0.25) 1px;">
-                        
+
                                                     <div class="col-8">
                                                       <div class="card-content card-job-content-heading mb-3 ">
-                        
-                        
+
+
                                                           <div class="col-10">
                                                               <div class="card-job-title">
                                                                  {{ jobpostForm.get('jobTittle')?.value}}
                                                               </div>
-                        
+
                                                               <div class="card-job-sub-title">
                                                                   {{ jobpostForm.get('jobTittle')?.value}}
                                                               </div>
                                                           </div>
-                        
-                        
-                        
-                        
+
+
+
+
                                                       </div>
                                                       <div class="col-12 card-job d-flex ">
-                                                        
+
                                                               <div class="card-job-content-data col-6">
                                                                   <div> <span class="icon-custom width-custom"><i><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M15.1969 3.68164H0.796875V7.52164H6.72454C6.61859 7.32109 6.55859 7.0925 6.55859 6.84991V6.75391H9.43859V6.84991C9.43859 7.0925 9.3786 7.32109 9.27264 7.52164H15.1969V3.68164Z" fill="#8493A3"/>
@@ -793,35 +823,35 @@
                                                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M9.51599 7.90035C10.9714 7.30205 11.9961 5.8703 11.9961 4.19922C11.9961 1.99008 10.2052 0.199219 7.99609 0.199219C5.78695 0.199219 3.99609 1.99008 3.99609 4.19922C3.99609 5.87045 5.02102 7.30231 6.47659 7.90051C3.23025 8.35175 0.796875 10.3197 0.796875 14.0978C0.796875 17.6273 2.92041 17.5022 5.8465 17.3299C6.52557 17.2899 7.24787 17.2473 7.99687 17.2473C8.74588 17.2473 9.46818 17.2899 10.1472 17.3299C13.0733 17.5022 15.1969 17.6273 15.1969 14.0978C15.1969 10.3192 12.7629 8.35127 9.51599 7.90035Z" fill="#8493A3"/>
                                                                     </svg>
                                                                     </i></span>Hiring {{ jobpostForm.get('openings')?.value}} candidate</div>
-                        
+
                                                               </div>
-                                                    
+
                                                               <div class="card-job-content-data col-6 mb-4">
                                                                   <div>₹ {{ jobpostForm.get('salaryRangeFrom')?.value}} to {{ jobpostForm.get('salaryRangeTo')?.value}} lacs </div>
                                                                   <div>{{ jobpostForm.get('experienceFrom')?.value}} to {{ jobpostForm.get('experienceTo')?.value}} Years </div>
                                                                   <div>Posted 2 Day ago</div>
-                        
-                        
-                        
-                                                           
+
+
+
+
                                                           </div>
                                                       </div>
                                                   </div>
-                        
+
                         <div class="col-4 ">
                           <div class="d-flex align-items-start">
                           <img src="../../assets/image/Google-Icon.jpg" width="80px">
-                         
+
                         </div>
-                        
+
                         </div>
-                        
+
                                               </div>
-                                         
-                        
+
+
                                           <div class="row">
                                               <div class="col">
-                        
+
                                               </div>
                                           </div>
                                           <div class="job-view ms-5">
@@ -832,24 +862,24 @@
                                                          {{ jobpostForm.get('searchbox')?.value}}
                                                       </div>
                                                   </div>
-                        
+
                                               </div>
                                               <div class="single-rows d-flex">
                                                   <label for="">Qualification :</label>
                                                   <div class="content-boxs">
                                                       {{quadata}}
                                                   </div>
-                        
+
                                               </div>
-                        
+
                                               <div class="single-rows d-flex">
                                                   <label for="">Employment Type :</label>
                                                   <div class="content-boxs">
                                                      {{ jobpostForm.get('employmentType')?.value}}
                                                   </div>
-                        
+
                                               </div>
-                        
+
                                               <div class="single-rows d-flex">
                                                   <label for="">Work Mode :</label>
                                                   <div class="content-boxs">
@@ -881,7 +911,7 @@
                                                 <div class="content-boxs">
                                                     <ul>
                                                         <li> {{jobpostForm.get('candidateDescription')?.value}}</li>
-                                                       
+
                                                     </ul>
                                                 </div>
                                             </div>
@@ -890,35 +920,35 @@
                                               <div class="content-boxs">
                                                   <ul>
                                                       <li>{{jobpostForm.get('salaryDescription')?.value}}</li>
-                                                      
-                                                     
+
+
                                                   </ul>
                                               </div>
                                           </div>
-                        
+
                                               <div class="single-rows d-flex">
                                                   <label for="">Industry :</label>
                                                   <div class="content-boxs">
                                                       {{jobpostForm.get('industry')?.value}}                           </div>
                                               </div>
-                        
+
                                               <div class="single-rows d-flex">
                                                   <label for="">Preferred Industry :</label>
                                                   <div class="content-boxs">
-                                                     {{inddata}} 
+                                                     {{inddata}}
                                                   </div>
                                               </div>
-                        
-                                             
-                        
-                                             
-                        
-                        
-                        
-                        
+
+
+
+
+
+
+
+
                                           </div>
-                        
-                        
+
+
                                           <div class="job-view second-row ps-4 pt-3">
                                             <div class="heading row">
                                               <div class="col-7 ">
@@ -941,43 +971,43 @@
                                                 <li>Required Skill set</li>
                                                 <li>Proficient in Node.js or Java</li>
                                                 <li>Hands on Angular2+/React.js</li>
-                                               
+
                                             </ul>
-                        
+
                                             </div>
                                             </div>
                                           </div>
-                        
+
                                           <div class="job-view col-12 third-row ps-4">
-                                           
+
                                             <div class="col-10"  *ngIf="jobpostForm.get('recruiterName')?.value">
                                               <div class="col-12 d-flex mb-2">
                                               <label class="col-4" style="font-weight: 500;">Recruiter Name :</label>
                                               <a style="text-decoration: none;color: black;"  class="col-8">{{jobpostForm.get('recruiterName')?.value}}</a>
                                             </div>
-                                            
+
                                             </div>
                                             <div class="col-10 " *ngIf="jobpostForm.get('recruiterNumber')?.value">
                                               <div class="col-12 d-flex mb-2">
                                               <label class="col-4" style="font-weight: 500;">Mobile Number :</label>
                                               <a style="text-decoration: none;color: black;"  class="col-8">{{jobpostForm.get('recruiterNumber')?.value}}</a>
                                             </div>
-                                            
+
                                             </div>
                                             <div class="col-10 "  *ngIf="jobpostForm.get('recruiterEmail')?.value">
                                               <div class="col-12 d-flex mb-2">
                                               <label class="col-4" style="font-weight: 500;">Email Id :</label>
                                               <a style="text-decoration: none;color: black;" class="col-8">{{jobpostForm.get('recruiterEmail')?.value}}</a>
                                             </div>
-                                            
+
                                             </div>
                                           </div>
-                        
-                                         
-                        
-                        
-                        
-                        
+
+
+
+
+
+
                                       </div>
                                   </div>
                               </div>
@@ -985,14 +1015,14 @@
                                 <div class="content-box">
                                   <button type="submit" class="btn btn-brand-blue mb-2" data-bs-dismiss="modal">Back</button>
                               </div>
-                        
-                             
+
+
                             </div>
                           </div>
                           </div>
                         </div>
-                        
-                        
+
+
                         </div>
                     </div>
             </div>

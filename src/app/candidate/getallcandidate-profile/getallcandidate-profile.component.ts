@@ -50,9 +50,20 @@ export class GetallcandidateProfileComponent implements OnInit {
 
 
   }
+  imagepreview:any="https://livebroadcast.click/"
+  profileview:any
+
+  profile:any
+
+
   getallDetails() {
     this.candidateservice.viewDetails().subscribe((res: any) => {
       this.getAlldetails = res.user;
+     this.profileview=this.getAlldetails[0].image
+
+     this.profile=this.imagepreview+this.profileview
+      console.log(this.imagepreview+this.getAlldetails[0].image)
+      this.imagepreview=this.getAlldetails.image
       this.email = this.getAlldetails[0].email;
       this.mobile = this.getAlldetails[0].mobileNumber;
       this.id = this.getAlldetails[0]._id

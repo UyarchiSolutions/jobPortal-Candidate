@@ -10,41 +10,47 @@ import { CanditateService } from '../canditate.service';
   templateUrl: './updateprofile.component.html',
   styleUrls: ['./updateprofile.component.css']
 })
+
 export class UpdateprofileComponent implements OnInit {
   qualification: any;
   isSubmitted: any = false;
-  profileForm: any = this.fb.group({
-    image: new FormControl(''),
-    keyskill: new FormControl(null, [Validators.required]),
-    dob: new FormControl('', Validators.required),
-    experienceYear: new FormControl('', Validators.required),
-    experienceMonth: new FormControl(''),
-    expectedctc: new FormControl('', Validators.required),
-    currentctc: new FormControl('', Validators.required),   //display only experience
-    locationCurrent: new FormControl('', Validators.required),
-    locationNative: new FormControl('', Validators.required),
-    noticeperiod: new FormControl('', Validators.required),
-    currentSkill: new FormControl(null, Validators.required),
-    currentbox: new FormControl(''),
-    preferredSkill: new FormControl(null, Validators.required),
-    prefredBox: new FormControl(''),
-    gender: new FormControl('', Validators.required),
-    maritalStatus: new FormControl(null, Validators.required),
-    relocate: new FormControl(null, Validators.required),
-    preferredLocation: new FormControl([], Validators.required),
-    languages: this.fb.array([], Validators.required),
-    searchbox: new FormControl(null),
-    currentctc_th: new FormControl(''),
-    update: new FormControl(),
-    location: new FormControl()
-  })
+  profileForm:any
   viewAll: any = [];
   keySkill: any;
   lang: any = [];
   userId: any;
   now: any;
   getLang: any = []
-  constructor(private fb: FormBuilder, private candidateService: CanditateService, private router: Router, private activateRoute: ActivatedRoute) { }
+  constructor(private fb: FormBuilder, private candidateService: CanditateService, private router: Router, private activateRoute: ActivatedRoute) {
+
+
+
+    this.profileForm= this.fb.group({
+      // image: new FormControl('',[Validators.required]),
+      keyskill: new FormControl(null, [Validators.required]),
+      dob: new FormControl('', Validators.required),
+      experienceYear: new FormControl(0, Validators.required),
+      experienceMonth: new FormControl(0),
+      expectedctc: new FormControl('', Validators.required),
+      currentctc: new FormControl(0, Validators.required),   //display only experience
+      locationCurrent: new FormControl('', Validators.required),
+      locationNative: new FormControl('', Validators.required),
+      noticeperiod: new FormControl('', Validators.required),
+      currentSkill: new FormControl(null, Validators.required),
+      currentbox: new FormControl(''),
+      preferredSkill: new FormControl(null, Validators.required),
+      prefredBox: new FormControl(''),
+      gender: new FormControl('', Validators.required),
+      maritalStatus: new FormControl(null, Validators.required),
+      relocate: new FormControl(null, Validators.required),
+      preferredLocation: new FormControl([], Validators.required),
+      languages: this.fb.array([], Validators.required),
+      searchbox: new FormControl(null),
+      currentctc_th: new FormControl(0),
+      update: new FormControl(),
+      location: new FormControl()
+    })
+   }
 
   ngOnInit() {
 
@@ -55,6 +61,7 @@ export class UpdateprofileComponent implements OnInit {
     })
     this.activateRoute.queryParams.subscribe((res: any) => {
       this.userId = res;
+      console.log(res)
       if (this.userId.tab == "0" || this.userId.id) {
         this.getAlldata()
       }
@@ -73,11 +80,12 @@ export class UpdateprofileComponent implements OnInit {
   }
 
   getAlldata() {
+
     this.candidateService.viewDetails().subscribe((res: any) => {
       this.viewAll = res.user;
       console.log(this.viewAll[0].keyskill, "key skill")
       this.profileForm.patchValue({
-        image: this.viewAll.image,
+        // image: this.viewAll.image,
         keyskill: this.viewAll[0].keyskill,
         dob: this.viewAll[0].dob,
         experienceYear: this.viewAll[0].experienceYear,
@@ -126,16 +134,16 @@ export class UpdateprofileComponent implements OnInit {
   selectImg1: any;
   selectImg2: any;
   selectedImg1(event: any) {
-    this.selectImg1 = event.target.files[0];
-    // for (let i = 0; i < filesAmount; i++) {
-    //   const res = img.target.files[i];
-    //   this.gallery.push(res);
-      var reader = new FileReader();
-      reader.readAsDataURL(this.selectImg1);
-      reader.onload = (event) => {
-        this.selectImg2.push((<FileReader>event.target).result);
-      // }
-    }
+     // get the selected file
+  const file = event.target.files[0];
+this.selectImg1=file
+
+    //   var reader = new FileReader();
+    //   reader.readAsDataURL(this.selectImg1);
+    //   reader.onload = (event) => {
+    //     this.selectImg2.push((<FileReader>event.target).result);
+
+    // }
   }
   getQualified() {
     return (<FormArray>this.profileForm.get('qualify')).controls
@@ -295,27 +303,41 @@ export class UpdateprofileComponent implements OnInit {
       this.profileForm.get('preferredLocation').setErrors(null)
     }
   }
+  experienceYear:any
+  experienceMonth:any
+  currentCtc:any
+  currentTh:any
   updateprofile() {
     this.isSubmitted = true
-    const formData = new FormData();
+    let expYear=Number(this.experienceYear)
+    let expMonth=Number(this.experienceMonth)
+    let curCtc=Number(this.currentCtc)
+    let curTh=Number(this.currentTh)
+    this.profileForm.patchValue({experienceYear:expYear,experienceMonth:expMonth, currentctc:curCtc, currentctc_th:curTh})
+    console.log(this.profileForm.value)
+    let formData = new FormData();
+
     formData.append('image', this.selectImg1);
-    console.log(this.profileForm.get('dob')?.valid, "values")
-    console.log(this.profileForm.get('experienceYear')?.valid, "experienceYear")
-    console.log(this.profileForm.get('experienceMonth')?.valid, "experienceMonth")
-    console.log(this.profileForm.get('expectedctc')?.valid, "expectedctc")
-    console.log(this.profileForm.get('currentctc')?.valid, "currentctc")
-    console.log(this.profileForm.get('locationCurrent')?.valid, "locationCurrent")
-    console.log(this.profileForm.get('locationNative')?.valid, "locationNative")
-    console.log(this.profileForm.get('noticeperiod')?.valid, "noticeperiod")
-    console.log(this.profileForm.get('currentSkill')?.valid, "currentSkill")
-    console.log(this.profileForm.get('preferredSkill')?.valid, "preferredSkill")
-    console.log(this.profileForm.get('gender')?.valid, "gender")
-    console.log(this.profileForm.get('maritalStatus')?.valid, "maritalStatus")
-    console.log(this.profileForm.get('languages')?.valid, "languages")
-    console.log(this.profileForm.get('relocate')?.valid, "relocate")
-    console.log(this.profileForm)
+    console.log(formData)
+    // console.log(this.profileForm.get('dob')?.valid, "values")
+    // console.log(this.profileForm.get('experienceYear')?.valid, "experienceYear")
+    // console.log(this.profileForm.get('experienceMonth')?.valid, "experienceMonth")
+    // console.log(this.profileForm.get('expectedctc')?.valid, "expectedctc")
+    // console.log(this.profileForm.get('currentctc')?.valid, "currentctc")
+    // console.log(this.profileForm.get('locationCurrent')?.valid, "locationCurrent")
+    // console.log(this.profileForm.get('locationNative')?.valid, "locationNative")
+    // console.log(this.profileForm.get('noticeperiod')?.valid, "noticeperiod")
+    // console.log(this.profileForm.get('currentSkill')?.valid, "currentSkill")
+    // console.log(this.profileForm.get('preferredSkill')?.valid, "preferredSkill")
+    // console.log(this.profileForm.get('gender')?.valid, "gender")
+    // console.log(this.profileForm.get('maritalStatus')?.valid, "maritalStatus")
+    // console.log(this.profileForm.get('languages')?.valid, "languages")
+    // console.log(this.profileForm.get('relocate')?.valid, "relocate")
+    console.log(this.profileForm.value)
     if (this.profileForm.valid) {
+
       if (this.userId.tab == "0" || this.userId.id) {
+        console.log(this.userId)
         this.candidateService.educationDetail(this.profileForm.value).subscribe((res: any) => {
           if (this.userId.id) {
             this.router.navigate(['/viewprofile'])
@@ -326,15 +348,33 @@ export class UpdateprofileComponent implements OnInit {
           })
         })
       } else {
+        console.log(this.userId)
+
         this.candidateService.updateProfile(this.profileForm.value).subscribe((res: any) => {
           this.candidateService.imageUpload(res.user._id, formData).subscribe((res: any) => {
           })
           this.router.navigate(['/can-edu'])
         })
       }
-    }
 
+      // this.router.navigate(['/can-edu'])
+
+      // this.candidateService.updateProfile(this.profileForm.value).subscribe((res: any) => {
+      //  this.updateProfile=res
+
+      //  this.candidateService.imageUpload( this.updateProfile.user._id, formData).subscribe((res: any) => {
+      //   console.log(res)
+      // })
+
+
+      //     })
+
+
+
+    }
   }
+  updateProfile:any
+
   checkeLang(val: any) {
     if (this.getLang.find((a: any) => a.lang == val)) {
       return true;

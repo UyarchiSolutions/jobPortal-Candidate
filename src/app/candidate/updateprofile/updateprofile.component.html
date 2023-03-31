@@ -34,15 +34,11 @@
                           style="display: none;" formControlName="image" accept="image/gif, image/jpeg, image/png"
                           (change)="selectedImg1($event)">
                       </div>
-                      <div>
-                        <label for="select-logo" class="form-control logo-btn">+ Add Profile
-                          Picture</label>
-                        <input type="file" id="select-logo" class="form-control logo-btn" placeholder="+Add Logo"
-                          style="display: none;" formControlName="image" accept="image/gif, image/jpeg, image/png"
-                          (change)="selectedImg1($event)">
-                      </div>
+
                     </div>
                   </div>
+
+
                   <div class="single-row">
                     <label for="" class="lable-data">DOB <span>*</span>:</label>
                     <div class="content-box">
@@ -91,35 +87,35 @@
                     <label for="" class="lable-data">Expreience <span>*</span>:</label>
                     <div class="content-box">
                       <select class="form-control select-type douple-input-first" formControlName="experienceYear"
-                        (change)="expreience($event)">
+                        (change)="expreience($event)" [(ngModel)]="experienceYear">
                         <option value="option1" disabled selected>Year</option>
-                        <option value="0">Freshers</option>
-                        <option value="1">1 Year</option>
-                        <option value="2">2 Year</option>
-                        <option value="3">3 Year</option>
-                        <option value="4">4 Year</option>
-                        <option value="5">5 Year</option>
-                        <option value="6">6 Year</option>
-                        <option value="7">7 Year</option>
-                        <option value="8">8 Year</option>
-                        <option value="9">9 Year</option>
-                        <option value="10">10 Year</option>
-                        <option value="11">11 Year</option>
+                        <option value=0>Freshers</option>
+                        <option value=1>1 Year</option>
+                        <option value=2>2 Year</option>
+                        <option value=3>3 Year</option>
+                        <option value=4>4 Year</option>
+                        <option value=5>5 Year</option>
+                        <option value=6>6 Year</option>
+                        <option value=7>7 Year</option>
+                        <option value=8>8 Year</option>
+                        <option value=9>9 Year</option>
+                        <option value=10>10 Year</option>
+                        <option value=11>11 Year</option>
                       </select>
-                      <select class="form-control select-type douple-input-second" formControlName="experienceMonth">
-                        <option value="option1" disabled selected>Month</option>
-                        <option value="0">0 Month</option>
-                        <option value="1">1 Month</option>
-                        <option value="2">2 Month</option>
-                        <option value="3">3 Month</option>
-                        <option value="4">4 Month</option>
-                        <option value="5">5 Month</option>
-                        <option value="6">6 Month</option>
-                        <option value="7">7 Month</option>
-                        <option value="8">8 Month</option>
-                        <option value="9">9 Month</option>
-                        <option value="10">10 Month</option>
-                        <option value="11">11 Month</option>
+                      <select class="form-control select-type douple-input-second" formControlName="experienceMonth"  [(ngModel)]="experienceMonth">
+                        <option  value="option1" disabled selected>Month</option>
+                        <option value=0>0 Month</option>
+                        <option value=1>1 Month</option>
+                        <option value=2>2 Month</option>
+                        <option value=3>3 Month</option>
+                        <option value=4>4 Month</option>
+                        <option value=5>5 Month</option>
+                        <option value=6>6 Month</option>
+                        <option value=7>7 Month</option>
+                        <option value=8>8 Month</option>
+                        <option value=9>9 Month</option>
+                        <option value=10>10 Month</option>
+                        <option value=11>11 Month</option>
                       </select>
                     </div>
                   </div>
@@ -169,34 +165,34 @@
                   <div class="single-row" *ngIf="profileForm.get('experienceYear')?.value != 0">
                     <label for="" class="lable-data">Current CTC <span>*</span>:</label>
                     <div class="content-box">
-                      <select class="form-control select-type douple-input-first" formControlName="currentctc">
+                      <select class="form-control select-type douple-input-first" formControlName="currentctc" [(ngModel)]="currentCtc">
                         <option value="option1" disabled selected></option>
-                        <option value="1">1 lac</option>
-                        <option value="2">2 lac</option>
-                        <option value="3">3 lac</option>
-                        <option value="4">4 lac</option>
-                        <option value="5">5 lac</option>
-                        <option value="6">6 lac</option>
-                        <option value="7">7 lac</option>
-                        <option value="8">8 lac</option>
-                        <option value="9">9 lac</option>
-                        <option value="10">10 lac</option>
-                        <option value="11">11 lac</option>
+                        <option value=1>1 lac</option>
+                        <option value=2>2 lac</option>
+                        <option value=3>3 lac</option>
+                        <option value=4>4 lac</option>
+                        <option value=5>5 lac</option>
+                        <option value=6>6 lac</option>
+                        <option value=7>7 lac</option>
+                        <option value=8>8 lac</option>
+                        <option value=9>9 lac</option>
+                        <option value=10>10 lac</option>
+                        <option value=11>11 lac</option>
                       </select>
-                      <select class="form-control select-type douple-input-second" formControlName="currentctc_th">
+                      <select class="form-control select-type douple-input-second" formControlName="currentctc_th" [(ngModel)]="currentTh">
                         <option value="option1" disabled selected></option>
-                        <option value="5000">5000</option>
-                        <option value="10000">10000</option>
-                        <option value="15000">15000</option>
-                        <option value="20000">20000</option>
-                        <option value="25000">25000</option>
-                        <option value="30000">30000</option>
-                        <option value="35000">35000</option>
-                        <option value="40000">40000</option>
-                        <option value="45000">45000</option>
-                        <option value="50000">50000</option>
-                        <option value="55000">55000</option>
-                        <option value="60000">60000</option>
+                        <option value=5000>5000</option>
+                        <option value=10000>10000</option>
+                        <option value=15000>15000</option>
+                        <option value=20000>20000</option>
+                        <option value=25000>25000</option>
+                        <option value=30000>30000</option>
+                        <option value=35000>35000</option>
+                        <option value=40000>40000</option>
+                        <option value=45000>45000</option>
+                        <option value=50000>50000</option>
+                        <option value=55000>55000</option>
+                        <option value=60000>60000</option>
                       </select>
                       <!-- <input type="text" class="form-control" placeholder="Enter CTC" formControlName="currentctc"> -->
                     </div>

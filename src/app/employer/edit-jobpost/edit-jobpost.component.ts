@@ -47,7 +47,7 @@ export class EditJobpostComponent implements OnInit {
     course:this.formBuilder.array([], Validators.required),
     specialization:this.formBuilder.array([], Validators.required),
     searchbox: new FormControl(null),
-    
+
   });
   keySkill: any;
   latitude:any;
@@ -58,7 +58,7 @@ export class EditJobpostComponent implements OnInit {
   role_data: any;
   is_new: boolean =false;
   is_list: boolean=false;
- 
+
   dropdownSettings: IDropdownSettings = {
     singleSelection: false,
     idField: '_id',
@@ -106,7 +106,7 @@ export class EditJobpostComponent implements OnInit {
   is_course: boolean = false;
   quaname: any;
   educationArray:any=[
-   
+
   ];
   spclname: any;
   pushdata1:any;
@@ -126,7 +126,7 @@ export class EditJobpostComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams
     .subscribe(params => {
-      console.log(params['id']); 
+      console.log(params['id']);
       this.postid=params['id'];
     }
   );
@@ -142,6 +142,13 @@ export class EditJobpostComponent implements OnInit {
     this.empservice.get_job_detail(postid).subscribe((res:any)=>{
       console.log(res);
       this.jobdetails = res.user[0]
+      this.jobdetails.jobDescription= this.jobdetails.jobDescription.replace(/<\/?p>/g, '');
+      this.jobdetails.candidateDescription=this.jobdetails.candidateDescription.replace(/<\/?p>/g, '');
+      this.jobdetails.salaryDescription=this.jobdetails.salaryDescription.replace(/<\/?p>/g, '');
+      console.log(this.jobdetails)
+
+
+
       this.jobpostForm.patchValue({
         jobTittle : this.jobdetails.jobTittle,
         contactNumber : this.jobdetails.contactNumber,
@@ -179,6 +186,7 @@ export class EditJobpostComponent implements OnInit {
         recruiterList:new FormControl(null,Validators.required),
         recruiterList1:new FormControl(null,Validators.required),
       });
+
       if(this.jobdetails.recruiterName && this.jobdetails.recruiterEmail && this.jobdetails.recruiterNumber){
         this.is_new = true
       }
@@ -186,7 +194,7 @@ export class EditJobpostComponent implements OnInit {
         this.rolecategorybind()
       }
     })
-    
+
   }
   checkradio(data:any){
 
@@ -209,20 +217,28 @@ export class EditJobpostComponent implements OnInit {
   }
   choose_apply(e:any){
     this.apply_method = e.target.value
+    if(this.apply_method = 'telephone'){
+    this.jobpostForm.removeControl('recruiterName')
+
+    this.jobpostForm.removeControl('recruiterEmail')
+
+    this.jobpostForm.removeControl('recruiterNumber')
     console.log(this.apply_method)
+    }
 }
   job_post(){
     this.empservice.updatePostAJob(this.postid,this.jobpostForm.value).subscribe((res:any)=>{
       console.log(res);
       this.jobpostForm.reset();
       if(res){
+
       }
     })
   }
   search_skills(data:any){
     if (data.target.value) {
       this.isDisplay = true;
-    } 
+    }
     else {
       this.isDisplay = false
     }
@@ -336,7 +352,7 @@ export class EditJobpostComponent implements OnInit {
       this.qua_data = res
     })
   }
-  
+
   DeSelect_putcourse(e:any){
     console.log(e)
     let i: number = 0;
@@ -391,7 +407,7 @@ export class EditJobpostComponent implements OnInit {
         i++;
       });
     }
-    
+
   }
   selectcourse(e:any,event:any){
     console.log(e)
@@ -427,11 +443,11 @@ export class EditJobpostComponent implements OnInit {
       });
     }
     console.log(this.educationArray)
-   
+
   }
   selectspcl(e:any,event:any){
     this.spclname = e.Specialization
-    
+
     if(event.target.checked){
       this.educationArray.push(
         {
@@ -458,7 +474,7 @@ export class EditJobpostComponent implements OnInit {
         i++;
       });
     }
-    
+
   }
   rem(data:any){
     console.log(data)
@@ -505,4 +521,19 @@ export class EditJobpostComponent implements OnInit {
     let index3 = this.indus_data.findIndex((r: any) => r._id === this.jobpostForm.get('preferedIndustry')?.value)
     this.inddata = this.indus_data[index3].Industry
   }
+
+  onDeSelect(id: any) {
+    const data = this.jobpostForm.get('preferedIndustry')?.value;
+    let i: number = 0;
+    data.forEach((item: any) => {
+      if (item == id._id) {
+        data.splice(i, 1);
+        console.log(data, "data------------>")
+        return;
+      }
+      i++;
+    })
+  }
+
+
 }
