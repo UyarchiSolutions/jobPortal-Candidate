@@ -34,7 +34,7 @@ export class CanHomeComponent implements OnInit {
   page = 0;
   pagetotal = 0;
   totalcount = 0;
-  range = 5;
+  range = 10;
   dropdownSettings: IDropdownSettings = {
     singleSelection: false,
     idField: '_id',
@@ -55,13 +55,17 @@ export class CanHomeComponent implements OnInit {
     this.getIndustry(this.range);
     this.location()
   }
+  check(a: any, b : any){
+    console.log(a,"jobfrom", b,"jobto")
+  }
 
   getjobS() {
     this.canditSarvice.jobs(this.searchForm.value).subscribe((res: any) => {
       this.displaycount = this.page;
-      this.totalcount = res.count;
-      this.pagetotal = Math.ceil(res.count / this.searchForm.get('range')?.value);
+      this.totalcount = res.user.count;
+      this.pagetotal = Math.ceil(this.totalcount / this.range);
       this.jobs = res.user.data;
+      console.log(this.jobs)
     })
   }
   // get skills
@@ -244,7 +248,7 @@ export class CanHomeComponent implements OnInit {
   }
   isCheck_details(val: any) {
     const data: any = this.searchForm.get('workmode')?.value;
-    console.log(data,"datad")
+    console.log(data, "datad")
     if (data.findIndex((res: any) => res == val)) {
       return true;
     } else {
@@ -349,24 +353,47 @@ export class CanHomeComponent implements OnInit {
   changeRange(range: any) {
     this.searchForm.patchValue({
       range: range
-    })
-    this.getjobS();
+    });
+    this.getjobS()
   }
   pagination(val: any) {
     console.log("sdbsjhdj")
     if (val == 1) {
       console.log("sdbsjhdj")
       this.page = this.page + 1;
+      this.searchForm.patchValue({
+        page : this.page
+      })
       this.getjobS();
 
     }
     if (val == 0) {
       if (this.page != 0) {
         this.page = this.page - 1;
+        this.searchForm.patchValue({
+          page : this.page
+        })
         this.getjobS();
       }
     }
   }
+  // previousPage() {
+  //   this.page -= 1;
+  //   if (this.page <= -1) {
+  //     this.page = this.page + 1;
+  //   }
+  //   this.getjobS();
+  // }
+  // nextPage() {
+  //   // if (this.pagetotal ) {
+  //   //   console.log('sfsda')
+  //   //   this.page = this.page;
+  //   // }
+  //   this.page += 1;
+
+  //   this.getjobS();
+  // }
+
   viewmore(val: any) {
     this.range = val;
     this.getDeparment(this.range);
@@ -510,8 +537,9 @@ export class CanHomeComponent implements OnInit {
   }
   find_expfromTo(expfrom: any, expto: any) {
     if (expfrom && expto) {
-      return expfrom + 'to' + expto
+      return expfrom + '-' + expto
     }
+
     else {
       return '';
     }
@@ -524,17 +552,17 @@ export class CanHomeComponent implements OnInit {
     return value / 100000
   }
   myArray: any = [];
-  val:any;
+  val: any;
   yearChange() {
     this.myArray = [];
     this.val = this.searchForm.get('experienceAnotherfrom')?.value;
     this.myArray = this.yearArray.filter((res: any) => this.val < res)
-    console.log(this.myArray,"nvknvnv")
+    console.log(this.myArray, "nvknvnv")
   }
-  data_array(data:any){
+  data_array(data: any) {
     console.log(this.val)
-    if(this.val < data){
-     console.log(data,"data")
+    if (this.val < data) {
+      console.log(data, "data")
       return data
     }
     return data

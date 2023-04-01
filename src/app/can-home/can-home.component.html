@@ -36,8 +36,8 @@
                 </div>
               </div>
               <div class="search-box second-search-box">
-                <input type="text" class="form-control location" placeholder="Enter Location"
-                  formControlName="Location" style="width: 101%;">
+                <input type="text" class="form-control location" placeholder="Enter Location" formControlName="Location"
+                  style="width: 101%;">
               </div>
               <div class="search-box">
                 <select class="form-control select-type douple-input-first" formControlName="experience">
@@ -93,16 +93,14 @@
                 <div class="search-box search-box1">
                   <div class="dropdown">
                     <button class="btn btn1 dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
-                      data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
+                      data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                       Work Mode<i class="fa fa-angle-down" style="margin-left: 59px;"></i>
                     </button>
                     <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
-                      <li><input type="checkbox" value="onsite" (change)="changeWorkmode($event)"
-                         >Onsite</li>
-                      <li><input type="checkbox" value="work from home"
-                          (change)="changeWorkmode($event)">Work form home</li>
-                      <li><input type="checkbox" value="hybrid"
-                          (change)="changeWorkmode($event)">Hybrid</li>
+                      <li><input type="checkbox" value="onsite" (change)="changeWorkmode($event)">Onsite</li>
+                      <li><input type="checkbox" value="work from home" (change)="changeWorkmode($event)">Work form home
+                      </li>
+                      <li><input type="checkbox" value="hybrid" (change)="changeWorkmode($event)">Hybrid</li>
                     </ul>
                   </div>
                 </div>
@@ -114,8 +112,8 @@
                 <button class="btn btn1 collapsebtn" type="button" data-bs-toggle="collapse"
                   data-bs-target="#collapseExample" aria-expanded="false" style="
                     font-weight: 500;
-                    font-size: 14px;padding-left: 0px;" aria-controls="collapseExample">Experience</button><i class="fa fa-angle-down"
-                  style="margin-left: 45px;"></i>
+                    font-size: 14px;padding-left: 0px;" aria-controls="collapseExample">Experience</button><i
+                  class="fa fa-angle-down" style="margin-left: 45px;"></i>
                 <div class="collapse" id="collapseExample">
                   <div class="card card-body" style="padding: 0px;">
                     <div style="display:flex">
@@ -200,7 +198,7 @@
                   <div class="dropdown">
                     <button class="btn btn1 dropdown-toggle salarybtn" type="button"
                       style="font-weight: 500;font-size: 14px;padding-left: 4px;width: 163px;" id="dropdownMenuButton1"
-                      data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
+                      data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                       Deparment<i class="fa fa-angle-down" style="margin-left: 59px;"></i>
                     </button>
                     <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
@@ -221,7 +219,8 @@
                 <div class="search-box search-box1">
                   <div class="dropdown">
                     <button class="btn btn1 dropdown-toggle salarybtn" type="button" style="width:160px"
-                      id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
+                      id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"
+                      data-bs-auto-close="outside">
                       Location<i class="fa fa-angle-down" style="margin-left: 77px;"></i>
                     </button>
                     <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
@@ -237,7 +236,8 @@
                 <div class="search-box search-box1">
                   <div class="dropdown">
                     <button class="btn btn1 dropdown-toggle salarybtn" style="width: 100px;" type="button"
-                      id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
+                      id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"
+                      data-bs-auto-close="outside">
                       Salary<i class="fa fa-angle-down" style="margin-left: 92px;"></i>
                     </button>
                     <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
@@ -262,7 +262,8 @@
                 <div class="search-box search-box1">
                   <div class="dropdown">
                     <button class="btn btn1 dropdown-toggle salarybtn" style="width: 100px;" type="button"
-                      id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
+                      id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"
+                      data-bs-auto-close="outside">
                       Company Type<i class="fa fa-angle-down" style="margin-left: 28px;"></i>
                     </button>
                     <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
@@ -288,9 +289,9 @@
                   <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
                     <li value="Last 30 days" *ngFor="let role of roles"><input type="checkbox" value="{{role._id}}"
                         (change)="roleChange($event)">{{role.Job_role}}</li>
-                        <div style="margin-top: 7px;margin-left: 99px;">
-                          <a style="text-decoration: underline;" (click)="role('null')">View all</a>
-                        </div>
+                    <div style="margin-top: 7px;margin-left: 99px;">
+                      <a style="text-decoration: underline;" (click)="role('null')">View all</a>
+                    </div>
                   </ul>
 
                 </div>
@@ -300,7 +301,8 @@
                 <div class="search-box search-box1">
                   <div class="dropdown">
                     <button class="btn btn1 dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
-                      data-bs-toggle="dropdown" aria-expanded="false" style="width: 100px;" data-bs-auto-close="outside">
+                      data-bs-toggle="dropdown" aria-expanded="false" style="width: 100px;"
+                      data-bs-auto-close="outside">
                       Education<i class="fa fa-angle-down" style="margin-left: 65px;"></i>
                     </button>
                     <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
@@ -318,7 +320,8 @@
                 <div class="search-box search-box1">
                   <div class="dropdown">
                     <button class="btn btn1 dropdown-toggle salarybtn" type="button" style="width: 100px"
-                      id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                      id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"
+                      data-bs-auto-close="outside">
                       Posed by<i class="fa fa-angle-down" style="margin-left: 73px;"></i>
                     </button>
                     <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
@@ -334,7 +337,8 @@
                 <div class="search-box search-box1">
                   <div class="dropdown">
                     <button class="btn btn1 dropdown-toggle salarybtn" type="button" style="width: 100px"
-                      id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                      id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"
+                      data-bs-auto-close="outside">
                       Industry<i class="fa fa-angle-down" style="margin-left: 80px;"></i>
                     </button>
                     <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
@@ -469,12 +473,15 @@
                 </ng-container>
                 <ng-container
                   *ngIf="searchForm.get('experienceAnotherfrom')?.value != null && searchForm.get('experienceAnotherto')?.value != null">
-                  <span class="badge searchlabel bg-light text-dark">
-                    <span>{{find_expfromTo(searchForm.get('experienceAnotherfrom')?.value
-                      ,searchForm.get('experienceAnotherto')?.value)}}</span>
-                    <span class="close-mark"
-                      (click)="remove_filterexpFromto(searchForm.get('experienceAnotherfrom')?.value,searchForm.get('experienceAnotherto')?.value)">x</span>
-                  </span>
+                  <div
+                    *ngIf="searchForm.get('experienceAnotherfrom')?.value && searchForm.get('experienceAnotherto')?.value == searchForm.get('experienceAnotherto')">
+                    <span class="badge searchlabel bg-light text-dark">
+                      <span>{{find_expfromTo(searchForm.get('experienceAnotherfrom')?.value
+                        ,searchForm.get('experienceAnotherto')?.value)}}</span>
+                      <span class="close-mark"
+                        (click)="remove_filterexpFromto(searchForm.get('experienceAnotherfrom')?.value,searchForm.get('experienceAnotherto')?.value)">x</span>
+                    </span>
+                  </div>
                 </ng-container>
               </div>
             </div>
@@ -512,7 +519,7 @@
           </form>
           <div class="row content-card no-margin padding10 main-content" *ngFor="let job of jobs">
             <div class="col">
-              {{job.name}}
+              {{job.name.charAt(0).toUpperCase() + job.name.slice(1)}}
             </div>
             <div class="col wrap">
               {{job.role}}
@@ -520,11 +527,17 @@
             <div class="col wrap">
               {{job.jobLocation}}
             </div>
-            <div class="col">
-              {{job.experienceFrom}} To {{job.experienceTo}}
+            <div class="col" *ngIf="job.experienceFrom == job.experienceTo">
+              {{job.experienceTo}} year
             </div>
-            <div class="col">
-              {{job.salaryRangeFrom}} To {{job.salaryRangeTo}} lac
+            <div class="col" *ngIf="!(job.experienceFrom == job.experienceTo)">
+              {{job.experienceFrom}} - {{job.experienceTo}}
+            </div>
+            <div class="col" *ngIf="job.salaryRangeFrom == job.salaryRangeTo">
+              {{job.salaryRangeTo}} Lac
+            </div>
+            <div class="col" *ngIf="!(job.salaryRangeFrom == job.salaryRangeTo)">
+              {{job.salaryRangeFrom}} - {{job.salaryRangeTo}}
             </div>
             <div class="col">
               {{job.date}}
@@ -543,20 +556,21 @@
                 <button style="border: none;" (click)="pagination(0)"><img src="../../assets/image/left-arrow.png"
                     alt="" style="margin-top: 17px;" class="p-left"></button>
                 <div class="pageination-number">{{page+1}}</div>
-                <button style="border: none;" (click)="pagination(1)"><img src="../../assets/image/right-arrow.png"
-                    style="margin-top: 17px;" alt="" class="p-right"></button>
+                <button style="border: none;" (click)="pagination(1)" [disabled]="page+1 == pagetotal"
+                  [ngStyle]="{'pointer-events' : page+1 == pagetotal ? 'none' : 'auto' }"><img
+                    src="../../assets/image/right-arrow.png" style="margin-top: 17px;" alt="" class="p-right"></button>
               </div>
             </div>
             <div class="col">
             </div>
-            <div class="col" style="color: black;">
+            <div class="col" style="color: black;" *ngIf="page >= 1">
               <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle range" type="button" data-bs-toggle="dropdown"
                   aria-expanded="false">
                   <i class='fas fa-sort-amount-down'></i> Range
                 </button>
                 <ul style="cursor: pointer;" class="dropdown-menu">
-                  <li (click)="changeRange(2)">10</li>
+                  <li (click)="changeRange(10)">10</li>
                   <li (click)="changeRange(20)">20</li>
                   <li (click)="changeRange(40)">40</li>
                   <li (click)="changeRange(60)">60</li>

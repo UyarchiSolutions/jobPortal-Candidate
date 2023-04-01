@@ -103,6 +103,7 @@ export class GetallcandidateProfileComponent implements OnInit {
   }
   uploadfile() {
     this.tab = 5;
+    console.log(":dskjhsadkjfhasdfkjh")
   }
   full() {
     this.tab = 6;

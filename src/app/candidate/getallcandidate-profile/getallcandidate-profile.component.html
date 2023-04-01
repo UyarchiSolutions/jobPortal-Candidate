@@ -879,8 +879,8 @@
                   </filter>
                 </defs>
               </svg>
-
             </i></span>
+
           <span class=" edit-icon"><i><svg width="36" height="36" viewBox="0 0 56 56" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <g filter="url(#filter0_d_2095_8531)">
@@ -889,7 +889,9 @@
                 <path
                   d="M20 22H36V35C36 35.2652 35.8946 35.5196 35.7071 35.7071C35.5196 35.8946 35.2652 36 35 36H21C20.7348 36 20.4804 35.8946 20.2929 35.7071C20.1054 35.5196 20 35.2652 20 35V22ZM22 24V34H34V24H22ZM25 26H27V32H25V26ZM29 26H31V32H29V26ZM23 19V17C23 16.7348 23.1054 16.4804 23.2929 16.2929C23.4804 16.1054 23.7348 16 24 16H32C32.2652 16 32.5196 16.1054 32.7071 16.2929C32.8946 16.4804 33 16.7348 33 17V19H38V21H18V19H23ZM25 18V19H31V18H25Z"
                   fill="white" />
+
                 <defs>
+
                   <filter id="filter0_d_2095_8531" x="0" y="0" width="56" height="56" filterUnits="userSpaceOnUse"
                     color-interpolation-filters="sRGB">
                     <feFlood flood-opacity="0" result="BackgroundImageFix" />
@@ -904,12 +906,14 @@
                   </filter>
                 </defs>
               </svg>
+
             </i></span>
         </div>
-        <div *ngIf="pdfUrl !=null" class="resume content m-auto col-10 mt-2 ">
-          <iframe style="height: 782px;width: 741px;"
-            [src]="'https://streamingupload.s3.ap-south-1.amazonaws.com/bill-2022-12.pdf' | safe"></iframe>
-        </div>
+
+        <iframe style="width:100%; height:80%;"
+          [src]="'https://jobresume.s3.ap-south-1.amazonaws.com/sample.pdf' | safe" type="application/pdf">
+        </iframe>
+
       </div>
       <div class="row register-content-row " *ngIf="tab ==6">
         <div class="col">
@@ -1082,91 +1086,91 @@
           <div class="content m-auto" *ngFor="let details of getAlldetails">
             <div class="content m-auto col-8 mt-5 " *ngIf="details.drQualification">
               <div>
-              <h5 class="col-12 mb-4">Doctorate/Mphil :</h5>
-              <div class="col-12 d-flex">
-                <label class="col-5">Qualification : </label>
-                <p class="col-7">{{details.drQualification}}</p>
-              </div>
+                <h5 class="col-12 mb-4">Doctorate/Mphil :</h5>
+                <div class="col-12 d-flex">
+                  <label class="col-5">Qualification : </label>
+                  <p class="col-7">{{details.drQualification}}</p>
+                </div>
 
-              <div class="col-12 d-flex">
-                <label class="col-5">University : </label>
-                <p class="col-7">{{details.drUniversity}}</p>
-              </div>
+                <div class="col-12 d-flex">
+                  <label class="col-5">University : </label>
+                  <p class="col-7">{{details.drUniversity}}</p>
+                </div>
 
-              <div class="col-12 d-flex">
-                <label class="col-5">Specification : </label>
-                <p class="col-7">{{details.drSpecialization}}</p>
-              </div>
+                <div class="col-12 d-flex">
+                  <label class="col-5">Specification : </label>
+                  <p class="col-7">{{details.drSpecialization}}</p>
+                </div>
 
-              <div class="col-12 d-flex">
-                <label class="col-5">Course : </label>
-                <p class="col-7">{{details.drcourses}}</p>
-              </div>
+                <div class="col-12 d-flex">
+                  <label class="col-5">Course : </label>
+                  <p class="col-7">{{details.drcourses}}</p>
+                </div>
 
-              <div class="col-12 d-flex">
-                <label class="col-5">Grading Sysytem : </label>
-                <p class="col-7">{{details.drGradingSystem}}</p>
-              </div>
+                <div class="col-12 d-flex">
+                  <label class="col-5">Grading Sysytem : </label>
+                  <p class="col-7">{{details.drGradingSystem}}</p>
+                </div>
 
-              <div class="col-12 d-flex">
-                <label class="col-5">Grade : </label>
-                <p class="col-7">{{details.drMarks}}</p>
-              </div>
+                <div class="col-12 d-flex">
+                  <label class="col-5">Grade : </label>
+                  <p class="col-7">{{details.drMarks}}</p>
+                </div>
 
-              <div class="col-12 d-flex">
-                <label class="col-5">Course Type : </label>
-                <p class="col-7">{{details.drCourseType}}</p>
-              </div>
+                <div class="col-12 d-flex">
+                  <label class="col-5">Course Type : </label>
+                  <p class="col-7">{{details.drCourseType}}</p>
+                </div>
 
-              <div class="col-12 d-flex">
-                <label class="col-5">Passed Out Year :</label>
-                <p class="col-7">{{details.drCourseDurationFrom}} To {{details.drCourseDurationTo}}</p>
+                <div class="col-12 d-flex">
+                  <label class="col-5">Passed Out Year :</label>
+                  <p class="col-7">{{details.drCourseDurationFrom}} To {{details.drCourseDurationTo}}</p>
+                </div>
               </div>
-            </div>
-            <div *ngIf="details.pgQualification">
-              <h5 class="col-12 mt-4 mb-4">Master/PG courses</h5>
-              <div class="col-12 d-flex">
-                <label class="col-5">Qualification : </label>
-                <p class="col-7">{{details.pgQualification}}</p>
-              </div>
+              <div *ngIf="details.pgQualification">
+                <h5 class="col-12 mt-4 mb-4">Master/PG courses</h5>
+                <div class="col-12 d-flex">
+                  <label class="col-5">Qualification : </label>
+                  <p class="col-7">{{details.pgQualification}}</p>
+                </div>
 
-              <div class="col-12 d-flex">
-                <label class="col-5">University : </label>
-                <p class="col-7">{{details.pgUniversity}}</p>
-              </div>
+                <div class="col-12 d-flex">
+                  <label class="col-5">University : </label>
+                  <p class="col-7">{{details.pgUniversity}}</p>
+                </div>
 
-              <div class="col-12 d-flex">
-                <label class="col-5">Specification : </label>
-                <p class="col-7">{{details.pgSpecialization }}</p>
-              </div>
+                <div class="col-12 d-flex">
+                  <label class="col-5">Specification : </label>
+                  <p class="col-7">{{details.pgSpecialization }}</p>
+                </div>
 
-              <div class="col-12 d-flex">
-                <label class="col-5">Course : </label>
-                <p class="col-7">{{details.pgCourse}}</p>
-              </div>
+                <div class="col-12 d-flex">
+                  <label class="col-5">Course : </label>
+                  <p class="col-7">{{details.pgCourse}}</p>
+                </div>
 
-              <div class="col-12 d-flex">
-                <label class="col-5">Grading Sysytem : </label>
-                <p class="col-7">{{details.pgGradingSystem}}</p>
-              </div>
+                <div class="col-12 d-flex">
+                  <label class="col-5">Grading Sysytem : </label>
+                  <p class="col-7">{{details.pgGradingSystem}}</p>
+                </div>
 
-              <div class="col-12 d-flex">
-                <label class="col-5">Grade : </label>
-                <p class="col-7">{{details.pgMarks}}</p>
-              </div>
+                <div class="col-12 d-flex">
+                  <label class="col-5">Grade : </label>
+                  <p class="col-7">{{details.pgMarks}}</p>
+                </div>
 
-              <div class="col-12 d-flex">
-                <label class="col-5">Course Type : </label>
-                <p class="col-7">{{details.pgCourseType}}</p>
-              </div>
+                <div class="col-12 d-flex">
+                  <label class="col-5">Course Type : </label>
+                  <p class="col-7">{{details.pgCourseType}}</p>
+                </div>
 
-              <div class="col-12 d-flex">
-                <label class="col-5">Passed Out Year :</label>
-                <p class="col-7">{{details.pgCourseDurationFrom}} To {{details.pgCourseDurationTo}}</p>
+                <div class="col-12 d-flex">
+                  <label class="col-5">Passed Out Year :</label>
+                  <p class="col-7">{{details.pgCourseDurationFrom}} To {{details.pgCourseDurationTo}}</p>
+                </div>
               </div>
-            </div>
               <h5 class="col-12 mt-4 mb-4">
-                 Detail 3</h5>
+                Detail 3</h5>
               <div class="col-12 d-flex">
                 <label class="col-5">Qualification : </label>
                 <p class="col-7">{{details.ugQualification}}</p>
