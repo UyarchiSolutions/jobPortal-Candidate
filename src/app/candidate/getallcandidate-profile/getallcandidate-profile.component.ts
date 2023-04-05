@@ -46,6 +46,7 @@ export class GetallcandidateProfileComponent implements OnInit {
     this.recentSearch();
     this.activaterouter.queryParams.subscribe((params: any) => {
       this.tab = params.taps
+      console.log(this.tab)
     })
 
 
@@ -58,8 +59,9 @@ export class GetallcandidateProfileComponent implements OnInit {
 
   getallDetails() {
     this.candidateservice.viewDetails().subscribe((res: any) => {
-      this.getAlldetails = res.user;
-     this.profileview=this.getAlldetails[0].image
+    this.getAlldetails = res.user;
+    this.profileview=this.getAlldetails[0].image
+    console.log(res)
 
      this.profile=this.imagepreview+this.profileview
       console.log(this.imagepreview+this.getAlldetails[0].image)

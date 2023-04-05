@@ -33,7 +33,6 @@ export class CanRegisterComponent implements OnInit {
   // File upload
   file_name:any='';
   addresume(file: any) {
-    console.log("sbdhsbdhj")
     this.candidateFile = null;
     const res = file.target.files[0] as File;
     if (res != null) {
@@ -47,7 +46,7 @@ export class CanRegisterComponent implements OnInit {
       }
     }
   }
-  // rgister api
+  // rgister apis
   submit() {
     this.isSubmitted=true;
     console.log(this.Candidateform.value, 'sbdjshdbh')

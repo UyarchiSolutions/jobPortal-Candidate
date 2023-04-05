@@ -28,6 +28,7 @@ export class CanMobileverifyComponent implements OnInit {
       mobilenumber: mobile
     }
     this.canditateService.verifyMobile(a).subscribe((res: any) => {
+      console.log(res);
     })
   }
   verify_now() {
@@ -35,6 +36,7 @@ export class CanMobileverifyComponent implements OnInit {
       mobilenumber: this.mobileOtp
     });
     this.canditateService.verify_otp(this.verify.value).subscribe((res: any) => {
+      console.log(res);
       this.router.navigate(['canlogin']);
     }
     );

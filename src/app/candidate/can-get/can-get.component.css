@@ -6,8 +6,6 @@
 .register-content {
   background-color: #82C3EC;
   border-top-left-radius: 5px;
-
-
   border-top-right-radius: 5px;
 }
 
@@ -170,7 +168,9 @@
   color: #fff;
 }
 
-/* main-contnet */
+.main-content{
+  height: 50px;
+}
 
 
 /* content-footer */
@@ -219,6 +219,7 @@
 
 .main-content {
   font-size: 14px;
+  height: 55px;
 }
 
 .recent-search,
@@ -305,7 +306,7 @@ h1 {
   color: #FD841F;
 }
 
-.form {}
+/* .form {} */
 
 .form>div {
   display: flex;
@@ -453,7 +454,7 @@ a {
 }
 
 select {
-  -webkit-appearance: listbox !important;
+  appearance: listbox !important;
 }
 
 label {

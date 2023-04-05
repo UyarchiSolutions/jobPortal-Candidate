@@ -63,6 +63,7 @@ export class CanHomeComponent implements OnInit {
     this.canditSarvice.jobs(this.searchForm.value).subscribe((res: any) => {
       this.displaycount = this.page;
       this.totalcount = res.user.count;
+      console.log(res)
       this.pagetotal = Math.ceil(this.totalcount / this.range);
       this.jobs = res.user.data;
       console.log(this.jobs)
@@ -357,9 +358,7 @@ export class CanHomeComponent implements OnInit {
     this.getjobS()
   }
   pagination(val: any) {
-    console.log("sdbsjhdj")
     if (val == 1) {
-      console.log("sdbsjhdj")
       this.page = this.page + 1;
       this.searchForm.patchValue({
         page : this.page

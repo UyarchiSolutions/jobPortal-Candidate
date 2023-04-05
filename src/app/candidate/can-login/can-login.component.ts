@@ -42,6 +42,7 @@ export class CanLoginComponent implements OnInit {
           this.router.navigate(['mail-details'], { queryParams: { id: this.id } })
         }
       }, error => {
+        console.log(error)
         if(error.error.message =="Passwoed Doesn't Match"){
         this.passwordStatus=true;
         }else{
