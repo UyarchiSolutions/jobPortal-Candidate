@@ -4,6 +4,7 @@ import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Valida
 import { ActivatedRoute, Router } from '@angular/router';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { CanditateService } from '../canditate.service';
+import { __values } from 'tslib';
 
 @Component({
   selector: 'app-updateprofile',
@@ -21,6 +22,7 @@ export class UpdateprofileComponent implements OnInit {
   userId: any;
   now: any;
   getLang: any = []
+  expect: any;
   constructor(private fb: FormBuilder, private candidateService: CanditateService, private router: Router, private activateRoute: ActivatedRoute) {
 
 
@@ -32,7 +34,7 @@ export class UpdateprofileComponent implements OnInit {
       experienceYear: new FormControl(0, Validators.required),
       experienceMonth: new FormControl(0),
       expectedctc: new FormControl('', Validators.required),
-      currentctc: new FormControl(0, Validators.required),   //display only experience
+      currentctc: new FormControl('', Validators.required),   //display only experience
       locationCurrent: new FormControl('', Validators.required),
       locationNative: new FormControl('', Validators.required),
       noticeperiod: new FormControl('', Validators.required),
@@ -90,8 +92,8 @@ export class UpdateprofileComponent implements OnInit {
         dob: this.viewAll[0].dob,
         experienceYear: this.viewAll[0].experienceYear,
         experienceMonth: this.viewAll[0].experienceMonth,
-        expectedctc: this.viewAll[0].expectedctc,
-        currentctc: this.viewAll[0].currentctc,   //display only experience
+        expectedctc: this.viewAll.expectedctc,
+        currentctc: this.viewAll.currentctc,   //display only experience
         locationCurrent: this.viewAll[0].locationCurrent,
         locationNative: this.viewAll[0].locationNative,
         noticeperiod: this.viewAll[0].noticeperiod,
@@ -106,8 +108,7 @@ export class UpdateprofileComponent implements OnInit {
         preferredLocation: this.viewAll[0].preferredLocation,
         update: new FormControl('advance details')
 
-        // languages: this.viewAll[0].keyskill
-      })
+      });
       console.log(this.profileForm.get('currentSkill')?.value, "sdksfjnfjnjn")
       this.getLang = this.viewAll[0].languages;
       if (this.viewAll[0].experienceYear) {
@@ -115,14 +116,6 @@ export class UpdateprofileComponent implements OnInit {
       } else {
         this.profileForm.get('currentctc').setErrors(null)
       }
-
-      // if (this.viewAll[0].relocate == 'Yes') {
-      //   console.log(this.viewAll[0].preferredLocation,"vbnvghvgvfg")
-      //   this.profileForm.get('preferredLocation').setErrors({ 'incorrect': true })
-      // } else {
-      //   this.profileForm.get('preferredLocation').setErrors(null)
-      // }
-
       this.viewAll[0].languages.forEach((element: any) => {
         const data = this.profileForm.get('languages').push(this.fb.group({
           lang: new FormControl(element.lang),
@@ -312,27 +305,12 @@ this.selectImg1=file
     let expYear=Number(this.experienceYear)
     let expMonth=Number(this.experienceMonth)
     let curCtc=Number(this.currentCtc)
-    let curTh=Number(this.currentTh)
-    this.profileForm.patchValue({experienceYear:expYear,experienceMonth:expMonth, currentctc:curCtc, currentctc_th:curTh})
+    this.profileForm.patchValue({experienceYear:expYear,experienceMonth:expMonth, currentctc:curCtc})
     console.log(this.profileForm.value)
     let formData = new FormData();
 
     formData.append('image', this.selectImg1);
     console.log(formData)
-    // console.log(this.profileForm.get('dob')?.valid, "values")
-    // console.log(this.profileForm.get('experienceYear')?.valid, "experienceYear")
-    // console.log(this.profileForm.get('experienceMonth')?.valid, "experienceMonth")
-    // console.log(this.profileForm.get('expectedctc')?.valid, "expectedctc")
-    // console.log(this.profileForm.get('currentctc')?.valid, "currentctc")
-    // console.log(this.profileForm.get('locationCurrent')?.valid, "locationCurrent")
-    // console.log(this.profileForm.get('locationNative')?.valid, "locationNative")
-    // console.log(this.profileForm.get('noticeperiod')?.valid, "noticeperiod")
-    // console.log(this.profileForm.get('currentSkill')?.valid, "currentSkill")
-    // console.log(this.profileForm.get('preferredSkill')?.valid, "preferredSkill")
-    // console.log(this.profileForm.get('gender')?.valid, "gender")
-    // console.log(this.profileForm.get('maritalStatus')?.valid, "maritalStatus")
-    // console.log(this.profileForm.get('languages')?.valid, "languages")
-    // console.log(this.profileForm.get('relocate')?.valid, "relocate")
     console.log(this.profileForm.value)
     if (this.profileForm.valid) {
 

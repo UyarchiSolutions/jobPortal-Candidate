@@ -882,14 +882,13 @@
             </i></span>
 
           <span class=" edit-icon"><i><svg width="36" height="36" viewBox="0 0 56 56" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+                xmlns="http://www.w3.org/2000/svg" style="cursor:pointer" (click)="deleteResume($event)">
                 <g filter="url(#filter0_d_2095_8531)">
                   <rect x="8" y="6" width="40" height="40" rx="10" fill="#0A2647" />
                 </g>
                 <path
                   d="M20 22H36V35C36 35.2652 35.8946 35.5196 35.7071 35.7071C35.5196 35.8946 35.2652 36 35 36H21C20.7348 36 20.4804 35.8946 20.2929 35.7071C20.1054 35.5196 20 35.2652 20 35V22ZM22 24V34H34V24H22ZM25 26H27V32H25V26ZM29 26H31V32H29V26ZM23 19V17C23 16.7348 23.1054 16.4804 23.2929 16.2929C23.4804 16.1054 23.7348 16 24 16H32C32.2652 16 32.5196 16.1054 32.7071 16.2929C32.8946 16.4804 33 16.7348 33 17V19H38V21H18V19H23ZM25 18V19H31V18H25Z"
                   fill="white" />
-
                 <defs>
 
                   <filter id="filter0_d_2095_8531" x="0" y="0" width="56" height="56" filterUnits="userSpaceOnUse"
@@ -906,12 +905,11 @@
                   </filter>
                 </defs>
               </svg>
-
             </i></span>
         </div>
 
         <iframe style="width:100%; height:80%;"
-          [src]="'https://jobresume.s3.ap-south-1.amazonaws.com/agora%2Bbill.pdf' | safe" type="application/pdf">
+          [src]=" pdfUrl | safe" type="application/pdf">
         </iframe>
 
       </div>

@@ -39,6 +39,7 @@ export class GetallcandidateProfileComponent implements OnInit {
   check: boolean = false;
   mailData: any;
   mobile_data: any;
+
   constructor(private candidateservice: CanditateService, private router: Router, private fb: FormBuilder, private activaterouter: ActivatedRoute) { }
 
   ngOnInit() {
@@ -46,7 +47,6 @@ export class GetallcandidateProfileComponent implements OnInit {
     this.recentSearch();
     this.activaterouter.queryParams.subscribe((params: any) => {
       this.tab = params.taps
-      console.log(this.tab)
     })
 
 
@@ -54,21 +54,24 @@ export class GetallcandidateProfileComponent implements OnInit {
   imagepreview:any="https://livebroadcast.click/"
   profileview:any
 
-  profile:any
-
+  profile:any;
 
   getallDetails() {
     this.candidateservice.viewDetails().subscribe((res: any) => {
     this.getAlldetails = res.user;
-    this.profileview=this.getAlldetails[0].image
-    console.log(res)
+    this.profileview=this.getAlldetails[0].image;
+    this.pdfUrl =this.getAlldetails[0].resume;
+    console.log(this.pdfUrl)
+    console.log(res);
+
 
      this.profile=this.imagepreview+this.profileview
       console.log(this.imagepreview+this.getAlldetails[0].image)
       this.imagepreview=this.getAlldetails.image
       this.email = this.getAlldetails[0].email;
       this.mobile = this.getAlldetails[0].mobileNumber;
-      this.id = this.getAlldetails[0]._id
+      this.id = this.getAlldetails[0]._id;
+
       console.log(this.id)
       if (this.tab == 10) {
         this.mailData = localStorage.getItem('emailId')
@@ -86,7 +89,6 @@ export class GetallcandidateProfileComponent implements OnInit {
         mobileNumber: this.mobile_data,
         location: this.getAlldetails[0].location
       })
-      this.pdfUrl =this.getAlldetails[0].resume;
     })
   }
 
@@ -311,5 +313,8 @@ export class GetallcandidateProfileComponent implements OnInit {
       console.log(this.ischeck3, "fngjgnhjfghj")
       return this.ischeck3;
     }
+  }
+  deleteResume(event : any){
+    event.target.removeAt()
   }
 }

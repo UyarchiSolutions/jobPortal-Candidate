@@ -64,7 +64,7 @@
                     <label></label>
                     <div class="content-box drop-data">
                       <ul>
-                        <li *ngFor="let skill of keySkill"  style="cursor:pointer"
+                        <li *ngFor="let skill of keySkill" style="cursor:pointer"
                           (click)="checkSkill($event,skill.Skill_Title)">
                           <span>{{skill.Skill_Title}}</span>
                         </li>
@@ -102,8 +102,9 @@
                         <option value=10>10 Year</option>
                         <option value=11>11 Year</option>
                       </select>
-                      <select class="form-control select-type douple-input-second" formControlName="experienceMonth"  [(ngModel)]="experienceMonth">
-                        <option  value="option1" disabled selected>Month</option>
+                      <select class="form-control select-type douple-input-second" formControlName="experienceMonth"
+                        [(ngModel)]="experienceMonth">
+                        <option value="option1" disabled selected>Month</option>
                         <option value=0>0 Month</option>
                         <option value=1>1 Month</option>
                         <option value=2>2 Month</option>
@@ -137,24 +138,8 @@
                   <div class="single-row">
                     <label for="" class="lable-data">Expected CTC <span>*</span>:</label>
                     <div class="content-box">
-                      <!-- <input type="text" class="form-control" placeholder="Enter CTC" formControlName="expectedctc"> -->
-                      <select class="form-control select-type douple-input-first" formControlName="expectedctc">
-                        <option value="option1" disabled selected>Expected CTC</option>
-                        <option value="0-1">0 to 1 lac</option>
-                        <option value="1-2">1 to 2 lac</option>
-                        <option value="2-3">2 to 3 lac</option>
-                        <option value="2-4">3 to 4 lac</option>
-                        <option value="4-5">4 to 5 lac</option>
-                        <option value="5-8">5 to 8 lac</option>
-                        <option value="8-10">8 to 10 lac</option>
-                        <option value="10-13">10 to 13 lac</option>
-                        <option value="13-15">13 to 15 lac</option>
-                        <option value="15-20">15 to 20 lac</option>
-                        <option value="30-more">30 lac+</option>
-                      </select>
-
+                      <input type="number" class="form-control" formControlName="expectedctc">
                     </div>
-
                   </div>
                   <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('expectedctc')?.invalid">
                     <label for=""></label>
@@ -165,36 +150,7 @@
                   <div class="single-row" *ngIf="profileForm.get('experienceYear')?.value != 0">
                     <label for="" class="lable-data">Current CTC <span>*</span>:</label>
                     <div class="content-box">
-                      <select class="form-control select-type douple-input-first" formControlName="currentctc" [(ngModel)]="currentCtc">
-                        <option value="option1" disabled selected></option>
-                        <option value=1>1 lac</option>
-                        <option value=2>2 lac</option>
-                        <option value=3>3 lac</option>
-                        <option value=4>4 lac</option>
-                        <option value=5>5 lac</option>
-                        <option value=6>6 lac</option>
-                        <option value=7>7 lac</option>
-                        <option value=8>8 lac</option>
-                        <option value=9>9 lac</option>
-                        <option value=10>10 lac</option>
-                        <option value=11>11 lac</option>
-                      </select>
-                      <select class="form-control select-type douple-input-second" formControlName="currentctc_th" [(ngModel)]="currentTh">
-                        <option value="option1" disabled selected></option>
-                        <option value=5000>5000</option>
-                        <option value=10000>10000</option>
-                        <option value=15000>15000</option>
-                        <option value=20000>20000</option>
-                        <option value=25000>25000</option>
-                        <option value=30000>30000</option>
-                        <option value=35000>35000</option>
-                        <option value=40000>40000</option>
-                        <option value=45000>45000</option>
-                        <option value=50000>50000</option>
-                        <option value=55000>55000</option>
-                        <option value=60000>60000</option>
-                      </select>
-                      <!-- <input type="text" class="form-control" placeholder="Enter CTC" formControlName="currentctc"> -->
+                      <input type="number" class="form-control" formControlName="currentctc" [(ngModel)]="currentCtc">
                     </div>
 
                   </div>
@@ -368,7 +324,7 @@
                           (click)="remove_location(data)"
                           *ngFor="let data of profileForm.get('preferredLocation')?.value">
                           <span style="color: black;">{{get_maintext(data)}}</span>
-                          <span  style="color: black;" class="close-mark mx-1">x</span>
+                          <span style="color: black;" class="close-mark mx-1">x</span>
                         </span>
                       </ng-container>
                       <input type="text" class="form-control" placeholder="Enter Key Skills"
@@ -433,7 +389,7 @@
                           <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Speak"
                               (change)="kownaction($event,i,lang)" [checked]="chekedKnown(i,'Speak',lang)">
-                            <label class="form-check-label" for="inlineCheckbox1">Speck</label>
+                            <label class="form-check-label" for="inlineCheckbox1">speak</label>
                           </div>
                           <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Read"

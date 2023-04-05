@@ -40,6 +40,9 @@ export class CanditateService {
   getSkill(value:any){
     return this.http.get(this.baseUrl+`/v1/employerdetail/keySkillData/${value}`)
   }
+  getLoc(value : any){
+    return this.http.get(this.baseUrl+`/v1/employerdetail/location_api?/${value}`)
+  }
   // getShops
   getAlldetails(data:any){
     return this.http.post(this.baseUrl+'/v1/candidatedetail/candidateSearch_front_page',data,{headers:{auth:Cookie.get('tokens')}})

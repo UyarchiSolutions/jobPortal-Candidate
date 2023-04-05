@@ -262,10 +262,12 @@ export class CanGetComponent implements OnInit {
     }
   }
   arrayItem : any = []
-  changeLoc(e: any) {
+  changeLoc(e: any, value : any) {
     var loc = e.target.value;
     this.arrayItem.push(loc);
-
+    this.canditSarvice.getLoc(value).subscribe((res : any) =>{
+      this.getLocation = res;
+    })
   }
   recentSearch() {
     this.canditSarvice.getRecentsearch().subscribe((res: any) => {
