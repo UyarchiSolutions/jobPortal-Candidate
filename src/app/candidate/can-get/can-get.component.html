@@ -27,10 +27,26 @@
                   </div>
                 </div>
               </div>
-              <div class="search-box second-search-box" >
-                <input type="text" class="form-control location" placeholder="Enter Location" style="width: 101%;"
-                  formControlName="Location" (keyup)="changeLoc($event,$event)">
+
+              <div class="search-box first-search-box">
+                <input type="text" class="form-control keyskill" placeholder="Enter Location"
+                  (keyup)="changeLoc($event)" formControlName="Location">
+                <div class="" *ngIf="isShow" style="margin-top:0px;">
+                  <label></label>
+                  <div class="content-box keylist" style="background: white;">
+                    <ul class="ulkeylist" style="padding-left: 0px;" class="">
+                      <li class="ilkeylist" style="cursor:pointer" *ngFor="let item of viewLocation"
+                        (click)="addLocati($event,item.description)">
+                        <span>{{item.description}}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
+
+
+
+
               <div class="search-box">
                 <select class="form-control select-type douple-input-first" formControlName="experience">
                   <option [ngValue]="null" selected disabled>YEAR</option>
@@ -1165,7 +1181,8 @@
               </div>
             </div>
           </div>
-          <div class="row content-card-footer no-margin padding10" style="background: #82C3EC;height: 60px !important;" *ngIf="tab != 4">
+          <div class="row content-card-footer no-margin padding10" style="background: #82C3EC;height: 60px !important;"
+            *ngIf="tab != 4">
             <div class="col">
             </div>
             <div class="col">
@@ -1176,9 +1193,8 @@
                     alt="" style="margin-top: 17px;" class="p-left"></button>
                 <div class="pageination-number">{{page+1}}</div>
                 <button style="border: none;" [disabled]="page+1 == pagetotal"
-                  [ngStyle]="{'pointer-events': page+1 == pagetotal ? 'none' : 'auto'}"
-                  (click)="pagination(1)"><img src="../../assets/image/right-arrow.png"
-                    style="margin-top: 17px;" class="p-right"></button>
+                  [ngStyle]="{'pointer-events': page+1 == pagetotal ? 'none' : 'auto'}" (click)="pagination(1)"><img
+                    src="../../assets/image/right-arrow.png" style="margin-top: 17px;" class="p-right"></button>
               </div>
             </div>
             <div class="col">
@@ -1210,7 +1226,7 @@
             <i><svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
                   d="M10 0.864746C15.523 0.864746 20 5.30812 20 10.7896C20 16.2711 15.523 20.7145 10 20.7145C4.477 20.7145 0 16.2711 0 10.7896H2C2 15.1744 5.582 18.7295 10 18.7295C14.418 18.7295 18 15.1744 18 10.7896C18 6.40482 14.418 2.84972 10 2.84972C7.25 2.84972 4.824 4.22631 3.385 6.32343H6V8.30841H0V2.35348H2V4.8347C3.824 2.42295 6.729 0.864746 10 0.864746ZM11 5.82719V10.3777L14.243 13.5964L12.828 15.0008L9 11.1995V5.82719H11Z"
-                  fill="white"/>
+                  fill="white" />
               </svg>
             </i> Recent Search
           </header>

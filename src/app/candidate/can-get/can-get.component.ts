@@ -23,6 +23,7 @@ export class CanGetComponent implements OnInit {
   page = 0;
   pagetotal = 0;
   totalcount = 0;
+  located: any;
   searchForm: any = this.fb.group({
     search: new FormControl([]),
     experience: new FormControl(''),
@@ -40,7 +41,7 @@ export class CanGetComponent implements OnInit {
     Salary: new FormControl([]),
     searchbox: new FormControl(null),
     page: new FormControl(0),
-    range: new FormControl(10)
+    range: new FormControl(10),
   })
   setAlertForm: any = this.fb.group({
     currentIndustry: new FormControl(null, [Validators.required]),
@@ -261,12 +262,40 @@ export class CanGetComponent implements OnInit {
       this.searchForm.get('searchbox')?.setValue(search);
     }
   }
-  arrayItem : any = []
-  changeLoc(e: any, value : any) {
-    var loc = e.target.value;
-    this.arrayItem.push(loc);
-    this.canditSarvice.getLoc(value).subscribe((res : any) =>{
-      this.getLocation = res;
+  isShow: any = false
+  viewLocation : any = [];
+  addLocati(e: any, local: any){
+    this.isShow = false;
+    let index: any = this.searchForm.get('Location')?.value;
+    console.log(index, "location")
+    if (index.length != 0) {
+      let value = index.splice([index.length - 1], 1);
+      index.push(local)
+      this.searchForm.get('Location')?.setValue(index)
+      let search: any = index.toString() + ","
+      this.searchForm.get('Location')?.setValue(search);
+    }
+  }
+  changeLoc(data: any,) {
+
+    let value = data.target.value.split(",");
+
+    if (data.target.value) {
+      this.isShow = true;
+    } else {
+      this.isShow = false
+    }
+    if (value.length != 0) {
+      if (value[value.length - 1] != null && value[value.length - 1] != '') {
+        this.getLocate(value[value.length - 1])
+      }
+    }
+    this.searchForm.get('Location')?.setValue(value)
+  }
+  getLocate(value: any) {
+    this.canditSarvice.get_allLocation(value).subscribe((res: any) => {
+      this.viewLocation = res.predictions;
+      console.log(this.viewLocation)
     })
   }
   recentSearch() {
@@ -814,5 +843,8 @@ export class CanGetComponent implements OnInit {
   convertsalary(value: any) {
     return value / 100000
   }
+
+
+
 }
 

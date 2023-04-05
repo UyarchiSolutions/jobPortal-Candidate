@@ -92,8 +92,8 @@ export class UpdateprofileComponent implements OnInit {
         dob: this.viewAll[0].dob,
         experienceYear: this.viewAll[0].experienceYear,
         experienceMonth: this.viewAll[0].experienceMonth,
-        expectedctc: this.viewAll.expectedctc,
-        currentctc: this.viewAll.currentctc,   //display only experience
+        expectedctc: this.viewAll[0].expectedctc,
+        currentctc: this.viewAll[0].currentctc,   //display only experience
         locationCurrent: this.viewAll[0].locationCurrent,
         locationNative: this.viewAll[0].locationNative,
         noticeperiod: this.viewAll[0].noticeperiod,
@@ -305,7 +305,7 @@ this.selectImg1=file
     let expYear=Number(this.experienceYear)
     let expMonth=Number(this.experienceMonth)
     let curCtc=Number(this.currentCtc)
-    this.profileForm.patchValue({experienceYear:expYear,experienceMonth:expMonth, currentctc:curCtc})
+    this.profileForm.patchValue({experienceYear:expYear,experienceMonth:expMonth,})
     console.log(this.profileForm.value)
     let formData = new FormData();
 

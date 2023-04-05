@@ -1,4 +1,4 @@
-<div class="container-fluid register">
+<div class="container-fluid register" >
   <div class="row">
     <div class="col-2 ad-image">
       <img src="../../assets/image/ad.png" alt="">
@@ -23,7 +23,6 @@
 
               <div class="col">
                 <div class="register-form">
-
                   <div class="single-row">
                     <label for="">Add Profile Picture:</label>
                     <div class="content-box">
@@ -150,7 +149,7 @@
                   <div class="single-row" *ngIf="profileForm.get('experienceYear')?.value != 0">
                     <label for="" class="lable-data">Current CTC <span>*</span>:</label>
                     <div class="content-box">
-                      <input type="number" class="form-control" formControlName="currentctc" [(ngModel)]="currentCtc">
+                      <input type="number" class="form-control" formControlName="currentctc">
                     </div>
 
                   </div>

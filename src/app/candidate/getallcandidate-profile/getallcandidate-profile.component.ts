@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Cookie } from 'ng2-cookies';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { CanditateService } from '../canditate.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-getallcandidate-profile',
@@ -16,13 +17,14 @@ export class GetallcandidateProfileComponent implements OnInit {
   email: any;
   recentData: any = [];
   resumeForm: any = this.fb.group({
-    resume: new FormControl('', Validators.required)
+    updateresume: new FormControl('')
   })
   searchForm: any = this.fb.group({
     search: new FormControl([]),
     location: new FormControl(),
     experience: new FormControl(),
     searchbox: new FormControl(),
+    updateresume: new FormControl()
   })
   Candidateform: any = this.fb.group({
     name: new FormControl('', [Validators.required, Validators.maxLength(50), Validators.pattern('^[a-zA-Z-.]*$')]),
@@ -51,23 +53,22 @@ export class GetallcandidateProfileComponent implements OnInit {
 
 
   }
-  imagepreview:any="https://livebroadcast.click/"
-  profileview:any
+  imagepreview: any = "https://livebroadcast.click/"
+  profileview: any
 
-  profile:any;
+  profile: any;
 
   getallDetails() {
     this.candidateservice.viewDetails().subscribe((res: any) => {
-    this.getAlldetails = res.user;
-    this.profileview=this.getAlldetails[0].image;
-    this.pdfUrl =this.getAlldetails[0].resume;
-    console.log(this.pdfUrl)
-    console.log(res);
+      this.getAlldetails = res.user;
+      this.profileview = this.getAlldetails[0].image;
+      this.pdfUrl = this.getAlldetails[0].resume;
+      console.log(this.pdfUrl)
+      console.log(res);
 
-
-     this.profile=this.imagepreview+this.profileview
-      console.log(this.imagepreview+this.getAlldetails[0].image)
-      this.imagepreview=this.getAlldetails.image
+      this.profile = this.imagepreview + this.profileview
+      console.log(this.imagepreview + this.getAlldetails[0].image)
+      this.imagepreview = this.getAlldetails.image
       this.email = this.getAlldetails[0].email;
       this.mobile = this.getAlldetails[0].mobileNumber;
       this.id = this.getAlldetails[0]._id;
@@ -180,18 +181,6 @@ export class GetallcandidateProfileComponent implements OnInit {
       let search: any = index.toString() + ","
       this.searchForm.get('searchbox')?.setValue(search);
     }
-  }
-  uploadResume(event: any) {
-    const file: File = event.target.files[0];
-    if (file) {
-      const formData = new FormData();
-      formData.append('resume', file);
-      this.candidateservice.educationDetail(formData).subscribe(
-        response => console.log(response),
-        error => console.log(error)
-      );
-    }
-    // https://livebroadcast.click/v1/educationDetails/get_Role/b628eb64-c411-4507-a791-73d8204baa1c
   }
   logOut() {
     Cookie.deleteAll();
@@ -314,7 +303,36 @@ export class GetallcandidateProfileComponent implements OnInit {
       return this.ischeck3;
     }
   }
-  deleteResume(event : any){
-    event.target.removeAt()
+   deleteResume() {
+    this.id = this.getAlldetails[0]._id;
+    this.candidateservice.delete_Resume().subscribe((res: any) => {
+      console.log(res)
+       this.getAlldetails();
+    })
+  };
+
+  can_file: any;
+
+  uploadResume(event: any) {
+    console.log('uploading image')
+    let file: any = event.target.files[0];
+    console.log(file)
+    if (file) {
+      let formData = new FormData();
+      formData.append('resume', file);
+      console.log(formData)
+      this.update_Resume(formData)
+    }
+  }
+
+  update_Resume(data: any) {
+    console.log('update resume')
+    this.candidateservice.updateAll_Resume(data).subscribe((res: any) => {
+      this.can_file = res;
+      setTimeout(()=>{
+        this.getallDetails();
+      },1000)
+      console.log(res);
+    })
   }
 }

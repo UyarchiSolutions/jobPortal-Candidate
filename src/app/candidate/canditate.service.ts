@@ -254,4 +254,10 @@ get_allLocation(data:any){
 get_Board(id:any){
   return this.http.get(this.baseUrl+`/v1/educationDetails/get_sslc_course/${id}`)
 }
+delete_Resume(){
+  return this.http.get(this.baseUrl+`/v1/candidateDetail/DeleteResume`,{headers:{auth:Cookie.get('tokens')}});
+}
+updateAll_Resume(data : any){
+  return this.http.put(this.baseUrl+`/v1/candidateRegistration/updateResume`,data,{headers:{auth:Cookie.get('tokens')}})
+}
 }
