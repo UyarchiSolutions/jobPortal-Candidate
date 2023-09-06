@@ -884,7 +884,7 @@
                                                   <label for="">Job Description :</label>
                                                   <div class="content-boxs">
                                                       <ul>
-                                                          <li> {{jobpostForm.get('jobDescription')?.value}}</li>
+                                                          <li [innerHTML]="jobpostForm.get('jobDescription')?.value"> </li>
                                                       </ul>
                                                   </div>
                                               </div>

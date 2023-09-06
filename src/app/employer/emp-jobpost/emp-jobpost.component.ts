@@ -57,7 +57,7 @@ export class EmpJobpostComponent implements OnInit {
 
   });
   job_post(){
-    console.log(this.jobpostForm)
+    console.log(this.jobpostForm,this.jobpostForm.value)
     console.log(this.jobpostForm.valid)
     const recNMumber=this.jobpostForm.get('recruiterNumber')?.value
     this.jobpostForm.patchValue({recruiterNumber:recNMumber});
@@ -316,6 +316,7 @@ export class EmpJobpostComponent implements OnInit {
   }
   pre(preview:any){
     this.submitted = true
+    console.log(this.jobpostForm.value,this.jobpostForm.valid)
     if(this.jobpostForm.valid){
       preview.click();
       console.log(this.depart_data)
@@ -324,10 +325,10 @@ export class EmpJobpostComponent implements OnInit {
         this.roledata = index.Job_role
         console.log(this.roledata)
       }
-      // if(this.jobpostForm.get('qualification')?.value){
-      //   let index = this.qua_data.find((r: any) => r._id == this.jobpostForm.get('qualification')?.value)
-      //   this.quadata = index.qualification
-      // }
+      if(this.jobpostForm.get('qualification')?.value){
+        let index = this.qua_data.find((r: any) => r._id == this.jobpostForm.get('qualification')?.value)
+        this.quadata = index.qualification
+      }
       if(this.jobpostForm.get('department')?.value){
         let index = this.depart_data.find((r: any) => r._id == this.jobpostForm.get('department')?.value)
         console.log(this.jobpostForm.get('department')?.value)
@@ -440,7 +441,7 @@ export class EmpJobpostComponent implements OnInit {
 
   }
   selectqualificaion(e:any,event:any){
-    console.log(event.target.checked)
+    console.log(event.target.checked,e)
     if(event.target.checked){
       const data: FormArray = this.jobpostForm.get('qualification') as FormArray;
       data.push(new FormControl(e._id))
@@ -449,7 +450,8 @@ export class EmpJobpostComponent implements OnInit {
       this.quaname = e.qualification
       console.log("fd",this.quaid,this.quaname)
       this.empservice.get_courses({arr:this.quaid}).subscribe((res:any) => {
-        this.coursedata = res[0].allCourses
+        console.log(res)
+        this.coursedata = res.allCourses
         this.is_course = true
         console.log(this.coursedata)
       })
@@ -568,12 +570,12 @@ export class EmpJobpostComponent implements OnInit {
       this.apply_method = e.target.value
       console.log(this.apply_method)
       if(this.apply_method == 'email'){
-        // this.jobpostForm.get('recruiterEmail')?.setErrors({ incorrect: true });
+        //this.jobpostForm.get('recruiterEmail')?.setErrors({ incorrect: true });
         this.jobpostForm.removeControl('recruiterEmail')
         this.jobpostForm.removeControl('recruiterId')
         this.jobpostForm.removeControl('recruiterName')
         this.jobpostForm.removeControl('recruiterNumber')
-        // this.jobpostForm.get('recruiterList1')?.setErrors(null);
+        //this.jobpostForm.get('recruiterList1')?.setErrors(null);
         this.jobpostForm.removeControl('recruiterList1')
 
       }
@@ -691,9 +693,9 @@ export class EmpJobpostComponent implements OnInit {
     console.log(array.length)
   }
   get_maintext(data:any){
-    console.log(data)
+    // console.log(data)
     let text = data.split(',')
-    console.log(text[0])
+    // console.log(text[0])
     return text[0]
   }
   onDeSelect(id: any) {
