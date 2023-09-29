@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
     //   }
     //   return;
     // }
-        console.log(this.RegisterForm.value)
+        console.log(this.RegisterForm.value,this.RegisterForm.valid,this.RegisterForm)
         this.submitted = true;
         if(this.RegisterForm.valid){
           var jobForm = new FormData();
